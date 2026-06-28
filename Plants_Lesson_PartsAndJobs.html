@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 · Lesson 1 — Plant Parts &amp; Their Jobs</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a; --soil:#8d6e63;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.15rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.85rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .eat{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .eat span{background:#fff8e1;border:1px solid #ffe0a3;border-radius:18px;padding:5px 11px;font-size:.85rem}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .compare>div{border-radius:12px;padding:12px}
+  .root{background:#efebe9;border:2px solid var(--soil)}
+  .ustem{background:#e8f5e9;border:2px solid var(--green)}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌱 Lesson 1 · Plant Parts &amp; Their Jobs</b><span class="pill">Unit 1 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Plant Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: Every part of a plant has ONE main job.</div>
+    <p>A plant is a team. Each part does a different job to keep the plant alive. Here's the whole team — we'll meet each one today.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🌸</div><div class="t">Flower</div><div class="j">makes seeds</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🍃</div><div class="t">Leaves</div><div class="j">make food</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🪵</div><div class="t">Stem</div><div class="j">holds up &amp; carries</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🥕</div><div class="t">Roots</div><div class="j">anchor &amp; drink</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> point at any plant part and say its job — and spot the tricky <b>underground stems</b> that fool most people.</div>
+  </section>
+
+  <!-- SCREEN 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Look at your dinner plate — you are eating <b>plant parts</b>! Knowing which part is which is a real superpower.</div>
+    <div class="eat">
+      <span>🥕 Carrot = <b>root</b></span>
+      <span>🥔 Potato = <b>stem</b> (underground!)</span>
+      <span>🥬 Lettuce = <b>leaf</b></span>
+      <span>🥦 Broccoli = <b>flower</b></span>
+      <span>🍎 Apple = holds <b>seeds</b></span>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <b>Your superpower:</b> once you know each part's job, you can look at <i>any</i> plant — or any vegetable — and figure out what it does and why it grows that way. Scientists in the ASMOPSS contest love asking exactly this!
+    </div>
+  </section>
+
+  <!-- SCREEN 3: ROOTS -->
+  <section class="screen" data-s="3">
+    <h2>Roots 🥕</h2>
+    <div class="rulebar">Roots do 2 jobs: ANCHOR the plant + DRINK water from the soil.</div>
+    <svg viewBox="0 0 300 200" width="300" height="200" aria-label="Plant roots in soil">
+      <rect x="0" y="120" width="300" height="80" fill="#d7ccc8"/>
+      <line x1="150" y1="40" x2="150" y2="120" stroke="#2e7d32" stroke-width="6"/>
+      <ellipse cx="150" cy="35" rx="26" ry="16" fill="#66bb6a"/>
+      <path d="M150 120 L120 175 M150 120 L150 185 M150 120 L180 175 M150 130 L100 160 M150 130 L200 160" stroke="#6d4c41" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <text x="150" y="135" font-size="11" fill="#3e2723" text-anchor="middle">soil</text>
+      <text x="245" y="60" font-size="10" fill="#1565c0">💧 water in →</text>
+    </svg>
+    <div class="job"><b>Job 1 — Anchor:</b> roots spread out and grip the soil so wind and rain can't knock the plant over. (Think of tent pegs!)</div>
+    <div class="job"><b>Job 2 — Drink:</b> tiny <b>root hairs</b> soak up water and minerals from the soil, like hundreds of little straws.</div>
+  </section>
+
+  <!-- SCREEN 4: STEM -->
+  <section class="screen" data-s="4">
+    <h2>Stem 🪵</h2>
+    <div class="rulebar">The stem does 2 jobs: HOLD the plant up + CARRY water and food.</div>
+    <svg viewBox="0 0 300 200" width="300" height="200" aria-label="Plant stem with tubes carrying water up">
+      <rect x="138" y="30" width="24" height="150" fill="#7cb342"/>
+      <line x1="146" y1="40" x2="146" y2="175" stroke="#1565c0" stroke-width="2"/>
+      <line x1="154" y1="40" x2="154" y2="175" stroke="#1565c0" stroke-width="2"/>
+      <ellipse cx="110" cy="70" rx="26" ry="13" fill="#66bb6a"/>
+      <ellipse cx="190" cy="100" rx="26" ry="13" fill="#66bb6a"/>
+      <text x="205" y="155" font-size="10" fill="#1565c0">tubes carry</text>
+      <text x="205" y="168" font-size="10" fill="#1565c0">water UP ↑</text>
+    </svg>
+    <div class="job"><b>Job 1 — Support:</b> the stem stands tall and holds the leaves up to the sunlight, and holds the flowers up for insects.</div>
+    <div class="job"><b>Job 2 — Transport:</b> inside the stem are tiny <b>tubes</b> (like bundled straws) that carry water UP from the roots and carry food AROUND the plant.</div>
+  </section>
+
+  <!-- SCREEN 5: UNDERGROUND STEMS (key) -->
+  <section class="screen" data-s="5">
+    <h2>The Tricky Bit: Underground Stems 🕵️</h2>
+    <div class="rulebar">Some STEMS grow UNDER the soil — they look like roots, but they aren't!</div>
+    <p>Surprise: a <b>potato</b> is not a root — it's a stem that grows underground and stores food! So are <b>ginger</b>, <b>onion</b>, and <b>turmeric</b>.</p>
+    <div class="compare">
+      <div class="root">
+        <div style="text-align:center;font-size:1.6rem">🥕</div>
+        <b>Root</b> (carrot)<br>
+        <small>• thin, pointy, hairy<br>• NO buds or "eyes"<br>• just drinks &amp; anchors</small>
+      </div>
+      <div class="ustem">
+        <div style="text-align:center;font-size:1.6rem">🥔</div>
+        <b>Underground STEM</b> (potato)<br>
+        <small>• has <b>"eyes"</b> = buds<br>• buds can grow new shoots<br>• stores food</small>
+      </div>
+    </div>
+    <div class="why" style="margin-top:12px">🔑 <b>The test:</b> a stem has <b>buds</b> (places new leaves/shoots can sprout). Roots never have buds. Potato eyes = buds → potato is a STEM.</div>
+    <div class="card"><b>Underground stems to remember:</b> 🥔 potato, 🧅 onion, 🫚 ginger, turmeric. (Carrot, radish, sweet potato = roots.)</div>
+  </section>
+
+  <!-- SCREEN 6: LEAVES -->
+  <section class="screen" data-s="6">
+    <h2>Leaves 🍃</h2>
+    <div class="rulebar">The leaf's main job: MAKE FOOD using sunlight. (It's the plant's kitchen.)</div>
+    <svg viewBox="0 0 300 170" width="300" height="170" aria-label="Leaf making food from sunlight">
+      <circle cx="250" cy="35" r="20" fill="#ffca28"/>
+      <path d="M250 35 L210 70 M250 35 L225 75" stroke="#ffca28" stroke-width="3"/>
+      <path d="M60 130 Q150 30 230 110 Q140 150 60 130 Z" fill="#66bb6a"/>
+      <line x1="70" y1="128" x2="220" y2="108" stroke="#2e7d32" stroke-width="3"/>
+      <text x="120" y="95" font-size="11" fill="#1b5e20">food made here 🍬</text>
+    </svg>
+    <div class="job"><b>Make food:</b> leaves catch <b>sunlight</b> and use it (with water + air) to make sugar — the plant's food. This is called <b>photosynthesis</b> (we'll dig into it later).</div>
+    <div class="job"><b>Tiny holes:</b> leaves have microscopic holes to let air in and out. Remember these — they matter in Lesson 2!</div>
+  </section>
+
+  <!-- SCREEN 7: FLOWER -->
+  <section class="screen" data-s="7">
+    <h2>Flower 🌸</h2>
+    <div class="rulebar">The flower's main job: MAKE SEEDS (so new plants can grow).</div>
+    <svg viewBox="0 0 300 160" width="300" height="160" aria-label="Flower making seeds">
+      <g transform="translate(150,70)">
+        <circle r="18" fill="#fdd835"/>
+        <g fill="#ec407a">
+          <ellipse cx="0" cy="-34" rx="12" ry="20"/><ellipse cx="0" cy="34" rx="12" ry="20"/>
+          <ellipse cx="-34" cy="0" rx="20" ry="12"/><ellipse cx="34" cy="0" rx="20" ry="12"/>
+        </g>
+        <circle r="9" fill="#6d4c41"/>
+      </g>
+      <text x="150" y="140" font-size="11" fill="#6a1b9a" text-anchor="middle">seeds form in the middle → new plants 🌱</text>
+    </svg>
+    <div class="job"><b>Make seeds:</b> flowers attract insects, get pollinated, and then grow <b>seeds</b>. Each seed can become a brand-new plant. That's how plants make babies!</div>
+    <div class="card">🍅 Fruits (apple, tomato) form around the seeds to protect them and help them spread.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which part's main job is to <b>drink water</b> from the soil?</p>
+      <button class="opt">Leaf</button><button class="opt">Root</button><button class="opt">Flower</button><button class="opt">Stem</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Roots! Tiny root hairs soak up water like little straws.</div>
+      <div class="fb no">✘ Not quite. Think about which part is in the soil — the roots.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. A <b>potato</b> grows underground. Which part is it?</p>
+      <button class="opt">A root</button><button class="opt">A leaf</button><button class="opt">A flower</button><button class="opt">An underground stem</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Yes! A potato has "eyes" (buds), and only stems have buds.</div>
+      <div class="fb no">✘ Remember the eyes! Buds mean it's a stem, not a root.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Which part makes the plant's <b>food</b> using sunlight?</p>
+      <button class="opt">Leaf</button><button class="opt">Root</button><button class="opt">Stem</button><button class="opt">Seed</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Leaves are the plant's kitchen — they catch sunlight to make sugar.</div>
+      <div class="fb no">✘ Think about which part faces the sun and is flat and green.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>4. Maya finds a vegetable with little <b>buds (eyes)</b> on it. What can she conclude?</p>
+      <button class="opt">It is a root</button><button class="opt">It is a leaf</button><button class="opt">It is a stem</button><button class="opt">It is a seed</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Smart scientist! Buds = stem. Roots never have buds.</div>
+      <div class="fb no">✘ Buds are the giveaway — only stems have buds.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: how water travels through the whole plant — and how to think like a scientist.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Plants_Lesson_WaterTransport.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

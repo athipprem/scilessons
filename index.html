@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem's Science Lessons</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#eef4ee; color:#16321a; font-size:13px; line-height:1.5; height:100vh; overflow:hidden; }
+#app { display:flex; height:100vh; overflow:hidden; }
+#sidebar { width:66px; background:#13402a; display:flex; flex-direction:column; align-items:center; padding:14px 0; gap:4px; flex-shrink:0; }
+.sb-logo { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:12px; }
+.sb-btn { width:48px; height:48px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.5); }
+.sb-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.sb-btn.active { background:rgba(255,255,255,0.18); color:#fff; }
+.sb-icon { font-size:18px; } .sb-lbl { font-size:8px; font-weight:600; letter-spacing:.3px; text-transform:uppercase; }
+.sb-divider { width:30px; height:1px; background:rgba(255,255,255,0.14); margin:6px 0; }
+#main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+#topbar { background:#fff; border-bottom:1px solid #e2ece4; padding:0 20px; height:54px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+#topbar-title { font-size:15px; font-weight:800; color:#13402a; }
+#topbar-sub { font-size:11px; color:#6b8073; margin-left:10px; }
+.tb-badge { border-radius:20px; padding:3px 11px; font-size:11px; font-weight:700; }
+.tb-green { background:#e6f4ea; border:1px solid #a5d6b0; color:#1b5e20; }
+.tb-orange { background:#fff5e6; border:1px solid #fbd38d; color:#c05621; }
+.gold { background:linear-gradient(135deg,#FFD700,#FFA500); color:#5a3d00; border:1px solid #e0a800; }
+#hero { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; padding:14px 20px; background:#fff; border-bottom:1px solid #e2ece4; flex-shrink:0; }
+.hero-box { background:#f5faf6; border-radius:10px; padding:10px 14px; border:1px solid #e2ece4; }
+.hero-val { font-size:22px; font-weight:800; line-height:1.1; }
+.hero-lbl { font-size:10px; color:#6b8073; margin-top:2px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; }
+.hero-sub { font-size:10px; font-weight:600; margin-top:1px; color:#9aa8a0; }
+#content { flex:1; overflow-y:auto; padding:20px; }
+.panel { display:none; } .panel.active { display:block; }
+.pattern { background:#fff; border:1px solid #e2ece4; border-left:5px solid #2e7d32; border-radius:12px; padding:14px 18px; margin-bottom:16px; }
+.pattern .lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#6b8073; }
+.pattern p { font-size:12px; color:#3a4f42; margin:4px 0 8px; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.lesson-card { background:#fff; border-radius:12px; padding:16px; border:1px solid #e2ece4; border-top:4px solid #2e7d32; display:flex; flex-direction:column; gap:6px; }
+.lesson-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
+.lesson-card.blue { border-top-color:#1565c0; }
+.lc-unit { font-size:9px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:#9aa8a0; }
+.lc-title { font-size:13px; font-weight:800; color:#16321a; line-height:1.3; }
+.lc-desc { font-size:11px; color:#6b8073; flex:1; }
+.lc-badges { display:flex; gap:5px; flex-wrap:wrap; }
+.badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:12px; }
+.badge-new { background:#e6f4ea; color:#1b5e20; } .badge-asm { background:#fff3e0; color:#E65100; }
+.badge-soon { background:#f3f3f3; color:#999; }
+.btn-start { margin-top:6px; color:#fff; text-decoration:none; font-size:11px; font-weight:700; padding:8px 16px; border-radius:8px; text-align:center; width:fit-content; background:linear-gradient(135deg,#2e7d32,#43a047); }
+.btn-start.blue { background:linear-gradient(135deg,#1565c0,#1e88e5); }
+.sec-div { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:#9aa8a0; padding:6px 0 10px; }
+.empty { color:#9aa8a0; font-size:12px; padding:20px; text-align:center; border:1px dashed #cfdcd4; border-radius:12px; }
+#pw-overlay { position:fixed; inset:0; background:rgba(10,30,18,0.93); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
+#pw-overlay.hidden { display:none; }
+.pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.pw-box h2 { font-size:1.3rem; color:#1b5e20; margin-bottom:6px; }
+.pw-box p { font-size:0.85rem; color:#6b8073; margin-bottom:20px; }
+.pw-input { width:100%; padding:11px 14px; border:2px solid #e2ece4; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; }
+.pw-input:focus { border-color:#2e7d32; }
+.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#2e7d32,#43a047); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; }
+.pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div class="pw-box">
+    <div style="font-size:2.2rem;margin-bottom:10px">&#127793;</div>
+    <h2>Prem's Science Lessons</h2>
+    <p>Enter the password to continue</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password" inputmode="numeric"
+           onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="pw-btn" onclick="checkPassword()">Unlock &#8594;</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+<div id="app">
+  <nav id="sidebar">
+    <div class="sb-logo">&#127793;</div>
+    <button class="sb-btn active" onclick="showPanel('thisunit',this)"><span class="sb-icon">&#128218;</span><span class="sb-lbl">Unit</span></button>
+    <button class="sb-btn" onclick="showPanel('done',this)"><span class="sb-icon">&#9989;</span><span class="sb-lbl">Done</span></button>
+    <div class="sb-divider"></div>
+    <button class="sb-btn" onclick="openDashboard()"><span class="sb-icon">&#128202;</span><span class="sb-lbl">Board</span></button>
+    <a class="sb-btn" href="https://athipprem.github.io/mathlessons/" title="Math Lessons"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
+    <a class="sb-btn" href="https://athipprem.github.io/englessons/" title="English Lessons"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
+  </nav>
+  <div id="main">
+    <div id="topbar">
+      <div style="display:flex;align-items:baseline">
+        <span id="topbar-title">Science Lessons</span>
+        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ASMOPSS 2026 &nbsp;|&nbsp; Coach: Luikishi</span>
+      </div>
+      <div style="display:flex;gap:10px">
+        <span class="tb-badge gold">&#129351; Target: GOLD</span>
+        <span class="tb-badge tb-green" id="tb-unit">Unit 1</span>
+        <span class="tb-badge tb-orange">&#8987; <span id="tb-days">...</span> days to ASMOPSS</span>
+      </div>
+    </div>
+    <div id="hero">
+      <div class="hero-box"><div class="hero-val" id="h-unit" style="color:#2e7d32">&mdash;</div><div class="hero-lbl">Current unit</div><div class="hero-sub" id="h-unit-sub">&mdash;</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-done">&mdash;</div><div class="hero-lbl">Unit tests done</div><div class="hero-sub">Baseline: 72.5/100 (28/40)</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-skill" style="color:#ef6c00">&mdash;</div><div class="hero-lbl">Skills achievement</div><div class="hero-sub">vs gold &#129351; target</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-weeks">&mdash;</div><div class="hero-lbl">Weeks to ASMOPSS</div><div class="hero-sub">9 Aug 2026</div></div>
+    </div>
+    <div id="content">
+      <div class="panel active" id="panel-thisunit">
+        <div class="pattern" id="pattern-box"></div>
+        <div class="sec-div">This Unit &mdash; Lessons</div>
+        <div class="grid-3">
+          <div class="lesson-card">
+            <div class="lc-unit" style="color:#2e7d32">Biology &middot; Unit 1 &middot; Lesson 1</div>
+            <div class="lc-title">Plant Parts &amp; Their Jobs</div>
+            <div class="lc-desc">From zero. Roots, stem, leaves, flower &mdash; and the tricky <strong>underground stems</strong> (potato, ginger). Visual, with a check-yourself quiz.</div>
+            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start" href="Plants_Lesson_PartsAndJobs.html">Open Lesson</a>
+          </div>
+          <div class="lesson-card blue">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 1 &middot; Lesson 2</div>
+            <div class="lc-title">Water Transport + Think Like a Scientist</div>
+            <div class="lc-desc">How water travels roots&rarr;stem&rarr;leaves, the coloured-water &amp; leaf-bubble experiments, and how to spot a fair test.</div>
+            <div class="lc-badges"><span class="badge badge-new">&#9654; New</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start blue" href="Plants_Lesson_WaterTransport.html">Open Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#9e9e9e;opacity:.65">
+            <div class="lc-unit">Unit 1 &middot; Test</div>
+            <div class="lc-title">Unit 1 Test &mdash; Biology: Plants</div>
+            <div class="lc-desc">15 questions, 3 sections. Take it after both lessons. (In the Unit Tests folder.)</div>
+            <div class="lc-badges"><span class="badge badge-soon">Test ready</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" id="panel-done">
+        <div class="sec-div">Completed</div>
+        <div class="empty">No units completed yet. Finished lessons move here once their unit test is done. Baseline: <strong>72.5/100 (28/40)</strong> on the 2025 G4 paper; prior G3 = 55.5/100 (Honorable Mention).</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="prem_data.js"></script>
+<script>
+  var PW_HASH = 2088511772;
+  function djb2(str){ var h=5381; for(var i=0;i<str.length;i++){ h=(((h<<5)+h)+str.charCodeAt(i))>>>0; } return h; }
+  if (sessionStorage.getItem('unlocked')==='yes'){ document.getElementById('pw-overlay').classList.add('hidden'); }
+  else { document.getElementById('pw-input').focus(); }
+  function checkPassword(){
+    var e=document.getElementById('pw-input').value;
+    if (djb2(e)===PW_HASH){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); }
+    else { document.getElementById('pw-error').textContent='Wrong password. Try again!'; document.getElementById('pw-input').value=''; document.getElementById('pw-input').focus(); }
+  }
+  var D = PREM_DATA;
+  function showPanel(id, btn){
+    var ps=document.querySelectorAll('.panel'); for(var i=0;i<ps.length;i++) ps[i].classList.remove('active');
+    document.getElementById('panel-'+id).classList.add('active');
+    var bs=document.querySelectorAll('.sb-btn'); for(var j=0;j<bs.length;j++) bs[j].classList.remove('active');
+    if(btn) btn.classList.add('active');
+  }
+  function openDashboard(){ window.location.href='Prems_Science_Coach_Dashboard.html'; }
+  var days = Math.max(0, Math.ceil((new Date(D.asmopssDate)-new Date())/86400000));
+  document.getElementById('tb-days').textContent = days;
+  document.getElementById('h-weeks').textContent = Math.ceil(days/7);
+  document.getElementById('h-unit').textContent = 'U'+D.currentUnit.n;
+  document.getElementById('h-unit-sub').innerHTML = D.currentUnit.status;
+  document.getElementById('tb-unit').textContent = 'Unit '+D.currentUnit.n;
+  document.getElementById('h-done').textContent = D.scores.length;
+  var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
+  document.getElementById('h-skill').textContent = Math.round(sc/st*100)+'%';
+  var lu=D.lastUnit;
+  document.getElementById('pattern-box').innerHTML =
+    '<div class="lbl">'+lu.patternLabel+'</div><p>'+lu.patternInsight+'</p>'+
+    '<div class="lbl">'+lu.analysisLabel+'</div><p style="margin-bottom:0">'+lu.analysisInsight+'</p>';
+</script>
+</body>
+</html>

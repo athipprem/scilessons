@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 · Lesson 2 — Water Transport &amp; Think Like a Scientist</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .step{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .journey{display:flex;justify-content:space-between;text-align:center;gap:6px;margin:12px 0}
+  .journey>div{flex:1;border:2px solid var(--line);border-radius:12px;padding:10px 6px;background:#fafdfa}
+  .journey .ico{font-size:1.6rem}
+  .journey .t{font-weight:bold;color:var(--green-d);font-size:.85rem;margin-top:3px}
+  .arrow{align-self:center;color:var(--blue);font-weight:bold;font-size:1.3rem}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>💧 Lesson 2 · Water Transport + Think Like a Scientist</b><span class="pill">Unit 1 · Biology</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Water's journey: Roots → Stem → Leaves → out into the air.</div>
+    <div class="journey">
+      <div><div class="ico">🥕</div><div class="t">Roots drink</div></div>
+      <div class="arrow">→</div>
+      <div><div class="ico">🪵</div><div class="t">Stem lifts</div></div>
+      <div class="arrow">→</div>
+      <div><div class="ico">🍃</div><div class="t">Leaves release</div></div>
+    </div>
+    <div class="sci">MAP 2 — Scientist's tool: a FAIR TEST. Change ONE thing, keep everything else the same.</div>
+    <div class="why">🎯 <b>By the end you can:</b> trace how water moves through a plant, explain the coloured-water and leaf-bubble experiments, and judge whether a test is fair. This is exactly how ASMOPSS tests your thinking!</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">A plant has no mouth and no heart — yet water travels from the soil all the way up to the highest leaf. How? Once you know, you can <b>predict</b> and even <b>test</b> what a plant will do.</div>
+    <div class="card">
+      <b>Real life:</b> ever put a white flower (or celery) in coloured water and watched it turn colour? 🌷➡️💙 Florists use this trick. Farmers need it too — if roots can't move water up, the plant wilts. <b>Your superpower:</b> explain and design these experiments like a real scientist.
+    </div>
+  </section>
+
+  <!-- 3: ROOTS DRINK -->
+  <section class="screen" data-s="3">
+    <h2>Step 1 — Roots Drink 🥕</h2>
+    <div class="rulebar">Water enters through tiny ROOT HAIRS, like hundreds of straws.</div>
+    <svg viewBox="0 0 300 170" width="300" height="170" aria-label="Water entering root hairs">
+      <rect x="0" y="70" width="300" height="100" fill="#d7ccc8"/>
+      <path d="M150 70 L150 150 M150 90 L120 140 M150 90 L180 140 M150 110 L110 150 M150 110 L190 150" stroke="#6d4c41" stroke-width="4" fill="none" stroke-linecap="round"/>
+      <g stroke="#1565c0" stroke-width="2"><line x1="100" y1="120" x2="112" y2="118"/><line x1="200" y1="120" x2="188" y2="118"/><line x1="95" y1="140" x2="108" y2="142"/></g>
+      <text x="150" y="40" font-size="12" fill="#1565c0" text-anchor="middle">💧 water + minerals</text>
+      <text x="150" y="58" font-size="11" fill="#1565c0" text-anchor="middle">soak in here ↓</text>
+    </svg>
+    <div class="job"><b>What happens:</b> water (with minerals) from the soil soaks into the root hairs. Now it must travel UP to the rest of the plant.</div>
+  </section>
+
+  <!-- 4: STEM LIFTS + coloured water (Q20) -->
+  <section class="screen" data-s="4">
+    <h2>Step 2 — The Stem Lifts Water Up 🪵</h2>
+    <div class="rulebar">Inside the stem are tiny TUBES that carry water up to every leaf and flower.</div>
+    <svg viewBox="0 0 320 180" width="320" height="180" aria-label="Coloured water rising up a stem into a flower">
+      <rect x="60" y="120" width="80" height="50" fill="#bbdefb" stroke="#1565c0"/>
+      <text x="100" y="150" font-size="10" fill="#0d47a1" text-anchor="middle">blue water</text>
+      <rect x="96" y="40" width="8" height="90" fill="#7cb342"/>
+      <rect x="96" y="95" width="8" height="35" fill="#1565c0"/>
+      <g transform="translate(100,34)"><circle r="9" fill="#fdd835"/><g fill="#1565c0"><ellipse cx="0" cy="-15" rx="6" ry="9"/><ellipse cx="0" cy="15" rx="6" ry="9"/><ellipse cx="-15" cy="0" rx="9" ry="6"/><ellipse cx="15" cy="0" rx="9" ry="6"/></g></g>
+      <text x="210" y="60" font-size="11" fill="#0d47a1">White flower turns</text>
+      <text x="210" y="76" font-size="11" fill="#0d47a1"><tspan fill="#1565c0" font-weight="bold">BLUE</tspan> at the top!</text>
+      <text x="210" y="110" font-size="10" fill="#4a5568">Proof: water from</text>
+      <text x="210" y="124" font-size="10" fill="#4a5568">the roots reached</text>
+      <text x="210" y="138" font-size="10" fill="#4a5568">the flower.</text>
+    </svg>
+    <div class="step"><b>The classic experiment:</b> put a white flower in <b>blue-coloured water</b>. A few hours later the petals turn blue! That proves the water travelled <b>up the stem all the way to the flower</b>.</div>
+  </section>
+
+  <!-- 5: LEAVES RELEASE (Q34) -->
+  <section class="screen" data-s="5">
+    <h2>Step 3 — Leaves Release Water 🍃</h2>
+    <div class="rulebar">Leaves have tiny HOLES. Water leaves as vapour — and that pulls more water up.</div>
+    <svg viewBox="0 0 320 160" width="320" height="160" aria-label="Leaf with tiny holes releasing water vapour and bubbles">
+      <path d="M40 110 Q150 20 250 100 Q150 140 40 110 Z" fill="#66bb6a"/>
+      <g fill="#1b5e20"><circle cx="110" cy="95" r="2.5"/><circle cx="140" cy="85" r="2.5"/><circle cx="170" cy="90" r="2.5"/></g>
+      <g stroke="#90caf9" stroke-width="2" fill="none"><path d="M110 92 q-3 -10 0 -18"/><path d="M140 82 q-3 -10 0 -18"/><path d="M170 87 q-3 -10 0 -18"/></g>
+      <text x="150" y="155" font-size="11" fill="#1b5e20" text-anchor="middle">tiny holes let air &amp; water vapour out 💨</text>
+    </svg>
+    <div class="job"><b>Going out:</b> water escapes from tiny holes in the leaves as invisible <b>vapour</b>. As water leaves the top, it pulls more water up from the roots — like sipping a straw.</div>
+    <div class="step"><b>The leaf-bubble experiment:</b> put a leaf in warm water and you'll see tiny <b>bubbles</b> escape — that's <b>air coming out of those tiny holes and air spaces</b> inside the leaf. It shows leaves are full of little air passages.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change ONE thing, measure ONE thing, keep everything else the SAME.</div>
+    <p>Imagine testing: <i>"Does light make a plant's leaves greener?"</i> To be fair:</p>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGE</b><br>one thing<br><small>(amount of light)</small></div>
+      <div class="me"><b>MEASURE</b><br>one thing<br><small>(how green)</small></div>
+      <div class="sa"><b>SAME</b><br>everything else<br><small>(water, pot, plant type)</small></div>
+    </div>
+    <div class="card"><b>Why a "same" plant matters (the control):</b> if you only test the plant in light, you can't be sure light did it. You need a matching plant kept in the dark to compare. That second set-up is the <b>control</b>. To prove water reached the <b>flower</b>, the set-up must actually have a flower and compare fairly — that's what those experiment questions check!</div>
+    <div class="why">🧠 Big habit: in any experiment question, ask <b>"What changed? What stayed the same? What are they comparing?"</b></div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. In which order does water travel through a plant?</p>
+      <button class="opt">Leaves → stem → roots</button>
+      <button class="opt">Stem → roots → leaves</button>
+      <button class="opt">Roots → stem → leaves</button>
+      <button class="opt">Flower → roots → leaves</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Roots drink, the stem lifts, the leaves release. Up it goes!</div>
+      <div class="fb no">✘ Start where the water enters — the roots — then up.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. A white flower is put in blue water and the petals turn blue. What does this show?</p>
+      <button class="opt">The flower makes blue colour</button>
+      <button class="opt">Water travelled up from the stem to the flower</button>
+      <button class="opt">The roots eat the colour</button>
+      <button class="opt">Leaves make food</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — the coloured water rose up the tubes all the way to the petals.</div>
+      <div class="fb no">✘ Think about where the blue came from and where it ended up.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A leaf in warm water gives off tiny bubbles. The bubbles are mostly…</p>
+      <button class="opt">Blue dye</button>
+      <button class="opt">Food</button>
+      <button class="opt">Soil</button>
+      <button class="opt">Air escaping from tiny holes in the leaf</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Yes! Leaves have tiny holes and air spaces — the warmth pushes air out as bubbles.</div>
+      <div class="fb no">✘ Remember the tiny holes in leaves — bubbles are air coming out.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Lily wants to prove water reaches the <b>flower</b>. To make it a FAIR test, she should keep two plants the same but change only…</p>
+      <button class="opt">Whether the water is coloured (so she can see where it goes)</button>
+      <button class="opt">The size of each pot</button>
+      <button class="opt">The type of plant</button>
+      <button class="opt">The amount of sunlight</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Smart! Change only the one thing you're testing (the colour to trace water); keep all else the same.</div>
+      <div class="fb no">✘ A fair test changes only ONE thing — the thing that lets her trace the water.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 1! You know plant parts, how water travels, and how to think like a scientist. Ready for the Unit 1 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '🏠 Back to Hub' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Plants_Lesson_PartsAndJobs.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='index.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>
