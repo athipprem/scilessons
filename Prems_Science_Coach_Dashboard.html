@@ -112,9 +112,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <button class="sb-btn" onclick="showPanel('skills',this)" title="Skills Radar"><span class="sb-icon">&#127993;</span><span class="sb-lbl">Skills</span></button>
     <button class="sb-btn" onclick="showPanel('results',this)" title="Unit Results"><span class="sb-icon">&#128221;</span><span class="sb-lbl">Results</span></button>
     <div class="sb-divider"></div>
-    <a class="sb-btn" href="index.html" title="Back to Science Index"><span class="sb-icon" style="font-size:14px">&#8592;</span><span class="sb-lbl">Index</span></a>
-    <a class="sb-btn" href="https://athipprem.github.io/mathlessons/" title="Math Lessons"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
-    <a class="sb-btn" href="https://athipprem.github.io/englessons/" title="English Lessons"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openIndex()" title="Back to Science Index" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-size:14px">&#8592;</span><span class="sb-lbl">Index</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openMath()" title="Math Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openEnglish()" title="English Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
     <div class="sb-spacer"></div>
   </nav>
   <div id="main">
@@ -143,7 +143,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="card">
               <div class="card-hd"><span class="dot"></span>Unit Score History</div>
               <div class="note-empty" id="score-empty">No unit tests completed yet &mdash; U1 is the first. Baseline 72.5/100 on the 2025 G4 paper.</div>
-              <canvas id="scoreChart" height="80" style="display:none"></canvas>
+              <div id="score-history" style="display:none"></div>
               <div class="insight orange"><div class="insight-lbl" id="ov-plabel"></div><p id="ov-pins"></p></div>
             </div>
             <div class="card">
@@ -222,10 +222,27 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 <script>
   var PW_HASH = 2088511772;
   function djb2(str){ var h=5381; for(var i=0;i<str.length;i++){ h=(((h<<5)+h)+str.charCodeAt(i))>>>0; } return h; }
-  if (sessionStorage.getItem('unlocked')==='yes'){ document.getElementById('pw-overlay').classList.add('hidden'); } else { document.getElementById('pw-input').focus(); }
+  var hubToken = new URLSearchParams(window.location.search).get('hub');
+  var tokenValid = hubToken && (Date.now() - parseInt(hubToken, 10)) < 15000;
+  if (sessionStorage.getItem('unlocked')==='yes' || tokenValid){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); } else { document.getElementById('pw-input').focus(); }
   function checkDashPw(){ var e=document.getElementById('pw-input').value;
     if (djb2(e)===PW_HASH){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); }
     else { document.getElementById('pw-error').textContent='Wrong password. Try again!'; document.getElementById('pw-input').value=''; document.getElementById('pw-input').focus(); } }
+  function openIndex(){
+    var url = 'index.html';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openMath(){
+    var url = 'https://athipprem.github.io/mathlessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openEnglish(){
+    var url = 'https://athipprem.github.io/englessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
 
   var D = PREM_DATA;
   var panelTitles = { overview:'Science — Overview', skills:'Skills & Radar', results:'Unit Results' };
@@ -243,6 +260,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   document.getElementById('h-weeks').textContent = weeks;
   document.getElementById('h-days').textContent = days+' days left';
   document.getElementById('h-done').textContent = D.scores.length;
+  document.getElementById('h-unit-sub').innerHTML = 'U'+D.currentUnit.n+' &middot; '+D.currentUnit.status;
   var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
   var ach = Math.round(sc/st*100);
   document.getElementById('h-skill').textContent = ach+'%';
@@ -259,6 +277,18 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   // overview pattern insight
   document.getElementById('ov-plabel').innerHTML = D.lastUnit.patternLabel;
   document.getElementById('ov-pins').innerHTML = D.lastUnit.patternInsight;
+
+  // unit score history (real scores once unit tests are done)
+  if (D.scores.length > 0){
+    document.getElementById('score-empty').style.display = 'none';
+    var shEl = document.getElementById('score-history');
+    shEl.style.display = 'block';
+    for (var si=0; si<D.scores.length; si++){
+      var s = D.scores[si];
+      var passed = s.score >= (s.passBar||12);
+      shEl.innerHTML += '<div class="tm"><span>U'+s.unit+' &mdash; '+s.topic+'</span><span style="color:'+(passed?'#2e7d32':'#c05621')+'">'+s.score+'/'+s.outOf+' ('+s.pct+'%) '+(passed?'&#9989;':'')+'</span></div>';
+    }
+  }
 
   // unit log
   var lg=document.getElementById('session-log');

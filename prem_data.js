@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '28 Jun 2026',
+  updated:        '2 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,60 +13,63 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:1, topic:'Biology: Plants - Parts, Water Transport &amp; Investigation', status:'Lessons ready &middot; Test pending' },
+  currentUnit: { n:2, topic:'Chemistry/Matter: What Is Matter? Mass, Volume &amp; Dissolving', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:'Dx', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5, delta:null, prevScore:null,
-    patternLabel: 'Baseline - ASMOPSS 2025 Grade 4 Science paper (diagnostic)',
-    patternInsight: '<strong>28/40 questions = 72.5 / 100 marks (72.5%).</strong> Weighted paper: Q1-14 = 1.25m, Q15-26 &amp; Q33-36 = 2.5m, Q27-30 &amp; Q37-40 = 5m. He lost <strong>27.5 marks, 22.5 of them on the 2.5- and 5-mark questions</strong> - almost all experiment design/interpretation. Strong on cheap recall, bleeding marks on the expensive applied ones. (G3 last year = 55.5/100, so a big jump.)',
-    analysisLabel: 'Target: GOLD - 6 weeks out. Next: U1 Biology: Plants (built)',
-    analysisInsight: 'Gold needs the high-mark applied questions. U1 attacks his biggest content cluster (plants) while introducing experiment-reasoning in familiar content. Then U2 Matter &amp; Mass, U3 Physics (magnetism/heat), U4 Investigation Skills, rotating onward. Hardening experiment reasoning every unit is the highest-leverage move toward gold.',
-    qSummary: '<strong>72.5 / 100 marks (28/40 Q)</strong> - Wrong: Q3, 7, 11, 16, 18, 19, 20, 24, 32, 33, 34, 40',
+    n:1, score:14, outOf:15, marks:null, marksOutOf:null, pct:93, delta:null, prevScore:null,
+    patternLabel: 'Unit 1 result - Biology: Plants (14/15, PASS)',
+    patternInsight: '<strong>14/15 (93%)</strong> - pass bar is 12/15. Sections A+B (plant-parts content, incl. underground stems Q6&ndash;7 targeting the 2025 Q24 miss) = <strong>10/10</strong>, fully closing the Plants content gap. Section C (applied/experiment reasoning) = <strong>4/5</strong> - he nailed the control-group question (Q12) and the fair-test design question (Q14), exactly the skill that cost him marks on the 2025 papers. Only miss: Q13 (leaf bubbles = air escaping from stomata/air spaces - he said "food made by the leaf"), the same idea behind the 2025 Q34 miss - a recurring gap worth a quick reinforcement.',
+    analysisLabel: 'Target: GOLD - next up U2 Matter &amp; Mass (built, HTML format)',
+    analysisInsight: 'U1 proved the coaching approach works: content mastery is fast once taught from zero, and applied/experiment reasoning is climbing (Section C 80%) - the single biggest lever for gold. U2 attacks the Matter &amp; Mass cluster (2025 Q7, 11, 33: gases have mass, mass vs volume, dissolving) while continuing to bake in fair-test reasoning every unit.',
+    qSummary: '<strong>14 / 15 (93%)</strong> - Only miss: Q13 (leaf bubbles = stomata/air escape, said "food made by leaf")',
     qBreakdown: [
-      { q:'Q3',  topic:'Energy in a circuit &middot; 1.25m', lvl:'w', pass:false, note:'&#10007; initial energy = chemical (battery).' },
-      { q:'Q7',  topic:'Air in ball: mass &amp; volume &middot; 1.25m', lvl:'w', pass:false, note:'&#10007; gases have mass.' },
-      { q:'Q11', topic:'What has mass / is matter &middot; 1.25m', lvl:'w', pass:false, note:'&#10007; concept of matter.' },
-      { q:'Q16', topic:'Classification chart &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; classify objects A-D.' },
-      { q:'Q18', topic:'Magnets: poles &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; possible arrangement.' },
-      { q:'Q19', topic:'Heat + fair test &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; fair test for conduction.' },
-      { q:'Q20', topic:'Plant water transport + control &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; valid set-up to prove transport.' },
-      { q:'Q24', topic:'Underground stems &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; which parts are underground stems.' },
-      { q:'Q32', topic:'Astronomy: night sky &middot; 1.25m', lvl:'w', pass:false, note:'&#10007; why constellations change.' },
-      { q:'Q33', topic:'Matter: dissolving &amp; mass &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; rock sugar vs crystals.' },
-      { q:'Q34', topic:'Leaf air spaces / gas &middot; 2.5m', lvl:'h', pass:false, note:'&#10007; bubbles = air from leaf.' },
-      { q:'Q40', topic:'Mould: conditions for life &middot; 5m', lvl:'h', pass:false, note:'&#10007; air/water/food for mould (biggest drop).' }
+      { q:'Q13', topic:'Leaf bubbles = stomata/air spaces &middot; applied', lvl:'h', pass:false, note:'&#10007; said "food made by leaf" instead of air escaping - same idea as 2025 Q34.' }
     ]
   },
 
   skills: [
-    { name: 'Biology',                  c: 53, t: 85, ev:'G3 Bio 50% weakest; G4 plant misses Q20/24/34/40' },
-    { name: 'Chemistry / Matter',       c: 55, t: 85, ev:'G4 Q7/11/33; part of G3 Physical 66%' },
+    { name: 'Biology',                  c: 68, t: 85, ev:'U1 Plants 14/15 (content 10/10) closed the biggest Bio gap; ecosystems/human body/microorganisms still untested' },
+    { name: 'Chemistry / Matter',       c: 55, t: 85, ev:'G4 Q7/11/33; U2 in progress' },
     { name: 'Physics',                  c: 63, t: 85, ev:'G3 Physical 66% strongest; G4 Q3/18/19' },
     { name: 'Earth &amp; Space',            c: 50, t: 80, ev:'G3 Earth/Space 50%; G4 Q32' },
-    { name: 'Scientific Investigation', c: 45, t: 85, ev:'G4 Q19/20/33/34/40 experiment design (top gap)' },
-    { name: 'Applied Reasoning',        c: 60, t: 85, ev:'G3 Applied 50% vs field 32%' }
+    { name: 'Scientific Investigation', c: 56, t: 85, ev:'U1 Sec C 4/5 - nailed control (Q12) &amp; fair test (Q14); still the top lever for gold' },
+    { name: 'Applied Reasoning',        c: 67, t: 85, ev:'U1 Section C 80%, up from G3 Applied 50%' }
   ],
-  radarCurrent:  [53, 55, 63, 50, 45, 60],
+  radarCurrent:  [68, 55, 63, 50, 56, 67],
   radarTarget:   [85, 85, 85, 80, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
   outOf: 15,
-  scores: [],
+  scores: [
+    { unit:1, topic:'Biology: Plants', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-02' }
+  ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 2, badge: 'linear-gradient(135deg,#EF6C00,#FFB74D)',
+      title: 'Chemistry/Matter: What Is Matter? Mass, Volume &amp; Dissolving',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: What Is Matter?', c:'tgreen' },
+        { t:'L2: Mass, Volume &amp; Dissolving', c:'tblue' },
+        { t:'Targets 2025 Q7, Q11, Q33', c:'torange' }
+      ],
+      note: 'U2 attacks the second-biggest content cluster from the baseline: matter, mass vs volume, and dissolving. L1: what matter is (incl. things that are NOT matter - light/sound), the three states, and the classic "gases have mass" misconception (balloon/football demo) - targets 2025 Q7 &amp; Q11. L2: mass vs volume, dissolving &amp; conservation of mass, plus a fair-test beat on crushed vs lump sugar - targets 2025 Q33. First unit built in the new single-page HTML test format - instant score + explanations, save-to-file for Luikishi.',
+      status: 'pending'
+    },
+    {
       n: 1, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
       title: 'Biology: Plants - Parts, Water Transport &amp; Investigation',
       tags: [
-        { t:'Pending &#128197;', c:'tpurple' },
-        { t:'L1: Plant Parts &amp; Jobs', c:'tgreen' },
-        { t:'L2: Water Transport + Be a Scientist', c:'tblue' },
-        { t:'Targets 2025 Q20, Q24, Q34', c:'torange' }
+        { t:'&#9989; 14/15 PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 4/5', c:'tblue' },
+        { t:'Only miss Q13', c:'torange' }
       ],
-      note: 'U1 opens on Prem&rsquo;s biggest gap cluster (plants) and historical weakness (Biology), while introducing experiment-reasoning. L1: roots, stems incl. <strong>underground stems</strong> (potato/ginger - the 2025 Q24 miss), leaves, flowers. L2: roots-to-stem-to-leaves, coloured-water experiment (Q20), leaf-bubble experiment (Q34), and a first taste of fair tests/controls. Test plants-only, 15 Q, applied Section C. Pass 12/15.',
-      status: 'pending'
+      note: 'Scored 14/15 (93%) - comfortably above the 12/15 pass bar. Plant-parts content (Sections A+B) 10/10, fully closing the 2025 Plants gap (Q20, 24, 34, 40). Applied/experiment reasoning (Section C) 4/5 - nailed the control-group (Q12) and fair-test (Q14) questions. Only miss: Q13, the leaf-bubbles/stomata idea, echoing 2025 Q34 - flagged for a quick reinforcement. Taken in the last DOCX-format unit test; HTML format starts at U2.',
+      status: 'done'
     },
     {
       n: 'G4', badge: 'linear-gradient(135deg,#4527A0,#7C3AED)',
@@ -96,20 +99,20 @@ var PREM_DATA = {
     {
       label: 'Scientific Investigation (fair tests, controls, conclusions) - TOP LEVERAGE for gold',
       pill: 'p1', pillText: 'Focus',
-      score: 'G4: 5 of 12 misses (Q19,20,33,34,40) are design/read-an-experiment questions - and they carry the most marks (22.5 of 27.5 lost marks). G3 echoed it: beats the field on applied (50% vs 32%) but the top applied band is where gold is won. Trained inside every unit from U1 L2 on.',
-      fillClass: 'g2', fillPct: 45
+      score: 'U1 evidence: nailed the control-group (Q12) and fair-test-design (Q14) questions - real progress from the baseline weak spot (5 of 12 G4 misses were design/read-an-experiment questions). Still the single biggest lever for gold - trained inside every unit.',
+      fillClass: 'g2', fillPct: 56
     },
     {
-      label: 'Biology: Plants - biggest content cluster (U1 now)',
-      pill: 'p1', pillText: 'U1 now',
-      score: 'G4: Q20 (water transport), Q24 (underground stems), Q34 (leaf gas), Q40 (mould). G3: Biology weakest strand 50% and the largest (54 of 100 marks). Highest-return content fix - U1.',
-      fillClass: 'g2', fillPct: 50
-    },
-    {
-      label: 'Matter &amp; Mass (what is matter, gases have mass, dissolving) - U2',
-      pill: 'p2', pillText: 'U2 next',
-      score: 'G4: Q7 (air has mass), Q11 (what has mass), Q33 (dissolving &amp; mass). Foundational physical-science concepts that also underpin many experiment questions. Planned for U2.',
+      label: 'Matter &amp; Mass (what is matter, gases have mass, dissolving) - U2 now',
+      pill: 'p1', pillText: 'U2 now',
+      score: 'G4: Q7 (air has mass), Q11 (what has mass), Q33 (dissolving &amp; mass). Foundational physical-science concepts that also underpin many experiment questions. U2 lessons + HTML test built.',
       fillClass: 'g2', fillPct: 55
+    },
+    {
+      label: 'Biology: Plants - CLOSED &#9989;',
+      pill: 'p3', pillText: 'Done',
+      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34, 40) resolved except a lingering thread on leaf/stomata gas exchange (Q13/Q34) - watch for it in later rotation.',
+      fillClass: 'g3', fillPct: 95
     },
     {
       label: 'Physics &amp; Earth/Space one-offs: circuits, magnetism, heat, classification, astronomy',

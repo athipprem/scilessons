@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 2 · Lesson 1 — What Is Matter?</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a; --soil:#8d6e63;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.15rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .eat{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+  .eat span{background:#fff8e1;border:1px solid #ffe0a3;border-radius:18px;padding:5px 11px;font-size:.85rem}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .compare>div{border-radius:12px;padding:12px}
+  .notmatter{background:#efebe9;border:2px solid var(--soil)}
+  .ismatter{background:#e8f5e9;border:2px solid var(--green)}
+  .states{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
+  .states>div{border-radius:10px;padding:10px;text-align:center;border:2px solid var(--line)}
+  .states .ico{font-size:1.6rem}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧪 Lesson 1 · What Is Matter?</b><span class="pill">Unit 2 · Chemistry/Matter</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Matter Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: Matter is ANYTHING that has MASS and takes up SPACE — even things you can't see!</div>
+    <p>Everything around you — even the air you're breathing right now — is matter. Matter comes in three everyday forms. We'll meet all three today.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🧊</div><div class="t">Solid</div><div class="j">fixed shape</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">💧</div><div class="t">Liquid</div><div class="j">fixed volume</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">💨</div><div class="t">Gas</div><div class="j">spreads out</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> say what matter is, tell solids/liquids/gases apart, and prove that even invisible gases have mass.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 1 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 1 🌿</h2>
+    <div class="recall">🔁 <b>Remember leaves?</b> A leaf in warm water gives off tiny bubbles — that's <b>air escaping</b> from the tiny holes and air spaces inside the leaf. Air isn't nothing — it's real, and it's matter!</div>
+    <p>That's the perfect bridge into today's lesson: <b>gases (like air) are matter too</b> — even though you can't see them, they take up space and they have mass. Keep that leaf-bubble idea in mind; we'll build on it.</p>
+    <div class="card"><b>Mini self-check:</b> in Unit 1, were those leaf bubbles (1) food, or (2) air escaping from tiny holes? <i>(Answer: air escaping — if that surprised you, that's OK, today makes it click for good.)</i></div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Ever wondered why a balloon feels different full vs empty? Or why ice, water, and steam are secretly the <b>same</b> stuff? Understanding matter explains both — and it's one of the most-tested ideas in ASMOPSS Science.</div>
+    <div class="eat">
+      <span>🧊 Ice cube = <b>solid</b></span>
+      <span>💧 Melted ice = <b>liquid</b></span>
+      <span>☁️ Steam = <b>gas</b></span>
+      <span>🎈 Balloon = full of <b>gas matter</b></span>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <b>Your superpower:</b> once you know what matter really is, you can explain why a full balloon weighs more than an empty one, why ice floats, and why sugar doesn't vanish when it dissolves. ASMOPSS loves asking exactly this kind of "does it have mass?" question.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: WHAT IS MATTER (incl. NOT matter) -->
+  <section class="screen" data-s="4">
+    <h2>What IS Matter? 🔍</h2>
+    <div class="rulebar">Matter = anything with MASS (it can be weighed) AND VOLUME (it takes up space).</div>
+    <p>Rocks, water, air, your body, this screen — all matter. But some things are NOT matter, even though they're real and you can sense them:</p>
+    <div class="compare">
+      <div class="ismatter">
+        <div style="text-align:center;font-size:1.6rem">🪨</div>
+        <b>IS matter</b><br>
+        <small>rock, water, air, wood, your breath (the air in it)</small>
+      </div>
+      <div class="notmatter">
+        <div style="text-align:center;font-size:1.6rem">☀️</div>
+        <b>NOT matter</b><br>
+        <small>light, sound, heat, a shadow — no mass, no volume of their own</small>
+      </div>
+    </div>
+    <div class="why" style="margin-top:12px">🔑 <b>The test:</b> ask "could I put this on a scale and get a weight?" You can weigh a cup of air. You can't weigh sunlight itself.</div>
+  </section>
+
+  <!-- SCREEN 5: THREE STATES -->
+  <section class="screen" data-s="5">
+    <h2>Three States of Matter 🧊💧💨</h2>
+    <div class="rulebar">Same matter, different arrangement of tiny particles.</div>
+    <svg viewBox="0 0 320 110" width="320" height="110" aria-label="Particles in solid liquid and gas">
+      <g fill="#1565c0">
+        <circle cx="30" cy="25" r="6"/><circle cx="50" cy="25" r="6"/><circle cx="70" cy="25" r="6"/>
+        <circle cx="30" cy="45" r="6"/><circle cx="50" cy="45" r="6"/><circle cx="70" cy="45" r="6"/>
+        <circle cx="30" cy="65" r="6"/><circle cx="50" cy="65" r="6"/><circle cx="70" cy="65" r="6"/>
+      </g>
+      <text x="50" y="95" font-size="11" text-anchor="middle" fill="#1b5e20">SOLID — tightly packed</text>
+      <g fill="#1565c0">
+        <circle cx="140" cy="30" r="6"/><circle cx="160" cy="40" r="6"/><circle cx="150" cy="55" r="6"/>
+        <circle cx="175" cy="60" r="6"/><circle cx="135" cy="65" r="6"/><circle cx="165" cy="25" r="6"/>
+      </g>
+      <text x="155" y="95" font-size="11" text-anchor="middle" fill="#1b5e20">LIQUID — loose, flows</text>
+      <g fill="#90caf9">
+        <circle cx="230" cy="20" r="5"/><circle cx="270" cy="35" r="5"/><circle cx="250" cy="55" r="5"/>
+        <circle cx="290" cy="15" r="5"/><circle cx="240" cy="75" r="5"/><circle cx="285" cy="65" r="5"/>
+        <circle cx="265" cy="85" r="5"/>
+      </g>
+      <text x="260" y="105" font-size="11" text-anchor="middle" fill="#1b5e20">GAS — spread far apart</text>
+    </svg>
+    <div class="states">
+      <div><div class="ico">🧊</div><b>Solid</b><br><small>fixed shape<br>fixed volume</small></div>
+      <div><div class="ico">💧</div><b>Liquid</b><br><small>takes container's shape<br>fixed volume</small></div>
+      <div><div class="ico">💨</div><b>Gas</b><br><small>no fixed shape<br>no fixed volume — fills any space</small></div>
+    </div>
+    <div class="job" style="margin-top:10px"><b>Same rule for all three:</b> whatever the state, it's still matter — it still has mass.</div>
+  </section>
+
+  <!-- SCREEN 6: GASES HAVE MASS -->
+  <section class="screen" data-s="6">
+    <h2>Gases Have Mass Too! 🎈</h2>
+    <div class="rulebar">A puffed-up balloon is HEAVIER than a flat one — the air inside has mass!</div>
+    <svg viewBox="0 0 300 150" width="300" height="150" aria-label="Flat balloon vs inflated balloon on a scale">
+      <ellipse cx="80" cy="90" rx="26" ry="18" fill="#ef9a9a"/>
+      <text x="80" y="125" font-size="11" text-anchor="middle" fill="#4a5568">flat balloon</text>
+      <text x="80" y="140" font-size="11" text-anchor="middle" fill="#c62828">lighter</text>
+      <circle cx="220" cy="75" r="38" fill="#ef9a9a"/>
+      <text x="220" y="125" font-size="11" text-anchor="middle" fill="#4a5568">full of air</text>
+      <text x="220" y="140" font-size="11" text-anchor="middle" fill="#2e7d32">heavier ✓</text>
+    </svg>
+    <div class="job"><b>Why:</b> when you blow air into a balloon, you're packing real matter (gas) inside it. That gas has mass, so the full balloon weighs a tiny bit more than the empty one.</div>
+    <div class="card"><b>Same idea:</b> a football pumped full of air weighs more than a flat, empty one — for exactly the same reason. Gas isn't "nothing" — it's matter with mass, just spread out and invisible.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which of these is NOT matter?</p>
+      <button class="opt">A rock</button><button class="opt">A shadow</button><button class="opt">Water</button><button class="opt">Air</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right! A shadow has no mass and no volume of its own — it's not matter.</div>
+      <div class="fb no">✘ Ask: "could I weigh this on a scale?" You can't weigh a shadow.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Which state of matter takes the shape of its container but keeps the same volume?</p>
+      <button class="opt">Solid</button><button class="opt">Gas</button><button class="opt">Liquid</button><button class="opt">None of these</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Yes — liquids flow into any shape, but the amount (volume) doesn't change.</div>
+      <div class="fb no">✘ Think of water poured into different cups — same amount, different shape.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Tom blows up a bike tyre with air. Compared to the empty tyre, the full tyre is:</p>
+      <button class="opt">Lighter, air has no mass</button><button class="opt">Exactly the same mass</button><button class="opt">Impossible to compare</button><button class="opt">Heavier, because the air inside has mass</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct! The air packed inside is matter — it adds a tiny bit of mass.</div>
+      <div class="fb no">✘ Remember the balloon: gas is matter, and matter always has mass.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Which statement is TRUE about all matter, whether solid, liquid, or gas?</p>
+      <button class="opt">It always has mass, no matter what state it's in</button><button class="opt">Only solids have mass</button><button class="opt">Gases never have mass</button><button class="opt">Only things you can see have mass</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — mass doesn't disappear just because you can't see it (like a gas).</div>
+      <div class="fb no">✘ Think about the balloon and the leaf-bubble recall — gases count too.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: telling MASS and VOLUME apart, and the mystery of dissolving.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Matter_Lesson_MassVolumeDissolving.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

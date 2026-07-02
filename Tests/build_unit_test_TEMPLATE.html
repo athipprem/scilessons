@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     build_unit_test_TEMPLATE.html  —  MASTER TEMPLATE (Science / Luikishi)
+     ------------------------------------------------------------
+     Reference generator for ASMOPSS-style MCQ unit tests. HTML replaces DOCX
+     from Unit 2 onward (rule set 2 Jul 2026 by Lui — see project-science-luikishi.md).
+
+     To build a new unit: copy this file to Unit_0X_Test_<Topic>.html (in
+     Lessons\Tests\), then change ONLY:
+       1. <title>, the #hdr-title / #hdr-sub text, UNIT_NUM / UNIT_TITLE consts
+       2. The three SECTION band labels (keep the A/B/C colour convention)
+       3. The Q[] array — 15 questions, 3 sections of 5, on-topic only
+          Each item: { n, section:'A'|'B'|'C', star:0|1|2, body, options:[4],
+                        ans: 1-based correct option index, why: explanation }
+       4. PASS_BAR if a milestone test uses a different bar (default 12/15)
+
+     KEEP these conventions (do not change):
+       - Single page, all 15 questions visible at once (no pagination).
+       - Submit stays disabled until all 15 are answered — this is enforced
+         by code, do not remove the disabled-state check.
+       - On submit: full instant reveal — total score, right/wrong per
+         question, and the "why" explanation shown at the point of mistake
+         (rule set 2 Jul 2026 by Lui: score + wrong-Q + reasons, immediately).
+       - Answers CANNOT be embedded anywhere accessible before submit other
+         than inside this file's own script (same trust model as the old
+         answer-key-on-a-separate-page rule — a curious view-source is the
+         only way to see it early, same risk class as before).
+       - "Save Results" button writes a JSON record for Luikishi to read on
+         the next coaching session. Never skip this — it is the only score
+         record now that there is no handwritten/scanned copy.
+       - Results file naming: U{unit#, 2-digit}_Results_{YYYY-MM-DD}.json
+       - Save location: Lessons\Tests\Results\ (pick this folder the first
+         time the save dialog opens; supporting browsers remember it after).
+       - "Back to Hub" link (#btn-hub, href="../index.html") appears next to
+         Save Results once submitted — do not remove (set 2 Jul 2026 by Lui).
+         Path is one level up because tests live in Lessons\Tests\.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 1 Test — Biology: Plants</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 1 Test — Biology: Plants</b>
+      <span class="sub" id="hdr-sub">Plant parts • Water transport • Thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 15 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 15 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 15!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 1;                         // 2-digit padded for filenames automatically
+const UNIT_TITLE = "Biology: Plants";
+const PASS_BAR   = 12;                        // out of 15
+
+const Q = [
+  // Section A — Plant Parts & Their Jobs (warm-up)
+  { n:1, section:'A', star:0, body:"Which part of a plant holds it firmly in the soil and drinks water?",
+    options:["Leaf","Root","Flower","Stem"], ans:2,
+    why:"Roots anchor the plant and absorb water + minerals through root hairs." },
+  { n:2, section:'A', star:0, body:"What is the MAIN job of a leaf?",
+    options:["To make seeds","To anchor the plant","To make food using sunlight","To absorb water from soil"], ans:3,
+    why:"Leaves are the plant's kitchen — they use sunlight to make food (photosynthesis)." },
+  { n:3, section:'A', star:0, body:"Which part grows into seeds so new plants can form?",
+    options:["Root","Stem","Flower","Leaf"], ans:3,
+    why:"Flowers are pollinated and then grow seeds." },
+  { n:4, section:'A', star:0, body:"The stem of a plant mainly helps to:",
+    options:["make food","hold the plant up and carry water","drink minerals from soil","change colour"], ans:2,
+    why:"The stem supports the plant and carries water up and food around." },
+  { n:5, section:'A', star:0, body:"Which of these vegetables do we eat as a LEAF?",
+    options:["Carrot","Cabbage (or lettuce)","Apple","Potato"], ans:2,
+    why:"Cabbage/lettuce are leaves. Carrot = root, potato = underground stem, apple holds seeds." },
+
+  // Section B — How Plant Parts Work (★)
+  { n:6, section:'B', star:1, body:"A potato has small 'eyes' (buds) on it. This tells us a potato is actually a:",
+    options:["root","seed","underground stem","fruit"], ans:3,
+    why:"Only stems have buds. Potato 'eyes' are buds, so a potato is an underground stem." },
+  { n:7, section:'B', star:1, body:"Which group are ALL underground stems?",
+    options:["Carrot, radish, sweet potato","Ginger, onion, potato","Lettuce, spinach, cabbage","Apple, tomato, orange"], ans:2,
+    why:"Ginger, onion and potato are underground stems. Carrot/radish/sweet potato are roots." },
+  { n:8, section:'B', star:1, body:"Water absorbed by the roots reaches the leaves through tiny tubes inside the:",
+    options:["flower","stem","petals","seeds"], ans:2,
+    why:"The stem contains tube bundles that carry water upward." },
+  { n:9, section:'B', star:1, body:"Root hairs are useful mainly because they:",
+    options:["make the plant colourful","give more surface to absorb more water","make food","produce seeds"], ans:2,
+    why:"Many tiny root hairs greatly increase the surface area for absorbing water." },
+  { n:10, section:'B', star:1, body:"Which statement about leaves is CORRECT?",
+    options:["Leaves have tiny holes that let air and water vapour pass","Leaves anchor the plant in soil","Leaves store the plant's seeds","Leaves pump water using a heart"], ans:1,
+    why:"Leaves have tiny holes (stomata) for air and water vapour to move in and out." },
+
+  // Section C — Think Like a Scientist (★★ applied)
+  { n:11, section:'C', star:2, body:"A white flower is placed in red-coloured water. After a few hours the petals turn red. The BEST conclusion is:",
+    options:["The flower made red colour by itself","Water moved up from the container to the petals","Red water is heavier than clear water","The roots ate the colour"], ans:2,
+    why:"The coloured water travelled up the stem to the petals — showing water transport to the flower." },
+  { n:12, section:'C', star:2, body:"Maya puts one celery stick in blue water and an identical stick in plain water. Why did she ALSO use the plain-water stick?",
+    options:["To make the test look nicer","As a control, to compare and be sure the colour came from the dyed water","Because celery always needs two sticks","To give the plant more water"], ans:2,
+    why:"The plain-water stick is the control — it lets her be sure the blue came from the dye, a fair comparison." },
+  { n:13, section:'C', star:2, body:"A leaf is put into warm water and tiny bubbles appear on it. The bubbles are mostly:",
+    options:["food made by the leaf","air escaping from tiny holes and air spaces in the leaf","blue dye","melted leaf"], ans:2,
+    why:"Leaves have tiny holes and internal air spaces; the warmth pushes the air out as bubbles. (Not photosynthesis — that makes food, not bubbles of escaping air.)" },
+  { n:14, section:'C', star:2, body:"To test 'does more sunlight make a plant grow taller?', which is a FAIR test?",
+    options:["Two same plants, same water and pots, but one in bright light and one in dim light","Two different plants in different pots with different water","One plant in light, measured twice","Two plants — one watered, one not watered"], ans:1,
+    why:"A fair test changes ONLY the light and keeps everything else (plant, pot, water) the same." },
+  { n:15, section:'C', star:2, body:"A plant's leaves are removed, but its roots and stem stay in water. Over a few days MUCH LESS water is lost from the container than before. The best reason is:",
+    options:["The roots stopped working","Most water normally escapes through the leaves, which are now gone","The stem drank all the water","Water turned into food"], ans:2,
+    why:"Most water leaves a plant as vapour through the leaves. No leaves → far less water lost." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Plant Parts &amp; Their Jobs (warm-up)",
+  B: "SECTION B — How Plant Parts Work (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 15 answered`;
+  document.getElementById('progress-fill').style.width = (n/15*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 15){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 15 to submit (${15-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 15) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/15*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 15  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/15). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/15 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 15, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(2,'0');
+  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
