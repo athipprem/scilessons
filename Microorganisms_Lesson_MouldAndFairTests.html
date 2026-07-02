@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 4 · Lesson 2 — What Mould Needs to Grow &amp; Fair Tests</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .step{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .compare>div{border-radius:12px;padding:12px;text-align:center}
+  .fast{background:#fdecea;border:2px solid #c62828}
+  .slow{background:#e3f2fd;border:2px solid var(--blue)}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .needs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+  .needs>div{border-radius:10px;padding:10px;text-align:center;background:#fafdfa;border:2px solid var(--line)}
+  .needs .ico{font-size:1.6rem}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .bagtable{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem}
+  .bagtable th,.bagtable td{border:1.5px solid var(--line);padding:7px 9px;text-align:center}
+  .bagtable th{background:#f7fafc}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🍞 Lesson 2 · What Mould Needs to Grow &amp; Fair Tests</b><span class="pill">Unit 4 · Biology</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Mould (and most microorganisms) need FOOD, MOISTURE (water) and WARMTH to grow — and most also need AIR.</div>
+    <div class="sci">MAP 2 — Scientist's tool: to find out which condition matters most, change ONE thing at a time and keep everything else the same.</div>
+    <div class="why">🎯 <b>By the end you can:</b> say what conditions make mould grow fastest or slowest, and judge whether a mould experiment is a fair test. This is exactly the kind of question ASMOPSS asks!</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Ever wonder why bread goes mouldy on the kitchen counter in days, but lasts weeks in the freezer? Or why we keep leftovers in a sealed container in the fridge instead of an open bowl on the table? That's not a coincidence — it's you controlling the exact conditions mould needs to grow.</div>
+    <div class="card">
+      <b>Real life:</b> fridges slow mould down by removing warmth. Freezers stop it almost completely. Sealed, dry containers remove moisture. Bakers, on the other hand, deliberately give yeast (a helpful fungus) warmth, moisture and food so it grows FAST and makes bread rise. <b>Your superpower:</b> once you know what a microorganism needs, you can control whether it grows fast, slow, or not at all.
+    </div>
+  </section>
+
+  <!-- 3: WHAT MOULD NEEDS -->
+  <section class="screen" data-s="3">
+    <h2>What Does Mould Need to Grow? 🍄</h2>
+    <div class="rulebar">Mould is a fungus — a living thing. Like all living things, it needs the right conditions to survive and grow.</div>
+    <div class="needs">
+      <div><div class="ico">🍞</div><b>FOOD</b><br><small>something organic to feed on — bread, fruit, old leftovers</small></div>
+      <div><div class="ico">💧</div><b>MOISTURE</b><br><small>water/dampness — dry food resists mould far longer</small></div>
+      <div><div class="ico">🌡️</div><b>WARMTH</b><br><small>mould grows fastest in warm places, very slowly in the cold</small></div>
+    </div>
+    <div class="job"><b>Key fact:</b> most moulds also need AIR to grow, which is why sealing food in an airtight container (as well as keeping it cool and dry) helps slow mould down even further.</div>
+  </section>
+
+  <!-- 4: FAST VS SLOW -->
+  <section class="screen" data-s="4">
+    <h2>Fast Growth vs Slow Growth 🔥🧊</h2>
+    <div class="rulebar">MORE food + moisture + warmth = FASTER mould growth. LESS of any one of them = SLOWER growth.</div>
+    <svg viewBox="0 0 300 130" width="300" height="130" aria-label="A damp warm slice of bread growing mould fast compared to a dry cold slice staying mould-free">
+      <rect x="30" y="55" width="70" height="45" rx="6" fill="#e8c39e"/><circle cx="45" cy="60" r="5" fill="#4a7c3a"/><circle cx="65" cy="58" r="6" fill="#4a7c3a"/><circle cx="80" cy="62" r="4" fill="#4a7c3a"/>
+      <text x="65" y="112" font-size="10" text-anchor="middle" fill="#4a5568">damp + warm bread</text>
+      <text x="65" y="125" font-size="10" text-anchor="middle" fill="#c62828">moulds FAST</text>
+      <rect x="190" y="55" width="70" height="45" rx="6" fill="#f0dfa8"/>
+      <text x="225" y="112" font-size="10" text-anchor="middle" fill="#4a5568">dry + cold bread</text>
+      <text x="225" y="125" font-size="10" text-anchor="middle" fill="#1565c0">moulds SLOW</text>
+    </svg>
+    <div class="compare">
+      <div class="fast"><b>GROWS MOULD FAST</b><br><small>warm room, damp/moist bread, exposed to air</small></div>
+      <div class="slow"><b>GROWS MOULD SLOWLY</b><br><small>fridge/freezer (cold), dry bread, sealed away from air</small></div>
+    </div>
+  </section>
+
+  <!-- 5: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="5">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change ONE thing, measure ONE thing, keep everything else the SAME.</div>
+    <p>Imagine testing: <i>"Does moisture make mould grow faster?"</i> Four identical bread bags are set up like this:</p>
+    <table class="bagtable">
+      <tr><th>Bag</th><th>Bread</th><th>Moisture</th><th>Place kept</th></tr>
+      <tr><td>A</td><td>same size slice</td><td>dry</td><td>warm cupboard</td></tr>
+      <tr><td>B</td><td>same size slice</td><td>damp (few drops of water)</td><td>warm cupboard</td></tr>
+      <tr><td>C</td><td>same size slice</td><td>dry</td><td>fridge</td></tr>
+      <tr><td>D</td><td>same size slice</td><td>damp (few drops of water)</td><td>fridge</td></tr>
+    </table>
+    <p>To find out if MOISTURE ALONE makes a difference, compare Bag A with Bag B — both are kept warm, so the only thing that's different between them is moisture. If Bag B moulds faster than Bag A, moisture is the reason, not the warmth (since both were warm).</p>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGE</b><br>one thing<br><small>(moisture, when comparing A vs B)</small></div>
+      <div class="me"><b>MEASURE</b><br>one thing<br><small>(how much mould appears, and how fast)</small></div>
+      <div class="sa"><b>SAME</b><br>everything else<br><small>(bread type &amp; size, bag type, where kept, starting time)</small></div>
+    </div>
+    <div class="why">🧠 <b>Why comparing the RIGHT pair matters:</b> comparing Bag B (damp, warm) with Bag C (dry, fridge) would NOT tell you about moisture on its own — two things changed at once (moisture AND temperature), so you couldn't be sure which one caused the difference. Always compare bags that differ in only ONE way.</div>
+  </section>
+
+  <!-- 6: PRACTICE -->
+  <section class="screen" data-s="6">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which THREE things does mould need in order to grow?</p>
+      <button class="opt">Sunlight, soil, and seeds</button>
+      <button class="opt">Food, moisture, and warmth</button>
+      <button class="opt">Salt, sugar, and ice</button>
+      <button class="opt">Metal, glass, and plastic</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — food, moisture and warmth are the three main things mould needs to grow.</div>
+      <div class="fb no">✘ Think about why food goes mouldy fastest when it's damp and left in a warm place.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. Why does bread stored in the freezer stay mould-free for much longer than bread left on the counter?</p>
+      <button class="opt">Freezers remove all the food from the bread</button>
+      <button class="opt">Mould cannot survive touching plastic bags</button>
+      <button class="opt">Freezing makes bread a different food entirely</button>
+      <button class="opt">The cold removes the warmth mould needs to grow quickly</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — without warmth, mould growth slows down dramatically.</div>
+      <div class="fb no">✘ Think about which of mould's three needs (food, moisture, warmth) a freezer takes away.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. Four bread bags are set up: Bag 1 (dry, warm), Bag 2 (damp, warm), Bag 3 (dry, cold), Bag 4 (damp, cold). Which TWO bags should you compare to test the effect of MOISTURE alone?</p>
+      <button class="opt">Bag 1 and Bag 4</button>
+      <button class="opt">Bag 2 and Bag 3</button>
+      <button class="opt">Bag 1 and Bag 2 (or Bag 3 and Bag 4)</button>
+      <button class="opt">Any two bags — it doesn't matter which</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — these pairs only differ in moisture, with temperature kept the same, so any difference must be caused by moisture.</div>
+      <div class="fb no">✘ You need a pair where ONLY moisture is different and everything else (like temperature) matches.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. In a mould-growth experiment, what MUST stay the same between the bags being compared for it to be a fair test?</p>
+      <button class="opt">Everything except the ONE thing being tested</button>
+      <button class="opt">Only the bag colour</button>
+      <button class="opt">Nothing needs to stay the same</button>
+      <button class="opt">Only the size of the mould spots</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a fair test changes only one variable and keeps every other condition identical.</div>
+      <div class="fb no">✘ Remember the fair test rule: change ONE thing, keep everything else the SAME.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 4! You know what microorganisms are, how decomposers help nature, what mould needs to grow, and how to design a fair test to compare growth conditions. Ready for the Unit 4 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 4 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Microorganisms_Lesson_WhatAreThey.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_04_Test_Microorganisms.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

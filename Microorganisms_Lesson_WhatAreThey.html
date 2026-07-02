@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 4 · Lesson 1 — Microorganisms: The Tiny Living Things</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.15rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .compare>div{border-radius:12px;padding:12px}
+  .help{background:#e8f5e9;border:2px solid var(--green)}
+  .harm{background:#fdecea;border:2px solid #c62828}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px 0}
+  .tnode{background:#fff;border:2px solid var(--blue);border-radius:10px;padding:8px 16px;font-weight:bold;text-align:center;color:var(--blue)}
+  .tarrow{font-size:1.3rem;color:var(--grey)}
+  .tbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .tleaf{border-radius:10px;padding:10px 16px;text-align:center;font-weight:bold;min-width:130px}
+  .tleaf.repel{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .tleaf.attract{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🦠 Lesson 1 · Microorganisms: The Tiny Living Things</b><span class="pill">Unit 4 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Microorganism Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: microorganisms are living things SO SMALL you cannot see them without a microscope — and they are all around us, all the time.</div>
+    <p>Some microorganisms help us. Some can harm us. Today you'll learn what they are, what jobs they do in nature, and how to tell helpful ones from harmful ones.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🦠</div><div class="t">What they are</div><div class="j">too small to see</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🍞🧀</div><div class="t">Helpful vs harmful</div><div class="j">tell them apart</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🍂</div><div class="t">Decomposers</div><div class="j">nature's recyclers</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name the main types of microorganisms, explain what decomposers do for nature, and sort examples into "helpful" and "harmful."</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 3 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 3 🧲</h2>
+    <div class="recall">🔁 <b>Remember magnetism?</b> You couldn't SEE the magnetic force pulling two magnets together — but it was completely real, and you learned rules to predict it.</div>
+    <p>Microorganisms are the same kind of idea: invisible to your eyes, but very real and very powerful. A single microorganism is far too small to see, but billions of them together can turn milk into yogurt, make bread rise, or make old food unsafe to eat.</p>
+    <div class="card"><b>Mini self-check:</b> in Unit 3, could you see the magnetic pull with your eyes? <i>(Answer: no — but you could still test and prove it was there. Keep that "invisible but provable" idea in mind for microorganisms.)</i></div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Every time bread rises, yogurt sets, or leftovers get thrown out because they've "gone off," microorganisms are at work. Knowing how they behave helps you understand food safety, cooking, farming, and how nature recycles dead plants and animals. ASMOPSS loves asking about mould/bacteria experiments — exactly the kind of question you'll master today and next lesson.</div>
+    <div class="card">
+      <b>Real life:</b> bakers use a fungus called yeast to make bread dough rise. Farmers rely on bacteria and fungi in soil to break down dead leaves into nutrients their crops can use. Doctors and parents care about handwashing because it removes harmful bacteria and viruses before they can make us sick.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: WHAT ARE MICROORGANISMS -->
+  <section class="screen" data-s="4">
+    <h2>What Are Microorganisms? 🔬</h2>
+    <div class="rulebar">Microorganisms are LIVING THINGS so tiny you need a microscope to see them. The main groups are BACTERIA and FUNGI (like mould and yeast).</div>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🦠</div><div class="t">Bacteria</div><div class="j">tiny single-celled living things — found almost everywhere: soil, water, food, even your own body</div></div>
+      <div class="mapcell"><div class="ico">🍄</div><div class="t">Fungi</div><div class="j">mould and yeast are both fungi — mould grows fuzzy patches on old food; yeast makes bread rise</div></div>
+      <div class="mapcell"><div class="ico">🔎</div><div class="t">Too small to see</div><div class="j">a single one is invisible — you only notice them once there are millions together</div></div>
+    </div>
+    <div class="job"><b>Key fact:</b> microorganisms are alive — they grow, use food and energy, and reproduce (make more of themselves), just like bigger living things. They just do it at a size you can't see with your eyes alone.</div>
+  </section>
+
+  <!-- SCREEN 5: HELPFUL OR HARMFUL DECISION TREE -->
+  <section class="screen" data-s="5">
+    <h2>Helpful or Harmful? Use This Rule 🔄</h2>
+    <div class="rulebar">The SAME kinds of microorganisms can be helpful in one situation and harmful in another — it depends on WHERE they are growing and WHAT they are doing there.</div>
+    <div class="tree">
+      <div class="tnode">Is the microorganism doing a job we WANT (making food, recycling waste) or damaging something we need (spoiling food, making us sick)?</div>
+      <div class="tarrow">↓</div>
+      <div class="tbranch">
+        <div>
+          <div class="tleaf attract">Doing a job we want<br><small>HELPFUL</small></div>
+        </div>
+        <div>
+          <div class="tleaf repel">Damaging food/health<br><small>HARMFUL</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="compare">
+      <div class="help">
+        <div style="text-align:center;font-size:1.6rem">✅</div>
+        <b>HELPFUL examples</b><br>
+        <small>yeast rising bread, bacteria turning milk into yogurt, soil bacteria/fungi breaking down dead leaves into nutrients</small>
+      </div>
+      <div class="harm">
+        <div style="text-align:center;font-size:1.6rem">⚠️</div>
+        <b>HARMFUL examples</b><br>
+        <small>mould growing on old bread, bacteria spoiling forgotten leftovers, germs that spread coughs and colds</small>
+      </div>
+    </div>
+    <div class="why" style="margin-top:12px">🔑 <b>The test:</b> "is this microorganism making something useful, or ruining something we need?" That tells you helpful or harmful — not the microorganism's name alone.</div>
+  </section>
+
+  <!-- SCREEN 6: DECOMPOSERS -->
+  <section class="screen" data-s="6">
+    <h2>Decomposers: Nature's Recyclers ♻️</h2>
+    <div class="rulebar">Decomposers are microorganisms (mostly bacteria and fungi) that break down dead plants, dead animals, and food waste — and recycle the nutrients back into the soil.</div>
+    <svg viewBox="0 0 340 130" width="340" height="130" aria-label="A dead leaf being broken down by decomposers into nutrients in the soil">
+      <text x="55" y="30" font-size="28" text-anchor="middle">🍂</text>
+      <text x="55" y="50" font-size="10" text-anchor="middle" fill="#4a5568">dead leaf</text>
+      <text x="150" y="26" font-size="22" text-anchor="middle">🦠🍄</text>
+      <text x="150" y="50" font-size="10" text-anchor="middle" fill="#4a5568">decomposers feed on it</text>
+      <text x="100" y="22" font-size="16" text-anchor="middle" fill="#8a6a00">→</text>
+      <text x="200" y="22" font-size="16" text-anchor="middle" fill="#8a6a00">→</text>
+      <rect x="230" y="70" width="90" height="30" rx="6" fill="#a1887f"/>
+      <text x="275" y="90" font-size="11" text-anchor="middle" fill="#fff" font-weight="bold">SOIL NUTRIENTS</text>
+      <text x="275" y="115" font-size="10" text-anchor="middle" fill="#4a5568">plants use these to grow</text>
+    </svg>
+    <div class="job"><b>Why this matters for nature:</b> without decomposers, dead leaves, fallen trees, and dead animals would just pile up forever, and the nutrients trapped inside them could never be reused. Decomposers unlock those nutrients and put them back into the soil so new plants can grow — that's why they are HELPFUL, even though they are technically "rotting" something.</div>
+    <div class="card"><b>Compost bins</b> at home or school work the exact same way — you're giving decomposer microorganisms food scraps and garden waste so they can turn it into nutrient-rich soil.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What makes something a "microorganism"?</p>
+      <button class="opt">It lives underground</button><button class="opt">It is a living thing too small to see without a microscope</button><button class="opt">It is always harmful</button><button class="opt">It never moves</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right! Microorganisms are defined by their tiny size, not by whether they're helpful or harmful.</div>
+      <div class="fb no">✘ Think about the meaning of "micro" — it means very small.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Which living thing is a FUNGUS that bakers use to make bread dough rise?</p>
+      <button class="opt">Bacteria</button><button class="opt">Mould</button><button class="opt">Yeast</button><button class="opt">Algae</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — yeast is a fungus that produces bubbles of gas, making dough rise.</div>
+      <div class="fb no">✘ Mould and yeast are both fungi, but only one is used to make bread rise.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. What job do decomposer microorganisms do in nature?</p>
+      <button class="opt">They make plants grow taller instantly</button><button class="opt">They stop other living things from dying</button><button class="opt">They pollinate flowers</button><button class="opt">They break down dead plants and animals and return nutrients to the soil</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — decomposers recycle nutrients from dead things back into the soil.</div>
+      <div class="fb no">✘ Think about what happens to a dead leaf on the ground over many weeks.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A patch of fuzzy mould has grown on a forgotten piece of bread in the cupboard. In THIS situation, the mould is best described as:</p>
+      <button class="opt">Harmful — it has spoiled food that was meant to be eaten</button><button class="opt">Helpful — it is making the bread into a new food</button><button class="opt">Neither — mould never affects food</button><button class="opt">Helpful — it will make the bread rise more</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — this mould is spoiling food we needed, so here it's harmful.</div>
+      <div class="fb no">✘ Ask: is this microorganism doing a job we want, or ruining something we needed?</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: exactly what mould needs to grow, and how to design a fair test to find out.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Microorganisms_Lesson_MouldAndFairTests.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>
