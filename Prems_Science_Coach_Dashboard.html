@@ -320,9 +320,13 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   document.getElementById('res-alabel').innerHTML = D.lastUnit.analysisLabel;
   document.getElementById('res-ains').innerHTML = D.lastUnit.analysisInsight;
   var qb=document.getElementById('q-body');
-  for(var b=0;b<D.lastUnit.qBreakdown.length;b++){ var r=D.lastUnit.qBreakdown[b];
-    var lvl = r.lvl==='h' ? '<span class="lh">Hard</span>' : '<span class="lw">Basic</span>';
-    qb.innerHTML+='<tr><td><strong>'+r.q+'</strong></td><td>'+r.topic+'</td><td>'+lvl+'</td><td class="'+(r.pass?'':'q-fail')+'">'+r.note+'</td></tr>'; }
+  if (D.lastUnit.qBreakdown.length === 0){
+    qb.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#8a6a00;font-weight:700;padding:16px 0">&#127881; Perfect score &mdash; no wrong answers to review!</td></tr>';
+  } else {
+    for(var b=0;b<D.lastUnit.qBreakdown.length;b++){ var r=D.lastUnit.qBreakdown[b];
+      var lvl = r.lvl==='h' ? '<span class="lh">Hard</span>' : '<span class="lw">Basic</span>';
+      qb.innerHTML+='<tr><td><strong>'+r.q+'</strong></td><td>'+r.topic+'</td><td>'+lvl+'</td><td class="'+(r.pass?'':'q-fail')+'">'+r.note+'</td></tr>'; }
+  }
 
   // radar (6 axes)
   var radarBuilt=false;
