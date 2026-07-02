@@ -143,7 +143,15 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="card">
               <div class="card-hd"><span class="dot"></span>Unit Score History</div>
               <div class="note-empty" id="score-empty">No unit tests completed yet &mdash; U1 is the first. Baseline 72.5/100 on the 2025 G4 paper.</div>
-              <div id="score-history" style="display:none"></div>
+              <div id="score-chart-wrap" style="display:none">
+                <svg id="scoreChartSvg" viewBox="0 0 560 210" style="width:100%;height:auto;display:block"></svg>
+                <div style="display:flex;gap:14px;justify-content:center;margin-top:2px;flex-wrap:wrap;font-size:11px;color:#4a5568">
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#1565c0"/></svg>Unit</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#FFC107"/></svg>Perfect &#11088;</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#c62828"/></svg>Below pass</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#c05621" stroke-width="2" stroke-dasharray="4,3"/></svg>Pass line (80%)</span>
+                </div>
+              </div>
               <div class="insight orange"><div class="insight-lbl" id="ov-plabel"></div><p id="ov-pins"></p></div>
             </div>
             <div class="card">
@@ -279,16 +287,77 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   document.getElementById('ov-plabel').innerHTML = D.lastUnit.patternLabel;
   document.getElementById('ov-pins').innerHTML = D.lastUnit.patternInsight;
 
-  // unit score history (real scores once unit tests are done)
+  // unit score history (real scores once unit tests are done) - line chart
   if (D.scores.length > 0){
     document.getElementById('score-empty').style.display = 'none';
-    var shEl = document.getElementById('score-history');
-    shEl.style.display = 'block';
-    for (var si=0; si<D.scores.length; si++){
-      var s = D.scores[si];
-      var passed = s.score >= (s.passBar||12);
-      shEl.innerHTML += '<div class="tm"><span>U'+s.unit+' &mdash; '+s.topic+'</span><span style="color:'+(passed?'#2e7d32':'#c05621')+'">'+s.score+'/'+s.outOf+' ('+s.pct+'%) '+(passed?'&#9989;':'')+'</span></div>';
+    document.getElementById('score-chart-wrap').style.display = 'block';
+    buildScoreChart();
+  }
+
+  function buildScoreChart(){
+    var svg = document.getElementById('scoreChartSvg');
+    var scores = D.scores, n = scores.length;
+    var W=560, H=210, padL=32, padR=14, padT=20, padB=28;
+    var innerW = W-padL-padR, innerH = H-padT-padB;
+    function xAt(i){ return n<=1 ? padL+innerW/2 : padL + innerW*i/(n-1); }
+    function yAt(pct){ return padT + innerH*(1-Math.max(0,Math.min(100,pct))/100); }
+    function svgEl(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+
+    // gridlines: 0%, 50%, 80% (pass, dashed), 100%
+    [0,50,80,100].forEach(function(v){
+      var y = yAt(v);
+      var ln = svgEl('line');
+      ln.setAttribute('x1',padL); ln.setAttribute('x2',W-padR); ln.setAttribute('y1',y); ln.setAttribute('y2',y);
+      ln.setAttribute('stroke', v===80 ? '#c05621' : '#f0dfa8');
+      ln.setAttribute('stroke-width', v===80 ? '1.5' : '1');
+      if (v===80) ln.setAttribute('stroke-dasharray','5,4');
+      svg.appendChild(ln);
+      var lbl = svgEl('text');
+      lbl.setAttribute('x', padL-6); lbl.setAttribute('y', y+3); lbl.setAttribute('text-anchor','end');
+      lbl.setAttribute('font-size','9'); lbl.setAttribute('fill', v===80 ? '#c05621' : '#a89568');
+      lbl.textContent = v+'%';
+      svg.appendChild(lbl);
+    });
+
+    // connecting line across all units
+    if (n > 1){
+      var pts = scores.map(function(s,i){ return xAt(i)+','+yAt(s.pct); }).join(' ');
+      var poly = svgEl('polyline');
+      poly.setAttribute('points', pts); poly.setAttribute('fill','none');
+      poly.setAttribute('stroke','#8a6a00'); poly.setAttribute('stroke-width','2');
+      svg.appendChild(poly);
     }
+
+    // points, value labels, x-axis unit labels
+    scores.forEach(function(s,i){
+      var x = xAt(i), y = yAt(s.pct);
+      var passed = s.score >= (s.passBar||12);
+      var perfect = s.pct >= 100;
+      var color = perfect ? '#FFC107' : (passed ? '#1565c0' : '#c62828');
+
+      var c = svgEl('circle');
+      c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r','5');
+      c.setAttribute('fill',color); c.setAttribute('stroke','#fff'); c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c);
+
+      if (perfect){
+        var star = svgEl('text');
+        star.setAttribute('x',x); star.setAttribute('y',y-12); star.setAttribute('text-anchor','middle');
+        star.setAttribute('font-size','11'); star.textContent='⭐';
+        svg.appendChild(star);
+      }
+      var vlab = svgEl('text');
+      vlab.setAttribute('x',x); vlab.setAttribute('y', perfect ? y-24 : y-12); vlab.setAttribute('text-anchor','middle');
+      vlab.setAttribute('font-size','9'); vlab.setAttribute('font-weight','700'); vlab.setAttribute('fill','#2b2205');
+      vlab.textContent = s.score+'/'+s.outOf;
+      svg.appendChild(vlab);
+
+      var xlab = svgEl('text');
+      xlab.setAttribute('x',x); xlab.setAttribute('y', H-padB+16); xlab.setAttribute('text-anchor','middle');
+      xlab.setAttribute('font-size','9'); xlab.setAttribute('fill','#8a7a4a');
+      xlab.textContent = (typeof s.unit==='number' ? 'U'+s.unit : s.unit);
+      svg.appendChild(xlab);
+    });
   }
 
   // unit log
