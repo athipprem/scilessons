@@ -13,51 +13,62 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:2, topic:'Chemistry/Matter: What Is Matter? Mass, Volume &amp; Dissolving', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:3, topic:'Physics: Magnetism &amp; Heat', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:1, score:14, outOf:15, marks:null, marksOutOf:null, pct:93, delta:null, prevScore:null,
-    patternLabel: 'Unit 1 result - Biology: Plants (14/15, PASS)',
-    patternInsight: '<strong>14/15 (93%)</strong> - pass bar is 12/15. Sections A+B (plant-parts content, incl. underground stems Q6&ndash;7 targeting the 2025 Q24 miss) = <strong>10/10</strong>, fully closing the Plants content gap. Section C (applied/experiment reasoning) = <strong>4/5</strong> - he nailed the control-group question (Q12) and the fair-test design question (Q14), exactly the skill that cost him marks on the 2025 papers. Only miss: Q13 (leaf bubbles = air escaping from stomata/air spaces - he said "food made by the leaf"), the same idea behind the 2025 Q34 miss - a recurring gap worth a quick reinforcement.',
-    analysisLabel: 'Target: GOLD - next up U2 Matter &amp; Mass (built, HTML format)',
-    analysisInsight: 'U1 proved the coaching approach works: content mastery is fast once taught from zero, and applied/experiment reasoning is climbing (Section C 80%) - the single biggest lever for gold. U2 attacks the Matter &amp; Mass cluster (2025 Q7, 11, 33: gases have mass, mass vs volume, dissolving) while continuing to bake in fair-test reasoning every unit.',
-    qSummary: '<strong>14 / 15 (93%)</strong> - Only miss: Q13 (leaf bubbles = stomata/air escape, said "food made by leaf")',
-    qBreakdown: [
-      { q:'Q13', topic:'Leaf bubbles = stomata/air spaces &middot; applied', lvl:'h', pass:false, note:'&#10007; said "food made by leaf" instead of air escaping - same idea as 2025 Q34.' }
-    ]
+    n:2, score:15, outOf:15, marks:null, marksOutOf:null, pct:100, delta:null, prevScore:null,
+    patternLabel: 'Unit 2 result - Chemistry/Matter: What Is Matter? (15/15, PERFECT)',
+    patternInsight: '<strong>15/15 (100%)</strong> - pass bar is 12/15. Section A (what is matter warm-up) = <strong>5/5</strong>. Section B (gases, mass &amp; volume) = <strong>5/5</strong>, fully closing the baseline Matter &amp; Mass content gap (2025 Q7, Q11). Section C (dissolving/think like a scientist, applied) = <strong>5/5</strong> - up from U1\'s 4/5, resolving 2025 Q33 (dissolving &amp; mass) and stacking a second clean pass on fair-test reasoning. No misses at all.',
+    analysisLabel: 'Target: GOLD - next up U3 Physics: Magnetism &amp; Heat (built, HTML format)',
+    analysisInsight: 'Two units in, applied/experiment reasoning has gone from a baseline weak spot to a genuine strength (Section C: 80% in U1, 100% in U2) - the single biggest lever for gold is now trending the right way. U3 attacks the Physics one-offs (2025 Q18 magnets/poles, Q19 heat-conduction fair test) while keeping the applied-reasoning beat in every lesson.',
+    qSummary: '<strong>15 / 15 (100%)</strong> - Perfect score, no misses.',
+    qBreakdown: []
   },
 
   skills: [
     { name: 'Biology',                  c: 68, t: 85, ev:'U1 Plants 14/15 (content 10/10) closed the biggest Bio gap; ecosystems/human body/microorganisms still untested' },
-    { name: 'Chemistry / Matter',       c: 55, t: 85, ev:'G4 Q7/11/33; U2 in progress' },
-    { name: 'Physics',                  c: 63, t: 85, ev:'G3 Physical 66% strongest; G4 Q3/18/19' },
+    { name: 'Chemistry / Matter',       c: 90, t: 85, ev:'U2 Matter &amp; Mass 15/15 PERFECT - closed G4 Q7/11/33; now above target' },
+    { name: 'Physics',                  c: 63, t: 85, ev:'G3 Physical 66% strongest; G4 Q3/18/19; U3 (magnetism/heat) built, awaiting test' },
     { name: 'Earth &amp; Space',            c: 50, t: 80, ev:'G3 Earth/Space 50%; G4 Q32' },
-    { name: 'Scientific Investigation', c: 56, t: 85, ev:'U1 Sec C 4/5 - nailed control (Q12) &amp; fair test (Q14); still the top lever for gold' },
-    { name: 'Applied Reasoning',        c: 67, t: 85, ev:'U1 Section C 80%, up from G3 Applied 50%' }
+    { name: 'Scientific Investigation', c: 70, t: 85, ev:'Section C 80% (U1) then 100% (U2) - two strong results in a row on fair tests/controls/conclusions' },
+    { name: 'Applied Reasoning',        c: 78, t: 85, ev:'U1 Section C 80%, U2 Section C 100% - consistent upward trend' }
   ],
-  radarCurrent:  [68, 55, 63, 50, 56, 67],
+  radarCurrent:  [68, 90, 63, 50, 70, 78],
   radarTarget:   [85, 85, 85, 80, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
   outOf: 15,
   scores: [
-    { unit:1, topic:'Biology: Plants', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-02' }
+    { unit:1, topic:'Biology: Plants', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-02' },
+    { unit:2, topic:'Chemistry/Matter: What Is Matter?', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 3, badge: 'linear-gradient(135deg,#5C6BC0,#7986CB)',
+      title: 'Physics: Magnetism &amp; Heat',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: Magnets &amp; Poles', c:'tgreen' },
+        { t:'L2: Heat, Conduction &amp; Fair Tests', c:'tblue' },
+        { t:'Targets 2025 Q18, Q19', c:'torange' }
+      ],
+      note: 'U3 attacks the Physics one-offs from the baseline: magnet poles and heat-conduction fair tests. L1: magnetic vs non-magnetic materials, the two-pole rule, and reading rows of magnets (attract/repel joint by joint) - targets 2025 Q18. L2: conduction, good conductors vs insulators, and a rods-in-hot-water fair-test design (same logic as the classic wax-melting demo) - targets 2025 Q19. Built in the established single-page HTML test format.',
+      status: 'pending'
+    },
+    {
       n: 2, badge: 'linear-gradient(135deg,#EF6C00,#FFB74D)',
       title: 'Chemistry/Matter: What Is Matter? Mass, Volume &amp; Dissolving',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: What Is Matter?', c:'tgreen' },
-        { t:'L2: Mass, Volume &amp; Dissolving', c:'tblue' },
-        { t:'Targets 2025 Q7, Q11, Q33', c:'torange' }
+        { t:'&#9989; 15/15 PERFECT', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 5/5', c:'tblue' },
+        { t:'No misses', c:'torange' }
       ],
-      note: 'U2 attacks the second-biggest content cluster from the baseline: matter, mass vs volume, and dissolving. L1: what matter is (incl. things that are NOT matter - light/sound), the three states, and the classic "gases have mass" misconception (balloon/football demo) - targets 2025 Q7 &amp; Q11. L2: mass vs volume, dissolving &amp; conservation of mass, plus a fair-test beat on crushed vs lump sugar - targets 2025 Q33. First unit built in the new single-page HTML test format - instant score + explanations, save-to-file for Luikishi.',
-      status: 'pending'
+      note: 'Scored 15/15 (100%) - a perfect score, comfortably above the 12/15 pass bar. Sections A+B (what is matter, gases/mass/volume) 10/10, fully closing the 2025 Matter &amp; Mass gap (Q7, 11, 33). Section C (dissolving/think like a scientist) 5/5 - up from U1\'s 4/5, a second clean pass on fair-test reasoning. First unit tested in the new single-page HTML test format - results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 1, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
@@ -99,14 +110,20 @@ var PREM_DATA = {
     {
       label: 'Scientific Investigation (fair tests, controls, conclusions) - TOP LEVERAGE for gold',
       pill: 'p1', pillText: 'Focus',
-      score: 'U1 evidence: nailed the control-group (Q12) and fair-test-design (Q14) questions - real progress from the baseline weak spot (5 of 12 G4 misses were design/read-an-experiment questions). Still the single biggest lever for gold - trained inside every unit.',
-      fillClass: 'g2', fillPct: 56
+      score: 'Two strong results in a row: U1 Section C 4/5 (80%), U2 Section C 5/5 (100%) - nailed controls, mass-conservation reasoning, and fair-test design each time. Trending from weak spot to strength; keep training it inside every unit so it holds under exam pressure.',
+      fillClass: 'g2', fillPct: 70
     },
     {
-      label: 'Matter &amp; Mass (what is matter, gases have mass, dissolving) - U2 now',
-      pill: 'p1', pillText: 'U2 now',
-      score: 'G4: Q7 (air has mass), Q11 (what has mass), Q33 (dissolving &amp; mass). Foundational physical-science concepts that also underpin many experiment questions. U2 lessons + HTML test built.',
-      fillClass: 'g2', fillPct: 55
+      label: 'Physics one-offs: magnetism &amp; heat conduction - U3 now',
+      pill: 'p1', pillText: 'U3 now',
+      score: 'G4: Q18 (magnet poles/arrangement) and Q19 (heat-conduction fair test). U3 lessons + HTML test built - poles/attract-repel rules, conductors vs insulators, and a rods-in-hot-water fair-test design.',
+      fillClass: 'g2', fillPct: 65
+    },
+    {
+      label: 'Matter &amp; Mass - CLOSED &#9989;',
+      pill: 'p3', pillText: 'Done',
+      score: 'U2 scored 15/15 (100%), perfect. Baseline Matter &amp; Mass misses (Q7, 11, 33) fully resolved - gases have mass, mass vs volume, dissolving/conservation of mass all mastered.',
+      fillClass: 'g3', fillPct: 95
     },
     {
       label: 'Biology: Plants - CLOSED &#9989;',
@@ -115,9 +132,9 @@ var PREM_DATA = {
       fillClass: 'g3', fillPct: 95
     },
     {
-      label: 'Physics &amp; Earth/Space one-offs: circuits, magnetism, heat, classification, astronomy',
+      label: 'Remaining one-offs: circuits, classification, astronomy',
       pill: 'p3', pillText: 'Later rotation',
-      score: 'G4: Q3 (circuits), Q16 (classification), Q18 (magnets), Q19 (heat), Q32 (night sky). Physics is his strongest strand (G3 66%), so targeted top-ups, not rebuilds - picked up across later units (U3+).',
+      score: 'G4: Q3 (circuits), Q16 (classification), Q32 (night sky). Physics/Earth&amp;Space is otherwise his strongest strand (G3 66%), so these are targeted top-ups, not rebuilds - picked up in later rotation units.',
       fillClass: 'g3', fillPct: 62
     }
   ]

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 · Lesson 1 — Magnets &amp; Poles</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.15rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .compare>div{border-radius:12px;padding:12px}
+  .notmag{background:#efebe9;border:2px solid #8d6e63}
+  .ismag{background:#e8f5e9;border:2px solid var(--green)}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px 0}
+  .tnode{background:#fff;border:2px solid var(--blue);border-radius:10px;padding:8px 16px;font-weight:bold;text-align:center;color:var(--blue)}
+  .tarrow{font-size:1.3rem;color:var(--grey)}
+  .tbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .tleaf{border-radius:10px;padding:10px 16px;text-align:center;font-weight:bold;min-width:120px}
+  .tleaf.repel{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .tleaf.attract{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧲 Lesson 1 · Magnets &amp; Poles</b><span class="pill">Unit 3 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Magnet Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: every magnet has TWO poles (North &amp; South). Poles that MATCH push apart. Poles that DIFFER pull together.</div>
+    <p>Magnets pull on some materials and not others, and they even push or pull on EACH OTHER depending on which ends face each other. Today you'll learn the rules that decide it all.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🧲</div><div class="t">Magnetic materials</div><div class="j">what gets pulled</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔴🔵</div><div class="t">Poles (N &amp; S)</div><div class="j">every magnet has 2</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">↔️</div><div class="t">Attract / Repel</div><div class="j">same push, different pull</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> tell magnetic materials from non-magnetic ones, and predict whether two magnets will attract or repel just by knowing which poles face each other.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 2 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 2 🎈</h2>
+    <div class="recall">🔁 <b>Remember gases?</b> Air is invisible, but it's still real matter with real mass — you proved it with the balloon and the football. You can't SEE it, but you can prove it's there.</div>
+    <p>Magnetism works the same way: you can't see the magnetic pull, but it's a real force you can prove and predict — just like you proved invisible air has mass. Today you'll learn the exact rules that control that invisible pull.</p>
+    <div class="card"><b>Mini self-check:</b> in Unit 2, did a full balloon weigh (1) the same, or (2) more than an empty one? <i>(Answer: more — the invisible gas inside still has mass. Keep that "invisible but real" idea in mind for magnetism.)</i></div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Compasses, fridge magnets, the click of a magnetic door catch, machines that sort metal from rubbish at recycling plants — all of these rely on the SAME two rules you're about to learn. ASMOPSS loves asking "will these magnets attract or repel?" questions.</div>
+    <div class="card">
+      <b>Real life:</b> a compass needle is a tiny magnet that always points North because it lines up with Earth's own huge magnetic field. Recycling machines use giant magnets to pull out steel cans but leave aluminium cans behind — because not all metals are magnetic!
+    </div>
+  </section>
+
+  <!-- SCREEN 4: MAGNETIC MATERIALS -->
+  <section class="screen" data-s="4">
+    <h2>Which Materials Are Magnetic? 🔍</h2>
+    <div class="rulebar">A magnet only pulls on a small group of metals — mainly IRON, STEEL, NICKEL and COBALT.</div>
+    <p><b>Common trap:</b> people think ALL metals are magnetic. They are not!</p>
+    <div class="compare">
+      <div class="ismag">
+        <div style="text-align:center;font-size:1.6rem">🧲</div>
+        <b>IS pulled by a magnet</b><br>
+        <small>iron nail, steel paperclip, steel spoon, a tin (steel) can</small>
+      </div>
+      <div class="notmag">
+        <div style="text-align:center;font-size:1.6rem">🚫</div>
+        <b>NOT pulled by a magnet</b><br>
+        <small>aluminium can, copper wire, wood, plastic, glass, paper, gold, most coins</small>
+      </div>
+    </div>
+    <div class="why" style="margin-top:12px">🔑 <b>The test:</b> "is it made of iron or steel?" If yes → magnetic. If it's a different metal (aluminium, copper, gold) or not a metal at all → not magnetic.</div>
+  </section>
+
+  <!-- SCREEN 5: POLES -->
+  <section class="screen" data-s="5">
+    <h2>Every Magnet Has Two Poles 🔴🔵</h2>
+    <div class="rulebar">The two ends of a magnet are called the NORTH pole and the SOUTH pole. The pull is strongest right at the poles.</div>
+    <svg viewBox="0 0 300 100" width="300" height="100" aria-label="A bar magnet with North pole in red and South pole in blue">
+      <rect x="60" y="35" width="80" height="30" fill="#e53935"/>
+      <rect x="140" y="35" width="80" height="30" fill="#1565c0"/>
+      <text x="100" y="55" font-size="16" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <text x="180" y="55" font-size="16" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="140" y="85" font-size="11" text-anchor="middle" fill="#4a5568">one bar magnet — North pole and South pole</text>
+    </svg>
+    <div class="job"><b>Key fact:</b> you cannot have a magnet with only ONE pole. Even if you cut a bar magnet in half, each new piece grows its own North AND South pole.</div>
+  </section>
+
+  <!-- SCREEN 6: ATTRACT OR REPEL -->
+  <section class="screen" data-s="6">
+    <h2>Attract or Repel? Use This Rule 🔄</h2>
+    <div class="rulebar">SAME poles facing each other → REPEL (push apart). DIFFERENT poles facing each other → ATTRACT (pull together).</div>
+    <div class="tree">
+      <div class="tnode">Are the two facing poles the SAME? (N–N or S–S)</div>
+      <div class="tarrow">↓</div>
+      <div class="tbranch">
+        <div>
+          <div class="tleaf repel">YES → REPEL<br><small>push apart</small></div>
+        </div>
+        <div>
+          <div class="tleaf attract">NO (N–S) → ATTRACT<br><small>pull together</small></div>
+        </div>
+      </div>
+    </div>
+    <svg viewBox="0 0 320 110" width="320" height="110" aria-label="Two examples: N facing N repels, N facing S attracts">
+      <rect x="10" y="20" width="60" height="26" fill="#1565c0"/><rect x="70" y="20" width="60" height="26" fill="#e53935"/>
+      <text x="40" y="38" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="100" y="38" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <rect x="150" y="20" width="60" height="26" fill="#e53935"/><rect x="210" y="20" width="60" height="26" fill="#1565c0"/>
+      <text x="180" y="38" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <text x="240" y="38" font-size="13" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="70" y="70" font-size="12" text-anchor="middle" fill="#c62828" font-weight="bold">N faces N → REPEL ↔</text>
+      <text x="195" y="70" font-size="12" text-anchor="middle" fill="#1b5e20" font-weight="bold">N faces S → ATTRACT →←</text>
+    </svg>
+  </section>
+
+  <!-- SCREEN 7: MAGNETS IN A ROW -->
+  <section class="screen" data-s="7">
+    <h2>Reading a Row of Magnets 🧲🧲🧲</h2>
+    <div class="rulebar">Some ASMOPSS questions show several magnets touching in a line and ask which arrangement is POSSIBLE. Use the same rule, joint by joint.</div>
+    <svg viewBox="0 0 340 110" width="340" height="110" aria-label="Three bar magnets touching end to end">
+      <rect x="10" y="30" width="50" height="26" fill="#e53935"/><rect x="60" y="30" width="50" height="26" fill="#1565c0"/>
+      <rect x="120" y="30" width="50" height="26" fill="#e53935"/><rect x="170" y="30" width="50" height="26" fill="#1565c0"/>
+      <rect x="230" y="30" width="50" height="26" fill="#e53935"/><rect x="280" y="30" width="50" height="26" fill="#1565c0"/>
+      <text x="35" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <text x="85" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="145" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <text x="195" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="255" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">N</text>
+      <text x="305" y="48" font-size="12" text-anchor="middle" fill="#fff" font-weight="bold">S</text>
+      <text x="170" y="85" font-size="11" text-anchor="middle" fill="#1b5e20" font-weight="bold">every touching join here is S touching N → ATTRACT → the row can stay together ✓</text>
+    </svg>
+    <div class="job"><b>How to check any row:</b> look at EACH touching point on its own. If that one join is two different poles (N–S), it holds together. If even ONE join is two matching poles (N–N or S–S), the magnets push apart right there — the whole row can't stay lined up like that.</div>
+    <div class="card"><b>Try it in your head:</b> in the row above, every join is S touching N, so the whole chain attracts and stays together. If we flipped just the middle magnet around, its left end would become S facing the S next to it — that ONE join would repel, and the row would break apart there.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Which of these objects would a magnet NOT pull on?</p>
+      <button class="opt">A steel paperclip</button><button class="opt">An iron nail</button><button class="opt">A plastic ruler</button><button class="opt">A steel spoon</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right! Plastic is not a magnetic material — magnets only pull iron, steel, nickel and cobalt.</div>
+      <div class="fb no">✘ Ask: is it made of iron or steel? Plastic is neither.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Two magnets are held with their South poles facing each other. What happens?</p>
+      <button class="opt">They attract (pull together)</button><button class="opt">They repel (push apart)</button><button class="opt">Nothing happens at all</button><button class="opt">They both lose their magnetism</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — matching poles (S–S) always repel.</div>
+      <div class="fb no">✘ Remember the rule: SAME poles facing each other push apart.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. An aluminium drink can is placed near a strong magnet. What happens?</p>
+      <button class="opt">Nothing — aluminium is not a magnetic material</button><button class="opt">It is pulled in strongly</button><button class="opt">It is pushed away</button><button class="opt">It becomes a magnet itself instantly</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Yes — aluminium is a metal, but it is NOT one of the magnetic metals (iron, steel, nickel, cobalt).</div>
+      <div class="fb no">✘ Careful — not all metals are magnetic. Aluminium is the classic exception.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. Two bar magnets are placed end to end, touching. The join is North touching South. What will happen?</p>
+      <button class="opt">They will repel and fly apart</button><button class="opt">Nothing, poles don't matter at a join</button><button class="opt">They will spin in circles</button><button class="opt">They will attract and stay stuck together</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — N touching S is two DIFFERENT poles, so they attract.</div>
+      <div class="fb no">✘ Different poles (N and S) facing each other always attract.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: heat, conduction, and how to design a fair test for it.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Physics_Lesson_HeatAndFairTests.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 3 · Lesson 2 — Heat, Conduction &amp; Fair Tests</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .step{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .compare>div{border-radius:12px;padding:12px;text-align:center}
+  .fast{background:#fdecea;border:2px solid #c62828}
+  .slow{background:#e3f2fd;border:2px solid var(--blue)}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:8px;margin:12px 0}
+  .tnode{background:#fff;border:2px solid var(--blue);border-radius:10px;padding:8px 16px;font-weight:bold;text-align:center;color:var(--blue)}
+  .tarrow{font-size:1.3rem;color:var(--grey)}
+  .tbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .tleaf{border-radius:10px;padding:10px 16px;text-align:center;font-weight:bold;min-width:130px}
+  .tleaf.hot{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .tleaf.cold{background:#e3f2fd;color:var(--blue);border:2px solid var(--blue)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔥 Lesson 2 · Heat, Conduction &amp; Fair Tests</b><span class="pill">Unit 3 · Physics</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Heat always flows from HOT to COLD. Conduction = heat moving through touching solid matter.</div>
+    <div class="sci">MAP 2 — Scientist's tool: to compare materials fairly, change ONLY the material — keep size, water temperature, and timing the same.</div>
+    <div class="why">🎯 <b>By the end you can:</b> say which materials conduct heat fast or slow, and judge whether a heat experiment is a fair test. This is exactly the kind of question ASMOPSS asks!</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Ever notice a metal spoon left in hot soup gets too hot to hold, but a wooden spoon stays cool? That's not luck — it's conduction, and once you understand it you can explain why pot handles are plastic, why wool keeps you warm, and why ice packs are wrapped in cloth.</div>
+    <div class="card">
+      <b>Real life:</b> chefs choose metal pans (heat spreads fast, food cooks evenly) but wooden or plastic handles (so your hand doesn't burn). Builders pack houses with insulation (poor conductors) to keep heat from escaping in winter. <b>Your superpower:</b> predict which material to pick for any job — fast heat transfer, or slow.
+    </div>
+  </section>
+
+  <!-- 3: HEAT & CONDUCTION -->
+  <section class="screen" data-s="3">
+    <h2>Heat &amp; Conduction 🌡️</h2>
+    <div class="rulebar">Heat always flows from HOT places to COLD places — never the other way round.</div>
+    <div class="tree">
+      <div class="tnode">Touch a hot object with a cold one — which way does heat move?</div>
+      <div class="tarrow">↓</div>
+      <div class="tbranch">
+        <div class="tleaf hot">HOT → COLD<br><small>always this way</small></div>
+        <div class="tleaf cold">COLD → HOT<br><small>never happens</small></div>
+      </div>
+    </div>
+    <div class="job"><b>Conduction</b> is heat moving through touching solid matter — like a metal spoon in hot soup. The hot end passes energy along, particle by particle, until the whole spoon warms up.</div>
+  </section>
+
+  <!-- 4: CONDUCTORS VS INSULATORS -->
+  <section class="screen" data-s="4">
+    <h2>Fast Conductors vs Slow Insulators 🔥🧊</h2>
+    <div class="rulebar">METALS (copper, iron, aluminium, steel) conduct heat FAST. Wood, plastic, rubber, wool, and air conduct heat SLOWLY — they are called INSULATORS.</div>
+    <svg viewBox="0 0 300 130" width="300" height="130" aria-label="Metal spoon heating up fast compared to a wooden spoon staying cool">
+      <rect x="30" y="60" width="90" height="10" fill="#9e9e9e"/><circle cx="120" cy="65" r="16" fill="#bdbdbd"/>
+      <text x="75" y="95" font-size="11" text-anchor="middle" fill="#4a5568">metal spoon</text>
+      <text x="75" y="110" font-size="10" text-anchor="middle" fill="#c62828">heats up FAST</text>
+      <rect x="180" y="60" width="90" height="10" fill="#8d6e63"/><circle cx="270" cy="65" r="16" fill="#a1887f"/>
+      <text x="225" y="95" font-size="11" text-anchor="middle" fill="#4a5568">wooden spoon</text>
+      <text x="225" y="110" font-size="10" text-anchor="middle" fill="#1565c0">stays cool (SLOW)</text>
+    </svg>
+    <div class="compare">
+      <div class="fast"><b>GOOD CONDUCTORS (fast)</b><br><small>copper, aluminium, iron, steel — all metals</small></div>
+      <div class="slow"><b>INSULATORS (slow)</b><br><small>wood, plastic, rubber, wool, air</small></div>
+    </div>
+    <div class="job"><b>Why it matters:</b> we pick good conductors when we WANT heat to move fast (pots, pans), and insulators when we want to STOP heat moving (handles, oven mitts, winter coats).</div>
+  </section>
+
+  <!-- 5: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="5">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change ONE thing, measure ONE thing, keep everything else the SAME.</div>
+    <p>Imagine testing: <i>"Which metal conducts heat fastest — copper, iron, or aluminium?"</i> A classic way to test it: stick a small blob of wax near the top of each rod, then dip the bottom of all three rods into the SAME cup of hot water at the SAME time.</p>
+    <svg viewBox="0 0 320 120" width="320" height="120" aria-label="Three metal rods with wax blobs dipped in hot water">
+      <rect x="60" y="80" width="200" height="30" fill="#ffcc80" opacity="0.6"/>
+      <rect x="80" y="20" width="8" height="90" fill="#b45309"/><circle cx="84" cy="30" r="7" fill="#fff59d"/>
+      <rect x="155" y="20" width="8" height="90" fill="#9e9e9e"/><circle cx="159" cy="30" r="7" fill="#fff59d"/>
+      <rect x="230" y="20" width="8" height="90" fill="#78909c"/><circle cx="234" cy="30" r="7" fill="#fff59d"/>
+      <text x="84" y="18" font-size="10" text-anchor="middle" fill="#4a5568">copper</text>
+      <text x="159" y="18" font-size="10" text-anchor="middle" fill="#4a5568">iron</text>
+      <text x="234" y="18" font-size="10" text-anchor="middle" fill="#4a5568">aluminium</text>
+      <text x="160" y="118" font-size="10" text-anchor="middle" fill="#4a5568">wax blob melts first on the BEST conductor</text>
+    </svg>
+    <p>Whichever rod's wax melts FIRST is telling you: heat travelled along that rod the fastest, so that metal is the best conductor.</p>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGE</b><br>one thing<br><small>(the metal type)</small></div>
+      <div class="me"><b>MEASURE</b><br>one thing<br><small>(which wax melts first)</small></div>
+      <div class="sa"><b>SAME</b><br>everything else<br><small>(rod length &amp; thickness, wax amount, water temperature, start time)</small></div>
+    </div>
+    <div class="why">🧠 <b>Why "SAME" matters so much:</b> if one rod were thicker or longer than the others, it might melt its wax slower just because of its SIZE — not because the metal itself conducts worse. That would ruin the fair test and give a wrong answer.</div>
+  </section>
+
+  <!-- 6: PRACTICE -->
+  <section class="screen" data-s="6">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Heat always flows from:</p>
+      <button class="opt">Cold objects to hot objects</button>
+      <button class="opt">It moves randomly, in any direction</button>
+      <button class="opt">Hot objects to cold objects</button>
+      <button class="opt">It never moves between objects</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — heat always flows from hot to cold, never the other way.</div>
+      <div class="fb no">✘ Think of hot soup cooling down in a cold room — heat leaves the hot soup, going to the cooler air.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Which of these is the BEST conductor of heat?</p>
+      <button class="opt">A wooden ruler</button>
+      <button class="opt">A steel spoon</button>
+      <button class="opt">A rubber band</button>
+      <button class="opt">A woolly scarf</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — metals like steel conduct heat fast.</div>
+      <div class="fb no">✘ Metals conduct heat far faster than wood, rubber, or wool.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A saucepan has a metal body but a plastic handle. Why is the HANDLE made of plastic, not metal?</p>
+      <button class="opt">Plastic looks nicer</button>
+      <button class="opt">Plastic is cheaper to make</button>
+      <button class="opt">Metal handles cook the food faster</button>
+      <button class="opt">Plastic is a poor conductor, so the handle stays cool and safe to hold</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — plastic (an insulator) stops heat reaching your hand.</div>
+      <div class="fb no">✘ Think about WHY we don't want heat to reach the part you're holding.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. To fairly test which of three metal rods conducts heat fastest using the wax-and-hot-water method, what MUST stay the same across all three rods?</p>
+      <button class="opt">Rod length and thickness, amount of wax, water temperature, and start time</button>
+      <button class="opt">The type of metal used</button>
+      <button class="opt">Nothing needs to stay the same — only the metal matters</button>
+      <button class="opt">The colour of the wax</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — everything except the metal type must be kept identical, or the test isn't fair.</div>
+      <div class="fb no">✘ A fair test changes only ONE thing (the metal) — everything else must match.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 3! You know how magnets attract and repel, which materials conduct heat fastest, and how to design a fair test to compare them. Ready for the Unit 3 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 3 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Physics_Lesson_MagnetsAndPoles.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_03_Test_MagnetismAndHeat.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>
