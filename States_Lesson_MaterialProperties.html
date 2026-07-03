@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 5 · Lesson 2 — Material Properties &amp; Choosing the Right Material</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .props{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .props>div{border-radius:10px;padding:10px;border:2px solid var(--line);background:#fafdfa;font-size:.88rem}
+  .carroll{width:100%;border-collapse:collapse;margin:10px 0;font-size:.85rem}
+  .carroll th,.carroll td{border:1.5px solid var(--line);padding:8px 10px;text-align:center}
+  .carroll th{background:#f7fafc}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧱 Lesson 2 · Material Properties &amp; Choosing the Right Material</b><span class="pill">Unit 5 · Chemistry</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Every material has PROPERTIES (hard/soft, flexible/rigid, waterproof/absorbent, transparent/opaque) that decide what job it's good for.</div>
+    <div class="sci">MAP 2 — Scientist's tool: sort objects into groups using TWO properties at once, and design a fair test to compare a property.</div>
+    <div class="why">🎯 <b>By the end you can:</b> name common material properties, sort materials into a two-property grid, choose the best material for a real job, and judge a fair test comparing materials. ASMOPSS often asks you to read a classification chart just like this!</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Umbrellas are waterproof, windows are transparent, ropes are flexible but strong, oven mitts are poor heat conductors — nothing is picked by accident. Every object around you is made from a material chosen because of its properties.</div>
+    <div class="card">
+      <b>Real life:</b> engineers choose rubber (flexible, waterproof) for tyres, glass (transparent, rigid) for windows, and wool (soft, poor heat conductor) for winter jumpers. Get the property wrong and the object fails — a glass umbrella or a paper raincoat wouldn't work! <b>Your superpower:</b> look at any object and explain WHY that material was the right choice.
+    </div>
+  </section>
+
+  <!-- 3: MATERIAL PROPERTIES -->
+  <section class="screen" data-s="3">
+    <h2>Common Material Properties 🔍</h2>
+    <div class="rulebar">A property is a describable feature of a material that tells you what it's good for.</div>
+    <div class="props">
+      <div>🪨 <b>Hard / Soft</b><br><small>hard: stone, metal — soft: sponge, wool</small></div>
+      <div>🧵 <b>Flexible / Rigid</b><br><small>flexible: rubber, cloth — rigid: glass, brick</small></div>
+      <div>💧 <b>Waterproof / Absorbent</b><br><small>waterproof: plastic, rubber — absorbent: paper, cotton</small></div>
+      <div>🔍 <b>Transparent / Opaque</b><br><small>transparent: glass, clear plastic — opaque: wood, metal</small></div>
+      <div>🧲 <b>Magnetic / Non-magnetic</b><br><small>magnetic: iron, steel — recall from Unit 3!</small></div>
+      <div>🔥 <b>Good / Poor heat conductor</b><br><small>good: metal — poor: wood, plastic — recall from Unit 3!</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> most materials have SEVERAL properties at once — rubber is both flexible AND waterproof, which is exactly why it's used for boots and tyres.</div>
+  </section>
+
+  <!-- 4: CLASSIFYING WITH TWO PROPERTIES -->
+  <section class="screen" data-s="4">
+    <h2>Sorting Materials: Two Properties at Once 📊</h2>
+    <div class="rulebar">A classification (Carroll) chart sorts objects using TWO properties at the same time — read both the row AND the column.</div>
+    <table class="carroll">
+      <tr><th></th><th>Hard</th><th>Soft</th></tr>
+      <tr><th>Waterproof</th><td>plastic ruler</td><td>rubber ball</td></tr>
+      <tr><th>Absorbent</th><td>dry wood block</td><td>cotton towel</td></tr>
+    </table>
+    <div class="job"><b>How to read it:</b> a plastic ruler is BOTH hard AND waterproof, so it sits in the "Hard + Waterproof" box. A cotton towel is BOTH soft AND absorbent, so it sits in the "Soft + Absorbent" box. To classify any object, check it against EACH property in turn.</div>
+    <div class="card"><b>Try it in your head:</b> where would a soft, waterproof material — like a rubber ball — go in the chart above? (Soft + Waterproof — the "rubber ball" box.) Now try a hard, absorbent material like a dry wood block — where does that go? (Hard + Absorbent.)</div>
+  </section>
+
+  <!-- 5: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="5">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change ONE thing (the material), measure ONE thing, keep everything else the SAME.</div>
+    <p>Imagine testing: <i>"Which of three fabrics — cotton, plastic sheet, and wool — is the MOST waterproof?"</i> A fair way to test it:</p>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGE</b><br>one thing<br><small>(the fabric type)</small></div>
+      <div class="me"><b>MEASURE</b><br>one thing<br><small>(how much water soaks through in 1 minute)</small></div>
+      <div class="sa"><b>SAME</b><br>everything else<br><small>(size of fabric piece, amount of water, drip height, timing)</small></div>
+    </div>
+    <div class="why">🧠 <b>Why "SAME" matters:</b> if one fabric piece were bigger, or got more water poured on it, it might seem "less waterproof" just because of size or amount — not the material itself. That would ruin the fair comparison and give a wrong answer about which material is really best.</div>
+    <div class="card"><b>Choosing the right material:</b> once you know a property, you can pick the best material for a job. Need something to keep rain off your head? Pick a WATERPROOF material. Need to see through a window? Pick a TRANSPARENT one. Matching the property to the job is exactly what real engineers do.</div>
+  </section>
+
+  <!-- 6: PRACTICE -->
+  <section class="screen" data-s="6">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="4">
+      <p>1. Which property would matter MOST when choosing a material for a raincoat?</p>
+      <button class="opt">Transparent</button>
+      <button class="opt">Magnetic</button>
+      <button class="opt">Hard</button>
+      <button class="opt">Waterproof</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — a raincoat's main job is to keep water out, so waterproof matters most.</div>
+      <div class="fb no">✘ Think about the raincoat's JOB — what does it need to stop?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. A material is hard, does not let water through, and does not bend easily. Which set of properties describes it?</p>
+      <button class="opt">Soft, absorbent, flexible</button>
+      <button class="opt">Hard, waterproof, rigid</button>
+      <button class="opt">Hard, absorbent, flexible</button>
+      <button class="opt">Soft, waterproof, rigid</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — "does not let water through" = waterproof, "does not bend" = rigid.</div>
+      <div class="fb no">✘ Match each clue to its property word: hard, waterproof (not letting water through), and rigid (not bending).</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. In a classification chart sorted by "Hard/Soft" (columns) and "Transparent/Opaque" (rows), where would a soft, opaque material like a wool jumper belong?</p>
+      <button class="opt">Hard + Transparent box</button>
+      <button class="opt">Hard + Opaque box</button>
+      <button class="opt">Soft + Opaque box</button>
+      <button class="opt">Soft + Transparent box</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — wool is soft AND you can't see through it (opaque), so it belongs in the Soft + Opaque box.</div>
+      <div class="fb no">✘ Check the material against BOTH properties: is it hard or soft? Is it transparent or opaque?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. To fairly test which of three fabrics is most waterproof, what MUST stay the same across all three tests?</p>
+      <button class="opt">The size of the fabric piece and the amount of water used</button>
+      <button class="opt">The type of fabric being tested</button>
+      <button class="opt">Nothing needs to stay the same</button>
+      <button class="opt">The colour of the fabric</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — everything except the fabric type must be kept identical for a fair comparison.</div>
+      <div class="fb no">✘ A fair test changes only ONE thing (the fabric) — size and water amount must stay the same.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 5! You know the four changes of state, common material properties, how to sort materials using two properties at once, and how to fairly test a material property. Ready for the Unit 5 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 5 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='States_Lesson_ChangesOfState.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_05_Test_StatesAndMaterials.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

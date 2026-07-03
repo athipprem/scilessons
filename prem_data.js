@@ -13,27 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:4, topic:'Biology: Microorganisms', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:5, topic:'Chemistry: States of Matter &amp; Materials', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:3, score:15, outOf:15, marks:null, marksOutOf:null, pct:100, delta:null, prevScore:null,
-    patternLabel: 'Unit 3 result - Physics: Magnetism &amp; Heat (15/15, PERFECT)',
-    patternInsight: '<strong>15/15 (100%)</strong> - pass bar is 12/15. Section A (magnets &amp; heat basics warm-up) = <strong>5/5</strong>. Section B (poles &amp; conduction) = <strong>5/5</strong>, fully closing the baseline Physics content gap (2025 Q18 magnet-row arrangement). Section C (think like a scientist, applied) = <strong>5/5</strong> - a SECOND straight 100%, resolving 2025 Q19 (heat-conduction fair test) and holding under brand-new content he\'d never seen before. No misses at all.',
-    analysisLabel: 'Target: GOLD - next up U4 Biology: Microorganisms (built, HTML format)',
-    analysisInsight: 'Three units in, three passes, two of them perfect. Applied/experiment reasoning (Section C: 80% U1, 100% U2, 100% U3) is no longer a trend to watch - it\'s an established strength holding even on unfamiliar content. U4 rotates back to Biology and attacks the highest-value unaddressed baseline miss (2025 Q40, bread-mould/microorganisms, 5 marks) via microorganisms &amp; decomposition, while keeping the applied-reasoning beat in every lesson.',
+    n:4, score:15, outOf:15, marks:null, marksOutOf:null, pct:100, delta:null, prevScore:null,
+    patternLabel: 'Unit 4 result - Biology: Microorganisms (15/15, PERFECT)',
+    patternInsight: '<strong>15/15 (100%)</strong> - pass bar is 12/15. Section A (microorganism basics warm-up) = <strong>5/5</strong>. Section B (applying helpful/harmful + growth-needs) = <strong>5/5</strong>, fully closing the baseline microorganisms content gap (2025 Q40, bread-mould). Section C (think like a scientist, applied) = <strong>5/5</strong> - a THIRD straight 100%, resolving the last unaddressed baseline miss. No misses at all.',
+    analysisLabel: 'Target: GOLD - next up U5 Chemistry: States of Matter &amp; Materials (built, HTML format)',
+    analysisInsight: 'Four units in, four passes, three of them perfect in a row. Applied/experiment reasoning (Section C: 80% U1, 100% U2, 100% U3, 100% U4) is a durable strength across four different content areas. Every clustered baseline gap (Plants, Matter &amp; Mass, Physics, microorganisms) is now closed. U5 continues the Biology&rarr;Chemistry&rarr;Physics rotation, deepens U2\'s matter foundation into changes of state and materials, and targets baseline Q16 (classification) via sorting materials by properties.',
     qSummary: '<strong>15 / 15 (100%)</strong> - Perfect score, no misses.',
     qBreakdown: []
   },
 
   skills: [
-    { name: 'Biology',                  c: 68, t: 85, ev:'U1 Plants 14/15 (content 10/10) closed the biggest Bio gap; U4 (microorganisms/decomposition) built, awaiting test' },
-    { name: 'Chemistry / Matter',       c: 90, t: 85, ev:'U2 Matter &amp; Mass 15/15 PERFECT - closed G4 Q7/11/33; now above target' },
+    { name: 'Biology',                  c: 90, t: 85, ev:'U4 Microorganisms 15/15 PERFECT - closed G4 Q40; now above target' },
+    { name: 'Chemistry / Matter',       c: 90, t: 85, ev:'U2 Matter &amp; Mass 15/15 PERFECT - closed G4 Q7/11/33; U5 (states/materials) built, awaiting test' },
     { name: 'Physics',                  c: 90, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT - closed G4 Q18/19; now above target' },
     { name: 'Earth &amp; Space',            c: 50, t: 80, ev:'G3 Earth/Space 50%; G4 Q32' },
-    { name: 'Scientific Investigation', c: 80, t: 85, ev:'Section C 80% (U1), 100% (U2), 100% (U3) - three strong results in a row on fair tests/controls/conclusions' },
-    { name: 'Applied Reasoning',        c: 85, t: 85, ev:'U1 Section C 80%, U2+U3 Section C 100% - now at target, holding under new content' }
+    { name: 'Scientific Investigation', c: 85, t: 85, ev:'Section C 80% (U1), 100% (U2), 100% (U3), 100% (U4) - now at target, four units of evidence' },
+    { name: 'Applied Reasoning',        c: 87, t: 85, ev:'U1 Section C 80%, U2+U3+U4 Section C 100% - consistently above target across four content areas' }
   ],
-  radarCurrent:  [68, 90, 90, 50, 80, 85],
+  radarCurrent:  [90, 90, 90, 50, 85, 87],
   radarTarget:   [85, 85, 85, 80, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -41,23 +41,36 @@ var PREM_DATA = {
   scores: [
     { unit:1, topic:'Biology: Plants', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-02' },
     { unit:2, topic:'Chemistry/Matter: What Is Matter?', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' },
-    { unit:3, topic:'Physics: Magnetism &amp; Heat', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' }
+    { unit:3, topic:'Physics: Magnetism &amp; Heat', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' },
+    { unit:4, topic:'Biology: Microorganisms', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-03' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 5, badge: 'linear-gradient(135deg,#0288D1,#4FC3F7)',
+      title: 'Chemistry: States of Matter &amp; Materials',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: Changes of State', c:'tgreen' },
+        { t:'L2: Material Properties', c:'tblue' },
+        { t:'Targets 2025 Q16', c:'torange' }
+      ],
+      note: 'U5 continues the Biology&rarr;Chemistry&rarr;Physics rotation and deepens U2\'s matter foundation. L1: the four changes of state (melting, freezing, evaporating, condensing) and proving mass is conserved when matter changes state. L2: material properties (hard/soft, flexible/rigid, waterproof/absorbent, transparent/opaque), sorting materials with a two-property classification chart - targets baseline Q16 (classification chart) - plus choosing the best material for a job and fair-testing a property. Built in the established single-page HTML test format.',
+      status: 'pending'
+    },
+    {
       n: 4, badge: 'linear-gradient(135deg,#6D4C41,#A1887F)',
       title: 'Biology: Microorganisms',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: What Are Microorganisms?', c:'tgreen' },
-        { t:'L2: Mould Growth &amp; Fair Tests', c:'tblue' },
-        { t:'Targets 2025 Q40', c:'torange' }
+        { t:'&#9989; 15/15 PERFECT', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 5/5', c:'tblue' },
+        { t:'No misses', c:'torange' }
       ],
-      note: 'U4 rotates back to Biology and attacks the highest-value unaddressed baseline miss: 2025 Q40 (bread-mould, 5 marks). L1: what microorganisms are (bacteria &amp; fungi), sorting helpful vs harmful examples, and decomposers recycling nutrients in nature. L2: what mould needs to grow (food, moisture, warmth, air) and a bread-bag fair-test design comparing growth conditions - directly mirrors the baseline experiment. Built in the established single-page HTML test format.',
-      status: 'pending'
+      note: 'Scored 15/15 (100%) - a perfect score, comfortably above the 12/15 pass bar. Sections A+B (what microorganisms are, decomposers, mould growth needs) 10/10, fully closing the 2025 microorganisms gap (Q40). Section C (think like a scientist) 5/5 - a third straight 100%, the last unaddressed baseline miss now resolved. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 3, badge: 'linear-gradient(135deg,#5C6BC0,#7986CB)',
@@ -121,16 +134,22 @@ var PREM_DATA = {
 
   priorityGaps: [
     {
-      label: 'Scientific Investigation (fair tests, controls, conclusions) - TOP LEVERAGE for gold',
-      pill: 'p1', pillText: 'Focus',
-      score: 'Three strong results in a row: U1 Section C 4/5 (80%), U2 Section C 5/5 (100%), U3 Section C 5/5 (100%) - nailed controls, mass-conservation, fair-test design and multi-step magnet/heat reasoning every time. Now an established strength; keep training it inside every unit so it holds under exam pressure.',
-      fillClass: 'g2', fillPct: 82
+      label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
+      pill: 'p1', pillText: 'Maintain',
+      score: 'Four results: U1 Section C 4/5 (80%), U2/U3/U4 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across four different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
+      fillClass: 'g2', fillPct: 85
     },
     {
-      label: 'Biology: microorganisms &amp; decomposition - U4 now',
-      pill: 'p1', pillText: 'U4 now',
-      score: 'G4: Q40 (bread-mould, air/water/food needed to grow) - the highest-value baseline miss still unaddressed (5 marks). U4 lessons + HTML test built - what microorganisms are, helpful vs harmful, decomposers, and a bread-bag fair-test design comparing mould growth conditions.',
+      label: 'Classification (sorting by properties) - U5 now',
+      pill: 'p1', pillText: 'U5 now',
+      score: 'G4: Q16 (classification chart of objects A-D) - the last individual content-cluster-adjacent miss. U5 lessons + HTML test built - material properties, sorting materials using a two-property classification chart, and choosing the right material for a job.',
       fillClass: 'g2', fillPct: 60
+    },
+    {
+      label: 'Biology: microorganisms &amp; decomposition - CLOSED &#9989;',
+      pill: 'p3', pillText: 'Done',
+      score: 'U4 scored 15/15 (100%), perfect. Baseline microorganisms miss (Q40, bread-mould) fully resolved - what microorganisms are, decomposers, and what mould needs to grow all mastered. Every clustered baseline gap is now closed.',
+      fillClass: 'g3', fillPct: 95
     },
     {
       label: 'Physics: magnetism &amp; heat conduction - CLOSED &#9989;',
@@ -147,14 +166,14 @@ var PREM_DATA = {
     {
       label: 'Biology: Plants - CLOSED &#9989;',
       pill: 'p3', pillText: 'Done',
-      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved except a lingering thread on leaf/stomata gas exchange (Q13/Q34) - watch for it in later rotation. (Q40 was a separate microorganisms miss, not Plants - now targeted by U4, see above.)',
+      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved except a lingering thread on leaf/stomata gas exchange (Q13/Q34) - watch for it in later rotation.',
       fillClass: 'g3', fillPct: 95
     },
     {
-      label: 'Remaining one-offs: circuits, classification, astronomy',
+      label: 'Remaining one-offs: circuits, astronomy',
       pill: 'p3', pillText: 'Later rotation',
-      score: 'G4: Q3 (circuits), Q16 (classification), Q32 (night sky). Physics/Earth&amp;Space is otherwise his strongest strand (G3 66%), so these are targeted top-ups, not rebuilds - picked up in later rotation units.',
-      fillClass: 'g3', fillPct: 62
+      score: 'G4: Q3 (initial energy form in a circuit) and Q32 (night sky/constellations). Physics/Earth&amp;Space is otherwise his strongest strand (G3 66%), so these are targeted top-ups, not rebuilds - picked up in later rotation units (electricity, Earth &amp; Space).',
+      fillClass: 'g3', fillPct: 65
     }
   ]
 };
