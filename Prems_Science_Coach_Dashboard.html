@@ -60,12 +60,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 .gpill { font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:8px; text-transform:uppercase; white-space:nowrap; }
 .p1 { background:#ffe9e0; color:#c0392b; } .p2 { background:#fffaf0; color:#c05621; } .p3 { background:#e6f4ea; color:#2e7d32; }
 .tm { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f0f4f8; font-size:12px; } .tm:last-child { border-bottom:none; } .tm span:last-child { color:#8a6a00; font-weight:700; }
-.skill-row { display:flex; align-items:center; gap:8px; margin-bottom:8px; }
-.skill-name { font-size:11px; color:#3a4f42; width:130px; flex-shrink:0; }
-.skill-track { flex:1; height:8px; background:#e7efe9; border-radius:4px; overflow:hidden; position:relative; }
-.skill-fill { height:100%; border-radius:4px; background:linear-gradient(90deg,#FFC107,#DAA520); }
-.skill-tgt { position:absolute; top:-2px; width:2px; height:12px; background:#B85C00; }
-.skill-pct { font-size:10px; font-weight:700; color:#3a4f42; width:62px; text-align:right; }
+.skill-row { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.skill-name { font-size:11px; color:#3a4f42; width:120px; flex-shrink:0; }
+.skill-track { flex:1; height:9px; background:#e7efe9; border-radius:5px; overflow:hidden; position:relative; }
+.skill-fill { height:100%; border-radius:5px; }
+.skill-fill.lvl-red { background:#e53e3e; }
+.skill-fill.lvl-yellow { background:#f6993f; }
+.skill-fill.lvl-green { background:#43e97b; }
+.skill-val { font-size:11px; font-weight:700; color:#3a4f42; width:24px; text-align:right; flex-shrink:0; }
+.skill-delta { font-size:10px; font-weight:800; width:32px; text-align:right; flex-shrink:0; }
+.skill-delta.lvl-red { color:#c0392b; }
+.skill-delta.lvl-yellow { color:#c05621; }
+.skill-delta.lvl-green { color:#2e7d32; }
+.skill-foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-top:12px; padding:10px 12px; background:#f5faf6; border-radius:8px; font-size:11px; color:#4a5568; border:1px solid #f0dfa8; }
 .chart-wrap { display:flex; align-items:center; justify-content:center; }
 .radar-legend { display:flex; gap:14px; justify-content:center; margin-top:8px; flex-wrap:wrap; }
 .radar-legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:#4a5568; }
@@ -220,7 +227,13 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="card-hd"><span class="dot" style="background:#DAA520"></span>Skill vs Target Breakdown</div>
             <div id="skill-meta" style="margin-bottom:10px;font-size:10px;color:#8a7a4a"></div>
             <div id="skill-bars"></div>
-            <div id="skill-summary" style="margin-top:14px;padding:10px 12px;background:#f5faf6;border-radius:8px;font-size:11px;color:#4a5568"></div>
+            <div class="radar-legend" style="justify-content:flex-start;margin-top:2px">
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#e53e3e;display:inline-block"></span>Critical</div>
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#f6993f;display:inline-block"></span>OK</div>
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#43e97b;display:inline-block"></span>Great / 85%+</div>
+            </div>
+            <div id="skill-summary" style="margin-top:10px;font-size:11px;color:#4a5568"></div>
+            <div id="skill-foot" class="skill-foot"></div>
           </div>
         </div>
         <div class="card">
@@ -425,11 +438,20 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 
   // skill bars + summary
   var sb=document.getElementById('skill-bars');
+  var skillSumC=0, skillSumT=0, html='';
   for(var s=0;s<D.skills.length;s++){ var x=D.skills[s];
-    sb.innerHTML+='<div class="skill-row"><div class="skill-name">'+x.name+'</div>'+
-      '<div class="skill-track"><div class="skill-fill" style="width:'+x.c+'%"></div><div class="skill-tgt" style="left:'+x.t+'%"></div></div>'+
-      '<div class="skill-pct">'+x.c+'% / '+x.t+'%</div></div>'; }
-  document.getElementById('skill-summary').innerHTML = '<strong>Read:</strong> Physics is his strongest strand; Biology and Scientific Investigation are the lowest and the highest-leverage for gold. Bars are seeded from the 2025 G3 + G4 papers and update after each unit test.';
+    skillSumC+=x.c; skillSumT+=x.t;
+    var lvl = x.c>=85 ? 'green' : (x.c>=65 ? 'yellow' : 'red');
+    var gap = x.t - x.c;
+    var deltaHtml = gap<=0 ? '&#10003;' : ('+'+gap);
+    html+='<div class="skill-row"><div class="skill-name">'+x.name+'</div>'+
+      '<div class="skill-track"><div class="skill-fill lvl-'+lvl+'" style="width:'+x.c+'%"></div></div>'+
+      '<div class="skill-val">'+x.c+'</div>'+
+      '<div class="skill-delta lvl-'+lvl+'">'+deltaHtml+'</div></div>'; }
+  sb.innerHTML = html;
+  var skillAch = Math.round(skillSumC/skillSumT*100);
+  document.getElementById('skill-summary').innerHTML = '<strong>Read:</strong> Physics, Biology, Chemistry, Scientific Investigation and Applied Reasoning are all at or above target &mdash; Earth &amp; Space (50%) is now the sole red zone and the single biggest lever left for gold. Bars are seeded from the 2025 G3 + G4 papers and update after each unit test.';
+  document.getElementById('skill-foot').innerHTML = '<span>Current sum <strong>'+skillSumC+'</strong></span><span>Target sum <strong>'+skillSumT+'</strong></span><span><strong>'+skillAch+'%</strong> toward Gold target</span>';
 
   // results
   document.getElementById('res-sum').innerHTML = D.lastUnit.qSummary;

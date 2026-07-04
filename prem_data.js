@@ -32,12 +32,12 @@ var PREM_DATA = {
     { name: 'Biology',                  c: 90, t: 85, ev:'U4 Microorganisms 15/15 PERFECT - closed G4 Q40; now above target' },
     { name: 'Chemistry / Matter',       c: 87, t: 85, ev:'U5 States/Materials 13/15 (87%) - baseline Q16 classification improving but not fully closed (Q10 miss)' },
     { name: 'Physics',                  c: 90, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT - closed G4 Q18/19; U6 (circuits/electricity) built, awaiting test' },
-    { name: 'Earth &amp; Space',            c: 50, t: 80, ev:'G3 Earth/Space 50%; G4 Q32' },
+    { name: 'Earth &amp; Space',            c: 50, t: 85, ev:'G3 Earth/Space 50%; G4 Q32 - target normalised to 85 like every other strand' },
     { name: 'Scientific Investigation', c: 88, t: 85, ev:'Section C 80% (U1), 100% (U2), 100% (U3), 100% (U4), 100% (U5) - five units of evidence, four straight 100%' },
     { name: 'Applied Reasoning',        c: 89, t: 85, ev:'U1 Section C 80%, U2-U5 Section C 100% - consistently above target across five content areas' }
   ],
   radarCurrent:  [90, 87, 90, 50, 88, 89],
-  radarTarget:   [85, 85, 85, 80, 85, 85],
+  radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
   outOf: 15,
