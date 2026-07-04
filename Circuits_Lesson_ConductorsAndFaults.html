@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 6 · Lesson 2 — Conductors, Insulators &amp; Circuit Faults</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .props{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .props>div{border-radius:10px;padding:10px;border:2px solid var(--line);background:#fafdfa;font-size:.88rem}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:440px}
+  .dbox.q{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔧 Lesson 2 · Conductors, Insulators &amp; Circuit Faults</b><span class="pill">Unit 6 · Physics</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Materials are either ELECTRICAL CONDUCTORS (let electricity flow through) or INSULATORS (block it).</div>
+    <div class="sci">MAP 2 — Scientist's tool: use a step-by-step check to find WHY a circuit isn't working, and design a fair test to compare materials.</div>
+    <div class="why">🎯 <b>By the end you can:</b> sort materials into electrical conductors and insulators, work through a fault-finding check when a bulb won't light, and judge a fair test comparing which material conducts electricity.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Wires are covered in plastic for a reason — the metal inside conducts electricity to where it's needed, while the plastic coating insulates YOU from it, keeping you safe. Electricians, engineers, and appliance designers rely on knowing exactly which materials conduct and which don't.</div>
+    <div class="card">
+      <b>Real life:</b> a metal fork left touching a toaster's inner wires could conduct electricity dangerously — that's why appliances use plastic and rubber parts anywhere you might touch them. Choosing the wrong material in the wrong place isn't just a bad circuit, it can be a safety hazard.
+    </div>
+  </section>
+
+  <!-- 3: CONDUCTORS VS INSULATORS -->
+  <section class="screen" data-s="3">
+    <h2>Electrical Conductors vs Insulators 🔌</h2>
+    <div class="rulebar">A CONDUCTOR lets electricity flow through it easily. An INSULATOR blocks electricity from flowing.</div>
+    <div class="props">
+      <div>⚡ <b>Good electrical conductors</b><br><small>metals: copper wire, iron, steel, aluminium</small></div>
+      <div>🚫 <b>Good electrical insulators</b><br><small>plastic, rubber, glass, dry wood, paper</small></div>
+    </div>
+    <div class="job"><b>Recall from Unit 3:</b> metals were also GOOD HEAT conductors, while wood and plastic were POOR heat conductors (good insulators). It's the same materials behaving the same way — metals conduct both heat AND electricity; wood and plastic block both.</div>
+    <div class="card"><b>Careful:</b> "conductor" always needs to say WHAT it conducts. A material could be a good heat conductor but you should still check separately whether it's a good electrical conductor too — for most everyday materials (metal vs wood/plastic) they match, but don't just assume without thinking it through.</div>
+  </section>
+
+  <!-- 4: DIAGNOSING CIRCUIT FAULTS (decision tree) -->
+  <section class="screen" data-s="4">
+    <h2>Diagnosing Circuit Faults 🔍</h2>
+    <div class="rulebar">When a bulb won't light, check each part of the loop in order — battery, wires, switch, bulb — until you find the gap.</div>
+    <div class="dtree">
+      <div class="dbox q">Bulb won't light. Is the battery fresh and facing the correct way?</div>
+      <div class="darrow">↓ if yes</div>
+      <div class="dbox q">Are all the wire connections tight, with no loose ends?</div>
+      <div class="darrow">↓ if yes</div>
+      <div class="dbox q">Is the switch CLOSED (not left open)?</div>
+      <div class="darrow">↓ if yes</div>
+      <div class="dbox q">Is the bulb's filament unbroken (not "burnt out")?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch" style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
+        <div class="dbox yes">If EVERY check passes, the circuit should be complete — the bulb lights up 💡</div>
+        <div class="dbox no">The FIRST check that fails is the fault — fix that one thing, then re-test</div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> this is exactly a fault-finding checklist — go through the possible gaps ONE AT A TIME in order, rather than guessing randomly. It's the same "check one thing at a time" habit you used for reading a two-property classification chart.</div>
+  </section>
+
+  <!-- 5: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="5">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change ONE thing (the material), measure ONE thing, keep everything else the SAME.</div>
+    <p>Imagine testing: <i>"Which of four objects — a metal paperclip, a plastic ruler, a rubber band, and a wooden pencil — conducts electricity?"</i> Build a simple circuit with a gap, then place each object in the gap one at a time to see if the bulb lights.</p>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGE</b><br>one thing<br><small>(the object placed in the gap)</small></div>
+      <div class="me"><b>MEASURE</b><br>one thing<br><small>(does the bulb light up: yes/no)</small></div>
+      <div class="sa"><b>SAME</b><br>everything else<br><small>(same battery, same wires, same bulb, same gap size)</small></div>
+    </div>
+    <div class="why">🧠 <b>Why "SAME" matters:</b> if you swapped to a weaker battery halfway through testing, an object might seem "non-conducting" just because the battery was weaker — not because of the material itself. That would ruin the fair comparison.</div>
+    <div class="card"><b>Predicting the result:</b> based on what you know about conductors and insulators, which of the four objects should let the bulb light up? (The metal paperclip — it's the only conductor of the four; the ruler, rubber band, and pencil are all insulators.)</div>
+  </section>
+
+  <!-- 6: PRACTICE -->
+  <section class="screen" data-s="6">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Which of these is the BEST electrical conductor?</p>
+      <button class="opt">Rubber band</button>
+      <button class="opt">Wooden ruler</button>
+      <button class="opt">Copper wire</button>
+      <button class="opt">Plastic comb</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — copper is a metal, and metals are good electrical conductors.</div>
+      <div class="fb no">✘ Look for the metal in the list — metals conduct electricity well; rubber, wood, and plastic are insulators.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. A bulb won't light. The battery is fresh and facing the right way, and the switch is closed. What should be checked NEXT, before assuming the bulb itself is broken?</p>
+      <button class="opt">Buy a new battery</button>
+      <button class="opt">Check that all the wire connections are tight, with no loose ends</button>
+      <button class="opt">Repaint the circuit</button>
+      <button class="opt">Add a second battery</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — work through the checklist in order: battery, then connections, then switch, then bulb.</div>
+      <div class="fb no">✘ Don't jump straight to "the bulb is broken" — check the wire connections first, since a loose wire is a very common fault.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. To fairly test which of four objects conducts electricity, what MUST stay exactly the same across all four tests?</p>
+      <button class="opt">The object being tested</button>
+      <button class="opt">Nothing needs to stay the same</button>
+      <button class="opt">The colour of the object</button>
+      <button class="opt">The battery, wires, bulb, and gap size</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — everything except the object itself must stay identical for a fair comparison.</div>
+      <div class="fb no">✘ A fair test changes only ONE thing (the object) — the battery, wires, bulb, and gap size must all stay the same.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A wire is covered in a plastic coating. What is the MAIN reason plastic is used for the coating, not another metal?</p>
+      <button class="opt">Plastic is an insulator, so it stops electricity escaping and keeps people safe from touching the live metal inside</button>
+      <button class="opt">Plastic conducts electricity even better than the metal wire inside</button>
+      <button class="opt">Plastic makes the wire heavier</button>
+      <button class="opt">Plastic is always more expensive than metal</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — the plastic coating is an insulator, keeping the electricity inside the wire and people safely outside it.</div>
+      <div class="fb no">✘ Think about what an insulator does — it BLOCKS electricity, which is exactly what you want between a live wire and someone's hand.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 6! You know what makes a circuit complete, how switches and energy transfer work, electrical conductors vs insulators, how to diagnose a circuit fault, and how to fairly test which material conducts. Ready for the Unit 6 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 6 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Circuits_Lesson_BuildingACircuit.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_06_Test_CircuitsAndElectricity.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>
