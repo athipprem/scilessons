@@ -30,7 +30,7 @@
   .props>div{border-radius:10px;padding:10px;border:2px solid var(--line);background:#fafdfa;font-size:.88rem}
   .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
   .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:440px}
-  .dbox.q{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
   .dbox.yes{background:#e8f5e9;border-color:var(--green)}
   .dbox.no{background:#fdecea;border-color:#e53935}
   .darrow{color:var(--grey);font-size:1.1rem}
@@ -96,13 +96,13 @@
     <h2>Diagnosing Circuit Faults 🔍</h2>
     <div class="rulebar">When a bulb won't light, check each part of the loop in order — battery, wires, switch, bulb — until you find the gap.</div>
     <div class="dtree">
-      <div class="dbox q">Bulb won't light. Is the battery fresh and facing the correct way?</div>
+      <div class="dbox dq">Bulb won't light. Is the battery fresh and facing the correct way?</div>
       <div class="darrow">↓ if yes</div>
-      <div class="dbox q">Are all the wire connections tight, with no loose ends?</div>
+      <div class="dbox dq">Are all the wire connections tight, with no loose ends?</div>
       <div class="darrow">↓ if yes</div>
-      <div class="dbox q">Is the switch CLOSED (not left open)?</div>
+      <div class="dbox dq">Is the switch CLOSED (not left open)?</div>
       <div class="darrow">↓ if yes</div>
-      <div class="dbox q">Is the bulb's filament unbroken (not "burnt out")?</div>
+      <div class="dbox dq">Is the bulb's filament unbroken (not "burnt out")?</div>
       <div class="darrow">↓</div>
       <div class="dbranch" style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap">
         <div class="dbox yes">If EVERY check passes, the circuit should be complete — the bulb lights up 💡</div>
