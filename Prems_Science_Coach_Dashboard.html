@@ -83,6 +83,12 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 .tag { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:600; }
 .tgreen { background:#f0fff4; color:#276749; } .tpurple { background:#faf5ff; color:#6b46c1; } .torange { background:#fff5e6; color:#c05621; } .tblue { background:#ebf4ff; color:#2b6cb0; }
 .snote { font-size:10px; color:#8a7a4a; }
+.log-hd { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; }
+.log-count { font-size:10px; font-weight:700; color:#8a7a4a; text-transform:uppercase; letter-spacing:.5px; }
+.log-filters { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 4px; }
+.log-filter-btn { border:none; border-radius:20px; padding:6px 14px; font-size:11px; font-weight:700; cursor:pointer; background:#eceff1; color:#546e7a; }
+.log-filter-btn:hover { background:#e2e8f0; }
+.log-filter-btn.active { background:#1565c0; color:#fff; }
 .q-table { width:100%; border-collapse:collapse; font-size:11px; }
 .q-table th { text-align:left; padding:4px 6px; color:#8a7a4a; font-weight:700; border-bottom:1px solid #edf2f7; font-size:10px; text-transform:uppercase; }
 .q-table td { padding:5px 6px; border-bottom:1px solid #f7fafc; vertical-align:top; }
@@ -155,7 +161,17 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
               <div class="insight orange"><div class="insight-lbl" id="ov-plabel"></div><p id="ov-pins"></p></div>
             </div>
             <div class="card">
-              <div class="card-hd"><span class="dot"></span>Unit Log</div>
+              <div class="card-hd log-hd">
+                <span style="display:flex;align-items:center;gap:6px"><span class="dot"></span>Unit Log</span>
+                <span class="log-count" id="log-count"></span>
+              </div>
+              <div class="log-filters" id="log-filters">
+                <button class="log-filter-btn active" data-f="recent5" onclick="setLogFilter('recent5',this)">Recent 5</button>
+                <button class="log-filter-btn" data-f="all" onclick="setLogFilter('all',this)">All</button>
+                <button class="log-filter-btn" data-f="pending" onclick="setLogFilter('pending',this)">Pending</button>
+                <button class="log-filter-btn" data-f="done" onclick="setLogFilter('done',this)">Done</button>
+                <button class="log-filter-btn" data-f="milestones" onclick="setLogFilter('milestones',this)">Milestones</button>
+              </div>
               <div id="session-log"></div>
             </div>
           </div>
@@ -360,13 +376,44 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     });
   }
 
-  // unit log
-  var lg=document.getElementById('session-log');
-  for(var u=0;u<D.unitLog.length;u++){ var it=D.unitLog[u]; var tags='';
-    if(it.tags){ for(var t=0;t<it.tags.length;t++){ var tg=it.tags[t]; tags+='<span class="tag '+(tg.c||'tgreen')+'"'+(tg.s?(' style="'+tg.s+'"'):'')+'>'+tg.t+'</span>'; } }
-    var nm=(typeof it.n==='number')?('U'+it.n):it.n;
-    lg.innerHTML+='<div class="session-item"><div class="ut-badge" style="background:'+it.badge+'">'+nm+'</div>'+
-      '<div class="session-body"><strong>'+it.title+'</strong><div class="tags">'+tags+'</div><div class="snote">'+it.note+'</div></div></div>'; }
+  // unit log (filterable: Recent 5 / All / Pending / Done / Milestones)
+  var logFilter = 'recent5';
+  function isMilestone(it){ return typeof it.n === 'string' && it.n.charAt(0) === 'M'; }
+  function filteredLog(){
+    if (logFilter === 'recent5') return D.unitLog.slice(0, 5);
+    if (logFilter === 'pending') return D.unitLog.filter(function(it){ return it.status === 'pending'; });
+    if (logFilter === 'done')    return D.unitLog.filter(function(it){ return it.status === 'done'; });
+    if (logFilter === 'milestones') return D.unitLog.filter(isMilestone);
+    return D.unitLog; // all
+  }
+  var EMPTY_MSG = {
+    pending: 'Nothing pending right now &mdash; every built unit has been taken.',
+    milestones: 'No milestone tests yet &mdash; the first one (M1) comes after Unit 10.'
+  };
+  function renderLog(){
+    var lg = document.getElementById('session-log');
+    var list = filteredLog();
+    document.getElementById('log-count').textContent = 'Showing ' + list.length + ' of ' + D.unitLog.length;
+    if (list.length === 0){
+      lg.innerHTML = '<div class="note-empty">' + (EMPTY_MSG[logFilter] || 'Nothing to show yet.') + '</div>';
+      return;
+    }
+    var html = '';
+    for(var u=0;u<list.length;u++){ var it=list[u]; var tags='';
+      if(it.tags){ for(var t=0;t<it.tags.length;t++){ var tg=it.tags[t]; tags+='<span class="tag '+(tg.c||'tgreen')+'"'+(tg.s?(' style="'+tg.s+'"'):'')+'>'+tg.t+'</span>'; } }
+      var nm=(typeof it.n==='number')?('U'+it.n):it.n;
+      html+='<div class="session-item"><div class="ut-badge" style="background:'+it.badge+'">'+nm+'</div>'+
+        '<div class="session-body"><strong>'+it.title+'</strong><div class="tags">'+tags+'</div><div class="snote">'+it.note+'</div></div></div>'; }
+    lg.innerHTML = html;
+  }
+  function setLogFilter(f, btn){
+    logFilter = f;
+    var btns = document.querySelectorAll('#log-filters .log-filter-btn');
+    for(var i=0;i<btns.length;i++){ btns[i].classList.remove('active'); }
+    if (btn) btn.classList.add('active');
+    renderLog();
+  }
+  renderLog();
 
   // priority gaps
   var g=document.getElementById('priority-gaps');
