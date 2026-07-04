@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 7 · Lesson 2 — The Moon &amp; Our Solar System</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .props{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .props>div{border-radius:10px;padding:10px;border:2px solid var(--line);background:#fafdfa;font-size:.88rem}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:440px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌙 Lesson 2 · The Moon &amp; Our Solar System</b><span class="pill">Unit 7 · Earth &amp; Space</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — The Moon does not make its own light. It REFLECTS sunlight, and how much lit Moon we see changes as it orbits Earth — that's what causes phases.</div>
+    <div class="sci">MAP 2 — Scientist's tool: build a simple MODEL (a lamp and a ball) to explain something you can't easily test directly, like why the Moon's shape seems to change.</div>
+    <div class="why">🎯 <b>By the end you can:</b> explain why the Moon shines, name the main Moon phases and why they happen, describe the basic layout of the solar system, and use a model to explain a real observation. ASMOPSS often mixes up "moon phases" with "eclipses" — you'll learn to tell them apart.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">The Moon has guided calendars, tides, and night-time travel for thousands of years — and its changing shape in the sky is one of the most obvious things anyone can observe about space without a telescope. Understanding WHY it changes shape (and that Earth has seven other planet-neighbours orbiting the same Sun) is core "big picture" science.</div>
+    <div class="card">
+      <b>Real life:</b> fishing communities and farmers have tracked Moon phases for centuries to predict tides and plan work. Space agencies plan Moon missions around specific phases too, since lighting conditions on the Moon's surface depend on where the Sun is shining.
+    </div>
+  </section>
+
+  <!-- 3: THE MOON: REFLECTED LIGHT -->
+  <section class="screen" data-s="3">
+    <h2>The Moon: Reflected Light, Not Its Own ✨</h2>
+    <div class="rulebar">The Moon has NO light of its own. What you see is SUNLIGHT bouncing off the Moon's surface, the same way sunlight bounces off a mirror or a wall.</div>
+    <div class="job"><b>Key fact:</b> the Moon orbits (travels around) Earth, taking about 27–29 days for one full trip. As it orbits, the half of the Moon facing the Sun is always lit — but how much of THAT lit half we can see from Earth keeps changing, because the Moon's position relative to Earth and the Sun keeps changing.</div>
+    <div class="card"><b>Common mix-up:</b> some people think Earth's shadow "covers up" parts of the Moon to make the phases. That's actually what causes a rare LUNAR ECLIPSE, not the everyday phases you see almost every night. Regular phases are about VIEWING ANGLE, not shadow.</div>
+  </section>
+
+  <!-- 4: MOON PHASES (decision tree) -->
+  <section class="screen" data-s="4">
+    <h2>Why the Moon's Shape Seems to Change 🌓</h2>
+    <div class="rulebar">The phase you see depends on WHERE the Moon is in its orbit around Earth, compared to the Sun.</div>
+    <svg viewBox="0 0 320 120" width="320" height="120" aria-label="Diagram showing the Moon at different points in its orbit around Earth, with the Sun off to one side lighting half of the Moon at each position">
+      <circle cx="160" cy="60" r="14" fill="#90caf9"/>
+      <text x="160" y="64" font-size="8" text-anchor="middle" fill="#0d3d66" font-weight="bold">EARTH</text>
+      <circle cx="60" cy="60" r="8" fill="#cfd8dc"/>
+      <text x="60" y="80" font-size="8" text-anchor="middle" fill="#546e7a">New</text>
+      <circle cx="260" cy="60" r="8" fill="#FFC107"/>
+      <text x="260" y="80" font-size="8" text-anchor="middle" fill="#8a6a00">Full</text>
+      <circle cx="160" cy="10" r="8" fill="#b0bec5"/>
+      <text x="160" y="26" font-size="8" text-anchor="middle" fill="#546e7a">Quarter</text>
+      <ellipse cx="160" cy="60" rx="120" ry="50" fill="none" stroke="#cfd8dc" stroke-dasharray="4,3"/>
+    </svg>
+    <div class="dtree">
+      <div class="dbox dq">Is the Moon on the SAME side as the Sun (between Earth and Sun)?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol"><div class="dlbl">YES</div><div class="dbox yes">The lit half faces AWAY from Earth<br><small>we see the dark side = <b>NEW MOON</b></small></div></div>
+        <div class="dcol"><div class="dlbl">NO — opposite the Sun</div><div class="dbox yes">The lit half faces TOWARD Earth<br><small>we see the whole lit side = <b>FULL MOON</b></small></div></div>
+        <div class="dcol"><div class="dlbl">NO — in between</div><div class="dbox no">We see PART of the lit half<br><small>= crescent or quarter (half) phases</small></div></div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> the Moon itself never changes — only how much of its permanently-lit half we can see from Earth changes, as it moves around its orbit.</div>
+  </section>
+
+  <!-- 5: OUR SOLAR SYSTEM -->
+  <section class="screen" data-s="5">
+    <h2>Our Solar System: The Basic Layout ☀️🪐</h2>
+    <div class="rulebar">The SUN is a star at the centre. PLANETS (including Earth) orbit the Sun. MOONS orbit planets — Earth has one Moon, but some other planets have many.</div>
+    <div class="props">
+      <div>☀️ <b>The Sun</b><br><small>a star — makes its own light and heat</small></div>
+      <div>🪐 <b>Planets</b><br><small>orbit the Sun — Earth is one of eight</small></div>
+      <div>🌙 <b>Moons</b><br><small>orbit planets, not the Sun directly</small></div>
+      <div>🔭 <b>Order matters</b><br><small>everything orbits something bigger: moons→planets→Sun</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> Earth orbits the Sun (that's revolution, from Lesson 1). The Moon orbits EARTH, not the Sun directly. Two different orbits, two different centres.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">MODEL RULE: when something is too big, too far away, or too slow to test directly, scientists build a smaller MODEL that behaves the same way and study that instead.</div>
+    <p>You can't fly to the Moon to check why its shape seems to change — but you CAN model it: hold a ball (the Moon) at arm's length, with a lamp (the Sun) lighting it from one side, and your head as Earth. Slowly walk the ball around your head.</p>
+    <div class="fairtest">
+      <div class="ch"><b>REPRESENTS</b><br>the ball<br><small>= the Moon</small></div>
+      <div class="me"><b>REPRESENTS</b><br>the lamp<br><small>= the Sun</small></div>
+      <div class="sa"><b>REPRESENTS</b><br>your head<br><small>= the Earth</small></div>
+    </div>
+    <div class="why">🧠 <b>What the model shows:</b> as the ball moves around your head, you see different amounts of its lit side — just like real Moon phases. When the ball is between you and the lamp, its lit side faces away from you (New Moon). When it's on the far side, its lit side faces you fully (Full Moon).</div>
+    <div class="card"><b>Spot the flawed claim:</b> a student says "Moon phases happen because Earth's shadow covers different parts of the Moon each night." Is this correct? (No — that describes a lunar ECLIPSE, a rare event. Regular phases are caused by the CHANGING VIEWING ANGLE as the Moon orbits, not by Earth's shadow.)</div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Why does the Moon appear to shine at night?</p>
+      <button class="opt">It makes its own light like the Sun</button>
+      <button class="opt">It reflects sunlight off its surface</button>
+      <button class="opt">It borrows light from Earth</button>
+      <button class="opt">It glows because it is very hot</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — the Moon has no light of its own; we see sunlight reflecting off it.</div>
+      <div class="fb no">✘ The Moon is not a star and makes no light of its own — think about where the light is really coming from.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. The Moon is directly opposite the Sun, with Earth in between. Which phase does this cause?</p>
+      <button class="opt">New Moon</button>
+      <button class="opt">Quarter Moon</button>
+      <button class="opt">Full Moon</button>
+      <button class="opt">No Moon at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — opposite the Sun means the fully lit side faces Earth, giving a Full Moon.</div>
+      <div class="fb no">✘ Picture the lit half of the Moon facing which way when it's opposite the Sun — that's the side we'd see from Earth.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Which correctly describes the solar system's basic layout?</p>
+      <button class="opt">The Moon orbits the Sun directly, just like Earth does</button>
+      <button class="opt">Earth orbits the Moon, and the Moon orbits the Sun</button>
+      <button class="opt">The Sun orbits Earth once a year</button>
+      <button class="opt">The Sun is at the centre; planets like Earth orbit the Sun; the Moon orbits Earth</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — Sun at the centre, planets orbit the Sun, and moons orbit their planets.</div>
+      <div class="fb no">✘ Check who orbits whom: the Moon orbits EARTH, not the Sun directly.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. What is WRONG with the claim "Moon phases happen because Earth's shadow covers different parts of the Moon every night"?</p>
+      <button class="opt">That describes a rare lunar eclipse — everyday phases are caused by the changing viewing angle as the Moon orbits, not by Earth's shadow</button>
+      <button class="opt">Nothing is wrong — that is exactly how phases work</button>
+      <button class="opt">Earth has no shadow in space</button>
+      <button class="opt">The Moon has no surface for a shadow to fall on</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — that claim describes an eclipse, not the everyday phases caused by viewing angle.</div>
+      <div class="fb no">✘ Re-read the Think Like a Scientist screen — phases and eclipses have different causes.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 7! You know what causes day/night and the year, why the night sky changes through the year, why the Moon shines and changes shape, and the basic layout of the solar system. Ready for the Unit 7 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 7 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='EarthSpace_Lesson_RotationAndRevolution.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_07_Test_EarthAndSpace.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

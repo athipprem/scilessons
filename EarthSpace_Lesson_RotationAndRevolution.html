@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 7 · Lesson 1 — Earth's Rotation, Revolution & Changing Night Sky</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.88rem;border:2px solid var(--line);background:#fafdfa;max-width:440px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .cyclegrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .cyclegrid>div{border-radius:10px;padding:10px 14px;border:2px solid var(--line)}
+  .day{background:#fff3e8;border-color:var(--amber)}
+  .night{background:#e3f2fd;border-color:var(--blue)}
+  .seasongrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .seasongrid>div{border-radius:10px;padding:10px;border:2px solid var(--line);background:#fafdfa;font-size:.88rem}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌍 Lesson 1 · Earth's Rotation, Revolution &amp; the Changing Night Sky</b><span class="pill">Unit 7 · Earth &amp; Space</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Earth &amp; Space Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: Earth makes TWO different journeys at once — a fast SPIN (rotation) and a slow ORBIT around the Sun (revolution) — and they cause two very different things.</div>
+    <p>Today you'll learn what causes day and night, what makes a year, and why the stars you see at night slowly change through the year.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🔄</div><div class="t">Rotation</div><div class="j">day &amp; night</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌞</div><div class="t">Revolution</div><div class="j">one year</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">✨</div><div class="t">Changing night sky</div><div class="j">different stars, different seasons</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain what causes day and night, explain what makes one year, and explain why you see different constellations at different times of the year.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 6 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 6 🔌</h2>
+    <div class="recall">🔁 <b>Conductor vs insulator check:</b> a CONDUCTOR lets electricity (or heat) flow through easily — metals like copper and steel. An INSULATOR blocks it — rubber, dry wood, plastic. If a question asks for something that STOPS a flow, it wants an insulator, not a metal — even though metal wires are the most familiar word, "wire" itself is not the answer to "which is an insulator."</div>
+    <p>Keep that same habit today: check what a question is actually asking for before picking the familiar-sounding answer. Astronomy has a few ideas that sound similar but mean opposite things too — like rotation vs revolution, and day vs night.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Every sunrise, every sunset, every birthday (one full year older!), and every different set of stars you see in winter versus summer — all of it comes from Earth moving through space in two ways at once. ASMOPSS loves asking you to explain WHY these everyday things happen, not just name them.</div>
+    <div class="card">
+      <b>Real life:</b> pilots, farmers, and even fishermen plan around Earth's movements — farmers plant crops by the season (caused by the year-long orbit), and sailors once navigated using which constellations were visible at a given time of year. Understanding Earth's two movements explains a huge part of the natural world around you.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: ROTATION = DAY AND NIGHT -->
+  <section class="screen" data-s="4">
+    <h2>Rotation: Why We Have Day and Night 🔄</h2>
+    <div class="rulebar">Earth SPINS on an invisible line called its axis, making one full spin every 24 hours. This spin is called ROTATION.</div>
+    <svg viewBox="0 0 300 140" width="300" height="140" aria-label="Earth spinning on its axis with one half in daylight facing the Sun and one half in darkness facing away">
+      <circle cx="150" cy="70" r="55" fill="#90caf9"/>
+      <path d="M150,15 A55,55 0 0,1 150,125 A55,55 0 0,1 150,15 Z" fill="#FFC107" opacity="0.55"/>
+      <text x="110" y="74" font-size="11" text-anchor="middle" fill="#7a4a00" font-weight="bold">DAY</text>
+      <text x="195" y="74" font-size="11" text-anchor="middle" fill="#0d3d66" font-weight="bold">NIGHT</text>
+      <circle cx="270" cy="70" r="8" fill="#FFC107"/>
+      <text x="270" y="95" font-size="9" text-anchor="middle" fill="#8a6a00">Sun's light</text>
+    </svg>
+    <div class="cyclegrid">
+      <div class="day"><b>☀️ DAY</b><br><small>your side of Earth faces the Sun — sunlight reaches you</small></div>
+      <div class="night"><b>🌙 NIGHT</b><br><small>your side of Earth faces AWAY from the Sun — you're in Earth's shadow</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> the Sun does not move around Earth — Earth spins, so different parts face the Sun at different times. One full spin = 24 hours = one day-night cycle.</div>
+  </section>
+
+  <!-- SCREEN 5: REVOLUTION = ONE YEAR -->
+  <section class="screen" data-s="5">
+    <h2>Revolution: What Makes One Year ☀️</h2>
+    <div class="rulebar">While Earth spins, it is ALSO travelling in a huge loop all the way around the Sun. One full loop takes about 365 days — that's ONE YEAR. This journey is called REVOLUTION.</div>
+    <div class="job"><b>Two different movements, two different jobs:</b> ROTATION (the daily spin) causes day and night. REVOLUTION (the yearly loop around the Sun) is what a "year" actually means. Don't mix them up — a common trap is thinking the yearly loop causes day/night, or the daily spin causes a year.</div>
+    <div class="card"><b>Try it in your head:</b> if Earth stopped spinning but kept orbiting the Sun, would we still have day and night? (No — rotation causes day/night, not revolution. One side would stay lit, the other dark, all the time.)</div>
+  </section>
+
+  <!-- SCREEN 6: WHY THE NIGHT SKY CHANGES (decision tree) -->
+  <section class="screen" data-s="6">
+    <h2>Why You See Different Stars at Different Times of Year ✨</h2>
+    <div class="rulebar">As Earth orbits the Sun, your night side points towards a DIFFERENT part of space each season — so a different set of constellations is visible at night.</div>
+    <svg viewBox="0 0 320 130" width="320" height="130" aria-label="Earth at two opposite points in its orbit around the Sun, with the night side pointing toward different background stars each time">
+      <circle cx="160" cy="65" r="16" fill="#FFC107"/>
+      <text x="160" y="69" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="bold">SUN</text>
+      <circle cx="40" cy="65" r="12" fill="#90caf9"/>
+      <text x="10" y="40" font-size="9" fill="#546e7a">Earth in January</text>
+      <circle cx="280" cy="65" r="12" fill="#90caf9"/>
+      <text x="230" y="40" font-size="9" fill="#546e7a">Earth in July</text>
+      <path d="M40,65 Q100,10 160,65 Q220,120 280,65" fill="none" stroke="#cfd8dc" stroke-width="2" stroke-dasharray="4,3"/>
+      <text x="8" y="100" font-size="9" fill="#8a6a00">night: ←</text>
+      <text x="200" y="100" font-size="9" fill="#8a6a00">night: →</text>
+    </svg>
+    <div class="dtree">
+      <div class="dbox dq">Has Earth moved to a different point in its orbit (a different season)?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">Your night side now points toward a DIFFERENT part of space<br><small>→ different constellations visible</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO (same night, hours apart)</div>
+          <div class="dbox no">Earth has only rotated, not orbited far<br><small>→ stars appear to slide slowly across the sky, but it's mostly the SAME constellations as earlier that night</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> this is exactly why ASMOPSS asks about "different constellations on different nights" — it's the SAME reason as the seasons: Earth's year-long orbit means your night side gradually points toward different stars over the months.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. What causes day and night on Earth?</p>
+      <button class="opt">Earth's yearly orbit around the Sun</button>
+      <button class="opt">The Sun moving around Earth</button>
+      <button class="opt">Earth spinning (rotating) on its axis</button>
+      <button class="opt">The Moon blocking the Sun</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — Earth's rotation (spinning) makes different sides face the Sun, causing day and night.</div>
+      <div class="fb no">✘ Day/night comes from the FAST daily movement, not the slow yearly one. Which movement is faster — rotation or revolution?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. About how long does it take Earth to complete ONE full revolution (orbit) around the Sun?</p>
+      <button class="opt">24 hours</button>
+      <button class="opt">365 days</button>
+      <button class="opt">1 hour</button>
+      <button class="opt">30 days</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — one full orbit around the Sun takes about 365 days, which is one year.</div>
+      <div class="fb no">✘ 24 hours is the ROTATION (spin) time. The question asks about the much longer orbit around the Sun.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Why do you see different constellations in the night sky in December compared to June?</p>
+      <button class="opt">The stars themselves move around during the year</button>
+      <button class="opt">Earth spins faster in December</button>
+      <button class="opt">The Sun changes which stars exist</button>
+      <button class="opt">Earth has moved to a different point in its orbit, so its night side faces a different part of space</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — Earth's position in its orbit changes over the year, so the night side points toward different stars.</div>
+      <div class="fb no">✘ The stars themselves barely move — it's EARTH that has moved to a different spot in its orbit around the Sun.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. If Earth stopped spinning completely but kept orbiting the Sun, what would happen?</p>
+      <button class="opt">One side of Earth would have permanent day, the other permanent night</button>
+      <button class="opt">Nothing would change at all</button>
+      <button class="opt">There would be no more years</button>
+      <button class="opt">Every part of Earth would have day and night as normal</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — without rotation, the side facing the Sun would always be in daylight, and the other side would always be dark.</div>
+      <div class="fb no">✘ Rotation is what causes day and night to alternate. Without it, one side stays lit and one side stays dark.</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: the Moon's phases, why the Moon doesn't make its own light, and the basic layout of our solar system.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='EarthSpace_Lesson_MoonAndSolarSystem.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

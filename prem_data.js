@@ -13,30 +13,29 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:6, topic:'Physics: Electricity &amp; Circuits', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:7, topic:'Earth &amp; Space: Astronomy', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:5, score:13, outOf:15, marks:null, marksOutOf:null, pct:87, delta:-2, prevScore:15,
-    patternLabel: 'Unit 5 result - Chemistry: States of Matter &amp; Materials (13/15, 87%)',
-    patternInsight: '<strong>13/15 (87%)</strong> - pass bar is 12/15, comfortable pass but first non-perfect since Unit 1. Section A (states/materials warm-up) = <strong>4/5</strong> (missed Q1: named the HEATING pair instead of the COOLING pair - a direction mix-up). Section B (applying changes of state &amp; properties) = <strong>4/5</strong> (missed Q10: a two-property sort - placed an absorbent+soft material in the opposite Waterproof+Hard box). Section C (think like a scientist, applied) = <strong>5/5</strong> - a FOURTH straight 100%.',
-    analysisLabel: 'Target: GOLD - next up U6 Physics: Electricity &amp; Circuits (built, HTML format)',
-    analysisInsight: 'Five units in, five passes, four of the last five perfect. Applied/experiment reasoning (Section C: 80% U1, 100% U2, 100% U3, 100% U4, 100% U5) is a durable strength across five different content areas. Both U5 misses are specific and fixable, not conceptual gaps - a heating/cooling direction slip and one two-property classification box - and U6\'s Quick Recall screen opens with a recap of both before new content. U6 closes the last individual baseline miss (Q3, energy in a circuit) and continues the rotation into electricity.',
-    qSummary: '<strong>13 / 15 (87%)</strong> - Two misses: Q1 (cooling vs heating direction) and Q10 (two-property classification, opposite corner). Section C (applied reasoning) still 5/5.',
+    n:6, score:14, outOf:15, marks:null, marksOutOf:null, pct:93, delta:1, prevScore:13,
+    patternLabel: 'Unit 6 result - Physics: Electricity &amp; Circuits (14/15, 93%)',
+    patternInsight: '<strong>14/15 (93%)</strong> - pass bar is 12/15, bounced back from Unit 5\'s dip. Section A (circuit basics warm-up) = <strong>5/5</strong>. Section B (applying circuits, conductors &amp; energy) = <strong>4/5</strong> (missed Q7: picked two metals - both conductors - when asked for two good electrical INSULATORS, an inversion). Section C (think like a scientist, applied) = <strong>5/5</strong> - a FIFTH straight 100%.',
+    analysisLabel: 'Target: GOLD - next up U7 Earth &amp; Space: Astronomy (built, HTML format)',
+    analysisInsight: 'Six units in, six passes, five of the last six perfect or near-perfect. Applied/experiment reasoning (Section C: 80% U1, 100% U2-U6) is now a rock-solid strength spanning six different content areas. Baseline Q3 (energy form in a circuit) is resolved - only ONE individual question from the entire original diagnostic remains untouched anywhere: Q32 (astronomy). U7 closes it, and directly targets Earth &amp; Space, the only strand still sitting at 50% since nothing has tested it since baseline.',
+    qSummary: '<strong>14 / 15 (93%)</strong> - One miss: Q7 (conductor/insulator inversion - picked two conductors when asked for insulators). Section C (applied reasoning) still 5/5 - a fifth straight 100%.',
     qBreakdown: [
-      { q:'Q1', topic:'Changes of state - cooling vs heating direction', lvl:'w', pass:false, note:'Chose the HEATING pair (melting/evaporating) instead of the COOLING pair (freezing/condensing) - a direction mix-up, not a gap in what each change means.' },
-      { q:'Q10', topic:'Two-property classification chart (Absorbent/Waterproof x Hard/Soft)', lvl:'h', pass:false, note:'Placed a soft, absorbent material in the opposite corner (Waterproof + Hard) instead of Absorbent + Soft. Got the OTHER two-property sort on the test right (Q14) - reads as a slip, not a blind spot, but worth a recap since this targets baseline Q16.' }
+      { q:'Q7', topic:'Electrical conductors vs insulators', lvl:'w', pass:false, note:'Chose "copper wire and steel nail" (both conductors) when asked for a pair of good INSULATORS (correct: rubber and dry wood) - an inversion of the property, not a repeat of the U3 heat-conductor/insulator confusion (which he got 100% on).' }
     ]
   },
 
   skills: [
     { name: 'Biology',                  c: 90, t: 85, ev:'U4 Microorganisms 15/15 PERFECT - closed G4 Q40; now above target' },
     { name: 'Chemistry / Matter',       c: 87, t: 85, ev:'U5 States/Materials 13/15 (87%) - baseline Q16 classification improving but not fully closed (Q10 miss)' },
-    { name: 'Physics',                  c: 90, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT - closed G4 Q18/19; U6 (circuits/electricity) built, awaiting test' },
-    { name: 'Earth &amp; Space',            c: 50, t: 85, ev:'G3 Earth/Space 50%; G4 Q32 - target normalised to 85 like every other strand' },
-    { name: 'Scientific Investigation', c: 88, t: 85, ev:'Section C 80% (U1), 100% (U2), 100% (U3), 100% (U4), 100% (U5) - five units of evidence, four straight 100%' },
-    { name: 'Applied Reasoning',        c: 89, t: 85, ev:'U1 Section C 80%, U2-U5 Section C 100% - consistently above target across five content areas' }
+    { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) - closed G4 Q18/19/Q3; strongest strand' },
+    { name: 'Earth &amp; Space',            c: 50, t: 85, ev:'G3 Earth/Space 50%; G4 Q32 - U7 (astronomy) built, first real unit test for this strand, awaiting result' },
+    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U6) - six units of evidence, five straight 100%' },
+    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U6 Section C 100% - consistently above target across six content areas' }
   ],
-  radarCurrent:  [90, 87, 90, 50, 88, 89],
+  radarCurrent:  [90, 87, 91, 50, 90, 90],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -46,23 +45,36 @@ var PREM_DATA = {
     { unit:2, topic:'Chemistry/Matter: What Is Matter?', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' },
     { unit:3, topic:'Physics: Magnetism &amp; Heat', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' },
     { unit:4, topic:'Biology: Microorganisms', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-03' },
-    { unit:5, topic:'Chemistry: States of Matter &amp; Materials', score:13, outOf:15, pct:87, passBar:12, date:'2026-07-04' }
+    { unit:5, topic:'Chemistry: States of Matter &amp; Materials', score:13, outOf:15, pct:87, passBar:12, date:'2026-07-04' },
+    { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 7, badge: 'linear-gradient(135deg,#4527A0,#9575CD)',
+      title: 'Earth &amp; Space: Astronomy',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: Rotation &amp; Revolution', c:'tgreen' },
+        { t:'L2: Moon &amp; Solar System', c:'tblue' },
+        { t:'Targets 2025 Q32', c:'torange' }
+      ],
+      note: 'U7 closes the very last individual question left from the original baseline diagnostic (Q32, why different constellations are visible on different nights of the year) and directly targets Earth &amp; Space, the one strand still sitting at 50% since nothing has tested it since baseline. L1: what causes day/night (rotation) vs what makes a year (revolution), and why the night sky gradually changes through the year - plus a Quick Recall recap of the Unit 6 conductor/insulator miss. L2: why the Moon shines (reflected sunlight, not its own), why its shape seems to change (phases), the basic Sun-planets-moons layout of the solar system, and a lamp-and-ball model for reasoning about phases like a scientist. Built in the established single-page HTML test format.',
+      status: 'pending'
+    },
+    {
       n: 6, badge: 'linear-gradient(135deg,#00838F,#4DD0E1)',
       title: 'Physics: Electricity &amp; Circuits',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: Building a Circuit', c:'tgreen' },
-        { t:'L2: Conductors &amp; Faults', c:'tblue' },
-        { t:'Targets 2025 Q3', c:'torange' }
+        { t:'&#9989; 14/15 PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 5/5', c:'tblue' },
+        { t:'Misses Q7', c:'torange' }
       ],
-      note: 'U6 continues the rotation into electricity and closes the last individual baseline miss (Q3, initial energy form in a circuit). L1: what makes a circuit complete, open vs closed switches, and the energy transfer chain (chemical in the battery &rarr; electrical in the loop &rarr; light/heat at the bulb) - plus a Quick Recall recap of two Unit 5 misses (heating/cooling direction, two-property classification). L2: electrical conductors vs insulators, a step-by-step decision-tree check for diagnosing a circuit fault, and fair-testing which material conducts. Built in the established single-page HTML test format.',
-      status: 'pending'
+      note: 'Scored 14/15 (93%) - comfortably above the 12/15 pass bar, bounced back from Unit 5\'s dip. Missed Q7 (picked two metals - both conductors - when asked for a pair of good electrical insulators; correct answer was rubber and dry wood). Section C (think like a scientist) 5/5 - a fifth straight 100%. Baseline Q3 (initial energy form in a circuit) fully resolved - only Q32 (astronomy) remains of the entire original diagnostic. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 5, badge: 'linear-gradient(135deg,#0288D1,#4FC3F7)',
@@ -152,20 +164,26 @@ var PREM_DATA = {
     {
       label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
       pill: 'p1', pillText: 'Maintain',
-      score: 'Five results: U1 Section C 4/5 (80%), U2/U3/U4/U5 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across five different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
-      fillClass: 'g2', fillPct: 88
+      score: 'Six results: U1 Section C 4/5 (80%), U2-U6 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across six different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
+      fillClass: 'g2', fillPct: 90
+    },
+    {
+      label: 'Earth &amp; Space: astronomy - U7 now',
+      pill: 'p1', pillText: 'U7 now',
+      score: 'G4: Q32 (different constellations on different nights) - the very last individual question remaining anywhere on the original baseline diagnostic. Earth &amp; Space is also the one strand still sitting at 50% on the skills radar, unchanged since baseline since nothing has tested it. U7 lessons + HTML test built - rotation vs revolution, why the night sky changes through the year, Moon phases, and basic solar system layout.',
+      fillClass: 'g2', fillPct: 55
     },
     {
       label: 'Classification (sorting by properties) - improving, one slip remains',
       pill: 'p2', pillText: 'Watch',
-      score: 'G4: Q16 (classification chart of objects A-D). U5\'s dedicated two-property classification lesson resolved one of two test questions on this skill (Q14 correct, Q10 missed - opposite corner on both axes). Reads as a slip, not a blind spot, since the other sort was correct - a quick recap is built into Unit 6\'s Quick Recall screen before moving on.',
+      score: 'G4: Q16 (classification chart of objects A-D). U5\'s dedicated two-property classification lesson resolved one of two test questions on this skill (Q14 correct, Q10 missed - opposite corner on both axes). Reads as a slip, not a blind spot, since the other sort was correct.',
       fillClass: 'g2', fillPct: 75
     },
     {
-      label: 'Physics: circuits &amp; energy transfer - U6 now',
-      pill: 'p1', pillText: 'U6 now',
-      score: 'G4: Q3 (initial energy form in a circuit - battery = chemical energy) - the last individual baseline miss. U6 lessons + HTML test built - complete circuits, switches, the chemical&rarr;electrical&rarr;light/heat energy chain, conductors vs insulators, and fault-finding.',
-      fillClass: 'g2', fillPct: 60
+      label: 'Physics: circuits &amp; energy transfer - CLOSED &#9989;',
+      pill: 'p3', pillText: 'Done',
+      score: 'U6 scored 14/15 (93%). Baseline Q3 (initial energy form in a circuit) fully resolved - complete circuits, switches, and the chemical&rarr;electrical&rarr;light/heat energy chain all mastered. One isolated miss on conductor/insulator identification (Q7), not on the circuits/energy content this gap targeted.',
+      fillClass: 'g3', fillPct: 95
     },
     {
       label: 'Biology: microorganisms &amp; decomposition - CLOSED &#9989;',
@@ -190,12 +208,6 @@ var PREM_DATA = {
       pill: 'p3', pillText: 'Done',
       score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved except a lingering thread on leaf/stomata gas exchange (Q13/Q34) - watch for it in later rotation.',
       fillClass: 'g3', fillPct: 95
-    },
-    {
-      label: 'Remaining one-off: astronomy',
-      pill: 'p3', pillText: 'Later rotation',
-      score: 'G4: Q32 (night sky/constellations) - the last untouched individual baseline miss once U6 (circuits) is done. Earth &amp; Space is otherwise his weakest strand on the radar (50%), so this is picked up alongside other first-time Earth &amp; Space content in a later rotation unit.',
-      fillClass: 'g3', fillPct: 65
     }
   ]
 };
