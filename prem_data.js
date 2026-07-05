@@ -13,27 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:8, topic:'Biology: Photosynthesis', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:9, topic:'Chemistry: Reactions', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:7, score:15, outOf:15, marks:null, marksOutOf:null, pct:100, delta:1, prevScore:14,
-    patternLabel: 'Unit 7 result - Earth &amp; Space: Astronomy (15/15, 100% - PERFECT)',
-    patternInsight: '<strong>15/15 (100%)</strong> - pass bar is 12/15, a PERFECT score on brand-new content. Section A (Earth &amp; Space basics) = <strong>5/5</strong>. Section B (applying rotation, revolution &amp; Moon phases) = <strong>5/5</strong>. Section C (think like a scientist, applied) = <strong>5/5</strong> - a SIXTH straight 100%.',
-    analysisLabel: 'Target: GOLD - next up U8 Biology: Photosynthesis (built, HTML format, new 20Q test format)',
-    analysisInsight: 'Seven units in, seven passes, U7 the best yet. Baseline Q32 (astronomy) is resolved - this was the VERY LAST individual question remaining anywhere on the original diagnostic, meaning every one of the 12 original baseline misses is now individually closed. Earth &amp; Space also jumped from 50% (untested since baseline) straight to a perfect result. With no baseline gaps left, U8 targets a different recurring thread instead: the U1 Q13 leaf-bubbles/gas-exchange mix-up, using the new 20-question test format (4A/6B/10C) to stress-test applied reasoning under more volume.',
-    qSummary: '<strong>15 / 15 (100%)</strong> - No misses at all. Section C (applied reasoning) 5/5 - a sixth straight 100%.',
+    n:8, score:20, outOf:20, marks:null, marksOutOf:null, pct:100, delta:0, prevScore:15,
+    patternLabel: 'Unit 8 result - Biology: Photosynthesis (20/20, 100% - PERFECT, first 20Q test)',
+    patternInsight: '<strong>20/20 (100%)</strong> - pass bar is 16/20, a PERFECT score on the first test in the new 20-question format. Section A (photosynthesis basics) = <strong>4/4</strong>. Section B (applying the recipe &amp; gas exchange) = <strong>6/6</strong>. Section C (think like a scientist, applied) = <strong>10/10</strong> - a SEVENTH straight 100%, now proven at double the previous question volume.',
+    analysisLabel: 'Target: GOLD - next up U9 Chemistry: Reactions (built, HTML format, 20Q format now permanent)',
+    analysisInsight: 'Eight units in, eight passes, two perfect scores in a row (U7, U8). The U1 Q13 / baseline Q34 leaf-bubbles-vs-photosynthesis thread is now directly closed - the Section C question re-testing that exact scenario was answered correctly. The 20-question format (4A/6B/10C) held up perfectly with no fatigue-driven errors in the backloaded applied section, so this format is now confirmed permanent for every future unit test. U9 picks the Biology&rarr;Chemistry&rarr;Physics rotation back up with Chemistry: Reactions - physical vs chemical change, signs of a reaction, and reversible vs irreversible changes.',
+    qSummary: '<strong>20 / 20 (100%)</strong> - No misses at all. Section C (applied reasoning) 10/10 - a seventh straight 100%, at double the previous question volume.',
     qBreakdown: []
   },
 
   skills: [
-    { name: 'Biology',                  c: 90, t: 85, ev:'U4 Microorganisms 15/15 PERFECT - closed G4 Q40; now above target' },
+    { name: 'Biology',                  c: 92, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT - closed G4 Q40 and the U1 Q13 gas-exchange thread; strongest Biology run yet' },
     { name: 'Chemistry / Matter',       c: 87, t: 85, ev:'U5 States/Materials 13/15 (87%) - baseline Q16 classification improving but not fully closed (Q10 miss)' },
     { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) - closed G4 Q18/19/Q3; strongest strand' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 91, t: 85, ev:'Section C 80% (U1), 100% (U2-U7) - seven units of evidence, six straight 100%' },
-    { name: 'Applied Reasoning',        c: 91, t: 85, ev:'U1 Section C 80%, U2-U7 Section C 100% - consistently above target across seven content areas' }
+    { name: 'Scientific Investigation', c: 92, t: 85, ev:'Section C 80% (U1), 100% (U2-U8) - eight units of evidence, seven straight 100%, now proven at double question volume (U8&#39;s 20Q format)' },
+    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 Section C 80%, U2-U8 Section C 100% - consistently above target across eight content areas, held under the new 20Q format' }
   ],
-  radarCurrent:  [90, 87, 91, 90, 91, 91],
+  radarCurrent:  [92, 87, 91, 90, 92, 92],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -45,23 +45,36 @@ var PREM_DATA = {
     { unit:4, topic:'Biology: Microorganisms', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-03' },
     { unit:5, topic:'Chemistry: States of Matter &amp; Materials', score:13, outOf:15, pct:87, passBar:12, date:'2026-07-04' },
     { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' },
-    { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' }
+    { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' },
+    { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 9, badge: 'linear-gradient(135deg,#4E342E,#A1887F)',
+      title: 'Chemistry: Reactions',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: What Is a Chemical Reaction?', c:'tgreen' },
+        { t:'L2: Reversible &amp; Reaction Speed', c:'tblue' },
+        { t:'20Q format', c:'torange' }
+      ],
+      note: 'Picks the Biology&rarr;Chemistry&rarr;Physics rotation back up (U8 was Biology). No baseline gap to chase - U9 is first-time content covering physical vs chemical change, the clue-signs of a reaction (gas, colour, temperature, smell), reversible vs irreversible changes, and what makes a reaction speed up or slow down (temperature, surface area). L1: physical vs chemical change, signs of a reaction, and a decision tree for spotting one. L2: reversible vs irreversible with its own decision tree, factors affecting reaction speed, and a fair-test worked example testing temperature. Continues the now-permanent 20-question format (4A/6B/10C, PASS_BAR 16/20).',
+      status: 'pending'
+    },
+    {
       n: 8, badge: 'linear-gradient(135deg,#00695C,#4DB6AC)',
       title: 'Biology: Photosynthesis',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: What Is Photosynthesis?', c:'tgreen' },
-        { t:'L2: Gas Exchange &amp; Factors', c:'tblue' },
-        { t:'New format: 20Q', c:'torange' }
+        { t:'&#9989; 20/20 PERFECT', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 10/10', c:'tblue' },
+        { t:'No misses', c:'torange' }
       ],
-      note: 'With every baseline gap now closed after U7, U8 targets a different recurring thread instead: Unit 1\'s Q13 miss (leaf bubbles mistaken for photosynthesis food-making instead of gas exchange). L1: the photosynthesis recipe (sunlight+water+CO2&rarr;glucose+oxygen), chlorophyll, and a decision tree for spotting when photosynthesis is happening. L2: the leaf-bubbles mystery solved (stomata gas exchange vs photosynthesis), a decision tree telling the two apart, factors affecting photosynthesis rate, and a fair-test worked example. First unit tested in the new 20-question format (4A/6B/10C, PASS_BAR 16/20) - more applied-reasoning volume per Lui\'s request.',
-      status: 'pending'
+      note: 'Scored 20/20 (100%) - a perfect score, comfortably above the 16/20 pass bar, and the first test in the new 20-question format. Sections A+B (photosynthesis recipe, chlorophyll, gas exchange, factors affecting rate) 10/10. Section C (think like a scientist) 10/10 - a seventh straight 100%, held at double the previous applied-question volume with no fatigue-driven errors. Directly closed the Unit 1 Q13 / baseline Q34 leaf-bubbles-vs-photosynthesis thread - the opening Section C question re-tested that exact scenario and was answered correctly. This result confirmed the 20Q/4A-6B-10C format as permanent going forward. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 7, badge: 'linear-gradient(135deg,#4527A0,#9575CD)',
@@ -173,16 +186,10 @@ var PREM_DATA = {
 
   priorityGaps: [
     {
-      label: 'Photosynthesis &amp; gas exchange (Unit 1 Q13 thread) - U8 now',
-      pill: 'p1', pillText: 'U8 now',
-      score: 'Not a baseline-diagnosed gap (every one of those is now closed) but a recurring thread: U1 Q13 (leaf-bubbles mistaken for photosynthesis food-making instead of gas exchange through stomata) echoes baseline Q34\'s underlying confusion. U8 lessons directly solve the "leaf-bubbles mystery" and teach photosynthesis-vs-gas-exchange as a decision tree.',
-      fillClass: 'g2', fillPct: 60
-    },
-    {
       label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
       pill: 'p1', pillText: 'Maintain',
-      score: 'Seven results: U1 Section C 4/5 (80%), U2-U7 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across seven different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug, including under the new longer 20Q test format starting U8.',
-      fillClass: 'g2', fillPct: 91
+      score: 'Eight results: U1 Section C 4/5 (80%), U2-U8 Section C 5/5 or 10/10 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across eight different content areas, including at double the question volume under U8\'s new 20Q format. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
+      fillClass: 'g2', fillPct: 92
     },
     {
       label: 'Classification (sorting by properties) - improving, one slip remains',
@@ -223,7 +230,7 @@ var PREM_DATA = {
     {
       label: 'Biology: Plants - CLOSED &#9989;',
       pill: 'p3', pillText: 'Done',
-      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved. The lingering leaf/stomata gas-exchange thread (Q13/Q34) is now being directly closed by U8\'s photosynthesis lessons - see that entry above.',
+      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved. The lingering leaf/stomata gas-exchange thread (Q13/Q34) is now also closed - U8 (Photosynthesis, 20/20 perfect) directly re-tested that exact scenario and Prem answered it correctly.',
       fillClass: 'g3', fillPct: 95
     }
   ]

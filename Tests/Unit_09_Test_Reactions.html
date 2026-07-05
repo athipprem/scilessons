@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 Test — Chemistry: Reactions</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 9 Test — Chemistry: Reactions</b>
+      <span class="sub" id="hdr-sub">Chemical vs physical change • Reversible vs irreversible • Thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 9;
+const UNIT_TITLE = "Chemistry: Reactions";
+const PASS_BAR   = 16;                        // out of 20
+
+const Q = [
+  // Section A — Reactions Basics (warm-up)
+  { n:1, section:'A', star:0, body:"What happens during a chemical reaction?",
+    options:["The substance only changes shape or size","One or more brand new substances form, with different properties","The substance disappears completely, leaving nothing behind","Nothing changes at all"], ans:2,
+    why:"A chemical reaction always produces genuinely new substances with different properties from the starting materials." },
+  { n:2, section:'A', star:0, body:"Which of these is a PHYSICAL change, not a chemical one?",
+    options:["A nail rusting", "Wood burning in a fire", "Ice melting into water", "A firework exploding"], ans:3,
+    why:"Melting is a physical change — it's still the same substance (water), just in a different state." },
+  { n:3, section:'A', star:0, body:"Which of these is a clue that a chemical reaction MIGHT be happening?",
+    options:["The object always gets lighter for no reason", "New gas bubbles, a colour change, or a temperature change", "The object stays exactly the same forever", "The object turns invisible"], ans:2,
+    why:"Gas bubbles, colour change, and temperature change are all classic warning signs that a reaction may be occurring." },
+  { n:4, section:'A', star:0, body:"Which change is generally REVERSIBLE?",
+    options:["Baking a cake", "Cooking an egg", "Freezing water into ice, which can be melted back", "Burning paper into ash"], ans:3,
+    why:"Freezing/melting water is a physical change you can repeat back and forth — the other three are irreversible chemical reactions." },
+
+  // Section B — Applying Reactions & Change Type (★)
+  { n:5, section:'B', star:1, body:"A student mixes baking soda and vinegar in a cup and sees it fizz vigorously, releasing gas. What is the BEST way to describe this?",
+    options:["A physical change, since nothing new was made", "A chemical reaction — gas is being produced and a new substance is forming", "Not a change of any kind, just noise", "A chemical reaction only if it also changes colour"], ans:2,
+    why:"Vigorous fizzing with gas release is a strong sign of a chemical reaction — new substances (including the gas) are forming." },
+  { n:6, section:'B', star:1, body:"An ice cube is left on a plate and turns into a puddle of water after an hour. Later, that same water is put in the freezer and turns solid again. What does this show?",
+    options:["This must be a chemical reaction, since the water changed state twice", "This is a physical change — the substance is still water throughout, and the change can be reversed", "The puddle is now a completely different substance from the ice", "Freezing always creates a brand new substance"], ans:2,
+    why:"Being able to reverse the change by simply re-freezing is strong evidence this is a physical change, not a chemical reaction." },
+  { n:7, section:'B', star:1, body:"An iron nail is left outside in the rain for several months and develops a flaky orange-brown coating. What is the BEST explanation?",
+    options:["The nail simply got dirty and can be wiped clean back to bare iron", "The iron has reacted with oxygen and water to form rust, a new substance — this is a chemical reaction", "The coating is just water sitting on the surface", "Nothing has actually changed about the nail's substance"], ans:2,
+    why:"Rust is a genuinely new substance (iron oxide) formed by a slow chemical reaction between iron, oxygen, and water — not something you can simply wipe away." },
+  { n:8, section:'B', star:1, body:"A slice of bread is put in a toaster and comes out browned and crisp. Which statement is TRUE?",
+    options:["Toasting is reversible — the toast can be turned back into plain bread by cooling it", "Toasting is a chemical reaction, and the browning cannot be undone", "Toasting is purely a change in temperature with no new substances involved", "Toast and bread are chemically identical substances"], ans:2,
+    why:"Toasting triggers a chemical reaction in the bread's surface that produces new browned substances — there is no simple way to reverse it back into plain bread." },
+  { n:9, section:'B', star:1, body:"Sugar is stirred into a glass of water until it can no longer be seen. A student wants to know if this was a chemical reaction. What is the key test?",
+    options:["Whether the water got warmer or colder", "Whether the sugar could be recovered, unchanged, by evaporating the water away", "Whether the glass is see-through", "Whether the water was stirred clockwise or anticlockwise"], ans:2,
+    why:"If evaporating the water would leave the original sugar behind unchanged, that shows dissolving was a physical change, not a chemical reaction." },
+  { n:10, section:'B', star:1, body:"Two identical crushed-vs-whole antacid tablets are dropped into two cups of water at the same temperature. The crushed tablet finishes fizzing first. What is the BEST explanation?",
+    options:["Crushed tablets are a different chemical substance from whole ones", "The crushed tablet has more surface area exposed to the water, so it reacts faster", "Whole tablets never react with water at all", "The water temperature must have been different between the two cups"], ans:2,
+    why:"Crushing increases the surface area in contact with the water, allowing more of the tablet to react at the same time — making the reaction faster." },
+
+  // Section C — Think Like a Scientist (★★ applied)
+  { n:11, section:'C', star:2, body:"A student claims: 'Mixing blue paint and yellow paint to make green paint is a chemical reaction, because a brand new colour appeared.' What is the BEST correction?",
+    options:["The claim is correct exactly as stated", "This is really just the pigments physically mixing together — no genuinely new substance with different chemical properties has formed, unlike a true reaction", "Paint can never be mixed at all", "Colour changes are never a useful clue for anything"], ans:2,
+    why:"Simply blending two colours together is a physical mixture, not a chemical reaction — the individual pigments are still present, just combined visually." },
+  { n:12, section:'C', star:2, body:"A student tests whether warming vinegar speeds up its reaction with baking soda, but also uses a bigger spoonful of baking soda in the warm cup than in the cold cup. Why is this NOT a fair test?",
+    options:["Two things changed at once (temperature AND amount of baking soda), so you can't tell which one caused any difference observed", "Fair tests must always use cold vinegar only", "Temperature never affects reaction speed, so the test is pointless either way", "Changing two things at once always gives more reliable results"], ans:1,
+    why:"A fair test changes only ONE variable at a time — changing both temperature and the amount of baking soda makes it impossible to isolate which factor caused any result." },
+  { n:13, section:'C', star:2, body:"Why can't a baked cake ever be turned back into its original flour, eggs, sugar, and butter, no matter what you do to it afterwards?",
+    options:["Because baking only changes the cake's shape, not its substances", "Because baking triggers chemical reactions that create genuinely new substances, and simple physical steps (cooling, cutting, etc.) cannot undo those reactions", "Because cakes are not really made of separate ingredients at all", "Because ovens destroy matter completely, leaving nothing behind"], ans:2,
+    why:"Baking causes real chemical changes in the ingredients; since new substances have formed, no simple physical process can restore the original raw ingredients." },
+  { n:14, section:'C', star:2, body:"Two identical cups of vinegar and baking soda are set up, but Cup A's vinegar is warmed first while Cup B's stays at room temperature; everything else is kept the same. Which BEST explains the expected difference?",
+    options:["No difference is expected, since both cups have the same amount of vinegar and baking soda", "Cup B will fizz faster, because cooler temperatures always speed up reactions", "Cup A will likely fizz faster, because the warmer temperature gives the particles more energy to react", "Temperature has no connection to how fast this reaction happens"], ans:3,
+    why:"Higher temperature increases particle energy and collision rate, which generally speeds up a chemical reaction like this one." },
+  { n:15, section:'C', star:2, body:"Builders often paint or oil iron railings and steel bridges. Based on what you know about rusting, what is the BEST reason for this?",
+    options:["Paint and oil have nothing to do with rust prevention", "Paint and oil create a barrier that keeps water and oxygen away from the iron, slowing down the chemical reaction that forms rust", "Painting iron turns it into a completely different metal", "Rust only forms on painted metal, never on bare metal"], ans:2,
+    why:"Rusting is a chemical reaction between iron, oxygen, and water — blocking oxygen and water from reaching the metal slows the reaction down significantly." },
+  { n:16, section:'C', star:2, body:"A student sets up two cups to test whether the AMOUNT of baking soda affects fizzing: both cups get the same vinegar at the same temperature, but Cup A gets one spoonful of baking soda and Cup B gets three spoonfuls. Which is the best description of this setup?",
+    options:["It is unfair, because temperature was not also changed", "It is a fair test — only the amount of baking soda differs, so any result can be reasonably linked to that", "It is unfair, because you should always change every variable to get a clear answer", "It cannot be a fair test unless the cups are different sizes"], ans:2,
+    why:"Only the amount of baking soda was changed while vinegar and temperature stayed identical, which is exactly what a fair test requires." },
+  { n:17, section:'C', star:2, body:"A student says: 'Since dissolving sugar makes the water look clear and different, dissolving must always be a chemical reaction.' What is WRONG with this reasoning?",
+    options:["Nothing is wrong — looking different always proves a chemical reaction happened", "Looking different is not proof of a new substance forming — the sugar is still sugar, just spread through the water, and can be recovered by evaporation", "Sugar can never actually dissolve in water at all", "Chemical reactions never change how something looks"], ans:2,
+    why:"A change in appearance alone doesn't prove a chemical reaction — the real test is whether a genuinely new substance has formed, which is not the case when sugar simply dissolves." },
+  { n:18, section:'C', star:2, body:"A sealed jar with a rusting nail inside is weighed every week for a month, and the reading slowly changes. Reasoning about the rusting reaction, what does this pattern BEST show?",
+    options:["The nail is disappearing completely with nothing left behind", "Rusting is a chemical reaction that happens gradually over time as iron, oxygen, and water slowly combine into rust", "Rust only forms instantly, all at once", "Weighing a jar has nothing to do with chemical reactions"], ans:2,
+    why:"Rusting is a slow chemical reaction — unlike a fast fizzing reaction, it can take days or weeks to notice, but it is still the same kind of process: new substances gradually forming." },
+  { n:19, section:'C', star:2, body:"In a controlled experiment testing whether crushing a tablet affects reaction speed, one tablet is left completely whole and untouched. What is the PURPOSE of this whole, unchanged tablet in the experiment?",
+    options:["It has no purpose and should be removed", "It acts as a control, showing the reaction speed with no crushing, so the crushed tablets can be fairly compared against it", "It is there to save tablets", "It represents the fastest possible reaction speed"], ans:2,
+    why:"An unchanged control tablet lets the experimenter compare the crushed tablets against a true baseline, isolating the effect of crushing." },
+  { n:20, section:'C', star:2, body:"Which statement MOST completely explains why chemical reactions are generally much harder to reverse than physical changes?",
+    options:["Chemical reactions never actually change anything", "Chemical reactions create substances with genuinely different properties, so simple physical steps like cooling or reshaping cannot restore the original materials", "Physical changes are impossible to reverse, unlike chemical reactions", "There is no real difference between physical and chemical changes"], ans:2,
+    why:"Because a chemical reaction forms new substances with different properties, undoing it would require another reaction entirely — not just a simple physical step like freezing or reshaping." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Reactions Basics (warm-up)",
+  B: "SECTION B — Applying Reactions &amp; Change Type (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(2,'0');
+  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

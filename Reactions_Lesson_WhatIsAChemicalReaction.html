@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 · Lesson 1 — What Is a Chemical Reaction?</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .signs{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.88rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .revcompare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .revcompare>div{border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .phys{background:#e3f2fd;border:2px solid var(--blue)}
+  .chem{background:#fff3e8;border:2px solid var(--amber)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧪 Lesson 1 · What Is a Chemical Reaction?</b><span class="pill">Unit 9 · Chemistry</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Chemical Reactions Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: In a CHEMICAL REACTION, starting substances change into completely NEW substances with different properties — and you usually can't easily turn them back.</div>
+    <p>Today you'll learn to tell a physical change apart from a chemical one, spot the clues that a reaction has happened, and use a checklist to decide whether something you observe is really a chemical reaction.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">⚖️</div><div class="t">Physical vs Chemical</div><div class="j">what actually changes</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🫧</div><div class="t">The Clues</div><div class="j">signs a reaction happened</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔍</div><div class="t">Spot It</div><div class="j">is this a chemical reaction?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> tell physical changes apart from chemical changes, name the clues that show a chemical reaction is happening, and decide whether a described situation is a chemical reaction.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 8 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 8 🌿</h2>
+    <div class="recall">🔁 <b>Photosynthesis check:</b> in Unit 8 you learned that photosynthesis combines water and carbon dioxide, using sunlight energy, to make glucose (food) and oxygen.</div>
+    <p>Here's the connection: photosynthesis is actually a CHEMICAL REACTION! Brand new substances (glucose and oxygen) are formed from completely different starting ingredients (water and carbon dioxide) — that's exactly what a chemical reaction is. Today you'll learn how to spot reactions like this one, and many others, in everyday life.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Chemical reactions are happening around you constantly — cooking food, a car engine burning fuel, a battery powering a torch, bread rising, and even your own body digesting lunch. Being able to tell a physical change from a chemical one, and spot the clues, is one of the most useful "explain what you see" skills in science.</div>
+    <div class="card">
+      <b>Real life:</b> firefighters know burning is a fast chemical reaction that needs fuel, heat, and oxygen — remove any one and the fire stops. Bakers rely on a chemical reaction (baking soda reacting with an acid) to make cakes rise. Farmers and builders protect iron and steel from rusting, because rust is a slow chemical reaction with oxygen and water that ruins metal over time.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: PHYSICAL VS CHEMICAL CHANGE -->
+  <section class="screen" data-s="4">
+    <h2>Physical vs Chemical Change ⚖️</h2>
+    <div class="rulebar">A PHYSICAL change alters how a substance LOOKS or its STATE, but it is still the same substance. A CHEMICAL change (a reaction) turns it into a genuinely NEW substance.</div>
+    <svg viewBox="0 0 300 150" width="480" height="240" aria-label="A beaker with two liquids mixed together producing gas bubbles and a new substance">
+      <rect x="110" y="40" width="80" height="90" rx="6" fill="none" stroke="#546e7a" stroke-width="3"/>
+      <rect x="113" y="72" width="74" height="55" fill="#90caf9"/>
+      <circle cx="130" cy="60" r="5" fill="#e0f7fa" stroke="#4fc3f7" stroke-width="1.5"/>
+      <circle cx="150" cy="46" r="4" fill="#e0f7fa" stroke="#4fc3f7" stroke-width="1.5"/>
+      <circle cx="170" cy="56" r="5" fill="#e0f7fa" stroke="#4fc3f7" stroke-width="1.5"/>
+      <text x="150" y="18" font-size="10" text-anchor="middle" fill="#0d47a1" font-weight="bold">gas bubbles out</text>
+      <text x="150" y="145" font-size="9" text-anchor="middle" fill="#37474f">new substance made</text>
+    </svg>
+    <div class="revcompare">
+      <div class="phys"><b>PHYSICAL change</b><br>melting ice, tearing paper, cutting wood, dissolving sugar<br><small>same substance, different look/state</small></div>
+      <div class="chem"><b>CHEMICAL change (reaction)</b><br>burning wood, rusting iron, baking a cake, mixing vinegar + baking soda<br><small>brand new substance(s) form</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> if you melt an ice cube, it's still water — you can freeze it back. If you burn a piece of paper, the ash and smoke are completely different substances from paper, and you can never turn ash back into paper. That's the real test: has a genuinely NEW substance been created?</div>
+  </section>
+
+  <!-- SCREEN 5: SIGNS OF A CHEMICAL REACTION -->
+  <section class="screen" data-s="5">
+    <h2>The Clues: Signs of a Chemical Reaction 🫧</h2>
+    <div class="rulebar">You usually can't see new substances forming directly, but these FOUR clues tell you a chemical reaction is probably happening.</div>
+    <div class="signs">
+      <div class="mapcell"><div class="ico">🫧</div><div class="t">Gas / Bubbles</div><div class="j">a gas is being given off</div></div>
+      <div class="mapcell"><div class="ico">🎨</div><div class="t">Colour Change</div><div class="j">the substance looks different</div></div>
+      <div class="mapcell"><div class="ico">🌡️</div><div class="t">Temperature Change</div><div class="j">it gets hotter or colder</div></div>
+      <div class="mapcell"><div class="ico">👃</div><div class="t">New Smell</div><div class="j">a different smell appears</div></div>
+    </div>
+    <div class="job"><b>Key idea:</b> no single clue proves a reaction on its own (ice also gets cold when it melts, and that's just physical!), but they're useful warning signs. The real proof is always: did a genuinely new substance form? Vinegar and baking soda fizzing (gas + a new liquid forming) is a chemical reaction; an ice cube "fizzing" as it melts in soda is not — it's just releasing trapped gas physically.</div>
+  </section>
+
+  <!-- SCREEN 6: IS THIS A CHEMICAL REACTION? (decision tree) -->
+  <section class="screen" data-s="6">
+    <h2>Is This a Chemical Reaction? 🔍</h2>
+    <div class="rulebar">Use this checklist to decide whether something you observe is a chemical reaction.</div>
+    <div class="dtree">
+      <div class="dbox dq">Did a genuinely NEW substance form, with different properties from what you started with?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">This IS a chemical reaction<br><small>e.g. rusting, burning, baking soda + vinegar</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — still the same substance</div>
+          <div class="dbox no">This is just a PHYSICAL change<br><small>e.g. melting, freezing, dissolving, tearing, cutting</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> an iron nail left in damp air slowly turns to rust — a completely different substance from iron, so that's a chemical reaction. That same nail bent into a new shape is still iron, just a different shape — a physical change. Same starting material, two very different kinds of change.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What actually happens during a chemical reaction?</p>
+      <button class="opt">The substance just changes shape or size</button>
+      <button class="opt">One or more brand new substances form, with different properties from the starting materials</button>
+      <button class="opt">Nothing changes — it only looks different</button>
+      <button class="opt">The substance always turns into a gas</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — a chemical reaction always produces genuinely new substances with different properties.</div>
+      <div class="fb no">✘ Think about what makes a reaction different from just changing shape. What actually forms?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. Which set of clues suggests a chemical reaction might be happening?</p>
+      <button class="opt">New gas bubbles appearing, a colour change, or heat being given off</button>
+      <button class="opt">The object getting bigger without anything added</button>
+      <button class="opt">The object staying exactly the same forever</button>
+      <button class="opt">The object always turning transparent</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — gas, colour change, and temperature change are classic clues (though not proof by themselves).</div>
+      <div class="fb no">✘ Re-check the four clue cards from the lesson. Which of these actually appear when reactions happen?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. An ice cube melts into a puddle of water. What kind of change is this?</p>
+      <button class="opt">A chemical reaction, because the state changed</button>
+      <button class="opt">A chemical reaction, because it got colder</button>
+      <button class="opt">A physical change — it's still water, just in a different state</button>
+      <button class="opt">Not a change of any kind</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — melting is a physical change. It's still H2O; you could freeze it right back.</div>
+      <div class="fb no">✘ Ask: is it still the very same substance afterwards? What substance is ice, and what substance is the puddle?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A piece of paper is burned, leaving behind ash and smoke. What kind of change is this?</p>
+      <button class="opt">A physical change, since paper just got smaller</button>
+      <button class="opt">A physical change, since you can press the ash back into paper</button>
+      <button class="opt">Neither — burning doesn't count as any kind of change</button>
+      <button class="opt">A chemical change — ash and smoke are new substances, and you can't turn them back into paper</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — burning creates genuinely new substances (ash, smoke, gases) that can never be turned back into paper.</div>
+      <div class="fb no">✘ Ask the key question: can you easily get the original paper back from the ash? What does that tell you?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>5. Sugar is stirred into a cup of water until it disappears. What kind of change is this?</p>
+      <button class="opt">A physical change — the sugar is still sugar, just spread through the water, and could be recovered by evaporating the water</button>
+      <button class="opt">A chemical change, because the sugar completely vanished forever</button>
+      <button class="opt">A chemical change, because the water changed colour</button>
+      <button class="opt">Neither — nothing actually happened to the sugar</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — dissolving is physical. The sugar molecules are still sugar; evaporating the water would leave the sugar behind.</div>
+      <div class="fb no">✘ Has the sugar turned into a genuinely different substance, or is it just spread out through the water?</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: reversible vs irreversible changes, and how to fair-test what makes reactions speed up or slow down.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Reactions_Lesson_ReversibleAndSpeed.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

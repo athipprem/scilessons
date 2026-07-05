@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 9 · Lesson 2 — Reversible Changes &amp; Reaction Speed</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .mixup{background:#fff3e8;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--amber)}
+  .mixup b{color:#7a4a00}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .revcompare{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .revcompare>div{border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .phys{background:#e3f2fd;border:2px solid var(--blue)}
+  .chem{background:#fff3e8;border:2px solid var(--amber)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .steps{border:2px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:#fafdfa}
+  .steps ol{margin:6px 0 0 18px;padding:0;font-size:.88rem}
+  .steps li{margin-bottom:6px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔥 Lesson 2 · Reversible Changes &amp; Reaction Speed</b><span class="pill">Unit 9 · Chemistry</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Some changes are REVERSIBLE (you can undo them); chemical reactions are usually IRREVERSIBLE (you can't easily get the original substances back).</div>
+    <div class="sci">MAP 2 — Scientist's tool: design a FAIR TEST to find out what makes a reaction speed up or slow down.</div>
+    <div class="why">🎯 <b>By the end you can:</b> tell reversible changes apart from irreversible ones, explain what speeds up or slows down a reaction, and design a fair test for it.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Knowing whether a change can be undone matters in real life — you can re-freeze melted ice cream, but you can never un-bake a cake back into flour, eggs, and sugar. Knowing what speeds reactions up (like temperature) explains why food spoils faster in a warm kitchen than in a fridge, and why crushed medicine tablets work faster than whole ones.</div>
+    <div class="card">
+      <b>Real life:</b> chefs use heat to speed up cooking reactions on purpose. Doctors know crushed tablets can act faster than whole ones because more surface is exposed. Engineers coat iron and steel in paint or oil specifically to slow down the (irreversible) rusting reaction.
+    </div>
+  </section>
+
+  <!-- 3: REVERSIBLE VS IRREVERSIBLE -->
+  <section class="screen" data-s="3">
+    <h2>Reversible vs Irreversible Changes 🔄</h2>
+    <div class="rulebar">A REVERSIBLE change can be undone, getting the original substance back. An IRREVERSIBLE change cannot easily be undone.</div>
+    <div class="revcompare">
+      <div class="phys"><b>REVERSIBLE</b><br>melting → freezing, dissolving → evaporating, folding paper<br><small>mostly physical changes</small></div>
+      <div class="chem"><b>IRREVERSIBLE</b><br>burning wood, rusting iron, baking a cake, cooking an egg<br><small>mostly chemical reactions</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> most physical changes are reversible — you can melt ice and freeze it right back into ice. Most chemical reactions are irreversible in everyday life — once an egg is cooked, no amount of cooling turns it back into raw egg, because the reaction created genuinely new substances.</div>
+    <div class="mixup"><b>Watch out:</b> reversible doesn't always mean "easy" — you'd need a special process to reverse some reactions in a lab. For everyday science, though, if you can't undo it with a simple physical step (freezing, evaporating, reshaping), treat it as irreversible.</div>
+  </section>
+
+  <!-- 4: REVERSIBLE OR IRREVERSIBLE? (decision tree) -->
+  <section class="screen" data-s="4">
+    <h2>Reversible or Irreversible? 🔍</h2>
+    <div class="rulebar">Use this checklist to decide whether a change can be undone.</div>
+    <div class="dtree">
+      <div class="dbox dq">Can you get the original substance(s) back using a simple step (freezing, evaporating, reshaping)?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">REVERSIBLE change<br><small>e.g. melted ice, dissolved sugar, bent wire</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO</div>
+          <div class="dbox no">IRREVERSIBLE change<br><small>e.g. burnt toast, rusted nail, baked cake</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> toast browning in a toaster is a chemical reaction between the bread's sugars and heat — you can never turn toast back into plain bread, so it's irreversible. Melted butter on that toast, though, is just a physical change — pop it in the fridge and it turns solid again.</div>
+  </section>
+
+  <!-- 5: WHAT AFFECTS REACTION SPEED -->
+  <section class="screen" data-s="5">
+    <h2>What Makes a Reaction Speed Up or Slow Down? ⚡</h2>
+    <div class="rulebar">Three things generally speed a reaction up: more HEAT (temperature), a bigger SURFACE AREA (crushed/broken up), and a higher CONCENTRATION (amount of reacting substance).</div>
+    <svg viewBox="0 0 300 110" width="480" height="176" aria-label="Bar chart showing warmer water leads to faster gas production, up to a point">
+      <line x1="30" y1="90" x2="270" y2="90" stroke="#546e7a" stroke-width="1.5"/>
+      <line x1="30" y1="90" x2="30" y2="15" stroke="#546e7a" stroke-width="1.5"/>
+      <rect x="55" y="70" width="35" height="20" fill="#90caf9"/>
+      <text x="72" y="103" font-size="8" text-anchor="middle" fill="#546e7a">cold water</text>
+      <rect x="120" y="45" width="35" height="45" fill="#42a5f5"/>
+      <text x="137" y="103" font-size="8" text-anchor="middle" fill="#546e7a">room temp</text>
+      <rect x="185" y="22" width="35" height="68" fill="#1565c0"/>
+      <text x="202" y="103" font-size="8" text-anchor="middle" fill="#546e7a">warm water</text>
+      <text x="15" y="20" font-size="8" fill="#546e7a" text-anchor="middle">more</text>
+      <text x="15" y="85" font-size="8" fill="#546e7a" text-anchor="middle">less</text>
+      <text x="150" y="10" font-size="9" text-anchor="middle" fill="#0d3d66" font-weight="bold">gas made</text>
+    </svg>
+    <div class="job"><b>Key idea:</b> warmer temperatures give particles more energy, so they react faster and produce gas quicker — that's why baking soda fizzes faster in warm vinegar than cold. Crushing a tablet into powder exposes more surface area to react at once, so it dissolves and reacts faster than a whole tablet. Whichever of these you change, the reaction itself is still the same reaction — just faster or slower.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change only ONE thing at a time, and keep everything else exactly the same, so you know what actually caused any difference you see.</div>
+    <div class="steps">
+      <b>Worked example — testing whether TEMPERATURE affects reaction speed:</b>
+      <ol>
+        <li>Take two identical cups, each with the same amount of vinegar.</li>
+        <li>Give both the SAME amount of baking soda, added at the SAME time.</li>
+        <li>Change only ONE thing: warm the vinegar in Cup A first; keep Cup B's vinegar cold.</li>
+        <li>Time how long the fizzing lasts (or how much gas is made) in each cup.</li>
+        <li>Because temperature was the ONLY thing different, any difference in fizzing speed can be fairly blamed on the temperature — not on the amount of vinegar or baking soda, since those were kept identical.</li>
+      </ol>
+    </div>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGED</b><br>the temperature of the vinegar<br><small>= the one variable being tested</small></div>
+      <div class="me"><b>MEASURED</b><br>fizzing time / gas produced<br><small>= the result we're comparing</small></div>
+      <div class="sa"><b>KEPT SAME</b><br>amount of vinegar, amount of baking soda, timing<br><small>= everything else, so the test is fair</small></div>
+    </div>
+    <div class="card"><b>Spot the flawed claim:</b> a student says "Cup A fizzed for longer AND I used a bigger spoon of baking soda in Cup A too, so temperature must be what made the difference." Is this a fair test? (No — TWO things changed at once, the temperature and the amount of baking soda, so you can't tell which one actually caused the longer fizzing.)</div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which of these changes is REVERSIBLE?</p>
+      <button class="opt">A nail rusting in damp air</button>
+      <button class="opt">Water freezing into ice, which can be melted back into water</button>
+      <button class="opt">A candle burning down</button>
+      <button class="opt">Bread baking in an oven</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — freezing/melting is a physical change you can go back and forth on as many times as you like.</div>
+      <div class="fb no">✘ Ask: can this change be undone with a simple step like freezing or evaporating?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Which of these changes is IRREVERSIBLE?</p>
+      <button class="opt">Dissolving salt in water</button>
+      <button class="opt">Bending a wire into a new shape</button>
+      <button class="opt">Toast browning in a toaster</button>
+      <button class="opt">Melting chocolate that can be cooled solid again</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — toasting is a chemical reaction; you can never turn toast back into plain bread.</div>
+      <div class="fb no">✘ Which of these creates a genuinely new substance that can't simply be undone?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Baking soda and vinegar fizz much faster when the vinegar is warm compared to when it's cold. Why?</p>
+      <button class="opt">Higher temperature gives the particles more energy, so they react faster</button>
+      <button class="opt">Warm vinegar isn't a real chemical anymore</button>
+      <button class="opt">Cold always makes reactions faster, not slower</button>
+      <button class="opt">Temperature has no effect on reaction speed at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — more heat means more particle energy, which speeds up the reaction.</div>
+      <div class="fb no">✘ Think about what heat energy does to how fast particles move and react.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A crushed antacid tablet fizzes faster in water than a whole tablet of the exact same size and type. Why?</p>
+      <button class="opt">Crushed tablets are a different chemical entirely</button>
+      <button class="opt">Whole tablets always react faster than crushed ones</button>
+      <button class="opt">Crushing removes the need for water completely</button>
+      <button class="opt">Crushing exposes more surface area, so more of the tablet can react with the water at once</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — more exposed surface area means more particles can react at the same time.</div>
+      <div class="fb no">✘ Think about how much of the tablet is actually touching the water at once, whole versus crushed.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. To fairly test whether TEMPERATURE affects how fast vinegar and baking soda react, which setup is BEST?</p>
+      <button class="opt">Warm vinegar with extra baking soda vs cold vinegar with less baking soda</button>
+      <button class="opt">Same amount of vinegar and baking soda in both cups, only the vinegar's temperature is different</button>
+      <button class="opt">Different amounts of vinegar in each cup, same temperature</button>
+      <button class="opt">Testing only one cup, with no comparison at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — only temperature changes, everything else stays identical, so any difference can be fairly blamed on temperature.</div>
+      <div class="fb no">✘ A fair test changes ONLY the one thing you're testing. Which option keeps everything else the same except temperature?</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 9! You know how to spot a chemical reaction, tell reversible from irreversible changes, and what affects how fast a reaction happens. Ready for the Unit 9 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 9 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Reactions_Lesson_WhatIsAChemicalReaction.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_09_Test_Reactions.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>
