@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 · Lesson 2 — Gas Exchange &amp; What Plants Need</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .mixup{background:#fff3e8;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--amber)}
+  .mixup b{color:#7a4a00}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .steps{border:2px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:#fafdfa}
+  .steps ol{margin:6px 0 0 18px;padding:0;font-size:.88rem}
+  .steps li{margin-bottom:6px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🍃 Lesson 2 · Gas Exchange &amp; What Plants Need</b><span class="pill">Unit 8 · Biology</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Leaves have tiny holes called STOMATA that let gases move in and out — this solves the "leaf bubbles" mystery.</div>
+    <div class="sci">MAP 2 — Scientist's tool: design a FAIR TEST to find out what makes photosynthesis speed up or slow down.</div>
+    <div class="why">🎯 <b>By the end you can:</b> explain what stomata do and why bubbles from a leaf are NOT food, tell photosynthesis apart from gas exchange, name what affects how much food a plant makes, and design a fair test for it.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">This is one of the most common science mix-ups there is: seeing gas bubbles come off a leaf and assuming that's the plant's "food" leaking out. Understanding what's REALLY happening — gas moving through tiny holes — is exactly the kind of "explain what you see" question ASMOPSS loves to ask.</div>
+    <div class="card">
+      <b>Real life:</b> gardeners watch for wilting leaves as a sign something's wrong with gas or water exchange. Scientists studying climate change measure how much carbon dioxide forests take in and how much oxygen they release — all through these same tiny leaf holes.
+    </div>
+  </section>
+
+  <!-- 3: STOMATA & THE LEAF-BUBBLES MYSTERY -->
+  <section class="screen" data-s="3">
+    <h2>Stomata: The Leaf-Bubbles Mystery Solved 🔍</h2>
+    <div class="rulebar">Leaves are covered in thousands of tiny holes called STOMATA. Gases (like carbon dioxide, oxygen, and water vapour) move in and out of the leaf through these holes.</div>
+    <svg viewBox="0 0 300 110" width="480" height="176" aria-label="Close-up of a leaf surface showing tiny stomata pores with gas bubbles escaping outward">
+      <rect x="20" y="30" width="260" height="50" rx="10" fill="#a5d6a7"/>
+      <ellipse cx="90" cy="55" rx="7" ry="4" fill="#2e7d32"/>
+      <ellipse cx="150" cy="55" rx="7" ry="4" fill="#2e7d32"/>
+      <ellipse cx="210" cy="55" rx="7" ry="4" fill="#2e7d32"/>
+      <text x="150" y="95" font-size="9" text-anchor="middle" fill="#1b5e20" font-weight="bold">stomata (holes)</text>
+      <circle cx="90" cy="30" r="5" fill="#B3E5FC"/>
+      <circle cx="150" cy="25" r="6" fill="#B3E5FC"/>
+      <circle cx="210" cy="30" r="5" fill="#B3E5FC"/>
+      <text x="150" y="10" font-size="9" text-anchor="middle" fill="#0d3d66">gas = bubbles</text>
+    </svg>
+    <div class="job"><b>Key idea:</b> when a leaf is put into warm water, the warmth pushes trapped gas out through the stomata — you see this as tiny bubbles rising. That gas is mostly OXYGEN (released by photosynthesis) plus ordinary air that was trapped in the leaf's internal air spaces. The bubbles are ESCAPING GAS, not food.</div>
+    <div class="mixup"><b>Common mix-up (fixes Unit 1's leaf-bubbles question):</b> some people think those bubbles ARE the plant's food leaking out, since photosynthesis makes "food." But the glucose (food) photosynthesis makes is a solid sugar that STAYS INSIDE the plant's cells — it doesn't turn into bubbles or leak out into water. The bubbles you see are gas escaping through stomata, a completely separate thing from the food itself.</div>
+  </section>
+
+  <!-- 4: PHOTOSYNTHESIS VS GAS EXCHANGE (decision tree) -->
+  <section class="screen" data-s="4">
+    <h2>Photosynthesis or Just Gas Exchange? 🌗</h2>
+    <div class="rulebar">Not everything happening in a leaf is photosynthesis — gas exchange through stomata happens ALL the time, day and night.</div>
+    <div class="dtree">
+      <div class="dbox dq">Does this process need SUNLIGHT energy to happen?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">This is PHOTOSYNTHESIS<br><small>making food — only happens in daylight</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO</div>
+          <div class="dbox no">This is GAS EXCHANGE (through stomata)<br><small>gases simply moving in/out — happens day AND night</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> a leaf can release gas bubbles through its stomata at any time, but it can only PHOTOSYNTHESISE (make food) when there's enough sunlight. Seeing bubbles doesn't automatically mean photosynthesis is happening right then — you'd need to also check whether there's light.</div>
+  </section>
+
+  <!-- 5: WHAT AFFECTS PHOTOSYNTHESIS -->
+  <section class="screen" data-s="5">
+    <h2>What Makes Photosynthesis Speed Up or Slow Down? ⚡</h2>
+    <div class="rulebar">Three things affect HOW MUCH food a plant makes: the amount of LIGHT, WATER, and CARBON DIOXIDE available.</div>
+    <svg viewBox="0 0 300 110" width="480" height="176" aria-label="Bar chart showing more light leads to more food made, up to a point">
+      <line x1="30" y1="90" x2="270" y2="90" stroke="#546e7a" stroke-width="1.5"/>
+      <line x1="30" y1="90" x2="30" y2="15" stroke="#546e7a" stroke-width="1.5"/>
+      <rect x="55" y="70" width="35" height="20" fill="#90caf9"/>
+      <text x="72" y="103" font-size="8" text-anchor="middle" fill="#546e7a">dim light</text>
+      <rect x="120" y="45" width="35" height="45" fill="#42a5f5"/>
+      <text x="137" y="103" font-size="8" text-anchor="middle" fill="#546e7a">medium light</text>
+      <rect x="185" y="22" width="35" height="68" fill="#1565c0"/>
+      <text x="202" y="103" font-size="8" text-anchor="middle" fill="#546e7a">bright light</text>
+      <text x="15" y="20" font-size="8" fill="#546e7a" text-anchor="middle">more</text>
+      <text x="15" y="85" font-size="8" fill="#546e7a" text-anchor="middle">less</text>
+      <text x="150" y="10" font-size="9" text-anchor="middle" fill="#0d3d66" font-weight="bold">food made</text>
+    </svg>
+    <div class="job"><b>Key idea:</b> more light generally means faster photosynthesis (more food made), as long as the plant also has enough water and carbon dioxide. If any ONE of the three ingredients runs low — even if the others are plentiful — photosynthesis slows down. Scientists call this a "limiting factor": whichever ingredient is scarcest limits the whole process.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change only ONE thing at a time, and keep everything else exactly the same, so you know what actually caused any difference you see.</div>
+    <div class="steps">
+      <b>Worked example — testing whether LIGHT affects photosynthesis:</b>
+      <ol>
+        <li>Take two identical plants of the same type and size.</li>
+        <li>Give both the SAME amount of water, SAME soil, and SAME temperature.</li>
+        <li>Change only ONE thing: put Plant A in bright light and Plant B in dim light.</li>
+        <li>After a week, compare how much new growth or how many bubbles each plant produces.</li>
+        <li>Because light was the ONLY thing different, any difference in growth can be fairly blamed on the light — not on water, soil, or temperature, since those were kept identical.</li>
+      </ol>
+    </div>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGED</b><br>the light level<br><small>= the one variable being tested</small></div>
+      <div class="me"><b>MEASURED</b><br>growth / bubbles produced<br><small>= the result we're comparing</small></div>
+      <div class="sa"><b>KEPT SAME</b><br>water, soil, temperature, plant type<br><small>= everything else, so the test is fair</small></div>
+    </div>
+    <div class="card"><b>Spot the flawed claim:</b> a student says "The bubbles coming off my leaf in water are pure food that leaked out, so I can measure how much food the plant made by counting the bubbles." Is this correct? (No — the bubbles are escaping GAS, mostly oxygen and trapped air, not food. Food stays inside the plant as glucose. Counting bubbles tells you about gas exchange, not directly about how much food was made.)</div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. A leaf is placed in warm water and tiny bubbles rise from it. What are the bubbles MOSTLY made of?</p>
+      <button class="opt">Solid food (glucose) leaking out</button>
+      <button class="opt">Pure water vapour only</button>
+      <button class="opt">Gas (mostly oxygen and trapped air) escaping through the stomata</button>
+      <button class="opt">Chlorophyll dissolving into the water</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — the bubbles are gas escaping through the leaf's tiny stomata, not food.</div>
+      <div class="fb no">✘ Food (glucose) stays inside the plant's cells — it doesn't bubble out. What escapes through stomata instead?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. Which of these can happen at NIGHT, with no sunlight at all?</p>
+      <button class="opt">Gas exchange through stomata</button>
+      <button class="opt">Photosynthesis (making new food)</button>
+      <button class="opt">Both happen only in daylight</button>
+      <button class="opt">Neither can ever happen in a plant</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — gas exchange through stomata isn't tied to sunlight, so it continues at night. Photosynthesis needs light and stops without it.</div>
+      <div class="fb no">✘ Photosynthesis specifically needs sunlight energy. Is there a different process that doesn't need light?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A plant has plenty of light and carbon dioxide, but very little water. What is MOST likely?</p>
+      <button class="opt">Photosynthesis speeds up because light and CO2 are high</button>
+      <button class="opt">Water has no effect on photosynthesis at all</button>
+      <button class="opt">The plant will photosynthesise fastest of all</button>
+      <button class="opt">Photosynthesis will slow down, because water is the scarcest ingredient (the limiting factor)</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — whichever ingredient is scarcest limits the whole process, even if the other two are plentiful.</div>
+      <div class="fb no">✘ Water is one of the three key ingredients. What happens to a recipe when one ingredient runs low, even if the others are plentiful?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>4. To fairly test whether LIGHT affects how fast a plant photosynthesises, which setup is BEST?</p>
+      <button class="opt">Two different plant species, same light, different water amounts</button>
+      <button class="opt">Two identical plants, same water/soil/temperature, but different light levels</button>
+      <button class="opt">One plant tested twice on two different days</button>
+      <button class="opt">Two identical plants, but change light AND water AND soil all together</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — only light is changed, everything else stays identical, so any difference can be fairly blamed on light.</div>
+      <div class="fb no">✘ A fair test changes ONLY the one thing you're testing. Which option keeps everything else the same except light?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>5. What is WRONG with the claim "counting bubbles from a leaf tells you exactly how much food the plant made"?</p>
+      <button class="opt">Bubbles are escaping gas, not food — they show gas exchange, not the amount of food (glucose) made</button>
+      <button class="opt">Nothing is wrong — bubbles are a perfect measure of food made</button>
+      <button class="opt">Leaves never produce any bubbles at all</button>
+      <button class="opt">Bubbles only appear if the plant is dying</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — bubbles measure escaping gas, which is related to but not the same thing as the food (glucose) actually produced.</div>
+      <div class="fb no">✘ Think back to the leaf-bubbles mystery — what are the bubbles actually made of?</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 You finished Unit 8! You know the photosynthesis recipe, where it happens, the leaf-bubbles mystery, and what affects how fast a plant makes food. Ready for the Unit 8 test.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 8 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Photosynthesis_Lesson_WhatIsPhotosynthesis.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_08_Test_Photosynthesis.html';}
+  };
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

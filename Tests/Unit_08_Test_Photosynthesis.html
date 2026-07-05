@@ -1,60 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<!-- ============================================================
-     build_unit_test_TEMPLATE.html  —  MASTER TEMPLATE (Science / Luikishi)
-     ------------------------------------------------------------
-     Reference generator for ASMOPSS-style MCQ unit tests. HTML replaces DOCX
-     from Unit 2 onward (rule set 2 Jul 2026 by Lui — see project-science-luikishi.md).
-
-     To build a new unit: copy this file to Unit_0X_Test_<Topic>.html (in
-     Lessons\Tests\), then change ONLY:
-       1. <title>, the #hdr-title / #hdr-sub text, UNIT_NUM / UNIT_TITLE consts
-       2. The three SECTION band labels (keep the A/B/C colour convention)
-       3. The Q[] array — 20 questions: 4 in Section A (warm-up), 6 in
-          Section B (applying, ★), 10 in Section C (think like a scientist,
-          ★★ applied). Changed from the original 15Q/5-5-5 split starting
-          Unit 8 (5 Jul 2026, Lui's call) — with every baseline content gap
-          now closed, the priority shifted from closing gaps to stress-
-          testing applied reasoning under more volume, even past what's
-          strictly proportionate to the real exam, since it's judged useful
-          prep for Y5 science generally, not just ASMOPSS. The reference
-          Q[] example below still shows the old 15Q (4A/6B/5C after a light
-          relabel) — extend Section C with 5 more ★★ questions following
-          the exact same item shape before using this as a real unit test.
-          Each item: { n, section:'A'|'B'|'C', star:0|1|2, body, options:[4],
-                        ans: 1-based correct option index, why: explanation }
-       4. PASS_BAR if a milestone test uses a different bar (default 16/20,
-          i.e. 80% — same threshold as the old 12/15, just rescaled)
-       5. Lessons feeding a 20Q test (10 of them ★★ applied) should run a
-          bit longer/deeper than earlier units — add more worked applied
-          examples/practice reps so Prem has enough scaffolding to support
-          10 Section C questions confidently, not just 5.
-
-     KEEP these conventions (do not change):
-       - Single page, all 20 questions visible at once (no pagination).
-       - Submit stays disabled until all 20 are answered — this is enforced
-         by code, do not remove the disabled-state check.
-       - On submit: full instant reveal — total score, right/wrong per
-         question, and the "why" explanation shown at the point of mistake
-         (rule set 2 Jul 2026 by Lui: score + wrong-Q + reasons, immediately).
-       - Answers CANNOT be embedded anywhere accessible before submit other
-         than inside this file's own script (same trust model as the old
-         answer-key-on-a-separate-page rule — a curious view-source is the
-         only way to see it early, same risk class as before).
-       - "Save Results" button writes a JSON record for Luikishi to read on
-         the next coaching session. Never skip this — it is the only score
-         record now that there is no handwritten/scanned copy.
-       - Results file naming: U{unit#, 2-digit}_Results_{YYYY-MM-DD}.json
-       - Save location: Lessons\Tests\Results\ (pick this folder the first
-         time the save dialog opens; supporting browsers remember it after).
-       - "Back to Hub" link (#btn-hub, href="../index.html") appears next to
-         Save Results once submitted — do not remove (set 2 Jul 2026 by Lui).
-         Path is one level up because tests live in Lessons\Tests\.
-     ============================================================ -->
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Unit 1 Test — Biology: Plants</title>
+<title>Unit 8 Test — Biology: Photosynthesis</title>
 <link rel="icon" type="image/svg+xml" href="../favicon.svg">
 <style>
   :root{
@@ -140,8 +89,8 @@
 
   <div class="hdr">
     <div>
-      <b id="hdr-title">Unit 1 Test — Biology: Plants</b>
-      <span class="sub" id="hdr-sub">Plant parts • Water transport • Thinking like a scientist</span>
+      <b id="hdr-title">Unit 8 Test — Biology: Photosynthesis</b>
+      <span class="sub" id="hdr-sub">Photosynthesis recipe • Gas exchange • Thinking like a scientist</span>
     </div>
     <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
   </div>
@@ -185,71 +134,82 @@
 
 <script>
 /* ---------- EDIT PER UNIT ---------- */
-const UNIT_NUM   = 1;                         // 2-digit padded for filenames automatically
-const UNIT_TITLE = "Biology: Plants";
-const PASS_BAR   = 16;                        // out of 20 (80%, same threshold as the old 12/15)
+const UNIT_NUM   = 8;
+const UNIT_TITLE = "Biology: Photosynthesis";
+const PASS_BAR   = 16;                        // out of 20
 
 const Q = [
-  // Section A — Plant Parts & Their Jobs (warm-up) — 4 questions
-  { n:1, section:'A', star:0, body:"Which part of a plant holds it firmly in the soil and drinks water?",
-    options:["Leaf","Root","Flower","Stem"], ans:2,
-    why:"Roots anchor the plant and absorb water + minerals through root hairs." },
-  { n:2, section:'A', star:0, body:"What is the MAIN job of a leaf?",
-    options:["To make seeds","To anchor the plant","To make food using sunlight","To absorb water from soil"], ans:3,
-    why:"Leaves are the plant's kitchen — they use sunlight to make food (photosynthesis)." },
-  { n:3, section:'A', star:0, body:"Which part grows into seeds so new plants can form?",
-    options:["Root","Stem","Flower","Leaf"], ans:3,
-    why:"Flowers are pollinated and then grow seeds." },
-  { n:4, section:'A', star:0, body:"The stem of a plant mainly helps to:",
-    options:["make food","hold the plant up and carry water","drink minerals from soil","change colour"], ans:2,
-    why:"The stem supports the plant and carries water up and food around." },
+  // Section A — Photosynthesis Basics (warm-up)
+  { n:1, section:'A', star:0, body:"Photosynthesis mainly happens inside which part of a plant?",
+    options:["Roots","Leaves","Flowers","Stem tips"], ans:2,
+    why:"Leaves (using chlorophyll) are where photosynthesis mainly takes place." },
+  { n:2, section:'A', star:0, body:"What is the name of the green substance in leaves that captures sunlight energy?",
+    options:["Glucose","Stomata","Chlorophyll","Cellulose"], ans:3,
+    why:"Chlorophyll is the green substance that captures light energy for photosynthesis." },
+  { n:3, section:'A', star:0, body:"Which THREE things does a plant need as ingredients for photosynthesis?",
+    options:["Sunlight, water, and carbon dioxide","Soil, ready-made food, and air","Oxygen, sugar, and minerals","Heat, wind, and darkness"], ans:1,
+    why:"Photosynthesis combines sunlight energy with water and carbon dioxide to build food." },
+  { n:4, section:'A', star:0, body:"What is the food substance that photosynthesis produces called?",
+    options:["Chlorophyll","Stomata","Carbon dioxide","Glucose"], ans:4,
+    why:"Photosynthesis produces glucose, a sugar the plant uses or stores as food." },
 
-  // Section B — How Plant Parts Work (★) — 6 questions
-  { n:5, section:'B', star:1, body:"Which of these vegetables do we eat as a LEAF?",
-    options:["Carrot","Cabbage (or lettuce)","Apple","Potato"], ans:2,
-    why:"Cabbage/lettuce are leaves. Carrot = root, potato = underground stem, apple holds seeds." },
-  { n:6, section:'B', star:1, body:"A potato has small 'eyes' (buds) on it. This tells us a potato is actually a:",
-    options:["root","seed","underground stem","fruit"], ans:3,
-    why:"Only stems have buds. Potato 'eyes' are buds, so a potato is an underground stem." },
-  { n:7, section:'B', star:1, body:"Which group are ALL underground stems?",
-    options:["Carrot, radish, sweet potato","Ginger, onion, potato","Lettuce, spinach, cabbage","Apple, tomato, orange"], ans:2,
-    why:"Ginger, onion and potato are underground stems. Carrot/radish/sweet potato are roots." },
-  { n:8, section:'B', star:1, body:"Water absorbed by the roots reaches the leaves through tiny tubes inside the:",
-    options:["flower","stem","petals","seeds"], ans:2,
-    why:"The stem contains tube bundles that carry water upward." },
-  { n:9, section:'B', star:1, body:"Root hairs are useful mainly because they:",
-    options:["make the plant colourful","give more surface to absorb more water","make food","produce seeds"], ans:2,
-    why:"Many tiny root hairs greatly increase the surface area for absorbing water." },
-  { n:10, section:'B', star:1, body:"Which statement about leaves is CORRECT?",
-    options:["Leaves have tiny holes that let air and water vapour pass","Leaves anchor the plant in soil","Leaves store the plant's seeds","Leaves pump water using a heart"], ans:1,
-    why:"Leaves have tiny holes (stomata) for air and water vapour to move in and out." },
+  // Section B — Applying Photosynthesis & Gas Exchange (★)
+  { n:5, section:'B', star:1, body:"A gardener notices her plant's leaves are unusually pale (not very green) and the plant is growing slowly, even though it gets plenty of water. What is the MOST likely explanation?",
+    options:["The plant has too much chlorophyll", "The pale leaves likely have less chlorophyll, so they capture less sunlight energy for photosynthesis", "Water is poisoning the plant", "Pale leaves always mean too much sunlight"], ans:2,
+    why:"Chlorophyll amount affects how much light energy a leaf can capture — pale leaves usually mean less chlorophyll and slower photosynthesis." },
+  { n:6, section:'B', star:1, body:"A leafy plant is sealed inside a completely dark box for one full week, with plenty of water and soil. At the end of the week, tests show it made no new food. Why?",
+    options:["It ran out of water", "It had no sunlight energy available for photosynthesis", "The soil went bad in the dark", "Darkness always kills chlorophyll instantly"], ans:2,
+    why:"Without light, there is no energy source for photosynthesis, so no new food (glucose) can be made — regardless of water or soil." },
+  { n:7, section:'B', star:1, body:"At noon on a sunny day, a leaf placed in a glass of water is producing a steady stream of small bubbles. Which explanation BEST accounts for this?",
+    options:["The bubbles are solid glucose crumbs breaking off the leaf", "The bubbles are gas — including oxygen from active photosynthesis — escaping through the stomata", "The leaf is dissolving into the water", "The bubbles are pure carbon dioxide the leaf is trying to get rid of"], ans:2,
+    why:"In bright light, photosynthesis is active and releasing oxygen, which escapes as bubbles through the stomata along with other trapped gas." },
+  { n:8, section:'B', star:1, body:"A gardener digs up a potato (an underground stem) and asks whether it has been photosynthesising underground. What is TRUE?",
+    options:["Yes, potatoes photosynthesise constantly underground", "No — it has no chlorophyll and receives no sunlight, so it cannot photosynthesise itself", "Yes, but only at night", "It photosynthesises using heat from the soil instead of light"], ans:2,
+    why:"With no chlorophyll and no light reaching it underground, a potato cannot photosynthesise — it stores food made by the plant's green parts instead." },
+  { n:9, section:'B', star:1, body:"Two identical plants get the same water and soil for two weeks. Plant X sits in bright light; Plant Y sits in very dim light. Which plant most likely made MORE food?",
+    options:["Plant Y, because dim light is gentler", "Plant X, because more light generally means faster photosynthesis", "Both made exactly the same amount", "Neither made any food, since both got water"], ans:2,
+    why:"More available light generally speeds up photosynthesis, so Plant X — with brighter light — most likely made more food, assuming water and CO2 weren't limiting." },
+  { n:10, section:'B', star:1, body:"A plant has plenty of sunlight and carbon dioxide, but is given almost no water for several days. What happens to its photosynthesis rate?",
+    options:["It stays exactly the same, since light and CO2 are enough on their own", "It speeds up, because less water means more sunlight reaches the leaf", "It slows down, because water is now the scarcest ingredient (the limiting factor)", "It becomes impossible to predict"], ans:3,
+    why:"Even with plenty of light and CO2, if water becomes scarce it limits the whole process — the scarcest ingredient controls the rate." },
 
-  // Section C — Think Like a Scientist (★★ applied) — 10 questions
-  // NOTE: only 5 shown below (this is legacy 15Q reference content, not yet
-  // extended). A real 20Q unit test must have 10 Section C items — add 5
-  // more ★★ applied questions here, matching this exact item shape, before
-  // using this file as a real test.
-  { n:11, section:'C', star:2, body:"A white flower is placed in red-coloured water. After a few hours the petals turn red. The BEST conclusion is:",
-    options:["The flower made red colour by itself","Water moved up from the container to the petals","Red water is heavier than clear water","The roots ate the colour"], ans:2,
-    why:"The coloured water travelled up the stem to the petals — showing water transport to the flower." },
-  { n:12, section:'C', star:2, body:"Maya puts one celery stick in blue water and an identical stick in plain water. Why did she ALSO use the plain-water stick?",
-    options:["To make the test look nicer","As a control, to compare and be sure the colour came from the dyed water","Because celery always needs two sticks","To give the plant more water"], ans:2,
-    why:"The plain-water stick is the control — it lets her be sure the blue came from the dye, a fair comparison." },
-  { n:13, section:'C', star:2, body:"A leaf is put into warm water and tiny bubbles appear on it. The bubbles are mostly:",
-    options:["food made by the leaf","air escaping from tiny holes and air spaces in the leaf","blue dye","melted leaf"], ans:2,
-    why:"Leaves have tiny holes and internal air spaces; the warmth pushes the air out as bubbles. (Not photosynthesis — that makes food, not bubbles of escaping air.)" },
-  { n:14, section:'C', star:2, body:"To test 'does more sunlight make a plant grow taller?', which is a FAIR test?",
-    options:["Two same plants, same water and pots, but one in bright light and one in dim light","Two different plants in different pots with different water","One plant in light, measured twice","Two plants — one watered, one not watered"], ans:1,
-    why:"A fair test changes ONLY the light and keeps everything else (plant, pot, water) the same." },
-  { n:15, section:'C', star:2, body:"A plant's leaves are removed, but its roots and stem stay in water. Over a few days MUCH LESS water is lost from the container than before. The best reason is:",
-    options:["The roots stopped working","Most water normally escapes through the leaves, which are now gone","The stem drank all the water","Water turned into food"], ans:2,
-    why:"Most water leaves a plant as vapour through the leaves. No leaves → far less water lost." },
+  // Section C — Think Like a Scientist (★★ applied)
+  { n:11, section:'C', star:2, body:"A student claims: 'Counting the bubbles rising from a leaf in water tells you exactly how much food the plant has made.' What is the BEST correction?",
+    options:["The claim is correct exactly as stated", "Bubbles are escaping gas (mostly oxygen and trapped air), not food — they indicate gas exchange, not the precise amount of glucose made", "Leaves never actually produce bubbles", "Bubbles only appear when a plant is dying, so they can't indicate anything about food"], ans:2,
+    why:"Bubbles show gas escaping through stomata, which is related to photosynthesis activity but is not a direct, precise measurement of the glucose (food) produced." },
+  { n:12, section:'C', star:2, body:"A student wants to test whether LIGHT affects photosynthesis rate, so she changes the light level AND swaps to a different type of plant AND waters it more, all at the same time. Why is this NOT a fair test?",
+    options:["Multiple things changed at once, so you can't tell which change (light, plant type, or water) caused any difference observed", "Fair tests must always use different types of plants", "Light never affects photosynthesis, so the test is pointless either way", "Changing three things at once always gives faster, more reliable results"], ans:1,
+    why:"A fair test changes only ONE variable at a time — changing light, plant type, and water together makes it impossible to isolate which factor caused any result." },
+  { n:13, section:'C', star:2, body:"A sealed glass jar with a healthy leafy plant inside sits in bright sunlight all day, then in complete darkness all night. Which statement about gas exchange through the plant's stomata is TRUE?",
+    options:["Gas exchange through stomata only happens during the bright daytime part", "Gas exchange through stomata continues both day and night, though photosynthesis itself only happens in daylight", "The plant stops exchanging any gases at all once it gets dark", "Stomata only open at night, never during the day"], ans:2,
+    why:"Gas exchange through stomata is not tied to light — it continues around the clock, while photosynthesis specifically requires daylight to occur." },
+  { n:14, section:'C', star:2, body:"Two plants have equally excellent water and carbon dioxide supplies, but Plant A gets very little light while Plant B gets abundant light. Which BEST explains the expected difference in food production?",
+    options:["No difference is expected, since water and CO2 are already excellent for both", "Plant A will make more food, since low light forces plants to work harder", "Plant B will likely make more food, because light is now the limiting factor for Plant A", "Light has no effect once water and CO2 are sufficient"], ans:3,
+    why:"Even with excellent water and CO2, low light becomes the limiting factor for Plant A, capping its photosynthesis rate below Plant B's." },
+  { n:15, section:'C', star:2, body:"A commercial greenhouse already gives its plants abundant sunlight and water, yet growers still pump extra carbon dioxide gas into the greenhouse air. What is the BEST reason for this?",
+    options:["Carbon dioxide has nothing to do with photosynthesis", "With light and water already abundant, CO2 may be the limiting factor, so adding more can speed up photosynthesis further", "Extra carbon dioxide replaces the plants' need for sunlight", "Growers only do this to make the air smell different"], ans:2,
+    why:"When light and water are no longer scarce, carbon dioxide can become the limiting factor — adding more of it can push the photosynthesis rate higher still." },
+  { n:16, section:'C', star:2, body:"A student sets up two identical plants to test whether water affects photosynthesis: both get the same bright light and same soil, but Plant A is watered daily and Plant B is watered only once a week. Which is the best description of this setup?",
+    options:["It is unfair, because light was not also changed", "It is a fair test — only water differs, so any result can be reasonably linked to water", "It is unfair, because you should always change every variable to get a clear answer", "It cannot be a fair test unless the plants are different species"], ans:2,
+    why:"Only water was changed while light and soil stayed identical, which is exactly what a fair test requires." },
+  { n:17, section:'C', star:2, body:"A student says: 'Since chlorophyll is green, painting a leaf's surface green with paint should help it photosynthesise better.' What is WRONG with this reasoning?",
+    options:["Nothing is wrong — painting a leaf green would genuinely boost photosynthesis", "Green paint isn't chlorophyll — it can't capture and use light energy the way a living chlorophyll molecule does, and it may even block light from reaching the real chlorophyll underneath", "Photosynthesis has nothing to do with colour at all", "Leaves already are as green as physically possible, so paint would make no difference either way"], ans:2,
+    why:"Colour alone doesn't cause photosynthesis — chlorophyll is a specific living substance that captures and converts light energy; paint cannot do this and may block real light from reaching the leaf." },
+  { n:18, section:'C', star:2, body:"At sunset, gas bubbles from a submerged leaf slow down and eventually stop overnight, then start again the next morning. What does this pattern BEST show?",
+    options:["The leaf is dying overnight and recovering each morning", "Photosynthesis (and the oxygen bubbles it produces) depends on available sunlight, slowing and stopping without it", "Bubbles have nothing to do with light at all", "The water itself changes temperature and causes the bubbles, unrelated to the plant"], ans:2,
+    why:"The bubble pattern tracks sunlight availability because photosynthesis (which produces the oxygen bubbles) needs light energy to run." },
+  { n:19, section:'C', star:2, body:"In a controlled experiment testing light's effect on photosynthesis, one plant is kept under a lamp that is never switched on. What is the PURPOSE of this un-lit plant in the experiment?",
+    options:["It has no purpose and should be removed", "It acts as a control, showing what happens with no added light so the lit plants can be fairly compared against it", "It is there to save electricity", "It represents the fastest possible photosynthesis rate"], ans:2,
+    why:"An un-lit control lets the experimenter compare the lit plants against a true baseline, isolating the effect of the added light." },
+  { n:20, section:'C', star:2, body:"Which statement MOST completely explains why scientists say 'plants make their own food'?",
+    options:["Plants absorb pre-made sugar directly from soil through their roots", "Plants use light energy to combine water and carbon dioxide into glucose inside their cells, rather than consuming food from an outside source", "Plants photosynthesise only when watered heavily, otherwise they eat soil nutrients directly as food", "Plants get their food entirely from the oxygen in the air"], ans:2,
+    why:"Photosynthesis builds glucose from water and carbon dioxide using light energy — the plant constructs its own food rather than consuming ready-made food from outside." },
 ];
 /* ---------- END EDIT PER UNIT ---------- */
 
 const SECTION_LABEL = {
-  A: "SECTION A — Plant Parts &amp; Their Jobs (warm-up)",
-  B: "SECTION B — How Plant Parts Work (&#9733;)",
+  A: "SECTION A — Photosynthesis Basics (warm-up)",
+  B: "SECTION B — Applying Photosynthesis &amp; Gas Exchange (&#9733;)",
   C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
 };
 

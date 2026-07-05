@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 8 · Lesson 1 — What Is Photosynthesis?</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.88rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌿 Lesson 1 · What Is Photosynthesis?</b><span class="pill">Unit 8 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Photosynthesis Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: Plants make their OWN food using sunlight — this is called PHOTOSYNTHESIS, and it's the reason almost all life on Earth has food to eat and oxygen to breathe.</div>
+    <p>Today you'll learn the "recipe" for photosynthesis, where in the plant it happens, and how to tell whether photosynthesis is happening in a given situation.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🌞</div><div class="t">The Recipe</div><div class="j">ingredients &amp; products</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🍃</div><div class="t">Where It Happens</div><div class="j">chlorophyll &amp; leaves</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Spot It</div><div class="j">is photosynthesis happening?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name the ingredients and products of photosynthesis, explain where in a plant it happens and why, and decide whether photosynthesis is happening in a given situation.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNIT 7 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 7 🌍</h2>
+    <div class="recall">🔁 <b>Rotation check:</b> Earth's ROTATION (its daily spin) is what causes day and night — your side of Earth gets sunlight during the day, and is in shadow at night.</div>
+    <p>Keep that connected to today's topic: photosynthesis needs SUNLIGHT, so it happens during the DAY — the same daylight that Earth's rotation gives us. Two different units, one connected idea: no sunlight reaching a plant means no photosynthesis, just like no sunlight reaching your side of Earth means night.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Nearly every bite of food you eat traces back to a plant making food through photosynthesis — even meat comes from animals that ate plants (or ate other animals that did). The oxygen you're breathing right now was very likely released by a plant doing photosynthesis. It's one of the most important processes on the entire planet.</div>
+    <div class="card">
+      <b>Real life:</b> farmers plan crops around sunlight, water, and soil because they're feeding photosynthesis. Greenhouse growers add extra carbon dioxide and light on purpose to make plants grow faster. Understanding the "recipe" for photosynthesis explains why plants wilt without light or water — they can't cook their own food.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: THE RECIPE -->
+  <section class="screen" data-s="4">
+    <h2>The Photosynthesis Recipe 🌞</h2>
+    <div class="rulebar">Plants combine THREE ingredients using energy from sunlight to make food (glucose) — and release oxygen as a bonus product.</div>
+    <svg viewBox="0 0 340 140" width="480" height="198" aria-label="Diagram showing sunlight, water, and carbon dioxide going into a leaf, which produces glucose food and oxygen">
+      <circle cx="40" cy="30" r="16" fill="#FFC107"/>
+      <text x="40" y="34" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="bold">SUN</text>
+      <text x="40" y="58" font-size="9" text-anchor="middle" fill="#8a6a00">sunlight</text>
+      <circle cx="40" cy="80" r="14" fill="#90caf9"/>
+      <text x="40" y="84" font-size="8" text-anchor="middle" fill="#0d3d66" font-weight="bold">H2O</text>
+      <text x="40" y="106" font-size="9" text-anchor="middle" fill="#546e7a">water</text>
+      <circle cx="40" cy="128" r="14" fill="#cfd8dc"/>
+      <text x="40" y="132" font-size="8" text-anchor="middle" fill="#37474f" font-weight="bold">CO2</text>
+      <path d="M62,30 L150,70" stroke="#DAA520" stroke-width="2" marker-end="url(#arrH)"/>
+      <path d="M62,80 L150,72" stroke="#90caf9" stroke-width="2" marker-end="url(#arrH)"/>
+      <path d="M62,128 L150,76" stroke="#90a4ae" stroke-width="2" marker-end="url(#arrH)"/>
+      <rect x="150" y="45" width="70" height="55" rx="12" fill="#a5d6a7"/>
+      <text x="185" y="77" font-size="10" text-anchor="middle" fill="#1b5e20" font-weight="bold">LEAF</text>
+      <path d="M228,60 L280,35" stroke="#43a047" stroke-width="2" marker-end="url(#arrH)"/>
+      <path d="M228,85 L280,108" stroke="#43a047" stroke-width="2" marker-end="url(#arrH)"/>
+      <circle cx="300" cy="28" r="15" fill="#FFD54F"/>
+      <text x="300" y="32" font-size="8" text-anchor="middle" fill="#7a4a00" font-weight="bold">FOOD</text>
+      <text x="300" y="52" font-size="8" text-anchor="middle" fill="#8a6a00">glucose</text>
+      <circle cx="300" cy="108" r="15" fill="#B3E5FC"/>
+      <text x="300" y="112" font-size="8" text-anchor="middle" fill="#0d3d66" font-weight="bold">O2</text>
+      <text x="300" y="132" font-size="8" text-anchor="middle" fill="#546e7a">oxygen</text>
+      <defs><marker id="arrH" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#546e7a"/></marker></defs>
+    </svg>
+    <div class="job"><b>Key idea:</b> sunlight (energy) + water (from roots) + carbon dioxide (from air) &rarr; glucose (food, stored/used by the plant) + oxygen (released into the air). This is why we say plants "make their own food" — they don't eat anything solid, they build food from simple ingredients using light energy.</div>
+  </section>
+
+  <!-- SCREEN 5: WHERE IT HAPPENS -->
+  <section class="screen" data-s="5">
+    <h2>Where It Happens: Chlorophyll &amp; Leaves 🍃</h2>
+    <div class="rulebar">Photosynthesis happens mainly in LEAVES, inside a green substance called CHLOROPHYLL that captures sunlight energy.</div>
+    <svg viewBox="0 0 300 110" width="480" height="176" aria-label="Cross-section of a leaf showing a green chlorophyll layer capturing sunlight near the top surface">
+      <rect x="20" y="20" width="260" height="60" rx="10" fill="#e8f5e9" stroke="#a5d6a7" stroke-width="2"/>
+      <rect x="20" y="20" width="260" height="22" rx="10" fill="#66bb6a"/>
+      <text x="150" y="35" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">CHLOROPHYLL LAYER</text>
+      <path d="M150,5 L150,20" stroke="#FFC107" stroke-width="3" marker-end="url(#arrH2)"/>
+      <text x="150" y="0" font-size="9" text-anchor="middle" fill="#8a6a00" font-weight="bold">sunlight in</text>
+      <text x="150" y="65" font-size="9" text-anchor="middle" fill="#2e7d32">water/food tubes</text>
+      <defs><marker id="arrH2" markerWidth="8" markerHeight="8" refX="6" refY="6" orient="auto"><path d="M0,0 L6,6 L0,12" fill="none" stroke="#FFC107" stroke-width="2"/></marker></defs>
+    </svg>
+    <div class="job"><b>Key idea:</b> chlorophyll is GREEN, which is exactly why most leaves look green — it's the substance doing the light-capturing work. Parts of a plant without chlorophyll (like roots, or a potato's underground stem) cannot do photosynthesis themselves; they rely on food made by the green parts and moved to them through the plant's tubes.</div>
+  </section>
+
+  <!-- SCREEN 6: IS IT PHOTOSYNTHESIS? (decision tree) -->
+  <section class="screen" data-s="6">
+    <h2>Is Photosynthesis Happening Here? 🌳</h2>
+    <div class="rulebar">Use this checklist to decide whether a part of a plant is doing photosynthesis right now.</div>
+    <div class="dtree">
+      <div class="dbox dq">Does this part contain chlorophyll (is it green) AND is it currently getting sunlight?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES to both</div>
+          <div class="dbox yes">Photosynthesis CAN happen here right now<br><small>e.g. a green leaf in daylight</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO to either</div>
+          <div class="dbox no">Photosynthesis is NOT happening here right now<br><small>e.g. a root underground, or a leaf at night, or a leaf kept in the dark</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> a green leaf outside on a sunny afternoon = photosynthesis happening. That SAME leaf at midnight = no photosynthesis (no sunlight), even though it's still green. A potato underground = no photosynthesis ever (no chlorophyll, no light reaches it) — it just stores food made elsewhere in the plant.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. No peeking — try first!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Photosynthesis is BEST described as:</p>
+      <button class="opt">Plants absorbing food from the soil</button>
+      <button class="opt">Plants breathing in oxygen from the air</button>
+      <button class="opt">Plants making their own food using sunlight, water, and carbon dioxide</button>
+      <button class="opt">Plants storing water in their roots</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — photosynthesis is how plants build their own food from sunlight, water, and carbon dioxide.</div>
+      <div class="fb no">✘ Plants don't absorb ready-made food from soil — they build it themselves. What are the three ingredients?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Which gas do plants release as a product of photosynthesis?</p>
+      <button class="opt">Carbon dioxide</button>
+      <button class="opt">Oxygen</button>
+      <button class="opt">Nitrogen</button>
+      <button class="opt">Hydrogen</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — oxygen is released as a product, alongside the glucose (food) the plant makes.</div>
+      <div class="fb no">✘ Carbon dioxide is an INGREDIENT going in, not a product coming out. Which gas comes OUT?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Why do most leaves look green?</p>
+      <button class="opt">Because they contain chlorophyll, which captures sunlight for photosynthesis</button>
+      <button class="opt">Because green is the plant's favourite colour</button>
+      <button class="opt">Because they are full of water</button>
+      <button class="opt">Because they never get sunlight</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — chlorophyll is green, and it's the substance that captures sunlight energy for photosynthesis.</div>
+      <div class="fb no">✘ Think about what substance actually does the light-capturing job inside a leaf.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A potato is an underground stem with NO chlorophyll and NO sunlight reaching it. Which is TRUE?</p>
+      <button class="opt">The potato does photosynthesis constantly underground</button>
+      <button class="opt">The potato makes its own oxygen underground</button>
+      <button class="opt">The potato needs direct sunlight to grow bigger</button>
+      <button class="opt">The potato cannot do photosynthesis itself — it stores food made by the plant's green parts</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — with no chlorophyll and no sunlight, the potato can't photosynthesise; it just stores food sent from elsewhere in the plant.</div>
+      <div class="fb no">✘ Re-check the checklist: does the potato have chlorophyll, or get sunlight, underground?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A leaf is kept in a completely dark cupboard all day. Which is TRUE?</p>
+      <button class="opt">It photosynthesises even faster in the dark</button>
+      <button class="opt">It cannot photosynthesise, because there is no sunlight energy available</button>
+      <button class="opt">It photosynthesises using moonlight instead</button>
+      <button class="opt">Darkness has no effect on photosynthesis at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — no light means no energy source for photosynthesis, even though the leaf still has chlorophyll.</div>
+      <div class="fb no">✘ Photosynthesis needs an energy source. What provides that energy, and is it available in a dark cupboard?</div>
+    </div>
+
+    <div class="card" style="text-align:center;background:#e8f5e9;border-color:var(--green)">
+      🎉 Great work! Next: the leaf-bubbles mystery, gas exchange through stomata, and what makes photosynthesis speed up or slow down.
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Photosynthesis_Lesson_GasExchangeAndFactors.html';}
+  };
+  // practice: no feedback until Check
+  document.querySelectorAll('.q').forEach(q=>{
+    const correct=+q.dataset.correct, opts=[...q.querySelectorAll('.opt')];
+    let chosen=0;
+    opts.forEach((o,n)=>o.onclick=()=>{opts.forEach(x=>x.style.outline='');o.style.outline='3px solid #1565c0';chosen=n+1;});
+    q.querySelector('.chk').onclick=()=>{
+      if(!chosen){return;}
+      opts.forEach((o,n)=>{o.classList.remove('correct','wrong');if(n+1===correct)o.classList.add('correct');if(n+1===chosen&&chosen!==correct)o.classList.add('wrong');});
+      q.querySelector('.fb.ok').classList.toggle('show',chosen===correct);
+      q.querySelector('.fb.no').classList.toggle('show',chosen!==correct);
+    };
+  });
+  render();
+</script>
+</body>
+</html>

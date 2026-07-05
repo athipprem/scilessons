@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '4 Jul 2026',
+  updated:        '5 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,29 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:7, topic:'Earth &amp; Space: Astronomy', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:8, topic:'Biology: Photosynthesis', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:6, score:14, outOf:15, marks:null, marksOutOf:null, pct:93, delta:1, prevScore:13,
-    patternLabel: 'Unit 6 result - Physics: Electricity &amp; Circuits (14/15, 93%)',
-    patternInsight: '<strong>14/15 (93%)</strong> - pass bar is 12/15, bounced back from Unit 5\'s dip. Section A (circuit basics warm-up) = <strong>5/5</strong>. Section B (applying circuits, conductors &amp; energy) = <strong>4/5</strong> (missed Q7: picked two metals - both conductors - when asked for two good electrical INSULATORS, an inversion). Section C (think like a scientist, applied) = <strong>5/5</strong> - a FIFTH straight 100%.',
-    analysisLabel: 'Target: GOLD - next up U7 Earth &amp; Space: Astronomy (built, HTML format)',
-    analysisInsight: 'Six units in, six passes, five of the last six perfect or near-perfect. Applied/experiment reasoning (Section C: 80% U1, 100% U2-U6) is now a rock-solid strength spanning six different content areas. Baseline Q3 (energy form in a circuit) is resolved - only ONE individual question from the entire original diagnostic remains untouched anywhere: Q32 (astronomy). U7 closes it, and directly targets Earth &amp; Space, the only strand still sitting at 50% since nothing has tested it since baseline.',
-    qSummary: '<strong>14 / 15 (93%)</strong> - One miss: Q7 (conductor/insulator inversion - picked two conductors when asked for insulators). Section C (applied reasoning) still 5/5 - a fifth straight 100%.',
-    qBreakdown: [
-      { q:'Q7', topic:'Electrical conductors vs insulators', lvl:'w', pass:false, note:'Chose "copper wire and steel nail" (both conductors) when asked for a pair of good INSULATORS (correct: rubber and dry wood) - an inversion of the property, not a repeat of the U3 heat-conductor/insulator confusion (which he got 100% on).' }
-    ]
+    n:7, score:15, outOf:15, marks:null, marksOutOf:null, pct:100, delta:1, prevScore:14,
+    patternLabel: 'Unit 7 result - Earth &amp; Space: Astronomy (15/15, 100% - PERFECT)',
+    patternInsight: '<strong>15/15 (100%)</strong> - pass bar is 12/15, a PERFECT score on brand-new content. Section A (Earth &amp; Space basics) = <strong>5/5</strong>. Section B (applying rotation, revolution &amp; Moon phases) = <strong>5/5</strong>. Section C (think like a scientist, applied) = <strong>5/5</strong> - a SIXTH straight 100%.',
+    analysisLabel: 'Target: GOLD - next up U8 Biology: Photosynthesis (built, HTML format, new 20Q test format)',
+    analysisInsight: 'Seven units in, seven passes, U7 the best yet. Baseline Q32 (astronomy) is resolved - this was the VERY LAST individual question remaining anywhere on the original diagnostic, meaning every one of the 12 original baseline misses is now individually closed. Earth &amp; Space also jumped from 50% (untested since baseline) straight to a perfect result. With no baseline gaps left, U8 targets a different recurring thread instead: the U1 Q13 leaf-bubbles/gas-exchange mix-up, using the new 20-question test format (4A/6B/10C) to stress-test applied reasoning under more volume.',
+    qSummary: '<strong>15 / 15 (100%)</strong> - No misses at all. Section C (applied reasoning) 5/5 - a sixth straight 100%.',
+    qBreakdown: []
   },
 
   skills: [
     { name: 'Biology',                  c: 90, t: 85, ev:'U4 Microorganisms 15/15 PERFECT - closed G4 Q40; now above target' },
     { name: 'Chemistry / Matter',       c: 87, t: 85, ev:'U5 States/Materials 13/15 (87%) - baseline Q16 classification improving but not fully closed (Q10 miss)' },
     { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) - closed G4 Q18/19/Q3; strongest strand' },
-    { name: 'Earth &amp; Space',            c: 50, t: 85, ev:'G3 Earth/Space 50%; G4 Q32 - U7 (astronomy) built, first real unit test for this strand, awaiting result' },
-    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U6) - six units of evidence, five straight 100%' },
-    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U6 Section C 100% - consistently above target across six content areas' }
+    { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
+    { name: 'Scientific Investigation', c: 91, t: 85, ev:'Section C 80% (U1), 100% (U2-U7) - seven units of evidence, six straight 100%' },
+    { name: 'Applied Reasoning',        c: 91, t: 85, ev:'U1 Section C 80%, U2-U7 Section C 100% - consistently above target across seven content areas' }
   ],
-  radarCurrent:  [90, 87, 91, 50, 90, 90],
+  radarCurrent:  [90, 87, 91, 90, 91, 91],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -46,23 +44,36 @@ var PREM_DATA = {
     { unit:3, topic:'Physics: Magnetism &amp; Heat', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-02' },
     { unit:4, topic:'Biology: Microorganisms', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-03' },
     { unit:5, topic:'Chemistry: States of Matter &amp; Materials', score:13, outOf:15, pct:87, passBar:12, date:'2026-07-04' },
-    { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' }
+    { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' },
+    { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 8, badge: 'linear-gradient(135deg,#00695C,#4DB6AC)',
+      title: 'Biology: Photosynthesis',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: What Is Photosynthesis?', c:'tgreen' },
+        { t:'L2: Gas Exchange &amp; Factors', c:'tblue' },
+        { t:'New format: 20Q', c:'torange' }
+      ],
+      note: 'With every baseline gap now closed after U7, U8 targets a different recurring thread instead: Unit 1\'s Q13 miss (leaf bubbles mistaken for photosynthesis food-making instead of gas exchange). L1: the photosynthesis recipe (sunlight+water+CO2&rarr;glucose+oxygen), chlorophyll, and a decision tree for spotting when photosynthesis is happening. L2: the leaf-bubbles mystery solved (stomata gas exchange vs photosynthesis), a decision tree telling the two apart, factors affecting photosynthesis rate, and a fair-test worked example. First unit tested in the new 20-question format (4A/6B/10C, PASS_BAR 16/20) - more applied-reasoning volume per Lui\'s request.',
+      status: 'pending'
+    },
+    {
       n: 7, badge: 'linear-gradient(135deg,#4527A0,#9575CD)',
       title: 'Earth &amp; Space: Astronomy',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: Rotation &amp; Revolution', c:'tgreen' },
-        { t:'L2: Moon &amp; Solar System', c:'tblue' },
-        { t:'Targets 2025 Q32', c:'torange' }
+        { t:'&#9989; 15/15 PERFECT', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 5/5', c:'tblue' },
+        { t:'No misses', c:'torange' }
       ],
-      note: 'U7 closes the very last individual question left from the original baseline diagnostic (Q32, why different constellations are visible on different nights of the year) and directly targets Earth &amp; Space, the one strand still sitting at 50% since nothing has tested it since baseline. L1: what causes day/night (rotation) vs what makes a year (revolution), and why the night sky gradually changes through the year - plus a Quick Recall recap of the Unit 6 conductor/insulator miss. L2: why the Moon shines (reflected sunlight, not its own), why its shape seems to change (phases), the basic Sun-planets-moons layout of the solar system, and a lamp-and-ball model for reasoning about phases like a scientist. Built in the established single-page HTML test format.',
-      status: 'pending'
+      note: 'Scored 15/15 (100%) - a perfect score, comfortably above the 12/15 pass bar. Sections A+B (rotation/revolution, Moon phases, solar system) 10/10, fully resolving baseline Q32 (different constellations on different nights) - the very last individual question remaining anywhere on the original baseline diagnostic. Section C (think like a scientist) 5/5 - a sixth straight 100%. Earth &amp; Space jumped from 50% (untested since baseline) straight to a perfect result. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 6, badge: 'linear-gradient(135deg,#00838F,#4DD0E1)',
@@ -162,22 +173,28 @@ var PREM_DATA = {
 
   priorityGaps: [
     {
-      label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
-      pill: 'p1', pillText: 'Maintain',
-      score: 'Six results: U1 Section C 4/5 (80%), U2-U6 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across six different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
-      fillClass: 'g2', fillPct: 90
+      label: 'Photosynthesis &amp; gas exchange (Unit 1 Q13 thread) - U8 now',
+      pill: 'p1', pillText: 'U8 now',
+      score: 'Not a baseline-diagnosed gap (every one of those is now closed) but a recurring thread: U1 Q13 (leaf-bubbles mistaken for photosynthesis food-making instead of gas exchange through stomata) echoes baseline Q34\'s underlying confusion. U8 lessons directly solve the "leaf-bubbles mystery" and teach photosynthesis-vs-gas-exchange as a decision tree.',
+      fillClass: 'g2', fillPct: 60
     },
     {
-      label: 'Earth &amp; Space: astronomy - U7 now',
-      pill: 'p1', pillText: 'U7 now',
-      score: 'G4: Q32 (different constellations on different nights) - the very last individual question remaining anywhere on the original baseline diagnostic. Earth &amp; Space is also the one strand still sitting at 50% on the skills radar, unchanged since baseline since nothing has tested it. U7 lessons + HTML test built - rotation vs revolution, why the night sky changes through the year, Moon phases, and basic solar system layout.',
-      fillClass: 'g2', fillPct: 55
+      label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
+      pill: 'p1', pillText: 'Maintain',
+      score: 'Seven results: U1 Section C 4/5 (80%), U2-U7 Section C 5/5 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across seven different content areas. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug, including under the new longer 20Q test format starting U8.',
+      fillClass: 'g2', fillPct: 91
     },
     {
       label: 'Classification (sorting by properties) - improving, one slip remains',
       pill: 'p2', pillText: 'Watch',
       score: 'G4: Q16 (classification chart of objects A-D). U5\'s dedicated two-property classification lesson resolved one of two test questions on this skill (Q14 correct, Q10 missed - opposite corner on both axes). Reads as a slip, not a blind spot, since the other sort was correct.',
       fillClass: 'g2', fillPct: 75
+    },
+    {
+      label: 'Earth &amp; Space: astronomy - CLOSED &#9989;',
+      pill: 'p3', pillText: 'Done',
+      score: 'U7 scored 15/15 (100%), perfect. Baseline Q32 (different constellations on different nights) fully resolved - this was the very last individual question remaining anywhere on the original baseline diagnostic. Every baseline gap identified at diagnostic is now closed.',
+      fillClass: 'g3', fillPct: 95
     },
     {
       label: 'Physics: circuits &amp; energy transfer - CLOSED &#9989;',
@@ -206,7 +223,7 @@ var PREM_DATA = {
     {
       label: 'Biology: Plants - CLOSED &#9989;',
       pill: 'p3', pillText: 'Done',
-      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved except a lingering thread on leaf/stomata gas exchange (Q13/Q34) - watch for it in later rotation.',
+      score: 'U1 scored 14/15 (93%), Sections A+B 10/10. Baseline Plants misses (Q20, 24, 34) resolved. The lingering leaf/stomata gas-exchange thread (Q13/Q34) is now being directly closed by U8\'s photosynthesis lessons - see that entry above.',
       fillClass: 'g3', fillPct: 95
     }
   ]
