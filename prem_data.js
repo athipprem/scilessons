@@ -13,27 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:9, topic:'Chemistry: Reactions', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:10, topic:'Physics: Forces', status:'Lessons ready &middot; Test ready' },
 
   lastUnit: {
-    n:8, score:20, outOf:20, marks:null, marksOutOf:null, pct:100, delta:0, prevScore:15,
-    patternLabel: 'Unit 8 result - Biology: Photosynthesis (20/20, 100% - PERFECT, first 20Q test)',
-    patternInsight: '<strong>20/20 (100%)</strong> - pass bar is 16/20, a PERFECT score on the first test in the new 20-question format. Section A (photosynthesis basics) = <strong>4/4</strong>. Section B (applying the recipe &amp; gas exchange) = <strong>6/6</strong>. Section C (think like a scientist, applied) = <strong>10/10</strong> - a SEVENTH straight 100%, now proven at double the previous question volume.',
-    analysisLabel: 'Target: GOLD - next up U9 Chemistry: Reactions (built, HTML format, 20Q format now permanent)',
-    analysisInsight: 'Eight units in, eight passes, two perfect scores in a row (U7, U8). The U1 Q13 / baseline Q34 leaf-bubbles-vs-photosynthesis thread is now directly closed - the Section C question re-testing that exact scenario was answered correctly. The 20-question format (4A/6B/10C) held up perfectly with no fatigue-driven errors in the backloaded applied section, so this format is now confirmed permanent for every future unit test. U9 picks the Biology&rarr;Chemistry&rarr;Physics rotation back up with Chemistry: Reactions - physical vs chemical change, signs of a reaction, and reversible vs irreversible changes.',
-    qSummary: '<strong>20 / 20 (100%)</strong> - No misses at all. Section C (applied reasoning) 10/10 - a seventh straight 100%, at double the previous question volume.',
+    n:9, score:18, outOf:20, marks:null, marksOutOf:null, pct:90, delta:-10, prevScore:20,
+    patternLabel: 'Unit 9 result - Chemistry: Reactions (18/20, 90% - PASS)',
+    patternInsight: '<strong>18/20 (90%)</strong> - pass bar is 16/20, a comfortable PASS. Section A (reactions basics) = <strong>3/4</strong> (missed the opening question, Q1). Section B (signs of a reaction) = <strong>6/6</strong> - perfect. Section C (think like a scientist, applied) = <strong>9/10</strong> - missed one question on a colour-change-as-proof trap in a paint-mixing framing, though the equivalent reasoning in a dissolving framing (Q17) was answered correctly.',
+    analysisLabel: 'Target: GOLD - next up U10 Physics: Forces (built, HTML format, first unit under the new lesson lock + score-summary rule)',
+    analysisInsight: 'Nine units in, nine passes. U9 ends the seven-straight-100% Section C streak with a 9/10 - not a knowledge gap (the same underlying reasoning was answered correctly in a different framing, Q17), but a framing-sensitivity slip worth a quick callback if paint-mixing or colour-as-evidence comes up again. The Q1 opening-question slip echoes similar early-question misses seen in U1 and U5 - worth watching for a small first-question-nerves pattern. U10 picks up Physics: Forces - contact vs non-contact forces, balanced vs unbalanced forces, gravity, and friction (including the mass-vs-weight distinction from Unit 2). U10 is also the LAST unit test before Milestone Test 1 (after 10 units).',
+    qSummary: '<strong>18 / 20 (90%)</strong> - two misses: Q1 (reaction definition, opening-question slip) and Q11 (colour-change-as-proof trap in a paint-mixing framing).',
     qBreakdown: []
   },
 
   skills: [
     { name: 'Biology',                  c: 92, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT - closed G4 Q40 and the U1 Q13 gas-exchange thread; strongest Biology run yet' },
-    { name: 'Chemistry / Matter',       c: 87, t: 85, ev:'U5 States/Materials 13/15 (87%) - baseline Q16 classification improving but not fully closed (Q10 miss)' },
+    { name: 'Chemistry / Matter',       c: 89, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) - two solid passes; U9&#39;s only misses were an opening-question slip and one framing-sensitivity trap, not a core content gap' },
     { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) - closed G4 Q18/19/Q3; strongest strand' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 92, t: 85, ev:'Section C 80% (U1), 100% (U2-U8) - eight units of evidence, seven straight 100%, now proven at double question volume (U8&#39;s 20Q format)' },
-    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 Section C 80%, U2-U8 Section C 100% - consistently above target across eight content areas, held under the new 20Q format' }
+    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9) - nine units of evidence; U9 broke the seven-straight-100% streak with one framing-sensitivity slip (the equivalent question in a different framing, Q17, was answered correctly)' },
+    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U8 100%, U9 90% - still comfortably above target across nine content areas; U9&#39;s miss reflects framing sensitivity, not a reasoning gap' }
   ],
-  radarCurrent:  [92, 87, 91, 90, 92, 92],
+  radarCurrent:  [92, 89, 91, 90, 90, 90],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -46,23 +46,36 @@ var PREM_DATA = {
     { unit:5, topic:'Chemistry: States of Matter &amp; Materials', score:13, outOf:15, pct:87, passBar:12, date:'2026-07-04' },
     { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' },
     { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' },
-    { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' }
+    { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' },
+    { unit:9, topic:'Chemistry: Reactions', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-05' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 10, badge: 'linear-gradient(135deg,#1565C0,#64B5F6)',
+      title: 'Physics: Forces',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'L1: What Is a Force? Contact vs Non-Contact', c:'tgreen' },
+        { t:'L2: Balanced Forces, Gravity &amp; Friction', c:'tblue' },
+        { t:'Last unit test before Milestone 1', c:'torange' }
+      ],
+      note: 'Picks the Biology&rarr;Chemistry&rarr;Physics rotation back up (U9 was Chemistry). New content: what a force is (a push or pull) and what it can do to motion; contact vs non-contact forces; balanced vs unbalanced forces; gravity and friction, including the mass-vs-weight distinction first introduced in Unit 2. L1: what a force is, contact vs non-contact with a decision tree. L2: balanced vs unbalanced with its own decision tree, gravity &amp; friction, and a fair-test worked example testing which surface has more friction. This is the FIRST unit built under the new lesson practice lock + score summary rule - once Prem clicks Check, his answer locks in, and after all 5 practice questions he gets a running score plus tailored advice. U10 is also the LAST unit test before Milestone Test 1 (after 10 units).',
+      status: 'pending'
+    },
+    {
       n: 9, badge: 'linear-gradient(135deg,#4E342E,#A1887F)',
       title: 'Chemistry: Reactions',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: What Is a Chemical Reaction?', c:'tgreen' },
-        { t:'L2: Reversible &amp; Reaction Speed', c:'tblue' },
-        { t:'20Q format', c:'torange' }
+        { t:'&#9989; 18/20 PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 9/10', c:'tblue' },
+        { t:'Misses Q1, Q11', c:'torange' }
       ],
-      note: 'Picks the Biology&rarr;Chemistry&rarr;Physics rotation back up (U8 was Biology). No baseline gap to chase - U9 is first-time content covering physical vs chemical change, the clue-signs of a reaction (gas, colour, temperature, smell), reversible vs irreversible changes, and what makes a reaction speed up or slow down (temperature, surface area). L1: physical vs chemical change, signs of a reaction, and a decision tree for spotting one. L2: reversible vs irreversible with its own decision tree, factors affecting reaction speed, and a fair-test worked example testing temperature. Continues the now-permanent 20-question format (4A/6B/10C, PASS_BAR 16/20).',
-      status: 'pending'
+      note: 'Scored 18/20 (90%) - comfortably above the 16/20 pass bar. Section A (reactions basics) 3/4 - missed Q1 (an opening-question definition slip). Section B (signs of a reaction) 6/6 - perfect. Section C (think like a scientist) 9/10 - ends a seven-straight-100% streak with one miss, Q11, a colour-change-as-proof trap in a paint-mixing framing; the equivalent reasoning in a dissolving framing (Q17) was answered correctly, so this reads as framing sensitivity rather than a reasoning gap. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 8, badge: 'linear-gradient(135deg,#00695C,#4DB6AC)',
@@ -188,8 +201,8 @@ var PREM_DATA = {
     {
       label: 'Scientific Investigation (fair tests, controls, conclusions) - established strength, keep sharp',
       pill: 'p1', pillText: 'Maintain',
-      score: 'Eight results: U1 Section C 4/5 (80%), U2-U8 Section C 5/5 or 10/10 (100% each) - nailed controls, mass-conservation, fair-test design and multi-step reasoning every time across eight different content areas, including at double the question volume under U8\'s new 20Q format. No longer remediation - the goal now is holding this under real exam pressure on 9 Aug.',
-      fillClass: 'g2', fillPct: 92
+      score: 'Nine results: U1 Section C 4/5 (80%), U2-U8 Section C 5/5 or 10/10 (100% each), U9 Section C 9/10 (90%) - nailed controls, mass-conservation, fair-test design and multi-step reasoning almost every time across nine different content areas. U9\'s one miss was a colour-change-as-proof framing trap, not a reasoning failure - the same logic applied correctly in a different framing (Q17). Goal remains holding this under real exam pressure on 9 Aug.',
+      fillClass: 'g2', fillPct: 90
     },
     {
       label: 'Classification (sorting by properties) - improving, one slip remains',

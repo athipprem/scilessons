@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 10 · Lesson 2 — Balanced &amp; Unbalanced Forces, Gravity &amp; Friction</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .steps{border:2px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:#fafdfa}
+  .steps ol{margin:6px 0 0 18px;padding:0;font-size:.88rem}
+  .steps li{margin-bottom:6px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⚖️ Lesson 2 · Balanced &amp; Unbalanced Forces, Gravity &amp; Friction</b><span class="pill">Unit 10 · Physics</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — Forces can be BALANCED (no change in motion) or UNBALANCED (motion changes) — plus a closer look at gravity and friction.</div>
+    <div class="sci">MAP 2 — Scientist's tool: design a FAIR TEST to find out which surface has more friction.</div>
+    <div class="why">🎯 <b>By the end you can:</b> tell balanced forces apart from unbalanced forces, explain gravity and friction, and design a fair test to compare friction on different surfaces.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Knowing whether forces are balanced or not explains why a parked car stays still, why a book doesn't sink through a table, and why brakes work. Understanding friction explains why some shoes grip better than others, why ice is dangerous to walk on, and why race cars use special tyres.</div>
+    <div class="card">
+      <b>Real life:</b> engineers design tyre treads to increase friction with the road for a better grip, especially in the rain. Furniture makers add rubber pads under chair legs to increase friction so they don't slide. Car designers shape vehicles to reduce air resistance so they use less fuel.
+    </div>
+  </section>
+
+  <!-- 3: BALANCED VS UNBALANCED -->
+  <section class="screen" data-s="3">
+    <h2>Balanced vs Unbalanced Forces ⚖️</h2>
+    <div class="rulebar">When forces on an object are BALANCED, its motion does NOT change. When forces are UNBALANCED, its motion DOES change.</div>
+    <svg viewBox="0 0 300 130" width="480" height="208" aria-label="A book resting on a table, with an upward support force arrow and a downward gravity arrow of equal length, showing balanced forces">
+      <rect x="60" y="70" width="180" height="10" fill="#8d6e63"/>
+      <rect x="70" y="30" width="70" height="40" fill="#90caf9" stroke="#1565c0" stroke-width="2"/>
+      <text x="105" y="54" font-size="9" text-anchor="middle" fill="#0d47a1" font-weight="bold">BOOK</text>
+      <line x1="105" y1="30" x2="105" y2="5" stroke="#e53935" stroke-width="3" marker-end="url(#arrB1)"/>
+      <text x="105" y="0" font-size="8" text-anchor="middle" fill="#b71c1c">gravity pulls down</text>
+      <line x1="180" y1="70" x2="180" y2="95" stroke="#43a047" stroke-width="3" marker-end="url(#arrB2)"/>
+      <text x="180" y="112" font-size="8" text-anchor="middle" fill="#1b5e20">table pushes up</text>
+      <defs>
+        <marker id="arrB1" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L6,3 L0,6 Z" fill="#e53935"/></marker>
+        <marker id="arrB2" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L6,3 L0,6 Z" fill="#43a047"/></marker>
+      </defs>
+    </svg>
+    <div class="job"><b>Key idea:</b> a book resting on a table looks like nothing is happening, but TWO forces are actually acting on it: gravity pulling it down, and the table pushing back up. Because these two forces are exactly equal and opposite, they're BALANCED — the book stays perfectly still. If you then push the book sideways, that adds a new, unbalanced force, and the book starts to move.</div>
+  </section>
+
+  <!-- 4: BALANCED OR UNBALANCED? (decision tree) -->
+  <section class="screen" data-s="4">
+    <h2>Balanced or Unbalanced? 🔍</h2>
+    <div class="rulebar">Use this checklist to decide whether the forces on an object are balanced.</div>
+    <div class="dtree">
+      <div class="dbox dq">Does the object's motion CHANGE (start, stop, speed up, slow down, or change direction)?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">UNBALANCED forces<br><small>e.g. kicking a stationary ball, braking a moving car</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — stays still or steady</div>
+          <div class="dbox no">BALANCED forces<br><small>e.g. a book on a table, a car moving at a steady speed on a flat road</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> a tug-of-war rope that isn't moving looks like "nothing is happening," but both teams ARE pulling hard — the forces are just balanced (equal and opposite), so the rope stays still. The moment one team pulls harder than the other, the forces become unbalanced and the rope starts to move.</div>
+  </section>
+
+  <!-- 5: GRAVITY & FRICTION -->
+  <section class="screen" data-s="5">
+    <h2>Gravity &amp; Friction ⬇️</h2>
+    <div class="rulebar">GRAVITY pulls every object toward the Earth. FRICTION is a force between two touching surfaces that opposes (works against) motion.</div>
+    <svg viewBox="0 0 300 110" width="480" height="176" aria-label="Bar chart showing rougher surfaces create more friction, slowing a toy car down more">
+      <line x1="30" y1="90" x2="270" y2="90" stroke="#546e7a" stroke-width="1.5"/>
+      <line x1="30" y1="90" x2="30" y2="15" stroke="#546e7a" stroke-width="1.5"/>
+      <rect x="55" y="70" width="35" height="20" fill="#90caf9"/>
+      <text x="72" y="103" font-size="8" text-anchor="middle" fill="#546e7a">smooth tile</text>
+      <rect x="120" y="45" width="35" height="45" fill="#42a5f5"/>
+      <text x="137" y="103" font-size="8" text-anchor="middle" fill="#546e7a">carpet</text>
+      <rect x="185" y="22" width="35" height="68" fill="#1565c0"/>
+      <text x="202" y="103" font-size="8" text-anchor="middle" fill="#546e7a">rough gravel</text>
+      <text x="15" y="20" font-size="8" fill="#546e7a" text-anchor="middle">more</text>
+      <text x="15" y="85" font-size="8" fill="#546e7a" text-anchor="middle">less</text>
+      <text x="150" y="10" font-size="9" text-anchor="middle" fill="#0d3d66" font-weight="bold">friction force</text>
+    </svg>
+    <div class="job"><b>Key idea:</b> gravity is why a dropped pencil falls and why we all stay on the ground instead of floating away. On the Moon, gravity is much weaker, so a book WEIGHS less there — but it still has exactly the same MASS (the same amount of matter), a distinction you first met back in Unit 2. Friction is different: rougher surfaces create MORE friction (more force opposing motion), which is why a ball rolls much farther on smooth tile than on rough gravel.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">FAIR TEST RULE: change only ONE thing at a time, and keep everything else exactly the same, so you know what actually caused any difference you see.</div>
+    <div class="steps">
+      <b>Worked example — testing which surface has MORE friction:</b>
+      <ol>
+        <li>Take one toy car and one ramp of a fixed height.</li>
+        <li>Release the car from the SAME point on the ramp every time, with the SAME starting push (or no push at all — just let it roll).</li>
+        <li>Change only ONE thing: the surface the car rolls onto at the bottom (first smooth tile, then carpet, then rough gravel).</li>
+        <li>Measure how far the car travels before stopping on each surface.</li>
+        <li>Because the surface was the ONLY thing different, any difference in how far the car travelled can be fairly blamed on the surface's friction — not on the ramp height or the car's starting push, since those were kept identical.</li>
+      </ol>
+    </div>
+    <div class="fairtest">
+      <div class="ch"><b>CHANGED</b><br>the surface the car rolls onto<br><small>= the one variable being tested</small></div>
+      <div class="me"><b>MEASURED</b><br>distance travelled before stopping<br><small>= the result we're comparing</small></div>
+      <div class="sa"><b>KEPT SAME</b><br>ramp height, starting point, the car itself<br><small>= everything else, so the test is fair</small></div>
+    </div>
+    <div class="card"><b>Spot the flawed claim:</b> a student says "My car travelled the FARTHEST on smooth tile, so tile must have the MOST friction." Is this correct? (No — travelling FARTHER means LESS friction was slowing the car down, not more. The surface with the most friction is the one where the car stops soonest — rough gravel — not the one where it travels farthest.)</div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>. Once you check, that answer is locked in.</div>
+
+    <div class="q" data-correct="2">
+      <p>1. A ball sits still on flat ground. What is TRUE about the forces acting on it?</p>
+      <button class="opt">No forces at all are acting on it</button>
+      <button class="opt">Gravity and the ground's support force are balanced, so it stays still</button>
+      <button class="opt">Only gravity is acting on it, with nothing pushing back</button>
+      <button class="opt">Friction is the only force keeping it in place</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — gravity pulling down and the ground pushing up are equal and opposite, so the ball stays still.</div>
+      <div class="fb no">✘ Think about the book-on-a-table example. What two forces are always present, even when something looks still?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. A skateboard is rolling steadily along flat ground, then someone gives it a push from behind and it speeds up. What just happened to the forces?</p>
+      <button class="opt">The forces were always unbalanced, even before the push</button>
+      <button class="opt">Gravity suddenly got stronger</button>
+      <button class="opt">Friction disappeared completely</button>
+      <button class="opt">The push made the forces unbalanced, causing the skateboard's speed to change</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the extra push unbalanced the forces, which is exactly why the speed changed.</div>
+      <div class="fb no">✘ Recall the checklist: forces are unbalanced whenever motion actually changes. What changed here?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. A ball is rolled with the same push onto smooth tile and, separately, onto rough gravel. Which travels FARTHER before stopping?</p>
+      <button class="opt">The ball on smooth tile, because there's less friction opposing it</button>
+      <button class="opt">The ball on rough gravel, because rough surfaces speed things up</button>
+      <button class="opt">Both travel exactly the same distance</button>
+      <button class="opt">Neither ball moves at all on any surface</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — less friction means less force opposing the motion, so the ball keeps rolling farther.</div>
+      <div class="fb no">✘ Which surface creates MORE friction, and does more friction help or oppose motion?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>4. A book has a mass of 1 kg on Earth. If the same book were taken to the Moon, which is TRUE?</p>
+      <button class="opt">Its mass would become 0 kg</button>
+      <button class="opt">Both its mass and its weight would stay exactly the same</button>
+      <button class="opt">Its mass would stay 1 kg, but it would WEIGH less, because the Moon's gravity is weaker</button>
+      <button class="opt">Its mass would increase, but its weight would stay the same</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — mass (amount of matter) doesn't change, but weight (the force of gravity on it) does, since gravity is weaker on the Moon.</div>
+      <div class="fb no">✘ Remember the Unit 2 distinction: mass is the amount of matter; weight is a FORCE caused by gravity. Which one depends on how strong gravity is?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A student sets up a fair test to compare friction on two surfaces but uses a different ramp height for each surface. What is wrong with this test?</p>
+      <button class="opt">Nothing — ramp height never affects a friction test</button>
+      <button class="opt">Two things changed at once (surface AND ramp height), so you can't tell which one caused any difference in distance</button>
+      <button class="opt">You should always use the exact same surface for a fair test</button>
+      <button class="opt">Changing more things at once always makes a test more accurate</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a fair test changes only ONE variable; changing both surface and ramp height makes the result impossible to interpret fairly.</div>
+      <div class="fb no">✘ A fair test isolates ONE variable. How many things were different between the two setups here?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 10 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Forces_Lesson_WhatIsAForce.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_10_Test_Forces.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

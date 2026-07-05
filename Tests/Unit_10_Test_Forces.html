@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 10 Test — Physics: Forces</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 10 Test — Physics: Forces</b>
+      <span class="sub" id="hdr-sub">Contact vs non-contact • Balanced vs unbalanced • Gravity, friction &amp; thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 10;
+const UNIT_TITLE = "Physics: Forces";
+const PASS_BAR   = 16;                        // out of 20
+
+const Q = [
+  // Section A — Forces Basics (warm-up)
+  { n:1, section:'A', star:0, body:"Which of these is something a force can do to an object?",
+    options:["Change its colour permanently", "Make it start moving, stop, speed up, slow down, or change direction", "Turn it into a completely different substance", "Change how much matter it contains"], ans:2,
+    why:"Forces are pushes or pulls, and they're the only thing that can start, stop, speed up, slow down, or redirect an object's motion." },
+  { n:2, section:'A', star:0, body:"Which of these forces can act on an object even when nothing is touching it?",
+    options:["A hand pushing open a heavy door", "Friction slowing down a sliding crate", "A magnet pulling a steel pin toward it before they touch", "Air resistance pushing against a moving cyclist"], ans:3,
+    why:"A magnet can pull certain metals toward it before they ever touch — that's exactly what makes magnetism a non-contact force." },
+  { n:3, section:'A', star:0, body:"Which of these forces needs the two objects to be physically touching?",
+    options:["Gravity holding a satellite in orbit around Earth", "The pull between two magnets before they even touch", "Friction between a sliding crate and the floor beneath it", "A magnet attracting a paperclip from across a table"], ans:3,
+    why:"Friction only happens between surfaces that are actually pressed together and touching." },
+  { n:4, section:'A', star:0, body:"When the forces on an object are BALANCED, what happens to its motion?",
+    options:["It always speeds up", "It always stops immediately", "Its motion does not change", "It always changes direction"], ans:3,
+    why:"Balanced forces are equal and opposite, so there is no change in motion — the object stays still or keeps moving at a steady speed." },
+
+  // Section B — Applying Forces & Motion (★)
+  { n:5, section:'B', star:1, body:"A framed picture hangs completely still on a wall, held up by a single nail. What is TRUE about the forces acting on it?",
+    options:["There are no forces acting on it whatsoever", "The pull of gravity downward and the nail's support force upward cancel out, keeping the picture perfectly still", "Only the nail's force acts on it, with nothing pulling downward", "Magnetism between the nail and the frame is what holds it in place"], ans:2,
+    why:"Gravity constantly pulls the picture down, but the nail pushes back up with equal force — since they're balanced, the picture doesn't move." },
+  { n:6, section:'B', star:1, body:"A stationary football is kicked and starts rolling across the pitch. What caused this change in motion?",
+    options:["The ball started moving on its own, with no force involved", "An unbalanced force (the kick) acted on the ball", "Gravity alone made the ball start rolling sideways", "The forces stayed perfectly balanced throughout"], ans:2,
+    why:"The kick is an unbalanced force — it's what caused the ball's motion to change from still to moving." },
+  { n:7, section:'B', star:1, body:"An ice rink is far more slippery than a rubber gym floor. What is the BEST explanation?",
+    options:["Ice has more friction than rubber", "There is much less friction between skates and ice than between shoes and rubber", "Gravity is weaker on an ice rink", "Ice is a non-contact surface"], ans:2,
+    why:"Smoother surfaces like ice create much less friction, which is exactly why they feel so slippery." },
+  { n:8, section:'B', star:1, body:"A skydiver opens a parachute and slows down noticeably. Which force is mainly responsible for the slowing?",
+    options:["Gravity increasing suddenly", "Magnetism from the ground", "Air resistance, a contact force between the air and the parachute fabric", "Friction between the skydiver and the clouds"], ans:3,
+    why:"Air resistance is a contact force created by air pushing against the parachute's surface, and it's what slows the fall." },
+  { n:9, section:'B', star:1, body:"Two identical toy cars are pushed with exactly the same force — one rolls onto a smooth wooden floor, the other onto a thick rug. Which car keeps rolling for a LONGER distance?",
+    options:["The car on the rug, since soft surfaces let things glide farther", "The car on the wooden floor, since the surface resists its motion much less", "Both cars travel exactly the same distance no matter what", "Neither car moves once it reaches either surface"], ans:2,
+    why:"A smooth wooden floor creates far less friction than a rug, so the car experiences less resistance and keeps rolling longer." },
+  { n:10, section:'B', star:1, body:"Compared to Earth, why does an object weigh less on the Moon even though it still contains exactly the same amount of matter?",
+    options:["The object's mass actually shrinks once it reaches the Moon", "The Moon's gravity is weaker than Earth's, so it pulls less strongly on that same amount of matter", "Weight has nothing to do with gravity at all", "The object gains extra mass from Moon dust"], ans:2,
+    why:"Mass (the amount of matter) doesn't change with location, but weight depends on how strongly gravity pulls — and the Moon's gravity is weaker than Earth's." },
+
+  // Section C — Think Like a Scientist (★★ applied)
+  { n:11, section:'C', star:2, body:"A student wants to find out which surface has more friction, but pushes the car with much more force on one surface and uses a different-sized car for the other. Why is this NOT a fair test?",
+    options:["Two variables changed together — how hard it was pushed and which car was used — so there's no way to know which one caused any difference seen", "A fair test should always try to test as many surfaces as possible at once", "Friction has no real effect on how far a car rolls, so the test doesn't matter either way", "Testing several changes together always gives the most reliable results"], ans:1,
+    why:"A fair test changes only ONE variable — changing both the push force and the car makes it impossible to isolate which factor caused any result." },
+  { n:12, section:'C', star:2, body:"In a tug-of-war, both teams are pulling as hard as they can, but the rope isn't moving at all. What does this show?",
+    options:["Neither team is actually applying any force", "The forces from both teams are balanced — equal and opposite — so there's no change in motion", "Gravity is holding the rope in place instead of the teams", "The rope has no forces acting on it"], ans:2,
+    why:"Even though both teams are pulling hard, their forces are equal and opposite, so they balance out and the rope stays still." },
+  { n:13, section:'C', star:2, body:"A 2 kg rock is taken from Earth to the Moon. A student claims 'the rock's weight AND mass will both be exactly the same on the Moon.' What is the BEST correction?",
+    options:["The claim is completely correct as stated", "The rock's mass stays 2 kg (same amount of matter), but its weight will be less on the Moon, since the Moon's gravity is weaker", "Both the mass and weight will increase on the Moon", "Weight and mass mean exactly the same thing, so there's nothing to correct"], ans:2,
+    why:"Mass depends only on the amount of matter (unchanged by location); weight depends on the strength of gravity, which is weaker on the Moon." },
+  { n:14, section:'C', star:2, body:"A marble is flicked with the same force across a smooth glass table and, on a separate try, across a thick bath towel. Which will make the marble stop SOONEST, and why?",
+    options:["The glass table, because smooth surfaces create the most friction", "The bath towel, because its rough, thick surface creates much more friction, opposing the marble's motion strongly", "Both stop at exactly the same time no matter the surface", "Surface type never affects how a marble moves"], ans:2,
+    why:"A thick towel's rough texture creates much more friction than smooth glass, which opposes the marble's motion strongly and brings it to a stop sooner." },
+  { n:15, section:'C', star:2, body:"Car tyre manufacturers design different tread patterns for wet-weather tyres versus dry-weather racing tyres. What is the BEST reason for this?",
+    options:["Tread patterns are purely decorative and have no effect on grip", "Different tread patterns change how much friction (grip) the tyre has with the road in different conditions", "Weather has no effect on friction between tyres and the road", "All tyres perform identically regardless of tread pattern or conditions"], ans:2,
+    why:"Tread design changes how much friction (grip) a tyre generates with the road surface, which matters more or less depending on wet or dry conditions." },
+  { n:16, section:'C', star:2, body:"A student sets up two identical ramps and toy cars to test whether SURFACE affects rolling distance: both ramps are the same height and both cars are released the same way, but one rolls onto tile and the other onto carpet. Which is the best description of this setup?",
+    options:["It is unfair, because the ramp height should also have been changed", "It is a fair test — only the surface differs, so any result can be reasonably linked to the surface", "It is unfair, because you should always change every variable to get a clear answer", "It cannot be a fair test unless the cars are different sizes"], ans:2,
+    why:"Only the surface was changed while ramp height and release method stayed identical, which is exactly what a fair test requires." },
+  { n:17, section:'C', star:2, body:"A student says: 'A car parked on a hill with the handbrake on isn't moving, so there must be no forces acting on it at all.' What is WRONG with this reasoning?",
+    options:["Nothing is wrong — a still car truly has no forces acting on it", "Forces (gravity pulling it down the hill, and the brake/friction holding it back) ARE acting on the car — they are simply balanced, which is why it stays still", "Cars on hills are always affected only by non-contact forces", "Balanced forces mean there are no forces at all"], ans:2,
+    why:"An object can have multiple forces acting on it and still not move, as long as those forces are balanced — 'not moving' does not mean 'no forces.'" },
+  { n:18, section:'C', star:2, body:"A skydiver falls and speeds up at first, but after a while falls at a STEADY speed (no longer speeding up), even though gravity is still pulling just as strongly. What BEST explains this?",
+    options:["Gravity has switched off", "Air resistance has increased enough to balance gravity, so the forces are now balanced and speed stays steady", "The skydiver has stopped falling completely", "Friction from the clouds has replaced gravity"], ans:2,
+    why:"As falling speed increases, air resistance increases too, until it becomes equal to gravity — at that point the forces are balanced and speed stops changing." },
+  { n:19, section:'C', star:2, body:"Car and plane designers shape their vehicles to be smooth and streamlined rather than boxy. What is the BEST reason for this?",
+    options:["Streamlined shapes have no effect on how a vehicle moves through air", "A streamlined shape reduces air resistance, allowing the vehicle to move faster or use less energy", "Boxy shapes always create less air resistance than streamlined ones", "Shape only affects how a vehicle looks, never how it moves"], ans:2,
+    why:"A streamlined shape lets air flow past more easily, reducing air resistance (a contact force) so the vehicle needs less force to maintain its speed." },
+  { n:20, section:'C', star:2, body:"Which statement MOST completely explains why an object's motion changes?",
+    options:["An object's motion only changes if you touch it directly", "An object's motion changes whenever the forces acting on it are unbalanced, whether those forces are contact or non-contact", "Motion can change with no force involved at all", "Only non-contact forces can ever change an object's motion"], ans:2,
+    why:"Any unbalanced force — contact or non-contact — causes a change in motion; balanced forces never do, regardless of force type." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Forces Basics (warm-up)",
+  B: "SECTION B — Applying Forces &amp; Motion (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(2,'0');
+  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
