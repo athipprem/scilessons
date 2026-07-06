@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '5 Jul 2026',
+  updated:        '6 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,27 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:10, topic:'Physics: Forces', status:'Lessons ready &middot; Test ready' },
+  currentUnit: { n:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', status:'Test ready &middot; 40 questions, weighted marks, benchmarked vs 72.5/100 baseline' },
 
   lastUnit: {
-    n:9, score:18, outOf:20, marks:null, marksOutOf:null, pct:90, delta:-10, prevScore:20,
-    patternLabel: 'Unit 9 result - Chemistry: Reactions (18/20, 90% - PASS)',
-    patternInsight: '<strong>18/20 (90%)</strong> - pass bar is 16/20, a comfortable PASS. Section A (reactions basics) = <strong>3/4</strong> (missed the opening question, Q1). Section B (signs of a reaction) = <strong>6/6</strong> - perfect. Section C (think like a scientist, applied) = <strong>9/10</strong> - missed one question on a colour-change-as-proof trap in a paint-mixing framing, though the equivalent reasoning in a dissolving framing (Q17) was answered correctly.',
-    analysisLabel: 'Target: GOLD - next up U10 Physics: Forces (built, HTML format, first unit under the new lesson lock + score-summary rule)',
-    analysisInsight: 'Nine units in, nine passes. U9 ends the seven-straight-100% Section C streak with a 9/10 - not a knowledge gap (the same underlying reasoning was answered correctly in a different framing, Q17), but a framing-sensitivity slip worth a quick callback if paint-mixing or colour-as-evidence comes up again. The Q1 opening-question slip echoes similar early-question misses seen in U1 and U5 - worth watching for a small first-question-nerves pattern. U10 picks up Physics: Forces - contact vs non-contact forces, balanced vs unbalanced forces, gravity, and friction (including the mass-vs-weight distinction from Unit 2). U10 is also the LAST unit test before Milestone Test 1 (after 10 units).',
-    qSummary: '<strong>18 / 20 (90%)</strong> - two misses: Q1 (reaction definition, opening-question slip) and Q11 (colour-change-as-proof trap in a paint-mixing framing).',
+    n:10, score:19, outOf:20, marks:null, marksOutOf:null, pct:95, delta:5, prevScore:18,
+    patternLabel: 'Unit 10 result - Physics: Forces (19/20, 95% - PASS)',
+    patternInsight: '<strong>19/20 (95%)</strong> - pass bar is 16/20, a strong PASS, Prem&#39;s best score since U8. Section A (force basics, contact vs non-contact) = <strong>4/4</strong> - perfect. Section B (balanced/unbalanced forces, gravity, friction) = <strong>5/6</strong> - missed Q7, an ice-rink friction inversion (picked the LOWER-friction surface when asked for the HIGHER-friction one) - the same error shape as U6&#39;s Q7 conductor/insulator inversion. Section C (think like a scientist, applied) = <strong>10/10</strong> - perfect.',
+    analysisLabel: 'Target: GOLD - next up MILESTONE TEST 1 (40Q spanning U1-U10, weighted 1.25/2.5/5 marks like the real ASMOPSS paper, benchmarked directly against the 72.5/100 baseline)',
+    analysisInsight: 'Ten units in, ten passes - all 10 unit tests are now complete. U10&#39;s only miss (Q7) is a property-inversion slip - picking the wrong side of a two-way comparison (low-friction vs high-friction) - that echoes U6&#39;s Q7 (conductor/insulator inversion); worth a quick callback if a similar A-vs-B property question comes up again. <strong>Important finding this unit:</strong> Prem noticed Section C&#39;s correct answer was consistently the longest, most detailed option across recent tests - a real, quantitatively-confirmed unintentional hint (16/20, 18/20, 19/20 of U8/U9/U10 questions had the longest option as correct, also clustered at position 2). This means U8-U10&#39;s Section C &quot;100%&quot; streaks should be read with a caveat rather than full face value. Fixed going forward: every test from Milestone Test 1 onward is built and verified under a new ANSWER-BALANCE RULE (balanced option lengths, varied correct-answer position, quantitatively checked before shipping). Milestone Test 1 is now built and verified (40Q: 16A/16B/8C, weighted marks, no reused questions, balanced answers) and ready for Prem to take.',
+    qSummary: '<strong>19 / 20 (95%)</strong> - one miss: Q7 (ice-rink friction inversion - chose the smoother/lower-friction surface when asked which has MORE friction).',
     qBreakdown: []
   },
 
   skills: [
     { name: 'Biology',                  c: 92, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT - closed G4 Q40 and the U1 Q13 gas-exchange thread; strongest Biology run yet' },
     { name: 'Chemistry / Matter',       c: 89, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) - two solid passes; U9&#39;s only misses were an opening-question slip and one framing-sensitivity trap, not a core content gap' },
-    { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) - closed G4 Q18/19/Q3; strongest strand' },
+    { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) - closed G4 Q18/19/Q3; strongest strand. U10&#39;s only miss was a friction-inversion slip, same error shape as U6&#39;s conductor/insulator inversion' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9) - nine units of evidence; U9 broke the seven-straight-100% streak with one framing-sensitivity slip (the equivalent question in a different framing, Q17, was answered correctly)' },
-    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U8 100%, U9 90% - still comfortably above target across nine content areas; U9&#39;s miss reflects framing sensitivity, not a reasoning gap' }
+    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10) - ten units of evidence. Note: U8-U10&#39;s 100% Section C scores carry a caveat - a quantitatively-confirmed answer-length/position hint pattern was found in those three tests (fixed going forward under the new ANSWER-BALANCE RULE, starting with Milestone Test 1), so true mastery should be re-verified once more tests are taken under the corrected, unhinted format' },
+    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U8 100%, U9 90%, U10 100% - comfortably above target across ten content areas, though U8-U10&#39;s perfect scores should be read with the same answer-balance caveat noted above' }
   ],
-  radarCurrent:  [92, 89, 91, 90, 90, 90],
+  radarCurrent:  [92, 89, 92, 90, 90, 90],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -47,23 +47,36 @@ var PREM_DATA = {
     { unit:6, topic:'Physics: Electricity &amp; Circuits', score:14, outOf:15, pct:93, passBar:12, date:'2026-07-04' },
     { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' },
     { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' },
-    { unit:9, topic:'Chemistry: Reactions', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-05' }
+    { unit:9, topic:'Chemistry: Reactions', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-05' },
+    { unit:10, topic:'Physics: Forces', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-06' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
+      n: 'M1', badge: 'linear-gradient(135deg,#DAA520,#8a6a00)',
+      title: 'Milestone Test 1 - All Units (U1-U10)',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'40 Questions', c:'tgreen' },
+        { t:'Weighted marks (100 total)', c:'tblue' },
+        { t:'Benchmarks vs 72.5/100 baseline', c:'torange' }
+      ],
+      note: 'The first milestone test, covering everything from Unit 1 through Unit 10 (Biology, Chemistry, Physics, Earth &amp; Space). 40 questions weighted like a real ASMOPSS paper: Section A 16Q &times; 1.25 marks = 20 marks (basic recall), Section B 16Q &times; 2.5 marks = 40 marks (applying), Section C 8Q &times; 5 marks = 40 marks (think like a scientist, applied). Total 100 marks, pass bar 80/100 (80%), directly comparable to Prem&#39;s original baseline score of 72.5/100. No lessons for this one - per the milestone-test rule, it&#39;s a pure assessment. Built and verified under the new ANSWER-BALANCE RULE established after U10 (no answer-length or position hints) and checked question-by-question against every lesson on file to confirm zero reused questions.',
+      status: 'pending'
+    },
+    {
       n: 10, badge: 'linear-gradient(135deg,#1565C0,#64B5F6)',
       title: 'Physics: Forces',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'L1: What Is a Force? Contact vs Non-Contact', c:'tgreen' },
-        { t:'L2: Balanced Forces, Gravity &amp; Friction', c:'tblue' },
-        { t:'Last unit test before Milestone 1', c:'torange' }
+        { t:'&#9989; 19/20 PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Section A 4/4, Section B 5/6', c:'tgreen' },
+        { t:'Section C 10/10', c:'tblue' },
+        { t:'Misses Q7 (friction inversion)', c:'torange' }
       ],
-      note: 'Picks the Biology&rarr;Chemistry&rarr;Physics rotation back up (U9 was Chemistry). New content: what a force is (a push or pull) and what it can do to motion; contact vs non-contact forces; balanced vs unbalanced forces; gravity and friction, including the mass-vs-weight distinction first introduced in Unit 2. L1: what a force is, contact vs non-contact with a decision tree. L2: balanced vs unbalanced with its own decision tree, gravity &amp; friction, and a fair-test worked example testing which surface has more friction. This is the FIRST unit built under the new lesson practice lock + score summary rule - once Prem clicks Check, his answer locks in, and after all 5 practice questions he gets a running score plus tailored advice. U10 is also the LAST unit test before Milestone Test 1 (after 10 units).',
-      status: 'pending'
+      note: 'Scored 19/20 (95%) - comfortably above the 16/20 pass bar, Prem&#39;s best score since U8. Section A (force basics, contact vs non-contact) 4/4 - perfect. Section B (balanced/unbalanced forces, gravity, friction) 5/6 - missed Q7, an ice-rink friction inversion (chose the smoother/lower-friction surface when asked which has MORE friction) - the same error shape as U6&#39;s Q7 conductor/insulator inversion. Section C (think like a scientist) 10/10 - perfect. This was the FIRST unit built under the new lesson practice lock + score summary rule. <strong>Important:</strong> Prem flagged that Section C&#39;s correct answer was consistently the longest, most detailed option - a real, quantitatively-confirmed hint pattern found across U8-U10 (fixed going forward via the new ANSWER-BALANCE RULE, first applied to Milestone Test 1). U10 was the LAST unit test before Milestone Test 1 - all 10 units are now complete. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 9, badge: 'linear-gradient(135deg,#4E342E,#A1887F)',

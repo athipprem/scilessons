@@ -298,7 +298,8 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   document.getElementById('h-weeks').textContent = weeks;
   document.getElementById('h-days').textContent = days+' days left';
   document.getElementById('h-done').textContent = D.scores.length;
-  document.getElementById('h-unit-sub').innerHTML = 'U'+D.currentUnit.n+' &middot; '+D.currentUnit.status;
+  var curUnitLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n;
+  document.getElementById('h-unit-sub').innerHTML = curUnitLabel+' &middot; '+D.currentUnit.status;
   var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
   var ach = Math.round(sc/st*100);
   document.getElementById('h-skill').textContent = ach+'%';
@@ -470,7 +471,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   var radarBuilt=false;
   function buildRadar(){
     if(radarBuilt) return; radarBuilt=true;
-    var lblEl=document.getElementById('radar-now-lbl'); if(lblEl) lblEl.textContent='Now (U'+D.currentUnit.n+')';
+    var lblEl=document.getElementById('radar-now-lbl'); if(lblEl){ var radarUnitLabel=(typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n; lblEl.textContent='Now ('+radarUnitLabel+')'; }
     var svg=document.getElementById('radarSvg'); var cx=160, cy=140, r=96;
     var labels=['Biology','Chemistry\n/ Matter','Physics','Earth &\nSpace','Scientific\nInvestigation','Applied\nReasoning'];
     var cur=D.radarCurrent, tgt=D.radarTarget, base=D.radarBaseline, n=labels.length;

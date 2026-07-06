@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Milestone_01_Test.html — Milestone Test 1 (Science / Luikishi)
+     ------------------------------------------------------------
+     Built from build_unit_test_TEMPLATE.html, adapted for milestone
+     format (set 6 Jul 2026 by Lui): 40 questions, weighted marks
+     (1.25 / 2.5 / 5) matching the real ASMOPSS G4 baseline paper's
+     scale (100 marks total), so this score is directly comparable
+     to Prem's 72.5/100 baseline. Covers cumulative content from all
+     10 units taught so far (U1-U10): Biology (Plants, Microorganisms,
+     Photosynthesis), Chemistry (Matter, States/Materials, Reactions),
+     Physics (Magnetism/Heat, Circuits, Forces), Earth & Space
+     (Astronomy). No lessons for a milestone test, per project rules.
+
+     Built under the new ANSWER-BALANCE RULE (6 Jul 2026): option
+     lengths are balanced (no conspicuous longest = correct pattern)
+     and correct-answer position is evenly distributed across A/B/C/D
+     (10 of each across the 40 questions) — verified quantitatively
+     before this file was finalized. See project-science-luikishi.md
+     ANSWER-BALANCE RULE for the full verification method.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milestone Test 1 — All Units</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#DAA520; --gold-d:#8a6a00;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Milestone Test 1 — All Units</b>
+      <span class="sub">Biology &bull; Chemistry &bull; Physics &bull; Earth &amp; Space &mdash; cumulative review</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+  <div class="milestone-note">&#127942; This is your FIRST MILESTONE TEST — 40 questions covering everything from Unit 1 through Unit 10, weighted like a real ASMOPSS paper (1.25 / 2.5 / 5 marks) so your score can be compared directly to your baseline result.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MILESTONE CONFIG ---------- */
+const MILESTONE_NUM = 1;
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // matches the real ASMOPSS G4 paper's weighting
+const TOTAL_MARKS = 100;                   // 16*1.25 + 16*2.5 + 8*5 = 20 + 40 + 40 = 100
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold as every unit test
+const BASELINE_MARKS = 72.5;               // Prem's original G4 diagnostic score, for comparison
+
+const Q = [
+  // Section A — Basic Recall (warm-up, 1.25 marks each)
+  { n:1, section:'A', star:0, body:"Which part of a plant grows into seeds after being pollinated?",
+    options:["A root", "A stem", "A flower", "A leaf"], ans:3,
+    why:"Flowers are pollinated and then develop into seeds." },
+  { n:2, section:'A', star:0, body:"Which of these statements about air is TRUE?",
+    options:["Air has mass, even though we can't see it", "Air has no mass at all", "Air is not a form of matter", "Air only has mass when it is cold"], ans:1,
+    why:"All gases, including air, are matter and therefore have mass." },
+  { n:3, section:'A', star:0, body:"Which of these materials is attracted to a magnet?",
+    options:["A plastic ruler", "A wooden pencil", "A rubber paperclip", "An iron nail"], ans:4,
+    why:"Iron is a magnetic material; plastic, wood, and rubber are not." },
+  { n:4, section:'A', star:0, body:"Why do we experience a repeating cycle of day and night?",
+    options:["Because the Sun turns itself on and off each day", "Because Earth continuously spins on its own axis", "Because the Moon blocks sunlight every twelve hours", "Because Earth moves nearer to the Sun each morning"], ans:2,
+    why:"Earth's rotation on its own axis causes the daily cycle of day and night." },
+  { n:5, section:'A', star:0, body:"Bacteria and fungi are both examples of:",
+    options:["Plants", "Microorganisms", "Rocks and minerals", "Man-made machines"], ans:2,
+    why:"Bacteria and fungi are both types of microorganisms — tiny living things." },
+  { n:6, section:'A', star:0, body:"Which change happens when ice is warmed until it turns into liquid water?",
+    options:["Condensing", "Evaporating", "Freezing", "Melting"], ans:4,
+    why:"Melting is the change from solid to liquid caused by warming." },
+  { n:7, section:'A', star:0, body:"In a simple electrical circuit, what does a switch do?",
+    options:["Opens or closes the circuit's current path", "Makes the bulb permanently brighter than normal", "Stores electrical energy inside itself for later", "Changes the colour of the light produced"], ans:1,
+    why:"A switch opens (breaks) or closes (completes) the circuit's current path." },
+  { n:8, section:'A', star:0, body:"What gas do plants take in to help make food during photosynthesis?",
+    options:["Oxygen", "Nitrogen", "Carbon dioxide", "Hydrogen"], ans:3,
+    why:"Plants take in carbon dioxide as one of the raw materials for photosynthesis." },
+  { n:9, section:'A', star:0, body:"A student notices unexpected fizzing and a change in temperature while mixing two substances together. What do these observations most likely indicate?",
+    options:["Nothing important — these are just random events with no cause", "The two substances are definitely still exactly the same as before", "The mixture has gotten colder for no particular reason", "A chemical reaction is probably taking place, forming new substances"], ans:4,
+    why:"Fizzing, gas release, and temperature change are classic signs that a chemical reaction is occurring." },
+  { n:10, section:'A', star:0, body:"A dropped apple falls straight to the ground. Which type of force is pulling it down?",
+    options:["A pushing force coming from the air above it", "Gravity, a non-contact force pulling it downward", "Friction between the apple and the nearby tree", "Magnetism coming from somewhere in the ground below"], ans:2,
+    why:"Gravity acts without the two objects touching, which makes it a non-contact force." },
+  { n:11, section:'A', star:0, body:"What is the Moon's light actually made of?",
+    options:["Light the Moon creates itself", "Light stored up from daytime", "Sunlight reflected off the Moon's surface", "Light coming from distant stars"], ans:3,
+    why:"The Moon has no light of its own — we see sunlight reflecting off its surface." },
+  { n:12, section:'A', star:0, body:"Which plant part carries water from the roots up to the leaves?",
+    options:["The stem", "The flower", "The petal", "The seed"], ans:1,
+    why:"The stem contains tube-like structures that carry water upward from the roots." },
+  { n:13, section:'A', star:0, body:"Mass and volume are:",
+    options:["Two different things — matter amount vs. space taken up", "Exactly the same measurement in every single case", "Always measured using the exact same units", "Properties that only solid objects can ever have"], ans:1,
+    why:"Mass measures the amount of matter something has; volume measures the space it takes up — two different properties." },
+  { n:14, section:'A', star:0, body:"A chef wants a pan handle that stays cool to touch even when the pan itself is very hot. Which property should the handle material have?",
+    options:["Strong electrical conductivity, similar to copper wire", "High density, making the handle feel heavier", "Poor heat conduction, like wood, so it stays cool", "Strong magnetic properties that attract other metals"], ans:3,
+    why:"Materials that conduct heat poorly (insulators like wood or plastic) stay cool, so they make safe handles; metals conduct heat well and would get hot." },
+  { n:15, section:'A', star:0, body:"What do decomposers mainly do in an ecosystem?",
+    options:["Make their own food using sunlight", "Break down dead plants and animals, recycling nutrients", "Hunt other animals for food", "Produce oxygen for the air"], ans:2,
+    why:"Decomposers break down dead material, returning nutrients to the soil and ecosystem." },
+  { n:16, section:'A', star:0, body:"A student says a full Earth orbit around the Sun takes about the same time as one school year. Is this roughly accurate?",
+    options:["No, a full orbit actually only takes about one week total", "No, a full orbit actually takes about ten entire years", "No, orbit time is different depending on which continent you're on", "Yes, one orbit takes roughly a year, much like a school year"], ans:4,
+    why:"One full orbit (revolution) of Earth around the Sun takes about a year." },
+
+  // Section B — Applying What You Know (2.5 marks each)
+  { n:17, section:'B', star:1, body:"A gardener notices a potato has small buds ('eyes') growing on its surface. What does this tell us about what a potato really is?",
+    options:["A type of root, like a carrot", "A seed that hasn't sprouted yet", "An underground stem, since only stems grow buds", "A fruit that grows underground"], ans:3,
+    why:"Only stems grow buds — the potato's 'eyes' show it is really an underground stem." },
+  { n:18, section:'B', star:1, body:"A puddle of water slowly disappears on a warm, sunny day. What is the BEST explanation?",
+    options:["The water froze into invisible ice", "The water changed into a completely different substance", "The water was absorbed directly by sunlight", "The water evaporated into water vapour in the air"], ans:4,
+    why:"Warmth causes liquid water to evaporate into water vapour, which mixes into the air." },
+  { n:19, section:'B', star:1, body:"A torch stops working properly as its battery runs low. What is the BEST explanation for why the bulb no longer lights up well?",
+    options:["The circuit no longer has enough electrical energy flowing through it", "The bulb has turned into a completely different material", "The switch has become permanently broken", "Light bulbs always stop working after one use"], ans:1,
+    why:"A low battery can't supply enough electrical energy to keep the bulb lit properly." },
+  { n:20, section:'B', star:1, body:"A student in Thailand and a student far to the north both look at the night sky on the same date. Why might they see different constellations?",
+    options:["Stars are different colours in different countries", "Different locations on Earth face different parts of space at any given time", "Only one hemisphere of Earth has stars at any time", "Constellations move to a new place in the sky every night"], ans:2,
+    why:"Different locations on Earth face different parts of space at any given time, so different constellations are visible." },
+  { n:21, section:'B', star:1, body:"Bread left in a warm, moist bread box for a week grows mould, while an identical slice kept in the freezer stays mould-free. What is the BEST explanation?",
+    options:["Freezing permanently destroys every single mould spore completely", "Cold slows mould growth, since mould needs warmth to grow", "Bread kept in the freezer is no longer real food", "Mould only ever grows inside bread boxes, never in freezers"], ans:2,
+    why:"Mould needs warmth (along with moisture and food) to grow well — cold slows it down." },
+  { n:22, section:'B', star:1, body:"An antacid tablet dropped into a glass of water fizzes rapidly, releasing a steady stream of gas bubbles. What is the BEST way to describe this?",
+    options:["A chemical reaction — new gas and substances are forming", "A physical change only, since nothing new was made", "Not a real change of any kind", "A reaction only if the water also changes colour"], ans:1,
+    why:"Rapid fizzing with gas release is a strong sign that a chemical reaction — forming new substances — is occurring." },
+  { n:23, section:'B', star:1, body:"You give a toy car one firm push on a flat wooden floor, then let go completely. It rolls a short distance before coming to rest on its own. Which force brought it to rest?",
+    options:["Gravity pulling it sideways along the floor", "Magnetism from metal hidden in the floorboards", "The car simply running out of its own energy supply", "Friction between the car's wheels and the floor"], ans:4,
+    why:"Friction between the wheels and floor is a contact force that opposes and slows motion after the push ends." },
+  { n:24, section:'B', star:1, body:"A potted fern is placed inside a windowless storage room for ten days, with soil kept consistently moist. At the end, no new growth or food production is detected. What is the BEST explanation?",
+    options:["The pot didn't have proper drainage holes", "The room's temperature was slightly too warm", "It had no light energy available for photosynthesis to occur", "Ferns are a type of plant that never needs light at all"], ans:3,
+    why:"Without light, photosynthesis cannot occur, no matter how much water or soil is available." },
+  { n:25, section:'B', star:1, body:"A block of ice is weighed, then left to melt completely into liquid water inside a sealed container, then weighed again. What should the two masses show?",
+    options:["The total mass increases noticeably right after it melts", "The mass becomes zero once the ice is gone", "The mass can no longer be measured once liquid", "The mass stays the same, since it's the same matter"], ans:4,
+    why:"Melting is a physical change — no matter is created or destroyed, so mass stays the same in a sealed container." },
+  { n:26, section:'B', star:1, body:"Two metal rods — one bare, one coated in plastic — both have one end placed in a cup of hot water. Which end will feel warm FIRST at the far end?",
+    options:["Neither end will ever feel warm", "The plastic-coated rod, since plastic holds heat well", "The bare metal rod, since metals conduct heat well", "Both will warm up at exactly the same rate"], ans:3,
+    why:"Metals like copper are good heat conductors; plastic is an insulator and conducts heat poorly." },
+  { n:27, section:'B', star:1, body:"Over about a month, the Moon appears to change shape from a thin crescent to a full circle and back again. What causes this pattern?",
+    options:["The Moon actually grows and shrinks in size every single month", "We see different amounts of the Moon's sunlit half over time", "Clouds on Earth cover different parts of the Moon nightly", "The Moon itself turns a completely different colour weekly"], ans:2,
+    why:"As the Moon orbits Earth, we see varying amounts of its sunlit half, creating the phases we observe." },
+  { n:28, section:'B', star:1, body:"A sealed jar holds a leafy water plant sitting in bright sunlight, and a steady stream of tiny gas bubbles rises continuously from its leaves. What do these bubbles show?",
+    options:["Active photosynthesis is releasing oxygen through the leaf's tiny openings", "The plant is slowly dissolving completely into the surrounding water", "The bubbles are actually solid food that the plant has made", "The water itself is boiling because of the plant's natural warmth"], ans:1,
+    why:"Bubbles rising from a photosynthesising plant are gas — including oxygen — escaping through the leaf's stomata." },
+  { n:29, section:'B', star:1, body:"A material soaks up water easily and feels soft when squeezed. Which two-property group does it belong to?",
+    options:["Absorbent and soft", "Waterproof and hard", "Waterproof and soft", "Absorbent and hard"], ans:1,
+    why:"A material that soaks up water is absorbent, and one that squishes easily is soft — both properties apply here." },
+  { n:30, section:'B', star:1, body:"An electrician needs to choose a safe material to cover the handle of a metal tool. Which property should that material have?",
+    options:["Strong electrical conductivity, so current flows through easily", "Strong magnetism, so it sticks firmly to metal", "High density, so the handle feels heavier", "Strong electrical insulation, blocking current from passing through"], ans:4,
+    why:"An insulating material blocks electric current from passing through, protecting the user from a shock." },
+  { n:31, section:'B', star:1, body:"Is it true that ALL microorganisms are harmful to humans?",
+    options:["Yes, every single microorganism always causes disease in humans", "Yes, but only bacteria are ever harmful, never fungi", "No, many microorganisms are helpful, like decomposers", "No, microorganisms don't actually exist anywhere in nature"], ans:3,
+    why:"Many microorganisms are helpful — decomposers recycle nutrients, and some are even used in making food." },
+  { n:32, section:'B', star:1, body:"Which of these correctly lists the order of the first four planets, starting closest to the Sun?",
+    options:["Sun, Earth, Mercury, Venus", "Mercury, Venus, Earth, Mars", "Earth, Mercury, Mars, Venus", "Mars, Venus, Mercury, Earth"], ans:2,
+    why:"Starting from the Sun, the order of the first four planets is Mercury, Venus, Earth, then Mars." },
+
+  // Section C — Think Like a Scientist (★★ applied, 5 marks each)
+  { n:33, section:'C', star:2, body:"A student wants to test which of two magnets is stronger, but uses a different-sized paperclip for each magnet's test AND holds each magnet a different distance away. Why is this NOT a fair test?",
+    options:["Fair tests must always use the exact same magnet every single time", "Changing more variables together always produces clearer, more reliable results", "Two things changed together, so you can't isolate which one caused the difference", "Magnetism never really affects how paperclips move around at all"], ans:3,
+    why:"A fair test changes only ONE variable — changing both paperclip size and distance makes it impossible to isolate which factor caused any result." },
+  { n:34, section:'C', star:2, body:"A student mixes a spoonful of red juice concentrate into a glass of clear water, and the whole glass turns pink. The student claims: 'This must be a chemical reaction, since a brand new colour appeared.' What is the BEST correction?",
+    options:["The claim is completely correct, since colour changing always proves a new substance formed", "This is just the juice spreading through the water — no new substance has formed", "Colour can never change unless a true chemical reaction is taking place", "Juice and water are physically incapable of ever being mixed together"], ans:2,
+    why:"Simply spreading a coloured substance through water is a physical mixture — no new substance has formed, so it isn't a chemical reaction." },
+  { n:35, section:'C', star:2, body:"Two identical rocks are compared: one stays on Earth, the other is carried to the Moon. Which statement is TRUE about them afterward?",
+    options:["Mass stays the same in both, but the Moon rock weighs less since gravity there is weaker", "The Moon rock's mass actually shrinks once it leaves Earth's atmosphere and reaches the Moon", "Weight stays exactly identical everywhere, since gravity never changes from place to place", "The Earth rock slowly gains extra mass over time simply by sitting still on the ground"], ans:1,
+    why:"Mass (amount of matter) doesn't change with location, but weight depends on gravity's strength, which is weaker on the Moon." },
+  { n:36, section:'C', star:2, body:"A student says: 'The Sun moves across the sky during the day, so the Sun must be circling the Earth.' What is the BEST correction?",
+    options:["The claim is completely correct exactly as it was stated", "The Sun does truly circle the Earth once every 24 hours", "Nothing at all about the sky can ever be explained by movement", "It only looks that way, since the Earth itself is rotating"], ans:4,
+    why:"The Sun's apparent daily movement across the sky is actually caused by Earth's own rotation, not the Sun circling Earth." },
+  { n:37, section:'C', star:2, body:"A baked cake cannot be turned back into its original flour, eggs, and sugar, but melted ice can easily be turned back into ice by freezing it again. What BEST explains this difference?",
+    options:["Cakes are baked at a much lower temperature than ice requires to freeze solid", "Baking causes a chemical reaction forming new substances that simple steps can't undo", "Ice is a far rarer and more valuable substance than basic cake ingredients", "There is truly no real difference between these two kinds of processes at all"], ans:2,
+    why:"Baking is a chemical reaction that creates genuinely new substances; melting/freezing is a physical change that's easily reversed." },
+  { n:38, section:'C', star:2, body:"A student tests whether the AMOUNT OF WATER affects how tall bean plants grow: two identical plants get the same soil, pot, and sunlight, but Plant A is watered daily while Plant B is watered once a week. Which best describes this setup?",
+    options:["It is unfair, because the amount of sunlight should also have been changed", "It cannot be counted as a fair test unless the two plants are entirely different species", "It is a fair test, since only the watering amount differs between the two plants", "It is unfair, because a true fair test must always change every variable at once"], ans:3,
+    why:"Only the watering amount was changed while soil, pot, and sunlight stayed identical — exactly what a fair test requires." },
+  { n:39, section:'C', star:2, body:"A student tests whether warmth affects how fast mould grows on bread using three identical bagged slices: one in a warm cupboard, one in the fridge, and one left at room temperature with nothing else changed. What is the PURPOSE of the room-temperature slice?",
+    options:["It serves no real purpose here and should simply be removed", "It shows the single fastest mould growth rate possible", "It exists only so the student has extra slices to look at", "It acts as a baseline control for comparing the warm and cold results fairly"], ans:4,
+    why:"An untouched control slice lets the experimenter compare the warm and cold results against a true, unaffected baseline." },
+  { n:40, section:'C', star:2, body:"Across everything you've learned this year — plants, reactions, forces, the Moon, and more — which idea connects them ALL?",
+    options:["Every change has a specific, identifiable cause that can be investigated and explained", "Only living things such as plants and animals are capable of changing over time", "Science is fundamentally unable to explain why any change happens", "All changes in nature happen randomly, without any real cause behind them"], ans:1,
+    why:"Every kind of change — in living things, substances, or motion — has a specific, identifiable cause that can be investigated and explained." },
+];
+/* ---------- END MILESTONE CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Basic Recall (warm-up, 1.25 marks each)",
+  B: "SECTION B — Applying What You Know (&#9733;, 2.5 marks each)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied, 5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Milestone Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+    }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your original baseline (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    milestone: MILESTONE_NUM,
+    title: "Milestone Test 1 - All Units",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
