@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Competition_ASMOPSS2024_G4_SetB.html — Real past ASMOPSS paper
+     ------------------------------------------------------------
+     Source: ASMOPSS Thailand 2024 Grade 4 Science paper, Set B
+     (sat 4 Aug 2024, national excellence round). Converted from the
+     original PDF into an interactive, self-scoring HTML test so Prem
+     can practise under real competition conditions.
+
+     40 questions, official ASMOPSS mark weighting: Q1-16 = 1.25 marks
+     each (Part 1), Q17-32 = 2.5 marks each (Part 2), Q33-40 = 5 marks
+     each (Part 3). Total = 100 marks, matching how Prem's original
+     baseline and Milestone Test 1 were scored, so results are directly
+     comparable.
+
+     Diagrams are the ACTUAL images cropped from the original PDF
+     (not recreated), to stay faithful to the real paper. Explanations
+     ("why") were written by Luikishi since the official paper only
+     publishes the answer key, not reasoning.
+
+     Special note — Q23: the official key differs between Set A and
+     Set B for this question; Set B's answer (3) is used here since
+     this is the Set B paper. Q39: the original question's option D
+     was printed with incomplete/garbled text in the source paper, so
+     ASMOPSS marked this question "free" (any answer accepted) — this
+     is replicated here: Q39 always scores full marks once answered.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASMOPSS 2024 — Science G4 (Set B) — Real Competition Paper</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --navy:#1a237e; --navy-d:#0d1257; --crimson:#b71c1c; --crimson-d:#7f0000;
+    --a-fill:#dde3fb; --a-text:#1a237e;
+    --b-fill:#ffe0b2; --b-text:#8a4a00;
+    --c-fill:#ffcdd2; --c-text:#7f0000;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5fa;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--navy-d),var(--navy));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e4e6f2;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--navy-d),var(--crimson));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--navy-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .comp-note{background:#fff0f0;border:1.5px solid var(--crimson);color:#7f0000;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--navy)}
+  .q.B{border-left-color:#b8860b}
+  .q.C{border-left-color:var(--crimson)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--navy-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .q .stmts{font-weight:400;font-size:.93rem;margin:6px 0 10px;padding-left:4px}
+  .q .stmts div{margin:3px 0}
+  .q .qimg{display:block;max-width:100%;height:auto;margin:8px auto;border-radius:8px;border:1px solid var(--line)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--navy)}
+  .opt.selected{border-color:var(--navy);background:#eef0fb;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+  .result-tag.free{background:#e1bee7;color:#4a148c}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--navy-d),var(--crimson));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,#1565c0,#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:2px solid var(--navy)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--navy-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,30,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--navy-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">ASMOPSS 2024 — Science, Grade 4 (Set B)</b>
+      <span class="sub">Real national competition paper &bull; sat 4 Aug 2024 &bull; Excellence Round</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same? For diagrams, look only at what's actually shown, not what you assume.</div>
+  <div class="comp-note">&#127942; This is a REAL past ASMOPSS competition paper (2024, Grade 4, Set B) — not a practice test built by Luikishi. 40 questions, weighted like the real paper (1.25 / 2.5 / 5 marks = 100 total), so this score is directly comparable to your baseline and Milestone Test 1.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- COMPETITION CONFIG ---------- */
+const COMP_ID = "ASMOPSS2024_G4_SetB";
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // real ASMOPSS G4 weighting: Q1-16 / Q17-32 / Q33-40
+const TOTAL_MARKS = 100;
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold used across the project
+const BASELINE_MARKS = 72.5;               // Prem's original G4 (2025 paper) diagnostic score, for comparison
+
+const IMG = "images/ASMOPSS_2024_G4_SetB/";
+
+const Q = [
+  /* ===================== PART 1 — Q1-16 (1.25 marks each) ===================== */
+  { n:1, section:'A', body:"Look at the pictures below (A - Mushroom, B - Hydrilla). Which is the correct description of organisms A and B?",
+    img:IMG+"q01.png",
+    options:["A: Can make its own food / B: Cannot make its own food","A: Flowering / B: Non-flowering","A: Has spores / B: Does not have spores","A: Poisonous / B: Poisonous"], ans:3,
+    why:"A mushroom is a fungus, which reproduces using spores. Hydrilla is a flowering water plant, which reproduces using seeds, not spores. (Option 1 is backwards — the fungus can't make its own food, but Hydrilla can, since it's a plant. 'Flowering/non-flowering' doesn't sensibly apply to a fungus at all.)" },
+  { n:2, section:'A', body:"Study the classification table below (Ground: Rubber, Sand · Plants: Cotton, Silk · Animals: Leather, Wool · Man-made: Ceramic, Plastic). Which of the materials is/are incorrectly classified?",
+    options:["Rubber only","Silk and plastic only","Rubber and silk only","Rubber, sand and ceramic only"], ans:3,
+    why:"Rubber comes from the sap of rubber trees — it's a plant material, not a 'ground' material. Silk comes from silkworm cocoons — it's an animal material, not a plant material. Sand (ground), Cotton and Wool (correctly placed), Leather (animal), Ceramic and Plastic (man-made) are all correctly classified." },
+  { n:3, section:'A', body:"The diagram below shows a hydroelectric power plant. Which of the following statements about the power plant is/are true? A: Fuels are needed to boil water to turn the turbine. B: It causes air pollution when electricity is generated. C: Gravitational potential energy of the water is converted to kinetic energy when water is released from the reservoir.",
+    img:IMG+"q03.png",
+    options:["C only","A and B only","A and C only","B and C only"], ans:1,
+    why:"A hydroelectric plant does NOT burn fuel to boil water — falling water directly spins the turbine, so A is false. It doesn't burn anything, so it causes no air pollution during generation — B is false. As water is released from the high reservoir and falls, its stored (gravitational potential) energy converts to movement (kinetic) energy, which is true — C only." },
+  { n:4, section:'A', body:"Paul grouped organisms by two factors (Factor X, Factor Y) he observed during the day. Organism Q was found where Factor X is High and Factor Y is Low. If Organism Q is a cactus or a camel, what are the two environmental factors?",
+    options:["Factor X: Temperature / Factor Y: Amount of light","Factor X: Temperature / Factor Y: Amount of water","Factor X: Amount of light / Factor Y: Amount of soil","Factor X: Amount of water / Factor Y: Temperature"], ans:2,
+    why:"Cacti and camels are both adapted to hot, dry desert conditions — high temperature, low water availability. That matches Organism Q's position exactly (Factor X = Temperature, High; Factor Y = Amount of water, Low)." },
+  { n:5, section:'A', body:"During a hike, James tripped over some roots of a tree growing sideways. Which of the following explains why roots of some trees grow sideways? A: To look for more water and mineral salts. B: To provide better anchorage for the tree. C: To take in more sunlight to carry out photosynthesis.",
+    img:IMG+"q05.png",
+    options:["A only","A and B only","A and C only","A, B and C"], ans:2,
+    why:"Roots spreading sideways can reach a wider area of soil to absorb more water and minerals (A), and a wider spread of roots anchors the tree more firmly against wind and being toppled (B). Roots are underground and have no chlorophyll — they cannot carry out photosynthesis or use sunlight, so C is false." },
+  { n:6, section:'A', body:"Study the diagram below (a rain tree in the rain, under dark clouds, with raindrops, a bird's nest fern, and birds). Which of the following charts correctly classifies the things in the diagram?",
+    img:IMG+"q06.png",
+    options:["Living: Rain tree, Raindrops, Bird's nest fern, Birds / Non-living: Dark clouds","Living: Rain tree, Birds, Bird's nest fern / Non-living: Dark clouds, Raindrops","Living: Bird's nest fern, Birds / Non-living: Dark clouds, Rain tree, Raindrops","Living: Bird's nest fern, Rain tree, Raindrops / Non-living: Dark clouds, Birds"], ans:2,
+    why:"Living things grow, feed, and reproduce: the rain tree, the bird's nest fern, and the birds are all living. Dark clouds and raindrops are just water and water vapour — not alive — so they belong together as non-living things." },
+  { n:7, section:'A', body:"Which one of the following gases is wrongly described? Nitrogen — bacteria in the soil can change this gas into a form useful for plants. Carbon dioxide — this gas does not support burning. Water vapour — this gas makes up four-fifths of the air. Oxygen — our body can use this gas to break down food and produce energy.",
+    options:["Nitrogen","Carbon dioxide","Water vapour","Oxygen"], ans:3,
+    why:"It's actually NITROGEN that makes up about four-fifths (78%) of the air — not water vapour, which is only a small, variable fraction of the air. Every other description (nitrogen fixation by soil bacteria, CO2 not supporting burning, oxygen used in respiration) is correct." },
+  { n:8, section:'A', body:"The diagrams show how near to magnets A and B a steel paper clip must be placed before it is attracted (magnet B needs to be much closer than magnet A). The experiment above can be used to _______.",
+    img:IMG+"q08.png",
+    options:["compare the strengths of magnets","find out if steel is a magnetic material","prove whether a magnet is permanent","confirm which pole of a magnet is facing the paper clip"], ans:1,
+    why:"A magnet that can attract the paper clip from farther away is exerting a stronger magnetic force — so measuring the distance at which attraction starts is a way of comparing how strong different magnets are." },
+  { n:9, section:'A', body:"A swimmer started before the starting signal and was called back by a loud, low-pitched sound from a loudspeaker at water level. Which statement about the sound is true?",
+    options:["The swimmer could hear the sound in air but not in water","The time taken by sound to travel through water is longer than that through air","The time taken by sound to travel through water is shorter than that through air","The time taken by sound to travel through water is the same as that through air"], ans:3,
+    why:"Sound actually travels FASTER through water than through air, because water's particles are much closer together, so vibrations pass from particle to particle more quickly. So for the same distance, sound takes LESS time to travel through water — a shorter time than through air." },
+  { n:10, section:'A', body:"A fluorescent lamp is a broad source of light. Which of the following statements about the fluorescent lamp are correct? A: Forms umbra and penumbra when an object blocks the path of light. B: Forms umbra only when an object blocks the path of light. C: Normally used in offices. D: Normally used in lasers.",
+    options:["A and C only","A and D only","B and C only","B and D only"], ans:1,
+    why:"A broad (large) light source produces both a dark umbra (fully blocked) and a lighter penumbra (partially blocked) around a shadow, unlike a small point source which only makes a sharp umbra. Fluorescent lamps are indeed common in offices. They are not used in lasers — a laser produces a very different, narrow, focused beam of light." },
+  { n:11, section:'A', body:"Ninja looked at a candle flame through sheets of different materials, as shown in the diagram. Which question was Ninja most likely exploring?",
+    img:IMG+"q11.png",
+    options:["Which material gives off the most light?","Which material produces the clearest reflection?","Which material can produce the longest shadow?","Which material allows most light to pass through?"], ans:4,
+    why:"Ninja is looking at the candle flame THROUGH each material sheet, comparing how much of the flame's light he can still see. That tests how much light passes through each material — not how much light the material itself gives off, reflects, or how long a shadow it casts." },
+  { n:12, section:'A', body:"The diagram shows two dogs pulling on a rope with constant but unequal forces (175 newtons west, 200 newtons east). In which compass direction will both dogs most likely move?",
+    img:IMG+"q12.png",
+    options:["east","west","north","South"], ans:1,
+    why:"The two forces act in opposite directions, so they partly cancel out. The overall (net) force is 200 N − 175 N = 25 N in the direction of the stronger pull — east. Since the forces are unbalanced, both dogs and the rope will move in the direction of the bigger force: east." },
+  { n:13, section:'A', body:"Study the diagram: when a thin sheet of material X was placed between two bars, the magnetized iron bar was attracted to material X, but the plain iron bar was not. Which of the following statements is/are correct about material X? A: Material X is a magnet. B: Material X may be made of steel. C: Material X is a ferromagnetic material. D: Material X is a non-magnetic material.",
+    img:IMG+"q13.png",
+    options:["A only","B and C only","A, B and C only","A, B and D only"], ans:2,
+    why:"Being attracted BY a magnet only tells us material X is magnetic (attracted to magnets) — like steel — not that X is itself a magnet. Steel is a common ferromagnetic (strongly magnetic) material, so B and C fit. Since X clearly WAS attracted, it can't be non-magnetic, ruling out D. We can't confirm X is a magnet itself (A) just from being attracted to one." },
+  { n:14, section:'A', body:"Which of the following can be the consequences of factory emissions? A: Air pollution. B: Global warming. C: Increasing greenhouse effect. D: Corrosion of statues and buildings made of metals.",
+    options:["A and C only","B and D only","A, B and C only","A, B, C and D"], ans:4,
+    why:"Factory emissions release pollutants that dirty the air (A), release greenhouse gases that trap heat and contribute to global warming (B) by strengthening the greenhouse effect (C), and release acidic gases that form acid rain, which corrodes metal statues and buildings (D). All four are real consequences." },
+  { n:15, section:'A', body:"In what ways are a lion, a platypus and a monkey similar? A: They suckle their young. B: They give birth to their young alive. C: They have an outer body covering of hair. D: They start their life cycles as a fertilized egg.",
+    img:IMG+"q15.png",
+    options:["A and C only","A, B and C only","A, C and D only","A, B, C and D"], ans:1,
+    why:"All three are mammals: they all suckle (feed milk to) their young (A) and all have a hairy/furry body covering (C). But the platypus is an unusual mammal that LAYS EGGS rather than giving birth to live young — so B does not apply to all three. On this paper, D (starting as a fertilized egg, i.e. hatching from an external egg) is treated as true only for the platypus, not for the lion and monkey, which develop and are born live inside the mother — so D is also excluded, leaving A and C only." },
+  { n:16, section:'A', body:"Material X is used to cover some leftover food (cling wrap over trays of meat and fish). Which of the following properties of material X is used in this situation?",
+    img:IMG+"q16.png",
+    options:["Flexible and Transparent","Soft and light","Sink in water and Non colour","Floats on water and Flexible"], ans:1,
+    why:"Cling film needs to be flexible so it can stretch and wrap tightly around irregular shapes of food, and transparent so you can still see what food is inside without unwrapping it." },
+
+  /* ===================== PART 2 — Q17-32 (2.5 marks each) ===================== */
+  { n:17, section:'B', body:"Study the flow chart below: Materials → Hard / Soft. Hard → Sinks in V (W) / Floats on V (X). Soft → Not flexible (Y) / Flexible (Z). Which of the following could be the materials of V, W, X, Y and Z?",
+    options:["V: Oil / W: Metal / X: Plastic / Y: Wood / Z: Rubber","V: Oil / W: Rubber / X: Wood / Y: Metal / Z: Plastic","V: Water / W: Rubber / X: Metal / Y: Wood / Z: Plastic","V: Water / W: Rubber / X: Plastic / Y: Metal / Z: Wood"], ans:1,
+    why:"Following the flow chart: metal is hard and sinks in oil (W), plastic is hard and can float on oil (X), wood is grouped as not flexible (Y), and rubber is soft and flexible (Z) — matching V as oil. This is the official ASMOPSS grouping for this paper." },
+  { n:18, section:'B', body:"A group of pupils tested the strength of magnets X, Y and Z by lowering each one from the same height until it attracted an identical paper clip. Magnet X attracted the clip from the greatest height. The pupils deduced that magnet X is the strongest. In this experiment, the strength of the magnet is measured by _______.",
+    img:IMG+"q18.png",
+    options:["the size of the magnet","the number of paper clips the magnets can attract","the duration the paper clip remains attracted to the magnet","the distance from which the magnet can attract the paper clip"], ans:4,
+    why:"The experiment only varies and measures ONE thing: how far away (how high up) each magnet is when it first attracts the paper clip. A magnet that can attract from farther away is exerting a stronger pull at that distance — so distance-of-attraction is what's being used to measure strength here." },
+  { n:19, section:'B', body:"Look at four objects in flasks P, Q, R and S (the flask containing S is inverted). Based only on what you can see, which of the following conclusions are correctly drawn? A: Object S is a solid. B: Object P can be compressed. C: Object Q has a definite shape. D: Object R has a definite volume and a definite shape.",
+    img:IMG+"q19.png",
+    options:["A and C only","B and D only","B, C and D only","A, B, C and D"], ans:1,
+    why:"A solid keeps its own shape wherever it's placed — including upside-down, like object S, which kept the same shape even when its flask was inverted, so it must be a solid (A). Whether something 'can be compressed' or has a 'definite volume' can't actually be seen just by looking at a flask — those need to be tested, not just observed — so B and D go beyond what's shown. Object Q's contents keep a fixed, rounded shape independent of the flask's own shape, which is the visual clue for 'has a definite shape' (C)." },
+  { n:20, section:'B', body:"During a thunderstorm, a boy sees lightning before hearing thunder and records the time gap at different points in the storm: at 0 min the gap is 3.6s, at 2 min it's 2.4s, at 4 min it's 1.6s, at 5 min it's 2.4s, at 6 min it's 3.5s. How many minutes after the start of the storm does it reach the closest point to the boy's home?",
+    options:["2 min","4 min","5 min","8 min"], ans:2,
+    why:"The shorter the gap between seeing lightning and hearing thunder, the closer the storm is (sound is taking less time to arrive). The shortest gap in the table (1.6 seconds) happens at the 4-minute mark — so that's when the storm was closest to the boy's home." },
+  { n:21, section:'B', body:"Amy placed two different plants in identical bottles A and B, each half-filled with water, with a layer of oil poured on top of the water in each. After three days, bottle A's water level dropped from 15.0cm to 12.0cm, and bottle B's dropped from 15.0cm to 13.5cm. Which is a correct conclusion?",
+    img:IMG+"q21.png",
+    options:["The roots of the plants absorbed some water.","Some water in the bottle evaporated.","Plants with roots absorb more water than plants without roots.","Plants with smaller leaves absorb more water."], ans:1,
+    why:"The oil layer floating on top of the water seals the surface and stops evaporation almost completely — that's exactly why the oil is there, to rule evaporation out. So the water that disappeared must have been taken up by the plant through its roots. We can't conclude anything about roots-vs-no-roots or leaf size, since both set-ups used plants WITH roots — only the amount of water lost differed." },
+  { n:22, section:'B', body:"May plucked four leaves, dipped them in hot boiling water, and observed bubbles coming from the upper and lower surfaces. Every leaf showed MORE bubbles from the lower surface and LESS from the upper surface. What did May's observations show?",
+    options:["some leaves have more stomata than others","different leaves have different number of stomata","smaller leaves have fewer stomata than larger leaves","more stomata are found on the lower surfaces of the leaves"], ans:4,
+    why:"The bubbles are gas escaping through stomata (tiny pores) on the leaf surface. Since ALL FOUR leaves consistently showed more bubbles from the lower surface, this is a general pattern about leaf anatomy — more stomata are found on the lower surface of leaves — not something that varies leaf to leaf or by size." },
+  { n:23, section:'B', body:"A bracket fungus and some bread mould are shown below. Which of the following statements is/are true about the bracket fungus and bread mould? A: Both are eatable. B: Both are micro-organisms. C: Both reproduce through spores. D: Both take in food from the things that they grow on.",
+    img:IMG+"q23.png",
+    options:["A only","B only","C and D only","A, C and D only"], ans:3,
+    why:"Both bracket fungus and bread mould are fungi: they reproduce using spores (C) and absorb food/nutrients from whatever surface (wood, bread) they're growing on, since fungi can't make their own food (D). Not all fungi are edible/safe to eat, so A is false. A bracket fungus is large and clearly visible (not microscopic), so it isn't a micro-organism, making B false — this is the Set B answer (Set A's paper used a different correct answer for this question, due to a difference between the two versions)." },
+  { n:24, section:'B', body:"During a BTS breakdown, many commuters were trapped in the cabin with very little ventilation. Which of the following best describes the composition of gases present in the cabin after some time?",
+    img:IMG+"q24.png",
+    options:["Increase: Carbon dioxide, oxygen / Decrease: Water vapour","Increase: Carbon dioxide, water vapour / Decrease: Oxygen","Increase: Oxygen, water vapour / Decrease: Carbon dioxide","Increase: Carbon dioxide / Decrease: Water vapour and Oxygen"], ans:2,
+    why:"With many people breathing in a poorly-ventilated space, they use up oxygen (so it decreases) and breathe out both carbon dioxide and water vapour (so both increase) — this is what happens during respiration." },
+  { n:25, section:'B', body:"What are the roots of duckweeds for? A: The roots store food for reproduction. B: The roots trap light from their surroundings. C: The roots hold the plants firmly to the ground. D: The roots take in water and dissolved mineral salts from their surroundings.",
+    img:IMG+"q25.png",
+    options:["D only","C and D only","A, C and D only","B, C and D only"], ans:1,
+    why:"Duckweed is a tiny plant that FLOATS freely on the surface of water — it has no soil or ground to anchor into, so its roots don't function as anchors (ruling out C). Roots don't store food for reproduction or trap light either (that's a leaf/seed job) — the roots' real job here is simply absorbing water and dissolved minerals from the water around them." },
+  { n:26, section:'B', body:"Glass must be handled with care as it is brittle. Why is glass used to make things like spectacle lenses, light bulbs, fish tanks and window panes?",
+    img:IMG+"q26.png",
+    options:["It is transparent.","It cannot be bent.","It is not able to float on water.","It can support heavy loads without breaking."], ans:1,
+    why:"All four uses share one key property need: being able to see clearly through the material. Glass is transparent, letting light and images pass through clearly, which is why it's chosen for lenses, bulbs, tanks, and windows despite being brittle." },
+  { n:27, section:'B', body:"Karuna carried out three experiments with a magnet, a steel paper clip, and different materials placed between them at position B: (1) nothing at B — clip moved to the magnet; (2) a sheet of cardboard at B — clip still moved to the magnet; (3) a sheet of iron at B — clip did not move. Karuna's experiment is testing whether magnetic forces can ____________.",
+    imgs:[IMG+"q27a.png", IMG+"q27b.png", IMG+"q27c.png"],
+    options:["attract a paper clip","attract different materials","pass through different materials","pull through different materials"], ans:4,
+    why:"Across the three set-ups, only the material placed at position B changes (nothing, then cardboard, then iron), while everything else stays the same — a proper fair test. The magnet's pull reached the clip through cardboard but was blocked by iron, showing the experiment is testing whether the magnetic force can reach (pull/pass) through different materials placed in its path." },
+  { n:28, section:'B', body:"Objects that do not block light show the highest reading on a light sensor. Readings were: P=3, Q=0, R=10, S=7. Which object(s) belong(s) to Group Y in the classification table (Group X: Frosted glass, Group Y: Mirror, Group Z: Measuring cylinder)?",
+    options:["Q only","R only","P and S only","P, R and S only"], ans:1,
+    why:"A mirror reflects light back rather than letting it pass through, so a light sensor placed behind a mirror would read close to zero. Object Q's reading of 0 matches that pattern exactly — so Q belongs in the mirror group (Group Y)." },
+  { n:29, section:'B', body:"Four balls P, Q, R and S of the same volume but different materials are placed in water. Ball P (68g) sits lowest/most submerged, Ball Q (55g) floats at the surface, Ball R sits highest above the water, and Ball S sits partly submerged between Q and P. Which shows the possible values of R's mass (A) and S's mass (B)?",
+    img:IMG+"q29.png",
+    options:["A: 30 g / B: 40 g","A: 40 g / B: 30 g","A: 50 g / B: 60 g","A: 60 g / B: 50 g"], ans:3,
+    why:"Since all four balls have the same volume, the one that floats highest (R) must be the lightest, and the one that sits lowest (P, 68g) must be the heaviest. Reading the order from the diagram — R (lightest) < Q (55g) < S < P (68g) — only R=50g and S=60g fits both inequalities (50 is less than 55, and 60 is between 55 and 68)." },
+  { n:30, section:'B', body:"The diagram represents the Moon at one position in its orbit around Earth. Numbers 1-4 represent locations on Earth's surface. At which numbered location would high tide be occurring?",
+    img:IMG+"q30.png",
+    options:["location 1","Location 2","location 3","Location 4"], ans:1,
+    why:"High tide happens on the side of Earth that is directly facing the Moon (the Moon's gravity pulls the ocean water toward it, creating a bulge). Based on the diagram, location 1 is the point on Earth's surface directly facing the Moon's position, so that's where high tide occurs." },
+  { n:31, section:'B', body:"Four set-ups each have a seed in cotton wool, placed in different conditions: W (dry, air, no sunlight, 10°C), X (dry, no air, sunlight, 30°C), Y (moist, air, no sunlight, 30°C), Z (moist, no air, sunlight, 10°C). In which set-up will a seed germinate first?",
+    options:["W","X","Y","Z"], ans:3,
+    why:"Seeds need moisture, air (oxygen), and warmth to germinate — they do NOT need sunlight for germination itself (that only matters once the seedling needs to photosynthesise). Set-up Y has moisture, air, and warmth (30°C) all present, with the absence of sunlight not being a problem — so it germinates first. W is dry, and X and Z are both missing air." },
+
+  { n:32, section:'B', body:"The diagram shows the flower of a plant, with parts labelled A, B and C. Which of the following rows has the parts of the flower labelled correctly?",
+    img:IMG+"q32.png",
+    options:["A: anther / B: stigma / C: ovary","A: stigma / B: anther / C: ovule","A: ovary / B: stigma / C: anther","A: stigma / B: filament / C: anther"], ans:2,
+    why:"In the diagram, A points to the tall central tip (the stigma, the sticky part that catches pollen), B points to one of the pollen-bearing structures on a stalk (the anther), and C points to the swollen part at the base containing the ovule(s). This matches: A = stigma, B = anther, C = ovule." },
+
+  /* ===================== PART 3 — Q33-40 (5 marks each) ===================== */
+  { n:33, section:'C', star:1, body:"Study the diagram: three bar magnets X, Y and S are arranged in a row. X and Y repel each other; Y and S attract each other. What are the poles marked X and Y?",
+    img:IMG+"q33.png",
+    options:["X: North pole / Y: North pole","X: North pole / Y: South pole","X: South pole / Y: North pole","X: South pole / Y: South pole"], ans:3,
+    why:"Like poles repel, and opposite poles attract. Since X and Y repel each other, the ends facing each other must be the SAME pole. Since Y and S attract, the ends facing each other must be OPPOSITE poles. Matching this pattern against the diagram, the only consistent answer is X = South pole and Y = North pole." },
+  { n:34, section:'C', star:1, body:"The table shows the peak activity dates of four meteor showers across five different years — each shower peaks on nearly the same calendar date every single year. Based on the data, what do the dates of these meteor showers appear to depend on?",
+    options:["turning of Earth on its axis","position of Earth in its orbit","phase of the Moon during the month","movement of meteors in their orbits"], ans:2,
+    why:"A meteor shower happens when Earth's orbit carries it through a specific patch of space debris left behind by a comet. Since Earth returns to roughly the same point in its orbit at the same time every year, the shower recurs on nearly the same calendar date each year — this is about Earth's ORBITAL position, not its daily spin (axis) or the Moon's phase." },
+  { n:35, section:'C', star:1, body:"Lala tested three leaves (X, Y, Z) of a potted plant: leaf Z was covered with black paper, leaf Y had a substance that absorbs carbon dioxide placed near it, and leaf X was left untouched. The plant sat in the garden (in sunlight) for 48 hours. She then tested each leaf for starch with iodine solution. Which shows the results correctly?",
+    img:IMG+"q35.png",
+    options:["Leaf X: Brown / Leaf Y: Brown / Leaf Z: Blue-black","Leaf X: Brown / Leaf Y: Blue-black / Leaf Z: Brown","Leaf X: Blue-black / Leaf Y: Brown / Leaf Z: Brown","Leaf X: Blue-black / Leaf Y: Brown / Leaf Z: Blue-black"], ans:3,
+    why:"Photosynthesis (which makes starch) needs both light and carbon dioxide. Leaf Z was blocked from light by black paper, so it couldn't photosynthesise — no starch, so iodine stays brown. Leaf Y had its carbon dioxide supply removed, so it also couldn't photosynthesise — brown too. Only leaf X had both light and CO2 available, so it made starch, turning iodine blue-black." },
+  { n:36, section:'C', star:1, body:"Adrian tested which biscuit (in three set-ups with different-sized pieces) would be broken down fastest by 30ml of digestive juice. The biscuit in set-up Y (the smallest pieces) was broken down fastest. What conclusion could he draw?",
+    img:IMG+"q36.png",
+    options:["The smaller the piece of biscuit, the faster it will be digested.","The smaller the piece of biscuit, the slower it will be digested.","The larger the amount of digestive juice used, the faster the biscuit will be digested.","The larger the amount of digestive juice used, the slower the biscuit will be digested."], ans:1,
+    why:"All three set-ups used the SAME amount of digestive juice (30ml) — the only thing that varied was the size of the biscuit pieces. Smaller pieces have more surface area exposed to the digestive juice relative to their size, so they break down faster — matching set-up Y's result." },
+  { n:37, section:'C', star:1, body:"Diagrams show a weighing balance: (1) object C balances against a 100g weight, tilted so C is heavier; (2) object B balances against a 100g weight, tilted so the 100g weight is heavier; (3) objects A and B balance each other exactly level. Which statements is/are true? A: Object A has a mass of 100g. B: Object B has a bigger mass than object C. C: Object C has a bigger mass than object A. D: Object C has a mass of 150g.",
+    img:IMG+"q37.png",
+    options:["C only","D only","B and D only","C and D only"], ans:1,
+    why:"From diagram 1: C is heavier than 100g. From diagram 2: B is lighter than 100g. From diagram 3: A and B balance exactly, so A = B. Since B is less than 100g, A must also be less than 100g — so A is NOT 100g (statement A is false). Since C is more than 100g and A is less than 100g, C must be bigger than A (statement C is TRUE). B is less than 100g and C is more than 100g, so B is NOT bigger than C (statement B is false). We aren't given an exact reading for how much heavier C is, so we can't confirm C is exactly 150g (statement D is unconfirmed). Only C is definitely true." },
+  { n:38, section:'C', star:1, body:"A mineral supplement to prevent flu was tested on two groups: Group A got 100mg/day, Group B got 200mg/day. After 10 weeks, neither group reported any flu. Which procedure would have made the outcome of this study more valid?",
+    options:["test only one group with 200 mg of the supplement","test the supplement on both groups for 5 weeks instead of 10 weeks","test a third group that receives 150 mg of the supplement","test a third group that does not receive the supplement"], ans:4,
+    why:"Without a group that receives NO supplement at all (a control group), there's no way to know whether the supplement actually did anything — maybe nobody would have gotten the flu anyway during that period. A no-treatment control group is needed to show what would happen without the supplement, so the effect of the supplement can be properly judged." },
+  { n:39, section:'C', star:1, free:true, body:"Siri set up two conical flasks: G (a plant WITH roots) and H (a plant WITHOUT roots), each stoppered with 200ml of water, and recorded the water level every 12 hours over 48 hours (flask G dropped to 160ml, flask H dropped to 180ml). What conclusion(s) could Siri draw from this experiment? A: Plants have water-carrying tubes in their stem. B: The leaves of plants need water to make food. C: Plants cannot take in water when their roots are removed. D: [this option's text was incomplete/garbled in the original paper].",
+    img:IMG+"q39.png",
+    options:["D only","A and D only","B and C only","A, B and D only"], ans:4,
+    why:"IMPORTANT: In the original 2024 paper, option D's text was printed incompletely (garbled), so ASMOPSS officially marked this question as \"free\" for every student — any answer given receives full marks. This has been carried over here: whatever you choose for Q39, it will be marked correct. For your own learning, though: flask H (no roots) still lost 20ml of water over 48 hours, which shows plants CAN still take in/lose some water without roots (so C, as printed, would actually be false) — the stopper blocks direct evaporation from the flask's open water surface, so any water that left must have moved up through the plant's stem and out through its leaves, which is evidence for water-carrying tubes in the stem (A)." },
+  { n:40, section:'C', star:1, body:"There are many ways to use electricity carefully: A: Do not put too many plugs into one socket, because they may get too hot and start a fire. B: Check electrical appliances regularly for exposed wires. C: You should not do electrical repairs yourself — get an adult or an electrician. D: You can touch switches with wet hands because switch covers are made of plastic to prevent electric shock. Which of the following is/are correct?",
+    options:["A and C only","B, and D only","A, B, and C only","All of the above are correct."], ans:3,
+    why:"A, B, and C are all genuinely good electrical safety practices. D is FALSE and dangerous: you should NEVER touch any electrical switch or appliance with wet hands, regardless of plastic covers — water conducts electricity, and any small gap or exposed metal part could still give you a shock." },
+];
+/* ---------- END COMPETITION CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "PART 1 — Q1&ndash;16 (1.25 marks each)",
+  B: "PART 2 — Q17&ndash;32 (2.5 marks each)",
+  C: "PART 3 — Q33&ndash;40 (5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+        <span class="result-tag free" id="tag-free-${q.n}">&#10003; free (see why)</span>
+      </p>`;
+    if (q.img) html += `<img class="qimg" src="${q.img}" alt="Diagram for Q${q.n}">`;
+    if (q.imgs) q.imgs.forEach((src,i) => html += `<img class="qimg" src="${src}" alt="Diagram ${i+1} for Q${q.n}">`);
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Competition Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = q.free ? true : (given === q.ans);
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+    }
+
+    if (q.free){
+      q.options.forEach((_, i) => document.getElementById(`opt-${q.n}-${i+1}`).classList.remove('correct','wrong'));
+      document.getElementById(`opt-${q.n}-${given}`).classList.add('correct');
+      document.getElementById(`tag-free-${q.n}`).classList.add('show');
+    } else {
+      document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+      if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+      document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+    }
+    document.getElementById(`why-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect, free: !!q.free, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS on a REAL competition paper (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort on a real competition paper! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your original baseline (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Part ${s==='A'?1:s==='B'?2:3}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    competition: COMP_ID,
+    title: "ASMOPSS 2024 - Science G4 (Set B) - Real Competition Paper",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `${COMP_ID}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

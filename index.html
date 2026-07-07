@@ -80,6 +80,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div class="sb-logo">&#127793;</div>
     <button class="sb-btn active" onclick="showPanel('thisunit',this)"><span class="sb-icon">&#128218;</span><span class="sb-lbl">Unit</span></button>
     <button class="sb-btn" onclick="showPanel('done',this)"><span class="sb-icon">&#9989;</span><span class="sb-lbl">Done</span></button>
+    <button class="sb-btn" onclick="showPanel('competitions',this)"><span class="sb-icon">&#127942;</span><span class="sb-lbl">Comp</span></button>
     <div class="sb-divider"></div>
     <button class="sb-btn" onclick="openDashboard()"><span class="sb-icon">&#128202;</span><span class="sb-lbl">Board</span></button>
     <a class="sb-btn" href="javascript:void(0)" onclick="openMath()" title="Math Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
@@ -106,21 +107,24 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div id="content">
       <div class="panel active" id="panel-thisunit">
         <div class="pattern" id="pattern-box"></div>
-        <div class="sec-div">This Unit &mdash; Milestone Test 1</div>
-        <div class="grid-3">
-          <div class="lesson-card" style="border-top-color:#DAA520">
-            <div class="lc-unit" style="color:#8a6a00">Milestone Test 1 &middot; All Units (U1&ndash;U10)</div>
-            <div class="lc-title">Milestone Test 1 &mdash; Biology, Chemistry, Physics &amp; Earth/Space</div>
-            <div class="lc-desc">40 questions, weighted like a real ASMOPSS paper (1.25/2.5/5 marks &mdash; 100 marks total, pass bar 80). Benchmarked directly against your original baseline score of 72.5/100. No lessons for this one &mdash; it's a pure assessment covering all 10 units so far. Interactive &mdash; instant score, right/wrong, and explanations the moment you submit.</div>
-            <div class="lc-badges"><span class="badge badge-new">&#127942; Milestone</span><span class="badge badge-asm">ASMOPSS</span></div>
-            <a class="btn-start purple" href="Tests/Milestone_01_Test.html">Start Milestone Test</a>
-          </div>
-        </div>
+        <div class="sec-div">This Unit &mdash; Unit 11</div>
+        <div class="empty">&#127881; Milestone Test 1 is done (39/40, 99%, personal best)! Unit 11 hasn't been built yet &mdash; recommended focus: Biology (Human Body Systems or Cells). Check back soon, or visit the <strong>Completed</strong> tab to review everything so far.</div>
       </div>
       <div class="panel" id="panel-done">
         <div class="sec-div">Completed</div>
 
-        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 10 &middot; Physics: Forces</div>
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Milestone Test 1 &middot; All Units (U1&ndash;U10)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Milestone Test 1 &middot; Test</div>
+            <div class="lc-title">Milestone Test 1 &mdash; Biology, Chemistry, Physics &amp; Earth/Space</div>
+            <div class="lc-desc">40 questions, weighted like a real ASMOPSS paper (1.25/2.5/5 marks &mdash; 100 marks total, pass bar 80). Benchmarked directly against the original baseline score of 72.5/100. No lessons for this one &mdash; it's a pure assessment covering all 10 units.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 39/40 (99%) &#127881;</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Milestone_01_Test.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 10 &middot; Physics: Forces</div>
         <div class="grid-3" style="margin-bottom:18px">
           <div class="lesson-card" style="opacity:.8">
             <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 10 &middot; Lesson 1</div>
@@ -368,6 +372,20 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 14/15</span><span class="badge badge-soon">Archived format</span></div>
           </div>
         </div>
+      </div>
+      <div class="panel" id="panel-competitions">
+        <div class="sec-div">Competition Practice &mdash; Real Past Papers</div>
+        <div class="grid-3">
+          <div class="lesson-card" style="border-top-color:#b71c1c">
+            <div class="lc-unit" style="color:#b71c1c">ASMOPSS 2024 &middot; Grade 4 Science &middot; Set B</div>
+            <div class="lc-title">ASMOPSS 2024 Real Competition Paper (Set B)</div>
+            <div class="lc-desc">A genuine, complete ASMOPSS 2024 Grade 4 Science paper (sat 4 Aug 2024) &mdash; real diagrams from the original test, official weighting (1.25/2.5/5 marks, 100 total, pass bar 80), answers verified against the official ASMOPSS key. A benchmark for exam-day readiness, separate from the unit rotation.</div>
+            <div class="lc-badges"><span class="badge badge-new">&#127942; Competition</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Competition_ASMOPSS2024_G4_SetB.html">Start Competition Test</a>
+          </div>
+        </div>
+        <div class="sec-div">Completed</div>
+        <div class="empty">No competition papers taken yet. Once Prem takes one, it moves down here with its score &mdash; same card, same panel, no separate page.</div>
       </div>
     </div>
   </div>

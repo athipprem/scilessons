@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '6 Jul 2026',
+  updated:        '7 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,16 +13,18 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', status:'Test ready &middot; 40 questions, weighted marks, benchmarked vs 72.5/100 baseline' },
+  currentUnit: { n:11, topic:'Up next - recommended focus: Biology (Human Body Systems / Cells)', status:'Not yet built &middot; Unit 11 lessons + test coming soon, resuming the U1-U40 rotation after Milestone Test 1' },
 
   lastUnit: {
-    n:10, score:19, outOf:20, marks:null, marksOutOf:null, pct:95, delta:5, prevScore:18,
-    patternLabel: 'Unit 10 result - Physics: Forces (19/20, 95% - PASS)',
-    patternInsight: '<strong>19/20 (95%)</strong> - pass bar is 16/20, a strong PASS, Prem&#39;s best score since U8. Section A (force basics, contact vs non-contact) = <strong>4/4</strong> - perfect. Section B (balanced/unbalanced forces, gravity, friction) = <strong>5/6</strong> - missed Q7, an ice-rink friction inversion (picked the LOWER-friction surface when asked for the HIGHER-friction one) - the same error shape as U6&#39;s Q7 conductor/insulator inversion. Section C (think like a scientist, applied) = <strong>10/10</strong> - perfect.',
-    analysisLabel: 'Target: GOLD - next up MILESTONE TEST 1 (40Q spanning U1-U10, weighted 1.25/2.5/5 marks like the real ASMOPSS paper, benchmarked directly against the 72.5/100 baseline)',
-    analysisInsight: 'Ten units in, ten passes - all 10 unit tests are now complete. U10&#39;s only miss (Q7) is a property-inversion slip - picking the wrong side of a two-way comparison (low-friction vs high-friction) - that echoes U6&#39;s Q7 (conductor/insulator inversion); worth a quick callback if a similar A-vs-B property question comes up again. <strong>Important finding this unit:</strong> Prem noticed Section C&#39;s correct answer was consistently the longest, most detailed option across recent tests - a real, quantitatively-confirmed unintentional hint (16/20, 18/20, 19/20 of U8/U9/U10 questions had the longest option as correct, also clustered at position 2). This means U8-U10&#39;s Section C &quot;100%&quot; streaks should be read with a caveat rather than full face value. Fixed going forward: every test from Milestone Test 1 onward is built and verified under a new ANSWER-BALANCE RULE (balanced option lengths, varied correct-answer position, quantitatively checked before shipping). Milestone Test 1 is now built and verified (40Q: 16A/16B/8C, weighted marks, no reused questions, balanced answers) and ready for Prem to take.',
-    qSummary: '<strong>19 / 20 (95%)</strong> - one miss: Q7 (ice-rink friction inversion - chose the smoother/lower-friction surface when asked which has MORE friction).',
-    qBreakdown: []
+    n:'M1', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, delta:4, prevScore:19,
+    patternLabel: 'Milestone Test 1 result - All Units, U1-U10 (39/40, 98.75/100 marks, 99% - PASS, personal best)',
+    patternInsight: '<strong>39/40 questions, 98.75/100 marks (99%)</strong> - pass bar is 80/100, a commanding PASS and Prem&#39;s best result of the whole program. Section A (basic recall, 1.25 marks each) = <strong>15/16 (18.75/20 marks)</strong> - one miss, Q5 ("Bacteria and fungi are both examples of:" - correct answer Microorganisms, Prem chose Plants), a definition slip on an easy opening question, not a real content gap (U4 Microorganisms was a separate 15/15 perfect). Section B (applying, 2.5 marks each) = <strong>16/16 (40/40 marks)</strong> - perfect. Section C (think like a scientist, applied reasoning, 5 marks each) = <strong>8/8 (40/40 marks)</strong> - perfect, and taken entirely under the new ANSWER-BALANCE RULE (no answer-length/position hints), so this result is a clean, unhinted confirmation of applied-reasoning mastery.',
+    analysisLabel: 'vs baseline: +26.25 marks (72.5 &rarr; 98.75/100) &middot; Target: GOLD &middot; next up: Unit 11 (resuming the rotation)',
+    analysisInsight: 'Milestone Test 1 closes out the U1-U10 block and directly answers the question the baseline diagnostic raised back on 28 Jun: <strong>from 72.5/100 to 98.75/100</strong>, a +26.25-mark jump, with every one of the original baseline gap clusters (Plants, Matter &amp; Mass, circuits, classification, magnets, heat, astronomy) now fully closed under exam-style weighted-mark conditions. The single miss (Q5) is an isolated recall slip on an easy question, not a pattern - Prem has no other misses anywhere in Section A or B. Most importantly, <strong>Section C&#39;s perfect 8/8 fully resolves the answer-balance caveat</strong> flagged after U8-U10: this test was built and quantitatively checked for balanced option lengths and varied correct-answer positions before Prem sat it, so this 100% reflects genuine applied-reasoning skill, not an answer-pattern hint. All 10 units + Milestone Test 1 are now complete. Unit 11 is next, resuming the normal unit rotation (recommended focus: Biology - Human Body Systems or Cells, continuing the strand rotation).',
+    qSummary: '<strong>39 / 40 (98.75/100 marks, 99%)</strong> - one miss: Q5 (Section A - "bacteria and fungi are both examples of..." - chose Plants instead of Microorganisms, an easy-question recall slip).',
+    qBreakdown: [
+      { q:'Q5', topic:'Biology - what a microorganism is (bacteria &amp; fungi)', lvl:'w', pass:false, note:'Chose "Plants" - correct answer is "Microorganisms". Recall slip on an easy opening question; U4 (Microorganisms, 15/15 perfect) shows this isn&#39;t a real content gap.' }
+    ]
   },
 
   skills: [
@@ -30,10 +32,10 @@ var PREM_DATA = {
     { name: 'Chemistry / Matter',       c: 89, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) - two solid passes; U9&#39;s only misses were an opening-question slip and one framing-sensitivity trap, not a core content gap' },
     { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) - closed G4 Q18/19/Q3; strongest strand. U10&#39;s only miss was a friction-inversion slip, same error shape as U6&#39;s conductor/insulator inversion' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 90, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10) - ten units of evidence. Note: U8-U10&#39;s 100% Section C scores carry a caveat - a quantitatively-confirmed answer-length/position hint pattern was found in those three tests (fixed going forward under the new ANSWER-BALANCE RULE, starting with Milestone Test 1), so true mastery should be re-verified once more tests are taken under the corrected, unhinted format' },
-    { name: 'Applied Reasoning',        c: 90, t: 85, ev:'U1 Section C 80%, U2-U8 100%, U9 90%, U10 100% - comfortably above target across ten content areas, though U8-U10&#39;s perfect scores should be read with the same answer-balance caveat noted above' }
+    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8) - eleven results now. The U8-U10 answer-length/position hint caveat is RESOLVED: Milestone 1&#39;s 8/8 was built and quantitatively verified under the new ANSWER-BALANCE RULE (no length/position hints), so this perfect score is a clean, unhinted confirmation of mastery' },
+    { name: 'Applied Reasoning',        c: 93, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8) - comfortably above target across eleven content areas. Milestone 1&#39;s perfect Section C score, taken under the corrected balanced-answer format, resolves the caveat carried since U8' }
   ],
-  radarCurrent:  [92, 89, 92, 90, 90, 90],
+  radarCurrent:  [92, 89, 92, 90, 93, 93],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -48,23 +50,36 @@ var PREM_DATA = {
     { unit:7, topic:'Earth &amp; Space: Astronomy', score:15, outOf:15, pct:100, passBar:12, date:'2026-07-05' },
     { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' },
     { unit:9, topic:'Chemistry: Reactions', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-05' },
-    { unit:10, topic:'Physics: Forces', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-06' }
+    { unit:10, topic:'Physics: Forces', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-06' },
+    { unit:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, passBar:32, date:'2026-07-07' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 'M1', badge: 'linear-gradient(135deg,#DAA520,#8a6a00)',
-      title: 'Milestone Test 1 - All Units (U1-U10)',
+      n: 'C1', badge: 'linear-gradient(135deg,#1a237e,#b71c1c)',
+      title: 'ASMOPSS 2024 - Science G4 (Set B) - Real Competition Paper',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
-        { t:'40 Questions', c:'tgreen' },
+        { t:'40 Questions - real past paper', c:'tgreen' },
         { t:'Weighted marks (100 total)', c:'tblue' },
         { t:'Benchmarks vs 72.5/100 baseline', c:'torange' }
       ],
-      note: 'The first milestone test, covering everything from Unit 1 through Unit 10 (Biology, Chemistry, Physics, Earth &amp; Space). 40 questions weighted like a real ASMOPSS paper: Section A 16Q &times; 1.25 marks = 20 marks (basic recall), Section B 16Q &times; 2.5 marks = 40 marks (applying), Section C 8Q &times; 5 marks = 40 marks (think like a scientist, applied). Total 100 marks, pass bar 80/100 (80%), directly comparable to Prem&#39;s original baseline score of 72.5/100. No lessons for this one - per the milestone-test rule, it&#39;s a pure assessment. Built and verified under the new ANSWER-BALANCE RULE established after U10 (no answer-length or position hints) and checked question-by-question against every lesson on file to confirm zero reused questions.',
+      note: 'A genuine, complete ASMOPSS 2024 Grade 4 Science competition paper (Set B, sat 4 Aug 2024 in Thailand), converted into an interactive, self-scoring test - real diagrams from the original paper, official ASMOPSS weighting (Part 1 16Q &times; 1.25 marks, Part 2 16Q &times; 2.5 marks, Part 3 8Q &times; 5 marks, 100 marks total, pass bar 80/100). Answers verified against the official ASMOPSS answer key (incl. the official Q39 "free credit" ruling for an incomplete question). This is a benchmark/practice paper, separate from the U1-U40 unit rotation - great for testing exam-day readiness under real competition conditions. Not yet taken.',
       status: 'pending'
+    },
+    {
+      n: 'M1', badge: 'linear-gradient(135deg,#DAA520,#8a6a00)',
+      title: 'Milestone Test 1 - All Units (U1-U10)',
+      tags: [
+        { t:'&#9989; 39/40 PASS - 99% personal best', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Section A 15/16, Section B 16/16', c:'tgreen' },
+        { t:'Section C 8/8 PERFECT', c:'tblue' },
+        { t:'Only miss Q5', c:'torange' }
+      ],
+      note: 'Scored 39/40 (98.75/100 marks, 99%) - a commanding PASS above the 80/100 bar and Prem&#39;s best result of the whole program, up +26.25 marks from the 72.5/100 baseline. Section A (basic recall) 15/16 - one miss, Q5 (bacteria/fungi classification - chose Plants instead of Microorganisms), an easy-question recall slip, not a real gap (U4 Microorganisms was a separate 15/15 perfect). Section B (applying) 16/16 - perfect. Section C (think like a scientist) 8/8 - perfect, and built + verified under the new ANSWER-BALANCE RULE, so this result fully resolves the answer-length/position hint caveat flagged after U8-U10. Every original baseline gap cluster is now closed under exam-style weighted-mark conditions. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 10, badge: 'linear-gradient(135deg,#1565C0,#64B5F6)',
