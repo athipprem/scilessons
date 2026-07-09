@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '7 Jul 2026',
+  updated:        '9 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,29 +13,27 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:11, topic:'Biology: Human Body Systems', status:'Lessons + test ready &middot; 20 questions, directly patches the Competition paper&#39;s Q24 gas-exchange gap' },
+  currentUnit: { n:12, topic:'Chemistry: Materials - Origins &amp; Classification', status:'Lessons + test ready &middot; 20 questions, directly patches the Competition paper&#39;s Q2 and Q17 material-classification gaps' },
 
   lastUnit: {
-    n:'M1', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, delta:4, prevScore:19,
-    patternLabel: 'Milestone Test 1 result - All Units, U1-U10 (39/40, 98.75/100 marks, 99% - PASS, personal best)',
-    patternInsight: '<strong>39/40 questions, 98.75/100 marks (99%)</strong> - pass bar is 80/100, a commanding PASS and Prem&#39;s best result of the whole program. Section A (basic recall, 1.25 marks each) = <strong>15/16 (18.75/20 marks)</strong> - one miss, Q5 ("Bacteria and fungi are both examples of:" - correct answer Microorganisms, Prem chose Plants), a definition slip on an easy opening question, not a real content gap (U4 Microorganisms was a separate 15/15 perfect). Section B (applying, 2.5 marks each) = <strong>16/16 (40/40 marks)</strong> - perfect. Section C (think like a scientist, applied reasoning, 5 marks each) = <strong>8/8 (40/40 marks)</strong> - perfect, and taken entirely under the new ANSWER-BALANCE RULE (no answer-length/position hints), so this result is a clean, unhinted confirmation of applied-reasoning mastery.',
-    analysisLabel: 'vs baseline: +26.25 marks (72.5 &rarr; 98.75/100) &middot; Target: GOLD &middot; next up: Unit 11 (resuming the rotation)',
-    analysisInsight: 'Milestone Test 1 closes out the U1-U10 block and directly answers the question the baseline diagnostic raised back on 28 Jun: <strong>from 72.5/100 to 98.75/100</strong>, a +26.25-mark jump, with every one of the original baseline gap clusters (Plants, Matter &amp; Mass, circuits, classification, magnets, heat, astronomy) now fully closed under exam-style weighted-mark conditions. The single miss (Q5) is an isolated recall slip on an easy question, not a pattern - Prem has no other misses anywhere in Section A or B. Most importantly, <strong>Section C&#39;s perfect 8/8 fully resolves the answer-balance caveat</strong> flagged after U8-U10: this test was built and quantitatively checked for balanced option lengths and varied correct-answer positions before Prem sat it, so this 100% reflects genuine applied-reasoning skill, not an answer-pattern hint. All 10 units + Milestone Test 1 are now complete. Unit 11 is next, resuming the normal unit rotation (recommended focus: Biology - Human Body Systems or Cells, continuing the strand rotation).',
-    qSummary: '<strong>39 / 40 (98.75/100 marks, 99%)</strong> - one miss: Q5 (Section A - "bacteria and fungi are both examples of..." - chose Plants instead of Microorganisms, an easy-question recall slip).',
-    qBreakdown: [
-      { q:'Q5', topic:'Biology - what a microorganism is (bacteria &amp; fungi)', lvl:'w', pass:false, note:'Chose "Plants" - correct answer is "Microorganisms". Recall slip on an easy opening question; U4 (Microorganisms, 15/15 perfect) shows this isn&#39;t a real content gap.' }
-    ]
+    n:11, score:20, outOf:20, pct:100, delta:1, prevScore:39,
+    patternLabel: 'Unit 11 result - Biology: Human Body Systems (20/20, 100% - PASS, PERFECT)',
+    patternInsight: '<strong>20/20 questions (100%)</strong> - pass bar is 16/20, a perfect score. Section A (body systems basics, warm-up) = <strong>4/4</strong>. Section B (applying systems &amp; teamwork) = <strong>6/6</strong>. Section C (think like a scientist, applied reasoning) = <strong>10/10</strong> - including three independent sealed-space gas-exchange scenarios (a stuck lift, a sealed blanket, a stuffy classroom) plus a claim-critique question, all answered correctly.',
+    analysisLabel: 'Directly confirms Competition Q24 (gas exchange in sealed spaces) is closed &middot; Target: GOLD &middot; next up: Unit 12 (Materials - Origins &amp; Classification)',
+    analysisInsight: 'Unit 11 is the first unit of the U11-U20 gap-closure plan, and its result is the strongest possible confirmation available: the real ASMOPSS 2024 Competition paper&#39;s Q24 miss (predicting gas changes in a poorly-ventilated space) is directly patched by this unit, and Section C alone carried FOUR separate questions rehearsing that exact reasoning from different angles - all four answered correctly. This is also the second full test scored clean under the ANSWER-BALANCE RULE (after Milestone Test 1&#39;s 8/8), reinforcing that the applied-reasoning strength is genuine, not answer-pattern guessing. Zero misses across all three sections, on content with no prior program exposure - consistent with the "teach from zero" pattern seen since U3. Unit 12 (Chemistry: Materials - Origins &amp; Classification) is next, targeting Competition Q2 (material-origin misclassification) and Q17 (hard/soft/floats-in-oil flowchart).',
+    qSummary: '<strong>20 / 20 (100%) - PERFECT.</strong> No misses across any section.',
+    qBreakdown: []
   },
 
   skills: [
-    { name: 'Biology',                  c: 92, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT - closed G4 Q40 and the U1 Q13 gas-exchange thread; strongest Biology run yet' },
+    { name: 'Biology',                  c: 94, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across three separate topics' },
     { name: 'Chemistry / Matter',       c: 89, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) - two solid passes; U9&#39;s only misses were an opening-question slip and one framing-sensitivity trap, not a core content gap' },
     { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) - closed G4 Q18/19/Q3; strongest strand. U10&#39;s only miss was a friction-inversion slip, same error shape as U6&#39;s conductor/insulator inversion' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8) - eleven results now. The U8-U10 answer-length/position hint caveat is RESOLVED: Milestone 1&#39;s 8/8 was built and quantitatively verified under the new ANSWER-BALANCE RULE (no length/position hints), so this perfect score is a clean, unhinted confirmation of mastery' },
-    { name: 'Applied Reasoning',        c: 93, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8) - comfortably above target across eleven content areas. Milestone 1&#39;s perfect Section C score, taken under the corrected balanced-answer format, resolves the caveat carried since U8' }
+    { name: 'Scientific Investigation', c: 94, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10) - twelve results now. The U8-U10 answer-length/position hint caveat remains RESOLVED across two more clean data points under the ANSWER-BALANCE RULE (Milestone 1 and now U11), confirming genuine applied-reasoning mastery, not an answer-pattern hint' },
+    { name: 'Applied Reasoning',        c: 94, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10) - comfortably above target across twelve content areas. U11&#39;s perfect Section C score directly confirmed the Competition paper&#39;s Q24 gas-exchange gap is closed, under the corrected balanced-answer format' }
   ],
-  radarCurrent:  [92, 89, 92, 90, 93, 93],
+  radarCurrent:  [94, 89, 92, 90, 94, 94],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -51,23 +49,36 @@ var PREM_DATA = {
     { unit:8, topic:'Biology: Photosynthesis', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-05' },
     { unit:9, topic:'Chemistry: Reactions', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-05' },
     { unit:10, topic:'Physics: Forces', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-06' },
-    { unit:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, passBar:32, date:'2026-07-07' }
+    { unit:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, passBar:32, date:'2026-07-07' },
+    { unit:11, topic:'Biology: Human Body Systems', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-09' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 11, badge: 'linear-gradient(135deg,#C2185B,#F06292)',
-      title: 'Biology: Human Body Systems',
+      n: 12, badge: 'linear-gradient(135deg,#37474F,#78909C)',
+      title: 'Chemistry: Materials - Origins &amp; Classification',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'Patches Competition Q24', c:'tblue' },
-        { t:'Resumes rotation post-Milestone 1', c:'torange' }
+        { t:'Patches Competition Q2, Q17', c:'tblue' },
+        { t:'2nd unit of gap-closure plan', c:'torange' }
       ],
-      note: 'First unit of the U11-U20 block. Lesson 1 covers the digestive, respiratory and circulatory systems and how they work as a team. Lesson 2 goes deep on breathing and gas exchange, directly building toward the real ASMOPSS 2024 competition paper&#39;s Q24 miss (gas composition in a poorly-ventilated space) - three fresh enclosed-space scenarios (a stuck lift, a blanket, a stuffy classroom) rehearse this exact reasoning. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/6/4 position spread, only 6/20 questions have a strict-longest correct option, max margin 2 words) and checked for zero reused questions against both lessons (2 real overlaps found and fixed: Q1 and Q8 were rewritten with fresh scenarios). Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;16.',
+      note: 'Second unit of the U11-U20 block. Lesson 1 covers where materials come from (plant, animal, ground/mineral, man-made), directly patching the Competition paper&#39;s Q2 (rubber and silk origin mix-ups). Lesson 2 covers sorting materials by hard/soft, flexible/rigid, and floating/sinking in water vs oil, patching Q17&#39;s hard/soft/floats-in-oil flowchart, plus a Quick Recall bridge to Q13 (magnet vs magnetic material). Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/6/4 position spread, all strict-longest-correct margins &le;2 words) and checked for zero reused questions against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;17.',
       status: 'pending'
+    },
+    {
+      n: 11, badge: 'linear-gradient(135deg,#C2185B,#F06292)',
+      title: 'Biology: Human Body Systems',
+      tags: [
+        { t:'&#9989; 20/20 PERFECT', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 10/10', c:'tgreen' },
+        { t:'Section C 10/10', c:'tblue' },
+        { t:'Confirms Competition Q24 closed', c:'torange' }
+      ],
+      note: 'Scored 20/20 (100%) - a perfect score, comfortably above the 16/20 pass bar, and the first unit of the U11-U20 gap-closure plan. Lesson 1 covered the digestive, respiratory and circulatory systems as a team; Lesson 2 went deep on breathing and gas exchange, directly building toward the real ASMOPSS 2024 competition paper&#39;s Q24 miss (gas composition in a poorly-ventilated space). Section C alone carried FOUR questions rehearsing that exact reasoning across fresh scenarios (a stuck lift, a sealed blanket, a stuffy classroom, and a claim-critique) - all four answered correctly, directly confirming the Q24 gap is closed, not just taught. Second full test scored clean under the ANSWER-BALANCE RULE (after Milestone Test 1&#39;s 8/8). Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 'C1', badge: 'linear-gradient(135deg,#1a237e,#b71c1c)',
