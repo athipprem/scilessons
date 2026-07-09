@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 13 Test — Physics: Light</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 13 Test — Physics: Light</b>
+      <span class="sub" id="hdr-sub">Light sources &amp; how light travels • Shadows, umbra &amp; penumbra • Thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' or 'scenario' questions, ask: what changed, what stayed the same, and what does the evidence actually show?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 13;
+const UNIT_TITLE = "Physics: Light";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Light Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"Which of these objects is LUMINOUS — it makes its own light?",
+    options:["A switched-off torch","A mirror reflecting sunlight","A burning candle flame","A book lying in the sun"], ans:3,
+    why:"A burning candle flame makes its own light through burning, so it is luminous — the other three only reflect light." },
+  { n:2, section:'A', star:0, body:"The Sun and a lit birthday candle are both light sources. Which describes them correctly?",
+    options:["Both are luminous, but only the Sun is a natural light source","Neither the Sun nor the candle is a real light source at all","Both the Sun and the candle are actually non-luminous objects","Both the Sun and the candle are man-made light sources"], ans:1,
+    why:"Both make their own light (luminous), but the Sun is natural while a candle flame is made by people (man-made)." },
+  { n:3, section:'A', star:0, body:"If you shine a torch across a dark room with nothing at all in its path, what shape will the beam of light make?",
+    options:["A wavy, curving beam","A zig-zag beam","A spiral beam","A straight-line beam"], ans:4,
+    why:"With nothing to interrupt it, a light beam always travels in a straight line." },
+  { n:4, section:'A', star:0, body:"Wood, metal, and a thick book all share one property that lets each of them cast a full, strong shadow. What is that shared property?",
+    options:["They are all completely transparent","They are all opaque","They are all translucent","They all let light pass straight through them"], ans:2,
+    why:"Opaque materials block ALL light completely, which is exactly what produces a full, strong shadow." },
+
+  /* ===================== SECTION B — Applying Light & Shadows (2.5-style, star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"You can see a football lying in a park even though the ball doesn't glow. Why?",
+    options:["Light from the Sun bounces (reflects) off the ball and travels into your eyes","The ball is actually a luminous object","Your eyes actually send out their own invisible light rays that shine onto the ball","The ball absorbs all light, which is why you see it"], ans:1,
+    why:"The ball is non-luminous — it's only visible because sunlight reflects off it and travels into your eyes." },
+  { n:6, section:'B', star:1, body:"A sheet of frosted (translucent) glass is held up in sunlight. What kind of shadow would it cast on the floor?",
+    options:["A perfectly dark, sharp-edged shadow, just like opaque wood","No shadow at all, because glass is always fully transparent","A faint, blurry shadow, because some light still gets scattered through","A shadow that is darker than an opaque object's shadow"], ans:3,
+    why:"Translucent materials let some scattered light through, so they cast a faint, blurry shadow rather than a strong dark one." },
+  { n:7, section:'B', star:1, body:"A single small star, extremely far away, shines on an astronaut's helmet in space. What kind of shadow edge would you expect?",
+    options:["A soft, fuzzy edge with a wide penumbra","A sharp, crisp edge, since the star acts like a single point source","No shadow at all, since stars are too far away to matter","A shadow that changes colour depending on the material"], ans:2,
+    why:"A single distant star behaves like a point source, which always produces a sharp-edged shadow with no penumbra." },
+  { n:8, section:'B', star:1, body:"A row of ceiling lights spanning the whole width of a classroom shines down on a raised hand. What kind of shadow edge would you expect on the desk below?",
+    options:["A perfectly sharp edge, with no penumbra at all","No shadow at all, since there are multiple lights","An edge that flickers on and off","A softer, fuzzier edge, with a wider penumbra fringe"], ans:4,
+    why:"A wide row of lights acts as a broad source, which always produces a softer edge with more penumbra." },
+  { n:9, section:'B', star:1, body:"Astronomers give a special name to the very darkest part of the Moon's shadow during a solar eclipse — the part where the Sun is completely blocked out. What is it called?",
+    options:["The umbra","The penumbra","The reflection zone","The luminous zone"], ans:1,
+    why:"The umbra is the fully dark region of a shadow where no light reaches at all." },
+  { n:10, section:'B', star:1, body:"In a shadow cast by a broad light source, the softer, partly-lit fringe around the dark centre is called the...",
+    options:["Umbra","Aura","Penumbra","Translucence"], ans:3,
+    why:"The penumbra is the softer, partly-lit fringe surrounding the fully dark umbra." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A classroom's long fluorescent light tube shines down on a raised pencil case sitting on a desk. Based on what you know about broad light sources, what should the pencil case's shadow look like?",
+    options:["One perfectly sharp-edged dark shape, with no fuzzy fringe at all","A dark central stripe (umbra) with a softer, blurrier fringe (penumbra) around its edges","No shadow at all, since fluorescent tubes are too dim","A shadow exactly the same width as the tube itself, with hard edges"], ans:2,
+    why:"A fluorescent tube is a broad source, so its shadow shows a dark umbra centre with a softer penumbra fringe, not one sharp edge." },
+  { n:12, section:'C', star:2, body:"On a heavily overcast (cloudy) day, the whole sky acts like one giant broad light source instead of one small bright Sun. What effect should this have on shadows outdoors?",
+    options:["Shadows should disappear completely because clouds are non-luminous objects","Shadows should turn a different colour, like grey or blue","Shadows should become much sharper and darker than on a sunny day","Shadows should become much softer and fuzzier, or almost disappear entirely"], ans:4,
+    why:"An overcast sky behaves like an extremely broad, diffuse source, producing very soft, fuzzy shadows with a huge penumbra." },
+  { n:13, section:'C', star:2, body:"A tiny laser pointer dot, held far across a room, shines on a raised finger. Based on how point sources behave, what should the finger's shadow look like on the wall behind it?",
+    options:["A single, sharp-edged dark shape with no soft fringe around it","A shape with a dark centre and a wide, fuzzy penumbra fringe","No shadow at all, since laser pointers cannot cast shadows","A shadow that is brighter than the surrounding wall around it"], ans:1,
+    why:"A laser pointer is essentially a single point source, so its shadow has one sharp edge with no penumbra." },
+  { n:14, section:'C', star:2, body:"During the day, the Moon is sometimes visible in the sky even though the Sun is also up. Someone says 'the Moon must be making its own light right now.' What's the best correction?",
+    options:["Yes, the Moon actually only makes its own light specifically during the daytime hours","Yes, because anything that is visible at all in a bright daytime sky must be luminous","No — the Moon never makes its own light; it's always just reflecting sunlight, day or night","No, the Moon is actually completely invisible during the day, so this claim can't possibly be true"], ans:3,
+    why:"The Moon is always non-luminous — it only ever reflects sunlight, whether it's visible during the day or at night." },
+  { n:15, section:'C', star:2, body:"A film crew compares two setups for lighting an actor's face: Setup 1 uses one small bare light bulb close to the actor. Setup 2 uses a large flat panel light the same distance away. Which setup will create harsher, more sharply-edged shadows on the actor's face?",
+    options:["Neither setup will create any visible shadow whatsoever","Setup 1, the small bare bulb, because it behaves more like a point source","Both setups will look exactly identical, with no differences at all","Setup 2, the large flat panel, because bigger lights always make harsher shadows"], ans:2,
+    why:"A small bare bulb behaves more like a point source, which produces harsher, sharper-edged shadows than a large broad panel." },
+  { n:16, section:'C', star:2, body:"A student holds a sheet of wax paper (translucent) up to sunlight and notices the shadow on the table below is grey and blurry rather than pitch black. What's the best explanation?",
+    options:["Wax paper is fully opaque, so this observation must be a mistake","Wax paper is transparent, so no shadow should be possible at all","The Sun must have been acting like a broad source that particular day","Wax paper is translucent, so some scattered light still gets through"], ans:4,
+    why:"Wax paper is translucent, letting some scattered light pass through, which is why its shadow is grey and blurry rather than fully dark." },
+  { n:17, section:'C', star:2, body:"Two identical coins are each held the same distance above a table. Coin A is lit by a single point-like LED far away. Coin B is lit by a wide bank of ceiling lights. Which coin's shadow should have the WIDER, fuzzier penumbra fringe?",
+    options:["Coin B, because a wider light source always produces more penumbra","Coin A, because point sources always create the widest penumbra","Both coins will show exactly identical amounts of penumbra","Neither coin will show any penumbra, since coins are too small"], ans:1,
+    why:"A wider light source (like Coin B's bank of ceiling lights) always produces more penumbra than a point-like source." },
+  { n:18, section:'C', star:2, body:"A shadow is described as having NO fuzzy penumbra fringe at all, just one sharp dark region. Which light source setup most likely produced it?",
+    options:["A wide bank of overlapping ceiling lights","An overcast, cloudy sky covering the entire horizon","A single small, distant point source, like one faraway star","A large studio softbox light panel close to the subject"], ans:3,
+    why:"Only a point source produces a shadow with no penumbra at all — every broad source produces at least some fuzzy fringe." },
+  { n:19, section:'C', star:2, body:"A student claims: 'A translucent material always casts an identical shadow to a fully opaque material, since both block some light.' Is this claim correct?",
+    options:["Yes, because both materials block at least some amount of light overall","No — opaque blocks ALL the light for a strong shadow, translucent only blocks SOME","No, because translucent materials actually block MORE light than opaque materials do","Yes, but only when the light source itself is a broad, wide source"], ans:2,
+    why:"Opaque materials block all light for a strong, dark shadow, while translucent materials only block some, giving a much fainter shadow — they are not identical." },
+  { n:20, section:'C', star:2, body:"An opaque ball is lit by a broad, wide light source. Based on everything you've learned, which best describes the shadow it casts?",
+    options:["A faint, barely-visible shadow with no clearly defined edges at all","A perfectly sharp-edged shadow with absolutely no penumbra at all, since the ball itself is opaque","No shadow at all, since broad light sources are physically unable to cast any shadows","A strong, dark shadow overall, with a clear umbra centre and a softer penumbra fringe"], ans:4,
+    why:"Being opaque makes the shadow strong and dark overall; being lit by a broad source gives it a clear umbra centre plus a softer penumbra fringe." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Light Basics (warm-up)",
+  B: "SECTION B — Applying Light & Shadows (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(2,'0');
+  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
