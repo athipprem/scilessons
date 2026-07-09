@@ -13,7 +13,7 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:11, topic:'Up next - recommended focus: Biology (Human Body Systems / Cells)', status:'Not yet built &middot; Unit 11 lessons + test coming soon, resuming the U1-U40 rotation after Milestone Test 1' },
+  currentUnit: { n:11, topic:'Biology: Human Body Systems', status:'Lessons + test ready &middot; 20 questions, directly patches the Competition paper&#39;s Q24 gas-exchange gap' },
 
   lastUnit: {
     n:'M1', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, delta:4, prevScore:19,
@@ -58,16 +58,28 @@ var PREM_DATA = {
 
   unitLog: [
     {
+      n: 11, badge: 'linear-gradient(135deg,#C2185B,#F06292)',
+      title: 'Biology: Human Body Systems',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
+        { t:'Patches Competition Q24', c:'tblue' },
+        { t:'Resumes rotation post-Milestone 1', c:'torange' }
+      ],
+      note: 'First unit of the U11-U20 block. Lesson 1 covers the digestive, respiratory and circulatory systems and how they work as a team. Lesson 2 goes deep on breathing and gas exchange, directly building toward the real ASMOPSS 2024 competition paper&#39;s Q24 miss (gas composition in a poorly-ventilated space) - three fresh enclosed-space scenarios (a stuck lift, a blanket, a stuffy classroom) rehearse this exact reasoning. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/6/4 position spread, only 6/20 questions have a strict-longest correct option, max margin 2 words) and checked for zero reused questions against both lessons (2 real overlaps found and fixed: Q1 and Q8 were rewritten with fresh scenarios). Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;16.',
+      status: 'pending'
+    },
+    {
       n: 'C1', badge: 'linear-gradient(135deg,#1a237e,#b71c1c)',
       title: 'ASMOPSS 2024 - Science G4 (Set B) - Real Competition Paper',
       tags: [
-        { t:'Ready &#128221;', c:'tpurple' },
-        { t:'40 Questions - real past paper', c:'tgreen' },
-        { t:'Weighted marks (100 total)', c:'tblue' },
-        { t:'Benchmarks vs 72.5/100 baseline', c:'torange' }
+        { t:'&#9888; 20/40 - 53% - below pass', s:'background:#ffe0b2;color:#c05621;font-weight:700' },
+        { t:'13/20 misses on untaught topics', c:'tblue' },
+        { t:'Only 1 clear miss on taught content', c:'tgreen' },
+        { t:'Curriculum-breadth signal, not a regression', c:'torange' }
       ],
-      note: 'A genuine, complete ASMOPSS 2024 Grade 4 Science competition paper (Set B, sat 4 Aug 2024 in Thailand), converted into an interactive, self-scoring test - real diagrams from the original paper, official ASMOPSS weighting (Part 1 16Q &times; 1.25 marks, Part 2 16Q &times; 2.5 marks, Part 3 8Q &times; 5 marks, 100 marks total, pass bar 80/100). Answers verified against the official ASMOPSS answer key (incl. the official Q39 "free credit" ruling for an incomplete question). This is a benchmark/practice paper, separate from the U1-U40 unit rotation - great for testing exam-day readiness under real competition conditions. Not yet taken.',
-      status: 'pending'
+      note: 'A genuine, complete ASMOPSS 2024 Grade 4 Science competition paper (Set B, sat 4 Aug 2024 in Thailand), converted into an interactive, self-scoring test - real diagrams from the original paper, official ASMOPSS weighting (100 marks total, pass bar 80/100). Answers verified against the official ASMOPSS answer key. Sat 7 Jul 2026: <strong>20/40 questions, 52.5/100 marks (53%) - below pass.</strong> 13 of 20 misses were on topics never taught yet (sound, energy transformation, environmental science, density, germination, tides, meteor showers, detailed flower anatomy). Only 1 clear miss (a photosynthesis leaf-swap slip) was on solidly-taught content. This is a curriculum-breadth signal, not a mastery regression - see Executive Summary &sect;15 for the full miss-by-miss analysis. Directly informed the U11-U20 GAP-CLOSURE PLAN (&sect;16), which folds every one of these gap topics into the next 10 units.',
+      status: 'done'
     },
     {
       n: 'M1', badge: 'linear-gradient(135deg,#DAA520,#8a6a00)',

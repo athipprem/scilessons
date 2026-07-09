@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem's Science Test Workflow — Luikishi</title>
+<style>
+:root{ color-scheme:light; }
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#FFFBEF; color:#2b2205; font-size:14px; line-height:1.5; padding:24px; }
+.wrap{ max-width:1180px; margin:0 auto; }
+
+/* header */
+header{ margin-bottom:18px; }
+h1{ font-size:22px; font-weight:800; color:#4a3800; }
+.subtitle{ font-size:12px; color:#8a7a4a; margin-top:2px; }
+.hero{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:16px; }
+.hero-box{ background:#fff; border:1px solid #f0dfa8; border-radius:12px; padding:12px 16px; }
+.hero-val{ font-size:20px; font-weight:800; color:#2b2205; }
+.hero-lbl{ font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; color:#8a7a4a; margin-top:2px; }
+.hero-sub{ font-size:10.5px; color:#a89568; margin-top:1px; font-weight:600; }
+
+/* explainer strip */
+.explainer{ background:#fff; border:1px solid #f0dfa8; border-radius:12px; padding:14px 18px; margin:18px 0; font-size:12.5px; color:#4a5568; }
+.explainer b{ color:#4a3800; }
+.mini-cadence{ display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; font-size:11px; }
+.mini-chip{ background:#f5faf6; border:1px solid #e2e8f0; border-radius:8px; padding:4px 9px; font-weight:700; color:#4a5568; }
+.mini-chip.gold{ background:#fff8e1; border-color:#e0a800; color:#8a6a00; }
+.mini-arrow{ color:#c9b98a; font-weight:700; }
+
+/* filters */
+.filters{ display:flex; gap:8px; margin:18px 0 8px; flex-wrap:wrap; }
+.filter-btn{ border:none; border-radius:20px; padding:8px 16px; font-size:12px; font-weight:700; cursor:pointer; background:#eceff1; color:#546e7a; transition:all .15s; }
+.filter-btn:hover{ background:#e2e8f0; }
+.filter-btn.active[data-f="all"]{ background:#4a3800; color:#fff; }
+.filter-btn.active[data-f="baseline"]{ background:linear-gradient(135deg,#4527A0,#7C3AED); color:#fff; }
+.filter-btn.active[data-f="unit"]{ background:linear-gradient(135deg,#1565C0,#43a047); color:#fff; }
+.filter-btn.active[data-f="milestone"]{ background:linear-gradient(135deg,#DAA520,#8a6a00); color:#fff; }
+.filter-btn.active[data-f="competition"]{ background:linear-gradient(135deg,#1a237e,#b71c1c); color:#fff; }
+.filter-btn.active[data-f="future"]{ background:#78909c; color:#fff; }
+
+/* flow */
+.flow-section{ background:#fff; border:1px solid #f0dfa8; border-radius:14px; padding:20px; margin-bottom:18px; }
+.flow-title{ font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#8a7a4a; margin-bottom:14px; }
+.flow{ display:flex; align-items:stretch; flex-wrap:wrap; gap:0; row-gap:14px; }
+.node-wrap{ display:flex; align-items:center; }
+.arrow{ color:#dfd2a8; font-size:16px; padding:0 4px; user-select:none; align-self:center; }
+.node{ position:relative; width:96px; min-height:96px; border-radius:12px; border:2px solid transparent; background:#fff; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:8px 6px; transition:all .15s; text-align:center; }
+.node:hover{ transform:translateY(-3px); box-shadow:0 6px 16px rgba(0,0,0,.12); }
+.node.dim{ opacity:.28; filter:grayscale(.4); }
+.node.selected{ box-shadow:0 0 0 3px rgba(0,0,0,.08); }
+.node-icon{ font-size:20px; }
+.node-label{ font-size:11px; font-weight:800; color:#2b2205; }
+.node-score{ font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:10px; margin-top:2px; white-space:nowrap; }
+
+/* type coloring */
+.node.baseline{ background:#f3e9ff; border-color:#c9a8f5; }
+.node.baseline .node-score{ background:#e4d4fb; color:#4527A0; }
+.node.unit{ background:#eef7ee; border-color:#a8d8ad; }
+.node.unit .node-score{ background:#e6f4ea; color:#1b5e20; }
+.node.unit.perfect{ background:#fff8e1; border-color:#ffd54f; }
+.node.unit.perfect .node-score{ background:#fff3cd; color:#8a6a00; }
+.node.milestone{ background:#fff8e1; border-color:#DAA520; border-width:3px; width:104px; min-height:104px; }
+.node.milestone .node-score{ background:#fff3cd; color:#8a6a00; }
+.node.competition{ background:#e8eaf6; border-color:#5c6bc0; }
+.node.competition .node-score{ background:#ffcdd2; color:#7f0000; }
+.node.competition.pass .node-score{ background:#e6f4ea; color:#1b5e20; }
+.node.next{ background:#fff3cd; border-color:#FFA500; border-style:dashed; animation:pulse 1.8s infinite; }
+.node.next .node-score{ background:#ffe0b2; color:#c05621; }
+.node.future{ background:#f3f3f3; border-color:#d0d0d0; opacity:.75; }
+.node.future .node-score{ background:#e0e0e0; color:#888; }
+@keyframes pulse{ 0%{ box-shadow:0 0 0 0 rgba(255,165,0,.45); } 70%{ box-shadow:0 0 0 10px rgba(255,165,0,0); } 100%{ box-shadow:0 0 0 0 rgba(255,165,0,0); } }
+.today-tag{ position:absolute; top:-11px; left:50%; transform:translateX(-50%); background:#c05621; color:#fff; font-size:8.5px; font-weight:800; padding:2px 7px; border-radius:8px; letter-spacing:.4px; white-space:nowrap; }
+
+/* legend */
+.legend{ display:flex; gap:16px; flex-wrap:wrap; margin-top:16px; padding-top:14px; border-top:1px solid #f0dfa8; font-size:11px; color:#4a5568; }
+.legend-item{ display:flex; align-items:center; gap:6px; }
+.legend-dot{ width:12px; height:12px; border-radius:4px; flex-shrink:0; }
+
+/* detail panel */
+.detail{ background:#fff; border:1px solid #f0dfa8; border-radius:14px; padding:20px 22px; min-height:120px; }
+.detail-empty{ color:#a89568; font-size:12.5px; text-align:center; padding:24px 0; }
+.d-head{ display:flex; align-items:baseline; justify-content:space-between; flex-wrap:wrap; gap:8px; margin-bottom:10px; }
+.d-title{ font-size:16px; font-weight:800; color:#2b2205; }
+.d-date{ font-size:11px; color:#8a7a4a; font-weight:600; }
+.d-badge{ display:inline-block; font-size:11px; font-weight:700; padding:3px 10px; border-radius:10px; margin-bottom:10px; }
+.d-sections{ display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin:12px 0; }
+.d-sec{ background:#f5faf6; border:1px solid #f0dfa8; border-radius:8px; padding:8px 10px; }
+.d-sec .k{ font-size:9.5px; font-weight:700; text-transform:uppercase; color:#8a7a4a; letter-spacing:.4px; }
+.d-sec .v{ font-size:14px; font-weight:800; color:#2b2205; margin-top:2px; }
+.d-note{ font-size:12.5px; color:#4a5568; line-height:1.65; margin-top:8px; }
+
+footer{ text-align:center; font-size:10.5px; color:#a89568; margin-top:20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <h1>&#128218; Prem's Science Test Workflow</h1>
+  <div class="subtitle">Coach: Luikishi &middot; Grade 4 &middot; ASMOPSS 2026 Science (9 Aug 2026) &middot; Target: &#129351; GOLD</div>
+  <div class="hero" id="hero"></div>
+</header>
+
+<div class="explainer">
+  <b>How the testing system works:</b> lessons build toward a <b>Unit Test</b> for each topic. Every <b>10 unit tests</b>, Prem sits a cumulative <b>Milestone Test</b> (weighted marks, benchmarked against the original baseline). Separately, real past <b>Competition papers</b> (actual ASMOPSS exams) are used as standalone benchmarks any time, outside this rotation, to stress-test exam-day readiness on the full syllabus.
+  <div class="mini-cadence">
+    <span class="mini-chip">Unit 1</span><span class="mini-arrow">&#8594;</span>
+    <span class="mini-chip">Unit 2</span><span class="mini-arrow">&#8594;</span>
+    <span class="mini-chip">&hellip;</span><span class="mini-arrow">&#8594;</span>
+    <span class="mini-chip">Unit 10</span><span class="mini-arrow">&#8594;</span>
+    <span class="mini-chip gold">&#127942; Milestone</span><span class="mini-arrow">&#8594;</span>
+    <span class="mini-chip">repeat&hellip;</span>
+    <span style="margin-left:14px;color:#c9b98a">|</span>
+    <span class="mini-chip" style="background:#e8eaf6;color:#3949ab;border-color:#5c6bc0">&#129351; Competition paper (anytime, parallel track)</span>
+  </div>
+</div>
+
+<div class="filters" id="filters">
+  <button class="filter-btn active" data-f="all">All</button>
+  <button class="filter-btn" data-f="baseline">Baseline / Diagnostic</button>
+  <button class="filter-btn" data-f="unit">Unit Tests</button>
+  <button class="filter-btn" data-f="milestone">Milestones</button>
+  <button class="filter-btn" data-f="competition">Competitions</button>
+  <button class="filter-btn" data-f="future">Upcoming</button>
+</div>
+
+<div class="flow-section">
+  <div class="flow-title">Full Chronological Journey — click any test for details</div>
+  <div class="flow" id="flow"></div>
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#e4d4fb;border:2px solid #c9a8f5"></span>Baseline / diagnostic</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e6f4ea;border:2px solid #a8d8ad"></span>Unit test — pass</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fff3cd;border:2px solid #ffd54f"></span>Unit test — perfect &#127775;</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fff3cd;border:3px solid #DAA520"></span>Milestone test</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#e8eaf6;border:2px solid #5c6bc0"></span>Competition paper</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#fff3cd;border:2px dashed #FFA500"></span>Next up (highlighted)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f3f3f3;border:2px solid #d0d0d0"></span>Not yet built</div>
+  </div>
+</div>
+
+<div class="detail" id="detail">
+  <div class="detail-empty">Click any test above to see its full score breakdown and notes.</div>
+</div>
+
+<footer id="footer"></footer>
+
+</div>
+
+<script>
+// ---- Live data (kept in sync with prem_data.js / Results JSON — last synced 7 Jul 2026) ----
+var ASMOPSS_DATE = '2026-08-09';
+var TODAY_ID = 'u11'; // current position — highlighted as "next"
+
+var NODES = [
+  { id:'g3', type:'baseline', label:'G3 2025', icon:'&#127941;', date:'Aug 2025', title:'Prior — ASMOPSS 2025 Grade 3 Science (official result)',
+    score:'55.5/100', scoreClass:'ok', badge:'Honorable Mention &middot; 88.66th percentile',
+    sections:[['Score','55.5/100'],['Rank','306 / 2,833'],['Applied vs field','50% vs 32%']],
+    note:'Official Grade 3 result. Field mean 38.8 (~+1.3 SD). By strand: Physical 66% strongest, Biology 50% weakest. Applied reasoning already a relative strength — the exact thing ASMOPSS rewards most.' },
+  { id:'g4', type:'baseline', label:'G4 Baseline', icon:'&#128203;', date:'27 Jun 2026', title:'Baseline — ASMOPSS 2025 Grade 4 Science paper (self-administered diagnostic)',
+    score:'72.5/100', scoreClass:'ok', badge:'28/40 questions &middot; Diagnostic',
+    sections:[['Marks','72.5/100'],['Questions','28/40'],['Lost','27.5 marks']],
+    note:'8 of 12 misses were the high-value 2.5/5-mark applied questions. Two clusters found: Plants (Q20,24,34,40) and Matter & Mass (Q7,11,33). This became the starting point every unit test and milestone is benchmarked against.' },
+  { id:'u1', type:'unit', label:'U1', icon:'&#128218;', date:'2 Jul 2026', title:'Unit 1 — Biology: Plants', score:'14/15', pct:93, scoreClass:'pass',
+    sections:[['Score','14/15 (93%)'],['Sections A+B','10/10'],['Section C','4/5']],
+    note:'Only miss: Q13 (leaf bubbles = stomata/air escaping, said "food made by leaf" — mixed up photosynthesis with gas exchange). Closed the baseline Plants cluster (Q20,24,34).' },
+  { id:'u2', type:'unit', label:'U2', icon:'&#128218;', date:'2 Jul 2026', title:'Unit 2 — Chemistry/Matter: What Is Matter?', score:'15/15', pct:100, scoreClass:'perfect',
+    sections:[['Score','15/15 (100%)'],['Sections A+B','10/10'],['Section C','5/5']],
+    note:'Perfect score. Closed the baseline Matter & Mass cluster (Q7,11,33). First test in the new single-page HTML format.' },
+  { id:'u3', type:'unit', label:'U3', icon:'&#128218;', date:'2 Jul 2026', title:'Unit 3 — Physics: Magnetism &amp; Heat', score:'15/15', pct:100, scoreClass:'perfect',
+    sections:[['Score','15/15 (100%)'],['Sections A+B','10/10'],['Section C','5/5']],
+    note:'Perfect score. Resolved baseline Q18 (magnet-row arrangement) and Q19 (heat-conduction fair test).' },
+  { id:'u4', type:'unit', label:'U4', icon:'&#128218;', date:'3 Jul 2026', title:'Unit 4 — Biology: Microorganisms', score:'15/15', pct:100, scoreClass:'perfect',
+    sections:[['Score','15/15 (100%)'],['Sections A+B','10/10'],['Section C','5/5']],
+    note:'Perfect score. Resolved baseline Q40 (bread-mould, air/water/food). Every clustered baseline gap now closed.' },
+  { id:'u5', type:'unit', label:'U5', icon:'&#128218;', date:'4 Jul 2026', title:'Unit 5 — Chemistry: States of Matter &amp; Materials', score:'13/15', pct:87, scoreClass:'pass',
+    sections:[['Score','13/15 (87%)'],['Sections A+B','8/10'],['Section C','5/5']],
+    note:'Missed Q1 (heating vs cooling change-of-state direction) and Q10 (two-property classification, opposite corner). First non-perfect since U1.' },
+  { id:'u6', type:'unit', label:'U6', icon:'&#128218;', date:'4 Jul 2026', title:'Unit 6 — Physics: Electricity &amp; Circuits', score:'14/15', pct:93, scoreClass:'pass',
+    sections:[['Score','14/15 (93%)'],['Sections A+B','9/10'],['Section C','5/5']],
+    note:'Missed Q7 — picked two conductors when asked for a pair of insulators (property inversion). Resolved baseline Q3 (energy form in a circuit).' },
+  { id:'u7', type:'unit', label:'U7', icon:'&#128218;', date:'5 Jul 2026', title:'Unit 7 — Earth &amp; Space: Astronomy', score:'15/15', pct:100, scoreClass:'perfect',
+    sections:[['Score','15/15 (100%)'],['Sections A+B','10/10'],['Section C','5/5']],
+    note:'Perfect score. Resolved baseline Q32 — the very last individual question remaining anywhere on the original diagnostic.' },
+  { id:'u8', type:'unit', label:'U8', icon:'&#128218;', date:'5 Jul 2026', title:'Unit 8 — Biology: Photosynthesis', score:'20/20', pct:100, scoreClass:'perfect',
+    sections:[['Score','20/20 (100%)'],['Sections A+B','10/10'],['Section C','10/10']],
+    note:'Perfect score — first test in the new 20-question format (4A/6B/10C). Closed the U1 Q13 / baseline Q34 photosynthesis-vs-gas-exchange thread.' },
+  { id:'u9', type:'unit', label:'U9', icon:'&#128218;', date:'5 Jul 2026', title:'Unit 9 — Chemistry: Reactions', score:'18/20', pct:90, scoreClass:'pass',
+    sections:[['Score','18/20 (90%)'],['Section A','3/4'],['Section B','6/6'],['Section C','9/10']],
+    note:'Missed Q1 (opening-question definition slip) and Q11 (colour-change-as-proof trap in a paint-mixing framing). Ended a 7-straight Section C 100% streak.' },
+  { id:'u10', type:'unit', label:'U10', icon:'&#128218;', date:'6 Jul 2026', title:'Unit 10 — Physics: Forces', score:'19/20', pct:95, scoreClass:'pass',
+    sections:[['Score','19/20 (95%)'],['Section A','4/4'],['Section B','5/6'],['Section C','10/10']],
+    note:'Missed Q7 — ice-rink friction inversion, same error shape as U6 Q7. Also: found the answer-length/position hint bug in Section C (fixed via the new ANSWER-BALANCE RULE from Milestone 1 onward). 10th and last unit test before Milestone 1.' },
+  { id:'m1', type:'milestone', label:'M1', icon:'&#127942;', date:'7 Jul 2026', title:'Milestone Test 1 — All Units (U1&ndash;U10)', score:'39/40', pct:99, scoreClass:'perfect',
+    badge:'98.75 / 100 marks &middot; PASS &middot; personal best',
+    sections:[['Marks','98.75/100 (99%)'],['Section A','15/16'],['Section B','16/16'],['Section C','8/8'],['vs baseline','+26.25 marks']],
+    note:'Only miss: Q5 (bacteria/fungi classified as Plants instead of Microorganisms — old U4 content, a retention slip). Section C held at 8/8 under the FIRST properly answer-balanced format — confirms the applied-reasoning streak is genuine, not answer-length pattern-guessing.' },
+  { id:'c1', type:'competition', label:'C1', icon:'&#129351;', date:'7 Jul 2026', title:'ASMOPSS 2024 — Real Competition Paper (Grade 4, Set B)', score:'20/40', pct:53, scoreClass:'fail',
+    badge:'52.5 / 100 marks &middot; BELOW PASS (bar 80)',
+    sections:[['Marks','52.5/100 (53%)'],['Part 1','8/16'],['Part 2','7/16'],['Part 3','5/8'],['vs baseline','&minus;20 marks']],
+    note:'A genuine, unmodified real ASMOPSS 2024 G4 paper. 13 of 20 misses were on topics never taught yet (sound, energy transformation, environmental science, density, germination, tides, meteor showers, detailed flower anatomy). Only 1 clear miss was on solidly-taught content (a photosynthesis leaf-swap slip). This is a curriculum-breadth signal, not a mastery regression — see Executive Summary &sect;15.' },
+  { id:'u11', type:'unit', status:'next', label:'U11', icon:'&#9203;', date:'Not yet built', title:'Unit 11 — recommended: Biology (Human Body Systems)', score:'Next up', scoreClass:'next',
+    sections:[['Status','Not yet built'],['Recommended','Human Body Systems'],['Why now','C1 surfaced a real respiratory/gas-exchange gap (Q24) — this topic directly patches it']],
+    note:'Resumes the rotation after Milestone 1. Candidate topics: Human Body Systems (organ systems, breathing/gas exchange — directly relevant after C1\'s Q24 miss) or Cells (plant vs animal cells, building on U8\'s chlorophyll content). Not yet decided or built.' },
+  { id:'future', type:'future', label:'U12&ndash;U20', icon:'&#128274;', date:'Upcoming', title:'Units 12&ndash;20 &rarr; Milestone Test 2', score:'Not built',
+    sections:[['Cadence','9 more unit tests + Milestone 2'],['Rotation topics left','Cells, Ecosystems, Light, Water Cycle']],
+    note:'Continues the "10 unit tests + 1 milestone" cadence. With ~5 weeks left to ASMOPSS (9 Aug 2026), the real ASMOPSS 2024 benchmark (C1) suggests weaving in short supplementary lessons for sound, energy transformation, environmental science, density/buoyancy, germination and flower anatomy — real tested topics currently missing from the rotation.' }
+];
+
+// ---- render hero ----
+function daysTo(dateStr){ return Math.max(0, Math.ceil((new Date(dateStr) - new Date())/86400000)); }
+var days = daysTo(ASMOPSS_DATE);
+var doneCount = NODES.filter(function(n){ return n.type==='unit' && n.status!=='next'; }).length;
+document.getElementById('hero').innerHTML =
+  '<div class="hero-box"><div class="hero-val">U11</div><div class="hero-lbl">Current position</div><div class="hero-sub">Next up &middot; not yet built</div></div>' +
+  '<div class="hero-box"><div class="hero-val">'+doneCount+'</div><div class="hero-lbl">Unit tests done</div><div class="hero-sub">+ 1 Milestone, + 1 Competition</div></div>' +
+  '<div class="hero-box"><div class="hero-val" style="color:#7f0000">53%</div><div class="hero-lbl">Latest: Competition C1</div><div class="hero-sub">Real ASMOPSS 2024 paper</div></div>' +
+  '<div class="hero-box"><div class="hero-val">'+days+'</div><div class="hero-lbl">Days to ASMOPSS</div><div class="hero-sub">9 Aug 2026</div></div>';
+
+// ---- render flow ----
+var flowEl = document.getElementById('flow');
+var html = '';
+NODES.forEach(function(n, i){
+  if (i > 0) html += '<span class="arrow">&#8594;</span>';
+  var cls = 'node ' + n.type;
+  if (n.scoreClass === 'perfect') cls += ' perfect';
+  if (n.status === 'next') cls += ' next';
+  if (n.type === 'competition' && n.scoreClass !== 'fail') cls += ' pass';
+  html += '<div class="node-wrap"><div class="'+cls+'" data-id="'+n.id+'" onclick="showDetail(\''+n.id+'\')">' +
+    (n.id === TODAY_ID ? '<span class="today-tag">NEXT</span>' : '') +
+    '<div class="node-icon">'+n.icon+'</div><div class="node-label">'+n.label+'</div>' +
+    '<div class="node-score">'+n.score+'</div></div></div>';
+});
+flowEl.innerHTML = html;
+
+// ---- detail panel ----
+function showDetail(id){
+  var n = NODES.filter(function(x){ return x.id === id; })[0];
+  if (!n) return;
+  document.querySelectorAll('.node').forEach(function(el){ el.classList.remove('selected'); });
+  document.querySelector('.node[data-id="'+id+'"]').classList.add('selected');
+
+  var badgeColor = { pass:'background:#e6f4ea;color:#1b5e20', perfect:'background:#fff3cd;color:#8a6a00',
+                     fail:'background:#ffcdd2;color:#7f0000', ok:'background:#f3e9ff;color:#4527A0', next:'background:#ffe0b2;color:#c05621' };
+  var secHtml = (n.sections||[]).map(function(s){
+    return '<div class="d-sec"><div class="k">'+s[0]+'</div><div class="v">'+s[1]+'</div></div>';
+  }).join('');
+
+  document.getElementById('detail').innerHTML =
+    '<div class="d-head"><div class="d-title">'+n.title+'</div><div class="d-date">'+n.date+'</div></div>' +
+    (n.badge ? '<span class="d-badge" style="'+(badgeColor[n.scoreClass]||badgeColor.ok)+'">'+n.badge+'</span>' : '') +
+    '<div class="d-sections">'+secHtml+'</div>' +
+    '<div class="d-note">'+(n.note||'')+'</div>';
+}
+
+// ---- filters ----
+document.getElementById('filters').addEventListener('click', function(e){
+  var btn = e.target.closest('.filter-btn');
+  if (!btn) return;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var f = btn.getAttribute('data-f');
+  document.querySelectorAll('.node').forEach(function(el){
+    var id = el.getAttribute('data-id');
+    var n = NODES.filter(function(x){ return x.id === id; })[0];
+    if (f === 'all' || n.type === f) el.classList.remove('dim'); else el.classList.add('dim');
+  });
+});
+
+document.getElementById('footer').textContent = 'Data synced from prem_data.js and Lessons\\Tests\\Results\\ — last updated 7 Jul 2026';
+</script>
+</body>
+</html>

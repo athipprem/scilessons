@@ -1,0 +1,401 @@
+{
+  "student": "Prem",
+  "competition": "ASMOPSS2024_G4_SetB",
+  "title": "ASMOPSS 2024 - Science G4 (Set B) - Real Competition Paper",
+  "dateTaken": "2026-07-07",
+  "submittedAt": "2026-07-07T07:06:17.755Z",
+  "numCorrect": 20,
+  "outOfQuestions": 40,
+  "marksEarned": 52.5,
+  "outOfMarks": 100,
+  "pct": 53,
+  "passMarks": 80,
+  "passed": false,
+  "baselineMarks": 72.5,
+  "deltaVsBaseline": -20,
+  "sections": [
+    {
+      "name": "A",
+      "correct": 8,
+      "outOf": 16,
+      "marks": 10,
+      "marksOutOf": 20
+    },
+    {
+      "name": "B",
+      "correct": 7,
+      "outOf": 16,
+      "marks": 17.5,
+      "marksOutOf": 40
+    },
+    {
+      "name": "C",
+      "correct": 5,
+      "outOf": 8,
+      "marks": 25,
+      "marksOutOf": 40
+    }
+  ],
+  "answers": [
+    {
+      "q": 1,
+      "section": "A",
+      "chosen": 1,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 2,
+      "section": "A",
+      "chosen": 2,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 3,
+      "section": "A",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 4,
+      "section": "A",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 5,
+      "section": "A",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 6,
+      "section": "A",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 7,
+      "section": "A",
+      "chosen": 1,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 8,
+      "section": "A",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 9,
+      "section": "A",
+      "chosen": 2,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 10,
+      "section": "A",
+      "chosen": 2,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 11,
+      "section": "A",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 12,
+      "section": "A",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 13,
+      "section": "A",
+      "chosen": 1,
+      "correct": 2,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 14,
+      "section": "A",
+      "chosen": 3,
+      "correct": 4,
+      "isCorrect": false,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 15,
+      "section": "A",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 16,
+      "section": "A",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 1.25
+    },
+    {
+      "q": 17,
+      "section": "B",
+      "chosen": 4,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 18,
+      "section": "B",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 19,
+      "section": "B",
+      "chosen": 2,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 20,
+      "section": "B",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 21,
+      "section": "B",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 22,
+      "section": "B",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 23,
+      "section": "B",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 24,
+      "section": "B",
+      "chosen": 4,
+      "correct": 2,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 25,
+      "section": "B",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 26,
+      "section": "B",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 27,
+      "section": "B",
+      "chosen": 3,
+      "correct": 4,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 28,
+      "section": "B",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 29,
+      "section": "B",
+      "chosen": 4,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 30,
+      "section": "B",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 31,
+      "section": "B",
+      "chosen": 4,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 32,
+      "section": "B",
+      "chosen": 1,
+      "correct": 2,
+      "isCorrect": false,
+      "free": false,
+      "marks": 2.5
+    },
+    {
+      "q": 33,
+      "section": "C",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 34,
+      "section": "C",
+      "chosen": 4,
+      "correct": 2,
+      "isCorrect": false,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 35,
+      "section": "C",
+      "chosen": 2,
+      "correct": 3,
+      "isCorrect": false,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 36,
+      "section": "C",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 37,
+      "section": "C",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 38,
+      "section": "C",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "free": false,
+      "marks": 5
+    },
+    {
+      "q": 39,
+      "section": "C",
+      "chosen": 3,
+      "correct": 4,
+      "isCorrect": true,
+      "free": true,
+      "marks": 5
+    },
+    {
+      "q": 40,
+      "section": "C",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "free": false,
+      "marks": 5
+    }
+  ]
+}

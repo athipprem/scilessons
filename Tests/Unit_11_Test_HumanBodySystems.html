@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 Test — Biology: Human Body Systems</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 11 Test — Biology: Human Body Systems</b>
+      <span class="sub" id="hdr-sub">Organ systems • Breathing &amp; gas exchange • Thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' or 'scenario' questions, ask: what changed, what stayed the same, and what does the evidence actually show?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 11;
+const UNIT_TITLE = "Biology: Human Body Systems";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Body Systems Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"Chewing your food and your stomach churning it are both actions belonging to which body system?",
+    options:["Respiratory system","Skeletal system","Digestive system","Circulatory system"], ans:3,
+    why:"Chewing and churning food are both steps in digestion, carried out by the digestive system (mouth, stomach, intestines)." },
+  { n:2, section:'A', star:0, body:"Which organ is the main pump of the circulatory system?",
+    options:["Lungs","Heart","Stomach","Windpipe"], ans:2,
+    why:"The heart pumps blood, carrying oxygen and nutrients, all around the body." },
+  { n:3, section:'A', star:0, body:"In the lungs' tiny air sacs, gas exchange is the swapping of which two gases?",
+    options:["Nitrogen for water vapour","Carbon dioxide for nitrogen","Oxygen for carbon dioxide","Oxygen for water vapour"], ans:3,
+    why:"Oxygen passes from the air into the blood, while carbon dioxide passes from the blood out into the air." },
+  { n:4, section:'A', star:0, body:"Which body system's organs include the nose, windpipe, and lungs?",
+    options:["Digestive system","Circulatory system","Skeletal system","Respiratory system"], ans:4,
+    why:"The nose, windpipe, and lungs together make up the respiratory system." },
+
+  /* ===================== SECTION B — Applying Body Systems (2.5-style, star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"Which of these is NOT a job of the digestive system?",
+    options:["Bringing oxygen into the blood","Breaking food into smaller pieces","Absorbing nutrients into the blood","Digesting food using stomach acid"], ans:1,
+    why:"Bringing oxygen into the blood is the respiratory system's job, not the digestive system's — that's the odd one out here." },
+  { n:6, section:'B', star:1, body:"After a big lunch, nutrients from the digested food need to reach your leg muscles. Which system carries them there?",
+    options:["Skeletal system","Circulatory system","Respiratory system","None — nutrients travel there on their own"], ans:2,
+    why:"The circulatory system (blood, pumped by the heart) carries digested nutrients to cells all over the body, including the muscles." },
+  { n:7, section:'B', star:1, body:"Put these in the correct order for air travelling into your body: nose → ____ → lungs.",
+    options:["Stomach","Heart","Windpipe","Blood vessels"], ans:3,
+    why:"Air travels from the nose, down the windpipe, and into the lungs." },
+  { n:8, section:'B', star:1, body:"If you breathe onto a cold mirror, it quickly fogs up. This happens because the air you breathe out contains more of which of these than the air around you?",
+    options:["Water vapour","Nitrogen","Oxygen","Solid dust particles"], ans:1,
+    why:"Exhaled air carries extra water vapour picked up inside the lungs; when it hits a cold surface, that vapour condenses into tiny droplets, fogging the mirror." },
+  { n:9, section:'B', star:1, body:"During exercise, why does a runner's heart beat faster?",
+    options:["To pump extra oxygen-rich blood to hard-working muscles faster","To break down food much faster in the stomach","To cool the whole body down all by itself","Because the lungs completely stop working during exercise"], ans:1,
+    why:"A faster heartbeat pumps more oxygen-carrying blood to the muscles, which need extra oxygen to keep working hard." },
+  { n:10, section:'B', star:1, body:"A swimmer needs a steady supply of energy throughout a long race. Which TWO systems must work together to keep supplying that energy?",
+    options:["Skeletal system and digestive system","Digestive system and circulatory system","Respiratory system alone","Circulatory system alone"], ans:2,
+    why:"The digestive system breaks food down into nutrients, and the circulatory system delivers those nutrients (along with oxygen) to the working muscle cells." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A crowded lift gets stuck between floors for 30 minutes, with the doors sealed shut and no airflow. What would you expect to happen to the air inside by the end?",
+    options:["Oxygen would increase, since more people means more air being produced","Nothing at all would change, regardless of how long they're trapped","Oxygen would decrease, while carbon dioxide and water vapour increase","Carbon dioxide would decrease steadily the longer they stay inside"], ans:3,
+    why:"With several people breathing and no fresh air coming in, oxygen gradually gets used up while carbon dioxide and water vapour (from breathing out) build up over time." },
+  { n:12, section:'C', star:2, body:"A student sleeps with a thick blanket pulled completely over their head all night, trapping the air underneath. They claim: 'breathing under the blanket keeps bringing in fresh oxygen from the room.' What is wrong with this claim?",
+    options:["Nothing is wrong here — this claim is completely correct","Breathing only ever removes carbon dioxide, never oxygen, from air","Thick blankets always let fresh air pass straight through them","Trapped air can only be reused, not replaced, with fresh air"], ans:4,
+    why:"Air sealed under a blanket cannot be replaced by fresh air from the room — it can only be breathed in and out repeatedly, so its oxygen still gradually gets used up." },
+  { n:13, section:'C', star:2, body:"To fairly test how exercise affects breathing rate, a student counts their own breaths per minute before exercising, then counts again right after running for 5 minutes. What makes this a FAIR test?",
+    options:["The same person is measured both times, changing only whether they've just run","A different person is measured for the before and after readings","Breathing rate is compared against eating habits at the same time","A different length of time is used before versus after"], ans:1,
+    why:"A fair test changes only ONE thing (having just exercised or not) while keeping everything else — the same person, same counting method — identical." },
+  { n:14, section:'C', star:2, body:"A table shows a student's pulse: 70 beats/min resting, 130 beats/min right after running, 85 beats/min five minutes after stopping. What is the BEST conclusion?",
+    options:["Pulse rate has no real relationship to exercise at all","Pulse rises sharply during exercise, then gradually falls back toward resting","Pulse rate keeps on rising forever once exercise has stopped","The resting pulse rate must have been measured incorrectly"], ans:2,
+    why:"The data shows a clear rise during exercise, followed by a gradual return toward the resting rate as the body recovers." },
+  { n:15, section:'C', star:2, body:"Mountain climbers near the top of very tall mountains often carry oxygen tanks to breathe from. What is the BEST reason for this?",
+    options:["Tall mountains have no air at all above a certain height","Climbing uses so much energy that food alone can't replace it","The air is much thinner up high, so each breath holds less oxygen","Cold temperatures stop the lungs from working properly at any height"], ans:3,
+    why:"At high altitude the air is thinner, meaning each breath brings in less oxygen than the same breath would at sea level — so extra oxygen is needed." },
+  { n:16, section:'C', star:2, body:"A classroom feels stuffy and a few students feel light-headed after a two-hour lesson with all the windows and doors closed. What is the MOST likely scientific explanation?",
+    options:["The classroom's ceiling lights slowly used up the oxygen in the air","The wooden desks and chairs slowly absorbed oxygen from the room","Students talking a lot has no effect at all on the room's air","With no fresh air entering, breathing lowered oxygen and raised carbon dioxide and moisture"], ans:4,
+    why:"With no fresh air coming in, the students' own breathing gradually used up oxygen and added carbon dioxide and water vapour to the room's air — the same pattern as any other sealed space." },
+  { n:17, section:'C', star:2, body:"A marathon runner needs to keep their leg muscles working for over three hours. Which TWO systems working well together make this possible?",
+    options:["The respiratory system bringing in oxygen and the circulatory system delivering it","The digestive system working completely alone, without help from any other system","The skeletal system working alone, since bones never need any oxygen supply","None of the body's systems matter at all for long-distance running"], ans:1,
+    why:"Sustained muscle activity over hours depends on a steady oxygen supply chain: the respiratory system brings oxygen in, and the circulatory system carries it to the working muscles." },
+  { n:18, section:'C', star:2, body:"A student tests their pulse ONE time after walking up one flight of stairs and concludes: 'exercise always raises pulse rate to exactly 100 beats per minute.' What is the flaw in this conclusion?",
+    options:["There is no flaw at all — one single measurement is always enough","One measurement from one activity can't prove an exact number fits all exercise","Pulse rate never actually changes with exercise, for a completely different reason","Climbing stairs does not count as a real form of exercise"], ans:2,
+    why:"A single measurement from one specific activity cannot prove that an exact number applies to ALL forms and intensities of exercise — different activities and people would likely give different results." },
+  { n:19, section:'C', star:2, body:"A student claims: 'my heart pumps at exactly the same rate whether I'm sitting still or sprinting, because the heart never changes speed.' Is this correct?",
+    options:["Yes, the heart always beats at one fixed, unchanging rate","Yes, only breathing rate changes during exercise, never heart rate","No — the heart beats faster to deliver more oxygen to hard-working muscles","No — the heart actually beats slower during exercise to save energy"], ans:3,
+    why:"The heart beats faster during exercise specifically to pump more oxygen-rich blood to the muscles, which need extra oxygen when working hard." },
+  { n:20, section:'C', star:2, body:"Trace the path of a single oxygen molecule from the air outside to a leg muscle cell that needs it. Which order is correct?",
+    options:["Muscle cell → blood → lungs → outside air","Blood → lungs → muscle cell → outside air","Lungs → outside air → blood → muscle cell","Outside air → lungs → blood → muscle cell"], ans:4,
+    why:"Oxygen is breathed in from the outside air, crosses into the blood at the lungs during gas exchange, and is then carried by the circulatory system to the muscle cell that uses it." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Body Systems Basics (warm-up)",
+  B: "SECTION B — Applying Body Systems (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(2,'0');
+  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
+                                                

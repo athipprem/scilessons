@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 11 · Lesson 2 — Breathing &amp; Gas Exchange</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 14px;text-align:center;font-size:.85rem;border:2px solid var(--line);background:#fafdfa;max-width:460px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbox.no{background:#fdecea;border-color:#e53935}
+  .darrow{color:var(--grey);font-size:1.1rem}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .gasgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .gasgrid>div{border-radius:10px;padding:10px 12px;font-size:.85rem}
+  .fresh{background:#e3f2fd;border:2px solid var(--blue)}
+  .exhaled{background:#fff3e8;border:2px solid var(--amber)}
+  .fairtest{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:10px 0}
+  .fairtest>div{border-radius:10px;padding:10px;text-align:center;font-size:.85rem}
+  .ch{background:#fff3e8;border:2px solid var(--amber)}
+  .me{background:#e3f2fd;border:2px solid var(--blue)}
+  .sa{background:#e8f5e9;border:2px solid var(--green)}
+  .steps{border:2px solid var(--line);border-radius:12px;padding:12px 16px;margin:10px 0;background:#fafdfa}
+  .steps ol{margin:6px 0 0 18px;padding:0;font-size:.88rem}
+  .steps li{margin-bottom:6px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌬️ Lesson 2 · Breathing &amp; Gas Exchange</b><span class="pill">Unit 11 · Biology</span></div>
+
+  <!-- 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Two Maps for Today 🗺️</h2>
+    <div class="rulebar">MAP 1 — how BREATHING works, and what GAS EXCHANGE actually swaps in your lungs.</div>
+    <div class="sci">MAP 2 — Scientist's tool: figure out what happens to the air in a closed-up space over time.</div>
+    <div class="why">🎯 <b>By the end you can:</b> explain how breathing moves air in and out, describe what gas exchange swaps in the lungs, and predict how air changes in a poorly-ventilated space.</div>
+  </section>
+
+  <!-- 2: WHY -->
+  <section class="screen" data-s="2">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Understanding breathing and gas exchange explains why you breathe faster after running, why stuffy rooms feel hard to breathe in, why mountain climbers need oxygen tanks at high altitude, and why opening a window in a crowded room actually helps.</div>
+    <div class="card">
+      <b>Real life:</b> submarine crews carefully monitor oxygen and carbon dioxide levels because they're sealed inside for long periods. Building engineers design ventilation systems to keep offices and classrooms full of fresh air. Doctors measure oxygen levels in blood to check how well the lungs are working.
+    </div>
+  </section>
+
+  <!-- 3: HOW BREATHING WORKS -->
+  <section class="screen" data-s="3">
+    <h2>How Breathing Works 🫁</h2>
+    <div class="rulebar">When you breathe IN, your lungs fill with air. When you breathe OUT, air is pushed back out.</div>
+    <svg viewBox="0 0 300 130" width="480" height="208" aria-label="Diagram of lungs showing air breathed in reaching tiny air sacs, where oxygen passes into the blood and carbon dioxide passes out">
+      <ellipse cx="110" cy="60" rx="35" ry="45" fill="#f8bbd0" stroke="#c2185b" stroke-width="2"/>
+      <ellipse cx="190" cy="60" rx="35" ry="45" fill="#f8bbd0" stroke="#c2185b" stroke-width="2"/>
+      <line x1="150" y1="15" x2="150" y2="45" stroke="#546e7a" stroke-width="6"/>
+      <circle cx="150" cy="10" r="8" fill="#90caf9" stroke="#1565c0" stroke-width="2"/>
+      <text x="150" y="-2" font-size="8" text-anchor="middle" fill="#0d47a1" font-weight="bold">air breathed in</text>
+      <circle cx="110" cy="55" r="5" fill="#42a5f5"/>
+      <circle cx="190" cy="55" r="5" fill="#42a5f5"/>
+      <text x="150" y="118" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="bold">tiny air sacs — oxygen in, CO2 out</text>
+    </svg>
+    <div class="job"><b>Key idea:</b> air travels down your windpipe into your lungs, which are full of millions of tiny air sacs. At each air sac, oxygen from the air you breathed in passes into your blood, and carbon dioxide (a waste gas from your cells) passes out of your blood into the air — this swap is called GAS EXCHANGE.</div>
+  </section>
+
+  <!-- 4: FRESH AIR VS EXHALED AIR -->
+  <section class="screen" data-s="4">
+    <h2>Fresh Air vs. Air You Breathe Out 💨</h2>
+    <div class="rulebar">The air you breathe OUT is different from the air you breathe IN — gas exchange changes it.</div>
+    <div class="gasgrid">
+      <div class="fresh"><b>Air breathed IN</b><br>more oxygen<br>less carbon dioxide<br>drier</div>
+      <div class="exhaled"><b>Air breathed OUT</b><br>less oxygen (some is used up)<br>more carbon dioxide (a waste gas)<br>more water vapour (moister)</div>
+    </div>
+    <div class="job"><b>Key idea:</b> you don't use up ALL the oxygen you breathe in — exhaled air still has some oxygen left, just less than fresh air. And it's not just carbon dioxide that increases — the air you breathe out is also more moist (more water vapour) than the air you breathed in, because your lungs add moisture to it.</div>
+  </section>
+
+  <!-- 5: WHAT HAPPENS IN A SEALED SPACE? (decision tree) -->
+  <section class="screen" data-s="5">
+    <h2>What Happens in a Sealed-Up Space? 🔍</h2>
+    <div class="rulebar">Use this checklist to predict how the air changes when people breathe in a space with little or no fresh air coming in.</div>
+    <div class="dtree">
+      <div class="dbox dq">Are several people breathing in a small space with the doors/windows closed and little airflow?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">Over time: oxygen DECREASES, carbon dioxide INCREASES, water vapour (humidity) INCREASES<br><small>e.g. a packed lift stuck between floors, a sealed tent</small></div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — fresh air keeps flowing in</div>
+          <div class="dbox no">Gas levels stay roughly steady<br><small>e.g. an open window, a well-ventilated room</small></div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> every breath removes a little oxygen from the air and adds carbon dioxide and water vapour back into it. With no fresh air coming in to replace what's used up, these changes build up more and more the longer people stay inside.</div>
+  </section>
+
+  <!-- 6: THINK LIKE A SCIENTIST -->
+  <section class="screen" data-s="6">
+    <h2>Think Like a Scientist 🔬</h2>
+    <div class="sci">WORKED EXAMPLE: predicting gas changes in a sealed minivan.</div>
+    <div class="steps">
+      <b>Scenario:</b> Five people sit inside a parked minivan with all the windows and doors shut for 40 minutes, on a cold morning, waiting for school to start.
+      <ol>
+        <li>Five people are breathing continuously the whole time.</li>
+        <li>No windows are open, so no fresh air is coming in and no stale air is going out.</li>
+        <li>Every breath taken removes a little oxygen from the air inside the van and adds carbon dioxide and water vapour.</li>
+        <li>Because nothing is refreshing the air, these small changes ADD UP over the full 40 minutes.</li>
+        <li>Prediction: by the end, the air inside the van should have LESS oxygen, MORE carbon dioxide, and MORE water vapour (the windows may even fog up!) than when they first got in.</li>
+      </ol>
+    </div>
+    <div class="card"><b>Spot the flawed claim:</b> a student says "the air inside will have MORE oxygen after 40 minutes, because breathing adds air into the van." Is this correct? (No — breathing doesn't add fresh air into a sealed van from outside; it only recycles the air that's already trapped inside, using up oxygen and adding carbon dioxide and water vapour each time.)</div>
+  </section>
+
+  <!-- 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>. Once you check, that answer is locked in.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. What happens at the tiny air sacs inside your lungs?</p>
+      <button class="opt">Food is broken down into nutrients</button>
+      <button class="opt">Blood is pumped around the body</button>
+      <button class="opt">Oxygen passes into the blood, and carbon dioxide passes out of the blood into the air</button>
+      <button class="opt">Water is absorbed directly into the stomach</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — this oxygen-in, carbon-dioxide-out swap at the air sacs is called gas exchange.</div>
+      <div class="fb no">✘ Re-check Screen 3 — what two gases are swapped at the tiny air sacs?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Compared to the air you breathe IN, the air you breathe OUT has:</p>
+      <button class="opt">More oxygen and less carbon dioxide</button>
+      <button class="opt">Less oxygen, more carbon dioxide, and more water vapour</button>
+      <button class="opt">Exactly the same amount of every gas — breathing doesn't change the air at all</button>
+      <button class="opt">No oxygen left at all, only pure carbon dioxide</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — exhaled air has used up some oxygen and gained carbon dioxide and water vapour.</div>
+      <div class="fb no">✘ Look at the Fresh vs Exhaled comparison on Screen 4 — which three things change, and in which direction?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Six people sit inside a small, sealed garden shed with the door shut for two hours. What would you expect to happen to the air inside?</p>
+      <button class="opt">Oxygen would increase because six people are breathing it in</button>
+      <button class="opt">Nothing would change — a shed is too big for breathing to matter</button>
+      <button class="opt">Carbon dioxide would decrease over time</button>
+      <button class="opt">Oxygen would decrease, and carbon dioxide and water vapour would both increase</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — six people breathing with no fresh air coming in will use up oxygen and add CO2 and water vapour over time.</div>
+      <div class="fb no">✘ Use the checklist from Screen 5 — is fresh air getting in, or is the shed sealed up?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A student claims: "Breathing adds fresh oxygen into a sealed room from outside." What is wrong with this claim?</p>
+      <button class="opt">Breathing only recycles the air already trapped inside a sealed room — it can't bring in air from outside if there's no gap for air to enter</button>
+      <button class="opt">Nothing is wrong — this claim is correct</button>
+      <button class="opt">Breathing removes carbon dioxide from a room, not oxygen</button>
+      <button class="opt">Sealed rooms always have unlimited oxygen no matter what</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — in a truly sealed space, breathing can only reuse the air already trapped inside, not bring in new air from outside.</div>
+      <div class="fb no">✘ Think about the minivan example — where would any "extra" oxygen actually come from if all the windows and doors are shut?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. Which set-up would you expect to have the STEADIEST oxygen and carbon dioxide levels over a whole afternoon?</p>
+      <button class="opt">A packed lift stuck between floors for an hour</button>
+      <button class="opt">A sealed tent with the flap zipped shut all afternoon</button>
+      <button class="opt">A classroom with a window kept open, letting fresh air flow in and out all afternoon</button>
+      <button class="opt">A car with all the windows rolled up on a hot day</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — with fresh air constantly flowing in and out, gas levels don't build up the way they do in a sealed space.</div>
+      <div class="fb no">✘ Which of these four places is the ONLY one where fresh air keeps coming in and out?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 11 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='HumanBody_Lesson_WhatAreBodySystems.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_11_Test_HumanBodySystems.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
