@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '9 Jul 2026 (later)',
+  updated:        '10 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,29 +13,29 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:13, topic:'Physics: Light', status:'Lessons + test ready &middot; 20 questions, directly patches the Competition paper&#39;s Q10 umbra/penumbra gap' },
+  currentUnit: { n:14, topic:'Biology: Cells', status:'Lessons + test ready &middot; 20 questions (18 Cells + 2 embedded Physics recap questions verifying the U13 point-vs-broad-source gap is closed), plus a dedicated Quick Fix remediation screen in Lesson 1' },
 
   lastUnit: {
-    n:12, score:19, outOf:20, pct:95, delta:-1, prevScore:20,
-    patternLabel: 'Unit 12 result - Chemistry: Materials, Origins &amp; Classification (19/20, 95% - PASS)',
-    patternInsight: '<strong>19/20 questions (95%)</strong> - pass bar is 16/20, comfortably a pass. Section A (materials basics, warm-up) = <strong>4/4</strong>. Section B (applying materials classification) = <strong>5/6</strong> - one miss, Q8. Section C (think like a scientist, applied reasoning) = <strong>10/10</strong> - a THIRD straight clean run under the ANSWER-BALANCE RULE, including every origin-classification trap (rubber, silk) and every hard/soft/floats-in-oil flowchart question.',
-    analysisLabel: 'Confirms Competition Q2 and Q17 closed &middot; Target: GOLD &middot; next up: Unit 13 (Physics: Light)',
-    analysisInsight: 'Unit 12 is the second unit of the U11-U20 gap-closure plan, and both targeted Competition gaps are confirmed closed on first attempt: Q2 (rubber/silk origin mix-ups) and Q17 (hard/soft/floats-in-oil flowchart) were answered correctly on every related question. The one miss, Q8, described a foam block lighter than BOTH water and cooking oil (so it floats in both); Prem answered "floats in water, sinks in oil" - the pattern from the lesson&#39;s beeswax worked example one screen earlier, not this question&#39;s actual premise. This reads as a worked-example-anchoring slip rather than a content gap, since every other floating/sinking and classification question was correct. This is also the THIRD full test scored clean on Section C under the ANSWER-BALANCE RULE (after Milestone Test 1&#39;s 8/8 and U11&#39;s 10/10), reinforcing that the applied-reasoning strength is genuine. Unit 13 (Physics: Light) is next, targeting Competition Q10 (umbra/penumbra, point vs broad light sources).',
-    qSummary: '<strong>19 / 20 (95%) - PASS.</strong> One miss: Q8, a worked-example-anchoring slip, not a content gap.',
+    n:13, score:14, outOf:20, pct:70, delta:-25, prevScore:95, passed:false,
+    patternLabel: 'Unit 13 result - Physics: Light (14/20, 70% - FAIL, first program fail)',
+    patternInsight: '<strong>14/20 questions (70%)</strong> - pass bar is 16/20, a genuine fail, the first of the whole program. Section A (light basics, warm-up) = <strong>4/4</strong>. Section B (applying light concepts) = <strong>4/6</strong> - two misses. Section C (think like a scientist, applied reasoning) = <strong>6/10</strong> - four misses, breaking a three-test clean streak.',
+    analysisLabel: 'Genuine concept inversion found, not slips &middot; Q10 not yet confirmed closed &middot; remediation folded into U14',
+    analysisInsight: 'Six missed questions (Q7, Q10, Q13, Q15, Q18, Q20) share one identical, backwards pattern: Prem believes POINT light sources give soft/fuzzy shadows and BROAD sources give sharp shadows - the exact opposite of the taught rule. This is confirmed as a genuine, one-directional misconception rather than scattered slips, because four separate direct restatement questions (Q8, Q11, Q12, Q17 - "a broad source gives a soft shadow", stated plainly) were all answered correctly; the rule only breaks down when the question requires reasoning about a POINT source specifically, or comparing/reversing the two. This directly means the Competition paper&#39;s Q10 gap (umbra/penumbra, point vs broad sources) is NOT yet confirmed closed. Rather than dedicating a full lesson or Section A block to remediation (weighed against the ~4.5 weeks remaining to ASMOPSS and 7 more units to build), a proportionate remediation-lite fix was chosen: Unit 14&#39;s Lesson 1 opens with a dedicated "Quick Fix from Unit 13" screen teaching the mechanism (why one source gives sharp shadows and the other soft) and drilling both directions with 3 quick-check questions, and Unit 14&#39;s test embeds 2 fresh recap questions (Q4, testing point-source-&gt;sharp directly; Q10, in a comparison framing) to verify the gap is actually closed before moving on unquestioned.',
+    qSummary: '<strong>14 / 20 (70%) - FAIL, first program fail.</strong> Six misses, all one backwards concept: point vs broad light source shadow rules.',
     qBreakdown: [
-      { q:'Q8', topic:'Floating &amp; sinking in two liquids', lvl:'m', pass:false, note:'Chose "floats in water, sinks in oil" (the beeswax in-between pattern from the lesson) instead of "floats in both" - the foam was lighter than BOTH liquids, not in-between. An anchoring slip on a nearby worked example, not a content gap.' }
+      { q:'Q7, Q10, Q13, Q15, Q18, Q20', topic:'Point vs broad light source shadows (umbra/penumbra)', lvl:'m', pass:false, note:'All six misses share one identical inverted rule: Prem answered as if POINT sources give soft/fuzzy shadows and BROAD sources give sharp shadows - backwards from the taught rule. Four separate direct-restatement questions (Q8, Q11, Q12, Q17) were answered correctly, showing this is one-directional fact memorisation without full bidirectional/mechanistic understanding, not scattered slips. Being remediated via a dedicated recap screen + 2 verification questions in Unit 14.' }
     ]
   },
 
   skills: [
     { name: 'Biology',                  c: 94, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across three separate topics' },
     { name: 'Chemistry / Matter',       c: 91, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) - closed G4 Q2 and Q17; U12&#39;s only miss was an applied-reasoning anchoring slip, not a materials-content gap - Sections A+B content questions were effectively clean' },
-    { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) - closed G4 Q18/19/Q3; strongest strand. U10&#39;s only miss was a friction-inversion slip, same error shape as U6&#39;s conductor/insulator inversion' },
+    { name: 'Physics',                  c: 89, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) - closed G4 Q18/19/Q3, but U13 revealed a genuine point-vs-broad-light-source concept inversion (not a slip) - the program&#39;s first fail; remediation folded into U14, being verified via 2 recap questions before considered closed' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 95, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10) - thirteen results now, THREE straight clean runs since the ANSWER-BALANCE RULE (Milestone 1, U11, U12), confirming genuine applied-reasoning mastery, not an answer-pattern hint' },
-    { name: 'Applied Reasoning',        c: 95, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10) - comfortably above target across thirteen content areas. U12&#39;s perfect Section C directly confirmed both the Competition paper&#39;s Q2 and Q17 gaps are closed, under the balanced-answer format' }
+    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10) - the U13 dip breaks a three-run clean streak, but the misses were driven by a specific Physics content gap (point-vs-broad-source shadows), not a breakdown in fair-test or experiment-design reasoning itself; watching closely on U14&#39;s embedded recap questions' },
+    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10) - U13&#39;s dip traces to the same Physics content gap rather than a general reasoning failure; U11/U12&#39;s perfect runs show the underlying skill is intact' }
   ],
-  radarCurrent:  [94, 91, 92, 90, 95, 95],
+  radarCurrent:  [94, 91, 89, 90, 93, 92],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -53,23 +53,36 @@ var PREM_DATA = {
     { unit:10, topic:'Physics: Forces', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-06' },
     { unit:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, passBar:32, date:'2026-07-07' },
     { unit:11, topic:'Biology: Human Body Systems', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-09' },
-    { unit:12, topic:'Chemistry: Materials - Origins &amp; Classification', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-09' }
+    { unit:12, topic:'Chemistry: Materials - Origins &amp; Classification', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-09' },
+    { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 13, badge: 'linear-gradient(135deg,#F9A825,#FFD54F)',
-      title: 'Physics: Light',
+      n: 14, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Biology: Cells',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'Patches Competition Q10', c:'tblue' },
-        { t:'3rd unit of gap-closure plan', c:'torange' }
+        { t:'2 embedded Physics recap Qs', c:'tblue' },
+        { t:'4th unit of gap-closure plan', c:'torange' }
       ],
-      note: 'Third unit of the U11-U20 block. Lesson 1 covers luminous vs non-luminous objects, natural vs man-made sources, straight-line light travel, and reflection, bridging from Unit 7&#39;s "the Moon reflects sunlight" fact. Lesson 2 covers opaque/translucent/transparent materials and, directly patching the Competition paper&#39;s Q10, teaches point-source vs broad-source shadows (a single sharp umbra vs an umbra + softer penumbra fringe) with two side-by-side ray diagrams. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words) and checked for zero reused questions against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;18.',
+      note: 'Fourth unit of the U11-U20 block. Lesson 1 covers what a cell is and plant vs animal cell parts (nucleus, cytoplasm, cell membrane; plant-only cell wall, chloroplasts, large vacuole), bridging from Unit 8&#39;s chlorophyll/chloroplasts fact - and opens with a dedicated "Quick Fix from Unit 13" screen remediating the point-vs-broad-light-source concept inversion found in U13&#39;s real result, teaching the mechanism and drilling both directions with 3 quick-check questions (not counted in the main practice score). Lesson 2 covers unicellular vs multicellular organisms and specialized cells, bridging from Unit 4&#39;s microorganisms fact and Unit 11&#39;s body-systems "different parts, different jobs" idea. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), checked for zero reused questions against both lessons, and embeds 2 fresh Physics recap questions (Q4: point-source direct; Q10: comparison framing) to verify the U13 gap is actually closed before moving on. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;19.',
       status: 'pending'
+    },
+    {
+      n: 13, badge: 'linear-gradient(135deg,#F9A825,#FFD54F)',
+      title: 'Physics: Light',
+      tags: [
+        { t:'&#9888; 14/20 (70%) FAIL', s:'background:#ffe0b2;color:#c05621;font-weight:700' },
+        { t:'Sections A+B 8/10', c:'tgreen' },
+        { t:'Section C 6/10', c:'tblue' },
+        { t:'Point vs broad source inverted - remediation in U14', c:'torange' }
+      ],
+      note: 'Scored 14/20 (70%) - below the 16/20 pass bar, the first fail of the whole program, third unit of the U11-U20 gap-closure plan. Section A (light basics) 4/4. Section B (applying light concepts) 4/6. Section C (think like a scientist) 6/10. All six misses (Q7, Q10, Q13, Q15, Q18, Q20) share one identical backwards rule: Prem believes POINT sources give soft/fuzzy shadows and BROAD sources give sharp shadows - the opposite of the taught rule - while four direct-restatement questions (Q8, Q11, Q12, Q17) were answered correctly, confirming this is a genuine one-directional misconception, not scattered slips. This means the Competition paper&#39;s Q10 gap (umbra/penumbra) is NOT yet confirmed closed. Rather than a full remediation lesson, a proportionate fix was folded into Unit 14: a dedicated "Quick Fix" recap screen plus 2 embedded verification questions in the U14 test. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 12, badge: 'linear-gradient(135deg,#37474F,#78909C)',

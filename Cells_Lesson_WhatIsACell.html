@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 14 · Lesson 1 — What Is a Cell? Plant vs Animal Cells</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .sysgrid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .sysgrid2>div{border-radius:10px;padding:12px;font-size:.85rem;border:2px solid var(--line)}
+  .sys1{background:#e3f2fd;border-color:var(--blue)}
+  .sys2{background:#e8f5e9;border-color:var(--green)}
+  .sysgrid2 ul{margin:6px 0 0;padding-left:18px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbox.yes{background:#e8f5e9;border-color:var(--green)}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .qc{background:#fff8e1;border:1.5px solid #f9a825;border-radius:12px;padding:12px 14px;margin:10px 0}
+  .qc p{font-weight:bold;margin:.1rem 0 .6rem}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧫 Lesson 1 · What Is a Cell? Plant vs Animal Cells</b><span class="pill">Unit 14 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Cells Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: every living thing is built from tiny building blocks called cells — and plant cells and animal cells are built a little differently.</div>
+    <p>Today you'll find out what a cell actually is, meet the parts every cell shares, discover the extra parts only plant cells have, and learn to tell plant and animal cells apart at a glance.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🧫</div><div class="t">What is a cell?</div><div class="j">the building block of life</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌿</div><div class="t">Plant cell parts</div><div class="j">wall, chloroplasts, vacuole</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🐾</div><div class="t">Animal cell parts</div><div class="j">membrane, no wall</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔍</div><div class="t">Spot the difference</div><div class="j">boxy vs round</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain what a cell is, list the parts every cell has in common, name the extra parts only plant cells have, and tell a plant cell from an animal cell just by its shape.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX FROM UNIT 13 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix from Unit 13 💡</h2>
+    <div class="rulebar">Before we start Cells, let's lock in one idea from Light that tripped up a few questions last time.</div>
+    <div class="card">
+      <p><b>The rule, both directions:</b></p>
+      <p>A <b>POINT source</b> (like a distant star, or a tiny bulb far away) sends light from just ONE place. Every spot behind an object is either fully lit or fully blocked — so the shadow has <b>ONE sharp, crisp edge</b>, with no fuzzy fringe at all.</p>
+      <p>A <b>BROAD source</b> (like a long fluorescent tube, or a big light close up) sends light from MANY different places at once. Right behind the object is still fully dark — but just to the sides, light from SOME parts of the source sneaks past while light from other parts is still blocked. That fuzzy, partly-lit sliver is the <b>penumbra</b>.</p>
+      <p>So: <b>POINT source → sharp shadow, no penumbra. BROAD source → soft shadow, with a penumbra fringe.</b> It's easy to accidentally flip these two around — let's check both directions before moving on.</p>
+    </div>
+
+    <div class="qc" data-qc-correct="1">
+      <p>Quick Check 1: A single tiny LED bulb, far across a dark room, shines on a toy. What should its shadow's edge look like?</p>
+      <button class="opt">A sharp, crisp edge</button>
+      <button class="opt">A soft, fuzzy edge</button>
+      <button class="opt">No shadow at all</button>
+      <button class="opt">A shadow that changes colour</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Right — a single point source always gives a sharp edge, since light only comes from one place.</div>
+      <div class="fb no">✘ Remember: a point source sends light from just ONE place — what kind of edge does that give?</div>
+    </div>
+
+    <div class="qc" data-qc-correct="2">
+      <p>Quick Check 2: Two lamps are compared — a small bare bulb vs a large flat panel light, same distance away. Which one gives the SOFTER, fuzzier shadow edge?</p>
+      <button class="opt">The small bare bulb</button>
+      <button class="opt">The large flat panel light</button>
+      <button class="opt">Neither — they're identical</button>
+      <button class="opt">Both give a sharp edge</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Correct — the larger, broader light source is the one that gives the softer, fuzzier edge.</div>
+      <div class="fb no">✘ Which lamp sends light from MANY different places at once — the small bulb, or the large panel?</div>
+    </div>
+
+    <div class="qc" data-qc-correct="2">
+      <p>Quick Check 3: A shadow has a dark centre with a soft, blurry fringe around it. What KIND of light source most likely made it?</p>
+      <button class="opt">A point source</button>
+      <button class="opt">A broad source</button>
+      <button class="opt">No light source at all</button>
+      <button class="opt">A non-luminous object only</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Exactly — that soft, blurry fringe (the penumbra) is the signature of a broad source, not a point source.</div>
+      <div class="fb no">✘ A soft, blurry fringe around a shadow only happens when light comes from many places — point or broad?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: QUICK RECALL FROM U8 -->
+  <section class="screen" data-s="3">
+    <h2>Quick Recall from Unit 8 🔁</h2>
+    <div class="recall">🔁 <b>Photosynthesis check:</b> back in Unit 8, you learned that chlorophyll — the green pigment that captures sunlight for photosynthesis — lives inside tiny structures called chloroplasts.</div>
+    <p>Here's the connection: chloroplasts are actually one of the special parts found ONLY inside plant cells, not animal cells. Today you'll meet the whole cell and see exactly where chloroplasts fit in.</p>
+  </section>
+
+  <!-- SCREEN 4: WHY -->
+  <section class="screen" data-s="4">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Understanding cells explains why plants can make their own food but animals can't, why plant stems and trunks can stand up rigid and tall while animal bodies stay soft and flexible, and how doctors and scientists study diseases that start when something goes wrong inside a cell.</div>
+    <div class="card">
+      <b>Real life:</b> scientists use powerful microscopes to study cells directly, farmers rely on understanding plant cells to grow healthier crops, and doctors study human cells to understand and treat illness — cells are the starting point for almost all of biology and medicine.
+    </div>
+  </section>
+
+  <!-- SCREEN 5: MEET THE CELL PARTS -->
+  <section class="screen" data-s="5">
+    <h2>Meet the Cell Parts 🔬</h2>
+    <div class="rulebar">Every cell — plant or animal — has these 3 parts in common: nucleus, cytoplasm, and cell membrane.</div>
+    <div class="sysgrid2">
+      <div class="sys1"><b>🧬 Found in BOTH plant and animal cells</b>
+        <ul>
+          <li><b>Nucleus</b> — the control centre, holds instructions</li>
+          <li><b>Cytoplasm</b> — the jelly-like filling</li>
+          <li><b>Cell membrane</b> — thin, flexible boundary</li>
+        </ul>
+      </div>
+      <div class="sys2"><b>🌿 Found ONLY in plant cells</b>
+        <ul>
+          <li><b>Cell wall</b> — rigid outer layer, for support</li>
+          <li><b>Chloroplasts</b> — capture sunlight for photosynthesis</li>
+          <li><b>Large permanent vacuole</b> — stores water, keeps the cell firm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> the plant-only parts are exactly what let plants make their own food, stand up straight without a skeleton, and stay firm with stored water — jobs animal cells simply don't need to do the same way.</div>
+  </section>
+
+  <!-- SCREEN 6: CELL DIAGRAM -->
+  <section class="screen" data-s="6">
+    <h2>What Do They Actually Look Like? 👀</h2>
+    <div class="rulebar">The cell wall is exactly why plant cells look like neat rectangular boxes, while animal cells look round and a little irregular.</div>
+
+    <svg viewBox="0 0 220 170">
+      <text x="110" y="12" font-size="12" text-anchor="middle" fill="#1b5e20" font-weight="bold">Plant Cell</text>
+      <rect x="10" y="18" width="200" height="142" rx="6" fill="#e8f5e9" stroke="#2e7d32" stroke-width="5"/>
+      <rect x="18" y="26" width="184" height="126" rx="4" fill="none" stroke="#66bb6a" stroke-width="1.5"/>
+      <ellipse cx="130" cy="103" rx="55" ry="42" fill="#cfe8f7" stroke="#64b5f6" stroke-width="1.5"/>
+      <text x="130" y="107" font-size="9" text-anchor="middle" fill="#0d47a1">Vacuole</text>
+      <circle cx="55" cy="58" r="20" fill="#9575cd" stroke="#4527a0" stroke-width="1.5"/>
+      <circle cx="55" cy="58" r="6" fill="#4527a0"/>
+      <text x="55" y="88" font-size="9" text-anchor="middle" fill="#4527a0">Nucleus</text>
+      <ellipse cx="45" cy="128" rx="11" ry="6" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <ellipse cx="72" cy="140" rx="11" ry="6" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <ellipse cx="165" cy="45" rx="11" ry="6" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <ellipse cx="180" cy="135" rx="11" ry="6" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <text x="165" y="32" font-size="9" text-anchor="middle" fill="#1b5e20">Chloroplasts</text>
+      <text x="14" y="170" font-size="9" fill="#1b5e20">Cell wall (thick outer edge)</text>
+    </svg>
+    <div class="svgcap">Plant cells look like neat, rectangular boxes because of the thick, rigid <b>cell wall</b> around the outside. Inside: a large <b>vacuole</b>, a <b>nucleus</b>, and several green <b>chloroplasts</b>.</div>
+
+    <svg viewBox="0 0 220 170">
+      <text x="110" y="12" font-size="12" text-anchor="middle" fill="#a34700" font-weight="bold">Animal Cell</text>
+      <ellipse cx="110" cy="93" rx="95" ry="72" fill="#fff3e0" stroke="#ef6c00" stroke-width="3"/>
+      <circle cx="110" cy="93" r="28" fill="#9575cd" stroke="#4527a0" stroke-width="1.5"/>
+      <circle cx="110" cy="93" r="8" fill="#4527a0"/>
+      <text x="110" y="130" font-size="9" text-anchor="middle" fill="#4527a0">Nucleus</text>
+      <text x="14" y="160" font-size="9" fill="#a34700">Cell membrane (thin, flexible, no wall)</text>
+    </svg>
+    <div class="svgcap">Animal cells look round and a bit irregular because they only have a thin, flexible <b>cell membrane</b> — no rigid wall. There's no cell wall, no chloroplasts, and no large permanent vacuole.</div>
+
+    <div class="job"><b>Key idea:</b> if you see a boxy, rectangular cell with a thick outer line, chloroplasts, and a big vacuole — it's a plant cell. If you see a round, irregular cell with none of those — it's an animal cell.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Plant Cell or Animal Cell? 🔍</h2>
+    <div class="rulebar">Ask this one key question about any cell you see under a microscope.</div>
+    <div class="dtree">
+      <div class="dbox dq">Does this cell have a thick, rigid outer wall AND green chloroplasts inside it?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dbox yes">It's a PLANT cell — the wall and chloroplasts are found only in plants.</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO</div>
+          <div class="dbox yes">It's an ANIMAL cell — just a flexible membrane, no wall, no chloroplasts.</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> the cell wall and chloroplasts are the two dead giveaways for a plant cell — if either is missing, you're looking at an animal cell.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which part is found in BOTH plant and animal cells?</p>
+      <button class="opt">Cell wall</button>
+      <button class="opt">Nucleus</button>
+      <button class="opt">Chloroplasts</button>
+      <button class="opt">Large permanent vacuole</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — the nucleus (plus cytoplasm and cell membrane) is found in every cell, plant or animal.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which part is listed under BOTH plant and animal cells?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. Which part lets plant cells make their own food using sunlight?</p>
+      <button class="opt">Cell wall</button>
+      <button class="opt">Nucleus</button>
+      <button class="opt">Large permanent vacuole</button>
+      <button class="opt">Chloroplasts</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — chloroplasts capture sunlight for photosynthesis, exactly like Unit 8's chlorophyll.</div>
+      <div class="fb no">✘ Which plant-only part was linked back to Unit 8's chlorophyll?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. Which part gives plant cells their rigid, box-like shape?</p>
+      <button class="opt">Nucleus</button>
+      <button class="opt">Chloroplasts</button>
+      <button class="opt">Cell wall</button>
+      <button class="opt">Cytoplasm</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Exactly — the thick, rigid cell wall is what makes plant cells look like neat rectangular boxes.</div>
+      <div class="fb no">✘ Look back at Screen 6's diagram — what's drawn as the thick outer edge of the plant cell?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. An unlabelled cell under a microscope has no cell wall and no chloroplasts, and it looks round rather than boxy. What kind of cell is it?</p>
+      <button class="opt">An animal cell</button>
+      <button class="opt">A plant cell</button>
+      <button class="opt">Both a plant and animal cell</button>
+      <button class="opt">Neither — this cell can't exist</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — no wall, no chloroplasts, round shape: that's an animal cell.</div>
+      <div class="fb no">✘ Use the decision tree from Screen 7 — no wall and no chloroplasts points to which type?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>5. What is the main job of the large central vacuole inside a plant cell?</p>
+      <button class="opt">Capturing sunlight for photosynthesis</button>
+      <button class="opt">Controlling the cell's instructions</button>
+      <button class="opt">Giving the cell a thin, flexible boundary</button>
+      <button class="opt">Storing water and keeping the cell firm</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Right — the vacuole stores water, which helps keep the whole plant cell firm and rigid.</div>
+      <div class="fb no">✘ Re-check Screen 5's plant-only list — what does the large permanent vacuole store?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Lesson 2 →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Cells_Lesson_UnicellularAndMulticellular.html';}
+  };
+
+  // Quick Check (Screen 2 recap) - independent lock+feedback, NOT part of the main practice summary
+  const qcQs = [...document.querySelectorAll('.qc[data-qc-correct]')];
+  qcQs.forEach(q => {
+    const correct = +q.dataset.qcCorrect, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #f9a825';
+      chosen = n + 1;
+    });
+    q.querySelector('.qcchk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.qcchk').disabled = true;
+      q.querySelector('.qcchk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
