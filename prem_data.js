@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '10 Jul 2026',
+  updated:        '11 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,29 +13,29 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:14, topic:'Biology: Cells', status:'Lessons + test ready &middot; 20 questions (18 Cells + 2 embedded Physics recap questions verifying the U13 point-vs-broad-source gap is closed), plus a dedicated Quick Fix remediation screen in Lesson 1' },
+  currentUnit: { n:15, topic:'Chemistry: Density &amp; Buoyancy', status:'Lessons + test ready &middot; 20 questions (19 Density &amp; Buoyancy + 1 standalone Physics recap question checking the U14 point-source finding), plus a dedicated observation-vs-inference bridge screen in Lesson 2' },
 
   lastUnit: {
-    n:13, score:14, outOf:20, pct:70, delta:-25, prevScore:95, passed:false,
-    patternLabel: 'Unit 13 result - Physics: Light (14/20, 70% - FAIL, first program fail)',
-    patternInsight: '<strong>14/20 questions (70%)</strong> - pass bar is 16/20, a genuine fail, the first of the whole program. Section A (light basics, warm-up) = <strong>4/4</strong>. Section B (applying light concepts) = <strong>4/6</strong> - two misses. Section C (think like a scientist, applied reasoning) = <strong>6/10</strong> - four misses, breaking a three-test clean streak.',
-    analysisLabel: 'Genuine concept inversion found, not slips &middot; Q10 not yet confirmed closed &middot; remediation folded into U14',
-    analysisInsight: 'Six missed questions (Q7, Q10, Q13, Q15, Q18, Q20) share one identical, backwards pattern: Prem believes POINT light sources give soft/fuzzy shadows and BROAD sources give sharp shadows - the exact opposite of the taught rule. This is confirmed as a genuine, one-directional misconception rather than scattered slips, because four separate direct restatement questions (Q8, Q11, Q12, Q17 - "a broad source gives a soft shadow", stated plainly) were all answered correctly; the rule only breaks down when the question requires reasoning about a POINT source specifically, or comparing/reversing the two. This directly means the Competition paper&#39;s Q10 gap (umbra/penumbra, point vs broad sources) is NOT yet confirmed closed. Rather than dedicating a full lesson or Section A block to remediation (weighed against the ~4.5 weeks remaining to ASMOPSS and 7 more units to build), a proportionate remediation-lite fix was chosen: Unit 14&#39;s Lesson 1 opens with a dedicated "Quick Fix from Unit 13" screen teaching the mechanism (why one source gives sharp shadows and the other soft) and drilling both directions with 3 quick-check questions, and Unit 14&#39;s test embeds 2 fresh recap questions (Q4, testing point-source-&gt;sharp directly; Q10, in a comparison framing) to verify the gap is actually closed before moving on unquestioned.',
-    qSummary: '<strong>14 / 20 (70%) - FAIL, first program fail.</strong> Six misses, all one backwards concept: point vs broad light source shadow rules.',
+    n:14, score:19, outOf:20, pct:95, delta:25, prevScore:70, passed:true,
+    patternLabel: 'Unit 14 result - Biology: Cells (19/20, 95% - PASS, strong recovery from U13&#39;s fail)',
+    patternInsight: '<strong>19/20 questions (95%)</strong> - comfortably above the 16/20 pass bar, a strong recovery from Unit 13&#39;s 70% fail. Section A (cells basics, warm-up) = <strong>3/4</strong> - one miss. Section B (applying cells) = <strong>6/6</strong> - perfect. Section C (think like a scientist, applied reasoning) = <strong>10/10</strong> - perfect, a return to the pre-U13 clean streak.',
+    analysisLabel: 'Comparison-vs-standalone recall split found &middot; Competition Q10 PARTIALLY confirmed closed',
+    analysisInsight: 'The only miss, Q4 (a firefly acting as a single point source of light - a standalone, non-comparison framing), was answered backwards, the same direction as U13&#39;s original inversion. But Q10 (two campers comparing a keychain flashlight vs a wide lantern - a comparison framing) was answered CORRECTLY. This is a materially more specific finding than U13&#39;s original "one-directional fact memorisation" diagnosis: comparative reasoning about which of two light sources gives a sharper/softer shadow is now reliable, but standalone recall of a single source&#39;s behaviour (with nothing to contrast against) is not yet reliable. Competition paper&#39;s Q10 is now classified as PARTIALLY confirmed closed. This comparison-vs-standalone split may generalise to other two-way relationships (hot vs cold, more vs less, near vs far, magnetic vs non-magnetic) - if comparison questions go well but standalone ones don&#39;t, that&#39;s this exact pattern. Rather than a third full remediation pass, one standalone (non-comparison) point-source recap question was folded into Unit 15&#39;s test (Q4) to check whether the gap is closing further.',
+    qSummary: '<strong>19 / 20 (95%) - PASS, strong recovery.</strong> One miss: Q4, a standalone point-source light recap question, answered backwards - same direction as U13, but this time isolated to standalone (non-comparison) recall only.',
     qBreakdown: [
-      { q:'Q7, Q10, Q13, Q15, Q18, Q20', topic:'Point vs broad light source shadows (umbra/penumbra)', lvl:'m', pass:false, note:'All six misses share one identical inverted rule: Prem answered as if POINT sources give soft/fuzzy shadows and BROAD sources give sharp shadows - backwards from the taught rule. Four separate direct-restatement questions (Q8, Q11, Q12, Q17) were answered correctly, showing this is one-directional fact memorisation without full bidirectional/mechanistic understanding, not scattered slips. Being remediated via a dedicated recap screen + 2 verification questions in Unit 14.' }
+      { q:'Q4', topic:'Point-source shadow (standalone recall, Unit 13 recap)', lvl:'e', pass:false, note:'A firefly as a single point source of light - answered as if it gives a soft, fuzzy shadow, backwards from the taught rule. This is the same inversion direction as U13, but Q10 (the comparison-framed version of the same concept) was answered correctly, isolating the gap to standalone recall specifically. One more standalone recap question folded into Unit 15&#39;s test to verify.' }
     ]
   },
 
   skills: [
-    { name: 'Biology',                  c: 94, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across three separate topics' },
+    { name: 'Biology',                  c: 96, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT + U14 Cells 19/20 (95%, 17/18 Biology-content questions correct - the one miss was an embedded Physics recap question, not Cells content) - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across four separate topics' },
     { name: 'Chemistry / Matter',       c: 91, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) - closed G4 Q2 and Q17; U12&#39;s only miss was an applied-reasoning anchoring slip, not a materials-content gap - Sections A+B content questions were effectively clean' },
-    { name: 'Physics',                  c: 89, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) - closed G4 Q18/19/Q3, but U13 revealed a genuine point-vs-broad-light-source concept inversion (not a slip) - the program&#39;s first fail; remediation folded into U14, being verified via 2 recap questions before considered closed' },
+    { name: 'Physics',                  c: 90, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s 2 embedded recap questions (Q10 comparison-framing correct, Q4 standalone recall still backwards) - closed G4 Q18/19/Q3; U13&#39;s point-vs-broad-source inversion is now PARTIALLY closed, isolated specifically to standalone (non-comparison) recall, being verified further via 1 more recap question in U15' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10) - the U13 dip breaks a three-run clean streak, but the misses were driven by a specific Physics content gap (point-vs-broad-source shadows), not a breakdown in fair-test or experiment-design reasoning itself; watching closely on U14&#39;s embedded recap questions' },
-    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10) - U13&#39;s dip traces to the same Physics content gap rather than a general reasoning failure; U11/U12&#39;s perfect runs show the underlying skill is intact' }
+    { name: 'Scientific Investigation', c: 95, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10) - a full bounce-back to perfect after the U13 dip, confirming the U13 misses were driven by a specific Physics content gap rather than a breakdown in fair-test or experiment-design reasoning itself' },
+    { name: 'Applied Reasoning',        c: 94, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10) - a full bounce-back to perfect after the U13 dip, confirming that dip traced to the same Physics content gap rather than a general reasoning failure' }
   ],
-  radarCurrent:  [94, 91, 89, 90, 93, 92],
+  radarCurrent:  [96, 91, 90, 90, 95, 94],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -54,23 +54,36 @@ var PREM_DATA = {
     { unit:'M1', topic:'Milestone Test 1 - All Units (U1-U10)', score:39, outOf:40, marks:98.75, marksOutOf:100, pct:99, passBar:32, date:'2026-07-07' },
     { unit:11, topic:'Biology: Human Body Systems', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-09' },
     { unit:12, topic:'Chemistry: Materials - Origins &amp; Classification', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-09' },
-    { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' }
+    { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' },
+    { unit:14, topic:'Biology: Cells', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-11' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 14, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
-      title: 'Biology: Cells',
+      n: 15, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Chemistry: Density &amp; Buoyancy',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'2 embedded Physics recap Qs', c:'tblue' },
-        { t:'4th unit of gap-closure plan', c:'torange' }
+        { t:'1 standalone Physics recap Q', c:'tblue' },
+        { t:'5th unit of gap-closure plan', c:'torange' }
       ],
-      note: 'Fourth unit of the U11-U20 block. Lesson 1 covers what a cell is and plant vs animal cell parts (nucleus, cytoplasm, cell membrane; plant-only cell wall, chloroplasts, large vacuole), bridging from Unit 8&#39;s chlorophyll/chloroplasts fact - and opens with a dedicated "Quick Fix from Unit 13" screen remediating the point-vs-broad-light-source concept inversion found in U13&#39;s real result, teaching the mechanism and drilling both directions with 3 quick-check questions (not counted in the main practice score). Lesson 2 covers unicellular vs multicellular organisms and specialized cells, bridging from Unit 4&#39;s microorganisms fact and Unit 11&#39;s body-systems "different parts, different jobs" idea. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), checked for zero reused questions against both lessons, and embeds 2 fresh Physics recap questions (Q4: point-source direct; Q10: comparison framing) to verify the U13 gap is actually closed before moving on. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;19.',
+      note: 'Fifth unit of the U11-U20 block. Lesson 1 covers what density is, comparing objects by mass and size (same-size/different-mass and same-mass/different-size rules), and ranking objects by density - directly mirroring the Competition paper&#39;s Q29 same-volume-balls question style. Lesson 2 covers the float/sink rule (density vs water), bridging from Unit 12&#39;s floating/sinking content, plus a dedicated observation-vs-inference bridge screen built to close the real competition paper&#39;s Q19 gap (what you directly see vs what you work out). Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), checked for zero reused questions against both lessons, and embeds 1 fresh standalone Physics recap question (Q4: point-source, non-comparison) to check whether Unit 14&#39;s partially-closed Competition Q10 gap is closing further. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;20.',
       status: 'pending'
+    },
+    {
+      n: 14, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Biology: Cells',
+      tags: [
+        { t:'&#9989; 19/20 (95%) PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 10/10', c:'tblue' },
+        { t:'Q10 partially closed - comparison vs standalone split', c:'torange' }
+      ],
+      note: 'Scored 19/20 (95%) - comfortably above the 16/20 pass bar, a strong recovery from Unit 13&#39;s 70% fail, fourth unit of the U11-U20 gap-closure plan. Section A (cells basics) 3/4 - missed Q4. Section B (applying cells) 6/6 - perfect. Section C (think like a scientist) 10/10 - perfect. The only miss, Q4 (a firefly as a single point source of light, standalone/non-comparison framing), was answered backwards - the same direction as U13&#39;s original inversion. But Q10 (a comparison framing: keychain flashlight vs wide lantern) was answered CORRECTLY, revealing a comparison-vs-standalone recall split: comparative reasoning about which of two sources gives a sharper/softer shadow is now reliable, but standalone recall of a single source&#39;s behaviour is not. Competition paper&#39;s Q10 gap is now classified as PARTIALLY confirmed closed - one more standalone recap question folded into Unit 15&#39;s test to verify further. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 13, badge: 'linear-gradient(135deg,#F9A825,#FFD54F)',

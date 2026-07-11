@@ -386,8 +386,8 @@ function doSubmit(){
 }
 
 async function saveResults(){
-  const pad = n => String(n).padStart(2,'0');
-  const filename = `U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
   const json = JSON.stringify(lastResults, null, 2);
   const statusEl = document.getElementById('save-status');
 
