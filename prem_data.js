@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '11 Jul 2026',
+  updated:        '12 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,29 +13,30 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:15, topic:'Chemistry: Density &amp; Buoyancy', status:'Lessons + test ready &middot; 20 questions (19 Density &amp; Buoyancy + 1 standalone Physics recap question checking the U14 point-source finding), plus a dedicated observation-vs-inference bridge screen in Lesson 2' },
+  currentUnit: { n:16, topic:'Physics: Sound', status:'Lessons + test ready &middot; 20 questions (4A/6B/10C) covering vibration/sound basics, sound-needs-a-medium, speed of sound through solids/liquids/gases (directly targets the real Competition paper&#39;s Q9), and pitch vs volume as independent properties' },
 
   lastUnit: {
-    n:14, score:19, outOf:20, pct:95, delta:25, prevScore:70, passed:true,
-    patternLabel: 'Unit 14 result - Biology: Cells (19/20, 95% - PASS, strong recovery from U13&#39;s fail)',
-    patternInsight: '<strong>19/20 questions (95%)</strong> - comfortably above the 16/20 pass bar, a strong recovery from Unit 13&#39;s 70% fail. Section A (cells basics, warm-up) = <strong>3/4</strong> - one miss. Section B (applying cells) = <strong>6/6</strong> - perfect. Section C (think like a scientist, applied reasoning) = <strong>10/10</strong> - perfect, a return to the pre-U13 clean streak.',
-    analysisLabel: 'Comparison-vs-standalone recall split found &middot; Competition Q10 PARTIALLY confirmed closed',
-    analysisInsight: 'The only miss, Q4 (a firefly acting as a single point source of light - a standalone, non-comparison framing), was answered backwards, the same direction as U13&#39;s original inversion. But Q10 (two campers comparing a keychain flashlight vs a wide lantern - a comparison framing) was answered CORRECTLY. This is a materially more specific finding than U13&#39;s original "one-directional fact memorisation" diagnosis: comparative reasoning about which of two light sources gives a sharper/softer shadow is now reliable, but standalone recall of a single source&#39;s behaviour (with nothing to contrast against) is not yet reliable. Competition paper&#39;s Q10 is now classified as PARTIALLY confirmed closed. This comparison-vs-standalone split may generalise to other two-way relationships (hot vs cold, more vs less, near vs far, magnetic vs non-magnetic) - if comparison questions go well but standalone ones don&#39;t, that&#39;s this exact pattern. Rather than a third full remediation pass, one standalone (non-comparison) point-source recap question was folded into Unit 15&#39;s test (Q4) to check whether the gap is closing further.',
-    qSummary: '<strong>19 / 20 (95%) - PASS, strong recovery.</strong> One miss: Q4, a standalone point-source light recap question, answered backwards - same direction as U13, but this time isolated to standalone (non-comparison) recall only.',
+    n:15, score:18, outOf:20, pct:90, delta:20, prevScore:70, passed:true,
+    patternLabel: 'Unit 15 result - Chemistry: Density &amp; Buoyancy (18/20, 90% - PASS)',
+    patternInsight: '<strong>18/20 questions (90%)</strong> - comfortably above the 16/20 pass bar, sixth unit of the U11-U20 gap-closure plan. Section A (density basics, warm-up) = <strong>4/4</strong> - perfect, including the standalone Physics recap question. Section B (applying density) = <strong>5/6</strong> - one miss. Section C (think like a scientist, applied reasoning) = <strong>9/10</strong> - one miss.',
+    analysisLabel: 'Competition Q10 FULLY closed &middot; two distinct, unrelated single misses',
+    analysisInsight: 'Q4 (a candle flame as a standalone, non-comparison point source) was answered CORRECTLY - this closes out the three-unit remediation arc that started with U13&#39;s fail (backwards on both comparison and standalone framings), continued through U14&#39;s partial fix (comparison-only), and is now fully resolved with a working standalone recall too. Competition paper&#39;s Q10 is now classified as FULLY confirmed closed. The two misses were unrelated to each other: Q9 (oil poured on water - which floats) was answered in the wrong direction, the THIRD confirmed instance of a recurring fast-read MORE/LESS-style inversion pattern (after U6&#39;s Q7 and U10&#39;s Q7) - the fix is coaching Prem to say the relationship out loud before answering these. Q16 (a helium balloon rising through air, generalising the float/sink rule to gases) was missed because that generalisation was only ever taught via a short supplementary teaching note, never given its own practice question - an undertrained-content gap, not a reasoning failure. Both Competition Q29 (same-volume-ranking) and Q19 (density-prediction) question styles were answered correctly, confirming those two gaps are also closed.',
+    qSummary: '<strong>18 / 20 (90%) - PASS.</strong> Two misses: Q9 (oil/water direction inversion - third instance of a known fast-read pattern) and Q16 (helium balloon gas-density generalisation - an undertrained teaching-note gap). Q4 (standalone point-source recap) answered correctly, fully closing Competition Q10.',
     qBreakdown: [
-      { q:'Q4', topic:'Point-source shadow (standalone recall, Unit 13 recap)', lvl:'e', pass:false, note:'A firefly as a single point source of light - answered as if it gives a soft, fuzzy shadow, backwards from the taught rule. This is the same inversion direction as U13, but Q10 (the comparison-framed version of the same concept) was answered correctly, isolating the gap to standalone recall specifically. One more standalone recap question folded into Unit 15&#39;s test to verify.' }
+      { q:'Q9', topic:'Oil poured on water - float/sink direction (fast-read inversion)', lvl:'b', pass:false, note:'Chose the wrong direction for which liquid floats on which - the third confirmed instance of this exact error shape, after U6&#39;s Q7 (conductors/insulators) and U10&#39;s Q7 (friction). Standing coaching fix: say the relationship out loud before answering MORE/LESS-style comparison questions.' },
+      { q:'Q16', topic:'Helium balloon - gas-density generalisation', lvl:'c', pass:false, note:'The float/sink rule extended to gases (helium less dense than air) was only ever taught via a short supplementary teaching note added to Lesson 2, with no dedicated practice question - a genuine first-exposure/undertrained-content gap. New standing rule: any teaching-note addendum covering a test question&#39;s required generalisation should also get at least one matching practice question.' }
     ]
   },
 
   skills: [
     { name: 'Biology',                  c: 96, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT + U14 Cells 19/20 (95%, 17/18 Biology-content questions correct - the one miss was an embedded Physics recap question, not Cells content) - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across four separate topics' },
-    { name: 'Chemistry / Matter',       c: 91, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) - closed G4 Q2 and Q17; U12&#39;s only miss was an applied-reasoning anchoring slip, not a materials-content gap - Sections A+B content questions were effectively clean' },
-    { name: 'Physics',                  c: 90, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s 2 embedded recap questions (Q10 comparison-framing correct, Q4 standalone recall still backwards) - closed G4 Q18/19/Q3; U13&#39;s point-vs-broad-source inversion is now PARTIALLY closed, isolated specifically to standalone (non-comparison) recall, being verified further via 1 more recap question in U15' },
+    { name: 'Chemistry / Matter',       c: 92, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) + U15 Density &amp; Buoyancy 18/20 (90%) - closed G4 Q2, Q17, and Competition Q29/Q19; U15&#39;s one content-side miss (Q9, oil/water direction) was a fast-read slip, not a density-concept gap' },
+    { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s embedded recap (comparison-framing correct, standalone still backwards) + U15&#39;s standalone recap Q4 answered CORRECTLY - closed G4 Q18/19/Q3; U13&#39;s point-vs-broad-source inversion is now FULLY closed after the U14 partial fix and U15&#39;s successful standalone recall' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 95, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10) - a full bounce-back to perfect after the U13 dip, confirming the U13 misses were driven by a specific Physics content gap rather than a breakdown in fair-test or experiment-design reasoning itself' },
-    { name: 'Applied Reasoning',        c: 94, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10) - a full bounce-back to perfect after the U13 dip, confirming that dip traced to the same Physics content gap rather than a general reasoning failure' }
+    { name: 'Scientific Investigation', c: 94, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10), 90% (U15, 9/10) - U15&#39;s one miss (Q16, helium balloon) was an undertrained-content gap (a generalisation only taught via a teaching note, never practised), not a fair-test or experiment-design reasoning failure' },
+    { name: 'Applied Reasoning',        c: 93, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10), U15 90% (9/10) - the U15 dip traces to the same undertrained-content gap (Q16) rather than a general reasoning failure' }
   ],
-  radarCurrent:  [96, 91, 90, 90, 95, 94],
+  radarCurrent:  [96, 92, 91, 90, 94, 93],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -55,23 +56,36 @@ var PREM_DATA = {
     { unit:11, topic:'Biology: Human Body Systems', score:20, outOf:20, pct:100, passBar:16, date:'2026-07-09' },
     { unit:12, topic:'Chemistry: Materials - Origins &amp; Classification', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-09' },
     { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' },
-    { unit:14, topic:'Biology: Cells', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-11' }
+    { unit:14, topic:'Biology: Cells', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-11' },
+    { unit:15, topic:'Chemistry: Density &amp; Buoyancy', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-12' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 15, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
-      title: 'Chemistry: Density &amp; Buoyancy',
+      n: 16, badge: 'linear-gradient(135deg,#1565C0,#64B5F6)',
+      title: 'Physics: Sound',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'1 standalone Physics recap Q', c:'tblue' },
-        { t:'5th unit of gap-closure plan', c:'torange' }
+        { t:'Targets Competition Q9 (speed in water vs air)', c:'tblue' },
+        { t:'6th unit of gap-closure plan', c:'torange' }
       ],
-      note: 'Fifth unit of the U11-U20 block. Lesson 1 covers what density is, comparing objects by mass and size (same-size/different-mass and same-mass/different-size rules), and ranking objects by density - directly mirroring the Competition paper&#39;s Q29 same-volume-balls question style. Lesson 2 covers the float/sink rule (density vs water), bridging from Unit 12&#39;s floating/sinking content, plus a dedicated observation-vs-inference bridge screen built to close the real competition paper&#39;s Q19 gap (what you directly see vs what you work out). Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), checked for zero reused questions against both lessons, and embeds 1 fresh standalone Physics recap question (Q4: point-source, non-comparison) to check whether Unit 14&#39;s partially-closed Competition Q10 gap is closing further. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary &sect;20.',
+      note: 'Sixth unit of the U11-U20 block. Lesson 1 covers what sound is (vibration &rarr; compression waves) and the sound-needs-a-medium rule, including an explicit contrast with light (which can cross a vacuum) that bridges back to Unit 13. Lesson 2 covers the speed of sound through solids/liquids/gases (fastest &rarr; slowest, tied back to Unit 2&#39;s particle-packing picture) - directly targeting the real Competition paper&#39;s Q9 (speed of sound in water vs air, zero credit on the original paper) - plus pitch (frequency, high/low) vs volume (amplitude, loud/soft) as independent properties. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), and checked for zero reused questions/worked-examples against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary.',
       status: 'pending'
+    },
+    {
+      n: 15, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Chemistry: Density &amp; Buoyancy',
+      tags: [
+        { t:'&#9989; 18/20 (90%) PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 9/10', c:'tblue' },
+        { t:'Competition Q10 FULLY closed', c:'torange' }
+      ],
+      note: 'Scored 18/20 (90%) - comfortably above the 16/20 pass bar, fifth unit of the U11-U20 gap-closure plan. Section A (density basics) 4/4 - perfect, including the standalone Physics recap question. Section B (applying density) 5/6 - missed Q9 (oil poured on water - wrong float/sink direction), the THIRD confirmed instance of a recurring fast-read MORE/LESS inversion pattern (after U6&#39;s Q7 and U10&#39;s Q7). Section C (think like a scientist) 9/10 - missed Q16 (helium balloon gas-density generalisation), an undertrained-content gap since that generalisation was only ever taught via a short teaching note, never given a practice question. Q4 (a candle flame as a standalone point source) was answered CORRECTLY, fully closing the three-unit Competition Q10 remediation arc (U13 fail &rarr; U14 partial fix &rarr; U15 full fix). Competition Q29 and Q19 question styles were also answered correctly, confirming both closed. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 14, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',

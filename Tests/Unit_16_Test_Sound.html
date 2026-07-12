@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 16 Test — Physics: Sound</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 16 Test — Physics: Sound</b>
+      <span class="sub" id="hdr-sub">What is sound? • Sound needs a medium • Speed through solids, liquids &amp; gases • Pitch vs volume</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' or 'scenario' questions, ask: what changed, what stayed the same, and what does the evidence actually show?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 16;
+const UNIT_TITLE = "Physics: Sound";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Sound Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"A metal ruler is held firmly at the edge of a desk, and the free end is flicked so it wobbles rapidly back and forth. As it wobbles, a buzzing sound is heard. What is actually causing this sound?",
+    options:["The rapid vibration (wobbling) of the ruler","The ruler getting warmer as it moves","The desk absorbing energy from the ruler","The colour of the ruler changing the air around it"], ans:1,
+    why:"Sound is produced by vibration — here, the ruler's rapid back-and-forth wobble is what creates the buzzing sound." },
+  { n:2, section:'A', star:0, body:"Which of these best describes what happens to sound in a place that is a true vacuum — completely empty of any matter at all?",
+    options:["Sound travels through a vacuum, just more slowly than through air","Sound travels through a vacuum just as fast as it always does through ordinary air","Sound cannot travel through a vacuum at all, because there is no matter to carry the vibration","Sound travels through a vacuum, but only very quiet sounds can get through"], ans:3,
+    why:"A vacuum has no matter at all, and sound needs a medium (matter) to travel through — so sound simply cannot travel through a vacuum, at any speed." },
+  { n:3, section:'A', star:0, body:"In sound, what does the word 'pitch' actually describe?",
+    options:["How high or low a sound is","How loud or soft a sound is","How long a sound lasts","How far away the sound source is"], ans:1,
+    why:"Pitch describes how high or low a sound is — it comes from how fast the sound source is vibrating." },
+  { n:4, section:'A', star:0, body:"In sound, what does the word 'volume' actually describe?",
+    options:["How high or low a sound is","How far a sound can travel before stopping completely","How loud or soft a sound is","How many different sounds are playing at once"], ans:3,
+    why:"Volume describes how loud or soft a sound is — it comes from how big or strong the vibration is." },
+
+  /* ===================== SECTION B — Applying Sound Concepts (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A worker leans against a long steel fence and taps it once at the far end. A friend standing right next to the worker, with an ear pressed to the fence, hears the tap through the metal, and also hears the same tap arrive again slightly later through the open air. Through which path did the sound of the tap arrive first?",
+    options:["Through the open air, since air carries sound fastest of all","Through the solid steel fence, since sound travels fastest through solids","Both paths carried the sound at exactly the same speed, so there is no real difference","Neither path actually carried any sound at all, since fences do not vibrate"], ans:2,
+    why:"Sound travels fastest through solids, since their particles are packed most tightly together — so the tap arrives through the steel fence before it arrives through the air." },
+  { n:6, section:'B', star:1, body:"Two divers underwater want to signal each other. One diver taps hard on a metal air tank, and the sound is heard clearly by the other diver a good distance away underwater — much more clearly than the same tap would be heard through open air at that same distance. What does this tell you about the speed of sound in water compared to air?",
+    options:["Sound moves through water more slowly than it moves through air","Water completely blocks sound, so no tap could ever be heard underwater at all","Water and air both carry sound at identical speeds, with no real difference between them","Sound moves through water more quickly than it moves through air"], ans:4,
+    why:"Water's particles are packed closer together than air's, so sound travels faster through water than through air — exactly why the tap is heard so clearly underwater." },
+  { n:7, section:'B', star:1, body:"A mosquito's wings beat extremely fast, producing a high-pitched whine, while an elephant's rumble comes from very slow vibrations deep in its body. Based on this, what can you say about the link between vibration speed and pitch?",
+    options:["Faster vibrations produce a higher pitch, and slower vibrations produce a lower pitch","Vibration speed has no effect on pitch at all","Faster vibrations produce a lower pitch, and slower vibrations produce a higher pitch","Only animals can produce pitch; machines cannot"], ans:1,
+    why:"The mosquito's fast wing vibrations produce a high pitch, while the elephant's slow, deep vibrations produce a low pitch — faster vibration always means higher pitch." },
+  { n:8, section:'B', star:1, body:"A drummer taps a drum very gently, then strikes the exact same drum much harder without changing anything else. What changes about the sound between the gentle tap and the hard strike?",
+    options:["The pitch becomes higher with the harder strike","The pitch becomes lower with the harder strike","The volume becomes louder with the harder strike","Nothing at all changes between the two strikes"], ans:3,
+    why:"Striking harder makes a bigger vibration, which increases volume (louder) — it does not change the pitch, since the vibration speed stays the same." },
+  { n:9, section:'B', star:1, body:"A tuning fork is struck and produces a note that is both very quiet and very high-pitched at the same time. Is it possible for a sound to be quiet AND high-pitched together?",
+    options:["No — quiet sounds must always be low-pitched","Yes — pitch and volume are separate properties, so any combination is possible","No — high-pitched sounds must always be loud","Yes, but a quiet and high-pitched combination like this could only ever happen with a tuning fork, and with no other kind of sound source"], ans:2,
+    why:"Pitch and volume are two completely separate properties of a sound — a note can be quiet and high-pitched, loud and low-pitched, or any other combination." },
+  { n:10, section:'B', star:1, body:"A powerful telescope on Earth observes a brilliant flash of light from a massive explosion on a distant star, even though the explosion happens far out in the empty vacuum of space between stars. If that same explosion also produced an incredibly loud bang, would the sound of the bang ever reach Earth?",
+    options:["No — the bang's sound has no medium to travel through across the vacuum of space, but the explosion's light can cross that same vacuum just fine","Yes — sound and light both travel through the total vacuum of space at exactly the same incredible speed, arriving at Earth together every single time","Yes, but only if the explosion happens extremely close to Earth","No — neither the light nor the sound from the explosion could ever reach Earth at all"], ans:1,
+    why:"Light does not need a medium and can travel through a vacuum, but sound absolutely needs a medium (matter) to travel, so it cannot cross empty space at all." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"Three identical tuning forks are struck at exactly the same moment, and a listener times how long the sound takes to arrive along three equal-length paths. Path 1 travels through a long steel rod. Path 2 travels through a sealed pipe filled with water. Path 3 travels through open air. In which order does the sound arrive, from FASTEST to SLOWEST?",
+    options:["Path 3 (air), Path 1 (steel rod), Path 2 (water pipe)","Path 1 (steel rod), Path 3 (air), Path 2 (water pipe)","Path 1 (steel rod), Path 2 (water pipe), Path 3 (air)","All three paths carry the sound at exactly the same time, regardless of the material"], ans:3,
+    why:"Sound travels fastest through solids, then liquids, then gases — so the steel rod (solid) is fastest, then the water pipe (liquid), then air (gas) is slowest." },
+  { n:12, section:'C', star:2, body:"A student claims: 'If I hit a drum harder, the vibration gets bigger, so the pitch must get higher.' Is this reasoning correct?",
+    options:["No — hitting harder changes how big the vibration is, which changes volume (louder), not pitch; pitch depends on how FAST the vibration is, not how big it is","Yes — hitting harder always raises the pitch of a drum","Yes, but this pattern is only true for drums specifically, and does not apply to any other kind of musical instrument at all, including strings and wind instruments","No — hitting harder actually has no effect on the drum's sound at all"], ans:1,
+    why:"Hitting harder makes a bigger vibration, which changes volume, not pitch. Pitch only changes when the SPEED of the vibration changes." },
+  { n:13, section:'C', star:2, body:"As a student walks away from a ringing school bell, she writes two notes. Note 1: 'The bell sounded quieter and quieter the further away I walked.' Note 2: 'This must be because sound spreads out and loses strength over distance.' Which note describes something she directly OBSERVED, rather than something she worked out afterwards?",
+    options:["This must be because sound spreads out and loses strength over distance","Sound must be a type of matter that gets used up as it spreads outward","The bell would sound louder again if she walked back toward it","The bell sounded quieter and quieter the further away she walked"], ans:4,
+    why:"'The bell sounded quieter and quieter' is what she directly heard — the observation. The explanation about sound spreading out is something she worked out afterwards, an inference." },
+  { n:14, section:'C', star:2, body:"A student claims: 'Sound can still travel through a total vacuum, just much more slowly than through air.' What is the BEST critique of this claim?",
+    options:["The claim is completely correct, and this is exactly and precisely how astronauts are able to hear each other clearly while spacewalking together without using any radio equipment at all","The claim is wrong in the opposite direction — sound actually travels FASTER through a vacuum than through air, not slower","The claim is wrong — sound cannot travel through a vacuum at all, at any speed, because there is no matter present to carry the vibration from particle to particle","The claim is correct only for very loud sounds, such as explosions, but not for quieter everyday sounds"], ans:3,
+    why:"A vacuum has no matter at all, so there's nothing to carry a vibration — sound cannot travel through it at any speed, not even slowly." },
+  { n:15, section:'C', star:2, body:"A swimmer underwater can clearly hear a boat engine running on the surface well before she can make out any engine sound after climbing out and standing on the dock, even though she is now physically closer to the boat. What is the BEST explanation for this?",
+    options:["Water actually blocks almost all sound, so what she heard underwater could not have been the boat engine at all","Sound travels faster through water than through air, so the engine sound reached her ears more efficiently while she was still submerged","Standing on the dock made her ears stop working properly for a short time","The boat engine was turned off the moment she climbed out of the water"], ans:2,
+    why:"Sound travels faster (and often more efficiently over that distance) through water than through air, which is why the swimmer heard the engine so clearly while submerged." },
+  { n:16, section:'C', star:2, body:"A violinist tightens a string, and the exact same bow stroke now produces a noticeably higher note than before, while sounding just as loud as it did before tightening. What has changed about the string's sound?",
+    options:["Only the volume has changed; the pitch has stayed exactly the same","The pitch and volume shifted together, changing at the same time","The string's sound stayed completely the same in every way, with no change at all","Only the pitch has changed; the volume has stayed about the same"], ans:4,
+    why:"Tightening the string changed how fast it vibrates, raising the pitch, while the same bow stroke kept the volume about the same — pitch and volume changed independently." },
+  { n:17, section:'C', star:2, body:"'A sound that is very deep and booming' describes LOW pitch. 'A sound that can be heard from far across a football field' describes HIGH volume. A new sound is described as 'a very high, ear-piercing whistle that can only be heard up close.' Which combination is this?",
+    options:["High pitch, high volume","Low pitch, low volume","Low pitch, high volume","High pitch, low volume"], ans:4,
+    why:"'Ear-piercing whistle' means a very high pitch, while 'can only be heard up close' means low volume — so this is high pitch, low volume." },
+  { n:18, section:'C', star:2, body:"A student says: 'Sound travels fastest through solids like steel because steel conducts electricity really well.' Is this the correct EXPLANATION for why sound travels fastest through solids?",
+    options:["Yes — materials that conduct electricity particularly well, such as copper and steel, will always carry sound the very fastest too, since both properties come from exactly the same underlying physical reason inside the material","No — the conclusion (solids carry sound fastest) is right, but the reason given is wrong; solids carry sound fastest because their particles are packed most tightly together, not because of electrical conductivity","No — solids do not actually carry sound fastest at all; gases do","Yes, but only for metals specifically, since only metals both conduct electricity and carry sound well"], ans:2,
+    why:"The student's conclusion is correct, but the reasoning is wrong — solids carry sound fastest because of tightly packed particles, which has nothing to do with electrical conductivity." },
+  { n:19, section:'C', star:2, body:"A student wants to test whether hitting a cymbal harder changes its pitch. She strikes the exact same cymbal once gently and once hard, keeping the striking spot and angle identical both times. Based on what she has learned about pitch and volume, what should she PREDICT before testing?",
+    options:["The hard strike will definitely produce a noticeably different and higher pitch than before, since a much stronger vibration always changes exactly how fast something vibrates back and forth","The hard strike will sound louder, but the pitch should stay about the same, since striking force changes the SIZE of the vibration, not its speed","The gentle strike will have a higher pitch than the hard strike, since gentler strikes are always higher-pitched","The hard strike will have a lower pitch than the gentle strike, since harder strikes are always lower-pitched"], ans:2,
+    why:"Striking harder only changes volume (louder), not pitch — force changes how BIG the vibration is, not how FAST it vibrates, so the pitch should stay about the same regardless of strike strength." },
+  { n:20, section:'C', star:2, body:"Two astronauts are doing a spacewalk, floating a short distance apart in open space with their spacesuits touching (helmet-to-helmet contact), and no radio switched on. One astronaut speaks, and to their surprise, the other can actually hear a faint voice through the contact point, even though shouting normally into open space produces total silence. What is the BEST explanation?",
+    options:["Sound can travel through the vacuum of space after all, as long as astronauts are close enough together","The astronauts' radios must have switched on by accident, since sound cannot travel any other way in space","This must be a trick or a mistake of some kind, since sound is never able to pass between two people wearing spacesuits under any circumstance at all, no matter how closely they are positioned together","The touching helmets/suits form a solid material pathway (a medium) for the vibrations to travel through directly, even though the empty space around them still has no medium and stays silent"], ans:4,
+    why:"The touching suits/helmets create a solid medium that vibrations can travel through directly — the empty space around them is still a vacuum with no medium, so shouting into open space stays silent." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Sound Basics (warm-up)",
+  B: "SECTION B — Applying Sound Concepts (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
