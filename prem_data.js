@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '12 Jul 2026',
+  updated:        '13 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,30 +13,31 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:16, topic:'Physics: Sound', status:'Lessons + test ready &middot; 20 questions (4A/6B/10C) covering vibration/sound basics, sound-needs-a-medium, speed of sound through solids/liquids/gases (directly targets the real Competition paper&#39;s Q9), and pitch vs volume as independent properties' },
+  currentUnit: { n:17, topic:'Biology: Ecosystems', status:'Lessons + test ready &middot; 20 questions (4A/6B/10C) covering producer/consumer/decomposer roles, nutrients &amp; air composition (nitrogen fixation - directly targets the real Competition paper&#39;s Q7), food chains &amp; webs, human impact (pollution vs the greenhouse effect - targets Competition Q31), and seed germination requirements plus detailed flower-part anatomy (stigma/anther/ovule - targets Competition Q32)' },
 
   lastUnit: {
-    n:15, score:18, outOf:20, pct:90, delta:20, prevScore:70, passed:true,
-    patternLabel: 'Unit 15 result - Chemistry: Density &amp; Buoyancy (18/20, 90% - PASS)',
-    patternInsight: '<strong>18/20 questions (90%)</strong> - comfortably above the 16/20 pass bar, sixth unit of the U11-U20 gap-closure plan. Section A (density basics, warm-up) = <strong>4/4</strong> - perfect, including the standalone Physics recap question. Section B (applying density) = <strong>5/6</strong> - one miss. Section C (think like a scientist, applied reasoning) = <strong>9/10</strong> - one miss.',
-    analysisLabel: 'Competition Q10 FULLY closed &middot; two distinct, unrelated single misses',
-    analysisInsight: 'Q4 (a candle flame as a standalone, non-comparison point source) was answered CORRECTLY - this closes out the three-unit remediation arc that started with U13&#39;s fail (backwards on both comparison and standalone framings), continued through U14&#39;s partial fix (comparison-only), and is now fully resolved with a working standalone recall too. Competition paper&#39;s Q10 is now classified as FULLY confirmed closed. The two misses were unrelated to each other: Q9 (oil poured on water - which floats) was answered in the wrong direction, the THIRD confirmed instance of a recurring fast-read MORE/LESS-style inversion pattern (after U6&#39;s Q7 and U10&#39;s Q7) - the fix is coaching Prem to say the relationship out loud before answering these. Q16 (a helium balloon rising through air, generalising the float/sink rule to gases) was missed because that generalisation was only ever taught via a short supplementary teaching note, never given its own practice question - an undertrained-content gap, not a reasoning failure. Both Competition Q29 (same-volume-ranking) and Q19 (density-prediction) question styles were answered correctly, confirming those two gaps are also closed.',
-    qSummary: '<strong>18 / 20 (90%) - PASS.</strong> Two misses: Q9 (oil/water direction inversion - third instance of a known fast-read pattern) and Q16 (helium balloon gas-density generalisation - an undertrained teaching-note gap). Q4 (standalone point-source recap) answered correctly, fully closing Competition Q10.',
+    n:16, score:17, outOf:20, pct:85, delta:-5, prevScore:90, passed:true,
+    patternLabel: 'Unit 16 result - Physics: Sound (17/20, 85% - PASS)',
+    patternInsight: '<strong>17/20 questions (85%)</strong> - above the 16/20 pass bar, seventh unit of the U11-U20 gap-closure plan. Section A (sound basics, warm-up) = <strong>4/4</strong> - perfect. Section B (applying sound concepts) = <strong>5/6</strong> - one miss. Section C (think like a scientist, applied reasoning) = <strong>8/10</strong> - two misses.',
+    analysisLabel: 'Competition Q9 CONFIRMED closed &middot; new pitch/volume property-misattribution pattern identified',
+    analysisInsight: 'Every question targeting the real Competition paper&#39;s Q9 (speed of sound in water vs air, and the broader solids/liquids/gases ranking) was answered correctly, confirming that gap is now fully closed. The three misses split into two distinct issues. Q8 and Q16 share a NEW error shape, distinct from every previously-seen pattern: Prem can correctly define pitch (frequency, high/low) and volume (amplitude, loud/soft) as separate properties in isolation, but in these two questions he mapped a new scenario&#39;s underlying cause to the WRONG property - identifying a pitch-driven change as a volume change, and vice versa. This is a property-misattribution pattern, not a direction-inversion pattern (the established U6/U10/U15 fast-read pattern where the right property is identified but the wrong direction is chosen) - the fix is a new explicit two-step check: name the cause first (what physically changed - how hard/fast something vibrates, or how big the vibration is), then decide which property that maps to, rather than jumping straight to an answer. Q13 (an observation-vs-inference question) was investigated separately since its content wasn&#39;t taught within Sound itself, but was confirmed via the lesson archive to be an established cross-unit "Think Like a Scientist" skill explicitly taught with a dedicated bridge screen in U15&#39;s Density lesson one unit prior - so this reads as an isolated recall miss on a skill still being consolidated, not a fresh content gap.',
+    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Competition Q9 (speed of sound) fully confirmed closed. Three misses: Q8 and Q16 (NEW pitch/volume property-misattribution pattern - correct property definitions, wrong cause-to-property mapping in context) and Q13 (observation-vs-inference, an established cross-unit skill from U15, isolated miss not a fresh gap).',
     qBreakdown: [
-      { q:'Q9', topic:'Oil poured on water - float/sink direction (fast-read inversion)', lvl:'b', pass:false, note:'Chose the wrong direction for which liquid floats on which - the third confirmed instance of this exact error shape, after U6&#39;s Q7 (conductors/insulators) and U10&#39;s Q7 (friction). Standing coaching fix: say the relationship out loud before answering MORE/LESS-style comparison questions.' },
-      { q:'Q16', topic:'Helium balloon - gas-density generalisation', lvl:'c', pass:false, note:'The float/sink rule extended to gases (helium less dense than air) was only ever taught via a short supplementary teaching note added to Lesson 2, with no dedicated practice question - a genuine first-exposure/undertrained-content gap. New standing rule: any teaching-note addendum covering a test question&#39;s required generalisation should also get at least one matching practice question.' }
+      { q:'Q8', topic:'Pitch vs volume - property misattribution (NEW pattern)', lvl:'b', pass:false, note:'Mapped a scenario&#39;s underlying cause to the wrong property (chose the volume-change option when the scenario actually described a pitch change, or vice versa) - the first of two matching misses. New standing coaching rule: name the physical cause first (how hard/fast it vibrates vs how big the vibration is), then decide which property that maps to, before answering.' },
+      { q:'Q13', topic:'Observation vs inference (cross-unit Think Like a Scientist skill)', lvl:'c', pass:false, note:'Confirmed via the lesson archive that this skill was explicitly taught one unit prior, in U15&#39;s Density lesson - so this is an isolated recall miss on a skill still being consolidated across units, not a Sound-specific content gap.' },
+      { q:'Q16', topic:'Pitch vs volume - property misattribution (NEW pattern)', lvl:'c', pass:false, note:'The second instance of the same new error shape as Q8, in the opposite direction - correctly defines pitch and volume separately but unreliably maps a new scenario&#39;s cause to the right one of the two. Same fix applies: name the cause, then the property.' }
     ]
   },
 
   skills: [
     { name: 'Biology',                  c: 96, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT + U14 Cells 19/20 (95%, 17/18 Biology-content questions correct - the one miss was an embedded Physics recap question, not Cells content) - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across four separate topics' },
     { name: 'Chemistry / Matter',       c: 92, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) + U15 Density &amp; Buoyancy 18/20 (90%) - closed G4 Q2, Q17, and Competition Q29/Q19; U15&#39;s one content-side miss (Q9, oil/water direction) was a fast-read slip, not a density-concept gap' },
-    { name: 'Physics',                  c: 91, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s embedded recap (comparison-framing correct, standalone still backwards) + U15&#39;s standalone recap Q4 answered CORRECTLY - closed G4 Q18/19/Q3; U13&#39;s point-vs-broad-source inversion is now FULLY closed after the U14 partial fix and U15&#39;s successful standalone recall' },
+    { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s embedded recap (comparison-framing correct, standalone still backwards) + U15&#39;s standalone recap Q4 answered CORRECTLY + U16 Sound 17/20 (85%) - closed G4 Q18/19/Q3 and Competition Q9 (speed of sound); U13&#39;s point-vs-broad-source inversion is FULLY closed, and U16 surfaced a NEW pitch/volume property-misattribution pattern (correct definitions, unreliable cause-to-property mapping in context) now flagged for coaching' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 94, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10), 90% (U15, 9/10) - U15&#39;s one miss (Q16, helium balloon) was an undertrained-content gap (a generalisation only taught via a teaching note, never practised), not a fair-test or experiment-design reasoning failure' },
-    { name: 'Applied Reasoning',        c: 93, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10), U15 90% (9/10) - the U15 dip traces to the same undertrained-content gap (Q16) rather than a general reasoning failure' }
+    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10), 90% (U15, 9/10), 80% (U16, 8/10) - U16&#39;s two misses were the new pitch/volume property-misattribution pattern (Q16) plus an isolated observation-vs-inference recall slip (Q13, a skill already confirmed taught in U15) - not a fair-test or experiment-design reasoning failure' },
+    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10), U15 90% (9/10), U16 80% (8/10) - the U16 dip traces to the new property-misattribution pattern (Q8/Q16) rather than a general reasoning failure' }
   ],
-  radarCurrent:  [96, 92, 91, 90, 94, 93],
+  radarCurrent:  [96, 92, 92, 90, 93, 92],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -57,23 +58,36 @@ var PREM_DATA = {
     { unit:12, topic:'Chemistry: Materials - Origins &amp; Classification', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-09' },
     { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' },
     { unit:14, topic:'Biology: Cells', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-11' },
-    { unit:15, topic:'Chemistry: Density &amp; Buoyancy', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-12' }
+    { unit:15, topic:'Chemistry: Density &amp; Buoyancy', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-12' },
+    { unit:16, topic:'Physics: Sound', score:17, outOf:20, pct:85, passBar:16, date:'2026-07-13' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 16, badge: 'linear-gradient(135deg,#1565C0,#64B5F6)',
-      title: 'Physics: Sound',
+      n: 17, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Biology: Ecosystems',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'Targets Competition Q9 (speed in water vs air)', c:'tblue' },
-        { t:'6th unit of gap-closure plan', c:'torange' }
+        { t:'Targets Competition Q7, Q14, Q31, Q32', c:'tblue' },
+        { t:'7th unit of gap-closure plan', c:'torange' }
       ],
-      note: 'Sixth unit of the U11-U20 block. Lesson 1 covers what sound is (vibration &rarr; compression waves) and the sound-needs-a-medium rule, including an explicit contrast with light (which can cross a vacuum) that bridges back to Unit 13. Lesson 2 covers the speed of sound through solids/liquids/gases (fastest &rarr; slowest, tied back to Unit 2&#39;s particle-packing picture) - directly targeting the real Competition paper&#39;s Q9 (speed of sound in water vs air, zero credit on the original paper) - plus pitch (frequency, high/low) vs volume (amplitude, loud/soft) as independent properties. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), and checked for zero reused questions/worked-examples against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary.',
+      note: 'Seventh unit of the U11-U20 block. Lesson 1 covers producer/consumer/decomposer roles, nutrients &amp; the air (nitrogen fixation, bridged back to Unit 4&#39;s decomposer content) - directly targeting the real Competition paper&#39;s Q7 (air composition/nitrogen) - food chains &amp; webs, and human impact via pollution vs the greenhouse effect, targeting Competition Q14. Lesson 2 covers seed germination requirements (water, warmth, air - explicitly not soil or light, targeting Competition Q31) and detailed flower-part anatomy via a hand-built labelled cross-section diagram (stigma, style, ovary, ovule, petal, anther, filament, sepal - targeting Competition Q32), plus the pollination-to-fertilization-to-seed cycle. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), and checked for zero reused questions/worked-examples against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary.',
       status: 'pending'
+    },
+    {
+      n: 16, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Physics: Sound',
+      tags: [
+        { t:'&#9989; 17/20 (85%) PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 8/10', c:'tblue' },
+        { t:'Competition Q9 CONFIRMED closed', c:'torange' }
+      ],
+      note: 'Scored 17/20 (85%) - above the 16/20 pass bar, seventh unit of the U11-U20 gap-closure plan. Section A (sound basics) 4/4 - perfect. Section B (applying sound concepts) 5/6 - missed Q8. Section C (think like a scientist) 8/10 - missed Q13 and Q16. Every question targeting the real Competition paper&#39;s Q9 (speed of sound in water vs air, and the solids/liquids/gases ranking) was answered correctly, confirming that gap is now FULLY closed. Q8 and Q16 share a NEW error shape not seen in any prior unit: Prem correctly defines pitch and volume as separate properties in isolation, but unreliably maps a new scenario&#39;s underlying cause to the right one of the two - a property-misattribution pattern, distinct from the established fast-read direction-inversion pattern (U6/U10/U15). New standing coaching fix: name the physical cause first, then decide which property it maps to. Q13 (observation vs inference) was confirmed via the lesson archive to be an established cross-unit skill already taught in U15&#39;s Density lesson - an isolated recall miss, not a fresh Sound-specific gap. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 15, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',

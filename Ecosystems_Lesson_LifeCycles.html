@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 17 · Lesson 2 — Life Cycles: Germination to Flower</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .needgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+  .needcell{border-radius:10px;padding:10px;text-align:center;background:#e3f2fd;border:2px solid var(--blue)}
+  .notneedgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .notneedcell{border-radius:10px;padding:10px;text-align:center;background:#fdecea;border:2px solid #c62828}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .cycle{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+  .cbox{background:#fafdfa;border:2px solid var(--blue);border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;min-width:90px;font-size:.85rem;color:var(--blue)}
+  .carrow{font-size:1.3rem;color:var(--grey)}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .critique{background:#fdecea;border-left:6px solid #e53935;padding:12px 16px;border-radius:10px;margin:12px 0}
+  .critique b{color:#b71c1c}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:var(--green);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌼 Lesson 2 · Life Cycles: Germination to Flower</b><span class="pill">Unit 17 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Life-Cycle Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: a plant's life cycle is a repeating loop — seed → seedling → grown plant → flower → new seeds — and starts over again.</div>
+    <p>Today you'll learn exactly what a seed needs to sprout, the detailed parts inside a flower and what each one does, and how a flower makes brand-new seeds to keep the cycle going.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🌱</div><div class="t">Seed germination</div><div class="j">what a seed needs to sprout</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌸</div><div class="t">Flower parts in detail</div><div class="j">stigma, anther, ovule &amp; more</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🐝</div><div class="t">Pollination &amp; fertilization</div><div class="j">how new seeds form</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔄</div><div class="t">The full cycle</div><div class="j">back to a new seed</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> predict whether a seed will germinate from its conditions, name every key part of a flower and its job, and explain the full seed-to-seed cycle.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 1 &amp; Unit 8 🔁</h2>
+    <div class="recall">🔁 <b>Remember flowers?</b> Back in Unit 1 you learned a flower's main job is to make seeds. In Unit 8 you learned leaves make food using sunlight, water, and air (photosynthesis).</div>
+    <p>Today you'll go much deeper: exactly HOW a flower makes seeds, part by part, and exactly what a seed needs before it can even start growing into a new plant.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Farmers and gardeners plan exactly when to plant seeds based on what they need to sprout. Scientists breeding new crops need to understand flower parts to control pollination. And every fruit or vegetable you eat exists because of this exact cycle repeating, generation after generation.</div>
+    <div class="card">
+      <b>Real life:</b> a farmer checks soil temperature and moisture before planting, not just the calendar date — because germination depends on specific conditions being right, not just "it's spring."
+    </div>
+  </section>
+
+  <!-- SCREEN 4: GERMINATION -->
+  <section class="screen" data-s="4">
+    <h2>What Does a Seed Need to Sprout? 🌱</h2>
+    <div class="rulebar">A seed needs exactly THREE things to germinate (start sprouting): WATER, the right WARMTH (temperature), and AIR (oxygen).</div>
+    <div class="needgrid">
+      <div class="needcell"><div style="font-size:1.6rem">💧</div><b>Water</b><br><small>softens the seed coat and wakes up the tiny plant inside</small></div>
+      <div class="needcell"><div style="font-size:1.6rem">🌡️</div><b>Warmth</b><br><small>too cold or too hot and the seed stays dormant (asleep)</small></div>
+      <div class="needcell"><div style="font-size:1.6rem">💨</div><b>Air (oxygen)</b><br><small>the tiny plant inside needs oxygen to release energy from its stored food</small></div>
+    </div>
+    <div class="job"><b>Surprise:</b> a seed does NOT need soil or light to germinate! A seed already has a tiny store of food packed inside it, enough to power the very first sprouting. That's why the classic "bean in a wet paper towel" experiment works — no soil at all, just a damp towel, warmth, and air.</div>
+    <div class="notneedgrid">
+      <div class="notneedcell"><div style="font-size:1.6rem">🚫🪴</div><b>NOT needed to germinate</b><br><small>Soil (the seed's own stored food is enough at first)</small></div>
+      <div class="notneedcell"><div style="font-size:1.6rem">🚫☀️</div><b>NOT needed to germinate</b><br><small>Light (needed LATER for photosynthesis, once it's a growing seedling)</small></div>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: FLOWER PARTS IN DETAIL -->
+  <section class="screen" data-s="5">
+    <h2>Inside a Flower: Every Part's Job 🌸</h2>
+    <div class="rulebar">A flower has TWO main sets of parts: parts that make POLLEN, and parts that receive pollen and make seeds.</div>
+    <svg viewBox="0 0 440 340" width="440" height="340" aria-label="Flower cross-section showing petal, sepal, stamen, and pistil parts">
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(0 200 215)"/>
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(60 200 215)"/>
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(120 200 215)"/>
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(180 200 215)"/>
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(240 200 215)"/>
+      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(300 200 215)"/>
+      <g transform="rotate(30 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(90 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(150 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(210 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(270 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(330 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <path d="M175 268 L155 285 L180 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <path d="M225 268 L245 285 L220 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <rect x="193" y="270" width="14" height="65" fill="#558b2f"/>
+      <ellipse cx="200" cy="255" rx="20" ry="16" fill="#7cb342" stroke="#33691e" stroke-width="1.5"/>
+      <circle cx="194" cy="257" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
+      <circle cx="206" cy="257" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
+      <circle cx="200" cy="251" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
+      <rect x="197" y="205" width="6" height="34" fill="#558b2f" rx="3"/>
+      <ellipse cx="200" cy="198" rx="11" ry="9" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
+
+      <line x1="211" y1="198" x2="300" y2="130" stroke="#718096" stroke-width="1"/>
+      <text x="304" y="134" font-size="13" fill="#2d3748">Stigma</text>
+
+      <line x1="203" y1="220" x2="300" y2="175" stroke="#718096" stroke-width="1"/>
+      <text x="304" y="179" font-size="13" fill="#2d3748">Style</text>
+
+      <line x1="218" y1="255" x2="300" y2="255" stroke="#718096" stroke-width="1"/>
+      <text x="304" y="259" font-size="13" fill="#2d3748">Ovary</text>
+
+      <line x1="200" y1="253" x2="300" y2="290" stroke="#718096" stroke-width="1"/>
+      <text x="304" y="294" font-size="13" fill="#2d3748">Ovule(s)</text>
+
+      <line x1="167" y1="118" x2="80" y2="70" stroke="#718096" stroke-width="1"/>
+      <text x="16" y="66" font-size="13" fill="#2d3748">Petal</text>
+
+      <line x1="217" y1="188" x2="330" y2="60" stroke="#718096" stroke-width="1"/>
+      <text x="334" y="64" font-size="13" fill="#2d3748">Anther</text>
+
+      <line x1="205" y1="215" x2="330" y2="95" stroke="#718096" stroke-width="1"/>
+      <text x="334" y="99" font-size="13" fill="#2d3748">Filament</text>
+
+      <line x1="163" y1="278" x2="70" y2="310" stroke="#718096" stroke-width="1"/>
+      <text x="10" y="315" font-size="13" fill="#2d3748">Sepal</text>
+    </svg>
+    <div class="svgcap">
+      <b>Pollen-making side (stamen):</b> the <b>filament</b> is the thin stalk; the <b>anther</b> sits on top and makes powdery <b>pollen</b>.<br>
+      <b>Seed-making side (pistil):</b> the <b>stigma</b> is the sticky top that catches pollen; the <b>style</b> is the tube pollen travels down; the <b>ovary</b> is the base, and it contains the <b>ovule(s)</b> — the egg cells that become seeds.<br>
+      <b>Outer parts:</b> <b>petals</b> are the colourful parts that attract insects; <b>sepals</b> are the small green leaf-like parts that protected the flower bud before it opened.
+    </div>
+  </section>
+
+  <!-- SCREEN 6: POLLINATION TO SEED -->
+  <section class="screen" data-s="6">
+    <h2>Pollination → Fertilization → New Seeds 🐝</h2>
+    <div class="rulebar">Pollen must travel from an ANTHER to a STIGMA before a new seed can form.</div>
+    <div class="cycle">
+      <div class="cbox">🐝 Insect (or wind) carries pollen from the anther</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🌸 Pollen lands on a STIGMA (pollination)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">⬇️ Pollen travels down the STYLE</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🥚 Pollen joins an OVULE inside the ovary (fertilization)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🌰 The ovule becomes a NEW SEED</div>
+    </div>
+    <div class="job"><b>Key idea:</b> pollination (pollen landing on a stigma) and fertilization (pollen actually joining an ovule) are two different steps — pollination has to happen FIRST, but it doesn't guarantee fertilization will follow.</div>
+    <div class="card">🍅 Once fertilized, the ovary often grows into a fruit around the new seeds, protecting them and helping them spread — completing the loop back to Screen 4's seed germination.</div>
+  </section>
+
+  <!-- SCREEN 7: WORKED EXAMPLE + CRITIQUE -->
+  <section class="screen" data-s="7">
+    <h2>Worked Example: Will This Seed Sprout? 🧪</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the seed have water, the right warmth, AND air?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES to all three</div>
+          <div class="dleaf yes">Will germinate (soil and light not required yet)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Missing even ONE</div>
+          <div class="dleaf no">Will NOT germinate, no matter how good the soil or light is</div>
+        </div>
+      </div>
+    </div>
+    <div class="critique">
+      <b>🚫 Spot the flaw:</b> A student says: "This seed has been sitting in a dry packet on a shelf for months. It looks small, hard, and completely still — it must not be a living thing at all."
+      <p style="margin-top:8px">A dry seed is still ALIVE — it's just dormant (like it's asleep), waiting for water, warmth, and air before it starts actively growing again. Looking still and lifeless is not the same as actually being dead; the seed is a living thing in a resting state.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="4">
+      <p>1. A student plants a seed in a pot with rich, dark soil but never waters it and keeps it in a freezing cold room. Will the seed germinate?</p>
+      <button class="opt">Yes, because the soil is rich enough on its own</button>
+      <button class="opt">Yes, because seeds don't actually need water to germinate</button>
+      <button class="opt">Yes, as long as the pot eventually gets bright light</button>
+      <button class="opt">No — it's missing water and the right warmth, both required for germination</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — soil alone can't make up for missing water and warmth.</div>
+      <div class="fb no">✘ Re-check Screen 4 — what three things does a seed actually need to germinate?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Which flower part is the sticky top that catches pollen?</p>
+      <button class="opt">Anther</button>
+      <button class="opt">Stigma</button>
+      <button class="opt">Filament</button>
+      <button class="opt">Sepal</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the stigma is the sticky top of the pistil that catches pollen.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which labelled part sits at the very top of the pistil?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. Which flower part actually makes the powdery pollen?</p>
+      <button class="opt">Ovule</button>
+      <button class="opt">Stigma</button>
+      <button class="opt">Anther</button>
+      <button class="opt">Ovary</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the anther, sitting on top of the filament, is where pollen is made.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which part sits on top of the filament and makes pollen?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A bee carries pollen from one flower's anther and lands it on a different flower's stigma, but the pollen never actually joins with an ovule inside the ovary. What is the BEST description of what happened?</p>
+      <button class="opt">Pollination happened, but fertilization did not — so this flower will not form a new seed from this event</button>
+      <button class="opt">Both pollination and fertilization happened successfully</button>
+      <button class="opt">Neither pollination nor fertilization happened</button>
+      <button class="opt">Fertilization happened, but pollination did not</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — pollen landing on a stigma is pollination; it only becomes fertilization once it actually joins an ovule.</div>
+      <div class="fb no">✘ Re-check Screen 6 — pollination and fertilization are two separate steps, in a specific order.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>5. A seed packet has been stored in a dry cupboard for a whole year. Someone claims: "Since it hasn't grown or moved this whole time, it must be a non-living object, like a small stone." What is the BEST correction?</p>
+      <button class="opt">The claim is correct — a stored seed truly is non-living until the moment it's planted</button>
+      <button class="opt">The claim is correct, but only for seeds bought from a shop rather than picked from a real plant</button>
+      <button class="opt">The claim is wrong, because seeds actually grow slowly and invisibly even while dry and stored on a shelf</button>
+      <button class="opt">The claim is wrong — the seed is alive but dormant (resting), simply waiting for water, warmth, and air before it starts actively growing</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — dormant means alive-but-resting, not the same as non-living.</div>
+      <div class="fb no">✘ Re-check Screen 7 — what does "dormant" actually mean for a seed?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Test →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_17_Test_Ecosystems.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
