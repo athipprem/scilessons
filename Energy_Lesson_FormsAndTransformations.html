@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 18 · Lesson 1 — Forms &amp; Transformations of Energy</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .egrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+  .ecell{border-radius:10px;padding:10px;text-align:center;background:#fafdfa;border:2px solid var(--line)}
+  .ecell .ico{font-size:1.6rem}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+  .cbox{background:#fafdfa;border:2px solid var(--green);border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;min-width:90px;font-size:.85rem;color:var(--green-d)}
+  .carrow{font-size:1.3rem;color:var(--grey)}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .critique{background:#fdecea;border-left:6px solid #e53935;padding:12px 16px;border-radius:10px;margin:12px 0}
+  .critique b{color:#b71c1c}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⚡ Lesson 1 · Forms &amp; Transformations of Energy</b><span class="pill">Unit 18 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Energy Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: energy comes in many different FORMS, and it's constantly TRANSFORMING (changing) from one form into another — but the total amount never disappears.</div>
+    <p>Today you'll learn the main forms of energy, how energy transforms from one form to another in everyday chains, and the big idea that energy is never created or destroyed — only changed.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔋</div><div class="t">Forms of energy</div><div class="j">kinetic, potential, chemical &amp; more</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔗</div><div class="t">Transformation chains</div><div class="j">one form changes into another</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">♻️</div><div class="t">Conservation of energy</div><div class="j">energy is never lost, just changed</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔍</div><div class="t">Observe vs infer refresher</div><div class="j">a quick recall from Unit 15</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name the main forms of energy, trace an everyday energy-transformation chain step by step, and explain why energy never truly disappears.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 6 &amp; Unit 15 🔁</h2>
+    <div class="recall">🔁 <b>Remember circuits?</b> Back in Unit 6 you learned that a working circuit sends energy through a chain: <b>chemical → electrical → light/heat</b> (say, a battery lighting a bulb). That's actually your very first example of an energy transformation chain!</div>
+    <p>Today you'll meet several MORE forms of energy beyond chemical, electrical, light, and heat — and learn a simple, general rule for describing any energy chain, not just circuits.</p>
+    <div class="recall" style="margin-top:14px">🔁 <b>Remember Unit 15's Observation vs Inference rule?</b> An OBSERVATION is something you can directly see, hear, or measure. An INFERENCE is a conclusion you WORK OUT based on that observation. This is a "Think Like a Scientist" skill that comes up in EVERY unit's harder questions, not just density — so let's practise it again with two fresh examples before today's energy content.</div>
+    <div class="job"><b>Refresher Q1:</b> A student watches a toy car roll down a ramp and speed up as it goes. She writes: "The car's kinetic energy must be increasing as it speeds up." Is this the OBSERVATION or the INFERENCE?
+      <br><br><i>Answer: this is the INFERENCE — she didn't directly see "kinetic energy," she worked out that idea from what she actually saw (the car speeding up).</i></div>
+    <div class="job"><b>Refresher Q2:</b> A student holds a stretched rubber band and lets it go, watching it snap forward across the table. What she directly SAW was: "the rubber band snapped forward and slid across the table." What she WORKED OUT afterwards was: "the stretched rubber band must have been storing energy." Notice the pattern — the observation is always the plain, directly-seen event; the inference is always the explanation or conclusion drawn from it.</div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Every machine, meal, and power plant on Earth works by transforming energy from one form into another. Understanding these chains helps you see why a torch needs batteries, why exercise makes you warm, and why power plants (including hydroelectric dams) can turn falling water into the electricity in your home.</div>
+    <div class="card">
+      <b>Real life:</b> when you eat food, your body transforms the chemical energy stored in it into kinetic energy (to move), thermal energy (to keep you warm), and more — the exact same "one form becomes another" idea you'll use for every machine and natural process today.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: FORMS OF ENERGY -->
+  <section class="screen" data-s="4">
+    <h2>The Main Forms of Energy 🔋</h2>
+    <div class="rulebar">Energy always exists in a FORM — here are the ones you'll use most often.</div>
+    <div class="egrid">
+      <div class="ecell"><div class="ico">🏃</div><b>Kinetic</b><br><small>the energy of anything moving</small></div>
+      <div class="ecell"><div class="ico">⛰️</div><b>Potential</b><br><small>stored energy, ready to be released (height or stretching)</small></div>
+      <div class="ecell"><div class="ico">🍞</div><b>Chemical</b><br><small>stored in food, fuel, and batteries</small></div>
+      <div class="ecell"><div class="ico">🔥</div><b>Thermal (heat)</b><br><small>the energy of warmth</small></div>
+      <div class="ecell"><div class="ico">💡</div><b>Light</b><br><small>energy that lets you see</small></div>
+      <div class="ecell"><div class="ico">🔊</div><b>Sound</b><br><small>energy carried by vibrations</small></div>
+    </div>
+    <div class="job" style="margin-top:10px"><b>Key idea:</b> "electrical energy" is really just energy flowing through wires — it's useful because it converts easily into almost any other form (light, heat, sound, motion), which is why it powers so many machines.</div>
+  </section>
+
+  <!-- SCREEN 5: TRANSFORMATION CHAINS -->
+  <section class="screen" data-s="5">
+    <h2>Energy Transformation Chains 🔗</h2>
+    <div class="rulebar">A TRANSFORMATION CHAIN shows energy changing from one form into another, one step at a time.</div>
+    <p><b>Example 1 — a torch:</b></p>
+    <div class="chain">
+      <div class="cbox">🔋 Chemical (battery)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">⚡ Electrical (wire)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">💡 Light (bulb)</div>
+    </div>
+    <p><b>Example 2 — dropping a ball:</b></p>
+    <div class="chain">
+      <div class="cbox">⛰️ Potential (held up high)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🏃 Kinetic (falling)</div>
+    </div>
+    <p><b>Example 3 — rubbing your hands together:</b></p>
+    <div class="chain">
+      <div class="cbox">🏃 Kinetic (rubbing motion)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🔥 Thermal (your hands feel warm)</div>
+    </div>
+    <div class="job"><b>Key idea:</b> a chain can have TWO steps or more — energy keeps transforming until it usually ends up spread out as heat and sound, which is why machines eventually need more fuel or a fresh battery.</div>
+  </section>
+
+  <!-- SCREEN 6: CONSERVATION OF ENERGY -->
+  <section class="screen" data-s="6">
+    <h2>Energy Is Never Lost — Only Changed ♻️</h2>
+    <div class="rulebar">THE BIG RULE: energy cannot be created out of nothing, and it cannot simply disappear — it can only be transformed from one form into another.</div>
+    <div class="job"><b>Surprise:</b> when a bouncing ball eventually stops bouncing, its energy hasn't vanished — it has transformed into thermal energy (the ball and floor warm up very slightly) and sound energy (the noise of each bounce), spread out so much you can't easily notice it anymore.</div>
+    <div class="card">🔎 <b>This is why "wasted energy" really means "energy that transformed into a form we didn't want"</b> — like a lightbulb that gets hot (wasted thermal energy) as well as making light (the form we wanted).</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Which Transformation Is This? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Look at the SITUATION: what form of energy do you START with, and what form do you END with?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">Something is STORED (height, stretch, or fuel) and starts to MOVE or RELEASE</div>
+          <div class="dleaf yes">Potential (or chemical) → Kinetic (or another form)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Something is ALREADY MOVING and slows down, heats up, or makes noise</div>
+          <div class="dleaf no">Kinetic → Thermal (and/or Sound)</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> always ask "what form did it have BEFORE?" and "what form does it have AFTER?" — naming both ends of the chain is the key skill, not memorising every possible example.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. A wind-up toy is wound tightly with a key, then let go — it drives itself across the floor. What is the BEST description of this energy transformation?</p>
+      <button class="opt">Chemical energy changes into light energy</button>
+      <button class="opt">Thermal energy changes into potential energy</button>
+      <button class="opt">Potential energy (stored in the wound-up spring) changes into kinetic energy</button>
+      <button class="opt">Sound energy changes into chemical energy</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — winding the spring stores potential energy, which becomes kinetic energy as the toy moves.</div>
+      <div class="fb no">✘ Re-check Screen 5 — what form of energy is stored inside a wound-up spring?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Which of these is an example of KINETIC energy?</p>
+      <button class="opt">A battery sitting unused in a drawer</button>
+      <button class="opt">A cyclist pedalling down the street</button>
+      <button class="opt">A book resting on a high shelf</button>
+      <button class="opt">A stretched bow before it's released</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — kinetic energy is the energy of anything actually moving, like a cyclist pedalling.</div>
+      <div class="fb no">✘ Re-check Screen 4 — kinetic energy belongs to things that are already moving, not things that are stored or waiting.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A camper rubs two sticks together quickly until they feel warm. Which transformation chain BEST describes this?</p>
+      <button class="opt">Thermal energy changes into chemical energy</button>
+      <button class="opt">Light energy changes into kinetic energy</button>
+      <button class="opt">Potential energy changes into sound energy</button>
+      <button class="opt">Kinetic energy (rubbing motion) changes into thermal energy</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the rubbing motion (kinetic) transforms into warmth (thermal), just like rubbing your hands together.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which example on that screen matches rubbing something together?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. After a wooden block slides across a rough table and eventually stops, a student says: "The block's kinetic energy just disappeared completely." What is the BEST correction?</p>
+      <button class="opt">The claim is wrong — the kinetic energy transformed into thermal energy (and a little sound), it didn't disappear</button>
+      <button class="opt">The claim is correct — energy really can disappear once an object stops moving</button>
+      <button class="opt">The claim is correct, but only for wooden blocks specifically</button>
+      <button class="opt">The claim is wrong, because the block secretly kept moving at a very slow, invisible speed</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — energy is never destroyed, only transformed; here it became thermal energy (friction heat) and sound.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what does the conservation-of-energy rule actually say happens to "lost" energy?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A student watches a candle burning and writes two notes. Note 1: "The candle flame flickered and grew slightly shorter over ten minutes." Note 2: "This must mean the candle's stored chemical energy is being used up." Which note is the OBSERVATION?</p>
+      <button class="opt">Note 2 — the candle's stored chemical energy is being used up</button>
+      <button class="opt">Note 1 — the candle flame flickered and grew slightly shorter over ten minutes</button>
+      <button class="opt">Both notes are equally observations</button>
+      <button class="opt">Neither note is an observation</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — Note 1 describes exactly what she directly saw; Note 2 is the conclusion she worked out from it.</div>
+      <div class="fb no">✘ Re-check Screen 2 — an observation is something directly seen, not a conclusion worked out afterwards.</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Next Lesson →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Energy_Lesson_PotentialKineticAndHydroelectric.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

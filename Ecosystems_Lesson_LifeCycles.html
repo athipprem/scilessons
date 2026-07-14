@@ -38,6 +38,18 @@
   .notneedcell{border-radius:10px;padding:10px;text-align:center;background:#fdecea;border:2px solid #c62828}
   svg{display:block;margin:10px auto;max-width:100%}
   .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .hint{font-size:.82rem;color:var(--grey);text-align:center;margin:6px 0 4px}
+  .hotspot{cursor:pointer}
+  .hotspot text{pointer-events:none}
+  .hotspot .hs-dot{transition:stroke-width .15s}
+  .hotspot:hover .hs-dot,.hotspot.hs-active .hs-dot{stroke-width:3.5}
+  .pt-petal,.pt-sepal,.pt-anther,.pt-filament,.pt-stigma,.pt-style,.pt-ovary,.pt-ovule{transition:stroke .15s,stroke-width .15s}
+  .pt-active{stroke:#212121 !important;stroke-width:3px !important}
+  .partlegend{margin:12px 0}
+  .prow{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);border-left:6px solid var(--pc,var(--line));margin:6px 0;cursor:pointer;background:#fafdfa;font-size:.87rem;transition:background .15s}
+  .prow:hover{background:#f0f4ff}
+  .prow.active{background:#fff3e0;box-shadow:0 2px 8px #0002}
+  .pnum{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;min-width:20px;border-radius:50%;color:#fff;font-size:.72rem;font-weight:800;margin-top:1px}
   .cycle{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
   .cbox{background:#fafdfa;border:2px solid var(--blue);border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;min-width:90px;font-size:.85rem;color:var(--blue)}
   .carrow{font-size:1.3rem;color:var(--grey)}
@@ -126,57 +138,94 @@
   <section class="screen" data-s="5">
     <h2>Inside a Flower: Every Part's Job 🌸</h2>
     <div class="rulebar">A flower has TWO main sets of parts: parts that make POLLEN, and parts that receive pollen and make seeds.</div>
-    <svg viewBox="0 0 440 340" width="440" height="340" aria-label="Flower cross-section showing petal, sepal, stamen, and pistil parts">
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(0 200 215)"/>
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(60 200 215)"/>
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(120 200 215)"/>
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(180 200 215)"/>
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(240 200 215)"/>
-      <ellipse cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(300 200 215)"/>
-      <g transform="rotate(30 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <g transform="rotate(90 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <g transform="rotate(150 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <g transform="rotate(210 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <g transform="rotate(270 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <g transform="rotate(330 200 235)"><line x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
-      <path d="M175 268 L155 285 L180 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
-      <path d="M225 268 L245 285 L220 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+    <div class="hint">🖱️ <b>Tap a numbered dot on the flower</b> (or a row in the list below) to light up that part and see what it does!</div>
+    <svg id="flowerSvg" viewBox="0 0 440 340" width="440" height="340" aria-label="Flower cross-section showing petal, sepal, stamen, and pistil parts">
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(0 200 215)"/>
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(60 200 215)"/>
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(120 200 215)"/>
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(180 200 215)"/>
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(240 200 215)"/>
+      <ellipse class="pt-petal" cx="200" cy="155" rx="24" ry="48" fill="#f06292" stroke="#ad1457" stroke-width="1" transform="rotate(300 200 215)"/>
+      <g transform="rotate(30 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(90 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(150 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(210 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(270 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <g transform="rotate(330 200 235)"><line class="pt-filament" x1="200" y1="230" x2="200" y2="187" stroke="#aed581" stroke-width="3"/><ellipse class="pt-anther" cx="200" cy="183" rx="7" ry="10" fill="#fdd835" stroke="#f9a825" stroke-width="1"/></g>
+      <path class="pt-sepal" d="M175 268 L155 285 L180 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
+      <path class="pt-sepal" d="M225 268 L245 285 L220 275 Z" fill="#66bb6a" stroke="#2e7d32" stroke-width="1"/>
       <rect x="193" y="270" width="14" height="65" fill="#558b2f"/>
-      <ellipse cx="200" cy="255" rx="20" ry="16" fill="#7cb342" stroke="#33691e" stroke-width="1.5"/>
+      <ellipse class="pt-ovary" cx="200" cy="255" rx="20" ry="16" fill="#7cb342" stroke="#33691e" stroke-width="1.5"/>
       <circle cx="194" cy="257" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
       <circle cx="206" cy="257" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
-      <circle cx="200" cy="251" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
-      <rect x="197" y="205" width="6" height="34" fill="#558b2f" rx="3"/>
-      <ellipse cx="200" cy="198" rx="11" ry="9" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
+      <circle class="pt-ovule" cx="200" cy="251" r="3" fill="#fff9c4" stroke="#afb42b" stroke-width="1"/>
+      <rect class="pt-style" x="197" y="205" width="6" height="34" fill="#558b2f" rx="3"/>
+      <ellipse class="pt-stigma" cx="200" cy="198" rx="11" ry="9" fill="#6d4c41" stroke="#4e342e" stroke-width="1"/>
 
-      <line x1="211" y1="198" x2="300" y2="130" stroke="#718096" stroke-width="1"/>
-      <text x="304" y="134" font-size="13" fill="#2d3748">Stigma</text>
-
-      <line x1="203" y1="220" x2="300" y2="175" stroke="#718096" stroke-width="1"/>
-      <text x="304" y="179" font-size="13" fill="#2d3748">Style</text>
-
-      <line x1="218" y1="255" x2="300" y2="255" stroke="#718096" stroke-width="1"/>
-      <text x="304" y="259" font-size="13" fill="#2d3748">Ovary</text>
-
-      <line x1="200" y1="253" x2="300" y2="290" stroke="#718096" stroke-width="1"/>
-      <text x="304" y="294" font-size="13" fill="#2d3748">Ovule(s)</text>
-
-      <line x1="167" y1="118" x2="80" y2="70" stroke="#718096" stroke-width="1"/>
-      <text x="16" y="66" font-size="13" fill="#2d3748">Petal</text>
-
-      <line x1="217" y1="188" x2="330" y2="60" stroke="#718096" stroke-width="1"/>
-      <text x="334" y="64" font-size="13" fill="#2d3748">Anther</text>
-
-      <line x1="205" y1="215" x2="330" y2="95" stroke="#718096" stroke-width="1"/>
-      <text x="334" y="99" font-size="13" fill="#2d3748">Filament</text>
-
-      <line x1="163" y1="278" x2="70" y2="310" stroke="#718096" stroke-width="1"/>
-      <text x="10" y="315" font-size="13" fill="#2d3748">Sepal</text>
+      <!-- Hotspots: numbered dot + short leader line + short colour-matched label, one per part -->
+      <g class="hotspot" data-part="petal" tabindex="0" role="button" aria-label="Show Petal">
+        <line x1="200" y1="107" x2="200" y2="45" stroke="#e91e63" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="200" cy="107" r="9" fill="#e91e63" stroke="#fff" stroke-width="2"/>
+        <text x="200" y="111" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">1</text>
+        <text x="200" y="38" font-size="13" font-weight="700" fill="#ad1457" text-anchor="middle">Petal</text>
+      </g>
+      <g class="hotspot" data-part="sepal" tabindex="0" role="button" aria-label="Show Sepal">
+        <line x1="168" y1="277" x2="90" y2="320" stroke="#66bb6a" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="168" cy="277" r="9" fill="#66bb6a" stroke="#fff" stroke-width="2"/>
+        <text x="168" y="281" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">2</text>
+        <text x="86" y="318" font-size="13" font-weight="700" fill="#2e7d32" text-anchor="end">Sepal</text>
+      </g>
+      <g class="hotspot" data-part="anther" tabindex="0" role="button" aria-label="Show Anther">
+        <line x1="226" y1="190" x2="330" y2="100" stroke="#fdd835" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="226" cy="190" r="9" fill="#fdd835" stroke="#fff" stroke-width="2"/>
+        <text x="226" y="194" font-size="10" font-weight="800" fill="#5a4300" text-anchor="middle">3</text>
+        <text x="334" y="104" font-size="13" font-weight="700" fill="#8a6a00" text-anchor="start">Anther</text>
+      </g>
+      <g class="hotspot" data-part="filament" tabindex="0" role="button" aria-label="Show Filament">
+        <line x1="186.5" y1="258.4" x2="90" y2="150" stroke="#9ccc65" stroke-width="1.5"/>
+        <circle class="hs-ring" cx="186.5" cy="258.4" r="4" fill="none" stroke="#9ccc65" stroke-width="2"/>
+        <circle class="hs-dot" cx="90" cy="150" r="9" fill="#9ccc65" stroke="#fff" stroke-width="2"/>
+        <text x="90" y="154" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">4</text>
+        <text x="76" y="154" font-size="13" font-weight="700" fill="#558b2f" text-anchor="end">Filament</text>
+      </g>
+      <g class="hotspot" data-part="stigma" tabindex="0" role="button" aria-label="Show Stigma">
+        <line x1="200" y1="198" x2="350" y2="175" stroke="#8d6e63" stroke-width="1.5"/>
+        <circle class="hs-ring" cx="200" cy="198" r="4" fill="none" stroke="#8d6e63" stroke-width="2"/>
+        <circle class="hs-dot" cx="350" cy="175" r="9" fill="#8d6e63" stroke="#fff" stroke-width="2"/>
+        <text x="350" y="179" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">5</text>
+        <text x="364" y="179" font-size="13" font-weight="700" fill="#4e342e" text-anchor="start">Stigma</text>
+      </g>
+      <g class="hotspot" data-part="style" tabindex="0" role="button" aria-label="Show Style">
+        <line x1="203" y1="222" x2="350" y2="225" stroke="#4fc3f7" stroke-width="1.5"/>
+        <circle class="hs-ring" cx="200" cy="222" r="4" fill="none" stroke="#4fc3f7" stroke-width="2"/>
+        <circle class="hs-dot" cx="350" cy="225" r="9" fill="#4fc3f7" stroke="#fff" stroke-width="2"/>
+        <text x="350" y="229" font-size="10" font-weight="800" fill="#01579b" text-anchor="middle">6</text>
+        <text x="364" y="229" font-size="13" font-weight="700" fill="#01579b" text-anchor="start">Style</text>
+      </g>
+      <g class="hotspot" data-part="ovule" tabindex="0" role="button" aria-label="Show Ovule(s)">
+        <line x1="200" y1="251" x2="350" y2="275" stroke="#ffb74d" stroke-width="1.5"/>
+        <circle class="hs-ring" cx="200" cy="251" r="4" fill="none" stroke="#ffb74d" stroke-width="2"/>
+        <circle class="hs-dot" cx="350" cy="275" r="9" fill="#ffb74d" stroke="#fff" stroke-width="2"/>
+        <text x="350" y="279" font-size="10" font-weight="800" fill="#5a3400" text-anchor="middle">8</text>
+        <text x="364" y="279" font-size="13" font-weight="700" fill="#c05621" text-anchor="start">Ovule(s)</text>
+      </g>
+      <g class="hotspot" data-part="ovary" tabindex="0" role="button" aria-label="Show Ovary">
+        <line x1="200" y1="271" x2="350" y2="310" stroke="#ba68c8" stroke-width="1.5"/>
+        <circle class="hs-ring" cx="200" cy="270" r="4" fill="none" stroke="#ba68c8" stroke-width="2"/>
+        <circle class="hs-dot" cx="350" cy="310" r="9" fill="#ba68c8" stroke="#fff" stroke-width="2"/>
+        <text x="350" y="314" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">7</text>
+        <text x="364" y="314" font-size="13" font-weight="700" fill="#6a1b9a" text-anchor="start">Ovary</text>
+      </g>
     </svg>
-    <div class="svgcap">
-      <b>Pollen-making side (stamen):</b> the <b>filament</b> is the thin stalk; the <b>anther</b> sits on top and makes powdery <b>pollen</b>.<br>
-      <b>Seed-making side (pistil):</b> the <b>stigma</b> is the sticky top that catches pollen; the <b>style</b> is the tube pollen travels down; the <b>ovary</b> is the base, and it contains the <b>ovule(s)</b> — the egg cells that become seeds.<br>
-      <b>Outer parts:</b> <b>petals</b> are the colourful parts that attract insects; <b>sepals</b> are the small green leaf-like parts that protected the flower bud before it opened.
+    <div class="partlegend" id="partlegend">
+      <div class="prow" data-part="petal" style="--pc:#e91e63"><span class="pnum" style="background:#e91e63">1</span><span><b>Petal</b> — the colourful part that attracts insects to visit the flower.</span></div>
+      <div class="prow" data-part="sepal" style="--pc:#66bb6a"><span class="pnum" style="background:#66bb6a">2</span><span><b>Sepal</b> — the small green leaf-like part that protected the flower bud before it opened.</span></div>
+      <div class="prow" data-part="anther" style="--pc:#fdd835"><span class="pnum" style="background:#fdd835;color:#5a4300">3</span><span><b>Anther</b> — sits on top of the filament and makes powdery pollen.</span></div>
+      <div class="prow" data-part="filament" style="--pc:#9ccc65"><span class="pnum" style="background:#9ccc65">4</span><span><b>Filament</b> — the thin stalk that holds the anther up.</span></div>
+      <div class="prow" data-part="stigma" style="--pc:#8d6e63"><span class="pnum" style="background:#8d6e63">5</span><span><b>Stigma</b> — the sticky top that catches pollen.</span></div>
+      <div class="prow" data-part="style" style="--pc:#4fc3f7"><span class="pnum" style="background:#4fc3f7;color:#01579b">6</span><span><b>Style</b> — the tube pollen travels down to reach the ovary.</span></div>
+      <div class="prow" data-part="ovary" style="--pc:#ba68c8"><span class="pnum" style="background:#ba68c8">7</span><span><b>Ovary</b> — the base of the pistil; it holds the ovule(s) inside.</span></div>
+      <div class="prow" data-part="ovule" style="--pc:#ffb74d"><span class="pnum" style="background:#ffb74d;color:#5a3400">8</span><span><b>Ovule(s)</b> — the egg cells inside the ovary that become seeds.</span></div>
     </div>
   </section>
 
@@ -315,6 +364,33 @@
     if(i<screens.length-1){i++;render();}
     else{window.location.href='Tests/Unit_17_Test_Ecosystems.html';}
   };
+  // flower diagram: click a numbered dot OR a legend row to highlight that part in both places
+  (function(){
+    const flowerSvg = document.getElementById('flowerSvg');
+    if(!flowerSvg) return;
+    function clearPartHighlights(){
+      flowerSvg.querySelectorAll('[class*="pt-"]').forEach(el=>el.classList.remove('pt-active'));
+      flowerSvg.querySelectorAll('.hotspot').forEach(h=>h.classList.remove('hs-active'));
+      document.querySelectorAll('.prow').forEach(r=>r.classList.remove('active'));
+    }
+    function activatePart(part){
+      const alreadyActive = flowerSvg.querySelector('.hotspot[data-part="'+part+'"]')?.classList.contains('hs-active');
+      clearPartHighlights();
+      if(alreadyActive) return; // second tap on the same part clears it
+      flowerSvg.querySelectorAll('.pt-'+part).forEach(el=>el.classList.add('pt-active'));
+      const hs = flowerSvg.querySelector('.hotspot[data-part="'+part+'"]');
+      if(hs) hs.classList.add('hs-active');
+      const row = document.querySelector('.prow[data-part="'+part+'"]');
+      if(row) row.classList.add('active');
+    }
+    flowerSvg.querySelectorAll('.hotspot').forEach(hs=>{
+      hs.addEventListener('click',()=>activatePart(hs.dataset.part));
+      hs.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activatePart(hs.dataset.part);}});
+    });
+    document.querySelectorAll('.prow').forEach(row=>{
+      row.addEventListener('click',()=>activatePart(row.dataset.part));
+    });
+  })();
   // practice: locked after Check, running score + summary once all 5 answered
   let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
   const practiceQs = [...document.querySelectorAll('.q[data-correct]')];

@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '13 Jul 2026',
+  updated:        '15 Jul 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,31 +13,31 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2026 Science',
   goalShort:      'Gold',
 
-  currentUnit: { n:17, topic:'Biology: Ecosystems', status:'Lessons + test ready &middot; 20 questions (4A/6B/10C) covering producer/consumer/decomposer roles, nutrients &amp; air composition (nitrogen fixation - directly targets the real Competition paper&#39;s Q7), food chains &amp; webs, human impact (pollution vs the greenhouse effect - targets Competition Q31), and seed germination requirements plus detailed flower-part anatomy (stigma/anther/ovule - targets Competition Q32)' },
+  currentUnit: { n:18, topic:'Physics: Energy Transformations', status:'Lessons + test ready &middot; 20 questions (4A/6B/10C) covering forms of energy (kinetic/potential/chemical/thermal/light/sound), transformation chains, conservation of energy, gravitational potential energy, PE&rarr;KE transformation, and hydroelectric power (reservoir&rarr;dam wall&rarr;penstock&rarr;turbine&rarr;generator - directly targets the real Competition paper&#39;s Q3, zero credit on the original attempt), plus a fresh observation-vs-inference refresher folded into Quick Recall per U16/U17&#39;s confirmed recurring-skill finding' },
 
   lastUnit: {
-    n:16, score:17, outOf:20, pct:85, delta:-5, prevScore:90, passed:true,
-    patternLabel: 'Unit 16 result - Physics: Sound (17/20, 85% - PASS)',
-    patternInsight: '<strong>17/20 questions (85%)</strong> - above the 16/20 pass bar, seventh unit of the U11-U20 gap-closure plan. Section A (sound basics, warm-up) = <strong>4/4</strong> - perfect. Section B (applying sound concepts) = <strong>5/6</strong> - one miss. Section C (think like a scientist, applied reasoning) = <strong>8/10</strong> - two misses.',
-    analysisLabel: 'Competition Q9 CONFIRMED closed &middot; new pitch/volume property-misattribution pattern identified',
-    analysisInsight: 'Every question targeting the real Competition paper&#39;s Q9 (speed of sound in water vs air, and the broader solids/liquids/gases ranking) was answered correctly, confirming that gap is now fully closed. The three misses split into two distinct issues. Q8 and Q16 share a NEW error shape, distinct from every previously-seen pattern: Prem can correctly define pitch (frequency, high/low) and volume (amplitude, loud/soft) as separate properties in isolation, but in these two questions he mapped a new scenario&#39;s underlying cause to the WRONG property - identifying a pitch-driven change as a volume change, and vice versa. This is a property-misattribution pattern, not a direction-inversion pattern (the established U6/U10/U15 fast-read pattern where the right property is identified but the wrong direction is chosen) - the fix is a new explicit two-step check: name the cause first (what physically changed - how hard/fast something vibrates, or how big the vibration is), then decide which property that maps to, rather than jumping straight to an answer. Q13 (an observation-vs-inference question) was investigated separately since its content wasn&#39;t taught within Sound itself, but was confirmed via the lesson archive to be an established cross-unit "Think Like a Scientist" skill explicitly taught with a dedicated bridge screen in U15&#39;s Density lesson one unit prior - so this reads as an isolated recall miss on a skill still being consolidated, not a fresh content gap.',
-    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Competition Q9 (speed of sound) fully confirmed closed. Three misses: Q8 and Q16 (NEW pitch/volume property-misattribution pattern - correct property definitions, wrong cause-to-property mapping in context) and Q13 (observation-vs-inference, an established cross-unit skill from U15, isolated miss not a fresh gap).',
+    n:17, score:17, outOf:20, pct:85, delta:0, prevScore:85, passed:true,
+    patternLabel: 'Unit 17 result - Biology: Ecosystems (17/20, 85% - PASS)',
+    patternInsight: '<strong>17/20 questions (85%)</strong> - above the 16/20 pass bar, seventh unit of the U11-U20 gap-closure plan. Section A (ecosystems basics, warm-up) = <strong>3/4</strong> - one miss. Section B (applying ecosystems concepts) = <strong>6/6</strong> - perfect. Section C (think like a scientist, applied reasoning) = <strong>8/10</strong> - two misses.',
+    analysisLabel: 'Competition Q7, Q14 &amp; Q32 CONFIRMED closed &middot; Q31 substantially closed &middot; observation-vs-inference now a confirmed 2-instance pattern',
+    analysisInsight: 'Every question targeting the real Competition paper&#39;s Q7 (air composition/nitrogen fixation) and Q14 (pollution vs the greenhouse effect) was answered correctly, confirming both gaps closed. Both flower-part-labelling questions (Competition Q32) were also answered correctly. Germination (Competition Q31) is substantially closed - both APPLIED germination scenarios (a bone-dry jar, an air-removed jar) were answered correctly, and only the bare Section A recall question (Q3) was missed, choosing the exact "soil, light, warmth" combination the lesson flagged as the deliberate "NOT needed" surprise - a fast-read recall slip, not a misunderstanding, since the underlying reasoning transferred correctly to two harder applied scenarios. Q13 (observation vs inference, the ants-carrying-a-dead-beetle scenario) is now a SECOND CONSECUTIVE unit-test miss on this cross-unit skill (after U16), upgrading it from "isolated data point" to a confirmed recurring pattern - a refresher screen is now folded into U18&#39;s Quick Recall. Q16 (a bird pollinating a flower whose ovary later swells into a seed pod) revealed a genuinely NEW, novel-to-Prem reasoning gap: the lesson taught that pollination doesn&#39;t guarantee fertilization (the failure direction, answered correctly in lesson practice), but Prem doesn&#39;t yet reliably apply the REVERSE - recognizing that visible ovary/seed-pod development IS strong positive evidence fertilization DID succeed. This is a fair, non-duplicate extension of taught content, not a repeat of anything already drilled - a first-exposure gap worth a light watch, not yet a pattern.',
+    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Competition Q7, Q14, and Q32 fully confirmed closed; Q31 substantially closed. Three misses: Q3 (germination recall slip), Q13 (observation-vs-inference, now a confirmed 2-instance recurring pattern), and Q16 (a novel fertilization-evidence reasoning gap, distinct from the taught "pollination doesn&#39;t guarantee fertilization" caution).',
     qBreakdown: [
-      { q:'Q8', topic:'Pitch vs volume - property misattribution (NEW pattern)', lvl:'b', pass:false, note:'Mapped a scenario&#39;s underlying cause to the wrong property (chose the volume-change option when the scenario actually described a pitch change, or vice versa) - the first of two matching misses. New standing coaching rule: name the physical cause first (how hard/fast it vibrates vs how big the vibration is), then decide which property that maps to, before answering.' },
-      { q:'Q13', topic:'Observation vs inference (cross-unit Think Like a Scientist skill)', lvl:'c', pass:false, note:'Confirmed via the lesson archive that this skill was explicitly taught one unit prior, in U15&#39;s Density lesson - so this is an isolated recall miss on a skill still being consolidated across units, not a Sound-specific content gap.' },
-      { q:'Q16', topic:'Pitch vs volume - property misattribution (NEW pattern)', lvl:'c', pass:false, note:'The second instance of the same new error shape as Q8, in the opposite direction - correctly defines pitch and volume separately but unreliably maps a new scenario&#39;s cause to the right one of the two. Same fix applies: name the cause, then the property.' }
+      { q:'Q3', topic:'Seed germination requirements (Section A recall)', lvl:'a', pass:false, note:'Chose "soil, light, and warmth" instead of "water, warmth, and air" - the exact combination the lesson explicitly flagged as the "surprise" (soil and light are NOT needed to germinate). Both harder applied germination questions (B8, C15) were answered correctly, so this reads as a fast-read recall slip, not a genuine gap.' },
+      { q:'Q13', topic:'Observation vs inference (cross-unit Think Like a Scientist skill) - NOW A CONFIRMED 2-INSTANCE PATTERN', lvl:'c', pass:false, note:'Chose the inference statement ("ants act as decomposers...") over the direct observation. This is the SECOND consecutive unit-test miss on this skill after U16 - upgraded from "watch for recurrence" to a confirmed recurring pattern. A refresher screen is now folded into U18&#39;s Quick Recall.' },
+      { q:'Q16', topic:'Fertilization-evidence reasoning (NEW novel-extension gap)', lvl:'c', pass:false, note:'Chose "only pollination happened" when a developing seed pod is actually strong positive evidence fertilization succeeded. Prem correctly applies the taught caution ("pollination doesn&#39;t guarantee fertilization") but doesn&#39;t yet reliably apply its reverse (recognizing when evidence DOES confirm success) - a fair, first-exposure extension, not a repeat of taught content.' }
     ]
   },
 
   skills: [
-    { name: 'Biology',                  c: 96, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT + U14 Cells 19/20 (95%, 17/18 Biology-content questions correct - the one miss was an embedded Physics recap question, not Cells content) - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24 gap; strongest Biology run yet across four separate topics' },
+    { name: 'Biology',                  c: 95, t: 85, ev:'U4 Microorganisms 15/15 PERFECT + U8 Photosynthesis 20/20 PERFECT + U11 Human Body Systems 20/20 PERFECT + U14 Cells 19/20 (95%, 17/18 Biology-content questions correct - the one miss was an embedded Physics recap question, not Cells content) + U17 Ecosystems 17/20 (85%) - closed G4 Q40, the U1 Q13 gas-exchange thread, and the Competition paper&#39;s Q24, Q7, Q14, and Q32 gaps (Q31 substantially closed); U17&#39;s three misses were a germination recall slip, a confirmed 2-instance observation-vs-inference pattern, and a novel fertilization-evidence reasoning gap - none a Biology-content weakness' },
     { name: 'Chemistry / Matter',       c: 92, t: 85, ev:'U5 States/Materials 13/15 (87%) + U9 Reactions 18/20 (90%) + U12 Materials Origins &amp; Classification 19/20 (95%) + U15 Density &amp; Buoyancy 18/20 (90%) - closed G4 Q2, Q17, and Competition Q29/Q19; U15&#39;s one content-side miss (Q9, oil/water direction) was a fast-read slip, not a density-concept gap' },
     { name: 'Physics',                  c: 92, t: 85, ev:'U3 Magnetism &amp; Heat 15/15 PERFECT + U6 Circuits 14/15 (93%) + U10 Forces 19/20 (95%) + U13 Light 14/20 (70%, FAIL) + U14&#39;s embedded recap (comparison-framing correct, standalone still backwards) + U15&#39;s standalone recap Q4 answered CORRECTLY + U16 Sound 17/20 (85%) - closed G4 Q18/19/Q3 and Competition Q9 (speed of sound); U13&#39;s point-vs-broad-source inversion is FULLY closed, and U16 surfaced a NEW pitch/volume property-misattribution pattern (correct definitions, unreliable cause-to-property mapping in context) now flagged for coaching' },
     { name: 'Earth &amp; Space',            c: 90, t: 85, ev:'U7 Astronomy 15/15 PERFECT - closed G4 Q32 (final baseline miss); jumped from 50% (untested) to above target in one unit' },
-    { name: 'Scientific Investigation', c: 93, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10), 90% (U15, 9/10), 80% (U16, 8/10) - U16&#39;s two misses were the new pitch/volume property-misattribution pattern (Q16) plus an isolated observation-vs-inference recall slip (Q13, a skill already confirmed taught in U15) - not a fair-test or experiment-design reasoning failure' },
-    { name: 'Applied Reasoning',        c: 92, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10), U15 90% (9/10), U16 80% (8/10) - the U16 dip traces to the new property-misattribution pattern (Q8/Q16) rather than a general reasoning failure' }
+    { name: 'Scientific Investigation', c: 92, t: 85, ev:'Section C 80% (U1), 100% (U2-U8), 90% (U9), 100% (U10), 100% (Milestone 1, 8/8), 100% (U11, 10/10), 100% (U12, 10/10), 60% (U13, 6/10), 100% (U14, 10/10), 90% (U15, 9/10), 80% (U16, 8/10), 80% (U17, 8/10) - TWO UNITS RUNNING at 80%; U17&#39;s misses were a germination recall slip plus a NOW-CONFIRMED 2-instance observation-vs-inference pattern (Q13) and a novel fertilization-evidence gap (Q16) - a refresher screen is folded into U18&#39;s Quick Recall to address the recurring skill directly' },
+    { name: 'Applied Reasoning',        c: 91, t: 85, ev:'U1 80%, U2-U8 100%, U9 90%, U10 100%, Milestone 1 100% (8/8), U11 100% (10/10), U12 100% (10/10), U13 60% (6/10), U14 100% (10/10), U15 90% (9/10), U16 80% (8/10), U17 80% (8/10) - same two-unit-running dip as Scientific Investigation, each with a distinct identifiable cause rather than a broad reasoning breakdown; U18 folds in a targeted refresher for the recurring observation-vs-inference piece' }
   ],
-  radarCurrent:  [96, 92, 92, 90, 93, 92],
+  radarCurrent:  [95, 92, 92, 90, 92, 91],
   radarTarget:   [85, 85, 85, 85, 85, 85],
   radarBaseline: [53, 55, 63, 50, 45, 60],
 
@@ -59,23 +59,36 @@ var PREM_DATA = {
     { unit:13, topic:'Physics: Light', score:14, outOf:20, pct:70, passBar:16, date:'2026-07-10' },
     { unit:14, topic:'Biology: Cells', score:19, outOf:20, pct:95, passBar:16, date:'2026-07-11' },
     { unit:15, topic:'Chemistry: Density &amp; Buoyancy', score:18, outOf:20, pct:90, passBar:16, date:'2026-07-12' },
-    { unit:16, topic:'Physics: Sound', score:17, outOf:20, pct:85, passBar:16, date:'2026-07-13' }
+    { unit:16, topic:'Physics: Sound', score:17, outOf:20, pct:85, passBar:16, date:'2026-07-13' },
+    { unit:17, topic:'Biology: Ecosystems', score:17, outOf:20, pct:85, passBar:16, date:'2026-07-14' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
     {
-      n: 17, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
-      title: 'Biology: Ecosystems',
+      n: 18, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Physics: Energy Transformations',
       tags: [
         { t:'Ready &#128221;', c:'tpurple' },
         { t:'20 Questions (4A/6B/10C)', c:'tgreen' },
-        { t:'Targets Competition Q7, Q14, Q31, Q32', c:'tblue' },
-        { t:'7th unit of gap-closure plan', c:'torange' }
+        { t:'Targets Competition Q3', c:'tblue' },
+        { t:'8th unit of gap-closure plan', c:'torange' }
       ],
-      note: 'Seventh unit of the U11-U20 block. Lesson 1 covers producer/consumer/decomposer roles, nutrients &amp; the air (nitrogen fixation, bridged back to Unit 4&#39;s decomposer content) - directly targeting the real Competition paper&#39;s Q7 (air composition/nitrogen) - food chains &amp; webs, and human impact via pollution vs the greenhouse effect, targeting Competition Q14. Lesson 2 covers seed germination requirements (water, warmth, air - explicitly not soil or light, targeting Competition Q31) and detailed flower-part anatomy via a hand-built labelled cross-section diagram (stigma, style, ovary, ovule, petal, anther, filament, sepal - targeting Competition Q32), plus the pollination-to-fertilization-to-seed cycle. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), and checked for zero reused questions/worked-examples against both lessons. Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary.',
+      note: 'Eighth unit of the U11-U20 block. Lesson 1 covers the main forms of energy (kinetic, potential, chemical, thermal, light, sound), bridges from Unit 6&#39;s circuits energy chain, and introduces transformation chains plus the conservation-of-energy rule (energy is never created or destroyed, only transformed) - includes a dedicated observation-vs-inference refresher, folded in per U16/U17&#39;s confirmed 2-instance recurring-skill finding. Lesson 2 covers gravitational potential energy, the PE&rarr;KE transformation (falling objects, roller coasters), and hydroelectric power via a hand-built interactive labelled diagram (reservoir, dam wall, penstock, turbine, generator) - directly targeting the real Competition paper&#39;s Q3 (hydroelectric power, gravitational PE&rarr;KE), which scored zero credit on the original attempt. Test: 20Q (4A/6B/10C), PASS_BAR 16/20, built and verified under the ANSWER-BALANCE RULE (5/5/5/5 position spread, all strict-longest-correct margins &le;2 words), and checked for zero reused questions/worked-examples against both lessons via an automated overlap script AND a 10-year-old role-play pass (which caught 6 additional near-duplicates/untaught conflations the automated check missed, all since fixed). Part of the U11-U20 GAP-CLOSURE PLAN - see Executive Summary.',
       status: 'pending'
+    },
+    {
+      n: 17, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',
+      title: 'Biology: Ecosystems',
+      tags: [
+        { t:'&#9989; 17/20 (85%) PASS', s:'background:#e6f4ea;color:#1b5e20;font-weight:700' },
+        { t:'Sections A+B 9/10', c:'tgreen' },
+        { t:'Section C 8/10', c:'tblue' },
+        { t:'Q7, Q14, Q32 CONFIRMED closed', c:'torange' }
+      ],
+      note: 'Scored 17/20 (85%) - above the 16/20 pass bar, seventh unit of the U11-U20 gap-closure plan. Section A (ecosystems basics) 3/4 - missed Q3. Section B (applying ecosystems concepts) 6/6 - perfect. Section C (think like a scientist) 8/10 - missed Q13 and Q16. Every question targeting the real Competition paper&#39;s Q7 (air composition/nitrogen) and Q14 (pollution vs the greenhouse effect) was answered correctly, and both flower-part-labelling questions (Q32) were correct - all three gaps CONFIRMED closed. Germination (Q31) is substantially closed: both applied germination scenarios were answered correctly, and the one miss (Q3) was a bare recall slip choosing the exact "soil, light, warmth" combination the lesson flagged as the deliberate "NOT needed" surprise. Q13 (observation vs inference) is now a SECOND CONSECUTIVE unit-test miss after U16 - upgraded from "watch for recurrence" to a confirmed 2-instance recurring pattern; a refresher screen is now folded into U18&#39;s Quick Recall. Q16 (a bird pollinating a flower whose ovary later swells into a seed pod) revealed a genuinely NEW reasoning gap: Prem correctly applies the taught caution that pollination doesn&#39;t guarantee fertilization, but doesn&#39;t yet reliably apply the reverse - recognizing that visible seed-pod development IS strong positive evidence fertilization succeeded. A fair, first-exposure gap, not a repeat of taught content. Results saved to Lessons\\Tests\\Results\\.',
+      status: 'done'
     },
     {
       n: 16, badge: 'linear-gradient(135deg,#2E7D32,#66BB6A)',

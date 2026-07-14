@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 18 · Lesson 2 — Potential, Kinetic &amp; Hydroelectric Power</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .cmpgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .cmpcell{border-radius:10px;padding:12px;text-align:center;background:#e3f2fd;border:2px solid var(--blue)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .hint{font-size:.82rem;color:var(--grey);text-align:center;margin:6px 0 4px}
+  .hotspot{cursor:pointer}
+  .hotspot text{pointer-events:none}
+  .hotspot .hs-dot{transition:stroke-width .15s}
+  .hotspot:hover .hs-dot,.hotspot.hs-active .hs-dot{stroke-width:3.5}
+  .pt-reservoir,.pt-damwall,.pt-penstock,.pt-turbine,.pt-generator{transition:stroke .15s,stroke-width .15s}
+  .pt-active{stroke:#212121 !important;stroke-width:3px !important}
+  .partlegend{margin:12px 0}
+  .prow{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;border-radius:10px;border:1.5px solid var(--line);border-left:6px solid var(--pc,var(--line));margin:6px 0;cursor:pointer;background:#fafdfa;font-size:.87rem;transition:background .15s}
+  .prow:hover{background:#f0f4ff}
+  .prow.active{background:#fff3e0;box-shadow:0 2px 8px #0002}
+  .pnum{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;min-width:20px;border-radius:50%;color:#fff;font-size:.72rem;font-weight:800;margin-top:1px}
+  .chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+  .cbox{background:#fafdfa;border:2px solid var(--blue);border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;min-width:90px;font-size:.85rem;color:var(--blue)}
+  .carrow{font-size:1.3rem;color:var(--grey)}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .critique{background:#fdecea;border-left:6px solid #e53935;padding:12px 16px;border-radius:10px;margin:12px 0}
+  .critique b{color:#b71c1c}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:var(--green);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⚡ Lesson 2 · Potential, Kinetic &amp; Hydroelectric Power</b><span class="pill">Unit 18 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Falling-Water Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: height + gravity = stored (potential) energy — and when something falls, that stored energy becomes energy of motion (kinetic).</div>
+    <p>Today you'll learn exactly what gravitational potential energy is, how it transforms into kinetic energy as something falls, and how real hydroelectric dams use this exact idea to make electricity.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">⛰️</div><div class="t">Gravitational potential energy</div><div class="j">height + gravity = stored energy</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🏃</div><div class="t">Potential → Kinetic</div><div class="j">falling converts stored energy to motion</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌊</div><div class="t">Hydroelectric power</div><div class="j">falling water → spinning turbine → electricity</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🎢</div><div class="t">Predicting PE &amp; KE</div><div class="j">where is energy highest at each point?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain what makes gravitational potential energy bigger or smaller, predict how PE and KE trade off as something falls, and explain how a hydroelectric dam turns falling water into electricity.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 &amp; Unit 10 🔁</h2>
+    <div class="recall">🔁 <b>Remember Lesson 1?</b> You learned potential energy is STORED energy, and that a transformation chain shows one form changing into another — like potential energy changing into kinetic energy when a ball drops.</div>
+    <div class="recall">🔁 <b>Remember Unit 10?</b> You learned that GRAVITY pulls every object toward the Earth. That's exactly the force that turns height into stored energy — the higher up something is, the more gravity "wants" to pull it down, and the more energy is stored up there.</div>
+    <p>Today you'll combine both ideas: gravity + height = gravitational potential energy, and you'll see this exact idea powering real hydroelectric dams.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Roller coaster designers use gravitational potential energy to plan every hill and drop, without needing any engine once the coaster reaches the top. Hydroelectric power stations use the exact same idea at a massive scale — storing water high up so gravity can do the work of generating electricity for entire cities.</div>
+    <div class="card">
+      <b>Real life:</b> engineers deliberately build the tallest hill FIRST on a roller coaster — that's where the cart is given the most potential energy, which then powers every twist, turn, and smaller hill for the rest of the ride.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: GRAVITATIONAL POTENTIAL ENERGY -->
+  <section class="screen" data-s="4">
+    <h2>Gravitational Potential Energy ⛰️</h2>
+    <div class="rulebar">The HIGHER an object is lifted, the MORE gravitational potential energy it has stored.</div>
+    <div class="cmpgrid">
+      <div class="cmpcell"><div style="font-size:1.6rem">📕</div><b>Book on a low shelf</b><br><small>a small drop if it fell — LESS stored energy</small></div>
+      <div class="cmpcell"><div style="font-size:1.6rem">📗</div><b>Same book, on a tall bookcase</b><br><small>a big drop if it fell — MORE stored energy</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> a heavier object at the same height also stores MORE potential energy than a lighter one — both height AND weight (mass) affect how much energy is stored, but height alone is enough to compare two identical objects.</div>
+  </section>
+
+  <!-- SCREEN 5: PE TO KE -->
+  <section class="screen" data-s="5">
+    <h2>Potential Energy Becomes Kinetic Energy 🏃</h2>
+    <div class="rulebar">As something FALLS, its potential energy transforms into kinetic energy — it loses height but gains speed.</div>
+    <div class="chain">
+      <div class="cbox">⛰️ High up, not moving yet<br>(MOST potential energy)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🏃 Falling, gaining speed<br>(potential energy changing to kinetic)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">💨 Just before landing<br>(MOST kinetic energy, LEAST potential energy)</div>
+    </div>
+    <div class="job"><b>Key idea:</b> on a roller coaster, the cart has its highest potential energy at the very top of the tallest hill, and its highest kinetic energy (fastest speed) at the very bottom of that same hill — the height lost becomes exactly the speed gained.</div>
+  </section>
+
+  <!-- SCREEN 6: HYDROELECTRIC POWER DIAGRAM -->
+  <section class="screen" data-s="6">
+    <h2>Hydroelectric Power: Falling Water → Electricity 🌊</h2>
+    <div class="rulebar">A hydroelectric dam stores water HIGH UP on purpose, so gravity can turn its potential energy into electricity.</div>
+    <div class="hint">🖱️ <b>Tap a numbered dot on the diagram</b> (or a row in the list below) to explore each part!</div>
+    <svg id="damSvg" viewBox="0 0 480 340" width="480" height="340" aria-label="Cross-section of a hydroelectric dam showing the reservoir, dam wall, penstock pipe, turbine, and generator">
+      <rect x="0" y="290" width="480" height="50" fill="#c8a165"/>
+      <path class="pt-damwall" d="M150,60 L185,60 L225,290 L140,290 Z" fill="#90a4ae" stroke="#546e7a" stroke-width="2"/>
+      <rect class="pt-reservoir" x="20" y="70" width="130" height="90" rx="8" fill="#4fc3f7" stroke="#0288d1" stroke-width="2"/>
+      <line x1="24" y1="76" x2="146" y2="76" stroke="#01579b" stroke-width="2"/>
+      <line class="pt-penstock" x1="145" y1="140" x2="245" y2="255" stroke="#607d8b" stroke-width="16" stroke-linecap="round"/>
+      <circle class="pt-turbine" cx="250" cy="258" r="15" fill="#ffb300" stroke="#e65100" stroke-width="2"/>
+      <line x1="250" y1="258" x2="262" y2="246" stroke="#e65100" stroke-width="2"/>
+      <line x1="250" y1="258" x2="238" y2="246" stroke="#e65100" stroke-width="2"/>
+      <line x1="250" y1="258" x2="262" y2="270" stroke="#e65100" stroke-width="2"/>
+      <line x1="250" y1="258" x2="238" y2="270" stroke="#e65100" stroke-width="2"/>
+      <rect class="pt-generator" x="270" y="238" width="42" height="38" rx="4" fill="#8d6e63" stroke="#4e342e" stroke-width="2"/>
+      <path d="M287,244 L279,258 L288,258 L282,270 L297,252 L288,252 Z" fill="#ffd54f" stroke="#a86a00" stroke-width="1"/>
+      <path d="M245,275 Q280,290 320,280 T440,285" stroke="#4fc3f7" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+      <g class="hotspot" data-part="reservoir" tabindex="0" role="button" aria-label="Show Reservoir">
+        <line x1="85" y1="90" x2="40" y2="35" stroke="#0288d1" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="40" cy="35" r="9" fill="#0288d1" stroke="#fff" stroke-width="2"/>
+        <text x="40" y="39" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">1</text>
+        <text x="54" y="39" font-size="13" font-weight="700" fill="#01579b" text-anchor="start">Reservoir</text>
+      </g>
+      <g class="hotspot" data-part="damwall" tabindex="0" role="button" aria-label="Show Dam Wall">
+        <line x1="180" y1="170" x2="30" y2="170" stroke="#546e7a" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="30" cy="170" r="9" fill="#546e7a" stroke="#fff" stroke-width="2"/>
+        <text x="30" y="174" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">2</text>
+        <text x="30" y="196" font-size="13" font-weight="700" fill="#37474f" text-anchor="middle">Dam Wall</text>
+      </g>
+      <g class="hotspot" data-part="penstock" tabindex="0" role="button" aria-label="Show Penstock">
+        <line x1="195" y1="197" x2="380" y2="100" stroke="#607d8b" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="380" cy="100" r="9" fill="#607d8b" stroke="#fff" stroke-width="2"/>
+        <text x="380" y="104" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">3</text>
+        <text x="394" y="104" font-size="13" font-weight="700" fill="#37474f" text-anchor="start">Penstock</text>
+      </g>
+      <g class="hotspot" data-part="turbine" tabindex="0" role="button" aria-label="Show Turbine">
+        <line x1="250" y1="258" x2="380" y2="180" stroke="#e65100" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="380" cy="180" r="9" fill="#ffb300" stroke="#fff" stroke-width="2"/>
+        <text x="380" y="184" font-size="10" font-weight="800" fill="#5a3400" text-anchor="middle">4</text>
+        <text x="394" y="184" font-size="13" font-weight="700" fill="#e65100" text-anchor="start">Turbine</text>
+      </g>
+      <g class="hotspot" data-part="generator" tabindex="0" role="button" aria-label="Show Generator">
+        <line x1="291" y1="257" x2="380" y2="260" stroke="#4e342e" stroke-width="1.5"/>
+        <circle class="hs-dot" cx="380" cy="260" r="9" fill="#8d6e63" stroke="#fff" stroke-width="2"/>
+        <text x="380" y="264" font-size="10" font-weight="800" fill="#fff" text-anchor="middle">5</text>
+        <text x="394" y="264" font-size="13" font-weight="700" fill="#4e342e" text-anchor="start">Generator</text>
+      </g>
+    </svg>
+    <div class="partlegend" id="partlegend">
+      <div class="prow" data-part="reservoir" style="--pc:#0288d1"><span class="pnum" style="background:#0288d1">1</span><span><b>Reservoir</b> — the lake of water stored HIGH UP behind the dam; this height is what gives the water its gravitational potential energy.</span></div>
+      <div class="prow" data-part="damwall" style="--pc:#546e7a"><span class="pnum" style="background:#546e7a">2</span><span><b>Dam Wall</b> — the huge solid wall that holds the reservoir's water back until it's needed.</span></div>
+      <div class="prow" data-part="penstock" style="--pc:#607d8b"><span class="pnum" style="background:#607d8b">3</span><span><b>Penstock</b> — the large pipe that lets water fall from the reservoir down toward the turbine, turning potential energy into kinetic energy on the way down.</span></div>
+      <div class="prow" data-part="turbine" style="--pc:#ffb300"><span class="pnum" style="background:#ffb300;color:#5a3400">4</span><span><b>Turbine</b> — a wheel with blades that the falling water spins as it rushes past.</span></div>
+      <div class="prow" data-part="generator" style="--pc:#8d6e63"><span class="pnum" style="background:#8d6e63">5</span><span><b>Generator</b> — connected to the spinning turbine; it turns that spinning (kinetic energy) into electrical energy.</span></div>
+    </div>
+    <div class="job"><b>Full chain:</b> gravitational potential energy (water stored high in the reservoir) → kinetic energy (water falling and rushing through the penstock) → kinetic energy (the turbine spinning) → electrical energy (the generator) — directly answering "where does hydroelectric electricity actually come from?"</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE + WORKED EXAMPLE -->
+  <section class="screen" data-s="7">
+    <h2>Predicting PE and KE 🎢</h2>
+    <div class="dtree">
+      <div class="dbox dq">At this exact point, is the object HIGH UP and STILL, or LOWER DOWN and MOVING FAST?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">High up, barely moving</div>
+          <div class="dleaf yes">Potential energy is at its HIGHEST here</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Low down, moving fastest</div>
+          <div class="dleaf no">Kinetic energy is at its HIGHEST here</div>
+        </div>
+      </div>
+    </div>
+    <div class="critique">
+      <b>🚫 Spot the flaw:</b> A student watches a roller coaster cart climb slowly to the top of the tallest hill, pause for a moment, then rush down the other side. She says: "The cart has the same amount of total energy at the top and at the bottom — it just LOOKS different because sometimes it's potential and sometimes it's kinetic."
+      <p style="margin-top:8px">This is actually CORRECT, not a flaw — it's the conservation-of-energy idea from Lesson 1! At the top, almost all the cart's energy is potential (barely moving). At the bottom, almost all of that same energy has transformed into kinetic (fast motion). The total amount of energy stays the same; only its FORM changes.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. A ball is held 3 metres above the ground, then a second identical ball is held 1 metre above the ground. Which ball has MORE gravitational potential energy?</p>
+      <button class="opt">The ball at 1 metre, since it's closer to the ground</button>
+      <button class="opt">The ball at 3 metres, since it's higher up</button>
+      <button class="opt">Both balls have exactly the same potential energy</button>
+      <button class="opt">Neither ball has any potential energy until it's released</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the higher an object is lifted, the more gravitational potential energy it stores.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which direction does height affect stored energy?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. A skateboarder rolls down a ramp, starting still at the top and moving fastest at the bottom. What happens to her potential and kinetic energy as she rolls down?</p>
+      <button class="opt">Both her potential energy and kinetic energy increase together</button>
+      <button class="opt">Both her potential energy and kinetic energy decrease together</button>
+      <button class="opt">Her kinetic energy decreases while her potential energy increases</button>
+      <button class="opt">Her potential energy decreases while her kinetic energy increases</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — as she loses height, potential energy transforms into kinetic energy, so PE goes down and KE goes up.</div>
+      <div class="fb no">✘ Re-check Screen 5 — what trades off as something falls or rolls downhill?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. In a hydroelectric dam, which part directly turns the SPINNING motion of the turbine into electrical energy?</p>
+      <button class="opt">The reservoir</button>
+      <button class="opt">The dam wall</button>
+      <button class="opt">The generator</button>
+      <button class="opt">The penstock</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the generator, connected to the spinning turbine, converts that motion into electrical energy.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which labelled part comes right after the turbine in the chain?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Why do engineers deliberately store a hydroelectric dam's water HIGH UP in a reservoir, instead of at ground level?</p>
+      <button class="opt">Height gives the water more gravitational potential energy, which becomes useful kinetic energy as it falls</button>
+      <button class="opt">Storing water higher up makes it weigh less, which is cheaper</button>
+      <button class="opt">It's purely a safety rule with no connection to energy at all</button>
+      <button class="opt">Height has no real effect; dams are built on hills just by tradition</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the entire point of the height is to store more gravitational potential energy for the water to release as it falls.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what does height actually give the stored water?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A roller coaster cart sits motionless at the very top of its tallest hill, about to start moving. Which statement is TRUE at this exact moment?</p>
+      <button class="opt">Its kinetic energy is at its highest point of the whole ride</button>
+      <button class="opt">Its potential energy is at its highest point of the whole ride</button>
+      <button class="opt">It has no energy of any kind at this moment</button>
+      <button class="opt">Its potential and kinetic energy are both at their lowest point</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — at the top of the tallest hill, height (and therefore potential energy) is at its maximum for the ride.</div>
+      <div class="fb no">✘ Re-check Screen 5 — where on a roller coaster is potential energy at its highest?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Test →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_18_Test_EnergyTransformations.html';}
+  };
+  // hydroelectric diagram: click a numbered dot OR a legend row to highlight that part in both places
+  (function(){
+    const damSvg = document.getElementById('damSvg');
+    if(!damSvg) return;
+    function clearPartHighlights(){
+      damSvg.querySelectorAll('[class*="pt-"]').forEach(el=>el.classList.remove('pt-active'));
+      damSvg.querySelectorAll('.hotspot').forEach(h=>h.classList.remove('hs-active'));
+      document.querySelectorAll('.prow').forEach(r=>r.classList.remove('active'));
+    }
+    function activatePart(part){
+      const alreadyActive = damSvg.querySelector('.hotspot[data-part="'+part+'"]')?.classList.contains('hs-active');
+      clearPartHighlights();
+      if(alreadyActive) return;
+      damSvg.querySelectorAll('.pt-'+part).forEach(el=>el.classList.add('pt-active'));
+      const hs = damSvg.querySelector('.hotspot[data-part="'+part+'"]');
+      if(hs) hs.classList.add('hs-active');
+      const row = document.querySelector('.prow[data-part="'+part+'"]');
+      if(row) row.classList.add('active');
+    }
+    damSvg.querySelectorAll('.hotspot').forEach(hs=>{
+      hs.addEventListener('click',()=>activatePart(hs.dataset.part));
+      hs.addEventListener('keydown',(e)=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();activatePart(hs.dataset.part);}});
+    });
+    document.querySelectorAll('.prow').forEach(row=>{
+      row.addEventListener('click',()=>activatePart(row.dataset.part));
+    });
+  })();
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
