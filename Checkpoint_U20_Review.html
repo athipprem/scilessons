@@ -22,8 +22,11 @@
   .intro{background:#fff;border:1.5px solid var(--gold-line);border-radius:12px;padding:14px 16px;margin-bottom:10px;font-size:.93rem}
   .cardgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
   @media(max-width:600px){.cardgrid{grid-template-columns:1fr}}
-  .rcard{background:#fff;border:1.5px solid var(--gold-line);border-radius:12px;padding:12px 14px;font-size:.87rem}
+  .rcard{background:#fff;border:1.5px solid var(--gold-line);border-radius:12px;padding:12px 14px;font-size:.87rem;display:flex;flex-direction:column}
   .rcard b.tt{display:block;color:var(--gold-d);font-size:.95rem;margin-bottom:4px}
+  .rcard-txt{flex:1}
+  .rcard-link{display:inline-block;margin-top:8px;padding-top:7px;border-top:1px dashed var(--gold-line);font-size:.78rem;font-weight:700;color:#8a6a00;text-decoration:none}
+  .rcard-link:hover{color:#DAA520;text-decoration:underline}
   .priority{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid #ef6c00;border-radius:14px;padding:16px 18px;margin:18px 0}
   .priority h2{border:none;margin-top:0;color:#c05621}
   .rulebar{background:#e3f2fd;border-left:5px solid #1565c0;border-radius:8px;padding:10px 14px;font-size:.9rem;margin:10px 0}
@@ -58,23 +61,23 @@
 
   <h2>Quick Recap Cards</h2>
   <div class="cardgrid">
-    <div class="rcard"><b class="tt">🌳 Materials (U12)</b>Rubber comes from tree sap — a PLANT material. Silk is spun by silkworms — an ANIMAL material. The two classic mix-ups! Sort any material by hard/soft, flexible/rigid, and floats/sinks in water AND oil.</div>
-    <div class="rcard"><b class="tt">💡 Light &amp; Shadows (U13–15)</b>A POINT source (small torch bulb) makes ONE sharp shadow — umbra only. A BROAD source (long fluorescent tube) makes a softer shadow with a fuzzy penumbra fringe around a smaller umbra.</div>
-    <div class="rcard"><b class="tt">⚖️ Density (U15)</b>Density compares MASS for the SAME volume. An object floats if it's LESS dense than the liquid around it, and sinks if it's MORE dense.</div>
-    <div class="rcard"><b class="tt">🔊 Sound (U16)</b>Sound travels FASTEST through solids, medium speed through liquids, SLOWEST through gases — because of how close together the particles are.</div>
-    <div class="rcard"><b class="tt">💨 Air &amp; Nitrogen (U17)</b>Air is roughly 78% nitrogen, 21% oxygen. Plants can't use nitrogen gas directly — root bacteria do NITROGEN FIXATION, turning it into a form plant roots CAN use.</div>
-    <div class="rcard"><b class="tt">🌍 Pollution vs Greenhouse Effect (U17)</b>The greenhouse effect is a NATURAL process that keeps Earth warm enough for life. Pollution (like extra carbon dioxide from burning fuel) makes that natural effect STRONGER, causing extra warming.</div>
-    <div class="rcard"><b class="tt">🌱 Germination (U17)</b>A seed needs WATER, WARMTH, and AIR to germinate — NOT soil, and NOT light. A resting seed is still alive, just dormant.</div>
-    <div class="rcard"><b class="tt">🌸 Flower Parts (U17)</b>STIGMA catches pollen. ANTHER makes pollen. OVARY holds the ovules and becomes the fruit. OVULE becomes the seed after fertilization.</div>
-    <div class="rcard"><b class="tt">⚡ Potential vs Kinetic Energy (U18)</b>POTENTIAL energy = stored energy from position, height, or stillness. KINETIC energy = the energy of MOTION. In a hydroelectric dam: water in the RESERVOIR (potential) flows down the PENSTOCK, spins the TURBINE (kinetic), which powers the GENERATOR.</div>
-    <div class="rcard"><b class="tt">🔍 Observation vs Inference (cross-unit skill)</b>An OBSERVATION is something you directly SEE, hear, or measure. An INFERENCE is a conclusion you WORK OUT based on that observation — not the same thing!</div>
-    <div class="rcard"><b class="tt">💧 The Water Cycle (U19)</b>Evaporation → Condensation → Precipitation → Collection, then the whole loop repeats — water is never created or destroyed, only moved and changed in form.</div>
+    <div class="rcard"><b class="tt">🌳 Materials (U12)</b><span class="rcard-txt">Rubber comes from tree sap — a PLANT material. Silk is spun by silkworms — an ANIMAL material. The two classic mix-ups! Sort any material by hard/soft, flexible/rigid, and floats/sinks in water AND oil.</span><a class="rcard-link" href="Materials_Lesson_WhereDoMaterialsComeFrom.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">💡 Light &amp; Shadows (U13–15)</b><span class="rcard-txt">A POINT source (small torch bulb) makes ONE sharp shadow — umbra only. A BROAD source (long fluorescent tube) makes a softer shadow with a fuzzy penumbra fringe around a smaller umbra.</span><a class="rcard-link" href="Light_Lesson_ShadowsUmbraAndPenumbra.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">⚖️ Density (U15)</b><span class="rcard-txt">Density compares MASS for the SAME volume. An object floats if it's LESS dense than the liquid around it, and sinks if it's MORE dense.</span><a class="rcard-link" href="Density_Lesson_WhatIsDensity.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">🔊 Sound (U16)</b><span class="rcard-txt">Sound travels FASTEST through solids, medium speed through liquids, SLOWEST through gases — because of how close together the particles are.</span><a class="rcard-link" href="Sound_Lesson_MediaPitchAndVolume.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">💨 Air &amp; Nitrogen (U17)</b><span class="rcard-txt">Air is roughly 78% nitrogen, 21% oxygen. Plants can't use nitrogen gas directly — root bacteria do NITROGEN FIXATION, turning it into a form plant roots CAN use.</span><a class="rcard-link" href="Ecosystems_Lesson_FoodChainsAndHumanImpact.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">🌍 Pollution vs Greenhouse Effect (U17)</b><span class="rcard-txt">The greenhouse effect is a NATURAL process that keeps Earth warm enough for life. Pollution (like extra carbon dioxide from burning fuel) makes that natural effect STRONGER, causing extra warming.</span><a class="rcard-link" href="Ecosystems_Lesson_FoodChainsAndHumanImpact.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">🌱 Germination (U17)</b><span class="rcard-txt">A seed needs WATER, WARMTH, and AIR to germinate — NOT soil, and NOT light. A resting seed is still alive, just dormant.</span><a class="rcard-link" href="Ecosystems_Lesson_LifeCycles.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">🌸 Flower Parts (U17)</b><span class="rcard-txt">STIGMA catches pollen. ANTHER makes pollen. OVARY holds the ovules and becomes the fruit. OVULE becomes the seed after fertilization.</span><a class="rcard-link" href="Ecosystems_Lesson_LifeCycles.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">⚡ Potential vs Kinetic Energy (U18)</b><span class="rcard-txt">POTENTIAL energy = stored energy from position, height, or stillness. KINETIC energy = the energy of MOTION. In a hydroelectric dam: water in the RESERVOIR (potential) flows down the PENSTOCK, spins the TURBINE (kinetic), which powers the GENERATOR.</span><a class="rcard-link" href="Energy_Lesson_PotentialKineticAndHydroelectric.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">🔍 Observation vs Inference (cross-unit skill)</b><span class="rcard-txt">An OBSERVATION is something you directly SEE, hear, or measure. An INFERENCE is a conclusion you WORK OUT based on that observation — not the same thing!</span><a class="rcard-link" href="Density_Lesson_FloatingSinkingBuoyancy.html" target="_blank" rel="noopener">Full lesson →</a></div>
+    <div class="rcard"><b class="tt">💧 The Water Cycle (U19)</b><span class="rcard-txt">Evaporation → Condensation → Precipitation → Collection, then the whole loop repeats — water is never created or destroyed, only moved and changed in form.</span><a class="rcard-link" href="Water_Lesson_TheWaterCycle.html" target="_blank" rel="noopener">Full lesson →</a></div>
   </div>
 
   <div class="priority">
     <h2>🌊 Priority Refresher — Tide Frequency</h2>
     <div class="rulebar"><b>The rule:</b> tides are NOT a once-a-day thing. There are roughly TWO high tides and TWO low tides every single day. A high tide is followed by the next HIGH tide about 12 hours later, and by the nearest LOW tide about 6 hours later (roughly halfway in between).</div>
-    <p style="font-size:.9rem">On Unit 19's test, two questions tested this exact idea from different angles, and both were missed — both pointed to the same mix-up: thinking there's only ONE tide cycle a day (one high, one low), instead of TWO of each. Let's lock this in before the checkpoint test.</p>
+    <p style="font-size:.9rem">On Unit 19's test, two questions tested this exact idea from different angles, and both were missed — both pointed to the same mix-up: thinking there's only ONE tide cycle a day (one high, one low), instead of TWO of each. Let's lock this in before the checkpoint test. <a class="rcard-link" style="border-top:none;padding-top:0;margin-top:0" href="Water_Lesson_PrecipitationAndTides.html" target="_blank" rel="noopener">Full lesson →</a></p>
 
     <div class="qc" data-qc-correct="2">
       <p>Quick Check 1: Which statement is TRUE about how tides are spaced out?</p>
