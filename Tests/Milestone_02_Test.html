@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Milestone_02_Test.html — Milestone Test 2 (Science / Luikishi)
+     ------------------------------------------------------------
+     Built from Milestone_01_Test.html, same milestone format: 40
+     questions, weighted marks (1.25 / 2.5 / 5) matching the real
+     ASMOPSS G4 paper's scale (100 marks total). Covers cumulative
+     content from U11-U19: Biology (Human Body Systems, Cells,
+     Ecosystems/Life Cycles), Chemistry (Materials Origins &
+     Classification, Density & Buoyancy), Physics (Light, Sound,
+     Energy Transformations, Water Cycle/Tides). U20 (Gap-Closure
+     Checkpoint) is review-only with no new content, so it is not
+     separately represented here — its content is the same U11-U19
+     material already covered. No lessons for a milestone test, per
+     project rules. Benchmarked against Milestone 1's 98.75/100.
+
+     Built under the ANSWER-BALANCE RULE: option lengths balanced,
+     correct-answer position evenly distributed (10 of each across
+     A/B/C/D) — verified quantitatively before this file was
+     finalized. Two flagged open items from the U20 Gap-Closure
+     Checkpoint analysis (Exec Summary §25/§26) get dedicated
+     coverage: the germination "seeds don't need light" recurring
+     misconception (Q9, Q24, Q33) and evidence-based observation-
+     vs-inference reasoning (Q32).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milestone Test 2 — All Units</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#DAA520; --gold-d:#8a6a00;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Milestone Test 2 — All Units (U11–U20)</b>
+      <span class="sub">Biology &bull; Chemistry &bull; Physics &mdash; cumulative review</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+  <div class="milestone-note">&#127942; This is your SECOND MILESTONE TEST — 40 questions covering everything from Unit 11 through Unit 20, weighted like a real ASMOPSS paper (1.25 / 2.5 / 5 marks) so your score can be compared directly to Milestone Test 1.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MILESTONE CONFIG ---------- */
+const MILESTONE_NUM = 2;
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // matches the real ASMOPSS G4 paper's weighting
+const TOTAL_MARKS = 100;                   // 16*1.25 + 16*2.5 + 8*5 = 20 + 40 + 40 = 100
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold as every unit test
+const BASELINE_MARKS = 98.75;              // Milestone Test 1's real result, for comparison
+
+const Q = [
+  // Section A — Basic Recall (warm-up, 1.25 marks each)
+  { n:1, section:'A', star:0, body:"A student needs to name the body system responsible for turning a meal into nutrients your cells can absorb. Which system is this?",
+    options:["The respiratory system","The digestive system","The circulatory system","The skeletal system"], ans:2,
+    why:"The digestive system's main job is breaking down food into nutrients the body can absorb and use." },
+  { n:2, section:'A', star:0, body:"Which of these materials is spun by an insect - a silkworm - rather than grown on a plant or sheared from an animal's fur?",
+    options:["Wool","Cotton","Leather","Silk"], ans:4,
+    why:"Silk is spun by silkworms, making it an animal material - not a plant or fur-based one." },
+  { n:3, section:'A', star:0, body:"Which of these is a natural source of light, not made by humans?",
+    options:["The Sun","A candle","A torch","A lightbulb"], ans:1,
+    why:"The Sun is a natural light source; candles, torches, and lightbulbs are all man-made." },
+  { n:4, section:'A', star:0, body:"Besides a nucleus and cytoplasm, which extra structure do PLANT cells have that ANIMAL cells lack entirely?",
+    options:["A nucleus","Cytoplasm","A cell wall","A cell membrane"], ans:3,
+    why:"Plant cells have an extra rigid cell wall for support - animal cells don't have one." },
+  { n:5, section:'A', star:0, body:"Density compares an object's mass to its:",
+    options:["Colour","Volume","Temperature","Shape"], ans:2,
+    why:"Density compares how much mass is packed into a given volume." },
+  { n:6, section:'A', star:0, body:"What is actually vibrating when you hear a sound?",
+    options:["Light waves","Only water, never air","Nothing - sound needs no medium at all","Particles in a medium, like air"], ans:4,
+    why:"Sound is caused by vibrating particles in a medium (like air, water, or a solid) bumping into each other." },
+  { n:7, section:'A', star:0, body:"What is the main job of a decomposer in an ecosystem?",
+    options:["Breaking down dead material and recycling nutrients","Making its own food using sunlight","Hunting other animals for food","Producing oxygen for the air"], ans:1,
+    why:"Decomposers break down dead plants and animals, recycling nutrients back into the ecosystem." },
+  { n:8, section:'A', star:0, body:"If you could measure every gas inside a single breath of ordinary air, roughly what share of it would turn out to be nitrogen?",
+    options:["About 10%","About 21%","About 78%","About 50%"], ans:3,
+    why:"Air is roughly 78% nitrogen, 21% oxygen, and small amounts of other gases." },
+  { n:9, section:'A', star:0, body:"A seed already has plenty of water and air around it. What ELSE must it have in order to germinate successfully?",
+    options:["Direct sunlight","Warmth","Soil","Fertilizer"], ans:2,
+    why:"Seeds need water, air, and warmth to germinate - sunlight, soil, and fertilizer are not required at this stage." },
+  { n:10, section:'A', star:0, body:"A bee brushes against a flower structure covered in fine, powdery yellow grains. Which flower part is producing that powder?",
+    options:["The stigma","The ovary","The ovule","The anther"], ans:4,
+    why:"The anther is the part of the flower that produces pollen." },
+  { n:11, section:'A', star:0, body:"A gymnast lands on a trampoline, pushing the surface down to its lowest point, where it holds momentarily still before springing back up. While the surface is stretched down and momentarily still, what form of energy does it store?",
+    options:["Potential energy","Kinetic energy","Sound energy","Light energy"], ans:1,
+    why:"A stretched, momentarily-still trampoline surface stores potential energy from its position/tension, which becomes kinetic energy as it springs back up." },
+  { n:12, section:'A', star:0, body:"After a hot shower, a bathroom mirror fogs up as warm, moist air touches the cool glass and forms a thin film of tiny droplets. Which water-cycle stage does this fogging represent?",
+    options:["Evaporation","Precipitation","Condensation","Collection"], ans:3,
+    why:"Condensation is water vapour cooling and turning back into tiny liquid droplets, forming clouds." },
+  { n:13, section:'A', star:0, body:"About how many high tides does a typical beach experience in one day?",
+    options:["Zero","About two","About one","About four"], ans:2,
+    why:"A typical day has roughly two high tides and two low tides." },
+  { n:14, section:'A', star:0, body:"A shoelace can be bent, curled, and twisted around your finger without ever cracking or breaking apart. What property does this show it has?",
+    options:["Rigid","Brittle","Opaque","Flexible"], ans:4,
+    why:"Flexible materials can bend without breaking; rigid/brittle materials tend to snap instead." },
+  { n:15, section:'A', star:0, body:"An object that is LESS dense than water will:",
+    options:["Float","Sink","Dissolve","Evaporate"], ans:1,
+    why:"An object less dense than the liquid around it floats; denser objects sink." },
+  { n:16, section:'A', star:0, body:"Sound cannot exist without something to carry its vibrations along. Which of these could actually carry sound to your ears?",
+    options:["Only solids","A total vacuum (empty space)","Solids, liquids, and gases","Nothing at all"], ans:3,
+    why:"Sound can travel through solids, liquids, and gases - but not through a vacuum, since there are no particles to vibrate." },
+
+  // Section B — Applying What You Know (2.5 marks each)
+  { n:17, section:'B', star:1, body:"A person's blood carries oxygen from the lungs to the rest of the body. Which system does this describe?",
+    options:["The digestive system","The circulatory system","The respiratory system","The skeletal system"], ans:2,
+    why:"The circulatory system (heart, blood, blood vessels) carries oxygen and nutrients around the body." },
+  { n:18, section:'B', star:1, body:"A block of pine wood keeps its shape firmly and doesn't squash when pressed, but still floats when dropped in a bowl of water. Which property combination does this block have?",
+    options:["Soft and sinks","Hard and sinks","Soft and floats","Hard and floats"], ans:4,
+    why:"Pine wood is hard enough to hold its shape firmly while also being less dense than water (floats)." },
+  { n:19, section:'B', star:1, body:"A wide fluorescent tube light casts a shadow with a soft, blurry edge. What causes this softer edge?",
+    options:["The light source is broad/wide, not a single point","The light is too dim to cast a proper shadow","The object blocking the light is transparent","Shadows are always soft no matter the light source"], ans:1,
+    why:"A broad/wide light source creates a softer shadow with a penumbra fringe, unlike a single point source." },
+  { n:20, section:'B', star:1, body:"A single-celled organism, like an amoeba, must carry out every job by itself inside just one cell: eating, breathing, and removing waste. What kind of organism is this?",
+    options:["Multicellular","A plant, specifically","Unicellular","Not a living thing at all"], ans:3,
+    why:"A unicellular organism is made of just one cell that handles every life process by itself." },
+  { n:21, section:'B', star:1, body:"A toy plastic boat stays on top of the water in a bathtub instead of sinking to the bottom. What does this tell us about the plastic's density compared to water?",
+    options:["The plastic is denser than water","The plastic is less dense than water","The plastic has the exact same density as water","Density cannot be determined from floating alone"], ans:2,
+    why:"Floating means the plastic is less dense than the water around it." },
+  { n:22, section:'B', star:1, body:"A guitarist plucks a thick string and a thin string with the exact same force. The thick string produces a LOWER pitch. What is the BEST explanation?",
+    options:["Thick strings vibrate faster, producing a lower pitch","String thickness has no real effect on pitch","Thin strings always sound quieter than thick ones","Thick strings vibrate more slowly, producing a lower pitch"], ans:4,
+    why:"Thicker strings vibrate more slowly, which produces a lower pitch." },
+  { n:23, section:'B', star:1, body:"Extra carbon dioxide released by cars and factories makes the natural greenhouse effect stronger over time. What is the BEST way to describe the greenhouse effect itself?",
+    options:["A natural process that keeps Earth warm enough for life","A harmful process invented by pollution","A process that only happens inside farming greenhouses","A process that cools the Earth down over time"], ans:1,
+    why:"The greenhouse effect is a natural process that keeps Earth warm - pollution simply makes it stronger, not the other way around." },
+  { n:24, section:'B', star:1, body:"A student plants identical soaked bean seeds in two pots with the same soil, water, and warmth. Pot A sits on a sunny windowsill; Pot B sits inside a dark cupboard. After a week, both pots show seeds sprouting about equally well. What is the BEST explanation for this result?",
+    options:["Pot B's seeds must have secretly gotten some light too","Sunlight speeds up germination, so Pot A should have sprouted faster","Germination doesn't require light, so both pots sprouted normally","The dark cupboard must have been warmer than the windowsill"], ans:3,
+    why:"Seeds need water, air, and warmth to germinate - not light - so both pots (equally warm, damp, and aired) sprout about equally well." },
+  { n:25, section:'B', star:1, body:"A gardener notices that after a flower is pollinated and fertilized, its ovary begins to swell and grow. What is the ovary developing into?",
+    options:["A brand new flower","The fruit, which holds the seeds","A new root system","A fresh pollen grain"], ans:2,
+    why:"The ovary develops into the fruit, which holds and protects the developing seeds." },
+  { n:26, section:'B', star:1, body:"A ball is held motionless at the top of a tall ramp, then released and rolls down, speeding up the whole way. At the TOP of the ramp, before release, what form of energy does the ball mostly have?",
+    options:["Kinetic energy","Sound energy","Chemical energy","Potential energy"], ans:4,
+    why:"At the top, motionless, the ball's energy is mostly potential (stored due to its height) - it becomes kinetic as it speeds up." },
+  { n:27, section:'B', star:1, body:"Rainwater collects into rivers, lakes, and oceans after falling from clouds. What is this stage of the water cycle called?",
+    options:["Collection","Evaporation","Condensation","Precipitation"], ans:1,
+    why:"Collection is the stage where fallen water gathers into rivers, lakes, and oceans." },
+  { n:28, section:'B', star:1, body:"A tide chart shows the water was at its highest point at noon today. Sailors want to know when the water level will next be at its LOWEST point. About how many hours should they expect to wait?",
+    options:["About 3 hours","About 12 hours","About 6 hours","About 24 hours"], ans:3,
+    why:"Low tide falls roughly halfway between two high tides, about 6 hours after a high tide." },
+  { n:29, section:'B', star:1, body:"Several people sit talking inside a small, sealed car with the windows rolled up for a long time. What is most likely happening to the air inside as time passes?",
+    options:["Oxygen is increasing and carbon dioxide is decreasing","Oxygen is decreasing and carbon dioxide is increasing","The air's composition never changes, no matter how long they wait","Nitrogen is being rapidly used up by their breathing"], ans:2,
+    why:"Breathing uses up oxygen and releases carbon dioxide, so in a sealed space oxygen drops and carbon dioxide rises over time." },
+  { n:30, section:'B', star:1, body:"A material bends easily without snapping, but does NOT soak up water at all. Which two properties describe it?",
+    options:["Flexible and absorbent","Rigid and waterproof","Rigid and absorbent","Flexible and waterproof"], ans:4,
+    why:"Bending without snapping is flexible; not soaking up water is waterproof - both apply here." },
+  { n:31, section:'B', star:1, body:"A red blood cell has no nucleus and is shaped like a flattened, indented disc, which helps it carry more oxygen and squeeze through narrow blood vessels. What does this shape tell us about the cell?",
+    options:["The cell's shape is specially suited to its particular job","All cells look exactly the same, regardless of their job","The shape is random and unrelated to its job","Red blood cells are actually a type of muscle cell"], ans:1,
+    why:"Specialized cells, like red blood cells, have shapes suited to their specific job - here, maximizing oxygen-carrying capacity and flexibility." },
+  { n:32, section:'B', star:1, body:"A student finds a trail of small, half-eaten apples on the ground under a tree, with fresh claw marks scratched into the bark nearby. Which of these is something the student could directly OBSERVE, rather than something they'd have to INFER?",
+    options:["A squirrel visited this tree recently to eat","The animal will probably come back again tomorrow","The claw marks and half-eaten apples are visible on/under the tree right now","The same animal that left the marks also climbed the tree"], ans:3,
+    why:"Seeing the claw marks and apples right now is a direct observation; explaining what caused them or predicting future visits is inference." },
+
+  // Section C — Think Like a Scientist (★★ applied, 5 marks each)
+  { n:33, section:'C', star:2, body:"A student wants to test whether SEED TYPE affects germination speed, using bean seeds and corn seeds. Both are planted in identical pots, but the bean pot gets more water AND more warmth than the corn pot. Why is this NOT a fair test?",
+    options:["Fair tests must always compare exactly two different seed types side by side, without any exceptions","Two things changed together (water AND warmth), so you can't isolate which one caused any speed difference","Seeds can never be fairly compared to each other in any experiment, no matter how it's designed","More water and warmth always guarantees faster germination speed, regardless of which seed type is used"], ans:2,
+    why:"A fair test changes only ONE variable at a time - changing both water and warmth together makes it impossible to isolate which factor caused any difference." },
+  { n:34, section:'C', star:2, body:"A student claims: 'A large, wide light source and a tiny point light source will always cast exactly the same kind of shadow.' What is the BEST correction?",
+    options:["The claim is completely correct, since every light source, no matter its size or shape, always casts an identical shadow","The claim is wrong, but this is only true in the rare special case where the object being lit is transparent","Shadows actually depend only on the object's own colour and material, and never depend on the light source's size at all","The claim is wrong - a point source casts a sharp shadow, a broad source casts a softer one with a penumbra fringe"], ans:4,
+    why:"A point source makes one sharp-edged shadow; a broad source makes a softer shadow with a penumbra fringe - the two are genuinely different." },
+  { n:35, section:'C', star:2, body:"A child on a playground swing is pulled back and held high in the air, completely still, right before being let go. A friend claims: 'At this highest, stillest point, the swing has mostly kinetic energy, since it's about to start moving again.' What is the BEST correction?",
+    options:["The claim is wrong - at the highest, stillest point, the energy is mostly potential, not kinetic","The claim is correct, since the swing was still moving through the air just one moment before this point","The claim is wrong, but only because playground swings don't actually store or use any energy whatsoever","Kinetic and potential energy are actually just two different names for the exact same underlying quantity"], ans:1,
+    why:"At the highest, momentarily-still point of a swing, the energy is mostly potential (due to height) - kinetic energy is highest at the bottom, where it moves fastest." },
+  { n:36, section:'C', star:2, body:"A beachgoer insists: 'A high tide is always followed immediately by another high tide - a low tide never fits in between the two.' What is the BEST correction?",
+    options:["The claim is correct, since tides always repeat the exact same type over and over in a row","The claim is wrong, but only because tide timing is actually completely random and impossible to predict","The claim is wrong - a low tide typically comes next, roughly halfway between the two high tides","The claim is correct, but this pattern only holds true specifically during a full moon"], ans:3,
+    why:"Tides alternate - a low tide typically falls roughly halfway (about 6 hours) between two high tides, not another high tide right away." },
+  { n:37, section:'C', star:2, body:"A gardener sees a flower's petals wilt and fall away, while its ovary visibly begins to swell and grow larger over the following days. What does the swelling ovary suggest happened?",
+    options:["Nothing in particular - ovaries swell randomly sometimes","Fertilization likely occurred, since the ovary is developing into fruit","The flower failed to be pollinated at all","The petals falling off is what caused the ovary to swell"], ans:2,
+    why:"A swelling ovary developing into fruit is strong evidence that fertilization occurred - petals falling is a separate, unrelated event." },
+  { n:38, section:'C', star:2, body:"A student assumes: 'Since rubber is stretchy and bendy like some plastics, it must be a man-made material.' What is the BEST correction?",
+    options:["The claim is correct, since every stretchy and bendy material is always man-made, without exception","The claim is wrong, but only because rubber is actually a type of mined rock or mineral","The claim is correct, but this is only true specifically for black-coloured rubber products","The claim is wrong - rubber actually comes from the sap of rubber trees, making it a plant material"], ans:4,
+    why:"Rubber comes from the sap of rubber trees, making it a plant material, not a man-made one, despite feeling similar to some plastics." },
+  { n:39, section:'C', star:2, body:"A student claims: 'Since the air inside a sealed, crowded elevator changes as people breathe, new gases must be appearing out of nowhere.' What is the BEST correction?",
+    options:["The claim is wrong - no gas is created; only the ratio of oxygen and carbon dioxide shifts as people breathe","The claim is correct, since new gases can genuinely appear from nothing whenever people breathe in an enclosed space","The claim is wrong, but only because the air inside a sealed elevator never actually changes at all","The claim is correct, but this effect only really happens inside very large, spacious elevators"], ans:1,
+    why:"No new gas is created - breathing simply shifts the existing balance of gases already in the air, using up oxygen and adding carbon dioxide." },
+  { n:40, section:'C', star:2, body:"Across everything you've learned this term - body systems, materials, light, cells, density, sound, ecosystems, energy, and the water cycle - which idea connects them ALL?",
+    options:["Only living things, like plants and animals, ever really follow any true scientific rules at all","Nothing at all in nature can really ever be explained or accurately predicted by science","Every system in nature is made of parts that work together and follow specific, predictable rules","Every single topic in science is actually completely unrelated and disconnected from every other topic"], ans:3,
+    why:"Every topic this term - living or non-living - is made of parts that work together following specific, predictable rules that can be investigated and understood." },
+];
+/* ---------- END MILESTONE CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Basic Recall (warm-up, 1.25 marks each)",
+  B: "SECTION B — Applying What You Know (&#9733;, 2.5 marks each)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied, 5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Milestone Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+    }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your Milestone Test 1 result (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    milestone: MILESTONE_NUM,
+    title: "Milestone Test 2 - All Units (U11-U20)",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
