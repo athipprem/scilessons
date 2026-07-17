@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 21 · Lesson 2 — Air Resistance &amp; Free Fall</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .sci{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🪶 Lesson 2 · Air Resistance &amp; Free Fall</b><span class="pill">Unit 21 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Solving the Feather Mystery 🗺️</h2>
+    <div class="rulebar">MAP: air resistance is a force that pushes back against falling objects — and it explains why feathers and rocks seem to break Lesson 1's rule in everyday life.</div>
+    <p>Lesson 1 showed that all objects fall at the same rate with no air resistance. But drop a feather and a rock together in your room right now, and the rock clearly wins! Today you'll find out exactly why — and see the real experiment that proves Lesson 1's rule is still true underneath it all.</p>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain what air resistance is, explain why shape and surface area change how fast something falls in air, and explain why that same feather and rock WOULD fall together if you took the air away.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM LESSON 1 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 🔁</h2>
+    <div class="recall">🔁 <b>Remember the surprising fact?</b> With NO air resistance acting, a heavy object and a light object dropped from the same height land at the exact same time — mass alone doesn't change the fall rate. You also learned back in Unit 10 that FRICTION is a force between two touching surfaces that opposes (works against) motion.</div>
+    <p>Today's big question: in real life, on Earth, why does a feather clearly fall slower than a rock? If Lesson 1's rule is true, something ELSE must be different between them. That "something else" is what today's lesson is all about.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Air resistance is why parachutes work at all — without it, a parachute would be completely useless! It's why raindrops don't smash into the ground at dangerous speeds, why paper airplanes glide instead of dropping straight down, and why skydivers can control their speed just by changing the shape of their body as they fall.</div>
+    <div class="card">
+      <b>Real life:</b> parachute designers use huge surface area on purpose, to catch as much air as possible and slow a falling person down to a safe landing speed. Car designers do the opposite — they shape cars to be streamlined, cutting through air with as little resistance as possible, so the car uses less fuel.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: WHAT IS AIR RESISTANCE -->
+  <section class="screen" data-s="4">
+    <h2>What Is Air Resistance? 💨</h2>
+    <div class="rulebar">AIR RESISTANCE is a force caused by air pushing back against something moving through it — very similar to how friction pushes back against something sliding along a surface.</div>
+    <div class="job"><b>Key idea:</b> just like Unit 10's friction (a force between two touching surfaces that opposes motion), air resistance is a force between a moving object and the air around it, that opposes its motion. The bigger the surface area an object presents to the air (compared to its weight), the more air resistance pushes back against it, and the more it gets slowed down.</div>
+  </section>
+
+  <!-- SCREEN 5: SHAPE & SURFACE AREA -->
+  <section class="screen" data-s="5">
+    <h2>Shape &amp; Surface Area Matter 🪶</h2>
+    <svg viewBox="0 0 300 150" width="480" height="240" aria-label="Diagram comparing a falling feather, which is slowed a lot by air resistance, with a falling compact ball, which is barely slowed at all">
+      <text x="80" y="16" font-size="10" font-weight="700" fill="#0d47a1" text-anchor="middle">Feather — large surface area</text>
+      <ellipse cx="80" cy="55" rx="26" ry="10" fill="#fff9c4" stroke="#f9a825" stroke-width="2"/>
+      <line x1="80" y1="45" x2="80" y2="30" stroke="#1565c0" stroke-width="2.5" marker-end="url(#arrUp1)"/>
+      <text x="80" y="26" font-size="7" fill="#0d47a1" text-anchor="middle">big air resistance</text>
+      <line x1="80" y1="65" x2="80" y2="80" stroke="#e53935" stroke-width="2.5" marker-end="url(#arrDown1)"/>
+      <text x="80" y="98" font-size="7" fill="#b71c1c" text-anchor="middle">gravity</text>
+      <text x="80" y="130" font-size="9" font-weight="700" fill="#546e7a" text-anchor="middle">falls SLOWLY, drifting side to side</text>
+
+      <text x="220" y="16" font-size="10" font-weight="700" fill="#0d47a1" text-anchor="middle">Rock — small surface area</text>
+      <circle cx="220" cy="55" r="14" fill="#616161"/>
+      <line x1="220" y1="41" x2="220" y2="32" stroke="#1565c0" stroke-width="1.5" marker-end="url(#arrUp1)"/>
+      <text x="220" y="26" font-size="7" fill="#0d47a1" text-anchor="middle">tiny air resistance</text>
+      <line x1="220" y1="69" x2="220" y2="88" stroke="#e53935" stroke-width="2.5" marker-end="url(#arrDown1)"/>
+      <text x="220" y="103" font-size="7" fill="#b71c1c" text-anchor="middle">gravity</text>
+      <text x="220" y="130" font-size="9" font-weight="700" fill="#546e7a" text-anchor="middle">falls FAST, straight down</text>
+      <defs>
+        <marker id="arrUp1" markerWidth="6" markerHeight="6" refX="3" refY="0" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,6 L3,0 L6,6 Z" fill="#1565c0"/></marker>
+        <marker id="arrDown1" markerWidth="6" markerHeight="6" refX="3" refY="6" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L6,0 L3,6 Z" fill="#e53935"/></marker>
+      </defs>
+    </svg>
+    <div class="svgcap">The feather has a huge surface area compared to its tiny weight, so air resistance pushes up on it strongly, almost balancing gravity — it drifts down slowly. The rock has a small surface area compared to its weight, so air resistance barely slows it at all — it falls almost as fast as gravity alone would pull it.</div>
+    <div class="job"><b>Key idea:</b> it isn't really about "heavy vs light" at all — it's about how much surface area an object has COMPARED to its weight. A flat sheet of paper falls slowly; the exact same paper, scrunched into a tight ball, falls much faster — same mass, same weight, but much less surface area facing the air.</div>
+  </section>
+
+  <!-- SCREEN 6: THE APOLLO 15 REVEAL -->
+  <section class="screen" data-s="6">
+    <h2>Proof From the Moon 🌕</h2>
+    <div class="rulebar">In 1971, astronaut David Scott, on the Apollo 15 Moon mission, dropped a hammer and a feather at the same moment — on live camera — to test Lesson 1's rule for real.</div>
+    <svg viewBox="0 0 300 190" width="480" height="304" aria-label="Diagram of the Moon's surface with no air, showing a hammer and a feather released together and falling side by side at the same rate, landing together">
+      <rect x="0" y="0" width="300" height="150" fill="#0d1117"/>
+      <circle cx="40" cy="30" r="1.4" fill="#fff"/><circle cx="90" cy="18" r="1" fill="#fff"/>
+      <circle cx="200" cy="24" r="1.2" fill="#fff"/><circle cx="255" cy="35" r="1" fill="#fff"/>
+      <circle cx="150" cy="15" r="1" fill="#fff"/><circle cx="270" cy="60" r="1.2" fill="#fff"/>
+      <rect x="0" y="150" width="300" height="40" fill="#9e9e9e"/>
+      <rect x="0" y="150" width="300" height="6" fill="#bdbdbd"/>
+      <text x="150" y="14" font-size="9" fill="#fff" text-anchor="middle">no air — a true vacuum</text>
+
+      <rect x="90" y="45" width="8" height="26" fill="#8d6e63"/>
+      <rect x="83" y="40" width="22" height="10" fill="#616161"/>
+      <text x="94" y="90" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">hammer</text>
+
+      <ellipse cx="200" cy="55" rx="16" ry="7" fill="#fafafa"/>
+      <text x="200" y="90" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">feather</text>
+
+      <line x1="20" y1="105" x2="280" y2="105" stroke="#616161" stroke-width="1" stroke-dasharray="3,3"/>
+      <rect x="88" y="99" width="12" height="12" fill="#8d6e63"/>
+      <ellipse cx="200" cy="105" rx="16" ry="6" fill="#fafafa"/>
+
+      <line x1="20" y1="145" x2="280" y2="145" stroke="#616161" stroke-width="1" stroke-dasharray="3,3"/>
+      <rect x="88" y="139" width="12" height="6" fill="#8d6e63"/>
+      <ellipse cx="200" cy="144" rx="16" ry="5" fill="#fafafa"/>
+      <text x="150" y="172" font-size="10" font-weight="700" fill="#37474f" text-anchor="middle">Moon's surface — they land at the SAME instant</text>
+    </svg>
+    <div class="svgcap">On the Moon there is no air at all, so there's no air resistance to slow the feather down. With that one difference removed, the hammer and feather fell side by side and landed at exactly the same time — real video proof of Lesson 1's rule.</div>
+    <div class="job"><b>Key idea:</b> this ties Lesson 1 and Lesson 2 together perfectly. Gravity ALWAYS pulls every object at the same rate (Lesson 1). On Earth, air resistance usually gets in the way and makes lighter/wider objects fall slower (Lesson 2) — but take the air away, like on the Moon, and Lesson 1's original rule shows through with nothing hiding it.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Will Two Objects Fall at the Same Rate? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Is there air (or another fluid) present, AND is one object's shape/surface area much bigger compared to its weight than the other's?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">NO — no air present (a vacuum), OR both objects are similarly compact/dense</div>
+          <div class="dleaf yes">They fall at the SAME rate — mass doesn't matter here</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">YES — air is present AND one object is much wider/lighter for its size (like a feather or paper)</div>
+          <div class="dleaf no">The more air-resistant object falls SLOWER — shape wins over mass</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> first ask if air resistance is even in play at all. If there's no air (or both objects are compact and dense, so air resistance barely matters for either one), fall rate only depends on gravity, which treats every mass the same. Only when air resistance is strong AND uneven between the two objects does shape start to decide the winner.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>. Once you check, that answer is locked in.</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What is air resistance?</p>
+      <button class="opt">A force that only exists on the Moon</button>
+      <button class="opt">A force caused by air pushing back against something moving through it</button>
+      <button class="opt">Another name for gravity</button>
+      <button class="opt">A force that only slows down heavy objects</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — air resistance is a force from air pushing back against a moving object, opposing its motion.</div>
+      <div class="fb no">✘ Re-check Screen 4 — what is air resistance actually caused by?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. A flat sheet of paper and the exact same sheet of paper, scrunched into a tight ball, are dropped from the same height at the same time. Which lands first?</p>
+      <button class="opt">The flat sheet, because it has more mass spread out</button>
+      <button class="opt">Neither — they always land at the same time no matter their shape</button>
+      <button class="opt">The scrunched-up ball, because it has much less surface area facing the air</button>
+      <button class="opt">It is impossible to know without weighing them separately</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — same mass, but the scrunched ball has far less surface area, so air resistance slows it down much less.</div>
+      <div class="fb no">✘ Re-check Screen 5 — the paper's MASS is identical in both shapes. What actually changed between the flat sheet and the scrunched ball?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. On the Moon, an astronaut drops a hammer and a feather together, at the same moment, from the same height. What happens, and why?</p>
+      <button class="opt">The hammer lands first, because the Moon's gravity is weaker for lighter objects</button>
+      <button class="opt">The feather lands first, because there is more gravity on the Moon</button>
+      <button class="opt">Neither object falls at all, since the Moon has no gravity</button>
+      <button class="opt">They land at exactly the same time, because there is no air on the Moon to create air resistance</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — with no air on the Moon, there's no air resistance to slow the feather down, so both objects fall together.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what is missing on the Moon that normally slows a feather down here on Earth?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A coin and a flat paper napkin are dropped together in a normal room, full of air. Which lands first, and why?</p>
+      <button class="opt">The coin, because its small surface area means air resistance barely slows it, while the napkin's large surface area slows it a lot</button>
+      <button class="opt">The napkin, because paper is always faster than metal</button>
+      <button class="opt">They land at the same time, because gravity pulls on mass equally</button>
+      <button class="opt">Neither falls, because air resistance cancels out gravity completely indoors</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — in normal air, the coin's small surface area means air resistance barely affects it, while the wide, light napkin is slowed down a lot.</div>
+      <div class="fb no">✘ Re-check Screen 5 — with air present, what decides whether an object is slowed down a little or a lot?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A student claims: "Gravity pulls harder on a feather than on a hammer on the Moon, that's why they would fall differently there too." What is the BEST correction?</p>
+      <button class="opt">The claim is correct — gravity always pulls harder on lighter objects</button>
+      <button class="opt">The claim is wrong — gravity pulls every object at the same rate; on the Moon (with no air resistance), the hammer and feather actually fall together</button>
+      <button class="opt">The claim is correct, but only because the Moon has stronger gravity than Earth</button>
+      <button class="opt">The claim is wrong, because objects don't fall at all on the Moon</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — gravity treats every mass the same; without air resistance in the way, the hammer and feather fall at exactly the same rate.</div>
+      <div class="fb no">✘ Re-check Screens 5 and 6 — does gravity itself pull differently on different masses, or is it air resistance that makes the real-life difference?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 21 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Gravity_Lesson_WhatIsGravity.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_21_Test_FallingObjectsGravityAirResistance.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

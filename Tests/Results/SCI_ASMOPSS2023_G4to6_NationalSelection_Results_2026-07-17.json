@@ -1,0 +1,760 @@
+{
+  "student": "Prem",
+  "competition": "ASMOPSS2023_G4to6_NationalSelection",
+  "title": "ASMOPSS 2023 - Science G4-6 2nd Round National Selection",
+  "dateTaken": "2026-07-17",
+  "submittedAt": "2026-07-17T12:57:42.148Z",
+  "numFullyCorrect": 7,
+  "outOfQuestions": 30,
+  "marksEarned": 19.5,
+  "outOfMarks": 102,
+  "pct": 19,
+  "sections": [
+    {
+      "name": "A",
+      "fullyCorrect": 6,
+      "outOf": 15,
+      "marks": 12,
+      "marksOutOf": 30
+    },
+    {
+      "name": "B",
+      "fullyCorrect": 1,
+      "outOf": 10,
+      "marks": 5.5,
+      "marksOutOf": 30
+    },
+    {
+      "name": "C",
+      "fullyCorrect": 0,
+      "outOf": 5,
+      "marks": 2,
+      "marksOutOf": 42
+    }
+  ],
+  "answers": [
+    {
+      "q": 1,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 5,
+      "correct": 3,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 2,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 5,
+      "correct": 3,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 3,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 4,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 2,
+      "correct": 5,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 5,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 6,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 1,
+      "correct": 3,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 7,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 8,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 1,
+      "correct": 3,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 9,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 10,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 11,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 12,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "marks": 2,
+      "marksEarned": 2
+    },
+    {
+      "q": 13,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 3,
+      "correct": 2,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 14,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 4,
+      "correct": 5,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 15,
+      "section": "A",
+      "type": "mcq",
+      "chosen": 3,
+      "correct": 4,
+      "isCorrect": false,
+      "marks": 2,
+      "marksEarned": 0
+    },
+    {
+      "q": 16,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "which",
+          "response": "Copper",
+          "accept": [
+            "copper"
+          ],
+          "isCorrect": true,
+          "pts": 1.5
+        },
+        {
+          "key": "why",
+          "response": "It is heavier ",
+          "accept": [
+            "heavier",
+            "weight",
+            "mass",
+            "heavy"
+          ],
+          "isCorrect": true,
+          "pts": 1.5
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 3,
+      "allCorrect": true
+    },
+    {
+      "q": 17,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "what",
+          "response": "It will attract the pieces of paper ",
+          "accept": [
+            "attract",
+            "pulled",
+            "pull",
+            "stick",
+            "move toward",
+            "attracted"
+          ],
+          "isCorrect": true,
+          "pts": 1.5
+        },
+        {
+          "key": "why",
+          "response": "Kinetic ",
+          "accept": [
+            "polariz",
+            "polaris",
+            "induced charge",
+            "electric field"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 1.5,
+      "allCorrect": false
+    },
+    {
+      "q": 18,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "v",
+          "response": "D",
+          "accept": [
+            "vitamin c",
+            "vit c",
+            "ascorbic acid",
+            "c"
+          ],
+          "isCorrect": false,
+          "pts": 3
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 19,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "2",
+          "accept": [
+            "2",
+            "rod 2",
+            "two"
+          ],
+          "isCorrect": true,
+          "pts": 1
+        },
+        {
+          "key": "b",
+          "response": "A",
+          "accept": [
+            "f"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "c",
+          "response": "B",
+          "accept": [
+            "e"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 1,
+      "allCorrect": false
+    },
+    {
+      "q": 20,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Idk",
+          "accept": [
+            "grass"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "b",
+          "response": "Idk",
+          "accept": [
+            "rose"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "c",
+          "response": "Idk",
+          "accept": [
+            "papaya"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 21,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Idk",
+          "accept": [
+            "negative",
+            "divergent",
+            "concave"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        },
+        {
+          "key": "b",
+          "response": "2m",
+          "accept": [
+            "-2",
+            "-2m",
+            "-2 m"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 22,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Faster",
+          "accept": [
+            "the same",
+            "same",
+            "the same as",
+            "equal"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        },
+        {
+          "key": "b",
+          "response": "Faster",
+          "accept": [
+            "shorter",
+            "less",
+            "shorter than",
+            "less than"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 23,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Idk",
+          "accept": [
+            "sun",
+            "the sun"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "b",
+          "response": "Idk",
+          "accept": [
+            "full"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "c",
+          "response": "Idk",
+          "accept": [
+            "crescent"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 24,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Idk",
+          "accept": [
+            "12"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        },
+        {
+          "key": "b",
+          "response": "Idk",
+          "accept": [
+            "0"
+          ],
+          "isCorrect": false,
+          "pts": 1.5
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 25,
+      "section": "B",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "Idk",
+          "accept": [
+            "south",
+            "southern",
+            "tropic of capricorn"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "b",
+          "response": "Idk",
+          "accept": [
+            "autumn",
+            "fall"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        },
+        {
+          "key": "c",
+          "response": "Idk",
+          "accept": [
+            "spring"
+          ],
+          "isCorrect": false,
+          "pts": 1
+        }
+      ],
+      "marks": 3,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 26,
+      "section": "C",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "kHz",
+          "accept": [
+            "ultrasound",
+            "ultrasonic"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        },
+        {
+          "key": "b",
+          "response": "Sound’s wavelength",
+          "accept": [
+            "6.8",
+            "6.8mm",
+            "6.8 mm"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        },
+        {
+          "key": "c",
+          "response": "Idk",
+          "accept": [
+            "6.0",
+            "6",
+            "6mm",
+            "6.0mm",
+            "6 mm"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        }
+      ],
+      "marks": 6,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 27,
+      "section": "C",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "?",
+          "accept": [
+            "0.9",
+            "0.9g/ml",
+            "0.9 g/ml"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        },
+        {
+          "key": "b",
+          "response": ".",
+          "accept": [
+            "2.7",
+            "2.7g/ml",
+            "2.7 g/ml"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        },
+        {
+          "key": "c",
+          "response": "?",
+          "accept": [
+            "180",
+            "180ml",
+            "180 ml"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        }
+      ],
+      "marks": 6,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 28,
+      "section": "C",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": "50",
+          "accept": [
+            "48",
+            "48km/h",
+            "48 km/h"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        },
+        {
+          "key": "b",
+          "response": "50",
+          "accept": [
+            "50",
+            "50km/h",
+            "50 km/h"
+          ],
+          "isCorrect": true,
+          "pts": 2
+        },
+        {
+          "key": "c",
+          "response": "50",
+          "accept": [
+            "200",
+            "200km",
+            "200 km"
+          ],
+          "isCorrect": false,
+          "pts": 2
+        }
+      ],
+      "marks": 6,
+      "marksEarned": 2,
+      "allCorrect": false
+    },
+    {
+      "q": 29,
+      "section": "C",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a",
+          "response": ".",
+          "accept": [
+            "2000000",
+            "2,000,000",
+            "2000000j",
+            "2mj",
+            "2 mj",
+            "2000000 j"
+          ],
+          "isCorrect": false,
+          "pts": 4
+        },
+        {
+          "key": "b",
+          "response": ".",
+          "accept": [
+            "20000",
+            "20,000",
+            "20000n",
+            "20000 n"
+          ],
+          "isCorrect": false,
+          "pts": 4
+        },
+        {
+          "key": "c",
+          "response": ".",
+          "accept": [
+            "0",
+            "0j",
+            "0 j"
+          ],
+          "isCorrect": false,
+          "pts": 4
+        }
+      ],
+      "marks": 12,
+      "marksEarned": 0,
+      "allCorrect": false
+    },
+    {
+      "q": 30,
+      "section": "C",
+      "type": "blank",
+      "blanks": [
+        {
+          "key": "a1",
+          "response": ".",
+          "accept": [
+            "sink",
+            "sinks",
+            "sink to the bottom",
+            "sinks to the bottom"
+          ],
+          "isCorrect": false,
+          "pts": 3
+        },
+        {
+          "key": "a2",
+          "response": ".",
+          "accept": [
+            "density",
+            "decrease",
+            "lower",
+            "less dense",
+            "dilut"
+          ],
+          "isCorrect": false,
+          "pts": 3
+        },
+        {
+          "key": "b1",
+          "response": "Boils",
+          "accept": [
+            "sink",
+            "sinks",
+            "sink to the bottom",
+            "sinks to the bottom"
+          ],
+          "isCorrect": false,
+          "pts": 3
+        },
+        {
+          "key": "b2",
+          "response": "Idk",
+          "accept": [
+            "expand",
+            "thermal expansion",
+            "solid expands less",
+            "expands less"
+          ],
+          "isCorrect": false,
+          "pts": 3
+        }
+      ],
+      "marks": 12,
+      "marksEarned": 0,
+      "allCorrect": false
+    }
+  ]
+}
