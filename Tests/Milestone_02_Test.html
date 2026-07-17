@@ -429,7 +429,7 @@ function doSubmit(){
 }
 
 async function saveResults(){
-  const filename = `M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const filename = `SCI_M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
   const json = JSON.stringify(lastResults, null, 2);
   const statusEl = document.getElementById('save-status');
 

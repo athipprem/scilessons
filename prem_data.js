@@ -71,6 +71,18 @@ var PREM_DATA = {
 
   unitLog: [
     {
+      n: 'C2', badge: 'linear-gradient(135deg,#1a237e,#b71c1c)',
+      title: 'ASMOPSS 2023 - Science G4-6 (2nd Round National Selection) - Real Competition Paper',
+      tags: [
+        { t:'Ready &#128221;', c:'tpurple' },
+        { t:'Harder round - G4-6 combined', c:'torange' },
+        { t:'30Q - MCQ + short answer + essay', c:'tblue' },
+        { t:'Stretch challenge, no pass bar', c:'tgreen' }
+      ],
+      note: 'A genuine ASMOPSS Thailand 2023 2nd Round National Selection paper (Science Primary, sat 1 Oct 2023), converted into an interactive, self-scoring test - real diagrams cropped from the original PDF (the bar-magnet photo, all 5 circulatory-system flow diagrams, and the muscle-tissue photo), answers verified against the official ASMOPSS answer key. <strong>This round combines Grades 4, 5 and 6 into one paper and is noticeably harder than Prem&#39;s usual G4 division</strong> - several Part III questions use algebra-based physics (average speed with equal-distance vs equal-time splits, force-vector resultants, density with thermal expansion, mechanical energy formulas) that go beyond the G4 curriculum. Kept as a stretch/challenge paper, not a like-for-like benchmark - no pass/fail bar or baseline comparison is shown, just a raw score out of the paper&#39;s own total. Format: Part I = 15 multiple-choice (2 marks each, 30 total); Part II = 10 fill-in-the-blank short answers (3 marks each, several with 2-3 blanks, 30 total); Part III = 5 essay/calculation questions (Q29 and Q30 use the source&#39;s own explicit 12-mark breakdowns; Q26-28 use an estimated 2 marks per sub-part since the source doesn&#39;t publish a breakdown for these three - true grand total is 102, not a forced 100). Short-answer and essay blanks are auto-graded via flexible keyword/text matching (numeric answers match regardless of units typed, e.g. &quot;0&quot;, &quot;0N&quot;, and &quot;0 N&quot; all match) - the full official reasoning is always shown after submitting so any correctly-reasoned-but-differently-worded answer is still visible. Scoring engine verified via a Node harness (all-correct = 102/102, all-wrong = 0/102, plus spot checks on every short-answer blank&#39;s matching logic).',
+      status: 'pending'
+    },
+    {
       n: 'M2', badge: 'linear-gradient(135deg,#DAA520,#8a6a00)',
       title: 'Milestone Test 2 - All Units (U11-U20)',
       tags: [

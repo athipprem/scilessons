@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Competition_ASMOPSS2023_G4to6_NationalSelection.html
+     ------------------------------------------------------------
+     Source: ASMOPSS Thailand 2023, 2nd Round National Selection,
+     Science Primary (Grades 4-6 combined), sat 1 Oct 2023.
+
+     IMPORTANT LEVEL NOTE: this is a HARDER, more advanced round than
+     Prem's G4 primary division papers (e.g. the 2024 G4 Set B test in
+     this same folder). It combines G4-6 into one paper and includes
+     algebra-based physics (average speed, resultant forces, density
+     with thermal expansion, mechanical energy formulas with g=10) that
+     go beyond G4 curriculum. Kept here as a stretch/challenge paper,
+     not a like-for-like benchmark against G4-level results — there is
+     no pass/fail bar or baseline comparison shown, just a raw score.
+
+     Format: Part I = 15 MCQ (A-E, 5 options), 2 marks each = 30.
+     Part II = 10 fill-in-the-blank short answers, 3 marks each = 30
+     (several questions have 2-3 blanks; marks split evenly across
+     the blanks within a question, e.g. a 3-blank question = 1 mark
+     per blank). Part III = 5 essay/calculation questions. Q29 and Q30
+     have official per-part mark values printed in the source key
+     (12 marks each: 4+4+4 and 3+3+3+3). Q26-28 have NO official
+     per-part breakdown published — 2 marks per sub-part (6 per
+     question) was used as a reasonable, clean estimate, since the
+     source's own printed "Total 40 points" header for Part III turns
+     out to undercount once 29/30's real explicit weights are used.
+     This makes the true grand total 102 (30+30+42) rather than a
+     forced-clean 100 — kept honest rather than fabricating a fake
+     split to hit a round number.
+
+     Short-answer/essay blanks are auto-graded by flexible keyword/
+     text matching (case-insensitive, whitespace/punctuation-
+     tolerant, accepts several worded variants per blank) since the
+     correct content is still objectively known, even though it's
+     typed rather than multiple-choice. The full official reasoning
+     is always shown after submitting, regardless of whether the
+     auto-grader matched a given answer, so any close-but-differently-
+     phrased correct answer is still visible and self-checkable.
+
+     The Q7 magnet photo, the Q14 five circulatory-system flow
+     diagrams, and the Q15 muscle-tissue photo are the ACTUAL images
+     cropped from the original PDF (not recreated), to stay faithful
+     to the real paper.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASMOPSS 2023 — Science G4-6 (2nd Round National Selection)</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --navy:#1a237e; --navy-d:#0d1257; --crimson:#b71c1c; --crimson-d:#7f0000;
+    --a-fill:#dde3fb; --a-text:#1a237e;
+    --b-fill:#ffe0b2; --b-text:#8a4a00;
+    --c-fill:#ffcdd2; --c-text:#7f0000;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5fa;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--navy-d),var(--navy));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e4e6f2;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--navy-d),var(--crimson));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--navy-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .comp-note{background:#fff0f0;border:1.5px solid var(--crimson);color:#7f0000;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .level-note{background:#fff3e0;border:1.5px solid var(--amber);color:#8a4a00;border-radius:10px;padding:10px 16px;font-size:.83rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--navy)}
+  .q.B{border-left-color:#b8860b}
+  .q.C{border-left-color:var(--crimson)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--navy-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .q .stmts{font-weight:400;font-size:.93rem;margin:6px 0 10px;padding-left:4px}
+  .q .stmts div{margin:3px 0}
+  .q .qimg{display:block;max-width:100%;height:auto;margin:8px auto;border-radius:8px;border:1px solid var(--line)}
+  .q table.qtbl{border-collapse:collapse;margin:10px 0;font-size:.88rem;width:100%}
+  .q table.qtbl th,.q table.qtbl td{border:1px solid var(--line);padding:6px 10px;text-align:center}
+  .q table.qtbl th{background:#f4f5fa}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--navy)}
+  .opt.selected{border-color:var(--navy);background:#eef0fb;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+  .result-tag.part{background:#fff3e0;color:#8a4a00}
+
+  .blank-row{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+  .blank-label{font-size:.88rem;font-weight:700;color:var(--navy-d);min-width:26px}
+  .blank-input{flex:1;min-width:160px;border:1.5px solid var(--line);border-radius:8px;padding:9px 12px;font-size:.92rem;font-family:inherit}
+  .blank-input:focus{outline:none;border-color:var(--navy)}
+  .blank-input.correct{border-color:var(--ok);background:var(--ok-l)}
+  .blank-input.wrong{border-color:var(--bad);background:var(--bad-l)}
+  .blank-input:disabled{color:var(--ink);opacity:1;cursor:default}
+  .blank-icon{font-weight:900;font-size:1rem;width:20px;text-align:center}
+  .blank-icon.ok{color:var(--ok)}
+  .blank-icon.bad{color:var(--bad)}
+  .blank-pts{font-size:.76rem;color:var(--grey);white-space:nowrap}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--navy-d),var(--crimson));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,#1565c0,#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8eaf6,#c5cae9);border:2px solid var(--navy)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--navy-d)}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,30,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--navy-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">ASMOPSS Thailand 2023 — 2nd Round National Selection (Science, G4-6)</b>
+      <span class="sub">Real national competition paper &bull; sat 1 Oct 2023 &bull; Grades 4-6 combined</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks. Part I is multiple choice (choose the ONE best answer, A-E). Part II and Part III need you to type your own answer into the box(es) — there's no hint, so work it out yourself first.</div>
+  <div class="comp-note">&#127942; This is a REAL past ASMOPSS competition paper (2023, 2nd Round National Selection) — not a practice test built by Luikishi. 30 questions across 3 parts, weighted like the real paper.</div>
+  <div class="level-note">&#9888; Heads up: this round combines Grades 4, 5 AND 6 into one paper, so it's noticeably harder than your usual G4 tests — some Part III questions use maths (like average speed and force diagrams) that go beyond what you've been taught so far. Treat this as a fun stretch challenge, not a "must-pass" test — there's no pass/fail bar here, just your raw score to see how far you can get.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 30 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 30 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 30!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- COMPETITION CONFIG ---------- */
+const COMP_ID = "ASMOPSS2023_G4to6_NationalSelection";
+const TOTAL_Q = 30;
+const IMG = "images/ASMOPSS_2023_G4to6_NatSelection/";
+
+/* Helper to build a simple even-split blanks array */
+function mkBlanks(defs){ return defs.map(d => ({ key:d[0], label:d[1], accept:d[2], pts:d[3], placeholder:d[4]||'' })); }
+
+const Q = [
+/* ===================== PART I — Q1-15 MCQ (2 marks each) ===================== */
+{ n:1, type:'mcq', section:'A', pts:2,
+  body:"Alex measured the length of some objects with measurement tools and got the results below. Which objects did Alex measure using a VERNIER CALLIPER?",
+  table:`<table class="qtbl"><tr><th>Object</th><th>Length</th></tr><tr><td>F</td><td>41.7 cm</td></tr><tr><td>G</td><td>12.51 mm</td></tr><tr><td>H</td><td>10.00 cm</td></tr><tr><td>I</td><td>82.5 mm</td></tr><tr><td>J</td><td>400.010 cm</td></tr></table>`,
+  options:["F, H and J","G and I","H and I","G and H","Only J"], ans:3,
+  why:"A vernier calliper reads to a precision of 0.01 (hundredths). H (10.00 cm) and I (82.5 mm) are both written to that same fine level of precision — H to the hundredths of a cm, I to the tenths of a mm (equivalent precision level for this instrument). F and J have inconsistent/implausible precision for a calliper (J's 400.010 cm would need an impossibly long calliper), and G (12.51 mm) doesn't fit the matching pattern with H and I." },
+{ n:2, type:'mcq', section:'A', pts:2,
+  body:"A solar cell is black or dark coloured on the side that faces the Sun, so that it could...",
+  options:["Absorb more heat from the Sun.","Not dazzle the eyes.","Absorb all the coloured light.","Reflect more light.","Absorb the heat and reflect the light from the Sun."], ans:3,
+  why:"A solar CELL (photovoltaic panel) needs to convert light into electricity, not just collect heat like a solar water heater. Being dark/black lets it absorb light of ALL colours (the full spectrum) rather than reflecting some colours away, so as much light energy as possible is available to convert into electrical energy." },
+{ n:3, type:'mcq', section:'A', pts:2,
+  body:"Which organisms are able to survive at 113 °C?",
+  options:["Prokaryote","Archaea","Eukaryotes","Eubacteria","Fungi"], ans:2,
+  why:"Archaea include extremophiles — organisms adapted to survive extreme conditions, including thermophiles that live in boiling hot springs and deep-sea vents well above 100°C. Eukaryotes, fungi, and typical eubacteria cannot survive such extreme heat." },
+{ n:4, type:'mcq', section:'A', pts:2,
+  body:"Which animals belong to arthropods?",
+  options:["Jellyfish, coral, sea star","Sea anemone, coral, snake sea","Bird, fish, frog","Bees, mosquito, roundworm","Spider, crabs, millipedes"], ans:5,
+  why:"Arthropods have a hard exoskeleton and jointed legs — spiders, crabs, and millipedes are all classic arthropods. Jellyfish/coral/sea stars/anemones are entirely different animal groups, birds/fish/frogs are vertebrates, and roundworms are a completely separate worm phylum, not arthropods." },
+{ n:5, type:'mcq', section:'A', pts:2,
+  body:"Grass &rarr; Grasshopper &rarr; Bluebird &rarr; Snake &rarr; Owl, with Fungi as a decomposer feeding off the chain. Based on this food chain, if the population of bluebird decreases, the true statement is:",
+  options:["The population of grasshopper increases","The population of snake increases","The population of owl increases","The population of fungi increases","It has no effect on the food chain"], ans:1,
+  why:"Bluebirds eat grasshoppers. If there are fewer bluebirds, fewer grasshoppers get eaten, so the grasshopper population increases. (Snakes, which eat bluebirds, would have LESS food and likely decrease, not increase — so that option is backwards.)" },
+{ n:6, type:'mcq', section:'A', pts:2,
+  body:"A glass initially contains water and ice. While the ice melts, the water level in the glass:",
+  options:["is increasing","is decreasing","remains the same","is increasing at first and then decreasing","is decreasing at first and then increasing"], ans:3,
+  why:"Floating ice displaces exactly its own melted volume of water (Archimedes' principle) — so as it melts, the water level stays exactly the same. This is the same reason melting sea ice/icebergs floating in water don't change sea level on their own." },
+{ n:7, type:'mcq', section:'A', pts:2,
+  body:"Three bar magnets are stacked, each end marked A-F (see diagram). From experiments: A and C repel each other; B and E also repel each other; F is a magnetic north pole. What is the correct conclusion?",
+  img:IMG+"q07.png",
+  options:["A and C are magnetic south poles","D and E are magnetic south poles","B and E are magnetic north poles","B and D are magnetic north poles","C and E are magnetic south poles"], ans:2,
+  why:"Start from F = North, so the other end of that same magnet, E, must be South (a magnet's two ends are always opposite). B and E repel, so B must be the SAME pole as E — B = South too. That makes A (the other end of B's magnet) = North. A and C repel, so C = North too (same as A), making D (other end of C's magnet) = South. Final poles: A=N, B=S, C=N, D=S, E=S, F=N — so D AND E are both magnetic south poles, matching option 2." },
+{ n:8, type:'mcq', section:'A', pts:2,
+  body:"The Moon is slowly moving away from Earth. If the Earth-Moon distance eventually became twice the current distance, what will change in our observation?",
+  options:["The solar eclipse will become less common","The solar eclipse will become more common","We will not be able to see solar eclipse anymore","There will be no lunar eclipse anymore","There will be no full moon anymore"], ans:3,
+  why:"A total solar eclipse only works because the Moon's small size and its current distance make it appear almost exactly the same apparent size as the Sun in our sky. If the Moon were twice as far away, it would look much smaller in the sky and would never appear large enough to cover the Sun at all — so we wouldn't be able to see a solar eclipse (of the Sun being blocked) anymore." },
+{ n:9, type:'mcq', section:'A', pts:2,
+  body:"Which part of the eye helps us to see in dim light?",
+  options:["rod cells","cone cells","iris","cornea","lens"], ans:1,
+  why:"Rod cells are very sensitive to low light levels (but can't detect colour), which is why they're the main cells working when it's dim. Cone cells need brighter light and are used for detailed colour vision in daylight." },
+{ n:10, type:'mcq', section:'A', pts:2,
+  body:"In daily life we usually hear the word 'weight' measured in kilograms. But in physics, mass has the unit kilogram, and weight is a different quantity measured in Newtons. Can we change the measure of mass and weight in physics?",
+  options:["Both mass and weight cannot be changed","Mass cannot be changed, but weight can be changed if we move the object to another planet with different gravity.","Weight cannot be changed, but mass can be changed if we move the object to another planet with different gravity.","Both mass and weight can be changed if we move the object to another planet with different gravity","We can change the mass by putting it inside a liquid, and we can change the weight by moving it to another planet with different gravity."], ans:2,
+  why:"Mass is how much matter/material an object is made of — it stays the same everywhere in the universe. Weight is the force of gravity pulling on that mass, so it DOES change if you move to a place with different gravity (like the Moon, where you'd weigh much less, even though your mass hasn't changed at all)." },
+{ n:11, type:'mcq', section:'A', pts:2,
+  body:"We usually know that water boils at 100°C. But is this true in every situation?",
+  options:["No, it depends on the air pressure — the higher the pressure, the higher the boiling temperature.","No, it depends on the air pressure — the higher the pressure, the lower the boiling temperature.","Yes, it does not depend on either pressure or humidity of the air.","No, it depends on the air humidity — the higher the humidity, the higher the boiling temperature.","No, it depends on the air humidity — the higher the humidity, the lower the boiling temperature."], ans:1,
+  why:"Higher air pressure pushes down harder on the water's surface, making it harder for water molecules to escape as steam — so it takes a higher temperature to boil (this is exactly how a pressure cooker works, cooking food faster at a higher boiling point). At high altitude, air pressure is lower, so water boils at a LOWER temperature than 100°C." },
+{ n:12, type:'mcq', section:'A', pts:2,
+  body:"Five food solutions A-E were tested for glucose, starch, and protein, with the resulting colours shown below. Which food solution contains a HIGH concentration of glucose but NOT starch and NOT protein?",
+  table:`<table class="qtbl"><tr><th>Solution</th><th>Glucose test</th><th>Starch test</th><th>Protein test</th></tr><tr><td>A</td><td>blue</td><td>orange</td><td>purple</td></tr><tr><td>B</td><td>brick-red</td><td>blue-black</td><td>purple</td></tr><tr><td>C</td><td>green</td><td>orange</td><td>blue</td></tr><tr><td>D</td><td>brick-red</td><td>orange</td><td>blue</td></tr><tr><td>E</td><td>blue</td><td>blue-black</td><td>blue</td></tr></table>`,
+  options:["A","B","C","D","E"], ans:4,
+  why:"Brick-red (from Benedict's solution) shows a strong POSITIVE glucose result. Orange (iodine staying its original colour) shows a NEGATIVE starch result. Blue (Biuret solution staying blue rather than turning purple) shows a NEGATIVE protein result. Solution D is brick-red + orange + blue — high glucose, no starch, no protein — exactly matching what's asked." },
+{ n:13, type:'mcq', section:'A', pts:2,
+  body:"You see an old standing clock with a big pendulum swinging back and forth. What quantity determines how long it takes for the pendulum to swing from one end to the other?",
+  options:["The mass of the pendulum","The length of the pendulum","Both the mass and the length of the pendulum","The material that made the pendulum","The air humidity"], ans:2,
+  why:"A pendulum's swing time (period) depends only on its LENGTH (and gravity) — a longer pendulum swings more slowly. Surprisingly, the mass/material of the pendulum bob doesn't affect the timing at all, which is why grandfather clocks are built with a specific pendulum length to keep accurate time." },
+{ n:14, type:'mcq', section:'A', pts:2,
+  body:"A student drew a diagram of the human circulatory system using arrows and letters P, Q, R, S. Given: blood at P has LESS carbon dioxide than blood at R; blood at S has the LEAST amount of carbon dioxide; blood at Q has the MOST amount of carbon dioxide. Which diagram is correct?",
+  img:IMG+"q14.png",
+  options:["Diagram A","Diagram B","Diagram C","Diagram D","Diagram E"], ans:5,
+  why:"In diagram E: Q carries blood FROM the heart TO the lungs (the most CO2-loaded blood, about to be cleaned) — matching 'Q has the most CO2'. S carries blood FROM the lungs back TO the heart (freshly cleaned, CO2 removed) — matching 'S has the least CO2'. P carries oxygen-rich blood from the heart out to the body (low CO2), and R brings CO2-rich blood back from the body to the heart (more CO2 than P, since the body's cells added CO2 to it) — matching 'P has less CO2 than R'. Every clue lines up only with diagram E." },
+{ n:15, type:'mcq', section:'A', pts:2,
+  body:"The picture below shows the structure of a muscle in the human body (long, spindle-shaped, tapered cells each with ONE central oval nucleus). Which organs have this same muscle structure? 1. Heart &nbsp; 2. Stomach &nbsp; 3. Intestine &nbsp; 4. Biceps &nbsp; 5. Triceps &nbsp; 6. Blood vessels",
+  img:IMG+"q15.png",
+  options:["1, 2, 3","1, 3, 5","2, 4, 5","2, 3, 6","4, 5, 6"], ans:4,
+  why:"This spindle-shaped, single-central-nucleus pattern is SMOOTH muscle — the type found lining organs that squeeze/push things along involuntarily, like the stomach, intestines, and blood vessel walls (2, 3, 6). The heart uses a different type (cardiac muscle, branching with striations), and the biceps/triceps use skeletal muscle (long cylindrical fibres with many nuclei around the edges, not one central nucleus) — neither matches this picture." },
+
+/* ===================== PART II — Q16-25 fill-in-the-blank (3 marks each) ===================== */
+{ n:16, type:'blank', section:'B', pts:3,
+  body:"If we drop two plates of the same size, one made of paper and one of copper, which one reaches the floor first, and why?",
+  blanks: mkBlanks([
+    ['which','Which reaches the floor first?',["copper"],1.5,'e.g. copper'],
+    ['why','Why?',["heavier","weight","mass","heavy"],1.5,'e.g. it is much heavier'] ]),
+  why:"The copper plate reaches the floor first, since its weight is much larger compared to the (roughly equal) air resistance/friction force acting on both same-sized plates. The extra weight completely dominates over the small, similar drag effect on both plates." },
+{ n:17, type:'blank', section:'B', pts:3,
+  body:"If we rub plastic in our hair and hold it close to small pieces of paper, what will happen to these pieces of paper? (The plastic acquires a negative charge from rubbing.)",
+  blanks: mkBlanks([
+    ['what','What happens?',["attract","pulled","pull","stick","move toward","attracted"],1.5,'e.g. they get pulled toward it'],
+    ['why','Why, even though the paper is neutral?',["polariz","polaris","induced charge","electric field"],1.5,'e.g. it becomes polarised'] ]),
+  why:"The paper will be pulled toward the plastic, even though the paper itself is neutral (uncharged) — because the plastic's electric field polarises the paper (rearranges its own electrons slightly), pulling the paper's near side toward being relatively positive, which is then attracted to the plastic's negative charge." },
+{ n:18, type:'blank', section:'B', pts:3,
+  body:"The type of vitamin that prevents scurvy is:",
+  blanks: mkBlanks([ ['v','Vitamin',["vitamin c","vit c","ascorbic acid","c"],3,'e.g. Vitamin C'] ]),
+  why:"Vitamin C (ascorbic acid) is needed to make collagen, which holds skin, gums, and blood vessels together — without enough of it, the body can't repair these tissues properly, causing scurvy (bleeding gums, weakness, slow-healing wounds)." },
+{ n:19, type:'blank', section:'B', pts:3,
+  body:"There are 3 iron rods: rod 1 is a magnet with ends A and B (A is the north pole); rod 2 has ends C and D; rod 3 has ends E and F. Experiment results: ends A and C attract; ends A and F repel; ends D and F attract. From this, it can be concluded that rod ___(A)___ is ordinary iron (not magnetised), and the other rod is a magnet with end ___(B)___ as the north pole and end ___(C)___ as the south pole.",
+  blanks: mkBlanks([
+    ['a','Which rod is ordinary (unmagnetised) iron? (1, 2, or 3)',["2","rod 2","two"],1,'e.g. 2'],
+    ['b','Which end is the north pole?',["f"],1,'e.g. F'],
+    ['c','Which end is the south pole?',["e"],1,'e.g. E'] ]),
+  why:"A and F REPEL — repulsion only happens between two real magnetic poles of the same type, so F must be a genuine pole, and since A is north, F is also north. D and F ATTRACT, so D (opposite pole to F) must be south — meaning rod 3 (ends E/F) is a real magnet with F=north, E=south. A and C ATTRACT too, which just means C is being pulled toward a magnet — this doesn't require rod 2 to be a magnet itself. Since rod 2 doesn't show the two-fixed-opposite-poles behaviour of a real magnet, rod 2 is the ordinary, unmagnetised iron." },
+{ n:20, type:'blank', section:'B', pts:3,
+  body:"Pair the correct leaf types and plants! (Given examples: Parallel venation, Pinnate venation, Palmate venation — matching plants Rose, Grass, Papaya)",
+  blanks: mkBlanks([
+    ['a','Parallel venation &rarr;',["grass"],1,'e.g. Grass'],
+    ['b','Pinnate venation &rarr;',["rose"],1,'e.g. Rose'],
+    ['c','Palmate venation &rarr;',["papaya"],1,'e.g. Papaya'] ]),
+  why:"Grass has long thin leaves with veins running side-by-side from base to tip — that's PARALLEL venation. Rose leaves have one central main vein with smaller veins branching off like a feather — that's PINNATE venation. Papaya leaves have several main veins spreading out from one point like fingers on a hand — that's PALMATE venation." },
+{ n:21, type:'blank', section:'B', pts:3,
+  body:"A person cannot see clearly at a distance of more than 2 metres. To correct this, they use glasses made of ___(A)___ lenses with a focal length of ___(B)___ metres.",
+  blanks: mkBlanks([
+    ['a','What type of lens? (negative/divergent/concave)',["negative","divergent","concave"],1.5,'e.g. concave'],
+    ['b','Focal length (in metres)',["-2","-2m","-2 m"],1.5,'e.g. -2'] ]),
+  why:"Not being able to see anything FARTHER than 2m clearly means this person is short-sighted (myopic) — their 'far point' is only 2m away. This is corrected with a NEGATIVE (diverging/concave) lens, and the required focal length equals negative the far-point distance: -2 metres." },
+{ n:22, type:'blank', section:'B', pts:3,
+  body:"If we drop a piece of iron and a feather from the same height on the surface of the Moon, the time for the iron to hit the surface will be ___(A)___ the time for the feather. If we then drop the same iron from the same height on Earth, the time for it to hit Earth's surface will be ___(B)___ the time it takes to hit the Moon's surface.",
+  blanks: mkBlanks([
+    ['a','(A) Compared to the feather, on the Moon, the iron\'s fall time is...',["the same","same","the same as","equal"],1.5,'e.g. the same as'],
+    ['b','(B) Iron on Earth vs iron on the Moon — Earth\'s fall time is...',["shorter","less","shorter than","less than"],1.5,'e.g. shorter than'] ]),
+  why:"There's no air on the Moon, so there's no air resistance to slow the feather down — both the iron and the feather fall together and land at exactly the same time. Gravity on the Moon is much weaker than on Earth (about 1/6th as strong), so anything takes LONGER to fall a given height there — meaning the same iron dropped on EARTH lands in a SHORTER time than it would take falling the same height on the Moon." },
+{ n:23, type:'blank', section:'B', pts:3,
+  body:"Galileo used a telescope to confirm the heliocentric model, which states that ___(A)___ is the centre of the solar system. He observed that Venus sometimes appears in a ___(B)___ phase, while in the geocentric model Venus could only ever appear in a ___(C)___ phase.",
+  blanks: mkBlanks([
+    ['a','(A) Centre of the solar system',["sun","the sun"],1,'e.g. the Sun'],
+    ['b','(B) Phase Venus can show (heliocentric)',["full"],1,'e.g. Full'],
+    ['c','(C) Phase Venus is limited to (geocentric)',["crescent"],1,'e.g. Crescent'] ]),
+  why:"Galileo's telescope showed Venus going through a FULL range of phases, from thin crescent to fully lit — only possible if Venus orbits the Sun and can pass to the far side of the Sun from Earth (heliocentric model). In the old geocentric model (Earth at the centre, Venus looping between Earth and Sun), Venus could only ever show a crescent phase, never full." },
+{ n:24, type:'blank', section:'B', pts:3,
+  body:"Abdul, Benny, and Caca give consecutively 3 N, 4 N, and 5 N of force. If all three forces act on one object, the maximum possible resultant force is ___(A)___ N and the minimum possible resultant force is ___(B)___ N.",
+  blanks: mkBlanks([
+    ['a','(A) Maximum resultant (N)',["12"],1.5,'e.g. 12'],
+    ['b','(B) Minimum resultant (N)',["0"],1.5,'e.g. 0'] ]),
+  why:"For the MAXIMUM resultant, all three forces point in exactly the same direction, so they add up fully: 3+4+5 = 12N. For the MINIMUM, since 3, 4, and 5 form a valid triangle (in fact a 3-4-5 right triangle), the three force vectors can be arranged at the right angles to each other so they perfectly balance out to a net resultant of exactly 0N." },
+{ n:25, type:'blank', section:'B', pts:3,
+  body:"The apparent movement of the Sun is its yearly shift north or south. In October, the Sun is moving from the equator line toward ___(A)___. So that month, the Northern Hemisphere is in ___(B)___ (season) and the Southern Hemisphere is in ___(C)___ (season).",
+  blanks: mkBlanks([
+    ['a','(A) Direction the Sun is moving toward',["south","southern","tropic of capricorn"],1,'e.g. South'],
+    ['b','(B) Northern Hemisphere season',["autumn","fall"],1,'e.g. Autumn'],
+    ['c','(C) Southern Hemisphere season',["spring"],1,'e.g. Spring'] ]),
+  why:"By October, the Sun's direct rays are shifting from the equator toward the Southern Hemisphere / Tropic of Capricorn (heading toward the December solstice). As the Southern Hemisphere starts getting more direct sunlight, it warms into Spring, while the Northern Hemisphere gets less direct sunlight and cools into Autumn." },
+
+/* ===================== PART III — Q26-30 essay/calculation ===================== */
+{ n:26, type:'blank', section:'C', pts:6,
+  body:"A bat detects small objects using sound signals — the smallest object it can detect is about the same size as the sound's wavelength. A bat emits sound at 50.0 kHz, flies at 40 m/s, and the speed of sound in air is 340 m/s.",
+  blanks: mkBlanks([
+    ['a','(A) What is the term for a 50.0 kHz sound?',["ultrasound","ultrasonic"],2,'e.g. ultrasound'],
+    ['b','(B) Smallest size it can detect when still (mm)',["6.8","6.8mm","6.8 mm"],2,'e.g. 6.8 mm'],
+    ['c','(C) Smallest size it can detect when flying (mm)',["6.0","6","6mm","6.0mm","6 mm"],2,'e.g. 6.0 mm'] ]),
+  why:"(A) A sound above the range of human hearing (roughly above 20 kHz) is called ULTRASOUND — bats use it for echolocation. (B) Wavelength = speed &divide; frequency = 340 &divide; 50,000 = 0.0068 m = 6.8 mm — the smallest object a stationary bat can detect. (C) While flying toward its target at 40 m/s, the sound's effective speed relative to the bat's motion becomes 340 − 40 = 300 m/s, giving a new wavelength of 300 &divide; 50,000 = 0.006 m = 6.0 mm — so a flying bat can actually detect slightly SMALLER objects than when standing still." },
+{ n:27, type:'blank', section:'C', pts:6,
+  body:"A glass bottle has total volume 500 ml (including its 400 ml inner cavity). Empty, it's placed in an unknown liquid and displaces 300 ml. Then 45 ml of water (density 1 g/ml) is poured in, and now it displaces 350 ml.",
+  blanks: mkBlanks([
+    ['a','(A) Density of the liquid (g/ml)',["0.9","0.9g/ml","0.9 g/ml"],2,'e.g. 0.9'],
+    ['b','(B) Density of the glass (g/ml)',["2.7","2.7g/ml","2.7 g/ml"],2,'e.g. 2.7'],
+    ['c','(C) Water needed to make the bottle sink (ml)',["180","180ml","180 ml"],2,'e.g. 180'] ]),
+  why:"Since the bottle floats (displacing less than its own 500 ml), its weight equals the weight of liquid displaced (Archimedes' principle). Empty: bottle's mass = 300 &times; liquid density. With 45g of water added: (bottle mass + 45) = 350 &times; liquid density. Solving: 45 = 50 &times; density &rarr; liquid density = 0.9 g/ml. So the bottle's own mass = 300 &times; 0.9 = 270 g. The glass itself (not the air cavity) has volume 500 − 400 = 100 ml, so glass density = 270 &divide; 100 = 2.7 g/ml. To sink, the bottle must displace its FULL 500 ml, needing a total mass of 500 &times; 0.9 = 450 g — since the glass is already 270 g, it needs 450 − 270 = 180 g more, which (at 1 g/ml for water) means 180 ml of water." },
+{ n:28, type:'blank', section:'C', pts:6,
+  body:"A traveller drives from town A to town B, going exactly half the DISTANCE at 40 km/h and the other half at 60 km/h. Returning from B to A, this time he drives exactly half the TIME at 40 km/h and the other half at 60 km/h. The distance between the two locations where he changed speed (on the two different trips) is 20 km.",
+  blanks: mkBlanks([
+    ['a','(A) Average speed, A&rarr;B (equal distances) (km/h)',["48","48km/h","48 km/h"],2,'e.g. 48'],
+    ['b','(B) Average speed, B&rarr;A (equal times) (km/h)',["50","50km/h","50 km/h"],2,'e.g. 50'],
+    ['c','(C) Distance between the two towns (km)',["200","200km","200 km"],2,'e.g. 200'] ]),
+  why:"(A) Splitting by equal DISTANCE uses the harmonic-mean formula: (2&times;40&times;60)/(40+60) = 4800/100 = 48 km/h. (B) Splitting by equal TIME is just the plain average: (40+60)/2 = 50 km/h. (C) The outward trip changes speed exactly halfway (by distance), but the return trip changes speed at a different point (by time) — working through the algebra, the gap between these two changeover points always equals exactly 1/10 of the total distance. Since that gap is 20 km, the full distance between the towns is 200 km." },
+{ n:29, type:'blank', section:'C', pts:12,
+  body:"A helicopter hovers 100 m above the ground, staying in that exact position. The mass of the helicopter plus passengers is 2000 kg. (Use g = 10 m/s&sup2;.)",
+  blanks: mkBlanks([
+    ['a','(A) Mechanical energy of the helicopter + passengers (J)',["2000000","2,000,000","2000000j","2mj","2 mj","2000000 j"],4,'e.g. 2000000 J or 2 MJ'],
+    ['b','(B) Lifting force needed to hover (N)',["20000","20,000","20000n","20000 n"],4,'e.g. 20000 N'],
+    ['c','(C) Work done by the lifting force while hovering (J)',["0","0j","0 j"],4,'e.g. 0'] ]),
+  why:"(A) While hovering still, the helicopter has only Potential Energy (height), no Kinetic Energy (no motion): ME = m&middot;g&middot;h = 2000 &times; 10 &times; 100 = 2,000,000 J (2 MJ). (B) To stay still, the lifting force must exactly balance its weight: F = m&middot;g = 2000 &times; 10 = 20,000 N. (C) Since the helicopter isn't actually moving (no displacement) while it hovers, the work done by the lifting force is 0 J — work requires movement in the direction of the force, and here there is none." },
+{ n:30, type:'blank', section:'C', pts:12,
+  body:"Bono has a container of seawater with an object submerged in it (floating in equilibrium below the surface).",
+  blanks: mkBlanks([
+    ['a1','(A) If Bono adds fresh water to the container, what happens to the object?',["sink","sinks","sink to the bottom","sinks to the bottom"],3,'e.g. it sinks'],
+    ['a2','(A) Why?',["density","decrease","lower","less dense","dilut"],3,'explain why (mentions density)'],
+    ['b1','(B) If the seawater is heated a lot (no evaporation), what happens to the object?',["sink","sinks","sink to the bottom","sinks to the bottom"],3,'e.g. it sinks'],
+    ['b2','(B) Why?',["expand","thermal expansion","solid expands less","expands less"],3,'explain why (mentions expansion)'] ]),
+  why:"(A) The object will SINK. Adding fresh water dilutes the seawater, DECREASING the liquid's overall density. Since the object's own density hasn't changed, it now becomes denser than the surrounding liquid, so it sinks. (B) The object will also SINK when heated (assuming no water evaporates). Heating makes both the liquid and the solid object expand — but liquids expand MORE than solids for the same temperature rise (thermal expansion is smaller in solids), so the liquid's density drops faster/more than the object's density. The object ends up denser than the now-less-dense liquid, so it sinks." },
+];
+/* ---------- END COMPETITION CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "PART I — Q1&ndash;15 &middot; Multiple choice (2 marks each)",
+  B: "PART II — Q16&ndash;25 &middot; Short answer / fill in the blank (3 marks each)",
+  C: "PART III — Q26&ndash;30 &middot; Essay / calculation"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+/* Compute total marks dynamically from the Q array itself */
+let TOTAL_MARKS = 0;
+Q.forEach(q => TOTAL_MARKS += q.pts);
+TOTAL_MARKS = Math.round(TOTAL_MARKS * 100) / 100;
+
+const chosen = {};      // mcq: { qn: optionIndex(1-based) }
+const blankVals = {};   // blank: { qn: { key: text } }
+let submitted = false;
+
+function normalize(s){
+  return (s || '').toString().trim().toLowerCase().replace(/[\s,]+/g,'').replace(/[^a-z0-9.\-\/]/g,'');
+}
+function leadingNumber(s){
+  const m = (s || '').toString().trim().match(/^-?\d+(\.\d+)?/);
+  return m ? parseFloat(m[0]) : null;
+}
+function blankIsCorrect(response, accept){
+  const norm = normalize(response);
+  if (!norm) return false;
+  const respNum = leadingNumber(response);
+  return accept.some(a => {
+    // Numeric answers: compare the leading number regardless of any unit
+    // text typed after it (e.g. "0", "0 N", "0N" should all match "0").
+    const accNum = leadingNumber(a);
+    if (respNum !== null && accNum !== null && Math.abs(respNum - accNum) < 0.01) return true;
+    const an = normalize(a);
+    if (norm === an) return true;
+    // Only allow substring matching for accept strings long enough that a
+    // stray letter in an unrelated word can't accidentally match (e.g. a
+    // single-letter answer like "F" or "E" must match exactly, not just
+    // appear somewhere inside a longer wrong answer).
+    if (an.length >= 3 && norm.includes(an)) return true;
+    if (norm.length >= 3 && an.includes(norm)) return true;
+    return false;
+  });
+}
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${q.pts} marks]</span> ${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; not quite</span>
+        <span class="result-tag part" id="tag-part-${q.n}">&#9679; partial</span>
+      </p>`;
+    if (q.table) html += q.table;
+    if (q.img) html += `<img class="qimg" src="${q.img}" alt="Diagram for Q${q.n}">`;
+
+    if (q.type === 'mcq'){
+      q.options.forEach((opt, idx) => {
+        html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+      });
+    } else if (q.type === 'blank'){
+      q.blanks.forEach(b => {
+        html += `<div class="blank-row" id="brow-${q.n}-${b.key}">
+          <span class="blank-label">${b.label}</span>
+          <input type="text" class="blank-input" id="binp-${q.n}-${b.key}" placeholder="${b.placeholder}" oninput="setBlank(${q.n},'${b.key}',this.value)">
+          <span class="blank-pts">(${b.pts} pt${b.pts===1?'':'s'})</span>
+          <span class="blank-icon ok" id="bicon-ok-${q.n}-${b.key}">&#10003;</span>
+          <span class="blank-icon bad" id="bicon-bad-${q.n}-${b.key}">&#10007;</span>
+        </div>`;
+      });
+    }
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+  document.querySelectorAll('.blank-icon').forEach(el => el.style.display = 'none');
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function setBlank(qn, key, val){
+  if (submitted) return;
+  if (!blankVals[qn]) blankVals[qn] = {};
+  blankVals[qn][key] = val;
+  updateProgress();
+}
+
+function isQuestionAnswered(q){
+  if (q.type === 'mcq') return chosen[q.n] !== undefined;
+  if (q.type === 'blank'){
+    const vals = blankVals[q.n] || {};
+    return q.blanks.every(b => (vals[b.key] || '').toString().trim().length > 0);
+  }
+  return false;
+}
+
+function updateProgress(){
+  const n = Q.filter(isQuestionAnswered).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Competition Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Q.filter(isQuestionAnswered).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.blank-input').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;   // whole questions fully correct
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+
+  const answers = Q.map(q => {
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += q.pts;
+
+    if (q.type === 'mcq'){
+      const given = chosen[q.n];
+      const isCorrect = given === q.ans;
+      if (isCorrect){ numCorrect++; marksEarned += q.pts; sectionTally[q.section].c++; sectionTally[q.section].marks += q.pts; }
+      document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+      if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+      document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+      document.getElementById(`why-${q.n}`).classList.add('show');
+      return { q:q.n, section:q.section, type:'mcq', chosen:given, correct:q.ans, isCorrect, marks:q.pts, marksEarned:isCorrect?q.pts:0 };
+    } else {
+      const vals = blankVals[q.n] || {};
+      let qMarksEarned = 0;
+      const blankResults = q.blanks.map(b => {
+        const resp = vals[b.key] || '';
+        const ok = blankIsCorrect(resp, b.accept);
+        const inp = document.getElementById(`binp-${q.n}-${b.key}`);
+        inp.classList.add(ok ? 'correct' : 'wrong');
+        document.getElementById(`bicon-${ok?'ok':'bad'}-${q.n}-${b.key}`).style.display = 'inline';
+        if (ok) qMarksEarned += b.pts;
+        return { key:b.key, response:resp, accept:b.accept, isCorrect:ok, pts:b.pts };
+      });
+      qMarksEarned = Math.round(qMarksEarned * 100) / 100;
+      marksEarned += qMarksEarned;
+      const allCorrect = blankResults.every(r => r.isCorrect);
+      const anyCorrect = blankResults.some(r => r.isCorrect);
+      if (allCorrect){ numCorrect++; sectionTally[q.section].c++; }
+      sectionTally[q.section].marks += qMarksEarned;
+      if (allCorrect) document.getElementById(`tag-ok-${q.n}`).classList.add('show');
+      else if (anyCorrect) document.getElementById(`tag-part-${q.n}`).classList.add('show');
+      else document.getElementById(`tag-bad-${q.n}`).classList.add('show');
+      document.getElementById(`why-${q.n}`).classList.add('show');
+      return { q:q.n, section:q.section, type:'blank', blanks:blankResults, marks:q.pts, marksEarned:qMarksEarned, allCorrect };
+    }
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', 'pass');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent =
+    `Nice work tackling a real 2nd Round National Selection paper, Prem! You got ${numCorrect}/${TOTAL_Q} questions fully correct, for ${marksEarned}/${TOTAL_MARKS} marks overall. Remember, this round mixes in Grade 5-6 content too, so look through the highlighted answers below to see what's worth another look, and don't worry about any tricky essay maths you haven't learned yet.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Part ${s==='A'?'I':s==='B'?'II':'III'}: ${sectionTally[s].c}/${sectionTally[s].t} fully correct (${Math.round(sectionTally[s].marks*100)/100}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    competition: COMP_ID,
+    title: "ASMOPSS 2023 - Science G4-6 2nd Round National Selection",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numFullyCorrect: numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct,
+    sections: ['A','B','C'].map(s => ({ name:s, fullyCorrect:sectionTally[s].c, outOf:sectionTally[s].t, marks:Math.round(sectionTally[s].marks*100)/100, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `SCI_${COMP_ID}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
