@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 22 · Lesson 2 — Vitamins &amp; Minerals</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .vcard{border:1.5px solid var(--line);border-radius:10px;padding:10px;background:#fafdfa}
+  .vcard b{color:var(--blue)}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🍊 Lesson 2 · Vitamins &amp; Minerals</b><span class="pill">Unit 22 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Small Amounts, Big Jobs 🗺️</h2>
+    <div class="rulebar">MAP: vitamins and minerals are only needed in tiny amounts, but going without one for too long can make you seriously ill — as one famous ship full of sailors found out the hard way.</div>
+    <p>Lesson 1 introduced vitamins and minerals as one of the six nutrient groups. Today you'll meet the most important ones by name, find out which foods give you each one, and uncover the real historical story of a disease that puzzled sailors for centuries — until someone ran one of the first fair-test experiments in history to solve it.</p>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name several key vitamins and minerals and what job each one does, identify good food sources for them, and explain what causes Vitamin C deficiency and how it was discovered.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM LESSON 1 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 🔁</h2>
+    <div class="recall">🔁 <b>Remember the nutrient groups?</b> Lesson 1 covered six groups: carbohydrates (energy), protein (growth &amp; repair), fats (energy store), vitamins &amp; minerals (tiny amounts, specific jobs), fibre (keeps digestion moving), and water. You also learned that fruit and vegetables make up the biggest share of a balanced plate.</div>
+    <p>Today's question: WHY do fruit and vegetables get such a big share of the plate, when they don't have much energy or protein compared to bread or meat? The answer is exactly the nutrient group you're about to explore.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Vitamins and minerals keep your eyes, bones, blood, skin, and immune system working properly. Going without enough of a specific one for a long time can cause a real, sometimes serious, deficiency disease — something doctors, nutritionists, and even ship captains throughout history have had to understand and prevent.</div>
+    <div class="card">
+      <b>Real life:</b> doctors test patients' blood for vitamin and mineral levels to diagnose deficiencies. Food companies add extra vitamins to products like milk and cereal (called "fortifying") specifically to help prevent common deficiencies in the population.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: KEY VITAMINS & MINERALS -->
+  <section class="screen" data-s="4">
+    <h2>Meet the Key Vitamins &amp; Minerals 🔑</h2>
+    <div class="rulebar">Each VITAMIN and MINERAL has its own specific job in your body — getting enough of a wide variety is what matters, not just eating a lot of food overall.</div>
+    <div class="vgrid">
+      <div class="vcard"><b>Vitamin A</b><br>Keeps your eyes healthy, especially seeing in dim light. Found in carrots, sweet potatoes, spinach.</div>
+      <div class="vcard"><b>Vitamin C</b><br>Keeps your immune system, skin, and gums healthy, and helps wounds heal. Found in oranges, lemons, tomatoes, peppers.</div>
+      <div class="vcard"><b>Vitamin D</b><br>Helps your body absorb calcium for strong bones. Your skin makes it using sunlight, and it's also found in eggs and oily fish.</div>
+      <div class="vcard"><b>Calcium</b> (a mineral)<br>Builds strong bones and teeth. Found in milk, cheese, yoghurt, leafy greens.</div>
+      <div class="vcard"><b>Iron</b> (a mineral)<br>Helps your blood carry oxygen around your body. Found in red meat, beans, leafy greens.</div>
+      <div class="vcard"><b>Fibre-friendly note</b><br>Many vitamin-C-rich foods (citrus, peppers) are also fibre-rich — one more reason fruit and veg get such a big plate share.</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: WHERE VITAMIN C COMES FROM -->
+  <section class="screen" data-s="5">
+    <h2>Vitamin C: A Closer Look 🍊</h2>
+    <svg viewBox="0 0 300 130" width="480" height="208" aria-label="Diagram showing a Vitamin C food group of citrus fruits, tomatoes, and peppers, and a list of jobs Vitamin C does in the body">
+      <circle cx="70" cy="55" r="30" fill="#ffb74d" stroke="#e65100" stroke-width="2"/>
+      <line x1="70" y1="25" x2="70" y2="35" stroke="#2e7d32" stroke-width="4"/>
+      <ellipse cx="150" cy="60" rx="22" ry="26" fill="#e53935" stroke="#b71c1c" stroke-width="2"/>
+      <path d="M150,34 Q145,24 150,20 Q155,24 150,34" fill="#2e7d32"/>
+      <path d="M195,40 Q210,35 220,50 Q225,65 210,72 Q195,78 190,62 Q188,48 195,40 Z" fill="#43a047" stroke="#1b5e20" stroke-width="2"/>
+      <line x1="205" y1="38" x2="205" y2="28" stroke="#1b5e20" stroke-width="3"/>
+      <text x="70" y="100" font-size="9" font-weight="700" fill="#7a4a00" text-anchor="middle">Orange</text>
+      <text x="150" y="100" font-size="9" font-weight="700" fill="#7a1c1c" text-anchor="middle">Tomato</text>
+      <text x="207" y="100" font-size="9" font-weight="700" fill="#1b5e20" text-anchor="middle">Pepper</text>
+      <text x="150" y="120" font-size="9" fill="#546e7a" text-anchor="middle">all good sources of Vitamin C</text>
+    </svg>
+    <div class="svgcap">Citrus fruits (oranges, lemons), tomatoes, and peppers are all rich sources of Vitamin C.</div>
+    <div class="job"><b>Key idea:</b> Vitamin C keeps your immune system strong, keeps your gums and skin healthy, and helps cuts and wounds heal. Because your body can't store much Vitamin C, you need a fresh supply regularly, from food — which becomes a real problem for anyone who can't get fresh fruit or vegetables for a long time.</div>
+  </section>
+
+  <!-- SCREEN 6: THE SCURVY STORY -->
+  <section class="screen" data-s="6">
+    <h2>The Real Story of Scurvy ⚓</h2>
+    <div class="rulebar">In the 1700s, sailors on long ocean voyages often had no fresh fruit or vegetables for months — and many developed a disease called SCURVY: bleeding gums, extreme tiredness, and wounds that wouldn't heal.</div>
+    <svg viewBox="0 0 300 160" width="480" height="256" aria-label="Diagram of a sailing ship on the ocean, illustrating the 1747 scurvy experiment by ship surgeon James Lind">
+      <rect x="0" y="110" width="300" height="50" fill="#1565c0"/>
+      <path d="M40,110 Q60,80 190,80 Q230,80 230,110 Z" fill="#8d6e63"/>
+      <rect x="120" y="20" width="4" height="60" fill="#5d4037"/>
+      <path d="M124,25 L124,75 L170,68 Z" fill="#fff" stroke="#90a4ae" stroke-width="1"/>
+      <path d="M124,30 L124,65 L95,58 Z" fill="#f5f5f5" stroke="#90a4ae" stroke-width="1"/>
+      <text x="150" y="14" font-size="10" font-weight="700" fill="#0d47a1" text-anchor="middle">HMS Salisbury, 1747</text>
+      <text x="150" y="140" font-size="9" fill="#fff" text-anchor="middle">months at sea, no fresh fruit or vegetables on board</text>
+    </svg>
+    <div class="svgcap">Ship surgeon James Lind wanted to find out what actually cured scurvy. In 1747, he ran one of the first FAIR-TEST medical experiments ever recorded: he split 12 sick sailors into pairs, gave each pair a different treatment (vinegar, seawater, citrus fruit, and others) — keeping everything else about their conditions the same — and tracked who got better.</div>
+    <div class="job"><b>Key idea:</b> the pair given ORANGES AND LEMONS recovered dramatically faster than every other pair. Lind's fair test proved that citrus fruit — rich in Vitamin C — cured scurvy, even though nobody yet knew vitamins existed as a scientific idea. This is exactly the fair-test thinking you practiced back in earlier units: change only ONE thing (the treatment) and keep everything else the same, so you can trust what the evidence shows.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Which Vitamin or Mineral Is This Food Good For? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Is this food a citrus fruit (orange, lemon), a tomato, or a pepper?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dleaf yes">A good source of Vitamin C — helps prevent scurvy, keeps gums/skin healthy, helps wounds heal.</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — check other groups</div>
+          <div class="dleaf no">Try a different match: dairy foods → calcium (bones); red meat/leafy greens → iron (blood); oily fish/eggs/sunlight → Vitamin D (bones); carrots/spinach → Vitamin A (eyes).</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> if a food question mentions oranges, lemons, tomatoes, or peppers, think Vitamin C first. For other foods, match the food to the vitamin/mineral card from Screen 4 that best fits it.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Answer first, then press <b>Check</b>. Once you check, that answer is locked in.</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Which vitamin keeps your immune system, skin, and gums healthy, and helps wounds heal?</p>
+      <button class="opt">Vitamin A</button>
+      <button class="opt">Vitamin D</button>
+      <button class="opt">Vitamin C</button>
+      <button class="opt">Calcium</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — Vitamin C keeps the immune system, skin, and gums healthy, and helps wounds heal.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which vitamin is described as keeping gums and skin healthy and helping wounds heal?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. Which mineral helps your blood carry oxygen around your body?</p>
+      <button class="opt">Calcium</button>
+      <button class="opt">Vitamin A</button>
+      <button class="opt">Vitamin D</button>
+      <button class="opt">Iron</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — iron helps blood carry oxygen around the body.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which mineral's job is described as helping blood carry oxygen?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>3. A sailor in the 1700s has spent many months at sea with no fresh fruit or vegetables and develops bleeding gums and extreme tiredness. What is this disease, and what nutrient deficiency causes it?</p>
+      <button class="opt">Rickets, caused by a lack of Vitamin D</button>
+      <button class="opt">Scurvy, caused by a lack of Vitamin C</button>
+      <button class="opt">Anaemia, caused by a lack of iron</button>
+      <button class="opt">A broken bone, caused by a lack of calcium</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — scurvy is caused by a lack of Vitamin C, common among sailors without fresh fruit or vegetables.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what was the sailors' disease called, and which vitamin were they missing?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. In James Lind's 1747 experiment, why did he give each pair of sailors a DIFFERENT single treatment, while keeping everything else about their conditions the same?</p>
+      <button class="opt">So he could fairly compare treatments and trust that any difference in recovery was caused by the treatment, not something else</button>
+      <button class="opt">Because he had run out of citrus fruit and had to use whatever was available</button>
+      <button class="opt">Because sailors from different pairs were not allowed to eat the same food as each other</button>
+      <button class="opt">It made no real difference to the experiment either way</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — changing only the treatment while keeping other conditions the same is what makes a fair test trustworthy.</div>
+      <div class="fb no">✘ Re-check Screen 6 — why does a fair test only change ONE thing at a time?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. A student claims: "As long as you eat a lot of food, you'll automatically get enough of every vitamin and mineral." What is the BEST correction?</p>
+      <button class="opt">The claim is correct — eating a large amount of any food always covers every vitamin and mineral need</button>
+      <button class="opt">The claim is wrong, because vitamins and minerals are not found in any type of food at all</button>
+      <button class="opt">The claim is wrong — different foods contain different vitamins and minerals, so you need a VARIETY of foods, not just a large quantity</button>
+      <button class="opt">The claim is wrong, because the human body does not need vitamins or minerals to survive</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — variety matters, since different foods provide different vitamins and minerals; quantity alone doesn't guarantee coverage.</div>
+      <div class="fb no">✘ Re-check Screen 4 — does one type of food provide every vitamin and mineral the body needs?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=false;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? '📝 Take the Unit 22 Test' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{
+    if(i>0){i--;render();}
+    else{window.location.href='Nutrition_Lesson_NutrientsAndBalancedDiet.html';}
+  };
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_22_Test_NutritionVitaminsBalancedDiet.html';}
+  };
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "🎉 Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "👍 Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

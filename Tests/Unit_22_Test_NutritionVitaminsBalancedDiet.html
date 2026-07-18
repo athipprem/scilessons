@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 22 Test — Biology: Nutrition, Vitamins &amp; a Balanced Diet</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--blue)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 22 Test — Biology: Nutrition, Vitamins &amp; a Balanced Diet</b>
+      <span class="sub" id="hdr-sub">Nutrients • Balanced Diet • Vitamins • Minerals • Vitamin C &amp; Scurvy</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' or 'scenario' questions, ask: what changed, what stayed the same, and what does the evidence actually show?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 22;
+const UNIT_TITLE = "Biology: Nutrition, Vitamins & a Balanced Diet";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Nutrition Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"What is the main job of PROTEIN in the body?",
+    options:["Growing and repairing the body, such as building muscle","Giving the body its fastest, most immediate source of energy","Helping the digestive system keep food moving smoothly through it","Helping the body absorb calcium into its bones and teeth"], ans:1,
+    why:"Protein builds and repairs the body, including muscle." },
+  { n:2, section:'A', star:0, body:"Which nutrient group is needed only in TINY amounts, yet each one still does an essential job?",
+    options:["Carbohydrates, needed in large amounts for daily energy","Fats, stored in the body as a longer-lasting energy reserve","Vitamins and minerals, each with its own specific essential job","Water, needed constantly for almost every body process"], ans:3,
+    why:"Vitamins and minerals are needed only in small amounts, but each one has a specific, essential job." },
+  { n:3, section:'A', star:0, body:"Which vitamin, if a person goes without it for a long time, can cause the disease SCURVY?",
+    options:["Vitamin A, important for healthy eyesight in dim light","Vitamin C, important for the immune system, skin, and gums","Vitamin D, important for helping the body absorb calcium","Calcium, a mineral important for strong bones and teeth"], ans:2,
+    why:"A long-term lack of Vitamin C causes scurvy — bleeding gums, tiredness, and slow-healing wounds." },
+  { n:4, section:'A', star:0, body:"Which MINERAL is especially important for building strong bones and teeth?",
+    options:["Iron, important for carrying oxygen around the blood","Vitamin A, important for healthy eyesight in dim light","Calcium, important for building strong bones and teeth","Fibre, important for keeping the digestive system moving"], ans:3,
+    why:"Calcium is the mineral that builds strong bones and teeth." },
+
+  /* ===================== SECTION B — Applying Nutrition Knowledge (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A student's lunch is white bread, rice crackers, and a can of soda — no fruit, vegetables, meat, or dairy at all. Which nutrients is this lunch most likely SHORT on?",
+    options:["Carbohydrates and water, since bread and soda both contain those","Fats only, since bread and rice barely contain any fat","Fibre only, since white bread already contains plenty of fibre","Protein, vitamins, and minerals, since none of those food groups are included"], ans:4,
+    why:"With no fruit, vegetables, meat, or dairy, this lunch is missing protein, vitamins, and minerals." },
+  { n:6, section:'B', star:1, body:"A chef adds fresh orange segments to a green salad, explaining it's 'not just for taste.' What nutritional benefit is the chef most likely referring to?",
+    options:["The oranges add extra fat to make the salad more filling","The oranges boost the salad's Vitamin C content","The oranges remove all the fibre from the leafy greens","The oranges replace the need for any protein in the meal"], ans:2,
+    why:"Oranges are a rich source of Vitamin C, boosting the salad's vitamin content." },
+  { n:7, section:'B', star:1, body:"A person has bleeding gums, feels constantly exhausted, and notices small cuts on their hands are healing very slowly. Which missing nutrient is the MOST likely cause?",
+    options:["Vitamin C","Iron","Calcium","Fibre"], ans:1,
+    why:"Bleeding gums, tiredness, and slow-healing cuts are the classic signs of a Vitamin C deficiency (scurvy)." },
+  { n:8, section:'B', star:1, body:"In James Lind's 1747 experiment, imagine the citrus-fruit pair of sailors had ALSO been given extra rest in a private cabin, while every other pair kept working normal duties. What would be wrong with the experiment?",
+    options:["Nothing would be wrong, since citrus fruit was still each pair's main treatment","The experiment would become completely impossible to run under those changed conditions","It would prove citrus fruit can never cure scurvy under any circumstance at all","It would no longer be a fair test, since more than one thing changed"], ans:4,
+    why:"A fair test changes only ONE thing at a time — giving extra rest as well would mean more than one thing changed, so you couldn't trust the result." },
+  { n:9, section:'B', star:1, body:"A person drinks milk and eats cheese every day, but almost never eats fruit or vegetables. Which vitamin are they most likely NOT getting enough of?",
+    options:["Vitamin D, since dairy already provides plenty of it","Calcium, since dairy already provides plenty of it","Vitamin C, since dairy contains very little of it","Protein, since dairy already provides plenty of it"], ans:3,
+    why:"Dairy is a poor source of Vitamin C — without fruit or vegetables, this person is likely short on it." },
+  { n:10, section:'B', star:1, body:"A doctor tells a constantly tired patient that their blood tests show a low ability to carry oxygen, and recommends eating more red meat, beans, and leafy greens. Which mineral is the doctor most likely treating a deficiency in?",
+    options:["Iron","Calcium","Vitamin A","Vitamin D"], ans:1,
+    why:"Iron helps blood carry oxygen — a low oxygen-carrying ability points to an iron deficiency." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"An astronaut is planning meals for a 6-month space mission with no fresh fruit or vegetables available once launched. Based on the sailors' scurvy story, which nutrient deficiency should the meal planners be MOST careful to prevent?",
+    options:["A protein deficiency, since space food naturally contains very little protein at all","A Vitamin C deficiency, since fresh produce can't be stored fresh for months","A carbohydrate deficiency, since space food is designed to contain almost none","A fibre deficiency, since space food naturally contains far too much fibre"], ans:2,
+    why:"Fresh produce (the main source of Vitamin C) can't be kept fresh for months, so a Vitamin C deficiency is the key risk — exactly the scurvy problem sailors faced." },
+  { n:12, section:'C', star:2, body:"A student wants to test whether taking a Vitamin C tablet speeds up how fast a small cut heals. Which experiment design is the FAIREST test?",
+    options:["Give one group a Vitamin C tablet and let them choose their own bandage type, while the other group uses a fixed bandage type","Give a Vitamin C tablet only to people who already eat lots of fruit, and compare them to people who eat no fruit","Give one group a Vitamin C tablet and a different group no tablet at all, comparing whichever cuts happen to heal fastest regardless of size","Give one group a Vitamin C tablet and the other an identical-looking tablet with no Vitamin C, keeping the cut size and care the same"], ans:4,
+    why:"A fair test changes only the treatment (real tablet vs identical fake tablet) while keeping everything else — cut size, care, bandage — exactly the same." },
+  { n:13, section:'C', star:2, body:"A student claims: 'An apple and an orange are nutritionally exactly the same, since they're both just fruit.' What is the BEST correction?",
+    options:["Different fruits contain different amounts of specific vitamins — oranges have far more Vitamin C than apples do","The claim is correct, since all fruits contain exactly identical amounts of every single nutrient","The claim is wrong, because apples and oranges do not contain any nutrients at all","The claim is wrong, because fruit itself is not actually a source of nutrients at all"], ans:1,
+    why:"Being 'fruit' doesn't mean identical nutrition — different fruits have different vitamin amounts, and oranges are much richer in Vitamin C than apples." },
+  { n:14, section:'C', star:2, body:"A student says: 'Vitamins and minerals are exactly the same thing, just two different names for it.' What is the BEST correction?",
+    options:["The claim is correct — there is truly no difference between them at all","The claim is wrong, because minerals are not needed by the human body in any amount","The claim is wrong — vitamins and minerals are different nutrients, both needed in small amounts","The claim is wrong, because vitamins are only ever found in meat, never in any plant"], ans:3,
+    why:"Vitamins and minerals are different kinds of nutrients (e.g. calcium and iron are minerals; Vitamin C and D are vitamins) — both are needed, just in small amounts." },
+  { n:15, section:'C', star:2, body:"A child drinks plenty of milk every day (getting lots of calcium) but spends almost all their time indoors, rarely going out in the sunlight. What might still happen to their bones, and why?",
+    options:["Nothing at all would happen, since calcium alone is the only thing bones ever need","Their bones could still end up weaker, since low Vitamin D limits how well the body absorbs the calcium","Their bones would automatically become stronger, since spending time indoors has no effect on bone health at all","Their bones would be harmed directly by the milk itself, regardless of how much sunlight they get"], ans:2,
+    why:"Vitamin D helps the body absorb calcium — without enough sunlight-made Vitamin D, even plenty of calcium may not be absorbed well, leaving bones weaker than expected." },
+  { n:16, section:'C', star:2, body:"A lunch tray contains only french fries and a sugary soda. Using what you know about the balanced plate, which nutrients is this meal most clearly missing?",
+    options:["Only fibre — fries and soda both provide every other nutrient the body needs","Only water — fries and soda already provide all the solid nutrients needed","Only fats — fries and soda contain no other nutrients at all","Vitamins, minerals, fibre, and protein — none of those food groups are represented on this tray"], ans:4,
+    why:"With no fruit, vegetables, dairy, or protein foods on the tray, this meal is missing vitamins, minerals, fibre, and protein." },
+  { n:17, section:'C', star:2, body:"Two identical potted plants are grown side by side, in the same soil, light, and water — except one is watered with a Vitamin-C-enriched solution and the other with plain water. After a month, both plants look exactly the same. What is the BEST conclusion?",
+    options:["Vitamin C likely has no special growth effect on this plant under these conditions","The experiment was not a fair test, since only the water was different","Vitamin C definitely damages plant growth, even though no visible harm appeared","The results are meaningless, since plants cannot ever be used in fair tests"], ans:1,
+    why:"This WAS a fair test (only one thing changed), and a fair test showing no difference is still a valid, useful result — it suggests Vitamin C has no special effect on this plant's growth." },
+  { n:18, section:'C', star:2, body:"A student is choosing an afternoon snack and wants to boost both their Vitamin C AND their fibre intake at the same time. Which snack is the BEST choice?",
+    options:["A tall glass of plain whole milk, poured fresh","A whole orange, including its white inner pith","A small spoonful of plain vegetable cooking oil","A plain grilled chicken breast, with nothing added"], ans:2,
+    why:"A whole orange provides both Vitamin C and fibre; milk, oil, and chicken don't provide meaningful Vitamin C or fibre." },
+  { n:19, section:'C', star:2, body:"A nutritionist reviews a week of a patient's meals and notices almost every meal includes citrus fruit, tomatoes, or peppers, but almost no dairy or leafy greens at all. Which nutrient is this patient MOST likely getting enough of, and which are they most likely SHORT on?",
+    options:["Plenty of iron; short on Vitamin C","Plenty of protein; short on carbohydrates","Plenty of Vitamin C; short on calcium","Plenty of fibre; short on water"], ans:3,
+    why:"Citrus fruit, tomatoes, and peppers are rich in Vitamin C, so that's well covered — but with little dairy or leafy greens, calcium is likely short." },
+  { n:20, section:'C', star:2, body:"A student eats an orange every day specifically for Vitamin C, but eats almost no dairy, red meat, or leafy greens. Which of these is the BEST assessment of their diet?",
+    options:["Their diet is completely balanced, since Vitamin C alone covers every nutrient the body needs","Their diet contains no nutrients at all, since oranges are not a real food source","Their diet is dangerously low in Vitamin C, despite eating an orange every single day","Their diet is missing meaningful sources of calcium and iron, even though Vitamin C is well covered"], ans:4,
+    why:"The daily orange covers Vitamin C well, but with almost no dairy, red meat, or leafy greens, this diet is likely short on calcium and iron." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Nutrition Basics (warm-up)",
+  B: "SECTION B — Applying Nutrition Knowledge (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
