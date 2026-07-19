@@ -145,7 +145,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <div id="hero">
       <div class="hero-box"><div class="hero-val" style="color:#ef6c00" id="h-skill">&mdash;</div><div class="hero-lbl">Skills achievement</div><div class="hero-sub">vs gold &#129351; target</div></div>
       <div class="hero-box"><div class="hero-val" id="h-base">72.5%</div><div class="hero-lbl">Baseline (2025 G4)</div><div class="hero-sub">72.5/100 &middot; 28/40 Q</div></div>
-      <div class="hero-box"><div class="hero-val" id="h-done">&mdash;</div><div class="hero-lbl">Unit tests done</div><div class="hero-sub" id="h-unit-sub">U1 pending</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-done">&mdash;</div><div class="hero-lbl">Unit + Milestone tests done</div><div class="hero-sub">Baseline: 72.5/100 (28/40)</div></div>
       <div class="hero-box"><div class="hero-val" id="h-weeks">&mdash;</div><div class="hero-lbl">Weeks to ASMOPSS</div><div class="hero-sub" id="h-days">9 Aug 2026</div></div>
     </div>
     <div id="content">
@@ -297,9 +297,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   var weeks = Math.ceil(ms/(7*864e5)), days = Math.ceil(ms/864e5);
   document.getElementById('h-weeks').textContent = weeks;
   document.getElementById('h-days').textContent = days+' days left';
-  document.getElementById('h-done').textContent = D.scores.length;
-  var curUnitLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n;
-  document.getElementById('h-unit-sub').innerHTML = curUnitLabel+' &middot; '+D.currentUnit.status;
+  var unitTestCount = D.scores.filter(function(s){ return typeof s.unit === 'number'; }).length;
+  var milestoneCount = D.scores.filter(function(s){ return typeof s.unit === 'string' && s.unit.charAt(0) === 'M'; }).length;
+  document.getElementById('h-done').textContent = unitTestCount+'+'+milestoneCount;
   var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
   var ach = Math.round(sc/st*100);
   document.getElementById('h-skill').textContent = ach+'%';

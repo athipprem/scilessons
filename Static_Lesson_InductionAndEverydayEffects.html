@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 23 · Lesson 2 — Static Electricity: Induction &amp; Everyday Effects</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#eef6fb;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--blue);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .job b{color:var(--blue)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdff}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--blue);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .egrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .ecell{border-radius:10px;padding:10px;text-align:center;background:#fafdff;border:2px solid var(--line)}
+  .ecell .ico{font-size:1.6rem}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdff;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#e3f2fd;color:var(--blue);border:2px solid var(--blue)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⚡ Lesson 2 · Static Electricity: Induction &amp; Everyday Effects</b><span class="pill">Unit 23 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: a charged object can pull on a NEUTRAL object without ever touching it — by pushing that object's own electrons around.</div>
+    <p>Today you'll learn the trickiest static electricity idea — how a charged balloon can attract paper it never touches — then see how this exact same idea shows up in everyday tricks and even in lightning.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Quick Recall from Lesson 1</div><div class="j">charges, friction, attract vs repel</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">📎</div><div class="t">Electrostatic induction</div><div class="j">attracting a NEUTRAL object without touching it</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🎈</div><div class="t">Everyday static effects</div><div class="j">balloons on walls, static cling, hair standing up</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⛈️</div><div class="t">Lightning</div><div class="j">static electricity on a giant, stormy scale</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain HOW a charged object attracts a neutral one without touching it, and use that one idea to explain balloon tricks, static cling, and lightning.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 🔁</h2>
+    <div class="recall">🔁 <b>Remember charges and friction?</b> Every object has protons (+) and electrons (−). Rubbing two objects together transfers electrons from one to the other — the one that GAINS electrons goes negative, the one that LOSES electrons goes positive. Like charges (+/+ or −/−) REPEL each other; unlike charges (+/−) ATTRACT each other.</div>
+    <p>Today you'll use that "like repels, unlike attracts" rule to explain something that seems strange at first: how a charged object can attract something that isn't charged at all.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">This exact idea — a charge pulling on something neutral without touching it — is how photocopiers and laser printers place ink precisely, how air purifiers called "electrostatic precipitators" pull dust out of the air, and it's the very first step of every single lightning bolt you'll ever see.</div>
+    <div class="card">
+      <b>Real life:</b> rub a plastic comb on your hair and hold it near small scraps of paper or a thin, steady stream of water from a tap — both the paper and the water will bend TOWARD the comb, even though neither one is charged. That's electrostatic induction in action.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: ELECTROSTATIC INDUCTION -->
+  <section class="screen" data-s="4">
+    <h2>Attracting Without Touching 📎</h2>
+    <div class="rulebar">A charged object can push and pull the electrons INSIDE a nearby neutral object, even without touching it — this is called INDUCTION (or polarisation).</div>
+    <svg viewBox="0 0 420 220" width="420" height="220" aria-label="Diagram of a negatively charged balloon near a neutral piece of paper, showing electrons in the paper being pushed away from the balloon side">
+      <circle cx="100" cy="110" r="55" fill="#ce93d8" stroke="#6a1b9a" stroke-width="2.5"/>
+      <text x="100" y="115" font-size="13" font-weight="700" fill="#4a148c" text-anchor="middle">balloon</text>
+      <text x="60" y="70" font-size="18" font-weight="900" fill="#c62828">−</text>
+      <text x="140" y="70" font-size="18" font-weight="900" fill="#c62828">−</text>
+      <text x="60" y="150" font-size="18" font-weight="900" fill="#c62828">−</text>
+      <text x="140" y="150" font-size="18" font-weight="900" fill="#c62828">−</text>
+      <rect x="270" y="60" width="90" height="100" rx="6" fill="#fff9c4" stroke="#f9a825" stroke-width="2.5"/>
+      <text x="315" y="200" font-size="13" font-weight="700" fill="#795548" text-anchor="middle">paper (neutral)</text>
+      <text x="285" y="90" font-size="15" font-weight="900" fill="#1565c0">+</text>
+      <text x="285" y="130" font-size="15" font-weight="900" fill="#1565c0">+</text>
+      <text x="345" y="90" font-size="15" font-weight="900" fill="#1565c0">−</text>
+      <text x="345" y="130" font-size="15" font-weight="900" fill="#1565c0">−</text>
+      <path d="M240,110 L200,110" stroke="#333" stroke-width="2.5" marker-end="url(#arrow2)"/>
+      <text x="220" y="100" font-size="9" fill="#333" text-anchor="middle">pulled</text>
+      <defs><marker id="arrow2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#333"/></marker></defs>
+    </svg>
+    <div class="svgcap">The negatively charged balloon pushes the paper's own electrons toward the FAR side (they're both negative, so they repel). This leaves the NEAR side of the paper slightly positive — which is then attracted to the negative balloon.</div>
+    <div class="card">
+      <p><b>Step by step:</b></p>
+      <p><b>1.</b> The paper starts neutral (equal + and −, evenly spread).<br><b>2.</b> The charged balloon comes close — its charge REPELS the same charge inside the paper, pushing those electrons to the far side.<br><b>3.</b> Now the near side of the paper (facing the balloon) has slightly MORE positive charge showing, and the far side has slightly MORE negative charge.<br><b>4.</b> Opposite charges attract — so the paper's near (positive-leaning) side is pulled toward the balloon's negative charge, and the paper moves.</p>
+    </div>
+    <div class="job"><b>Key idea:</b> NO electrons actually jump from the balloon to the paper — nothing is touching, and the paper is still overall neutral. The electrons just SHIFT POSITION inside the paper (this shifting is called polarisation). That's what makes induction different from charging by friction, where electrons really do transfer permanently from one object to the other.</div>
+  </section>
+
+  <!-- SCREEN 5: EVERYDAY EFFECTS -->
+  <section class="screen" data-s="5">
+    <h2>Static Electricity All Around You 🎈</h2>
+    <div class="egrid">
+      <div class="ecell"><div class="ico">🎈</div><b>Balloon on a wall</b><br><small>a rubbed balloon sticks to a wall — induction pulls the wall's electrons out of position, just like the paper</small></div>
+      <div class="ecell"><div class="ico">👕</div><b>Static cling</b><br><small>clothes tumbling in a dryer rub together, transfer electrons by friction, and end up sticking together (opposite charges attract)</small></div>
+      <div class="ecell"><div class="ico">💇</div><b>Hair standing up</b><br><small>pulling off a wooly hat charges each hair the SAME way — since like charges repel, the hairs push apart from each other</small></div>
+      <div class="ecell"><div class="ico">🚪</div><b>Doorknob shock</b><br><small>walking on carpet builds up charge on you by friction; touching a metal doorknob lets that charge jump across as a tiny spark</small></div>
+    </div>
+    <div class="job" style="margin-top:10px"><b>Key idea:</b> "hair standing up" uses the LIKE-CHARGES-REPEL rule (Lesson 1), while "balloon sticking to a wall" uses INDUCTION (this lesson) — two different static electricity effects that can look similar but work in different ways. Static cling and the doorknob shock both use plain charging-by-friction, just like Lesson 1's balloon-and-hair example.</div>
+  </section>
+
+  <!-- SCREEN 6: LIGHTNING -->
+  <section class="screen" data-s="6">
+    <h2>Lightning: Static Electricity on a Giant Scale ⛈️</h2>
+    <svg viewBox="0 0 420 240" width="420" height="240" aria-label="Diagram of a storm cloud with negative charge at its base, positive charge induced on the ground below, and a lightning bolt connecting them">
+      <ellipse cx="200" cy="70" rx="150" ry="55" fill="#78909c"/>
+      <ellipse cx="120" cy="60" rx="70" ry="40" fill="#90a4ae"/>
+      <ellipse cx="280" cy="60" rx="75" ry="42" fill="#90a4ae"/>
+      <text x="200" y="55" font-size="13" font-weight="900" fill="#c62828" text-anchor="middle">− − − − − − − −</text>
+      <text x="200" y="30" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">storm cloud</text>
+      <rect x="0" y="190" width="420" height="40" fill="#66bb6a"/>
+      <text x="200" y="215" font-size="13" font-weight="900" fill="#1565c0" text-anchor="middle">+ + + + + + + +</text>
+      <text x="200" y="235" font-size="10" font-weight="700" fill="#1b5e20" text-anchor="middle">ground</text>
+      <path d="M200,110 L190,150 L205,150 L185,190" stroke="#f9a825" stroke-width="4" fill="none" stroke-linejoin="round"/>
+      <text x="240" y="150" font-size="10" fill="#7a4a00" font-weight="700">lightning bolt</text>
+    </svg>
+    <div class="svgcap">Inside the storm cloud, ice crystals and water droplets rub against each other in strong updrafts — just like rubbing a balloon on hair — building up a large negative charge low in the cloud. This induces a positive charge on the ground below. When the pull between them gets strong enough, a lightning bolt discharges the built-up charge in one giant spark.</div>
+    <div class="job"><b>Key idea:</b> lightning uses BOTH ideas from this unit — friction charging (ice and water droplets rubbing inside the cloud) AND induction (the cloud's negative charge pulling positive charge to the surface below, without touching it) — just at a much, much bigger scale than a balloon and hair.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Friction, or Induction? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Are the two objects actually TOUCHING and being rubbed together, or is the charged object nearby but NOT touching?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">Objects rub together directly (e.g. balloon on hair, clothes in a dryer)</div>
+          <div class="dleaf yes">Charging by friction — electrons actually transfer, charge stays after separating</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">A charged object is held NEAR a neutral object, not touching it (e.g. balloon near paper, cloud above ground)</div>
+          <div class="dleaf no">Induction — electrons only SHIFT position, no permanent transfer</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> ask "did the two objects actually rub together?" first. If yes, it's friction charging and the charge is now permanent. If a charged object simply got close to something without touching, it's induction — a temporary shift, not a transfer.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. A negatively charged balloon is held near (but not touching) small scraps of neutral paper, and the paper jumps up toward the balloon. What is this effect called?</p>
+      <button class="opt">Friction charging</button>
+      <button class="opt">Conduction</button>
+      <button class="opt">Induction</button>
+      <button class="opt">Magnetism</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — attracting a neutral object without touching it is induction.</div>
+      <div class="fb no">✘ Re-check Screen 4 — what's the name for attracting a neutral object without touching it?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. During induction, what actually happens inside the neutral object's own electrons?</p>
+      <button class="opt">They jump permanently onto the charged object</button>
+      <button class="opt">They shift position inside the object, without leaving it</button>
+      <button class="opt">They disappear completely</button>
+      <button class="opt">Nothing happens to them at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the electrons shift to one side of the object; none of them actually leave.</div>
+      <div class="fb no">✘ Re-check Screen 4's step-by-step — do the electrons leave the object, or just shift position inside it?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Two hairs on your head both become positively charged after you pull off a wooly hat. What happens between them?</p>
+      <button class="opt">They repel and push apart</button>
+      <button class="opt">They attract and stick together</button>
+      <button class="opt">Nothing happens between them at all</button>
+      <button class="opt">They swap charges with each other</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — both hairs have the SAME charge (positive), and like charges repel.</div>
+      <div class="fb no">✘ Re-check Lesson 1's rule — do like charges attract or repel each other?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. Which pair of events happens INSIDE a storm cloud to build up its charge before a lightning strike?</p>
+      <button class="opt">Sunlight heats the cloud until it melts</button>
+      <button class="opt">Wind blows the cloud from one place to another</button>
+      <button class="opt">The cloud absorbs charge directly from the ground below</button>
+      <button class="opt">Ice crystals and water droplets rub together in strong updrafts</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — rubbing ice crystals and water droplets together inside the cloud is friction charging on a huge scale.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what rubs together inside the storm cloud to build up its charge?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A student says: "A charged object can only ever attract another object if that object is also charged." What is the BEST correction?</p>
+      <button class="opt">The claim is correct — a charged object can never affect a neutral object</button>
+      <button class="opt">The claim is wrong — a charged object can attract a NEUTRAL object too, through induction, by shifting that object's electrons</button>
+      <button class="opt">The claim is correct, but only for objects made of paper</button>
+      <button class="opt">The claim is wrong, because neutral objects are secretly always charged</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — induction lets a charged object attract a neutral one, without either object needing to already be charged the same way.</div>
+      <div class="fb no">✘ Re-check Screen 4 — can a charged object attract something that isn't charged at all? What's that effect called?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e3f2fd;border-color:var(--blue)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--blue)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Go to Test →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_23_Test_StaticElectricityElectricCharges.html';}
+  };
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
