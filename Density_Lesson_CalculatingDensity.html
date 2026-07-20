@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 24 · Lesson 1 — Calculating Density</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .qc{background:#fff8e1;border:1.5px solid #f9a825;border-radius:12px;padding:12px 14px;margin:10px 0}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .formula{background:#fff;border:3px solid var(--green);border-radius:14px;padding:16px;text-align:center;font-size:1.15rem;font-weight:900;color:var(--green-d);margin:14px 0}
+  .steps{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .steps ol{margin:6px 0 0;padding-left:22px}
+  .steps li{margin:6px 0}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#e3f2fd;color:var(--blue);border:2px solid var(--blue)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⚖️ Lesson 1 · Calculating Density</b><span class="pill">Unit 24 · Chemistry</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: density has an exact formula — Mass ÷ Volume — so you can calculate it precisely for ANY object, not just when a shortcut applies.</div>
+    <p>Today you'll fix one stubborn idea from the last two units, then learn the real density formula so you can work out and compare density even when objects are totally different sizes AND different masses.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">💡</div><div class="t">Quick Fix: fair tests with no difference</div><div class="j">a result can be "no change" and still count</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">➗</div><div class="t">The density formula</div><div class="j">Density = Mass ÷ Volume</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧮</div><div class="t">Calculating density</div><div class="j">for objects with no shortcut</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔍</div><div class="t">Shortcut or calculate?</div><div class="j">when each method applies</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> calculate an object's density using the formula, and know when you can use a shortcut instead of calculating.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX — FAIR TESTS WITH NO DIFFERENCE -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix: When a Fair Test Shows NO Difference 💡</h2>
+    <div class="rulebar">A fair test that shows NO difference between two groups is NOT a broken test — it's a real, useful answer, just like any other result.</div>
+    <div class="card">
+      <p><b>Think about flipping coins.</b> Imagine you flip an ordinary coin 20 times, and a friend flips their "lucky" coin 20 times. Both coins land on heads about the same number of times — roughly 10 each.</p>
+      <p>It's tempting to think: "well, nothing proved anything, so this test didn't work." But that's backwards. <b>The test DID work — and it proved something important: the "lucky" coin isn't actually any luckier than a normal coin.</b> If the lucky coin really did have some special power, you'd expect it to land on heads noticeably MORE often. It didn't. That "no difference" result is the whole answer to the question you were asking.</p>
+      <p><b>The wrong instinct to watch for:</b> when an experiment shows no difference, it's tempting to explain it away — "maybe I did it wrong" or "maybe there's a difference that's just too small to see." Sometimes that's true! But often, "no difference" simply means the thing you changed genuinely doesn't make a difference under those conditions — and that itself is valuable, real information. <b>Proving nothing changed is still proving something.</b></p>
+    </div>
+    <div class="qc" data-qc-correct="1">
+      <p>Quick Check 1: A student flips a normal coin 30 times and a "special" coin 30 times. Both coins land heads almost exactly half the time. What is the BEST conclusion?</p>
+      <button class="opt">The test worked properly, and it shows the special coin isn't actually any different from a normal coin</button>
+      <button class="opt">The test must have gone wrong, since nothing was proven either way</button>
+      <button class="opt">The special coin is secretly different, even though the results look the same</button>
+      <button class="opt">Coins can never be used in a fair test</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Right — the test worked, and "no difference" is itself the useful, real answer.</div>
+      <div class="fb no">✘ Remember: a fair test showing no difference is still a valid, working test — it just answered "no" instead of "yes."</div>
+    </div>
+    <div class="qc" data-qc-correct="2">
+      <p>Quick Check 2: Two identical toy cars are rolled down two identical ramps — one ramp is painted red, the other blue. Both cars roll exactly the same distance every time. What does this experiment tell you?</p>
+      <button class="opt">Nothing at all — the experiment failed because both results were the same</button>
+      <button class="opt">The ramp's colour genuinely doesn't affect how far the car rolls</button>
+      <button class="opt">The red ramp is secretly faster, but it's too hard to measure</button>
+      <button class="opt">You would need a completely different experiment to find out anything useful</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Correct — since only the colour changed and the distance stayed the same, colour genuinely has no effect here. That's a real, useful finding.</div>
+      <div class="fb no">✘ Only ONE thing changed (the colour) and the result stayed the same both times — that IS a real, informative answer, not a failed test.</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: QUICK RECALL -->
+  <section class="screen" data-s="3">
+    <h2>Quick Recall from Unit 15 🔁</h2>
+    <div class="recall">🔁 <b>Remember density shortcuts?</b> In Unit 15 you learned that DENSITY is how tightly packed an object's mass is, squeezed into its volume. You also learned two shortcuts: if two objects are the SAME SIZE, the one with MORE mass is denser. If two objects have the SAME MASS, the smaller one is denser.</div>
+    <p>Those shortcuts are handy — but what if two objects are DIFFERENT sizes AND different masses? The shortcuts don't work anymore. Today you'll learn the actual formula that works for absolutely any object, every time.</p>
+  </section>
+
+  <!-- SCREEN 4: WHY -->
+  <section class="screen" data-s="4">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">The exact density formula is what lets scientists identify an unknown material just by weighing it and measuring its size — gold has a very specific density, so does aluminium, so does wood. It's also how engineers work out exactly how much cargo a ship can carry before it sinks, and how jewellers can tell real gold from a fake without cutting it open.</div>
+    <div class="card">
+      <b>Real life:</b> archaeologists use density calculations to check whether an ancient coin is genuine gold or a cheaper metal painted to look like gold, and recycling plants use density to automatically sort different types of plastic that all look identical.
+    </div>
+  </section>
+
+  <!-- SCREEN 5: THE DENSITY FORMULA -->
+  <section class="screen" data-s="5">
+    <h2>The Density Formula ➗</h2>
+    <div class="formula">Density = Mass ÷ Volume</div>
+    <p>This one formula works for ANY object, no matter its size or mass — you don't need a shortcut, and you don't need the two objects to share anything in common. Density is usually measured in <b>grams per cubic centimetre (g/cm³)</b> — that just means "how many grams of mass are packed into each single cm³ of space."</p>
+    <div class="steps">
+      <p><b>Worked example:</b> A metal block has a mass of 270g and a volume of 30cm³. What is its density?</p>
+      <ol>
+        <li><b>Step 1:</b> Write down the formula: Density = Mass ÷ Volume.</li>
+        <li><b>Step 2:</b> Put in the numbers: Density = 270g ÷ 30cm³.</li>
+        <li><b>Step 3:</b> Divide: 270 ÷ 30 = 9.</li>
+        <li><b>Step 4:</b> Add the units: the block's density is <b>9 g/cm³</b>.</li>
+      </ol>
+    </div>
+    <div class="job"><b>Key idea:</b> the formula divides mass BY volume — mass always goes first (on top), volume always goes second (on the bottom). Mixing up the order gives a completely wrong answer, even if you use the right numbers.</div>
+  </section>
+
+  <!-- SCREEN 6: COMPARING WITH THE FORMULA -->
+  <section class="screen" data-s="6">
+    <h2>Comparing Objects the Formula Can Handle 🧮</h2>
+    <div class="rulebar">When two objects are DIFFERENT sizes AND different masses, the Unit 15 shortcuts don't work — you must calculate both densities and then compare the numbers.</div>
+    <div class="steps">
+      <p><b>Worked example:</b> Block A has a mass of 160g and a volume of 20cm³. Block B has a mass of 300g and a volume of 50cm³. Which block is denser?</p>
+      <ol>
+        <li><b>Step 1:</b> Calculate Block A's density: 160 ÷ 20 = <b>8 g/cm³</b>.</li>
+        <li><b>Step 2:</b> Calculate Block B's density: 300 ÷ 50 = <b>6 g/cm³</b>.</li>
+        <li><b>Step 3:</b> Compare the two density NUMBERS (not the masses, and not the volumes on their own): 8 g/cm³ is bigger than 6 g/cm³.</li>
+        <li><b>Step 4:</b> Block A is denser, even though Block B has the bigger mass — because Block A's mass is packed into far less space.</li>
+      </ol>
+    </div>
+    <div class="job"><b>Key idea:</b> this is exactly why the shortcuts from Unit 15 only work in SPECIAL cases — Block B has more mass, but that alone doesn't make it denser once the volumes are different too. The formula is the only method that always works, for every pair of objects.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Shortcut, or Calculate? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Do the two objects share the SAME size OR the SAME mass?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES — one of the two matches</div>
+          <div class="dleaf yes">Use the Unit 15 shortcut (compare the one that's different)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — both size and mass are different</div>
+          <div class="dleaf no">Calculate BOTH densities with Mass ÷ Volume, then compare the two numbers</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> always check first whether a shortcut applies — it's faster. But whenever both size and mass are different between two objects, the formula is the only reliable way to compare them.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What is the formula for density?</p>
+      <button class="opt">Density = Mass + Volume</button>
+      <button class="opt">Density = Mass ÷ Volume</button>
+      <button class="opt">Density = Volume ÷ Mass</button>
+      <button class="opt">Density = Mass × Volume</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — density is mass divided by volume.</div>
+      <div class="fb no">✘ Re-check Screen 5 — mass is divided by what?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. A block has a mass of 180g and a volume of 20cm³. What is its density?</p>
+      <button class="opt">160 g/cm³</button>
+      <button class="opt">200 g/cm³</button>
+      <button class="opt">9 g/cm³</button>
+      <button class="opt">3600 g/cm³</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — 180 ÷ 20 = 9 g/cm³.</div>
+      <div class="fb no">✘ Divide the mass by the volume: 180 ÷ 20 = ?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Rock X has a mass of 400g and a volume of 50cm³. Rock Y has a mass of 210g and a volume of 30cm³. Which rock is denser?</p>
+      <button class="opt">Rock X, since 400 ÷ 50 = 8 g/cm³, more than Rock Y's 7 g/cm³</button>
+      <button class="opt">Rock Y, since it has the smaller volume</button>
+      <button class="opt">Rock X, since it has the bigger mass</button>
+      <button class="opt">Both rocks must be equally dense</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — calculate both: Rock X = 400÷50 = 8 g/cm³, Rock Y = 210÷30 = 7 g/cm³. Rock X is denser.</div>
+      <div class="fb no">✘ Calculate both densities separately with the formula, then compare the two NUMBERS.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. Two blocks are DIFFERENT sizes and DIFFERENT masses. Which method should you use to compare their density?</p>
+      <button class="opt">Compare their masses only</button>
+      <button class="opt">Compare their volumes only</button>
+      <button class="opt">Use the Unit 15 same-size shortcut</button>
+      <button class="opt">Calculate both densities using the formula, then compare</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — when both size and mass differ, only the formula reliably compares them.</div>
+      <div class="fb no">✘ Re-check Screen 7's decision tree — which method works when NEITHER size nor mass matches?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A student says: "If a fair test shows no difference between two groups, the experiment must have failed." What is the BEST correction?</p>
+      <button class="opt">The claim is correct — a fair test always has to show some kind of difference</button>
+      <button class="opt">The claim is wrong — a fair test showing no difference is still a valid, useful result</button>
+      <button class="opt">The claim is wrong, because fair tests can never show "no difference"</button>
+      <button class="opt">The claim is correct, but only when comparing coins specifically</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — "no difference" is a real, informative result, not a failed experiment.</div>
+      <div class="fb no">✘ Re-check Screen 2 — is "no difference" proof that a test failed, or is it a valid result on its own?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Next Lesson →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Density_Lesson_ThermalExpansionAndBuoyancy.html';}
+  };
+
+  // Quick Check (Screen 2 recap) - independent lock+feedback, NOT part of the main practice summary
+  const qcQs = [...document.querySelectorAll('.qc[data-qc-correct]')];
+  qcQs.forEach(q => {
+    const correct = +q.dataset.qcCorrect, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #f9a825';
+      chosen = n + 1;
+    });
+    q.querySelector('.qcchk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.qcchk').disabled = true;
+      q.querySelector('.qcchk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

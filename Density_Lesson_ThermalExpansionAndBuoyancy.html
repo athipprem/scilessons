@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 24 · Lesson 2 — Thermal Expansion & Buoyancy</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#eef6fb;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--blue);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .job b{color:var(--blue)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdff}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--blue);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .egrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+  .ecell{border-radius:10px;padding:10px;text-align:center;background:#fafdff;border:2px solid var(--line)}
+  .ecell .ico{font-size:1.6rem}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdff;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .dleaf.no{background:#e3f2fd;color:var(--blue);border:2px solid var(--blue)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌡️ Lesson 2 · Thermal Expansion &amp; Buoyancy</b><span class="pill">Unit 24 · Chemistry</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: heating something makes it expand — same mass, more space — which means heating something makes it LESS dense.</div>
+    <p>Today you'll learn what happens to a substance's density when it warms up, and use that one idea to explain hot air balloons, why warm water rises, and weather.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Quick Recall from Lesson 1</div><div class="j">the density formula</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌡️</div><div class="t">Thermal expansion</div><div class="j">heat makes particles spread out</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⚖️</div><div class="t">Heat changes density</div><div class="j">same mass + more space = less dense</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🎈</div><div class="t">Buoyancy &amp; temperature</div><div class="j">warm rises through cool</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain why heating a substance lowers its density, and predict whether a warmer or cooler fluid will rise or sink through the other.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 🔁</h2>
+    <div class="recall">🔁 <b>Remember the density formula?</b> Density = Mass ÷ Volume. If the MASS of something stays exactly the same but its VOLUME gets bigger, the density number gets SMALLER — the same amount of "stuff" is now spread across more space.</div>
+    <p>Today you'll see exactly when that happens in real life: whenever something is heated up.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">This one idea — hot stuff is less dense than cold stuff of the same substance — is why hot air balloons float upward, why the top of a swimming pool often feels warmer than the bottom, why radiators heat a whole room instead of just the air right next to them, and why weather forecasters track rising warm air to predict clouds and storms.</div>
+    <div class="card">
+      <b>Real life:</b> hot air balloon pilots control a burner to heat the air inside the balloon whenever they want to rise, and engineers leave small gaps in railway tracks and bridges specifically so the metal has room to expand on hot days without buckling.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: THERMAL EXPANSION -->
+  <section class="screen" data-s="4">
+    <h2>What Heat Does to Matter 🌡️</h2>
+    <div class="rulebar">THERMAL EXPANSION: when a substance is heated, its tiny particles move around faster and push further apart from each other — so the substance takes up MORE space (a bigger volume).</div>
+    <svg viewBox="0 0 420 180" width="420" height="180" aria-label="Diagram showing particles close together when cold and spread further apart when heated, inside two containers of the same size">
+      <rect x="20" y="30" width="150" height="120" fill="#e3f2fd" stroke="#1565c0" stroke-width="2.5"/>
+      <text x="95" y="165" font-size="11" font-weight="700" fill="#0d47a1" text-anchor="middle">COLD — particles close together</text>
+      <circle cx="55" cy="60" r="8" fill="#1565c0"/><circle cx="90" cy="60" r="8" fill="#1565c0"/><circle cx="125" cy="60" r="8" fill="#1565c0"/>
+      <circle cx="55" cy="95" r="8" fill="#1565c0"/><circle cx="90" cy="95" r="8" fill="#1565c0"/><circle cx="125" cy="95" r="8" fill="#1565c0"/>
+      <circle cx="55" cy="130" r="8" fill="#1565c0"/><circle cx="90" cy="130" r="8" fill="#1565c0"/><circle cx="125" cy="130" r="8" fill="#1565c0"/>
+      <rect x="250" y="20" width="150" height="140" fill="#ffe0b2" stroke="#ef6c00" stroke-width="2.5"/>
+      <text x="325" y="175" font-size="11" font-weight="700" fill="#a34700" text-anchor="middle">HOT — particles spread out</text>
+      <circle cx="280" cy="45" r="8" fill="#ef6c00"/><circle cx="335" cy="55" r="8" fill="#ef6c00"/><circle cx="370" cy="40" r="8" fill="#ef6c00"/>
+      <circle cx="270" cy="95" r="8" fill="#ef6c00"/><circle cx="330" cy="100" r="8" fill="#ef6c00"/><circle cx="385" cy="90" r="8" fill="#ef6c00"/>
+      <circle cx="290" cy="145" r="8" fill="#ef6c00"/><circle cx="345" cy="140" r="8" fill="#ef6c00"/><circle cx="380" cy="150" r="8" fill="#ef6c00"/>
+    </svg>
+    <div class="svgcap">Both containers hold the exact same 9 particles (the same mass) — but the heated container is bigger, because the particles have spread further apart. Nothing was added or removed, only the space it fills changed.</div>
+    <div class="job"><b>Key idea:</b> heating does NOT add any new mass, and cooling does NOT remove any mass — the exact same amount of matter is still there. Only the VOLUME changes, because the particles themselves are moving more and spreading out (when hot) or staying close together (when cold).</div>
+  </section>
+
+  <!-- SCREEN 5: HEAT CHANGES DENSITY -->
+  <section class="screen" data-s="5">
+    <h2>Why Heating Something Lowers Its Density ⚖️</h2>
+    <div class="rulebar">Density = Mass ÷ Volume. Heating keeps the MASS the same but INCREASES the volume — so the density number goes DOWN.</div>
+    <div class="egrid">
+      <div class="ecell"><div class="ico">🌡️⬆️</div><b>Heating</b><br><small>same mass, bigger volume → LOWER density (less tightly packed)</small></div>
+      <div class="ecell"><div class="ico">🌡️⬇️</div><b>Cooling</b><br><small>same mass, smaller volume → HIGHER density (more tightly packed)</small></div>
+    </div>
+    <div class="job" style="margin-top:10px"><b>Key idea:</b> this works for solids, liquids, and gases — hot air is less dense than cold air, hot water is less dense than cold water, and even hot metal is (very slightly) less dense than cold metal of the same piece.</div>
+  </section>
+
+  <!-- SCREEN 6: BUOYANCY & TEMPERATURE -->
+  <section class="screen" data-s="6">
+    <h2>Buoyancy: Warm Rises Through Cool 🎈</h2>
+    <div class="rulebar">Remember Unit 15's float/sink rule: less dense floats, more dense sinks. Since warm fluid is LESS dense than cool fluid of the SAME substance, warm fluid rises up through the cooler fluid around it.</div>
+    <svg viewBox="0 0 300 200" width="300" height="200" aria-label="Diagram of a hot air balloon rising through cooler surrounding air">
+      <rect x="0" y="0" width="300" height="200" fill="#e1f5fe"/>
+      <ellipse cx="150" cy="80" rx="55" ry="65" fill="#ef6c00" stroke="#a34700" stroke-width="2.5"/>
+      <rect x="135" y="140" width="30" height="24" fill="#8d6e63"/>
+      <text x="150" y="85" font-size="10" font-weight="700" fill="#fff" text-anchor="middle">hot air</text>
+      <path d="M150,20 L150,5" stroke="#c62828" stroke-width="2.5" marker-end="url(#arrowUp)"/>
+      <defs><marker id="arrowUp" markerWidth="8" markerHeight="8" refX="4" refY="7" orient="auto"><path d="M0,8 L4,0 L8,8 Z" fill="#c62828"/></marker></defs>
+      <text x="150" y="188" font-size="10" font-weight="700" fill="#0277bd" text-anchor="middle">cooler air outside</text>
+    </svg>
+    <div class="svgcap">The air inside a hot air balloon is heated, making it less dense than the cooler air outside. Since it's less dense than its surroundings, it rises — exactly like a cork floating up through water, just with air instead of water.</div>
+    <div class="job"><b>Everyday example — a pot of water on a stove:</b> the water at the bottom heats up first, becomes less dense, and rises to the top. Cooler, denser water from the top then sinks down to take its place. This constant swapping is called a <b>convection current</b> — it's also exactly how warm air rises in a room and how weather systems move heat around the planet.</div>
+    <div class="job"><b>Bonus puzzle — why does a heavy steel ship float, when a solid lump of steel sinks?</b> Steel itself IS denser than water — a solid steel block sinks instantly. But a ship isn't solid steel — it's a hollow SHAPE, with a huge amount of empty air space inside its hull. That trapped air spreads the ship's total mass out over a much bigger overall volume, so the ship's OVERALL density (all its steel PLUS all that trapped air, combined) ends up LESS than water's density — even though the steel it's made from is denser on its own. This is the exact same density-vs-liquid rule from Unit 15, just applied to the ship's overall shape instead of to the raw material alone.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Will It Rise or Sink? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Comparing two patches of the SAME substance — is one WARMER than the other?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">The warmer patch</div>
+          <div class="dleaf yes">Less dense → RISES through the cooler patch</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">The cooler patch</div>
+          <div class="dleaf no">More dense → SINKS below the warmer patch</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> this only works when comparing the SAME substance at two different temperatures (warm air vs cool air, warm water vs cool water) — it's really just Unit 15's float/sink rule, applied to temperature differences instead of two totally different substances.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. What happens to a substance's volume when it is heated?</p>
+      <button class="opt">It shrinks</button>
+      <button class="opt">It stays exactly the same</button>
+      <button class="opt">It expands (gets bigger)</button>
+      <button class="opt">It disappears</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — heating makes particles spread out, so the volume expands.</div>
+      <div class="fb no">✘ Re-check Screen 4 — what happens to particles when they're heated?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. A metal rod is heated. Its mass stays exactly the same, but its volume increases slightly. What happens to its density?</p>
+      <button class="opt">It decreases</button>
+      <button class="opt">It increases</button>
+      <button class="opt">It stays exactly the same</button>
+      <button class="opt">It becomes impossible to measure</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — same mass over a bigger volume means the density number goes down.</div>
+      <div class="fb no">✘ Density = Mass ÷ Volume. If volume goes up and mass stays the same, what happens to the answer?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A pot of water is heated from the bottom on a stove. What happens inside the pot?</p>
+      <button class="opt">The water at the bottom stays put and never moves</button>
+      <button class="opt">All the water cools down evenly</button>
+      <button class="opt">The coolest water sinks to the very top</button>
+      <button class="opt">The heated water at the bottom becomes less dense and rises, while cooler water sinks to take its place</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — this rising-and-sinking swap is a convection current.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which water becomes less dense, and what does less dense water do?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>4. A hot air balloon rises into the sky after its burner heats the air inside it. Why does this happen?</p>
+      <button class="opt">Heating adds extra mass to the air inside the balloon</button>
+      <button class="opt">The heated air becomes less dense than the cooler air outside, so it rises</button>
+      <button class="opt">Hot air is heavier than cold air, so it floats upward</button>
+      <button class="opt">The balloon's fabric becomes lighter when heated</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the heated air is less dense than the surrounding cooler air, so it rises, exactly like Unit 15's float/sink rule.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what makes the air inside the balloon rise?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>5. Two identical containers hold the exact same substance. Container A is warmer than Container B. Which is denser?</p>
+      <button class="opt">Container B, since it's cooler</button>
+      <button class="opt">Container A, since it's warmer</button>
+      <button class="opt">Both must be equally dense</button>
+      <button class="opt">Temperature has no effect on density at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the cooler substance is more tightly packed, so it's denser.</div>
+      <div class="fb no">✘ Re-check Screen 5 — does heating make something MORE or LESS dense?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e3f2fd;border-color:var(--blue)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--blue)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Go to Test →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_24_Test_DensityBuoyancyThermalExpansion.html';}
+  };
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 24 Test — Chemistry: Density, Buoyancy &amp; Thermal Expansion</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--blue)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 24 Test — Chemistry: Density, Buoyancy &amp; Thermal Expansion</b>
+      <span class="sub" id="hdr-sub">Density Formula • Comparing Densities • Thermal Expansion • Buoyancy &amp; Temperature</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' or 'scenario' questions, ask: what changed, what stayed the same, and what does the evidence actually show?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 24;
+const UNIT_TITLE = "Chemistry: Density, Buoyancy & Thermal Expansion";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Density & Heat Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"What is the correct name for the property that measures how tightly packed an object's mass is within its volume?",
+    options:["Density","Weight","Buoyancy","Volume"], ans:1,
+    why:"Density is how tightly packed an object's mass is within its volume." },
+  { n:2, section:'A', star:0, body:"What is the name for a substance expanding — taking up more space — when it is heated?",
+    options:["Evaporation","Thermal expansion","Condensation","Chemical reaction"], ans:2,
+    why:"Thermal expansion is when heat makes a substance's particles spread out and take up more space." },
+  { n:3, section:'A', star:0, body:"In the density formula, mass is divided by which other value?",
+    options:["Weight","Temperature","Volume","Density"], ans:3,
+    why:"The density formula is Mass divided by Volume." },
+  { n:4, section:'A', star:0, body:"What is the name for a current formed when warmer, less dense fluid rises and cooler, denser fluid sinks to take its place?",
+    options:["Static current","Induction current","Friction current","Convection current"], ans:4,
+    why:"This rising-and-sinking swap between warm and cool fluid is called a convection current." },
+
+  /* ===================== SECTION B — Applying Density & Heat Knowledge (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A small toy car has a mass of 60g and takes up 20cm³ of space. Work out its density.",
+    options:["3 g/cm³","80 g/cm³","1200 g/cm³","0.3 g/cm³"], ans:1,
+    why:"Density = Mass ÷ Volume = 60 ÷ 20 = 3 g/cm³." },
+  { n:6, section:'B', star:1, body:"A small crystal weighs 96g and takes up 12cm³ of space. Work out its density.",
+    options:["108 g/cm³","8 g/cm³","1152 g/cm³","84 g/cm³"], ans:2,
+    why:"Density = Mass ÷ Volume = 96 ÷ 12 = 8 g/cm³." },
+  { n:7, section:'B', star:1, body:"A brass ornament weighs 250g and takes up 25cm³ of space. A ceramic ornament weighs 180g and takes up 20cm³ of space. Which ornament is denser?",
+    options:["The ceramic ornament, because it has the smaller mass of the two","The brass ornament, because it has the bigger mass of the two","The brass ornament, because its calculated density number turns out higher","Both are equally dense, since only one property differs between them"], ans:3,
+    why:"The brass ornament's density is 250÷25=10 g/cm³, the ceramic ornament's is 180÷20=9 g/cm³ — the brass ornament has the higher density number." },
+  { n:8, section:'B', star:1, body:"On a hot summer day, engineers notice railway tracks have grown slightly longer than they were on a cold winter day. What is the BEST explanation?",
+    options:["Railway tracks actually shrink slightly when heated, not expand at all","The tracks were measured incorrectly during the cold winter months","The metal absorbed extra mass directly from the sun's heat energy","The metal expanded because heat made its particles spread further apart"], ans:4,
+    why:"Heat makes the metal's particles spread further apart, so the track expands and grows slightly longer." },
+  { n:9, section:'B', star:1, body:"A fish tank has warmer water near the surface and cooler water near the bottom. Based on what you know about heat and density, why does the warm water stay near the top?",
+    options:["Warm water is less dense than cool water, so it rises and stays near the surface","Warm water is actually heavier than cool water, so it always sinks to the bottom","Cool water always evaporates much faster than warm water does in any tank","Temperature actually has no effect at all on how water layers arrange themselves"], ans:1,
+    why:"Warm water is less dense than cool water, so it rises and stays near the surface, just like the float/sink rule from Unit 15." },
+  { n:10, section:'B', star:1, body:"A solid lump of steel sinks in water, but a large steel cargo ship floats. What is the BEST explanation?",
+    options:["Ships are not actually made of solid steel at all, despite how they look from the outside","The ship's hollow shape spreads its mass over a much bigger volume, making its overall density less than water's","Steel itself somehow becomes less dense than water once it is shaped into a ship's hull","Water pushes much harder against hollow shapes than it does against solid ones, for no particular scientific reason"], ans:2,
+    why:"A ship's hollow shape spreads its mass over a much bigger overall volume, so its overall density ends up less than water's, even though solid steel itself is denser than water." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A sample of iron ore weighs 360g and takes up 40cm³ of space. A sample of granite weighs 175g and takes up 25cm³ of space. Which sample is denser?",
+    options:["The granite sample, because it has the smaller volume of the two","The iron ore sample, because it has the greater mass of the two","The iron ore sample, because its calculated density number turns out higher","Both samples must have equal density, since only one property differs"], ans:3,
+    why:"The iron ore sample's density is 360÷40=9 g/cm³, the granite sample's is 175÷25=7 g/cm³ — the iron ore sample's calculated density is higher." },
+  { n:12, section:'C', star:2, body:"A student tests whether the colour of a saucepan lid affects how quickly water boils. She boils water with a black lid, then again with a silver lid, keeping the stove setting, water amount, and pan exactly the same both times. Both times, the water takes almost exactly the same time to boil. What is the BEST conclusion?",
+    options:["The experiment failed, since a fair test always has to show a difference between the two trials","The silver lid is secretly a little bit faster at heating, but the tiny difference was just too small to measure","Boiling water experiments like this one can never really be tested fairly at all","This was a fair test, and it shows that lid colour genuinely makes little or no difference to boiling time here"], ans:4,
+    why:"Only the lid colour changed and everything else was kept the same, so this was a fair test — and 'no difference' is itself a real, useful result." },
+  { n:13, section:'C', star:2, body:"A jar completely full of water is sealed tightly, then left outside on a very hot day. The water inside heats up. Based on what you know about thermal expansion, what is most likely to happen?",
+    options:["The water will expand and press against the jar, possibly cracking it or forcing the lid off","The water will actually shrink slightly, leaving empty space near the top of the jar","The water's total mass will noticeably increase simply as it gets hotter","Nothing at all will happen, since sealed containers are completely unaffected by any temperature change"], ans:1,
+    why:"Heating makes the water expand, and with the jar sealed and already full, that expansion presses against the jar with nowhere else to go." },
+  { n:14, section:'C', star:2, body:"A radiator is placed near the floor of a room instead of near the ceiling. Based on what you know about warm air and density, why is this the better position for heating the whole room?",
+    options:["Radiators placed near the floor always end up using noticeably less household electricity than ones near the ceiling","The warmed air near the floor becomes less dense and rises, carrying heat upward through the room by convection","Warm air is actually denser than cool air, so it needs to start low down in order to sink properly","Position makes no real difference at all to how effectively a room ends up heating up"], ans:2,
+    why:"Warmed air near the floor becomes less dense and rises, spreading heat through the whole room by convection." },
+  { n:15, section:'C', star:2, body:"Two blocks of wood have the exact same volume, but Block C has more mass than Block D. Which method should you use to find out which one is denser?",
+    options:["Compare their masses only, since volume can be ignored entirely for density in this case","It is impossible to tell without using additional laboratory weighing equipment","Since both blocks share the same volume, just compare their masses to find which is denser","Calculate both densities using the formula, since the shortcut never applies here"], ans:3,
+    why:"Since both blocks share the same volume, the Unit 15 same-size shortcut applies: the one with more mass is denser." },
+  { n:16, section:'C', star:2, body:"A student heats a sealed balloon full of air over a candle, without popping it. The mass of air inside stays exactly the same, but the balloon expands. What happens to the density of the air inside, and why?",
+    options:["It increases, because heating always adds extra mass to a substance","It stays exactly the same, since mass alone determines density","It becomes impossible to know without also measuring temperature directly","It decreases, because the same mass is now spread across a bigger volume"], ans:4,
+    why:"The mass stays the same but the volume increases, so density = mass ÷ volume goes down." },
+  { n:17, section:'C', star:2, body:"A steel ship gets a large hole in its hull and fills with water, but stays just barely afloat because it still has a few sealed air compartments left. If ALL of those air compartments flooded too, what would most likely happen, and why?",
+    options:["The ship would sink, because without trapped air its overall density would end up higher than water's","The ship would still float just fine, because steel itself supposedly never sinks in water at all","The ship would actually float even better than before, because water always makes objects feel lighter","It's completely impossible to predict what would happen in this particular situation"], ans:1,
+    why:"Without any trapped air, the ship's overall density (now mostly solid, water-filled steel) rises above water's density, so it sinks." },
+  { n:18, section:'C', star:2, body:"A scientist has two beakers of the same oil at different temperatures and wants to know which one will rise if both are poured into the same container together. What should she check first?",
+    options:["Whether the two beakers are exactly the same size, since size is what actually determines rising","Whether one beaker's oil is warmer than the other, since warmer oil is less dense and would rise","Whether the oil is currently a solid, a liquid, or a gas, since that is unrelated to rising","It's impossible to know unless she also knows each beaker's exact mass measured in grams"], ans:2,
+    why:"For the same substance at two temperatures, the warmer one is less dense and rises — that's the key thing to check." },
+  { n:19, section:'C', star:2, body:"A jeweller weighs a gold-coloured ring and finds it has a mass of 38.6g. She submerges it in water and finds it displaces exactly 2cm³ of water — that's its volume. Pure gold has a density of about 19.3 g/cm³. Is this ring likely to be genuine gold?",
+    options:["No, since the ring's mass is far too small to be real gold","Yes, but only because the ring looks gold-coloured on the outside","Yes, since 38.6 ÷ 2 = 19.3 g/cm³, which matches gold's known density","No, since density can never be used to identify real metals"], ans:3,
+    why:"Calculating the ring's density (38.6 ÷ 2 = 19.3 g/cm³) matches pure gold's known density, so it is likely genuine." },
+  { n:20, section:'C', star:2, body:"A metal ball is heated until it slightly expands, and its mass stays exactly the same. The warm ball is then dropped into a container of cool water. Which TWO effects happen, in order?",
+    options:["First the ball's density increases due to the heating process, then it definitely floats in the water no matter what","First the ball gains extra mass simply from being heated, then it definitely sinks in the water no matter what","Neither the ball's density nor whether it floats or sinks is affected by heating in any way at all","First the ball's density drops due to heating, then whether it floats or sinks depends on comparing that new density with water's"], ans:4,
+    why:"Heating first lowers the ball's density (same mass, bigger volume); whether it then floats or sinks still depends on comparing its new density to water's." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Density &amp; Heat Basics (warm-up)",
+  B: "SECTION B — Applying Density &amp; Heat Knowledge (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
