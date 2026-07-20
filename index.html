@@ -786,7 +786,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   document.getElementById('h-weeks').textContent = Math.ceil(days/7);
   var curLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n;
   document.getElementById('h-unit').textContent = curLabel;
-  document.getElementById('h-unit-sub').innerHTML = D.currentUnit.status;
+  document.getElementById('h-unit-sub').innerHTML = D.currentUnit.topic;
   document.getElementById('tb-unit').textContent = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'Unit '+D.currentUnit.n;
   var unitTestCount = D.scores.filter(function(s){ return typeof s.unit === 'number'; }).length;
   var milestoneCount = D.scores.filter(function(s){ return typeof s.unit === 'string' && s.unit.charAt(0) === 'M'; }).length;
