@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 25 · Lesson 2 — Flowers to Seeds: Full Cycle &amp; Dispersal</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#eef6fb;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--blue);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e3f2fd;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .job b{color:var(--blue)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdff}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--blue);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .malefemale{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:12px 0}
+  .malecell{border-radius:10px;padding:12px;background:#fff8e1;border:2px solid #f9a825}
+  .femalecell{border-radius:10px;padding:12px;background:#f3e8ff;border:2px solid var(--purple)}
+  .cycle{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:14px 0}
+  .cbox{background:#fafdff;border:2px solid var(--blue);border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;min-width:90px;font-size:.85rem;color:var(--blue)}
+  .carrow{font-size:1.3rem;color:var(--grey)}
+  .dispgrid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0}
+  .dispcell{border-radius:10px;padding:10px;text-align:center;background:#fafdff;border:2px solid var(--line)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdff;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:200px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e3f2fd;color:var(--blue);border:2px solid var(--blue)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌰 Lesson 2 · Flowers to Seeds: Full Cycle &amp; Dispersal</b><span class="pill">Unit 25 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: a flower's male and female parts work together to make a seed — and then the seed still needs a way to travel away from the parent plant.</div>
+    <p>Today you'll lock in the difference between a flower's MALE and FEMALE parts, recap the full journey from pollen to seed, and learn the last missing piece: how seeds actually spread to new places.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">♂️♀️</div><div class="t">Male vs female parts</div><div class="j">anther vs ovary, sorted for good</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🐝</div><div class="t">Full cycle recap</div><div class="j">pollination to fertilization to seed</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌬️</div><div class="t">Seed dispersal</div><div class="j">wind, animals &amp; water</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔍</div><div class="t">Match the method</div><div class="j">a decision tree for dispersal</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> correctly sort flower parts into male and female groups, and match a seed's features to how it most likely spreads away from its parent plant.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 &amp; Unit 17 🔁</h2>
+    <div class="recall">🔁 <b>Remember the flower parts and the cycle?</b> A flower has parts that make pollen and parts that receive pollen and make seeds. Pollen travels from an ANTHER to a STIGMA (pollination), then down the STYLE to join an OVULE inside the OVARY (fertilization) — and the ovule becomes a new seed.</div>
+    <p>Today you'll group those parts into two clear teams so anther and ovary never get muddled again, then find out what happens to the seed AFTER it forms.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Plant breeders control exactly which flower's pollen reaches which flower's stigma to create new crop varieties — which means knowing precisely which parts are male and which are female. And every dandelion clock, burr stuck to a sock, or coconut washed up on a beach is a real example of a seed's journey away from its parent plant.</div>
+    <div class="card">
+      <b>Real life:</b> farmers sometimes use a small paintbrush to move pollen from one flower's anther to another flower's stigma by hand, when they want to control exactly which two plants combine to make seeds.
+    </div>
+  </section>
+
+  <!-- SCREEN 4: MALE VS FEMALE PARTS -->
+  <section class="screen" data-s="4">
+    <h2>Two Teams: Male Parts vs Female Parts ♂️♀️</h2>
+    <div class="rulebar">Every flower part belongs to one of two teams: the STAMEN (male, makes pollen) or the PISTIL (female, receives pollen and makes seeds).</div>
+    <svg viewBox="0 0 340 220" width="340" height="220" aria-label="Diagram of a flower cross-section labelling the male stamen (anther and filament) on the left in orange, and the female pistil (stigma, style, and ovary) on the right in purple">
+      <line x1="170" y1="220" x2="170" y2="150" stroke="#66bb6a" stroke-width="6"/>
+      <ellipse cx="170" cy="150" rx="26" ry="18" fill="#6a1b9a" opacity=".25" stroke="#6a1b9a" stroke-width="2"/>
+      <text x="170" y="155" font-size="10" fill="#4a148c" text-anchor="middle" font-weight="700">ovary</text>
+      <line x1="170" y1="132" x2="170" y2="70" stroke="#8e24aa" stroke-width="5"/>
+      <text x="205" y="105" font-size="10" fill="#4a148c" text-anchor="middle">style</text>
+      <circle cx="170" cy="60" r="11" fill="#ce93d8" stroke="#6a1b9a" stroke-width="2"/>
+      <text x="170" y="40" font-size="10" fill="#4a148c" text-anchor="middle" font-weight="700">stigma</text>
+      <line x1="95" y1="180" x2="130" y2="100" stroke="#f9a825" stroke-width="5"/>
+      <text x="70" y="150" font-size="10" fill="#7a4a00" text-anchor="middle">filament</text>
+      <ellipse cx="133" cy="90" rx="14" ry="10" fill="#ffca28" stroke="#f57f17" stroke-width="2" transform="rotate(-25 133 90)"/>
+      <text x="120" y="65" font-size="10" fill="#7a4a00" text-anchor="middle" font-weight="700">anther</text>
+      <rect x="40" y="192" width="90" height="18" rx="4" fill="#fff8e1" stroke="#f9a825"/>
+      <text x="85" y="205" font-size="10" fill="#7a4a00" text-anchor="middle" font-weight="700">STAMEN (male)</text>
+      <rect x="205" y="192" width="90" height="18" rx="4" fill="#f3e8ff" stroke="#6a1b9a"/>
+      <text x="250" y="205" font-size="10" fill="#4a148c" text-anchor="middle" font-weight="700">PISTIL (female)</text>
+    </svg>
+    <div class="svgcap">The stamen (orange, left) is the anther sitting atop a thin filament. The pistil (purple, right) is the sticky stigma leading down a style into the swollen ovary at the base.</div>
+    <div class="malefemale">
+      <div class="malecell"><b>♂️ STAMEN — male parts</b><br><small><b>Anther:</b> sits on top, makes the powdery pollen.<br><b>Filament:</b> the thin stalk that holds the anther up.</small></div>
+      <div class="femalecell"><b>♀️ PISTIL — female parts</b><br><small><b>Stigma:</b> the sticky top that catches pollen.<br><b>Style:</b> the tube pollen travels down.<br><b>Ovary:</b> holds the ovule(s); becomes the fruit/seed container.</small></div>
+    </div>
+    <div class="job"><b>Memory trick:</b> "Anther" and "stamen" both start with a sound near the front of your mouth, like the word "add" — think of the anther ADDING pollen. "Ovary" sounds like "oven" — think of the ovary as the little oven where the seed actually bakes and grows, tucked at the BASE of the flower, not the top. If a question asks which part MAKES pollen, the answer is always on the male (stamen) team — anther. If it asks which part BECOMES the seed/fruit, the answer is always on the female (pistil) team — ovary.</div>
+  </section>
+
+  <!-- SCREEN 5: FULL CYCLE RECAP -->
+  <section class="screen" data-s="5">
+    <h2>The Full Cycle, Start to Finish 🐝</h2>
+    <div class="cycle">
+      <div class="cbox">🐝 Pollen leaves the anther (male)</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🌸 Lands on a stigma (female) — POLLINATION</div>
+      <div class="carrow">→</div>
+      <div class="cbox">⬇️ Travels down the style</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🥚 Joins an ovule in the ovary — FERTILIZATION</div>
+      <div class="carrow">→</div>
+      <div class="cbox">🌰 Ovule becomes a NEW SEED</div>
+    </div>
+    <div class="job"><b>Key idea:</b> pollination (landing on the stigma) always happens before fertilization (joining an ovule) — and pollination alone doesn't guarantee fertilization will follow. Once fertilized, the ovary often swells into a fruit, protecting the new seeds inside.</div>
+  </section>
+
+  <!-- SCREEN 6: SEED DISPERSAL -->
+  <section class="screen" data-s="6">
+    <h2>The Missing Piece: How Do Seeds Travel? 🌬️</h2>
+    <div class="rulebar">A seed that just falls straight down would have to compete with its own parent plant for light, water, and space — so plants have evolved clever ways to send seeds further away, called SEED DISPERSAL.</div>
+    <svg viewBox="0 0 420 170" width="420" height="170" aria-label="Diagram showing three seed dispersal methods: a fluffy dandelion seed carried by wind, a spiky burr seed stuck to fur, and a coconut floating on water">
+      <circle cx="60" cy="60" r="6" fill="#8d6e63"/>
+      <g stroke="#bdbdbd" stroke-width="1"><line x1="60" y1="60" x2="45" y2="35"/><line x1="60" y1="60" x2="60" y2="28"/><line x1="60" y1="60" x2="75" y2="35"/><line x1="60" y1="60" x2="40" y2="50"/><line x1="60" y1="60" x2="80" y2="50"/></g>
+      <text x="60" y="95" font-size="10" font-weight="700" fill="#546e7a" text-anchor="middle">Wind</text>
+      <text x="60" y="108" font-size="9" fill="#78909c" text-anchor="middle">(dandelion)</text>
+      <circle cx="210" cy="65" r="9" fill="#6d4c41"/>
+      <g fill="#4e342e"><circle cx="203" cy="58" r="1.6"/><circle cx="217" cy="58" r="1.6"/><circle cx="203" cy="72" r="1.6"/><circle cx="217" cy="72" r="1.6"/><circle cx="210" cy="53" r="1.6"/><circle cx="210" cy="77" r="1.6"/></g>
+      <path d="M195,95 Q210,85 225,95 Q225,105 210,108 Q195,105 195,95 Z" fill="#a1887f"/>
+      <text x="210" y="122" font-size="10" font-weight="700" fill="#546e7a" text-anchor="middle">Animal (fur)</text>
+      <text x="210" y="135" font-size="9" fill="#78909c" text-anchor="middle">(burr)</text>
+      <rect x="330" y="90" width="80" height="20" fill="#1565c0"/>
+      <ellipse cx="360" cy="82" rx="16" ry="12" fill="#6d4c41" stroke="#4e342e" stroke-width="1.5"/>
+      <text x="360" y="122" font-size="10" font-weight="700" fill="#546e7a" text-anchor="middle">Water</text>
+      <text x="360" y="135" font-size="9" fill="#78909c" text-anchor="middle">(coconut)</text>
+    </svg>
+    <div class="svgcap">Three real dispersal methods: a fluffy dandelion seed drifting on the wind, a spiky burr seed hitching a ride stuck to an animal's fur, and a coconut floating on ocean currents.</div>
+    <div class="dispgrid">
+      <div class="dispcell"><div style="font-size:1.6rem">🌬️</div><b>Wind</b><br><small>light, feathery, or wing-shaped seeds (dandelion fluff, maple "helicopter" wings) get carried on the breeze</small></div>
+      <div class="dispcell"><div style="font-size:1.6rem">🐿️</div><b>Animals</b><br><small>spiky/hooked seeds (burrs) stick to fur; other seeds are eaten inside fruit and pass through droppings far away</small></div>
+      <div class="dispcell"><div style="font-size:1.6rem">🌊</div><b>Water</b><br><small>tough, buoyant seeds (coconuts) float on rivers or oceans until they wash ashore somewhere new</small></div>
+    </div>
+    <div class="job"><b>Key idea:</b> a seed's physical features are a clue to its dispersal method — feathery or winged shapes suggest wind, hooks or spikes suggest animal fur, and a hard waterproof shell that floats suggests water.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Match the Seed to Its Dispersal Method 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Look closely at the seed's own physical features first.</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">Light, feathery, or winged</div>
+          <div class="dleaf">Wind dispersal</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Spiky, hooked, or inside tasty fruit</div>
+          <div class="dleaf">Animal dispersal</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Hard shell, floats, waterproof</div>
+          <div class="dleaf">Water dispersal</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> when a question describes a seed's shape or texture, match those physical clues to the dispersal method they're built for, rather than guessing randomly.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Which flower part actually becomes the fruit or seed container after fertilization?</p>
+      <button class="opt">Anther</button>
+      <button class="opt">Filament</button>
+      <button class="opt">Ovary</button>
+      <button class="opt">Petal</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the ovary holds the ovule(s) and swells into the fruit/seed container after fertilization.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which team (male or female) is responsible for becoming the seed, and which part specifically?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. Which flower part is on the MALE team and actually makes the pollen?</p>
+      <button class="opt">Anther</button>
+      <button class="opt">Ovary</button>
+      <button class="opt">Stigma</button>
+      <button class="opt">Style</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the anther is part of the male stamen team, and it's where pollen is made.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which team makes pollen, and which specific part does the job?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A seed has a light, fluffy, feathery tuft attached to it, similar to a dandelion. How does this seed most likely travel away from its parent plant?</p>
+      <button class="opt">By floating on water</button>
+      <button class="opt">By sticking to an animal's fur</button>
+      <button class="opt">By being eaten inside a fruit</button>
+      <button class="opt">By drifting on the wind</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a light, feathery tuft is built to catch the wind and drift far from the parent plant.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which dispersal method suits light, feathery seeds?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>4. A seed pod is covered in small hooked spikes that easily catch onto clothing or animal fur. Which dispersal method does this feature suggest?</p>
+      <button class="opt">Water dispersal</button>
+      <button class="opt">Animal dispersal</button>
+      <button class="opt">Wind dispersal</button>
+      <button class="opt">The seed cannot be dispersed at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — hooked spikes are built to catch onto fur (or clothing) and hitch a ride to a new location.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which dispersal method matches hooked, spiky seeds?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. A bee carries pollen from a flower's anther and lands it on a different flower's stigma. What has happened so far, using the correct scientific term?</p>
+      <button class="opt">Fertilization has happened</button>
+      <button class="opt">Dispersal has happened</button>
+      <button class="opt">Pollination has happened</button>
+      <button class="opt">Germination has happened</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — pollen landing on a stigma is called pollination, the step before fertilization.</div>
+      <div class="fb no">✘ Re-check Screen 5 — what is the name for the step where pollen lands on a stigma?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e3f2fd;border-color:var(--blue)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--blue)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Go to Test →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_25_Test_SeedsPlantReproduction.html';}
+  };
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
