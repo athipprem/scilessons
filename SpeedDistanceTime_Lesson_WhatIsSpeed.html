@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 26 · Lesson 1 — What Is Speed?</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .qc{background:#fff8e1;border:1.5px solid #f9a825;border-radius:12px;padding:12px 14px;margin:10px 0}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  /* sorting mini-game */
+  .sortgame{margin:12px 0}
+  .sortparts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+  .sortpart{border:2px solid var(--line);background:#fff;border-radius:10px;padding:9px 16px;font-size:.9rem;font-weight:bold;cursor:pointer;color:var(--ink)}
+  .sortpart.selected{border-color:var(--amber);background:#fff8e1}
+  .sortpart.sorted{opacity:.45;cursor:not-allowed;border-color:var(--green);background:#e8f5e9}
+  .sortbins{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .sortbin{border:2px dashed var(--line);border-radius:12px;padding:16px;text-align:center;font-weight:bold;cursor:pointer;font-size:.95rem}
+  .sortbin[data-bin="stamen"]{border-color:#f9a825;background:#fff8e1;color:#7a4a00}
+  .sortbin[data-bin="pistil"]{border-color:var(--purple);background:var(--purple-l);color:var(--purple)}
+  .sortbin.disabled{cursor:not-allowed;opacity:.6}
+  .sortmsg{text-align:center;margin-top:10px;font-weight:bold;min-height:1.4em}
+  .sortmsg.ok{color:var(--green-d)}
+  .sortmsg.no{color:#c62828}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🚗 Lesson 1 · What Is Speed?</b><span class="pill">Unit 26 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: speed tells us how fast something is moving — and it's always worked out from just TWO things, distance and time, put together.</div>
+    <p>Before the new topic, we're fixing two tricky questions from Unit 25 in a completely new way — not just looking at the same explanation again, but actually practising them differently. Then we'll dig into a brand new topic: speed.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🩸</div><div class="t">Quick Fix: Iron</div><div class="j">a new way to remember it for good</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌸</div><div class="t">Quick Fix: Male vs Female Parts</div><div class="j">sort them yourself this time</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🏎️</div><div class="t">What is speed?</div><div class="j">distance, time, and the speed formula</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⚖️</div><div class="t">Comparing speeds</div><div class="j">who (or what) is faster?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> confidently sort flower parts into male/female teams, explain iron's real job in the body without hesitating, and calculate speed from distance and time.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX — IRON, THE DELIVERY-TRUCK ANALOGY -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix: Iron — A New Way to Picture It 🩸🚚</h2>
+    <div class="rulebar">Picture this: iron atoms are like tiny DELIVERY TRUCKS inside your blood. Their ONE job is picking up oxygen from your lungs and delivering it to every part of your body.</div>
+    <div class="job"><b>The delivery-truck picture:</b> Imagine your blood is a delivery company, and iron atoms are the trucks. Every truck's job is exactly the same: drive to the lungs, pick up a load of oxygen, then deliver it to your muscles, brain, and every other part of your body that needs it to work properly. If you don't have enough iron, you don't have enough delivery trucks — so oxygen doesn't get delivered properly, no matter how much of it is sitting at the "warehouse" (your lungs). That's exactly why low iron makes you feel TIRED (your muscles aren't getting enough oxygen delivered to work well) and look PALE (your blood carries less oxygen-rich red colour around when there aren't enough "trucks" doing their job).</div>
+    <div class="job"><b>Why this matters:</b> the mineral is Iron. The job is carrying oxygen. Every time you see tiredness + paleness in a question, picture the delivery trucks running low — that's Iron, every time.</div>
+    <div class="qc" data-qc-correct="1">
+      <p>Quick Check 1: Using the delivery-truck picture, what is iron's actual job inside your blood?</p>
+      <button class="opt">Carrying oxygen around the body</button>
+      <button class="opt">Fighting off infections and germs</button>
+      <button class="opt">Helping bones grow strong and hard</button>
+      <button class="opt">Breaking down food during digestion</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Correct — iron atoms are the "delivery trucks" whose one job is carrying oxygen around the body.</div>
+      <div class="fb no">✘ Re-check the picture above — what is the ONE job every iron "delivery truck" does?</div>
+    </div>
+    <div class="qc" data-qc-correct="3">
+      <p>Quick Check 2: A doctor tells a patient, "Your delivery trucks are running low." Using the picture from above, what is the doctor really saying about this patient?</p>
+      <button class="opt">Their heart is beating too fast</button>
+      <button class="opt">Their bones are becoming weak</button>
+      <button class="opt">They don't have enough iron, so oxygen isn't being delivered around their body properly</button>
+      <button class="opt">Their eyesight is getting worse</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Correct — "running low on delivery trucks" means low iron, which means oxygen isn't being carried around the body properly.</div>
+      <div class="fb no">✘ Re-check the picture above — what do the "delivery trucks" represent, and what happens when there aren't enough of them?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: QUICK FIX — STAMEN/PISTIL SORTING GAME -->
+  <section class="screen" data-s="3">
+    <h2>Quick Fix: Sort the Flower Parts Yourself 🌸</h2>
+    <div class="rulebar">This time, don't just look at a diagram — sort each part into its team YOURSELF. Click a part, then click the team (STAMEN or PISTIL) you think it belongs to.</div>
+    <div class="job"><b>Quick reminder before you start:</b> STAMEN = male team = ANTHER (makes pollen) + FILAMENT (the stalk holding it up). PISTIL = female team = STIGMA (catches pollen) + STYLE (the tube) + OVARY (becomes the seed/fruit).</div>
+    <div class="sortgame">
+      <div class="sortparts" id="sortparts">
+        <button class="sortpart" data-part="Anther" data-team="stamen">Anther</button>
+        <button class="sortpart" data-part="Stigma" data-team="pistil">Stigma</button>
+        <button class="sortpart" data-part="Filament" data-team="stamen">Filament</button>
+        <button class="sortpart" data-part="Ovary" data-team="pistil">Ovary</button>
+        <button class="sortpart" data-part="Style" data-team="pistil">Style</button>
+      </div>
+      <div class="sortbins">
+        <div class="sortbin" data-bin="stamen">🟡 STAMEN (male team)</div>
+        <div class="sortbin" data-bin="pistil">🟣 PISTIL (female team)</div>
+      </div>
+      <div class="sortmsg" id="sortmsg">Click a part above to start sorting.</div>
+    </div>
+    <div class="job" id="sort-complete-note" style="display:none"><b>All sorted!</b> Anther + Filament = STAMEN (male). Stigma + Style + Ovary = PISTIL (female). Notice the female team has three parts, the male team has two — that's a handy thing to remember too.</div>
+  </section>
+
+  <!-- SCREEN 4: WHY -->
+  <section class="screen" data-s="4">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Speed is everywhere: a speedometer tells a driver how fast their car is going, athletes and coaches use speed to compare runners and swimmers, and pilots and ship captains calculate speed to work out exactly when they'll arrive somewhere.</div>
+    <div class="card">
+      <b>Real life:</b> when you check a maps app before a trip and it tells you "45 minutes to arrive," it's using exactly the speed formula you're about to learn — distance divided by an assumed average speed.
+    </div>
+  </section>
+
+  <!-- SCREEN 5: WHAT IS SPEED -->
+  <section class="screen" data-s="5">
+    <h2>What Is Speed? 🏎️</h2>
+    <div class="rulebar">SPEED = DISTANCE ÷ TIME. It tells you how much distance something covers in a certain amount of time.</div>
+    <div class="job"><b>Worked example:</b> A car travels 100 kilometres in 2 hours. Speed = 100 ÷ 2 = <b>50 km/h</b> (kilometres per hour). This means the car covers 50 kilometres for every hour it drives, on average.</div>
+    <div class="job"><b>Units:</b> speed is usually measured in km/h (kilometres per hour) for cars and long trips, or m/s (metres per second) for shorter, faster things like a sprinter or a ball being thrown.</div>
+    <div class="job"><b>Key idea:</b> the SAME distance covered in LESS time means a HIGHER speed. The SAME distance covered in MORE time means a LOWER speed. Always say this relationship out loud before answering a speed question — it's an easy thing to accidentally flip under a fast read.</div>
+  </section>
+
+  <!-- SCREEN 6: COMPARING SPEEDS -->
+  <section class="screen" data-s="6">
+    <h2>Comparing Speeds ⚖️</h2>
+    <div class="rulebar">To compare who (or what) is faster, work out EACH speed using the same formula, then compare the actual numbers — don't just guess from distance or time alone.</div>
+    <div class="job"><b>Worked example:</b> A cheetah runs 30 metres in 2 seconds (30 ÷ 2 = 15 m/s). A greyhound runs 40 metres in 4 seconds (40 ÷ 4 = 10 m/s). Even though the greyhound covered MORE distance, the cheetah is actually FASTER, because it covered its distance in much less time. This is exactly why you can't compare speeds just by looking at distance or time on their own — you always need to calculate the actual speed for each one.</div>
+    <div class="job"><b>Trap to watch for:</b> a runner who takes MORE time to finish the exact same race distance is the SLOWER one, not the faster one — more time for the same distance always means less speed.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Which Way Round Do I Use the Formula? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Do you already have BOTH the distance travelled AND the time it took?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dleaf">Speed = Distance ÷ Time</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — comparing two speeds instead</div>
+          <div class="dleaf">Work out EACH speed separately first (Distance ÷ Time for each), then compare the two numbers</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> always check what the question actually GIVES you first — distance and time together mean you can calculate speed directly; two separate distance/time pairs mean you calculate each speed first, then compare.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. A scooter travels 40 km in 2 hours. What is its speed?</p>
+      <button class="opt">80 km/h</button>
+      <button class="opt">20 km/h</button>
+      <button class="opt">42 km/h</button>
+      <button class="opt">38 km/h</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — Speed = Distance ÷ Time = 40 ÷ 2 = 20 km/h.</div>
+      <div class="fb no">✘ Re-check Screen 5 — Speed = Distance ÷ Time. Try 40 ÷ 2 again.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. A swimmer covers 50 metres in 25 seconds. A second swimmer covers 50 metres in 20 seconds. Which swimmer is faster?</p>
+      <button class="opt">The first swimmer, since 25 is a bigger number than 20</button>
+      <button class="opt">Both swimmers are exactly the same speed</button>
+      <button class="opt">It's impossible to know without more information</button>
+      <button class="opt">The second swimmer, since they covered the same distance in less time</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — covering the SAME distance in LESS time always means a higher speed.</div>
+      <div class="fb no">✘ Re-check Screen 6 — same distance, less time means what about speed?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. Using the delivery-truck picture, why does low iron make someone feel tired?</p>
+      <button class="opt">Because iron controls how fast the heart beats, and tiredness always follows a slow heartbeat</button>
+      <button class="opt">Because iron is needed to digest food, and undigested food causes tiredness</button>
+      <button class="opt">Because there aren't enough "trucks" to deliver oxygen to the muscles and body properly</button>
+      <button class="opt">Iron has no real connection to tiredness at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — not enough iron means not enough oxygen delivered around the body, which causes tiredness.</div>
+      <div class="fb no">✘ Re-check Screen 2 — what do the "delivery trucks" carry, and what happens when there aren't enough?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Which flower part group makes up the female PISTIL team?</p>
+      <button class="opt">Stigma, style, and ovary</button>
+      <button class="opt">Anther and filament</button>
+      <button class="opt">Petal and sepal</button>
+      <button class="opt">Filament and ovary</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the pistil (female team) is made up of the stigma, style, and ovary.</div>
+      <div class="fb no">✘ Re-check Screen 3 — which three parts together make up the female team?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A go-kart travels 60 km in 3 hours. What is its speed?</p>
+      <button class="opt">180 km/h</button>
+      <button class="opt">20 km/h</button>
+      <button class="opt">63 km/h</button>
+      <button class="opt">57 km/h</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — Speed = Distance ÷ Time = 60 ÷ 3 = 20 km/h.</div>
+      <div class="fb no">✘ Re-check Screen 5 — Speed = Distance ÷ Time. Try 60 ÷ 3 again.</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    if(i===screens.length-1){
+      next.textContent='Next Lesson →';
+    }else{next.textContent='Next →';}
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='SpeedDistanceTime_Lesson_TheDSTTriangle.html';}
+  };
+
+  // Quick Check (Screen 2 recap) - independent lock+feedback, NOT part of the main practice summary
+  const qcQs = [...document.querySelectorAll('.qc[data-qc-correct]')];
+  qcQs.forEach(q => {
+    const correct = +q.dataset.qcCorrect, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #f9a825';
+      chosen = n + 1;
+    });
+    q.querySelector('.qcchk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.qcchk').disabled = true;
+      q.querySelector('.qcchk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // Sorting mini-game (Screen 3)
+  (function(){
+    const parts = [...document.querySelectorAll('.sortpart')];
+    const bins = [...document.querySelectorAll('.sortbin')];
+    const msg = document.getElementById('sortmsg');
+    const completeNote = document.getElementById('sort-complete-note');
+    let selected = null;
+    let sortedCount = 0;
+    const total = parts.length;
+
+    parts.forEach(p => p.onclick = () => {
+      if (p.classList.contains('sorted')) return;
+      parts.forEach(x => x.classList.remove('selected'));
+      p.classList.add('selected');
+      selected = p;
+      msg.textContent = `Now click the team you think "${p.dataset.part}" belongs to.`;
+      msg.className = 'sortmsg';
+    });
+
+    bins.forEach(b => b.onclick = () => {
+      if (!selected) {
+        msg.textContent = 'Click a part first, then click a team.';
+        msg.className = 'sortmsg';
+        return;
+      }
+      if (selected.dataset.team === b.dataset.bin) {
+        selected.classList.remove('selected');
+        selected.classList.add('sorted');
+        selected.textContent = '✔ ' + selected.dataset.part;
+        sortedCount++;
+        msg.textContent = `Correct! ${selected.dataset.part.replace('✔ ','')} is on the ${b.dataset.bin.toUpperCase()} team.`;
+        msg.className = 'sortmsg ok';
+        selected = null;
+        if (sortedCount === total) {
+          msg.textContent = '🎉 All 5 parts sorted correctly!';
+          completeNote.style.display = 'block';
+        }
+      } else {
+        msg.textContent = `Not quite — try a different team for "${selected.dataset.part}".`;
+        msg.className = 'sortmsg no';
+        selected.classList.remove('selected');
+        selected = null;
+      }
+    });
+  })();
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

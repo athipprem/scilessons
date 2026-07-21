@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 26 Test — Physics: Speed, Distance &amp; Time</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),#64b5f6);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--blue);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--blue)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--green),#43a047);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 26 Test — Physics: Speed, Distance &amp; Time</b>
+      <span class="sub" id="hdr-sub">Speed Formula • Distance-Speed-Time Triangle • Comparing Speeds • Average Speed • Fair Testing</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For "explain why" questions, think about the underlying reason, not just the rule.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 26;
+const UNIT_TITLE = "Physics: Speed, Distance & Time";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Speed Formula Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"What is the correct formula for calculating speed?",
+    options:["Speed = Distance ÷ Time","Speed = Time ÷ Distance","Speed = Distance × Time","Speed = Distance + Time"], ans:1,
+    why:"Speed is always calculated as Distance divided by Time." },
+  { n:2, section:'A', star:0, body:"You already know an object's speed and the time it travelled. Which formula finds the distance it covered?",
+    options:["Distance = Speed ÷ Time","Distance = Speed × Time","Distance = Time ÷ Speed","Distance = Speed − Time"], ans:2,
+    why:"When speed and time are known, Distance = Speed × Time." },
+  { n:3, section:'A', star:0, body:"You already know the distance travelled and the speed. Which formula finds the time taken?",
+    options:["Time = Distance × Speed","Time = Speed ÷ Distance","Time = Distance ÷ Speed","Time = Distance − Speed"], ans:3,
+    why:"When distance and speed are known, Time = Distance ÷ Speed." },
+  { n:4, section:'A', star:0, body:"Which of these is a correct unit for measuring speed?",
+    options:["Kilograms — often used when weighing food at a shop","Litres — often used when buying drinks in bottles","Degrees Celsius — often used when checking today's weather","Kilometres per hour — often used when driving on the motorway"], ans:4,
+    why:"Kilometres per hour (km/h) is a standard unit for speed — it tells you distance covered per unit of time." },
+
+  /* ===================== SECTION B — Applying the Speed Formula (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A motorbike covers 150 km in 3 hours. What is its speed?",
+    options:["50 km/h","450 km/h","147 km/h","153 km/h"], ans:1,
+    why:"Speed = Distance ÷ Time = 150 ÷ 3 = 50 km/h." },
+  { n:6, section:'B', star:1, body:"A jogger runs at a steady 12 km/h for 4 hours. How far does she travel?",
+    options:["3 km","48 km","16 km","8 km"], ans:2,
+    why:"Distance = Speed × Time = 12 × 4 = 48 km." },
+  { n:7, section:'B', star:1, body:"A train travels 240 km at a speed of 80 km/h. How long does the journey take?",
+    options:["6 hours","30 hours","3 hours","1.5 hours"], ans:3,
+    why:"Time = Distance ÷ Speed = 240 ÷ 80 = 3 hours." },
+  { n:8, section:'B', star:1, body:"A cheetah runs 30 metres in 2 seconds. A greyhound runs 40 metres in 4 seconds. Which animal is running faster?",
+    options:["The greyhound, because it covered a longer distance overall","Both animals are running at exactly the same speed","It's impossible to tell without knowing the length of the track","The cheetah, because it covers more distance in less time"], ans:4,
+    why:"Cheetah's speed = 30÷2 = 15 m/s. Greyhound's speed = 40÷4 = 10 m/s. The cheetah is faster, even though the greyhound covered more distance overall." },
+  { n:9, section:'B', star:1, body:"A vitamin supplement bottle label reads: \"Iron: essential for helping red blood cells carry oxygen throughout the body.\" Based on this label, what happens if someone doesn't get enough iron?",
+    options:["Their blood can't carry enough oxygen around the body","Their bones become brittle and break more easily","Their eyesight gradually gets worse over time","Their body can't digest food properly"], ans:1,
+    why:"Iron's job is helping blood carry oxygen — not enough iron means not enough oxygen delivered around the body." },
+  { n:10, section:'B', star:1, body:"A student labels a flower diagram and makes ONE mistake: they've written \"STAMEN\" next to the part that includes the stigma, style, and ovary. What should this label actually say?",
+    options:["Stamen is correct as labelled","Pistil","Petal","Sepal"], ans:2,
+    why:"The stigma, style, and ovary together make up the pistil (the female part) — not the stamen." },
+
+  /* ===================== SECTION C — Think Like a Scientist (applied, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A journey is 90 km long and takes 1 hour and 30 minutes. What is the average speed, in km/h?",
+    options:["90 km/h","45 km/h","60 km/h","135 km/h"], ans:3,
+    why:"1 hour 30 minutes = 1.5 hours. Speed = Distance ÷ Time = 90 ÷ 1.5 = 60 km/h." },
+  { n:12, section:'C', star:2, body:"A cyclist rides the first half of a journey at 10 km/h and the second half (the SAME distance) at 30 km/h. Is her average speed for the whole journey exactly 20 km/h — the simple midpoint of 10 and 30?",
+    options:["Yes, average speed is always exactly the midpoint between the two speeds, no matter how much time is spent travelling at each one","No, since she spends less time at the slower speed than the faster one, her true average ends up more than 20 km/h overall","It's impossible to know anything at all about her average speed without extra information about the total distance covered","No, since she spends MORE time riding at the slower 10 km/h speed, her true average speed ends up LESS than the simple midpoint of 20 km/h"], ans:4,
+    why:"Riding at 10 km/h takes much longer to cover the same distance than 30 km/h does, so more time is spent at the slower speed — pulling the true average below the simple midpoint." },
+  { n:13, section:'C', star:2, body:"Two students want to find out which of two toy cars is faster down a ramp. Car A is heavier than Car B. What should they do to make this a FAIR test?",
+    options:["Let both cars start from the same height and be measured the same way, changing nothing except which car is used","Race them down ramps of very different heights instead, since that would better match real-world driving conditions","Add extra weight to Car B until it matches Car A's weight exactly, which would cancel out the speed test entirely","It's impossible to test this fairly at all, since the two cars are naturally built with different weights"], ans:1,
+    why:"A fair test only changes ONE thing (which car is used) while keeping everything else — the ramp height and how it's measured — exactly the same." },
+  { n:14, section:'C', star:2, body:"A hiker walks at a steady speed of 4 km/h for 2 hours and 30 minutes. How far does she walk?",
+    options:["6 km","10 km","8 km","2.5 km"], ans:2,
+    why:"2 hours 30 minutes = 2.5 hours. Distance = Speed × Time = 4 × 2.5 = 10 km." },
+  { n:15, section:'C', star:2, body:"A bus needs to travel 210 km at an average speed of 70 km/h. If it leaves at 9:00am, what time will it arrive?",
+    options:["11:00am","1:00pm","12:00pm","10:30am"], ans:3,
+    why:"Time = Distance ÷ Speed = 210 ÷ 70 = 3 hours. 9:00am plus 3 hours is 12:00pm." },
+  { n:16, section:'C', star:2, body:"Car X travels 100 km in 2 hours. Car Y travels 100 km in 4 hours. Which car is travelling MORE SLOWLY?",
+    options:["Car X, because it took less time to finish","Both cars are travelling at exactly the same speed","It's impossible to tell without knowing the exact route taken","Car Y, because it took longer to cover the exact same distance"], ans:4,
+    why:"Covering the same distance in MORE time always means a LOWER speed — Car Y is the slower car." },
+  { n:17, section:'C', star:2, body:"A cargo van drives the first 100 km of a trip at 50 km/h, then drives the remaining 50 km at 25 km/h. How much total time does the whole trip take?",
+    options:["4 hours","3 hours","2 hours","6 hours"], ans:1,
+    why:"First leg: 100 ÷ 50 = 2 hours. Second leg: 50 ÷ 25 = 2 hours. Total time = 2 + 2 = 4 hours." },
+  { n:18, section:'C', star:2, body:"A weather report says a storm is moving at 15 km/h and is currently 60 km away from a coastal town. Roughly how many hours until it reaches the town, if it keeps the same speed?",
+    options:["15 hours","4 hours","60 hours","3 hours"], ans:2,
+    why:"Time = Distance ÷ Speed = 60 ÷ 15 = 4 hours." },
+  { n:19, section:'C', star:2, body:"Two runners cover the exact same distance. Runner A takes MORE time than Runner B to finish. Which runner had the FASTER average speed?",
+    options:["Runner A, since taking more time to finish a race always means that runner had a faster average speed","Both runners had exactly the same average speed, since they both covered the exact same total distance","Runner B, since taking less time to cover the identical distance means a higher speed","It's impossible to know which runner was faster without being given their exact finishing times"], ans:3,
+    why:"Covering the same distance in LESS time always means a HIGHER speed — Runner B was faster." },
+  { n:20, section:'C', star:2, body:"A student tests two paper airplanes to see which flies faster across a room. Plane A is thrown by Student 1, and Plane B is thrown by Student 2 (a much stronger thrower), both flying the same measured distance. Plane B's time is much shorter. Can the student conclude Plane B's DESIGN is faster?",
+    options:["Yes, since Plane B's flying time was shorter, its design must automatically be the better and faster one","Yes, but only because both planes happen to be paper airplanes built in exactly the same basic way","No, because paper airplanes can never be timed accurately under any circumstances, regardless of who throws them","No, because different throwers may have used different force — more than one thing changed, so this wasn't a fair test"], ans:4,
+    why:"Since two things changed at once (the plane AND the thrower's strength), it's impossible to fairly credit the design alone for the shorter time — this isn't a fair test." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Speed Formula Basics (warm-up)",
+  B: "SECTION B — Applying the Speed Formula (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
