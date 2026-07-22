@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 27 Test — Earth &amp; Space: Models of the Solar System</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),#64b5f6);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--blue);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--blue)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--green),#43a047);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 27 Test — Earth &amp; Space: Models of the Solar System</b>
+      <span class="sub" id="hdr-sub">Geocentric vs Heliocentric • Copernicus • Venus's Phases • Galileo's Evidence • Testing Two Models</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For "explain why" questions, think about the underlying reason, not just the rule.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 27;
+const UNIT_TITLE = "Earth & Space: Models of the Solar System";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Two Models Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"Which model says Earth stays still at the centre, with the Sun and planets circling around it?",
+    options:["Geocentric","Heliocentric","Lunar model","Orbital model"], ans:1,
+    why:"The geocentric model places a still Earth at the centre, with everything else circling it." },
+  { n:2, section:'A', star:0, body:"Which model says the Sun stays still at the centre, with Earth and other planets orbiting it?",
+    options:["Geocentric","Heliocentric","Lunar model","Orbital model"], ans:2,
+    why:"The heliocentric model places a still Sun at the centre, with planets (including Earth) orbiting it." },
+  { n:3, section:'A', star:0, body:"Which scientist proposed the Sun-centred (heliocentric) model?",
+    options:["Newton (a scientist)","Darwin (a scientist)","Copernicus (a scientist)","Einstein (a scientist)"], ans:3,
+    why:"Copernicus proposed the heliocentric model, with the Sun at the centre." },
+  { n:4, section:'A', star:0, body:"Which scientist first observed Venus's phases through a telescope, in 1610?",
+    options:["Copernicus","Newton","Darwin","Galileo"], ans:4,
+    why:"Galileo observed Venus's phases through a telescope in 1610, providing key evidence for the heliocentric model." },
+
+  /* ===================== SECTION B — Applying the Two Models (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A description says: \"In this idea, the ground under your feet never moves, and the Sun rises and crosses the sky each day because the Sun itself is circling around Earth.\" Which model is being described?",
+    options:["Geocentric","Heliocentric","Lunar phase model","Orbital eclipse model"], ans:1,
+    why:"A still Earth with the Sun circling around it describes the geocentric model." },
+  { n:6, section:'B', star:1, body:"A student notices they can't feel Earth moving at all, and every night the stars appear to wheel slowly overhead. Based only on this everyday observation, which model would this student most naturally believe, before any telescope existed?",
+    options:["Heliocentric model","Geocentric model","Lunar orbit model","Neither model at all"], ans:2,
+    why:"A still-feeling Earth and a visibly moving sky naturally led early observers to the geocentric model." },
+  { n:7, section:'B', star:1, body:"A stargazer explains: \"Venus doesn't glow on its own — I'm actually seeing sunlight bouncing off its surface, the same way I see the Moon.\" What is this stargazer correctly describing?",
+    options:["Why Venus is the brightest planet","Why Venus has rings circling around it","Why Venus can show phases like the Moon","Why Venus has no moons of its own"], ans:3,
+    why:"Reflected sunlight is exactly why Venus, like the Moon, can show phases." },
+  { n:8, section:'B', star:1, body:"Under the OLD geocentric model, Venus was pictured as always staying close to the Sun's position in the sky. Based on this, what range of phases should a geocentric believer expect to see through a telescope?",
+    options:["The full range, from crescent to full","Only a completely dark, invisible phase","No phases — Venus should look the same always","Only ever a thin crescent, never more"], ans:4,
+    why:"The geocentric model predicted Venus would only ever show a thin crescent, never a fuller phase." },
+  { n:9, section:'B', star:1, body:"Under the NEW heliocentric model, Venus orbits the Sun independently of Earth's position. Based on this, what range of phases should a heliocentric believer expect to see through a telescope?",
+    options:["The full range, from crescent through to full","Only ever a thin crescent, and nothing more than that","No phases of any kind, ever, under any circumstances","Only a full phase, and never anything like a crescent"], ans:1,
+    why:"The heliocentric model predicted Venus should show the full range of phases, from crescent to full." },
+  { n:10, section:'B', star:1, body:"In 1610, a scientist pointed a telescope at Venus for the first time and carefully recorded what he saw over many nights. Which observation did he actually record?",
+    options:["Venus stayed exactly the same unchanging shape every single night he looked","Venus moved through the full range of phases, from crescent to full","Venus vanished completely from the night sky for an entire year","Venus only ever showed a single, completely full phase and nothing else"], ans:2,
+    why:"Galileo recorded Venus moving through the full range of phases — the observation that confirmed the heliocentric model." },
+
+  /* ===================== SECTION C — Think Like a Scientist (applied, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A scientist says: \"Both the geocentric and heliocentric models explain why the Sun appears to rise and set every day.\" Is this statement true or false, and why?",
+    options:["False — only the heliocentric model has ever been able to explain sunrise and sunset happening","False — only the geocentric model has ever been able to explain sunrise and sunset happening","True — both models were designed to fit the same everyday sky observations equally well","False — neither model has ever been able to explain sunrise or sunset at all"], ans:3,
+    why:"For centuries, both models fit the everyday sky observations equally well, which is why they couldn't be told apart without new evidence." },
+  { n:12, section:'C', star:2, body:"A student argues: \"Since ancient astronomers had no telescopes, they must not have been using any real evidence at all when they proposed the geocentric model.\" What is wrong with this argument?",
+    options:["Nothing is wrong at all — ancient astronomers genuinely used no real evidence whatsoever when forming their ideas","Ancient astronomers actually did have working telescopes available, but they simply chose not to use them at the time","The claim is wrong because the geocentric model was actually proven completely correct by later scientific evidence","The claim is wrong — the geocentric model came from real, careful sky observations, evidence that later turned out misleading"], ans:4,
+    why:"The geocentric model was a reasonable conclusion from real, careful observation, even though it later turned out to be incorrect." },
+  { n:13, section:'C', star:2, body:"A telescope observation shows Venus displaying a full, brightly lit disc, much like a Full Moon. Which model does this specific observation support?",
+    options:["The heliocentric model","The geocentric model","Both models equally","Neither model — this observation is impossible"], ans:1,
+    why:"A full, brightly lit Venus matches only the heliocentric prediction, not the geocentric one." },
+  { n:14, section:'C', star:2, body:"If Galileo had instead observed Venus ALWAYS appearing as a thin crescent, no matter when he looked, what would this have supported?",
+    options:["The heliocentric model","The geocentric model","Both models equally","This observation would have been impossible to make"], ans:2,
+    why:"An always-crescent Venus would have matched the geocentric prediction instead." },
+  { n:15, section:'C', star:2, body:"A student claims: \"Copernicus proved the heliocentric model correct the moment he proposed it, using only his own reasoning.\" Explain what's wrong with this claim.",
+    options:["Nothing is wrong at all — pure reasoning alone was always enough to fully prove any scientific idea correct","Copernicus actually proposed the geocentric, Earth-centred model instead of the heliocentric one","Copernicus's model wasn't proven at the time — later telescope evidence, like Venus's phases, confirmed it was correct","Copernicus never proposed any kind of model describing the solar system whatsoever"], ans:3,
+    why:"Copernicus's idea needed later telescope evidence (Venus's phases) before it could actually be confirmed correct." },
+  { n:16, section:'C', star:2, body:"A student says: \"The old geocentric model was just a silly mistake with no good reasoning behind it.\" Why is this an unfair description of the geocentric model?",
+    options:["Because the geocentric model is actually still widely believed to be completely correct by scientists today","Because hardly anyone throughout history ever seriously believed the geocentric model at all","Because ancient astronomers supposedly never made any real, careful observations of the sky whatsoever","Because the model was a reasonable conclusion from real, careful sky-and-ground observations, before better evidence existed"], ans:4,
+    why:"The geocentric model was a genuinely reasonable conclusion from the evidence available at the time." },
+  { n:17, section:'C', star:2, body:"Which piece of evidence below would be the STRONGEST test for telling the geocentric and heliocentric models apart?",
+    options:["Observing whether Venus ever shows more than a thin crescent phase","Observing whether the Sun appears to rise in the morning sky as usual","Observing whether stars appear scattered across the night sky","Observing whether the Moon shows phases at all during the month"], ans:1,
+    why:"Venus's phase range is the one observation where the two models made clearly different, testable predictions." },
+  { n:18, section:'C', star:2, body:"A classmate says: \"The Moon and Venus show phases for completely different reasons.\" Is this correct?",
+    options:["Yes, the Moon and Venus have completely unrelated, unconnected reasons behind why they show phases","No — both the Moon and Venus reflect sunlight, showing phases because their visible lit portion changes","Yes, because only the Moon actually reflects sunlight while Venus does not reflect any light at all","Yes, because Venus makes its own light entirely, while the Moon reflects light instead of making its own"], ans:2,
+    why:"Both the Moon and Venus reflect sunlight, and their phases work the same way — from a changing view of their lit side." },
+  { n:19, section:'C', star:2, body:"Before Galileo's telescope observation, both models could explain the Sun's daily rising and setting. What made the Venus-phases observation different from earlier evidence?",
+    options:["It was supposedly the first time in all of human history that anyone had ever looked up and observed the night sky","It confirmed once and for all, beyond any possible doubt, that the geocentric model had been correct the whole time","It gave a case where the two models made clearly DIFFERENT predictions that could actually be tested and told apart","It somehow proved, according to this flawed idea, that the planet Venus does not actually exist at all in the sky"], ans:3,
+    why:"Venus's phases gave a testable case where the two models predicted different outcomes, finally allowing them to be told apart." },
+  { n:20, section:'C', star:2, body:"A history book states: \"For centuries, most people accepted the geocentric model not because they were foolish, but because it matched what they could observe with their own eyes.\" What does this best illustrate about how scientific ideas can change?",
+    options:["Scientific ideas never change at all once they have been widely accepted by everyone","Scientific ideas are always chosen completely randomly, without any reasoning behind them","Evidence has never once actually changed anyone's mind about anything throughout all of history","A widely-believed idea can still be overturned by new evidence — a normal, healthy part of science"], ans:4,
+    why:"Science regularly updates even widely-held beliefs when strong new evidence comes in — that's a healthy, normal part of how it works." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Two Models Basics (warm-up)",
+  B: "SECTION B — Applying the Two Models (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

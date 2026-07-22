@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 27 · Lesson 1 — Two Ideas About the Solar System</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .side2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0}
+  .side2>div{border-radius:12px;padding:12px;border:2px solid var(--line);background:#fafdfa}
+  .side2 h3{margin:.1rem 0 .4rem;font-size:1rem}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .fb-summary{display:none;text-align:center;background:#e8f5e9;border-color:var(--green)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🪐 Lesson 1 · Two Ideas About the Solar System</b><span class="pill">Unit 27 · Earth &amp; Space</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: people haven't always believed the Sun is at the centre of the solar system — it took centuries of careful observation to change everyone's mind.</div>
+    <div class="why">🎯 <b>By the end you can:</b> describe the old Earth-centred idea and the newer Sun-centred idea, explain why ancient people believed what they did, and tell which model a description is talking about.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 7 🧠</h2>
+    <div class="recall">You already learned: the Sun is a star at the centre of our solar system. Planets, including Earth, orbit the Sun. The Moon orbits Earth, not the Sun directly.</div>
+    <div class="job"><b>Today we go further:</b> that Sun-centred picture is actually called the <b>heliocentric model</b> — and it wasn't always what people believed. For most of human history, nearly everyone believed the exact opposite: that Earth stood still at the centre, and everything else circled around US.</div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">This is one of the biggest changes of mind in the whole history of science. Understanding WHY people believed the old idea (it made sense from what they could see with their own eyes) and WHY they eventually changed their minds (new evidence, especially from telescopes) teaches you something bigger than astronomy — it teaches you how good evidence can overturn even a belief almost everyone holds.</div>
+    <div class="card"><b>Real life:</b> scientists still update their beliefs today when strong new evidence comes in — that's not a weakness of science, it's exactly how science is supposed to work.</div>
+  </section>
+
+  <!-- SCREEN 4: THE OLD IDEA - GEOCENTRIC -->
+  <section class="screen" data-s="4">
+    <h2>The Old Idea: Earth at the Centre 🌍</h2>
+    <div class="rulebar">GEOCENTRIC MODEL: Earth stays still at the centre. The Sun, Moon, planets, and stars all circle around EARTH.</div>
+    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="110" r="95" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="65" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="35" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="16" fill="#64b5f6" stroke="#1565c0" stroke-width="2"/>
+      <text x="150" y="114" font-size="10" text-anchor="middle" fill="#0d3d66" font-weight="bold">EARTH</text>
+      <circle cx="185" cy="110" r="8" fill="#b0bec5"/>
+      <text x="185" y="128" font-size="9" text-anchor="middle" fill="#546e7a">Moon</text>
+      <circle cx="150" cy="45" r="10" fill="#FFC107"/>
+      <text x="150" y="30" font-size="9" text-anchor="middle" fill="#8a6a00">Sun</text>
+      <circle cx="88" cy="152" r="7" fill="#ef6c00"/>
+      <text x="60" y="165" font-size="9" text-anchor="middle" fill="#a34700">Planets</text>
+    </svg>
+    <div class="svgcap">In this old model, Earth doesn't move at all — the Sun, Moon, and planets are pictured circling around it, one after another.</div>
+    <div class="job"><b>Why people believed this:</b> stand still outside and watch the sky — the Sun appears to rise, cross the sky, and set. The stars appear to wheel overhead at night. You don't FEEL the Earth moving at all under your feet. From this everyday experience alone, "Earth is still, and everything else moves around us" was a completely reasonable conclusion — for thousands of years, this was the accepted scientific model, not a silly mistake.</div>
+  </section>
+
+  <!-- SCREEN 5: THE NEW IDEA - HELIOCENTRIC -->
+  <section class="screen" data-s="5">
+    <h2>The New Idea: Sun at the Centre ☀️</h2>
+    <div class="rulebar">HELIOCENTRIC MODEL: the Sun stays still at the centre. Earth and the other planets all orbit AROUND the Sun.</div>
+    <svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="110" r="95" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="65" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="35" fill="none" stroke="#e0e0e0" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <circle cx="150" cy="110" r="18" fill="#FFC107" stroke="#8a6a00" stroke-width="2"/>
+      <text x="150" y="114" font-size="10" text-anchor="middle" fill="#7a4a00" font-weight="bold">SUN</text>
+      <circle cx="185" cy="110" r="7" fill="#ef6c00"/>
+      <text x="185" y="128" font-size="9" text-anchor="middle" fill="#a34700">Venus</text>
+      <circle cx="150" cy="45" r="9" fill="#64b5f6"/>
+      <text x="150" y="30" font-size="9" text-anchor="middle" fill="#0d3d66" font-weight="bold">Earth</text>
+      <circle cx="88" cy="152" r="8" fill="#a1887f"/>
+      <text x="60" y="165" font-size="9" text-anchor="middle" fill="#5d4037">Mars</text>
+    </svg>
+    <div class="svgcap">In this model, the Sun stays put, and Earth is just one of several planets travelling around it — matching what you already learned in Unit 7.</div>
+    <div class="job"><b>Who changed the picture:</b> a scientist named Copernicus proposed this Sun-centred model. It explained the same everyday sky observations just as well as the old model — so for a long time, there was no way to prove which one was actually correct. That changed once a new tool came along: the telescope.</div>
+  </section>
+
+  <!-- SCREEN 6: DECISION TREE -->
+  <section class="screen" data-s="6">
+    <h2>Which Model Is It Describing? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the description say Earth stays still, with the Sun and planets circling AROUND Earth?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dleaf">GEOCENTRIC model (the old, Earth-centred idea)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — the Sun stays still, Earth and planets circle AROUND the Sun</div>
+          <div class="dleaf">HELIOCENTRIC model (the modern, Sun-centred idea — the one that's actually correct)</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> find the word "centre" in the question and ask — is EARTH sitting still in the centre, or is the SUN sitting still in the centre? Whichever object is described as NOT moving, staying fixed in the middle, tells you which model is being described.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which model is actually correct, matching what modern astronomy has confirmed?</p>
+      <button class="opt">The geocentric model — Earth is still, everything circles Earth</button>
+      <button class="opt">The heliocentric model — the Sun is still, planets circle the Sun</button>
+      <button class="opt">Both models are equally correct today</button>
+      <button class="opt">Neither model has ever been confirmed</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the heliocentric (Sun-centred) model is the one confirmed by evidence.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which model matches what you already learned about the Sun and planets in Unit 7?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Why did ancient people originally believe Earth was still and everything else moved around it?</p>
+      <button class="opt">They had telescopes that proved it</button>
+      <button class="opt">Religious leaders forbade any other idea from being considered</button>
+      <button class="opt">From everyday observation, the sky appears to move while the ground under their feet feels completely still</button>
+      <button class="opt">They had no interest in the night sky at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a still-feeling Earth and a visibly moving sky made the geocentric idea a reasonable, evidence-based conclusion at the time.</div>
+      <div class="fb no">✘ Re-check Screen 4 — what does the sky APPEAR to do, and what does the ground under your feet feel like?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A description says: "The Sun stays fixed in the middle, and Earth is one of several planets travelling in a path around it." Which model is this?</p>
+      <button class="opt">Geocentric</button>
+      <button class="opt">Lunar model</button>
+      <button class="opt">Orbital eclipse model</button>
+      <button class="opt">Heliocentric</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the Sun staying fixed while planets orbit it describes the heliocentric model.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which object is described as staying fixed in the middle here?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Who proposed the Sun-centred model that eventually replaced the older Earth-centred idea?</p>
+      <button class="opt">Copernicus</button>
+      <button class="opt">Newton</button>
+      <button class="opt">Darwin</button>
+      <button class="opt">Einstein</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — Copernicus proposed the heliocentric (Sun-centred) model.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which scientist's name is linked to the Sun-centred model?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. For a long time, why couldn't anyone prove which model — geocentric or heliocentric — was actually correct?</p>
+      <button class="opt">No one had ever thought of the heliocentric idea yet</button>
+      <button class="opt">The two models made completely different predictions about the Sun rising and setting</button>
+      <button class="opt">Both models explained the everyday sky observations (Sun rising/setting, stars wheeling overhead) equally well with only the naked eye</button>
+      <button class="opt">Ancient people had no way to observe the sky at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — without a telescope, both models fit the everyday sky observations equally well.</div>
+      <div class="fb no">✘ Re-check Screen 5 — what changed to finally let scientists tell the two models apart?</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='SolarSystem_Lesson_VenusPhasesEvidence.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got both models clear in your head.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the model comparison for the ones you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
