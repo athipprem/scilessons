@@ -231,13 +231,13 @@
     screens.forEach((s,n)=>s.classList.toggle('active',n===i));
     prev.disabled=i===0;
     dots.textContent=`Screen ${i+1} of ${screens.length}`;
-    next.textContent = (i===screens.length-1) ? 'Finish ✓' : 'Next →';
+    next.textContent = (i===screens.length-1) ? 'Go to Test →' : 'Next →';
     window.scrollTo({top:0,behavior:'smooth'});
   }
   prev.onclick=()=>{if(i>0){i--;render();}};
   next.onclick=()=>{
     if(i<screens.length-1){i++;render();}
-    else{window.location.href='index.html';}
+    else{window.location.href='Tests/Unit_27_Test_ModelsOfTheSolarSystem.html';}
   };
 
   let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
