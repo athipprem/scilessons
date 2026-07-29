@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Milestone_03_Test.html — Milestone Test 3 (Science / Luikishi)
+     ------------------------------------------------------------
+     Built from Milestone_02_Test.html, same milestone format: 40
+     questions, weighted marks (1.25 / 2.5 / 5) matching the real
+     ASMOPSS G4 paper's scale (100 marks total). Covers cumulative
+     content from U21-U29: Physics (Gravity & Air Resistance, Static
+     Electricity, Speed/Distance/Time, Energy/Forces/Simple Machines),
+     Biology (Nutrition/Vitamins, Seeds/Reproduction/Dispersal),
+     Chemistry (Density/Buoyancy/Thermal Expansion), Earth & Space
+     (Solar System Models, Earth's Tilt & Seasons). U30 (Gap-Closure
+     Checkpoint) is review-only with no new content, so it is not
+     separately represented here — its content is the same U21-U29
+     material already covered. No lessons for a milestone test, per
+     project rules. Benchmarked against Milestone 2's 95/100.
+
+     Built under the ANSWER-BALANCE RULE: option lengths balanced,
+     correct-answer position evenly distributed (10 of each across
+     A/B/C/D) — verified quantitatively before this file was
+     finalized. Two flagged carried-forward items from U30's real-
+     result analysis (Exec Summary §37/§38) get dedicated coverage:
+     the force-for-distance bare-recall trade-off, now a confirmed
+     2-instance recurring gap (A15, B12-adjacent applied confirmers),
+     and the new anther-vs-stigma pollen producer/receiver confusion
+     (A10, B16). U30's own priority items also get one confirming
+     rep each: 3-force multi-step grouping (B14, C2) and the magnet-
+     pole diagram-reading care habit (B15).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milestone Test 3 — All Units</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#DAA520; --gold-d:#8a6a00;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Milestone Test 3 — All Units (U21–U30)</b>
+      <span class="sub">Physics &bull; Biology &bull; Chemistry &bull; Earth &amp; Space — cumulative review</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For force problems, sort by direction FIRST. For 'best correction' questions, pick the answer that fixes the claim, not just disagrees with it.</div>
+  <div class="milestone-note">&#127942; This is your THIRD MILESTONE TEST — 40 questions covering everything from Unit 21 through Unit 30, weighted like a real ASMOPSS paper (1.25 / 2.5 / 5 marks) so your score can be compared directly to Milestone Tests 1 and 2.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MILESTONE CONFIG ---------- */
+const MILESTONE_NUM = 3;
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // matches the real ASMOPSS G4 paper's weighting
+const TOTAL_MARKS = 100;                   // 16*1.25 + 16*2.5 + 8*5 = 20 + 40 + 40 = 100
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold as every unit test
+const BASELINE_MARKS = 95;                 // Milestone Test 2's real result, for comparison
+
+const Q = [
+  // Section A — Basic Recall (warm-up, 1.25 marks each)
+  { n:1, section:'A', star:0, body:"Inside a vacuum chamber with the air completely pumped out, a metal wrench and a feather are released together. Which one reaches the bottom first?",
+    options:["They fall at exactly the same rate", "The heavy hammer falls faster", "The light feather falls faster", "Neither one falls at all in a vacuum"], ans:1,
+    why:"With no air resistance, every object falls at exactly the same rate, no matter its mass." },
+  { n:2, section:'A', star:0, body:"What kind of force is air resistance most similar to?",
+    options:["A magnetic force", "A friction-like force", "An electrical force", "A gravitational force"], ans:2,
+    why:"Air resistance acts like friction, slowing an object down as it pushes through the air." },
+  { n:3, section:'A', star:0, body:"Which of these is one of the six main nutrient groups your body needs?",
+    options:["Rocks and minerals", "Sugar and salt only", "Vitamins and minerals", "Just water alone"], ans:3,
+    why:"Vitamins and minerals are one of the six main nutrient groups, alongside carbohydrates, protein, fats, fibre, and water." },
+  { n:4, section:'A', star:0, body:"A long-term lack of Vitamin C in the diet causes a disease called:",
+    options:["Rickets", "Anaemia", "Diabetes", "Scurvy"], ans:4,
+    why:"Vitamin C deficiency causes scurvy, historically common among sailors without fresh fruit." },
+  { n:5, section:'A', star:0, body:"Charging an object by FRICTION works by:",
+    options:["Rubbing two objects to transfer electrons", "Heating two objects until they melt together", "Connecting two objects with a metal wire", "Placing two objects near a magnet"], ans:1,
+    why:"Friction charging transfers electrons between two objects as they rub together." },
+  { n:6, section:'A', star:0, body:"Electrostatic INDUCTION can attract a neutral object toward a charged one:",
+    options:["Only after both objects are heated first", "Without the charged object ever touching it", "Only if the neutral object is made of metal", "Only during a thunderstorm"], ans:2,
+    why:"Induction shifts a neutral object's own electrons around, attracting it without any touching or transfer." },
+  { n:7, section:'A', star:0, body:"Density is calculated using the formula:",
+    options:["Mass + Volume", "Volume ÷ Mass", "Mass ÷ Volume", "Mass × Volume"], ans:3,
+    why:"Density = Mass ÷ Volume — how much mass is packed into a given amount of space." },
+  { n:8, section:'A', star:0, body:"When an object is heated, its mass stays exactly the same, but its volume usually:",
+    options:["Decreases, so its density increases", "Stays exactly the same, so density is unaffected", "Becomes impossible to measure", "Increases, so its density decreases"], ans:4,
+    why:"Heating usually expands an object (same mass, bigger volume), which lowers its density." },
+  { n:9, section:'A', star:0, body:"A seed already has plenty of water and air around it. What one more condition must be present for it to sprout?",
+    options:["Extra warmth", "Direct sunlight", "Fertilizer", "Some soil"], ans:1,
+    why:"Seeds need water, air, and warmth to germinate — sunlight, fertilizer, and soil are not required at this early stage." },
+  { n:10, section:'A', star:0, body:"Which flower part actually PRODUCES the fine, powdery pollen grains?",
+    options:["The stigma", "The anther", "The ovary", "The ovule"], ans:2,
+    why:"The anther is the part of the flower's male stamen that produces pollen — the stigma's job is to catch it, not make it." },
+  { n:11, section:'A', star:0, body:"Speed is calculated using the formula:",
+    options:["Time ÷ Distance", "Distance × Time", "Distance ÷ Time", "Time - Distance"], ans:3,
+    why:"Speed = Distance ÷ Time — how far something travels for each unit of time." },
+  { n:12, section:'A', star:0, body:"The HELIOCENTRIC model of the solar system places which object at the centre?",
+    options:["The Earth", "The Moon", "Venus", "The Sun"], ans:4,
+    why:"The heliocentric model correctly places the Sun at the centre, with planets (including Earth) orbiting around it." },
+  { n:13, section:'A', star:0, body:"The main reason Earth has seasons is:",
+    options:["Earth's tilt, not its distance from the Sun", "Earth's distance from the Sun changing a lot", "The Moon blocking sunlight at different times", "The Sun itself changing temperature throughout the year"], ans:1,
+    why:"Earth's fixed 23.5° tilt, not its distance from the Sun, is what causes the seasons." },
+  { n:14, section:'A', star:0, body:"Scientific work is calculated as:",
+    options:["Force ÷ Time taken", "Force × Distance moved", "Mass × Height only", "Distance moved alone, with no force needed"], ans:2,
+    why:"Work = Force × Distance moved — and it's zero if nothing actually moves, no matter how much force is used." },
+  { n:15, section:'A', star:0, body:"Simple machines like ramps and pulleys let you use LESS force in exchange for:",
+    options:["A smaller amount of energy created", "A shorter amount of time", "A longer distance moved", "A heavier object lifted"], ans:3,
+    why:"Simple machines always trade less force for a longer distance moved — they never create energy for free." },
+  { n:16, section:'A', star:0, body:"A balloon rubbed on hair picks up extra electrons, ending up with more of them than protons overall. Its net charge becomes:",
+    options:["Positive", "Exactly neutral", "Impossible to determine", "Negative overall"], ans:4,
+    why:"Extra electrons (which carry negative charge) give an object an overall negative charge." },
+  // Section B — Applying What You Know (2.5 marks each)
+  { n:17, section:'B', star:1, body:"A frisbee and a small marble are dropped together from a rooftop in ordinary outdoor air, not a vacuum. Which one lands first, and why?",
+    options:["The marble, since air resistance slows the lighter, wider frisbee more", "They land at exactly the same time, since gravity pulls on both equally", "The frisbee, since it is lighter and easier to move", "Neither lands, since air resistance stops both completely"], ans:1,
+    why:"In normal air, air resistance slows the lighter, wider frisbee more, so the small, dense marble lands first." },
+  { n:18, section:'B', star:1, body:"A sailor on a long voyage develops bleeding gums and constant tiredness, with no fresh fruit or vegetables in his diet for months. Which nutrient is he most likely missing?",
+    options:["Extra iron", "Vitamin C", "More calcium", "More fibre"], ans:2,
+    why:"Bleeding gums and exhaustion with no fresh produce are the classic signs of Vitamin C deficiency (scurvy)." },
+  { n:19, section:'B', star:1, body:"A statically-charged comb is held close to a pile of tiny paper scraps, without ever touching them, and the scraps jump up toward the comb. This is an example of:",
+    options:["Friction", "Conduction", "Induction", "Gravity"], ans:3,
+    why:"This is induction — a charged object attracting a neutral one by shifting its electrons, with no touching or transfer." },
+  { n:20, section:'B', star:1, body:"A chunk of granite weighs 45g and fills a space of 15cm³. Calculate its density.",
+    options:["40 g/cm³", "1200 g/cm³", "80 g/cm³", "3 g/cm³"], ans:4,
+    why:"Density = Mass ÷ Volume = 45 ÷ 15 = 3 g/cm³." },
+  { n:21, section:'B', star:1, body:"A radiator heats the air in a room. The air just above it warms up, becomes less dense, and rises toward the ceiling, while cooler air near the floor sinks to replace it. What is this process called?",
+    options:["Convection", "Evaporation", "Condensation", "Dissolving"], ans:1,
+    why:"Convection is warm, less-dense fluid rising while cooler, denser fluid sinks, creating a circulating current." },
+  { n:22, section:'B', star:1, body:"After a flower is successfully pollinated and fertilized, its ovary begins to swell. What is the ovary developing into?",
+    options:["A brand-new flower bud", "Fruit, which holds seeds", "Extra pollen grains made", "A whole new root system"], ans:2,
+    why:"The ovary develops into fruit, which holds and protects the seeds after fertilization." },
+  { n:23, section:'B', star:1, body:"A seed with a fluffy, feathery tuft attached to it is most likely dispersed by:",
+    options:["Water", "Animals eating it", "Carried by the wind", "Bursting open explosively"], ans:3,
+    why:"A fluffy, feathery tuft is a classic wind-dispersal adaptation, helping the seed float on air currents." },
+  { n:24, section:'B', star:1, body:"A bus drives 180 km over 3 hours without stopping. Apply Speed = Distance ÷ Time to find its speed.",
+    options:["108 km/h", "360 km/h", "177 km/h", "60 km/h"], ans:4,
+    why:"180 km ÷ 3 hours = 60 km/h." },
+  { n:25, section:'B', star:1, body:"Suppose you know how fast something is moving (its Speed) and how long it travelled (the Time). Which formula from the DST triangle gives you the Distance covered?",
+    options:["Distance = Speed × Time", "Distance = Speed ÷ Time", "Distance = Time ÷ Speed", "Distance = Speed - Time"], ans:1,
+    why:"Cover up Distance in the triangle and Speed and Time are left side by side — Distance = Speed × Time." },
+  { n:26, section:'B', star:1, body:"For several months, an astronomer tracks Venus and notices it cycles through EVERY phase — from a thin crescent all the way to nearly full — exactly like our Moon does. Which model of the solar system does this evidence support?",
+    options:["The geocentric model", "The heliocentric model", "Neither model, since phases don't matter", "Both models equally"], ans:2,
+    why:"Only the heliocentric model predicts Venus showing a full range of phases — this was Galileo's real 1610 evidence." },
+  { n:27, section:'B', star:1, body:"A family in Australia (Southern Hemisphere) is having a beach barbecue in December. What season are they most likely experiencing?",
+    options:["Winter", "Autumn", "Summer", "Spring"], ans:3,
+    why:"December is summer in the Southern Hemisphere, the opposite season to the Northern Hemisphere at the same time." },
+  { n:28, section:'B', star:1, body:"A 5 kg light fixture is bolted to the ceiling, 3 m above the ground. Apply mechanical energy = mass × 10 × height to find how much energy it has stored.",
+    options:["15 J", "45 J", "11 J", "150 J"], ans:4,
+    why:"5 × 10 × 3 = 150 J." },
+  { n:29, section:'B', star:1, body:"Two workers push a stalled car in the SAME direction — one with 20N, one with 15N. What is the total force on the car?",
+    options:["35N", "5N", "300N", "15N"], ans:1,
+    why:"Same-direction forces add together: 20N + 15N = 35N." },
+  { n:30, section:'B', star:1, body:"At the school fair, three friends drag a wagon: two drag it EAST with 14N and 9N, one drags it WEST with 8N. What is the net force on the wagon, and which way does it move?",
+    options:["31N, east (all added)", "15N, due east", "8N, west", "23N, east"], ans:2,
+    why:"Group by direction first: EAST = 14+9 = 23N. WEST = 8N. Then subtract: 23 − 8 = 15N, moving east." },
+  { n:31, section:'B', star:1, body:"Two bar magnets sit in a row, facing each other. The end of the first magnet pointing toward the second is labelled N. The facing end of the second magnet is labelled S. What happens when they are pushed together?",
+    options:["They repel — like poles always push apart", "Nothing happens unless they are heated first", "They attract — opposite poles pull together", "They spin around in circles"], ans:3,
+    why:"Opposite poles (N and S) attract each other and pull together." },
+  { n:32, section:'B', star:1, body:"A bee visits a flower and pollen grains stick to its legs. When the bee then visits a SECOND flower, which part of that new flower must the pollen land on for fertilization to happen?",
+    options:["The anther, to be produced again", "The petal, for safekeeping", "The root, to be absorbed", "The stigma, to begin pollination"], ans:4,
+    why:"Pollen must land on the stigma of another flower — the anther makes pollen, but the stigma is where it must arrive." },
+  // Section C — Think Like a Scientist (★★ applied, 5 marks each)
+  { n:33, section:'C', star:2, body:"A classmate insists: 'Because heavier objects feel a stronger pull from gravity, they must fall faster than lighter ones everywhere, even in outer space.' What is the BEST correction?",
+    options:["Only true with air resistance — in a vacuum, all objects fall at the same rate", "The claim is completely correct in every possible environment", "Heavy objects never actually fall faster than light ones, in any environment", "Gravity doesn't actually affect falling objects at all, only air resistance does"], ans:1,
+    why:"Gravity pulls all objects at the same rate — the 'heavy falls faster' effect only appears because of air resistance, which vanishes in a vacuum." },
+  { n:34, section:'C', star:2, body:"A toy sled has three ropes attached: two teams pull it forward with 18N and 14N; a third team pulls backward with 9N. What is the net force on the sled, and which way does it move?",
+    options:["32N forward (all added)", "23N total forward", "41N forward", "9N backward"], ans:2,
+    why:"Group by direction first: forward = 18+14 = 32N. Backward = 9N. Then subtract: 32 − 9 = 23N, moving forward." },
+  { n:35, section:'C', star:2, body:"A student claims: 'A block of solid steel will always sink, no matter its shape, since steel is denser than water.' What is the BEST correction?",
+    options:["The claim is correct — no steel object can ever float, regardless of shape", "Steel actually floats naturally, and the claim has it backwards", "A hollow steel shape, like a ship's hull, can float by displacing enough water", "Density has nothing to do with whether an object floats or sinks"], ans:3,
+    why:"A hollow shape displaces much more water than a solid block of the same mass, letting an object made of denser material still float." },
+  { n:36, section:'C', star:2, body:"A student argues: 'Since seeds germinated equally well in a sunny window and a dark cupboard, light must be completely useless to a growing plant, forever.' What is the BEST correction?",
+    options:["The claim is completely correct — light is never needed by a plant at any stage", "Light is actually required for germination, and the experiment must have gone wrong", "Plants only ever need light if they are grown indoors", "Germination doesn't need light, but light matters later for photosynthesis"], ans:4,
+    why:"Germination doesn't require light, but the growing seedling needs light afterward to photosynthesize and make its own food." },
+  { n:37, section:'C', star:2, body:"A student says: 'The geocentric and heliocentric models are just two equally good ways of describing the solar system — neither one is more correct.' What is the BEST correction?",
+    options:["The heliocentric model is correct — Venus phases prove it orbits the Sun", "Both models are equally correct and interchangeable", "The geocentric model is actually the correct one, not the heliocentric model", "Neither model has ever been tested against real evidence"], ans:1,
+    why:"Venus showing a full range of phases (not just crescents) is only possible if it orbits the Sun — real evidence that settled the debate in favour of the heliocentric model." },
+  { n:38, section:'C', star:2, body:"A student in the Northern Hemisphere argues: 'Since Earth is closer to the Sun in January, that must be why it's cold there in January, not hot.' What is the BEST correction?",
+    options:["The claim is correct — distance from the Sun is exactly why January is cold", "Distance barely changes — the tilt away from the Sun causes the cold season", "Earth is actually farthest from the Sun in January, which is why the claim seems to work", "Temperature has nothing to do with the Sun at all"], ans:2,
+    why:"Earth's distance from the Sun barely changes across the year and isn't the cause of seasons — the Northern Hemisphere is actually tilted AWAY from the Sun in January, which is the real cause of the cold." },
+  { n:39, section:'C', star:2, body:"A person holds a heavy box completely still above their head for two full minutes at the gym. A friend says: 'That's a huge amount of scientific work.' Is the friend's use of the word 'work' correct?",
+    options:["Yes, holding something heavy always counts as a large amount of work", "Yes, but only because two minutes is a long time to hold something", "No — since the box never moves, zero scientific work is done", "No, because holding a box doesn't involve any force at all"], ans:3,
+    why:"Scientific work needs force AND movement — since the box stays still, zero work is done, regardless of how much effort or force is involved." },
+  { n:40, section:'C', star:2, body:"Across everything from this term — gravity, nutrition, static electricity, density, seeds, speed, the solar system, seasons, and forces — which idea connects them ALL?",
+    options:["Only living things ever really follow any true scientific rules", "Nothing in nature can really be explained or predicted by science", "Every topic in science is completely unrelated to every other topic", "Every system in nature follows specific, predictable, testable rules"], ans:4,
+    why:"Every topic this term — living or non-living — is made of parts that work together following specific, predictable rules that can be investigated and understood." },
+];
+/* ---------- END MILESTONE CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Basic Recall (warm-up, 1.25 marks each)",
+  B: "SECTION B — Applying What You Know (&#9733;, 2.5 marks each)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied, 5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Milestone Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+    }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your Milestone Test 2 result (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    milestone: MILESTONE_NUM,
+    title: "Milestone Test 3 - All Units (U21-U30)",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `SCI_M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
