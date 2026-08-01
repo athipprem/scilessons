@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 32 · Lesson 1 — Heat vs Temperature</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .qc{background:#fff8e1;border:1.5px solid #f9a825;border-radius:12px;padding:12px 14px;margin:10px 0}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .grid5{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .gcard{border:2px solid var(--line);border-radius:12px;padding:10px 12px;background:#fafdfa}
+  .gcard .h{font-weight:bold;color:var(--green-d);font-size:.95rem}
+  .gcard .b{font-size:.82rem;color:var(--ink);margin-top:4px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  /* sorting mini-game (3-bin, escalated from Unit 26) */
+  .sortgame{margin:12px 0}
+  .sortparts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:14px}
+  .sortpart{border:2px solid var(--line);background:#fff;border-radius:10px;padding:9px 16px;font-size:.9rem;font-weight:bold;cursor:pointer;color:var(--ink)}
+  .sortpart.selected{border-color:var(--amber);background:#fff8e1}
+  .sortpart.sorted{opacity:.45;cursor:not-allowed;border-color:var(--green);background:#e8f5e9}
+  .sortbins{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .sortbin{border:2px dashed var(--line);border-radius:12px;padding:14px 8px;text-align:center;font-weight:bold;cursor:pointer;font-size:.85rem}
+  .sortbin[data-bin="makes"]{border-color:#f9a825;background:#fff8e1;color:#7a4a00}
+  .sortbin[data-bin="catches"]{border-color:var(--purple);background:var(--purple-l);color:var(--purple)}
+  .sortbin[data-bin="becomes"]{border-color:var(--green);background:#e8f5e9;color:var(--green-d)}
+  .sortbin.disabled{cursor:not-allowed;opacity:.6}
+  .sortmsg{text-align:center;margin-top:10px;font-weight:bold;min-height:1.4em}
+  .sortmsg.ok{color:var(--green-d)}
+  .sortmsg.no{color:#c62828}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌡️ Lesson 1 · Heat vs Temperature</b><span class="pill">Unit 32 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: heat and temperature are NOT the same thing — and every material behaves differently as it heats up or cools down.</div>
+    <p>Before the new topic, we're fixing a tricky flower-parts mix-up in a completely new way — not a memory trick this time, but sorting the parts yourself by what job each one actually does. Then: heat vs temperature, and how to measure temperature properly.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🌼</div><div class="t">Quick Fix: Sort by the JOB</div><div class="j">anther, stigma &amp; ovary — no more mix-ups</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌡️</div><div class="t">Heat vs Temperature</div><div class="j">two different things, easy to confuse</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">📏</div><div class="t">Measuring Temperature</div><div class="j">thermometers &amp; the Celsius scale</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Heat or Temperature?</div><div class="j">a decision tree that always works</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> sort flower parts by their real job without hesitating, explain the difference between heat and temperature, and read a thermometer using real Celsius reference points.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX — 3-WAY JOB SORT -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix: Sort by the JOB, Not the Team 🌼</h2>
+    <div class="rulebar">Last time, a memory trick wasn't enough. This time, YOU sort each part into its correct job — no rhymes to remember, just what it actually DOES.</div>
+    <div class="card">
+      <p><b>The problem:</b> on the last test, "anther" kept getting mixed up with "ovary" AND with "stigma" — even after a memory-trick Quick Fix. So this time we're doing something different: three buckets, sorted by JOB.</p>
+      <div class="job"><b>Three different jobs, three different parts:</b><br>🟡 <b>MAKES</b> the pollen → the <b>ANTHER</b><br>🟣 <b>CATCHES</b> the pollen → the <b>STIGMA</b><br>🟢 <b>BECOMES</b> the fruit/seed → the <b>OVARY</b> and the <b>OVULE</b> inside it</div>
+      <p>Notice the verbs are all different: MAKES, CATCHES, BECOMES. If you can remember the verb, you know the part.</p>
+    </div>
+    <div class="sortgame">
+      <div class="rulebar" style="margin-top:0">Click a part below, then click the bucket for its JOB.</div>
+      <div class="sortparts" id="sortparts">
+        <button class="sortpart" data-part="Anther" data-team="makes">Anther</button>
+        <button class="sortpart" data-part="Stigma" data-team="catches">Stigma</button>
+        <button class="sortpart" data-part="Ovary" data-team="becomes">Ovary</button>
+        <button class="sortpart" data-part="Ovule" data-team="becomes">Ovule</button>
+      </div>
+      <div class="sortbins">
+        <div class="sortbin" data-bin="makes">🟡 MAKES the pollen</div>
+        <div class="sortbin" data-bin="catches">🟣 CATCHES the pollen</div>
+        <div class="sortbin" data-bin="becomes">🟢 BECOMES the fruit/seed</div>
+      </div>
+      <div class="sortmsg" id="sortmsg">Click a part above to start sorting.</div>
+    </div>
+    <div class="job" id="sort-complete-note" style="display:none"><b>All sorted!</b> ANTHER makes it. STIGMA catches it. OVARY and OVULE become it. Three different jobs, three different verbs — that's the trick that sticks.</div>
+    <div class="qc" data-qc-correct="3">
+      <p>Quick Check: A gardener notices one part of a flower slowly swelling and turning into a small green pod, right where the flower used to be. Which part is doing this?</p>
+      <button class="opt">The anther, because it makes pollen</button>
+      <button class="opt">The stigma, because it catches pollen</button>
+      <button class="opt">The ovary, because it becomes the fruit</button>
+      <button class="opt">The petal, because it attracts insects</button>
+      <button class="btn next qcchk">Check</button>
+      <div class="fb ok">✔ Correct — the ovary is the part that swells and BECOMES the fruit after fertilization.</div>
+      <div class="fb no">✘ Think about the verb "becomes" — which part's whole job is to grow INTO the fruit? That's the ovary, not the anther (which makes pollen) or the stigma (which catches it).</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: QUICK RECALL -->
+  <section class="screen" data-s="3">
+    <h2>Quick Recall from Units 2, 3 &amp; 24 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 2?</b> Matter can be solid, liquid, or gas — and heating or cooling can change which one it is. 🔁 <b>Remember Unit 3?</b> Some materials (like metal) are good at conducting heat, while others (like wood or plastic) are poor conductors — that's why pot handles are wood, not metal. 🔁 <b>Remember Unit 24?</b> Heating something makes its tiny particles move faster and spread further apart.</div>
+    <p>Today we go one level deeper: what's the actual DIFFERENCE between "heat" and "temperature" — two words people (and even some test questions!) mix up — and how do scientists measure temperature properly?</p>
+  </section>
+
+  <!-- SCREEN 4: WHY -->
+  <section class="screen" data-s="4">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Heat and temperature show up everywhere: checking if you have a fever, following a recipe's oven temperature, dressing for the weather, or an engineer choosing materials that can survive extreme heat or cold. ASMOPSS papers ask heat/temperature questions regularly — it's one of the most frequently recurring topics across past papers.</div>
+    <div class="card"><b>Real life:</b> a nurse uses a thermometer to check your temperature when you're sick; a chef relies on the oven's temperature dial to cook food safely; engineers test how bridge materials expand and contract across a whole year's range of temperatures before choosing them.</div>
+  </section>
+
+  <!-- SCREEN 5: HEAT VS TEMPERATURE -->
+  <section class="screen" data-s="5">
+    <h2>Heat vs Temperature: Not the Same Thing! 🌡️</h2>
+    <div class="rulebar">TEMPERATURE is how hot or cold something is — one single number. HEAT is the TOTAL amount of thermal energy inside something, added up across every single particle.</div>
+    <div class="card">
+      <p><b>A useful comparison:</b> imagine a small cup of hot tea (95°C) and a huge bathtub full of warm water (35°C).</p>
+      <ul style="margin:6px 0 0 20px;padding:0">
+        <li>The <b>tea has a HIGHER temperature</b> — each particle, on average, is moving faster.</li>
+        <li>But the <b>bathtub has MORE heat overall</b> — there are so many more particles in all that water, even though each one is moving a bit slower on average.</li>
+      </ul>
+      <p style="margin-top:8px">If you poured the tea into the bathtub, the huge tub would barely warm up at all — but the tiny cup of tea would cool down a LOT. That's because the bathtub's much bigger total heat energy overwhelms the tea's smaller total, even though the tea started off hotter.</p>
+    </div>
+    <div class="job"><b>Key rule:</b> TEMPERATURE = how fast particles are moving, on average (one number). HEAT = the total thermal energy of ALL the particles added together (depends on both temperature AND how much stuff there is).</div>
+  </section>
+
+  <!-- SCREEN 6: MEASURING TEMPERATURE -->
+  <section class="screen" data-s="6">
+    <h2>Measuring Temperature: The Celsius Scale 📏</h2>
+    <div class="rulebar">Scientists measure temperature with a THERMOMETER, using a scale called degrees Celsius (°C).</div>
+    <svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" aria-label="A vertical thermometer diagram marking 0 degrees C water freezing, 37 degrees C body temperature, and 100 degrees C water boiling">
+      <rect x="145" y="15" width="30" height="140" rx="15" fill="#fff" stroke="#546e7a" stroke-width="2.5"/>
+      <circle cx="160" cy="175" r="24" fill="#e53935" stroke="#546e7a" stroke-width="2.5"/>
+      <rect x="152" y="60" width="16" height="110" fill="#e53935"/>
+      <line x1="175" y1="30" x2="195" y2="30" stroke="#546e7a" stroke-width="1.5"/>
+      <text x="200" y="34" font-size="11" font-weight="bold" fill="#1565c0">100°C — water BOILS</text>
+      <line x1="175" y1="95" x2="195" y2="95" stroke="#546e7a" stroke-width="1.5"/>
+      <text x="200" y="99" font-size="11" font-weight="bold" fill="#c05621">37°C — your body</text>
+      <line x1="175" y1="150" x2="195" y2="150" stroke="#546e7a" stroke-width="1.5"/>
+      <text x="200" y="154" font-size="11" font-weight="bold" fill="#1b5e20">0°C — water FREEZES</text>
+    </svg>
+    <div class="svgcap">Three reference points worth knowing by heart: water freezes into ice at 0°C, a healthy human body is about 37°C, and water boils into steam at 100°C. A warm day in Thailand is usually around 30-35°C.</div>
+    <div class="job"><b>No conversions needed:</b> we always use Celsius (°C) — not Fahrenheit. Converting between the two involves a formula that's beyond what you need for ASMOPSS; just get comfortable reading and comparing Celsius numbers directly.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Heat or Temperature? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Is the question about ONE number (how hot something feels), or a TOTAL amount added up?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">One single number, a reading on a thermometer</div>
+          <div class="dleaf">TEMPERATURE</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">A total amount of thermal energy, depends on how much stuff there is too</div>
+          <div class="dleaf">HEAT</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> if a question just asks "how hot is it?" or gives you a thermometer reading, that's temperature. If a question talks about total energy, or compares a big amount of something to a small amount at a similar temperature, that's heat.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which flower part CATCHES the pollen?</p>
+      <button class="opt">The anther</button>
+      <button class="opt">The stigma</button>
+      <button class="opt">The ovule</button>
+      <button class="opt">The petal</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the stigma is the part that catches pollen.</div>
+      <div class="fb no">✘ Re-check Screen 2 — CATCHES the pollen is the stigma's job.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>2. At what temperature does water freeze into ice?</p>
+      <button class="opt">37°C</button>
+      <button class="opt">100°C</button>
+      <button class="opt">50°C</button>
+      <button class="opt">0°C</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — water freezes at 0°C.</div>
+      <div class="fb no">✘ Re-check Screen 6 — the freezing point of water is 0°C.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. A large swimming pool (30°C) and a small mug of hot chocolate (60°C) are compared. Which statement is correct?</p>
+      <button class="opt">The pool has a higher temperature than the mug</button>
+      <button class="opt">The mug has more total heat energy than the pool</button>
+      <button class="opt">The mug has a higher temperature, but the pool has more total heat energy</button>
+      <button class="opt">Temperature and heat are always exactly the same thing</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the mug is hotter (higher temperature), but the pool has vastly more water, so it holds more total heat energy overall.</div>
+      <div class="fb no">✘ Re-check Screen 5 — the smaller, hotter object has the higher TEMPERATURE, but the much bigger object usually holds more total HEAT.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A doctor checks a child's temperature and the thermometer reads 37°C. What does this tell the doctor?</p>
+      <button class="opt">The child's temperature is completely normal, matching healthy human body temperature</button>
+      <button class="opt">The child has a dangerously high fever</button>
+      <button class="opt">The thermometer must be broken, since 37°C sounds too low</button>
+      <button class="opt">This reading only makes sense if converted to Fahrenheit first</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — 37°C is the normal, healthy human body temperature.</div>
+      <div class="fb no">✘ Re-check Screen 6 — 37°C is the reference point for a healthy human body, not a fever.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>5. Two identical buckets of water are heated on the exact same stove for the exact same amount of time. What happens to their TOTAL heat energy compared to before?</p>
+      <button class="opt">It stays exactly the same, since heat and temperature never change together</button>
+      <button class="opt">It decreases, since heating always removes some mass</button>
+      <button class="opt">Only the temperature increases; the heat energy is unaffected</button>
+      <button class="opt">Both the temperature AND the total heat energy increase</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — heating adds thermal energy, so both the temperature (how hot it feels) and the total heat energy (added up across all the particles) increase together.</div>
+      <div class="fb no">✘ Re-check Screen 5 — heating a substance increases both its temperature AND its total heat energy at the same time.</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Heat_Lesson_TransferAndMaterials.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! Heat, temperature, and flower jobs are all locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  // Sorting mini-game (Screen 2) - 3-bin version
+  (function(){
+    const parts = [...document.querySelectorAll('.sortpart')];
+    const bins = [...document.querySelectorAll('.sortbin')];
+    const msg = document.getElementById('sortmsg');
+    const completeNote = document.getElementById('sort-complete-note');
+    let selected = null;
+    let sortedCount = 0;
+    const total = parts.length;
+
+    parts.forEach(p => p.onclick = () => {
+      if (p.classList.contains('sorted')) return;
+      parts.forEach(x => x.classList.remove('selected'));
+      p.classList.add('selected');
+      selected = p;
+      msg.textContent = `Now click the job you think "${p.dataset.part}" belongs to.`;
+      msg.className = 'sortmsg';
+    });
+
+    bins.forEach(b => b.onclick = () => {
+      if (!selected) {
+        msg.textContent = 'Click a part first, then click a job bucket.';
+        msg.className = 'sortmsg';
+        return;
+      }
+      if (selected.dataset.team === b.dataset.bin) {
+        selected.classList.remove('selected');
+        selected.classList.add('sorted');
+        selected.textContent = '✔ ' + selected.dataset.part;
+        sortedCount++;
+        msg.textContent = `Correct! ${selected.dataset.part.replace('✔ ','')} goes in the "${b.textContent.trim()}" bucket.`;
+        msg.className = 'sortmsg ok';
+        selected = null;
+        if (sortedCount === total) {
+          msg.textContent = '🎉 All 4 parts sorted correctly!';
+          completeNote.style.display = 'block';
+        }
+      } else {
+        msg.textContent = `Not quite — try a different bucket for "${selected.dataset.part}".`;
+        msg.className = 'sortmsg no';
+        selected.classList.remove('selected');
+        selected = null;
+      }
+    });
+  })();
+
+  // Quick Check (Screen 2 recap) - independent lock+feedback, NOT part of the main practice summary
+  const qcQs = [...document.querySelectorAll('.qc[data-qc-correct]')];
+  qcQs.forEach(q => {
+    const correct = +q.dataset.qcCorrect, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #f9a825';
+      chosen = n + 1;
+    });
+    q.querySelector('.qcchk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.qcchk').disabled = true;
+      q.querySelector('.qcchk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 32 · Lesson 2 — Heat Transfer & Materials</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .grid5{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0}
+  .gcard{border:2px solid var(--line);border-radius:12px;padding:10px 12px;background:#fafdfa}
+  .gcard .h{font-weight:bold;color:var(--green-d);font-size:.95rem}
+  .gcard .b{font-size:.82rem;color:var(--ink);margin-top:4px}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔥 Lesson 2 · Heat Transfer &amp; Materials</b><span class="pill">Unit 32 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: heat always moves from HOTTER things to COOLER things — and it can travel in three different ways.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔥</div><div class="t">Three Ways Heat Travels</div><div class="j">conduction, convection, radiation</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧤</div><div class="t">Insulators vs Conductors</div><div class="j">which materials block heat, which let it through</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧊</div><div class="t">Melting, Freezing &amp; Boiling</div><div class="j">what heat does to materials at key temperatures</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Which way is it traveling?</div><div class="j">a decision tree that always works</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name and identify the three ways heat travels, explain why some materials insulate and others conduct heat well, and predict what happens to a material at its melting, freezing, and boiling points.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Lesson 1 &amp; Unit 6 🔁</h2>
+    <div class="recall">🔁 <b>Remember Lesson 1?</b> Heat is the total thermal energy in something; temperature is one single number. Water freezes at 0°C, your body is about 37°C, water boils at 100°C. 🔁 <b>Remember Unit 6?</b> Metals are good conductors — of BOTH electricity AND heat. Wood, plastic, and rubber are poor conductors of both (good insulators).</div>
+    <p>Today: exactly HOW heat travels from one place to another, which materials let it through easily and which block it, and what actually happens to a material at those key temperatures.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Choosing the right material for a pot handle, an oven mitt, a winter coat, or a cooler box all comes down to understanding exactly how heat travels and which materials can block it. This shows up constantly in cooking, staying warm or cool, and even in how buildings and spacecraft are designed.</div>
+    <div class="card"><b>Real life:</b> firefighters wear special heat-resistant suits; a thermos flask is specially built with a gap that blocks all three ways heat can travel, keeping a drink hot OR cold for hours; builders choose insulating materials for walls and roofs to keep houses comfortable without wasting energy.</div>
+  </section>
+
+  <!-- SCREEN 4: THREE WAYS HEAT TRAVELS -->
+  <section class="screen" data-s="4">
+    <h2>Three Ways Heat Travels 🔥</h2>
+    <div class="rulebar">Heat always travels from HOTTER things to COOLER things — but it can do this in three different ways: conduction, convection, and radiation.</div>
+    <svg viewBox="0 0 460 190" xmlns="http://www.w3.org/2000/svg" aria-label="Three diagrams comparing conduction through a metal spoon, convection in a pot of water, and radiation from the Sun to Earth across empty space">
+      <text x="75" y="16" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#1b5e20">CONDUCTION</text>
+      <rect x="35" y="60" width="80" height="14" fill="#bdbdbd" stroke="#546e7a" stroke-width="1.5"/>
+      <circle cx="35" cy="67" r="16" fill="#e53935"/>
+      <text x="75" y="95" font-size="8" text-anchor="middle" fill="#546e7a">heat passes through touching solid</text>
+      <text x="75" y="107" font-size="8" text-anchor="middle" fill="#546e7a">(e.g. a metal spoon in hot soup)</text>
+
+      <line x1="155" y1="10" x2="155" y2="180" stroke="#e0e0e0" stroke-width="1"/>
+
+      <text x="230" y="16" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0d47a1">CONVECTION</text>
+      <rect x="195" y="45" width="70" height="55" rx="6" fill="#e3f2fd" stroke="#1565c0" stroke-width="1.5"/>
+      <path d="M215 90 q5 -12 0 -24 q-5 -12 0 -24" fill="none" stroke="#e53935" stroke-width="2"/>
+      <path d="M245 90 q-5 -12 0 -24 q5 -12 0 -24" fill="none" stroke="#e53935" stroke-width="2"/>
+      <text x="230" y="115" font-size="8" text-anchor="middle" fill="#546e7a">warm liquid/gas rises,</text>
+      <text x="230" y="127" font-size="8" text-anchor="middle" fill="#546e7a">cool sinks (a moving current)</text>
+
+      <line x1="310" y1="10" x2="310" y2="180" stroke="#e0e0e0" stroke-width="1"/>
+
+      <text x="390" y="16" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#c05621">RADIATION</text>
+      <circle cx="345" cy="70" r="16" fill="#fdd835" stroke="#c05621" stroke-width="1.5"/>
+      <circle cx="435" cy="70" r="12" fill="#90caf9" stroke="#1565c0" stroke-width="1.5"/>
+      <line x1="363" y1="65" x2="421" y2="65" stroke="#c05621" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="363" y1="72" x2="421" y2="72" stroke="#c05621" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="363" y1="79" x2="421" y2="79" stroke="#c05621" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="390" y="105" font-size="8" text-anchor="middle" fill="#546e7a">travels as invisible rays,</text>
+      <text x="390" y="117" font-size="8" text-anchor="middle" fill="#546e7a">even through empty space</text>
+    </svg>
+    <div class="svgcap"><b>Conduction:</b> heat passes directly through a touching solid, particle to particle (a metal spoon left in hot soup gets hot at the handle too). <b>Convection:</b> heat moves through a LIQUID or GAS as warmer, less dense parts rise and cooler, denser parts sink, creating a moving current (recall Unit 24's pot of water — this is that same idea, given its proper name). <b>Radiation:</b> heat travels as invisible rays, and — unlike the other two — it doesn't need to touch anything or have any material in between at all.</div>
+    <div class="job"><b>The giveaway for radiation:</b> it's the ONLY one of the three that can cross completely empty space (a vacuum) — that's exactly how the Sun's heat reaches Earth across millions of kilometres of empty space, and how you feel a campfire's warmth on your face without touching it.</div>
+  </section>
+
+  <!-- SCREEN 5: INSULATORS/CONDUCTORS + STATE CHANGES -->
+  <section class="screen" data-s="5">
+    <h2>Blocking Heat, and What Heat Does to Materials 🧤</h2>
+    <div class="rulebar">Good heat CONDUCTORS let heat pass through quickly (metals). Good heat INSULATORS slow heat down (wood, plastic, rubber, and even trapped air).</div>
+    <div class="job"><b>Why this matters for everyday objects:</b> saucepan handles are wood or plastic, not metal, so YOU don't get burned by conducted heat. Oven mitts are thick with lots of trapped air inside — air itself is a poor conductor, so a fluffy pocket of trapped air blocks heat really well. A thermos flask uses an insulating gap (often with trapped air or even a vacuum) to slow down all three ways heat can travel at once.</div>
+    <div class="rulebar">Heating and cooling a material can also change its STATE — solid, liquid, or gas — and this always happens at a specific, fixed temperature for that substance.</div>
+    <div class="card">
+      <p><b>Melting point</b> = the temperature where a SOLID turns into a LIQUID (ice melting into water).<br>
+      <b>Freezing point</b> = the temperature where a LIQUID turns into a SOLID (water freezing into ice).<br>
+      <b>Boiling point</b> = the temperature where a LIQUID turns into a GAS (water boiling into steam).</p>
+    </div>
+    <div class="job"><b>Sneaky but important:</b> for any one substance, the melting point and freezing point are the EXACT SAME temperature — just going in opposite directions. Water melts AND freezes at exactly 0°C; whether it's called "melting" or "freezing" just depends on which direction the change is happening (solid→liquid, or liquid→solid). Water boils at 100°C, from Lesson 1's thermometer screen.</div>
+  </section>
+
+  <!-- SCREEN 6: DECISION TREE -->
+  <section class="screen" data-s="6">
+    <h2>How Is the Heat Traveling? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">How is the heat getting from one place to another?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">Direct touching, through a solid</div>
+          <div class="dleaf">CONDUCTION</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Moving through a liquid or gas, warm rises &amp; cool sinks</div>
+          <div class="dleaf">CONVECTION</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Invisible rays, no touching needed, even through empty space</div>
+          <div class="dleaf">RADIATION</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> first ask if anything is TOUCHING (conduction). If not, ask if it's moving through a liquid or gas as a current (convection). If it can cross empty space with nothing touching or flowing at all, it's radiation.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. Which of the three ways heat travels is the ONLY one that can cross completely empty space?</p>
+      <button class="opt">Conduction</button>
+      <button class="opt">Convection</button>
+      <button class="opt">Radiation</button>
+      <button class="opt">All three can cross empty space equally well</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — radiation is the only one that doesn't need any material to travel through.</div>
+      <div class="fb no">✘ Re-check Screen 4 — only radiation can cross a complete vacuum, like the space between the Sun and Earth.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. A metal ladle is left resting inside a pot of hot stew. After a few minutes, the handle (which never touched the stew directly) feels hot too. What is this an example of?</p>
+      <button class="opt">Conduction — heat passing directly through the touching metal</button>
+      <button class="opt">Convection — a current of moving liquid</button>
+      <button class="opt">Radiation — invisible rays crossing empty space</button>
+      <button class="opt">None of these — metal cannot transfer heat at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — heat conducted along the touching metal, from the hot part to the handle.</div>
+      <div class="fb no">✘ Re-check Screen 4 — heat passing through a solid, touching object is conduction.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>3. A bowl of soup is heated on a stove. Warmer soup rises to the top while cooler soup sinks to the bottom, over and over, until it's evenly hot. What is this called?</p>
+      <button class="opt">Conduction</button>
+      <button class="opt">Convection</button>
+      <button class="opt">Radiation</button>
+      <button class="opt">Evaporation</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — this rising-and-sinking current in a liquid or gas is convection.</div>
+      <div class="fb no">✘ Re-check Screen 4 — warm rising, cool sinking, forming a current in a liquid or gas, is convection.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. Why are oven mitts usually thick and padded, rather than thin like a single layer of fabric?</p>
+      <button class="opt">Thick fabric looks nicer in a kitchen</button>
+      <button class="opt">Thick fabric is a better electrical conductor</button>
+      <button class="opt">Thick fabric is heavier, and heavier objects always insulate better</button>
+      <button class="opt">The thickness traps more air inside, and trapped air is a poor heat conductor, so it insulates your hand well</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — more trapped air means better insulation, since air is a poor conductor of heat.</div>
+      <div class="fb no">✘ Re-check Screen 5 — the thickness matters because it traps more air, and trapped air blocks heat well.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>5. A block of ice is left out and melts into water at 0°C. Later, that same water is put in a freezer and turns back into ice. At what temperature does it freeze?</p>
+      <button class="opt">0°C — the exact same temperature it melted at</button>
+      <button class="opt">-10°C, always a lower temperature than melting</button>
+      <button class="opt">37°C, the same as body temperature</button>
+      <button class="opt">There is no fixed freezing temperature for water</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — melting point and freezing point are the same temperature for a given substance, just in opposite directions.</div>
+      <div class="fb no">✘ Re-check Screen 5 — for any substance, the melting point and freezing point are the exact same temperature.</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_32_Test_HeatTemperatureAndMaterials.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! Heat transfer and materials are all locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>

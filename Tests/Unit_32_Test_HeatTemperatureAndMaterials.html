@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 32 Test — Physics: Heat, Temperature &amp; Materials</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 32 Test — Physics: Heat, Temperature &amp; Materials</b>
+      <span class="sub" id="hdr-sub">Heat vs temperature • Heat transfer • Materials • Thinking like a scientist</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 32;
+const UNIT_TITLE = "Physics: Heat, Temperature & Materials";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  // Section A — Warm-up (recall) — 4 questions
+  { n:1, section:'A', star:0, body:"Once pollen has travelled to a new flower, which sticky part receives it there?",
+    options:["The stigma","The anther","The ovary","The petal"], ans:1,
+    why:"The stigma is the sticky part that catches pollen. The anther MAKES pollen, and the ovary BECOMES the fruit." },
+  { n:2, section:'A', star:0, body:"Which Celsius reading marks the point where water turns into steam?",
+    options:["0°C","100°C","37°C","50°C"], ans:2,
+    why:"Water boils at 100°C — one of the three key Celsius reference points to know." },
+  { n:3, section:'A', star:0, body:"Which of these correctly describes TEMPERATURE?",
+    options:["The total thermal energy added up across every particle","Always exactly the same as heat","A single number showing how hot or cold something is","A measurement that only applies to liquids"], ans:3,
+    why:"Temperature is one single number describing how hot or cold something is. Heat is the TOTAL thermal energy, which is a different thing." },
+  { n:4, section:'A', star:0, body:"Which of these correctly describes CONDUCTION?",
+    options:["Heat travelling as rays through empty space","A moving current within a liquid or gas","Heat that only ever moves upward through objects","Heat passing directly through touching particles"], ans:4,
+    why:"Conduction is heat passing directly through a touching solid. Convection is a moving current in a liquid/gas, and radiation travels as rays, even through empty space." },
+
+  // Section B — Applying What You Know — 6 questions
+  { n:5, section:'B', star:1, body:"An Olympic-sized swimming pool is warmed to 26°C, and a hot clothes iron reaches 150°C. Which statement is correct?",
+    options:["The iron is hotter, but the pool holds more total heat","The pool is hotter than the iron overall","The iron holds more total heat energy than the pool","Temperature and total heat energy are always identical"], ans:1,
+    why:"The iron is much hotter (higher temperature), but the pool contains a vastly greater number of particles, so its TOTAL heat energy is far greater, even at a lower temperature." },
+  { n:6, section:'B', star:1, body:"Which material would be the WORST choice for the handle of a metal cooking pot placed directly over a flame?",
+    options:["Wood","Metal","Plastic","Rubber"], ans:2,
+    why:"Metal is a good heat conductor, so a metal handle would quickly become too hot to hold. Wood, plastic, and rubber are poor conductors (good insulators), keeping the handle safer to touch." },
+  { n:7, section:'B', star:1, body:"A radiator heats the air near it. That warm air rises to the ceiling, and cooler air near the floor moves in to replace it, creating a slow-moving current around the room. What is this an example of?",
+    options:["Conduction","Radiation","Convection","Evaporation"], ans:3,
+    why:"Warm air rising and cooler air sinking to replace it is a convection current — heat moving through a moving gas." },
+  { n:8, section:'B', star:1, body:"Astronauts on a spacewalk feel the Sun's heat directly on their spacesuits, even though there is no air or any material at all in the empty space between the Sun and their suits. How does this heat reach them?",
+    options:["Conduction, since the suit is touching sunlight","Convection, since heat always rises in space","It cannot reach them at all without air in between","Radiation, which can cross completely empty space"], ans:4,
+    why:"Radiation is the only one of the three heat-transfer methods that can cross a complete vacuum, with no matter in between at all — exactly how the Sun's heat reaches Earth and astronauts in space." },
+  { n:9, section:'B', star:1, body:"A metal bar is heated until it turns from a solid into a liquid at exactly 1200°C. What is 1200°C called, for this particular metal?",
+    options:["Its melting point","Its boiling point","Its freezing point","Its temperature point"], ans:1,
+    why:"The temperature at which a solid turns into a liquid is called the melting point — every substance has its own specific melting point." },
+  { n:10, section:'B', star:1, body:"Two identical mugs of hot chocolate are made at the exact same time. One is wrapped in a thick wool sock, the other is left bare. After 10 minutes, which mug will be hotter, and why?",
+    options:["The bare mug, because wool always makes drinks colder","The wrapped mug, because wool traps air and insulates, slowing down heat loss","Both will be exactly the same temperature, since wrapping makes no difference","The bare mug, because metal mugs conduct heat better without wrapping"], ans:2,
+    why:"Wool traps pockets of air, and trapped air is a poor conductor of heat — so the wrapped mug loses heat more slowly and stays hotter." },
+
+  // Section C — Think Like a Scientist — 10 questions
+  { n:11, section:'C', star:2, body:"A bee brushes against a dusty yellow structure on one flower, picking up fine powder on its legs. It flies to a second flower and rubs against a tall sticky structure in the centre, leaving some powder behind. Weeks later, a swollen green structure at the base of the SECOND flower begins growing into a fruit. Put these three flower parts in the correct order: which part released the powder, which part received it, and which part is now becoming the fruit?",
+    options:["Stigma released it; anther received it; ovule becomes the fruit","Ovary released it; anther received it; stigma becomes the fruit","Anther released it; stigma received it; ovary becomes the fruit","Anther released it; ovary received it; stigma becomes the fruit"], ans:3,
+    why:"The anther MAKES and releases pollen, the stigma CATCHES it, and the ovary BECOMES the fruit — three different jobs, three different parts, in that order." },
+  { n:12, section:'C', star:2, body:"Someone touches a metal spoon and a wooden spoon that have both been sitting on the same kitchen counter all day, so they're both at room temperature. The metal spoon feels noticeably colder. They conclude: 'The metal spoon must actually be at a lower temperature than the wooden spoon.' Is this conclusion correct?",
+    options:["Yes — metal is always naturally colder than wood","Yes — metal cannot hold any heat energy at all","No — wood conducts heat better than metal does","No — same temperature; metal just feels colder"], ans:4,
+    why:"Both spoons are genuinely at the same room temperature. Metal simply conducts heat away from your warm hand much faster than wood does, which is why it FEELS colder to the touch, even though it isn't actually colder." },
+  { n:13, section:'C', star:2, body:"A tiny thimble of water and a large fish tank of water are both heated until they reach exactly the same temperature, 40°C. Which one took MORE total heat energy to reach that temperature, and why?",
+    options:["The fish tank — it has far more water (particles)","The thimble — small amounts always need more energy","Neither — heating always uses the same energy","The thimble — it heats up faster than the tank"], ans:1,
+    why:"The fish tank has vastly more water — far more particles — so raising ALL of them to 40°C takes much more total heat energy than raising the small thimble to the same temperature." },
+  { n:14, section:'C', star:2, body:"A student wraps four identical ice cubes in four different materials (wool, foil, plastic wrap, and newspaper) and places all four in the same sunny spot at the same time, then times how long each takes to fully melt. What has she kept the SAME to make this a fair test?",
+    options:["The wrapping material used on each of the four cubes","Cube size, location, and start time — only the wrapping changes","The final melting time recorded for every single cube","Nothing at all — every part of the setup was different"], ans:2,
+    why:"A fair test changes only ONE thing (the wrapping material here) while keeping everything else — the ice cube size, location, and starting time — exactly the same." },
+  { n:15, section:'C', star:2, body:"Using the wrapped-ice-cube experiment above: wool took 90 minutes to melt, foil took 40 minutes, plastic wrap took 55 minutes, and newspaper took 70 minutes. Which material was the BEST insulator?",
+    options:["Foil — it melted the fastest of the four","Plastic wrap — its time was in the middle","Wool — took the longest time to melt","Newspaper — paper is always the best insulator"], ans:3,
+    why:"The BEST insulator blocks the MOST heat, so its ice cube takes the LONGEST to melt. Wool's 90 minutes was the longest time of the four, making it the best insulator here." },
+  { n:16, section:'C', star:2, body:"A camper stands near a campfire on a cold, still night. They feel warmth on their face from the flames without touching them, notice smoke and hot air rising straight up above the fire, and see that the metal tip of a stick left resting in the fire has become too hot to hold. Which THREE types of heat transfer are all happening at once here?",
+    options:["Only radiation — the other two need moving objects","Only conduction and convection — no radiation here","Only convection — fire always heats by moving air","All three: conduction, convection, and radiation together"], ans:4,
+    why:"All three are present at once: the warmth felt on the face is radiation, the rising smoke/hot air is convection, and the stick heating up from touching the fire is conduction." },
+  { n:17, section:'C', star:2, body:"A scientist cools a liquid substance. At exactly -39°C, it turns solid. What is -39°C called for this substance, and could the substance also turn back into a liquid at that exact same temperature?",
+    options:["Freezing point — yes, same temperature either direction","Boiling point — no, melting is always higher","Melting point — no, freezing and melting always differ","Freezing point — no, once frozen it can never melt again"], ans:1,
+    why:"The temperature where a liquid turns solid is its freezing point. For any one substance, the freezing point and melting point are the EXACT SAME temperature, just depending on which direction the change happens." },
+  { n:18, section:'C', star:2, body:"An engineer is choosing a material for a spacecraft's outer heat shield, which must survive intense radiant heat as the spacecraft re-enters the atmosphere. Should the engineer choose a good heat conductor or a good heat insulator for this job, and why?",
+    options:["A good conductor — the heat spreads and disappears","A good insulator — keeps outside heat from reaching inside","It doesn't matter — radiation ignores materials","A good conductor — heat is absorbed into the structure"], ans:2,
+    why:"A good insulator is needed so the intense outside heat is blocked from conducting through to the people and equipment inside — the same principle as an oven mitt, just at a much bigger scale." },
+  { n:19, section:'C', star:2, body:"Two students argue about whether the empty space between the Earth and the Sun should stop the Sun's heat from ever reaching Earth, since space has no air or matter to conduct or convect heat through. Who is correct?",
+    options:["Both are correct — heat cannot cross empty space at all","They're correct, but only during the day","Neither — radiation crosses empty space with no matter needed","Correct, but only because sunlight is a special exception"], ans:3,
+    why:"Radiation is the one heat-transfer method that doesn't need any material to travel through, so the Sun's heat easily crosses the empty vacuum of space to reach Earth." },
+  { n:20, section:'C', star:2, body:"Which statement correctly links heat, temperature, and how materials respond to them?",
+    options:["Heat and temperature always mean the exact same thing","Only liquids and gases are able to transfer heat at all","Temperature only matters for weather, not for cooking","Heat is total energy; temperature is one single reading"], ans:4,
+    why:"Heat (a total) and temperature (a single reading) are related but different, and materials like metals, wood, plastic, and trapped air all respond to and transfer heat very differently, depending on what they're made of." }
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-up (recall)",
+  B: "SECTION B — Applying What You Know (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
