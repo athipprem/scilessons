@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 33 · Lesson 2 — A Closer Look at Underground Stems</title>
+<style>
+  :root{
+    --blue:#1565c0; --blue-d:#0d47a1; --blue-l:#e3f2fd;
+    --amber:#ef6c00; --amber-l:#fff3e8; --purple:#6a1b9a; --purple-l:#f3e8ff;
+    --green:#2e7d32; --green-l:#e8f5e9; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --soil:#8d6e63; --tuber:#c98a4b; --bulb:#f4c95d; --rhizome:#e0a458; --corm:#b5651d;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f7fb;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--blue);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--blue-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--blue-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--blue)}
+  .job b{color:var(--blue-d)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfe;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfe}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--blue-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .grid4{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0}
+  .type{border-radius:12px;padding:12px;border:2px solid var(--line);background:#fafbfe}
+  .type h3{margin:.1rem 0 .3rem;font-size:1rem}
+  .type .ex{font-size:.8rem;color:var(--grey)}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+  .cbox{border-radius:12px;padding:14px;border:2px solid var(--line)}
+  .cbox.root{background:#e8f5e9;border-color:var(--green)}
+  .cbox.stem{background:#fff3e8;border-color:var(--amber)}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfe;max-width:500px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:210px}
+  .dlbl{font-size:.72rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 12px;text-align:center;font-weight:bold;font-size:.82rem;background:#e3f2fd;color:var(--blue-d);border:2px solid var(--blue)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--blue);color:#fff}
+  .btn.hub{background:var(--green);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🥔 Lesson 2 · A Closer Look at Underground Stems</b><span class="pill">Unit 33 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: some of the vegetables you eat every week are secretly STEMS in disguise, not roots — and there are actually FOUR different kinds of underground stem.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Quick Recall</div><div class="j">the buds/eyes test from Unit 1</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🥔</div><div class="t">4 Types of Underground Stem</div><div class="j">tuber, bulb, rhizome, corm</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🥕</div><div class="t">Storage Roots vs Stem Tubers</div><div class="j">carrot & sweet potato are NOT stems</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Veggie Classifier Tree</div><div class="j">sort any vegetable correctly</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> tell the difference between a tuber, bulb, rhizome, and corm, and correctly classify any underground vegetable — even tricky ones like carrots and sweet potatoes.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 1 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 1?</b> A potato is NOT a root — it's a STEM that grows underground and stores food. The test that proves it: a stem has BUDS (the "eyes" on a potato, where new shoots can sprout). Roots never have buds. Onion, ginger, and turmeric are underground stems too — while carrot, radish, and sweet potato are true roots.</div>
+    <p>Today we go deeper: underground stems actually come in FOUR different shapes, and there's an easy way to tell true roots and true stems apart even when they look confusingly similar (like potato vs sweet potato).</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Farmers, chefs, and gardeners all rely on knowing exactly which part of a vegetable they're growing or cooking — a bulb like an onion is planted differently from a tuber like a potato, and a rhizome like ginger can be replanted from a single cut piece because every piece with a bud can grow a whole new plant. ASMOPSS often tests this exact kind of "classify the vegetable" applied reasoning, not just memorised names.</div>
+    <div class="card"><b>Real life:</b> when you plant a piece of ginger with a bud on it, a whole new ginger plant grows from that one bud — that's only possible because ginger is a STEM (stems have buds), and it's exactly the same reason potato "eyes" can grow new potato plants.</div>
+  </section>
+
+  <!-- SCREEN 4: FOUR TYPES OF UNDERGROUND STEM -->
+  <section class="screen" data-s="4">
+    <h2>Four Types of Underground Stem 🥔</h2>
+    <div class="rulebar">All four are STEMS (they all have buds!) — but each one is shaped completely differently.</div>
+    <svg viewBox="0 0 340 220" xmlns="http://www.w3.org/2000/svg" aria-label="Comparison diagram of four underground stem types: a potato tuber with eyes, an onion bulb made of layered leaf scales around a short stem, a ginger rhizome growing sideways, and a taro corm as a solid swollen stem base">
+      <rect x="0" y="0" width="340" height="220" fill="#f5ede0"/>
+      <ellipse cx="55" cy="70" rx="34" ry="26" fill="#c98a4b"/>
+      <circle cx="42" cy="60" r="2.5" fill="#5d3a1a"/><circle cx="65" cy="55" r="2.5" fill="#5d3a1a"/>
+      <circle cx="50" cy="82" r="2.5" fill="#5d3a1a"/><circle cx="68" cy="78" r="2.5" fill="#5d3a1a"/>
+      <text x="55" y="112" font-size="9.5" text-anchor="middle" fill="#3e2723" font-weight="bold">TUBER (potato)</text>
+      <text x="55" y="123" font-size="8" text-anchor="middle" fill="#5d4037">eyes = buds all over</text>
+
+      <g transform="translate(140,45)">
+        <path d="M30 20 Q10 40 15 60 Q18 78 30 84 Q42 78 45 60 Q50 40 30 20Z" fill="#f4c95d" stroke="#c9971f" stroke-width="1.5"/>
+        <path d="M30 24 Q18 42 21 58 Q23 72 30 78" fill="none" stroke="#c9971f" stroke-width="1"/>
+        <path d="M30 24 Q42 42 39 58 Q37 72 30 78" fill="none" stroke="#c9971f" stroke-width="1"/>
+        <rect x="26" y="80" width="8" height="6" fill="#8d6e63"/>
+        <text x="30" y="100" font-size="9.5" text-anchor="middle" fill="#3e2723" font-weight="bold">BULB (onion)</text>
+        <text x="30" y="111" font-size="8" text-anchor="middle" fill="#5d4037">layers = modified leaves</text>
+      </g>
+
+      <g transform="translate(210,55)">
+        <path d="M10 30 Q40 15 70 30 Q75 32 70 38 Q40 25 12 40 Q8 36 10 30Z" fill="#e0a458" stroke="#a86a2a" stroke-width="1.5"/>
+        <circle cx="20" cy="33" r="2.2" fill="#5d3a1a"/><circle cx="45" cy="24" r="2.2" fill="#5d3a1a"/><circle cx="63" cy="32" r="2.2" fill="#5d3a1a"/>
+        <text x="40" y="60" font-size="9.5" text-anchor="middle" fill="#3e2723" font-weight="bold">RHIZOME (ginger)</text>
+        <text x="40" y="71" font-size="8" text-anchor="middle" fill="#5d4037">grows sideways, buds along it</text>
+      </g>
+
+      <g transform="translate(255,110)">
+        <ellipse cx="30" cy="35" rx="26" ry="22" fill="#b5651d" stroke="#7a3f0f" stroke-width="1.5"/>
+        <circle cx="20" cy="26" r="2.2" fill="#3e2312"/><circle cx="38" cy="24" r="2.2" fill="#3e2312"/><circle cx="30" cy="46" r="2.2" fill="#3e2312"/>
+        <text x="30" y="70" font-size="9.5" text-anchor="middle" fill="#3e2723" font-weight="bold">CORM (taro)</text>
+        <text x="30" y="81" font-size="8" text-anchor="middle" fill="#5d4037">solid, swollen stem base</text>
+      </g>
+    </svg>
+    <div class="svgcap">All four have buds somewhere on them — that's the proof they're stems, not roots.</div>
+    <div class="grid4">
+      <div class="type"><h3>🥔 TUBER</h3>A swollen underground stem, round and lumpy, with buds ("eyes") scattered all over its surface.<div class="ex">Example: potato</div></div>
+      <div class="type"><h3>🧅 BULB</h3>Made of layers wrapped tightly around a very short stem at the base — the layers are actually modified leaves, not the stem itself!<div class="ex">Example: onion, garlic</div></div>
+      <div class="type"><h3>🫚 RHIZOME</h3>A stem that grows sideways, just under the soil, with buds spaced out along its length that can each sprout a new shoot.<div class="ex">Example: ginger, turmeric</div></div>
+      <div class="type"><h3>🌿 CORM</h3>A solid, swollen stem base (not made of layers like a bulb) with a few buds on top and sides.<div class="ex">Example: taro, crocus</div></div>
+    </div>
+    <div class="job"><b>Easy way to remember bulb vs the rest:</b> cut a bulb in half and you'll see rings, like an onion — those rings are layers of modified leaves protecting the tiny short stem at the very center. Cut a tuber, rhizome, or corm in half and it's solid all the way through, because the WHOLE thing is stem tissue.</div>
+  </section>
+
+  <!-- SCREEN 5: STORAGE ROOTS VS STEM TUBERS -->
+  <section class="screen" data-s="5">
+    <h2>Storage Roots vs. Stem Tubers 🥕</h2>
+    <div class="rulebar">Potato and sweet potato look similar and are both called "potato" — but one is a STEM and the other is a TRUE ROOT.</div>
+    <div class="compare">
+      <div class="cbox root">
+        <h3 style="margin-top:0;color:#1b5e20">🥕 Storage Root</h3>
+        <p style="margin:6px 0"><b>Examples:</b> sweet potato, carrot, radish</p>
+        <p style="margin:6px 0">These are TRUE ROOTS that have swollen up to store extra food for the plant. Apply the buds test: a storage root has <b>NO buds anywhere</b> on its surface — smooth all over, sometimes with thin little root hairs, but never an "eye."</p>
+      </div>
+      <div class="cbox stem">
+        <h3 style="margin-top:0;color:#e65100">🥔 Stem Tuber</h3>
+        <p style="margin:6px 0"><b>Example:</b> potato</p>
+        <p style="margin:6px 0">This is a swollen underground STEM. Apply the buds test: a stem tuber is covered in <b>"eyes" (buds)</b> — each one is a real bud that can sprout a brand new plant, exactly like a bud on a branch above ground.</p>
+      </div>
+    </div>
+    <div class="job"><b>The one test that always works:</b> does it have buds ("eyes")? Buds → stem (tuber, bulb, rhizome, or corm). No buds anywhere → true root (a storage root). This is the exact same buds/eyes rule from Unit 1 — it still works perfectly here, even on tricky look-alikes.</div>
+  </section>
+
+  <!-- SCREEN 6: DECISION TREE -->
+  <section class="screen" data-s="6">
+    <h2>Veggie Classifier Tree 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the vegetable have buds ("eyes") anywhere on its surface?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">No buds anywhere — smooth surface</div>
+          <div class="dleaf">STORAGE ROOT (e.g. sweet potato, carrot)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Yes, it has buds — now check the shape</div>
+          <div class="dbox" style="margin:0">Cut it open: is it made of layered rings, or solid all the way through?</div>
+          <div class="dbranch" style="gap:10px">
+            <div class="dcol"><div class="dlbl">Layered rings</div><div class="dleaf">BULB (onion)</div></div>
+            <div class="dcol"><div class="dlbl">Solid, round, buds scattered all over</div><div class="dleaf">TUBER (potato)</div></div>
+            <div class="dcol"><div class="dlbl">Solid, grows sideways, buds spaced along it</div><div class="dleaf">RHIZOME (ginger)</div></div>
+            <div class="dcol"><div class="dlbl">Solid, rounded stem base, few buds on top</div><div class="dleaf">CORM (taro)</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>How to use this:</b> always start with the buds test — it instantly separates true roots from every kind of stem. Only THEN worry about which of the four stem shapes you're looking at.</div>
+  </section>
+
+  <!-- SCREEN 7: PRACTICE -->
+  <section class="screen" data-s="7">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. A vegetable is smooth all over with no buds anywhere on its surface. What is it most likely?</p>
+      <button class="opt">A bulb</button>
+      <button class="opt">A storage root</button>
+      <button class="opt">A rhizome</button>
+      <button class="opt">A corm</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — no buds anywhere means it's a true root that stores food, like a sweet potato or carrot.</div>
+      <div class="fb no">✘ Re-check Screen 5 — a smooth surface with zero buds is the storage-root sign.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>2. You cut a vegetable in half and see rings, like layers wrapped around a tiny short stem in the center. What type of underground stem is this?</p>
+      <button class="opt">A bulb</button>
+      <button class="opt">A tuber</button>
+      <button class="opt">A storage root</button>
+      <button class="opt">A rhizome</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — layered rings around a short central stem is exactly how a bulb, like an onion, is built.</div>
+      <div class="fb no">✘ Re-check Screen 4 — rings of modified leaves around a tiny stem is the bulb's signature.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. Why is a potato classified as a stem and not a root, even though it grows underground?</p>
+      <button class="opt">Because it is orange-brown in colour</button>
+      <button class="opt">Because it grows deep in the soil</button>
+      <button class="opt">Because it has buds ("eyes") that can sprout new shoots</button>
+      <button class="opt">Because it is round in shape</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — buds are the proof: only stems have buds, and a potato's "eyes" are real buds.</div>
+      <div class="fb no">✘ Re-check Screen 2/5 — the buds test is what separates stems from roots, not colour, depth, or shape.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. Ginger grows sideways just under the soil, with buds spaced out along its length. What type of underground stem is ginger?</p>
+      <button class="opt">A bulb</button>
+      <button class="opt">A storage root</button>
+      <button class="opt">A corm</button>
+      <button class="opt">A rhizome</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — growing sideways with buds spaced along its length is the rhizome pattern, just like ginger and turmeric.</div>
+      <div class="fb no">✘ Re-check Screen 4 — a sideways-growing stem with spaced-out buds is a rhizome.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A gardener cuts a piece of ginger that includes one bud, and plants it. A whole new ginger plant grows from that piece. What does this prove about ginger?</p>
+      <button class="opt">Ginger cannot be grown from a cutting</button>
+      <button class="opt">Ginger must be a stem, since only stems have buds that can sprout new plants</button>
+      <button class="opt">Ginger is a type of root, like a carrot</button>
+      <button class="opt">Ginger has no buds at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a new plant sprouting from a bud is only possible because ginger is a stem, and stems are the only part with buds.</div>
+      <div class="fb no">✘ Re-check Screen 3/5 — the buds test again: sprouting from a bud proves it's a stem, not a root.</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_33_Test_PlantStructuresAndAdaptation.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! All four underground stem types and the storage-root rule are locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>

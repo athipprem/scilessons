@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 33 Test — Biology: Plant Structures &amp; Adaptation</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 33 Test — Biology: Plant Structures &amp; Adaptation</b>
+      <span class="sub" id="hdr-sub">Desert & water plant adaptations • Underground stem types • Storage roots • Applied reasoning</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 33;
+const UNIT_TITLE = "Biology: Plant Structures & Adaptation";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  // Section A — Warm-up (recall) — 4 questions
+  { n:1, section:'A', star:0, body:"Which TWO jobs do a plant's roots do?",
+    options:["Anchor the plant in the soil and absorb water and minerals","Support the plant upright and transport food and water","Catch sunlight and make food through photosynthesis","Make seeds and produce fruit for the next generation"], ans:1,
+    why:"Roots have two main jobs: anchoring the plant in the soil, and absorbing water and minerals from it. Stems support and transport; leaves photosynthesize; flowers make seeds." },
+  { n:2, section:'A', star:0, body:"What are the papery layers that make up an onion actually made of?",
+    options:["Modified roots that store water","Modified leaves around a short central stem","Dead skin cells with no living function","Modified stems stacked on top of each other"], ans:2,
+    why:"An onion is a bulb — its layers are modified LEAVES wrapped tightly around a very short stem at the centre." },
+  { n:3, section:'A', star:0, body:"Which job do a plant's leaves mainly do?",
+    options:["Anchor the plant firmly in the ground","Transport pollen from flower to flower","Catch sunlight to make food for the plant","Store extra water for very dry seasons"], ans:3,
+    why:"Leaves catch sunlight and use it to make food for the plant — this process is called photosynthesis." },
+  { n:4, section:'A', star:0, body:"Taro and crocus plants both grow from a solid, rounded underground stem with a few buds on top. Cutting it in half shows solid tissue all the way through, with no layers and no long sideways growth. What is this type of underground stem called?",
+    options:["A tuber","A bulb","A rhizome","A corm"], ans:4,
+    why:"A corm is a solid, swollen underground stem base with buds on top — taro and crocus are classic examples." },
+
+  // Section B — Applying What You Know — 6 questions
+  { n:5, section:'B', star:1, body:"A gardener grows a thick, ridged desert plant whose fleshy stem visibly swells after rain and shrinks again during long dry spells. What is the stem doing?",
+    options:["Releasing all of its stored water into the air to help cool the surrounding soil down","Storing water when it's available and slowly using it up during long dry spells","Growing brand new spines every time it rains to protect against animals","Transporting sugar that the roots make, up through the stem to the leaves"], ans:2,
+    why:"A desert plant's fleshy stem acts as a water tank — swelling as it stores water after rain, then shrinking as that stored water is slowly used up during the dry months." },
+  { n:6, section:'B', star:1, body:"Water hyacinth floats on ponds using a puffy, spongy stem filled with tiny air pockets. What is the MAIN purpose of these air pockets?",
+    options:["To absorb extra sunlight through the stem for photosynthesis","To store extra food for the plant during the winter months","To keep the plant buoyant so it can float on the water's surface","To protect the plant from being eaten by pond insects"], ans:3,
+    why:"The trapped air pockets make the spongy stem buoyant, keeping the whole plant floating at the surface instead of sinking." },
+  { n:7, section:'B', star:1, body:"Garlic is made of several small sections called cloves, each wrapped in thin papery layers, surrounding a short central stem. Which type of underground stem is garlic?",
+    options:["A tuber","A rhizome","A corm","A bulb"], ans:4,
+    why:"Garlic, like onion, is a bulb — layers of modified leaves (forming cloves) wrapped around a short central stem." },
+  { n:8, section:'B', star:1, body:"A gardener digs up a knobbly vegetable called a yam. It has small bumps ('eyes') scattered across its skin, just like a potato. Based on the buds test, what is a yam most likely?",
+    options:["A stem tuber, since eyes are buds and only stems ever grow buds","A storage root, since it grows underground like other roots","A bulb, since its rounded shape looks similar to an onion","Neither a root nor a stem, since potatoes are a separate category"], ans:1,
+    why:"Eyes are buds, and only stems have buds — so a yam, just like a potato, is a stem tuber, not a true root." },
+  { n:9, section:'B', star:1, body:"A desert plant has roots that spread out very wide but stay close to the surface, rather than growing straight down. What is the main advantage of this root shape?",
+    options:["It lets the roots avoid almost all contact with the surrounding desert soil","It lets the roots quickly soak up as much of a rare rainfall as possible","It helps the whole plant grow taller and stronger much more quickly","It stops the plant from ever needing any direct sunlight at all"], ans:2,
+    why:"Desert rain is rare and often light, so spreading wide near the surface lets the roots grab as much of it as possible before it evaporates or sinks too deep." },
+  { n:10, section:'B', star:1, body:"A farmer harvests beets from her garden. Every beet is smooth-skinned from top to bottom, with absolutely no eyes or bumps anywhere. Using the buds test, what part of the plant is a beet?",
+    options:["A stem tuber, similar to a potato","A bulb, similar to an onion","A storage root, similar to a carrot","A rhizome, similar to ginger"], ans:3,
+    why:"No buds anywhere on the surface means it's a true root that has swollen to store food — a storage root, like a beet or sweet potato." },
+
+  // Section C — Think Like a Scientist — 10 questions
+  { n:11, section:'C', star:2, body:"Two students look at a cactus and a duckweed plant side by side. One says: 'Both plants have special water-related body parts, so they must be adapted to live in similar habitats.' Explain what is wrong with this reasoning.",
+    options:["Both plants actually live in exactly the same desert habitat, so the student's reasoning is correct","Duckweed is secretly a desert plant too, so both plants are adapted in the exact same way","Cacti do not actually have any adaptations related to water at all, despite appearances","Their adaptations solve opposite problems: the cactus stores scarce water; duckweed floats on plentiful water"], ans:4,
+    why:"A cactus's water-storing stem solves the problem of TOO LITTLE water; duckweed's floating body and short roots solve the opposite problem of having MORE water than it could ever need. Same theme (water), opposite habitats." },
+  { n:12, section:'C', star:2, body:"A plant is found floating freely on a pond. It has small, flat, round leaves on the surface and short roots that dangle in the water without ever touching the bottom. What job do the roots mainly do now, and why?",
+    options:["Absorb water and minerals only, since the surrounding water already supports the plant","Anchor the plant firmly and permanently to the muddy pond floor below","Make food through photosynthesis instead of relying on the floating leaves","Do nothing useful at all, since floating plants have no real need for roots"], ans:1,
+    why:"Since the water itself supports and holds up the whole plant, the roots' anchoring job disappears — they're left with just ONE job, absorbing water and minerals." },
+  { n:13, section:'C', star:2, body:"A potato left forgotten in a dark kitchen cupboard for several weeks starts growing pale green shoots out of its 'eyes.' What does this sprouting tell you about a potato's eyes?",
+    options:["They are a type of storage root cell that only grows in darkness","They are buds — only stems have buds capable of sprouting new shoots","They are flowers that only bloom without any sunlight at all","They prove that potatoes have no living cells inside them"], ans:2,
+    why:"Sprouting only happens from a bud, so a potato's 'eyes' sprouting new shoots proves they are buds — and only stems have buds." },
+  { n:14, section:'C', star:2, body:"A shopper buys what the store labels a 'yam' and a 'sweet potato.' The 'yam' has small eyes scattered over its skin. The 'sweet potato' is smooth with no eyes anywhere. Using the buds test, which statement is correct?",
+    options:["Both are true roots, since both of them grow entirely underground","Both are stems, simply because both are commonly called potatoes","The 'yam' is a stem tuber since it has buds; the 'sweet potato' is a true root","The 'sweet potato' is actually the stem, and the 'yam' is the root"], ans:3,
+    why:"The buds test settles it: the 'yam' has eyes (buds), making it a stem tuber, while the smooth 'sweet potato' has no buds at all, making it a true storage root." },
+  { n:15, section:'C', star:2, body:"A student cuts two unlabelled underground vegetables in half. Vegetable X shows solid tissue all the way through, with a few buds near one end. Vegetable Y shows layered rings wrapped around a tiny central stem. What are X and Y most likely?",
+    options:["X is a type of bulb; Y is a type of tuber","X is a storage root; Y is a type of corm","X and Y are both types of bulbs","X is a tuber (or corm); Y is a bulb"], ans:4,
+    why:"Solid tissue with buds (X) points to a tuber or corm; layered rings around a tiny central stem (Y) is the bulb's signature." },
+  { n:16, section:'C', star:2, body:"A scientist wants to test whether root shape (wide-and-shallow vs deep-and-narrow) affects how much water a plant can absorb after a light rainfall. Which setup below is the FAIREST test?",
+    options:["Two identical plants, same soil and rainfall, but different root shapes only","Two completely different plants, grown in different soil, but the same root shape","One single plant tested twice, using different amounts of rainfall each time","Two plants with different root shapes, different rainfall, and different soil types"], ans:1,
+    why:"A fair test changes only ONE thing (root shape here) while keeping everything else — the plant, soil, and rainfall amount — exactly the same." },
+  { n:17, section:'C', star:2, body:"A cactus's stem is green and does two jobs that leaves normally do in most other plants. What are these two jobs?",
+    options:["Anchoring the plant firmly and transporting water upward","Making food through photosynthesis and storing water","Making seeds for reproduction and releasing pollen grains","Absorbing minerals from soil and releasing oxygen gas only"], ans:2,
+    why:"With leaves reduced to spines, a cactus's green, fleshy stem takes over BOTH photosynthesis and water storage." },
+  { n:18, section:'C', star:2, body:"A gardener wants to grow a new turmeric plant from a piece of its underground stem. Which piece should they plant to succeed, and why?",
+    options:["Any piece at all, since every part of the plant can grow a new one","Only the very tip of a leaf, since leaves always regrow new stems","A piece of underground stem with at least one bud, since only buds sprout","A piece of true root only, since roots always regrow the fastest"], ans:3,
+    why:"Turmeric's underground stem is a rhizome, and only a piece that includes a bud can sprout a whole new plant — buds are the key, not just any piece of tissue." },
+  { n:19, section:'C', star:2, body:"A pond plant has tiny floating leaves with air pockets and short roots that never reach the bottom. A desert plant has a thick water-storing stem and wide, shallow roots. What do BOTH plants have in common, despite living in such different habitats?",
+    options:["Both plants happen to have exactly the same shape and length of roots","Both plants are completely unable to make their own food whatsoever","Neither of these two plants has ever been shown to grow any leaves","Both have adapted their roots and stems around their habitat's water challenge"], ans:4,
+    why:"Even though one habitat has too little water and the other has too much, both plants show the same PATTERN — every part of their body has adapted around solving the local water challenge." },
+  { n:20, section:'C', star:2, body:"A student is given an unlabelled underground vegetable. It has buds scattered across its surface, and cutting it open shows solid tissue with no layered rings. What is the correct order of reasoning to classify it?",
+    options:["Check for buds first (proves stem vs root), then check if it's layered or solid","Check its outer colour first, then decide if it's a root or stem","Check how deep it grows first, then decide if it has any buds","There is no reliable way to ever classify an underground vegetable"], ans:1,
+    why:"The buds test always comes first — it separates stems from true roots. Only after confirming it's a stem do you check whether it's layered (bulb) or solid (tuber, rhizome, or corm)." }
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-up (recall)",
+  B: "SECTION B — Applying What You Know (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
