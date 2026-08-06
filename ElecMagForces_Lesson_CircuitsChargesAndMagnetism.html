@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 34 · Lesson 1 — Circuits, Charges &amp; Magnetism Recap</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  h3{color:var(--blue);margin:1rem 0 .4rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .map{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .compare{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .compare>div{border-radius:12px;padding:12px}
+  .notmag{background:#efebe9;border:2px solid #8d6e63}
+  .ismag{background:#e8f5e9;border:2px solid var(--green)}
+  svg{display:block;margin:6px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:520px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔌 Lesson 1 · Circuits, Charges &amp; Magnetism Recap</b><span class="pill">Unit 34 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: electricity, static charges, and magnetism are three DIFFERENT invisible forces — but each one follows its own simple, predictable rules.</div>
+    <p>This unit is a RECAP — pulling together everything you've learned about circuits (Unit 6), static electricity (Unit 23), and magnets (Unit 3) — plus one brand-new idea about magnets that trips a lot of students up.</p>
+    <div class="map">
+      <div class="mapcell"><div class="ico">🔋</div><div class="t">Circuits Recap</div><div class="j">complete loops, conductors</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⚡</div><div class="t">Static Charges Recap</div><div class="j">friction, attract/repel, induction</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧲</div><div class="t">Magnet or Just Magnetic?</div><div class="j">a brand-new, tricky distinction</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> confidently recap circuits and static charges, AND correctly tell the difference between an object that IS a magnet and an object that is simply MADE of a magnetic material.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL FROM UNITS 6 & 23 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Units 6 &amp; 23 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 6?</b> Electricity only flows around a COMPLETE, unbroken loop — one gap anywhere (an open switch, a missing wire, a snapped connection) and nothing works. Materials are either CONDUCTORS (let electricity flow) or INSULATORS (block it). 🔁 <b>Remember Unit 23?</b> Rubbing two objects together can move electrons from one to the other — whichever object GAINS electrons becomes NEGATIVE, whichever LOSES electrons becomes POSITIVE. Same charges REPEL, different charges ATTRACT. A charged object can even pull a NEUTRAL object closer without touching it — that's induction.</div>
+    <p>Today, we're going to bring those two topics back to full strength with fresh scenarios, then push magnetism a level deeper than Unit 3 did — into territory that ASMOPSS papers have specifically tested and that needs one more careful look.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Circuits, charges, and magnets are some of the MOST frequently tested topics across every ASMOPSS paper you've seen so far — they show up in nearly every past paper reviewed for 2026. A confident recap now, right before the exam, is one of the highest-value things we can do with the time we have left.</div>
+    <div class="card"><b>Real life:</b> every light switch in your house is a deliberate gap in a circuit; a static-charged balloon sticking to a wall is the same electron-transfer trick from Unit 23; and the "attracted-to-a-magnet-but-not-a-magnet-itself" idea explains why a steel paperclip picked up by a magnet can't then go and pick up ANOTHER paperclip on its own.</div>
+  </section>
+
+  <!-- SCREEN 4: CIRCUITS RECAP -->
+  <section class="screen" data-s="4">
+    <h2>Circuits Recap: Complete the Loop 🔋</h2>
+    <div class="rulebar">A circuit needs a POWER SOURCE, a PATH (wires), and something to USE the energy — all connected in ONE unbroken loop.</div>
+    <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-label="A simple circuit diagram: battery, wires, and a bulb forming a complete loop">
+      <rect x="30" y="55" width="50" height="30" rx="4" fill="#546e7a"/>
+      <text x="55" y="74" font-size="10" text-anchor="middle" fill="#fff" font-weight="bold">BATTERY</text>
+      <line x1="80" y1="60" x2="220" y2="35" stroke="#546e7a" stroke-width="3"/>
+      <line x1="80" y1="80" x2="220" y2="105" stroke="#546e7a" stroke-width="3"/>
+      <circle cx="240" cy="70" r="24" fill="#fff3e8" stroke="#ef6c00" stroke-width="3"/>
+      <text x="240" y="74" font-size="10" text-anchor="middle" fill="#c05621" font-weight="bold">BULB</text>
+      <line x1="220" y1="35" x2="240" y2="46" stroke="#546e7a" stroke-width="3"/>
+      <line x1="220" y1="105" x2="240" y2="94" stroke="#546e7a" stroke-width="3"/>
+      <text x="160" y="20" font-size="11" text-anchor="middle" fill="#1b5e20" font-weight="bold">unbroken loop = bulb lights up</text>
+    </svg>
+    <div class="svgcap">Battery → wire → bulb → wire → back to the battery. Every part is connected with no gaps, so electricity flows all the way around and the bulb lights up.</div>
+    <div class="dtree">
+      <div class="dbox dq">Is the loop fully connected, with no gaps anywhere?</div>
+      <div class="dbranch">
+        <div class="dcol"><div class="dlbl">Yes — every connection is joined, switch closed</div><div class="dleaf">Bulb lights up ✓</div></div>
+        <div class="dcol"><div class="dlbl">No — a wire is missing, or a switch is open</div><div class="dleaf">Bulb stays off ✗</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: CONDUCTORS VS INSULATORS RECAP -->
+  <section class="screen" data-s="5">
+    <h2>Conductors vs Insulators Recap 🔍</h2>
+    <div class="rulebar">A CONDUCTOR lets electricity flow through it easily. An INSULATOR blocks electricity from flowing.</div>
+    <div class="compare">
+      <div class="ismag">
+        <div style="text-align:center;font-size:1.6rem">⚡</div>
+        <b>CONDUCTORS</b><br>
+        <small>most metals: copper wire, steel, iron, aluminium foil</small>
+      </div>
+      <div class="notmag">
+        <div style="text-align:center;font-size:1.6rem">🚫</div>
+        <b>INSULATORS</b><br>
+        <small>plastic, rubber, wood, glass, dry paper</small>
+      </div>
+    </div>
+    <div class="job"><b>Careful:</b> a wire's plastic COATING is an insulator on purpose — it stops electricity from escaping and keeps you safe from shocks, while the metal wire INSIDE it is the conductor doing the actual work.</div>
+  </section>
+
+  <!-- SCREEN 6: STATIC CHARGES RECAP -->
+  <section class="screen" data-s="6">
+    <h2>Static Charges Recap ⚡</h2>
+    <div class="rulebar">Rubbing transfers ELECTRONS. Same charges REPEL. Different charges ATTRACT. A charge can even pull a NEUTRAL object without touching it — induction.</div>
+    <div class="card">
+      <p><b>Fresh example:</b> a girl rubs a balloon on her wool jumper. The balloon gains extra electrons and becomes NEGATIVELY charged. She holds the balloon near a neutral wall.</p>
+      <p>The balloon's negative charge pushes the wall's own electrons slightly further away, leaving the near side of the wall slightly positive — and since opposite charges attract, the balloon sticks. This is INDUCTION: the balloon never touched the wall's charges directly, it just pushed them around.</p>
+    </div>
+    <div class="job"><b>Key rule to keep straight:</b> two objects that are BOTH negatively charged (or both positively charged) will always repel — even from a distance. A charged object and a NEUTRAL object will always attract, thanks to induction.</div>
+  </section>
+
+  <!-- SCREEN 7: MAGNET OR JUST MAGNETIC? (NEW CONTENT) -->
+  <section class="screen" data-s="7">
+    <h2>Magnet or Just Magnetic? A Tricky New Idea 🧲</h2>
+    <div class="rulebar">BEING ATTRACTED TO A MAGNET does NOT make an object a magnet itself. Only some magnetic materials are ACTUALLY magnets — the rest just get pulled toward one.</div>
+    <div class="card">
+      <p><b>Remember from Unit 3:</b> iron, steel, nickel, and cobalt are "magnetic materials" — a magnet pulls on them. But here's the part Unit 3 didn't cover: being pulled BY a magnet is completely different from BEING a magnet.</p>
+      <p><b>The key test:</b> a real magnet can pull on OTHER magnetic objects all by itself, from a distance, with no help. A magnetic material that is NOT itself a magnet can only get pulled TOWARD a magnet — it cannot then go and pull other magnetic objects toward itself.</p>
+    </div>
+    <div class="compare">
+      <div class="ismag">
+        <div style="text-align:center;font-size:1.6rem">🧲</div>
+        <b>IS a magnet</b><br>
+        <small>can pull other magnetic objects toward itself, all on its own — e.g. a fridge magnet, a bar magnet, a compass needle</small>
+      </div>
+      <div class="notmag">
+        <div style="text-align:center;font-size:1.6rem">🔩</div>
+        <b>Just a magnetic MATERIAL (not a magnet)</b><br>
+        <small>gets pulled by a magnet, but cannot pull other magnetic objects on its own — e.g. a plain steel paperclip, a plain iron nail</small>
+      </div>
+    </div>
+    <div class="job"><b>The test in one sentence: does it attract OTHER magnetic objects, all by itself, with no magnet nearby?</b> If yes, it's a magnet. If it only ever gets pulled — but never does the pulling itself — it's just made of a magnetic material.</div>
+  </section>
+
+  <!-- SCREEN 8: DECISION TREE FOR MAGNET vs MAGNETIC MATERIAL -->
+  <section class="screen" data-s="8">
+    <h2>Magnet or Magnetic Material? Decision Tree 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the object attract OTHER magnetic objects all by itself, with no magnet nearby to help it?</div>
+      <div class="dbranch">
+        <div class="dcol"><div class="dlbl">YES — it can pull other magnetic things toward itself, unaided</div><div class="dleaf">It IS a magnet</div></div>
+        <div class="dcol"><div class="dlbl">NO — it only ever gets pulled TOWARD a magnet, never does the pulling</div><div class="dleaf">Just a magnetic material</div></div>
+      </div>
+    </div>
+    <div class="card"><b>Worked example:</b> a thin sheet of metal X is held near a magnetized bar and gets pulled toward it. X is then held near a plain, unmagnetized iron nail — and nothing happens. What does this tell us about X? Since X was pulled BY the magnetized bar but could NOT pull the plain iron nail, X must be a magnetic material (like steel) — but X is NOT a magnet itself. If X were a real magnet, it would have pulled the plain iron nail toward it too, with no help needed.</div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. A circuit has a battery, two wires, and a bulb, but one wire has come loose and isn't touching the battery. What happens?</p>
+      <button class="opt">The bulb glows dimly</button>
+      <button class="opt">The bulb glows at full brightness</button>
+      <button class="opt">The bulb does not light up at all</button>
+      <button class="opt">The battery instantly stops working forever</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a loose wire breaks the loop, so no electricity can flow anywhere in the circuit.</div>
+      <div class="fb no">✘ Re-check Screen 4 — ANY gap in the loop, even one loose wire, stops the bulb lighting up completely.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Which of these is an INSULATOR, not a conductor?</p>
+      <button class="opt">A copper wire</button>
+      <button class="opt">A dry wooden ruler</button>
+      <button class="opt">A steel paperclip</button>
+      <button class="opt">An aluminium foil sheet</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — dry wood is an insulator; it blocks electricity from flowing through it.</div>
+      <div class="fb no">✘ Re-check Screen 5 — most metals are conductors; wood, plastic, rubber, and glass are insulators.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A student rubs a plastic ruler on their hair. The ruler gains extra electrons. What charge does the ruler now have, and what will happen if it's brought near tiny bits of paper?</p>
+      <button class="opt">Positive charge; it will repel the paper bits away</button>
+      <button class="opt">No charge at all; nothing will happen</button>
+      <button class="opt">Positive charge; it will attract the paper bits</button>
+      <button class="opt">Negative charge; it will attract the neutral paper bits</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — gaining electrons makes the ruler negatively charged, and a charged object always attracts neutral objects through induction.</div>
+      <div class="fb no">✘ Re-check Screen 6 — GAINING electrons means NEGATIVE charge, and a charged object attracts anything neutral nearby.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>4. A steel spoon is placed near a strong bar magnet and gets pulled toward it. The same spoon is then held near a plain steel fork with no magnet involved. Nothing happens. What does this tell us about the spoon?</p>
+      <button class="opt">The spoon is a real magnet, since it was pulled by the bar magnet</button>
+      <button class="opt">The spoon is a magnetic material, but it is NOT a magnet itself</button>
+      <button class="opt">The spoon lost its magnetism the moment it touched the fork</button>
+      <button class="opt">Steel is never magnetic in any situation</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the spoon gets pulled by a real magnet, but cannot pull other magnetic objects on its own, so it's a magnetic material, not a magnet.</div>
+      <div class="fb no">✘ Re-check Screens 7-8 — being ATTRACTED to a magnet is not the same as BEING a magnet. The test is whether it can pull other magnetic objects unaided.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. Which of these objects IS a true magnet, not just a magnetic material?</p>
+      <button class="opt">A plain iron nail that has never touched a magnet</button>
+      <button class="opt">A steel paperclip sitting on a desk</button>
+      <button class="opt">A compass needle that always swings to point North</button>
+      <button class="opt">An aluminium spoon</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a compass needle is a tiny magnet itself; that's exactly why it can line up with Earth's magnetic field and point North on its own.</div>
+      <div class="fb no">✘ Re-check Screens 7-8 — a plain iron nail and steel paperclip are only magnetic MATERIALS; aluminium isn't magnetic at all. Only the compass needle is an actual magnet.</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Lesson 2 →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='ElecMagForces_Lesson_MagnetChainsAndCombiningForces.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! Circuits, charges, and the magnet-vs-magnetic-material rule are all locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>

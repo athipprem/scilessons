@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 34 Test — Physics: Electricity, Magnetism &amp; Forces Recap</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--green),#43a047);color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--green),#66bb6a);transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--green-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--green-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  svg.qimg{display:block;margin:8px auto;max-width:100%}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--green),#43a047);color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--green-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--green-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 34 Test — Physics: Electricity, Magnetism &amp; Forces Recap</b>
+      <span class="sub" id="hdr-sub">Circuits • Static charges • Magnet-vs-material • Magnet chains • Combining forces</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For magnet-chain questions, check ONE join at a time. For 'experiment' questions, ask: what changed, what stayed the same?</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 34;
+const UNIT_TITLE = "Physics: Electricity, Magnetism & Forces Recap";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  // Section A — Warm-up (recall) — 4 questions
+  { n:1, section:'A', star:0, body:"Which THREE things does a simple working circuit need?",
+    options:["A power source, a path for current, and something to use the energy","A power source and a switch only, with absolutely no other parts required","Two batteries connected directly to each other, with no wires used anywhere","A magnet, a battery, and a bulb, all connected together in any order at all"], ans:1,
+    why:"A working circuit needs a power source (battery), a path (wires), and something that uses the energy (like a bulb) — all connected in one unbroken loop." },
+  { n:2, section:'A', star:0, body:"Which of these materials is an ELECTRICAL INSULATOR?",
+    options:["Copper electrical wire","Aluminium cooking foil","A rubber bicycle grip","A steel kitchen spoon"], ans:3,
+    why:"Rubber blocks electricity from flowing through it, making it an insulator. Copper, aluminium, and steel are all conductors." },
+  { n:3, section:'A', star:0, body:"When two objects are rubbed together, electrons can move from one to the other. If Object A GIVES AWAY electrons to Object B, what charge does Object A end up with?",
+    options:["Negative — it now holds extra electrons", "No charge at all, since nothing really moved", "Positive — it now has fewer electrons than before", "It depends on the surrounding room's temperature"], ans:3,
+    why:"Losing electrons means losing negative charge, so the object that gives electrons away becomes POSITIVELY charged." },
+  { n:4, section:'A', star:0, body:"Two toy horseshoe magnets have their matching S-labelled ends slid toward each other on a table. Predict what a child would feel happen.",
+    options:["They repel (push apart)","They attract (pull together)","Nothing happens at all","They both lose their magnetism instantly"], ans:1,
+    why:"Matching poles (N–N or S–S) always repel — they push apart, never attract." },
+
+  // Section B — Applying What You Know — 6 questions
+  { n:5, section:'B', star:1, body:"A girl runs a glass rod along a silk cloth. The rod loses electrons to the silk cloth and becomes positively charged. She then holds the rod near a pile of small, neutral foam beads. What will happen?",
+    options:["Nothing, since foam beads are never affected by charged objects","The beads will be repelled and scatter away from the rod","The beads will be attracted toward the rod, even though they're neutral","The beads will become permanently positively charged forever"], ans:3,
+    why:"A charged object always attracts a nearby NEUTRAL object through induction — the rod's charge pushes and pulls the beads' own electrons around, creating an attraction, even without direct contact beforehand." },
+  { n:6, section:'B', star:1, body:"A student holds a small steel bolt near a strong magnet, and the bolt is pulled toward it. The student then removes the magnet and holds the SAME bolt near a box of loose paperclips. Nothing happens — the paperclips are not pulled toward the bolt. What does this tell us about the bolt?",
+    options:["The bolt is a magnetic material, but it is NOT a magnet itself","The bolt is a real magnet itself, since it was pulled by the strong magnet","The bolt instantly lost its magnetism the moment the magnet was removed","Steel is not actually a magnetic material at all"], ans:1,
+    why:"The bolt got pulled BY a real magnet, but couldn't pull the paperclips on its own — that's exactly the test for a magnetic material that is NOT itself a magnet." },
+  { n:7, section:'B', star:1, body:"A torch stops working. The battery is fresh and the bulb is undamaged, but the slide switch is stuck in the OPEN position. What will happen when the torch is turned on?",
+    options:["The bulb will glow at full brightness as normal","The bulb will glow dimly, using less power than usual","The bulb will not light up at all, since the loop is broken","The battery will overheat and stop working permanently"], ans:3,
+    why:"An open switch is a deliberate gap in the loop — with the loop broken, no electricity can flow anywhere in the circuit, so the bulb stays completely off." },
+  { n:8, section:'B', star:1, body:"Two friends push a stalled car from behind, both pushing in the SAME direction: one pushes with 40N of force, the other with 25N. What is the total combined force on the car?",
+    options:["A combined total of only 15N in this direction","A combined total of exactly 1000N somehow","Just 40N, since the smaller push doesn't count","A combined 65N, since both forces add together"], ans:4,
+    why:"Forces in the same direction simply add together: 40N + 25N = 65N total." },
+  { n:9, section:'B', star:1, body:"A kite in the air has an upward wind-lift force of 12N and a downward gravity force of 7N pulling it down. What is the net force on the kite, and in which direction?",
+    options:["19N, downward","5N, downward","19N, upward","5N, upward"], ans:4,
+    why:"Opposite forces subtract: 12N − 7N = 5N left over, and since the lift (12N) is bigger than gravity (7N), the net force is upward." },
+  { n:10, section:'B', star:1, body:"A fridge magnet holds a paper note against a metal fridge door, with no glue or tape used at all. What TYPE of force is holding the note in place?",
+    options:["A contact force, since the magnet is touching the door","A non-contact force — magnetism, acting through the paper","Friction between the paper and the metal door","There is no real force involved, just luck"], ans:2,
+    why:"Magnetism is a non-contact force — it can act through the paper and even across a small gap, without the magnet needing to touch the fridge door directly." },
+
+  // Section C — Think Like a Scientist — 10 questions
+  { n:11, section:'C', star:2, body:"Three magnets K, L, and M touch end to end in a row. K's right end (touching L) is labelled S. The K–L join ATTRACTS. The L–M join ATTRACTS. What is M's LEFT end (touching L)?",
+    options:["North (N), the opposite of K's touching end","South (S), the same as K's touching end","It has no magnetic pole at all","Cannot be worked out from the information given"], ans:1,
+    why:"K's right is S, so the K–L join (attracts = different poles) means L's left is N. Since a magnet's two ends are always opposite, L's right is S. The L–M join (attracts = different poles) then means M's left must be N." },
+  { n:12, section:'C', star:2, body:"A row of three magnets is set up as follows: Magnet 1's right end = N, Magnet 2's left end = N, Magnet 2's right end = S, and Magnet 3's left end = N. A student claims this whole row could really stay joined together as described. Is the student correct?",
+    options:["Yes, this exact arrangement is completely possible as described","No — the Magnet 2–Magnet 3 join would repel, since both those ends are N","No, because three magnets can never be arranged in a single row","No — the Magnet 1–Magnet 2 join would repel, since both those facing ends are N"], ans:4,
+    why:"Magnet 1's right end (N) touches Magnet 2's left end (N) — matching poles always REPEL, so that join could never stay pushed together as claimed, even though the Magnet 2–Magnet 3 join (S touching N) would attract just fine." },
+  { n:13, section:'C', star:2, body:"A shopkeeper claims: 'This iron rod must be a real magnet, because I saw a strong magnet pull it across the counter.' Explain what is wrong with the shopkeeper's reasoning.",
+    options:["The shopkeeper's reasoning is completely correct, since being pulled always proves something is a magnet itself","Iron is never actually attracted to magnets, so the shopkeeper must be mistaken about what he saw happen","Being pulled TOWARD a magnet only proves it's a magnetic material — not that it can pull other objects on its own","The rod would first need to become red-hot before any magnet could ever manage to pull on it"], ans:3,
+    why:"Getting pulled by a magnet only proves an object is made of a magnetic material (like iron or steel). To prove the rod is an actual MAGNET, you'd need to test whether it can pull OTHER magnetic objects toward itself, with no outside magnet helping." },
+  { n:14, section:'C', star:2, body:"A boy rubs a balloon on his hair and sticks it to the ceiling. A friend says: 'That only works if the ceiling already has an opposite charge.' Is the friend's claim correct? Explain.",
+    options:["Yes, the ceiling must already be oppositely charged for this to work at all","No, because balloons cannot actually stick to ceilings under any circumstances","Yes, but only if the room is completely dark with all the lights turned off","No — the ceiling is neutral; the charge induces an attraction in its electrons"], ans:4,
+    why:"The ceiling doesn't need to start charged at all — a charged object attracts ANY neutral surface through induction, by pushing that surface's own electrons around to create an opposite charge nearby." },
+  { n:15, section:'C', star:2, body:"A wagon is pulled by three children at once: Amy pulls 6N to the left, Ben pushes 4N to the left, and Cara pulls 9N to the right. What is the net force on the wagon, and which way does it move?",
+    options:["19N, to the right","1N, to the left","10N, to the right","1N, to the right"], ans:2,
+    why:"Group by direction first: left total = 6N + 4N = 10N. Right total = 9N. Subtract the smaller from the bigger: 10N − 9N = 1N leftover, moving the wagon to the LEFT (the stronger side)." },
+  { n:16, section:'C', star:2, body:"A ball rolls across a smooth floor at a constant, unchanging speed in a straight line. What does this tell you about the forces acting on it?",
+    options:["The forces on it are balanced, roughly cancelling out","The forces on it must be completely and totally unbalanced","No forces of any kind at all are acting on the ball","The ball has stopped obeying the normal rules of physics"], ans:1,
+    why:"Constant speed in a straight line means the forces are BALANCED — motion only changes when forces are unbalanced, so an object moving steadily has forces cancelling each other out." },
+  { n:17, section:'C', star:2, body:"A student wants to test whether a mystery steel ball is a TRUE magnet, or just a magnetic material. Which test would correctly tell the two apart?",
+    options:["Check carefully whether the ball is silver-coloured or a different colour","Weigh the ball on a kitchen scale to see exactly how heavy it is","Heat the ball slowly over a flame and see whether it melts away","Hold it near paperclips with no magnet nearby and see if it pulls them"], ans:4,
+    why:"The correct test is whether the ball can pull OTHER magnetic objects toward itself, completely unaided — if it can, it's a true magnet; if it can only ever get pulled BY something else, it's just a magnetic material." },
+  { n:18, section:'C', star:2, body:"Gravity, magnetism, and static electric attraction can all pull two objects together. What do all THREE of these forces have in common?",
+    options:["They are all contact forces that need direct touching to work","They are all non-contact forces that can act across a distance","They can only ever push objects apart, never pull them together at all","They only ever work if both of the objects are made of metal"], ans:2,
+    why:"Gravity, magnetism, and static electric attraction are all NON-CONTACT forces — each one can act across a gap, without the two objects needing to touch." },
+  { n:19, section:'C', star:2, body:"An engineer is choosing a covering material for the outside of an electrical wire. Should the covering be a conductor or an insulator, and why?",
+    options:["A conductor, so extra electricity can escape freely and cool the wire down","An insulator, so electricity stays inside and doesn't shock anyone touching it","It really doesn't matter at all which material is used for this covering","A conductor, so that the covering itself lights up just like the bulb does"], ans:2,
+    why:"The plastic covering on a wire is deliberately an INSULATOR — it keeps electricity safely contained inside the metal wire, protecting anyone who touches the outside from an electric shock." },
+  { n:20, section:'C', star:2, body:"A student is given a diagram of four magnets touching in a row, with only the very first pole labelled, plus two 'attracts' and one 'repels' marked at the three joins. What is the correct order of steps to label every remaining pole correctly?",
+    options:["Guess each remaining pole completely randomly, since there's no reliable method for four magnets","Work through the joins one at a time, applying each magnet's opposite-poles rule and the attract/repel rule","Work out only the very last magnet's poles first, and then ignore the two middle magnets entirely","Assume that every single join must attract, regardless of what the diagram actually shows"], ans:2,
+    why:"The reliable method for ANY length chain is the same: move through the joins one at a time in order, remembering that a single magnet's two ends are always opposite, and applying the attract=different/repel=same rule fresh at every join — never guessing or skipping steps." }
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-up (recall)",
+  B: "SECTION B — Applying What You Know (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
