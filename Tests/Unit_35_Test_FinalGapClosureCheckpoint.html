@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_35_Test_FinalGapClosureCheckpoint.html — Final Gap-Closure Checkpoint
+     ------------------------------------------------------------
+     Review-only capstone, fifth and final unit of the U31-U35 final
+     plan — no new lessons, just Checkpoint_U35_Review.html (recap +
+     3 priority refreshers: fair-test/graph-reading exam skills,
+     magnet-vs-magnetic-material reverse-inference, longer magnet
+     chains) followed by this 20Q sweep test. Priority targets: U34's
+     two PARTIALLY-closed watch-items (Q6 reverse-inference format,
+     Q11 multi-step chain derivation), U34's isolated Q2 conductor/
+     insulator slip, plus a light resweep of durable U21-U30 content
+     and dedicated new fair-test/graph-reading skill questions.
+     Gold/amber themed, matching the U20/U30 checkpoint convention.
+     Built and verified under the ANSWER-BALANCE RULE (5/5/5/5).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 35 Test — Final Gap-Closure Checkpoint</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --gold:#DAA520; --gold-d:#8a6a00; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#fffbef;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#f0e4c0;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .checkpoint-note{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  svg.qimg{display:block;margin:8px auto;max-width:100%}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--gold)}
+  .opt.selected{border-color:var(--gold-d);background:#fffaf0;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--ok),#43a047);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#fff8e1,#ffecb3);border:2px solid var(--gold)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(40,30,10,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 35 Test — Final Gap-Closure Checkpoint</b>
+      <span class="sub" id="hdr-sub">Fair tests &amp; graphs • Magnet-vs-material • Longer magnet chains • Resweep of Units 21-30</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="checkpoint-note">🏁 This is the FINAL Gap-Closure Checkpoint before ASMOPSS 2026 — a review test with no new lessons. If you haven't already, read the Quick Review page first!</div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For magnet-chain questions, check ONE join at a time. For "what does this tell us" questions, re-read the whole set-up before choosing.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 35;
+const UNIT_TITLE = "Final Gap-Closure Checkpoint";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Checkpoint Basics (warm-up) — 4 questions ===================== */
+  { n:1, section:'A', star:0, body:"In a fair test, what do we call the ONE thing the experimenter deliberately changes on purpose?",
+    options:["The independent variable","The dependent variable","The controlled variable","The result variable"], ans:1,
+    why:"The independent variable is the one thing deliberately changed. The dependent variable is what's measured as the result." },
+  { n:2, section:'A', star:0, body:"In a fair test, what do we call the thing you measure and record as your result?",
+    options:["The controlled variable","The dependent variable","The independent variable","The starting hypothesis"], ans:2,
+    why:"The dependent variable is the result you measure — it 'depends on' whatever was changed." },
+  { n:3, section:'A', star:0, body:"Which of these four objects is made of an ELECTRICAL INSULATOR?",
+    options:["An iron nail","A silver ring","A glass marble","A brass button"], ans:3,
+    why:"Glass blocks electricity from flowing through it. Iron, silver, and brass are all metals, and metals conduct electricity." },
+  { n:4, section:'A', star:0, body:"Which sentence correctly describes EVERY magnet, no matter its size or shape?",
+    options:["It only attracts objects made of plastic","It only ever has a North pole, never South","It is always shaped exactly like a straight bar","It has a North pole and a South pole"], ans:4,
+    why:"Every single magnet — no matter its shape — has two opposite poles, a North end and a South end." },
+
+  /* ===================== SECTION B — Applying the Checkpoint Topics (star 1) — 6 questions ===================== */
+  { n:5, section:'B', star:1, body:"A puppy's weight was recorded every month for 4 months: Month 1 = 2kg, Month 2 = 4kg, Month 3 = 7kg, Month 4 = 8kg. Between which two months did the puppy gain the MOST weight?",
+    options:["Month 2 to Month 3","Month 1 to Month 2","Month 3 to Month 4","Equally, every month"], ans:1,
+    why:"Weight gained each month: M1→2 = +2kg, M2→3 = +3kg, M3→4 = +1kg. The biggest single gain is Month 2 to Month 3." },
+  { n:6, section:'B', star:1, body:"A student compares how well three brands of paper towel soak up water. She uses the SAME amount of water and the SAME size of paper towel for each brand, but tests them in rooms with different temperatures. What is wrong with her test?",
+    options:["Nothing is wrong; paper towel absorbency is never affected by temperature","Room temperature should also be kept the same — it could unfairly affect the results","She should have used a different amount of water for each brand","She should have used a different size of paper towel for each brand"], ans:2,
+    why:"A fair test must keep every OTHER variable the same except the one being tested — letting room temperature vary makes the comparison unfair." },
+  { n:7, section:'B', star:1, body:"A fridge magnet lifts a steel bolt straight off a table. The magnet is then put away, and the SAME bolt is held near a box of loose pins — nothing happens, the pins stay still. What is the best conclusion?",
+    options:["The pins are simply not magnetic at all","The magnet's power passed permanently into the bolt","The bolt is a magnetic material, but not a magnet","The bolt is a real magnet, since it got lifted"], ans:3,
+    why:"Being pulled by a real magnet proves the bolt is magnetic material — but since it can't pull the pins on its own, it is not itself a magnet." },
+  { n:8, section:'B', star:1, body:"A cargo ship covers 150 nautical miles in 5 hours, moving at a constant speed. How fast is it travelling?",
+    options:["750 nautical miles/hour","155 nautical miles/hour","5 nautical miles/hour","30 nautical miles/hour"], ans:4,
+    why:"150 nautical miles ÷ 5 hours = 30 nautical miles per hour." },
+  { n:9, section:'B', star:1, body:"A charged plastic ruler is held just above a small pile of neutral polystyrene beads. Several beads jump up and stick to the ruler without ever touching it first. What caused this?",
+    options:["Induction — the beads' own electrons get shifted","Friction between the ruler and the surrounding air","Gravity pulling the lightweight beads upward","The beads must have already been charged beforehand"], ans:1,
+    why:"This is electrostatic induction — a charged object can attract neutral objects without touching, by shifting their own electrons around." },
+  { n:10, section:'B', star:1, body:"Two tugboats push a barge in opposite directions: one pushes NORTH with 20N, the other pushes SOUTH with 12N. What is the net force on the barge, and which way does it move?",
+    options:["32N south total","8N, to the north","8N, to the south","12N, to the north"], ans:2,
+    why:"Opposite forces subtract: 20N − 12N = 8N leftover, moving toward the stronger side — north." },
+
+  /* ===================== SECTION C — Think Like a Scientist (5-mark-style, star 2) — 10 questions ===================== */
+  { n:11, section:'C', star:2, body:"A paperclip briefly picks up a second paperclip right after touching a strong magnet — but a few seconds after the magnet is taken away, the second paperclip falls off by itself. What does this tell us about the first paperclip?",
+    options:["It is a permanent magnet, just like the one it touched","It has no magnetic properties at all, not even briefly","It is a magnetic material, only briefly magnetised nearby","The second paperclip must not really be magnetic at all"], ans:3,
+    why:"Once the magnet is removed, the first paperclip's own magnetism quickly fades — proving it's a magnetic material that only gets magnetised while near a real magnet, not a permanent magnet itself." },
+  { n:12, section:'C', star:2, body:"Three magnetic toy blocks — Red, Blue, and Green — are stacked end to end in a tower. Red's TOP end (not touching anything) is labelled N. The Red–Blue join ATTRACTS. The Blue–Green join REPELS. What is Green's BOTTOM end (not touching anything)?",
+    options:["South (S), opposite Red's given end","It has no magnetic pole at all","Cannot be worked out from this","North (N), same as Red's given end"], ans:4,
+    why:"Red's top is N (given), so Red's bottom (touching Blue) is S. The Red–Blue join ATTRACTS (different poles), so Blue's top is N, and Blue's bottom is S. The Blue–Green join REPELS (same poles), so Green's top is also S, meaning Green's bottom (the opposite end) is N — the SAME pole as Red's given end." },
+  { n:13, section:'C', star:2, body:"A bar chart shows total rainfall recorded in a town over four months: March = 40mm, April = 65mm, May = 30mm, June = 55mm. A student claims: 'It rained more in June than in every other month.' Is this claim correct?",
+    options:["No — April had more rainfall than June (65mm vs 55mm)","Yes, June had the highest rainfall of the four months","No, March actually had the highest rainfall of all four","The chart doesn't give enough information to compare"], ans:1,
+    why:"Reading every bar carefully: April's 65mm is higher than June's 55mm, so June was NOT the highest month — always check every bar, not just the one being asked about." },
+  { n:14, section:'C', star:2, body:"A student wants to find out whether more sunlight makes tomato plants grow taller. She puts Plant A in full sun and waters it every day. She puts Plant B in shade and waters it only every THREE days. After a month, Plant A is taller, and she concludes sunlight makes plants grow taller. Is her conclusion trustworthy?",
+    options:["Yes, completely trustworthy — sunlight explains it","No — watering also changed, so sunlight can't be blamed alone","No, because tomato plants never respond to sunlight","Yes, but only if both plants started the same height"], ans:2,
+    why:"Watering (a second variable) was changed alongside sunlight, so the test isn't fair — we can't tell whether sunlight, watering, or both caused Plant A to grow taller." },
+  { n:15, section:'C', star:2, body:"A family in New Zealand (Southern Hemisphere) is celebrating a beach Christmas in bright summer sunshine. What season would a family in Canada (Northern Hemisphere) be experiencing at that exact same time?",
+    options:["Spring in Canada at that time","Summer in Canada as well","Winter in Canada at that time","It depends on the exact date"], ans:3,
+    why:"The two hemispheres always have opposite seasons at the same moment — Southern summer always pairs with Northern winter." },
+  { n:16, section:'C', star:2, body:"Three wind gusts act on a drifting hot air balloon: one blows NORTH with 22N, another also blows NORTH with 8N, and a third blows SOUTH with 11N. What is the net force on the balloon, and which way does it drift?",
+    options:["41N north (wrong)","11N south overall","22N north only","19N north total"], ans:4,
+    why:"Group by direction first: NORTH = 22+8 = 30N. SOUTH = 11N. Subtract: 30 − 11 = 19N, drifting north." },
+  { n:17, section:'C', star:2, body:"A scientist sees a puddle of water on the kitchen floor near an open window on a rainy day. Which of these is an OBSERVATION rather than an INFERENCE?",
+    options:["The kitchen floor has water on it","Someone left the window open on purpose","Rain blew in through the open window","The rain will probably stop again soon"], ans:1,
+    why:"'The kitchen floor has water on it' is something directly seen — a raw observation. The other three are all explanations or predictions built ON TOP of that observation, which makes them inferences." },
+  { n:18, section:'C', star:2, body:"A student tests how fast four different-sized ice cubes melt at room temperature. She keeps the room temperature and the type of surface the same for every cube, then graphs the melting time for each size. What is the INDEPENDENT variable in this test — the one thing she deliberately changed?",
+    options:["The room temperature","The size of the ice cubes","The type of surface used","The total melting time"], ans:2,
+    why:"Ice cube size is the ONE thing deliberately varied between trials. Room temperature and surface type are controlled (kept the same); melting time is the dependent variable being measured." },
+  { n:19, section:'C', star:2, body:"A student is given a 4-magnet chain diagram with 3 joins to work out, but has only 2 minutes left in the exam. He decides to just guess the pattern instead of checking each join carefully. What is the BEST advice for him?",
+    options:["Only check the first and last magnet","Guessing the pattern is fine here","Still check each join, one at a time","Give up on the question entirely"], ans:3,
+    why:"Even under time pressure, the one-join-at-a-time method is the fastest RELIABLE way through a chain — guessing a shortcut pattern is exactly what causes mistakes on longer chains." },
+  { n:20, section:'C', star:2, body:"Which strategy would most help avoid picking an answer that accidentally CONTRADICTS information already given earlier in the same question?",
+    options:["Pick the longest-sounding option, since it's usually the most complete","Choose the first answer that sounds roughly right, to save time","Skip re-reading the question, since the first read-through is always enough","Re-read the question's given information once more before choosing a final answer"], ans:4,
+    why:"A quick second read of the set-up, right before choosing, is the single best habit for catching an answer that quietly disagrees with a fact you were already told." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Checkpoint Basics (warm-up)",
+  B: "SECTION B — Applying the Checkpoint Topics (&#9733;)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    if (isCorrect) sectionTally[q.section].c++;
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
