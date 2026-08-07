@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 36 · Lesson 1 — Fair Tests: Checking Many Clues at Once</title>
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --leaf:#66bb6a;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--green);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--green-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#e8f5e9;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--leaf)}
+  .job b{color:var(--green-d)}
+  .qc{background:#fff8e1;border:1.5px solid #f9a825;border-radius:12px;padding:12px 14px;margin:10px 0}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafdfa;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafdfa}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--green-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafdfa;max-width:520px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#e8f5e9;color:var(--green-d);border:2px solid var(--green)}
+  .tablewrap{overflow-x:auto;margin:10px 0}
+  table.clue{width:100%;border-collapse:collapse;font-size:.87rem}
+  table.clue th{background:var(--green);color:#fff;padding:8px 10px;text-align:left}
+  table.clue td{padding:8px 10px;border-bottom:1px solid var(--line)}
+  table.clue tr:nth-child(even) td{background:#fafdfa}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:var(--green);font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:var(--green-d)}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--green);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔬 Lesson 1 · Fair Tests: Checking Many Clues at Once</b><span class="pill">Unit 36 · Scientific Investigation</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: when an experiment has THREE OR MORE groups, each group usually tests a DIFFERENT single clue — your job is to work out which group tests which clue, one at a time.</div>
+    <p>You already know what independent, dependent, and controlled variables are (from Unit 35). Today we go one level harder: real ASMOPSS questions often give you three, four, or even five groups at once, each one changed in a slightly different way. It looks confusing at first — but there's a simple, reliable method that untangles it every time.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🧪</div><div class="t">Multi-Group Fair Tests</div><div class="j">when more than 2 groups are compared at once</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">📋</div><div class="t">The Clue Table Method</div><div class="j">one row per group, spot what's different</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Which Group Is the Control?</div><div class="j">a decision tree that always works</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">✅</div><div class="t">Worked Examples &amp; Practice</div><div class="j">leaves, seeds, digestion — same method every time</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> take ANY multi-group experiment — no matter the topic — build a quick clue table, spot the control group, and work out exactly what each other group proves, without getting muddled.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Units 4, 20, 30 &amp; 35 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 4 (Mould &amp; Fair Tests)?</b> A fair test changes ONLY one thing on purpose and keeps everything else the same. 🔁 <b>Remember Unit 35?</b> The <b>independent variable</b> is the ONE thing changed on purpose. The <b>dependent variable</b> is what you measure as the result. The <b>controlled variables</b> are everything else, kept the same on purpose so the test stays fair.</div>
+    <p>Those rules work perfectly when there are just TWO groups. But ASMOPSS loves setups with THREE, FOUR, or even FIVE groups at once — and in those, it's easy to lose track of which group is testing what. That's exactly what today fixes.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Real scientists almost never test just two groups — a new medicine might be tested against three different doses PLUS a no-medicine group, all at once. Doctors, farmers, and engineers all have to read multi-group experiments and correctly say which group proves which fact. Getting this wrong in real life can mean believing something works when it doesn't (or the reverse)!</div>
+    <div class="card"><b>Real life:</b> a farmer testing 4 different fertilisers on 4 identical rows of crops; a doctor's drug trial with a no-treatment group, a low-dose group, and a high-dose group; a phone company testing 3 battery designs under the exact same conditions to see which lasts longest.</div>
+  </section>
+
+  <!-- SCREEN 4: THE PROBLEM WITH MULTI-GROUP SETUPS -->
+  <section class="screen" data-s="4">
+    <h2>Why Multi-Group Setups Trip People Up 🧩</h2>
+    <div class="rulebar">With only 2 groups, there's just ONE difference to spot. With 3+ groups, EACH group might change something DIFFERENT — so you can no longer compare "everything" to "everything," you must compare each group to the control, ONE AT A TIME.</div>
+    <div class="card">
+      <p><b>Example set-up:</b> Three identical leaves — X, Y, and Z — are all tested for starch after a day outside.</p>
+      <ul style="margin:6px 0 0 20px;padding:0">
+        <li><b>Leaf X:</b> left completely untouched, normal light, normal air, all day.</li>
+        <li><b>Leaf Y:</b> had black paper covering HALF of it all day (the other half stayed uncovered).</li>
+        <li><b>Leaf Z:</b> had its carbon dioxide supply completely removed with a special chemical, but was left in full light.</li>
+      </ul>
+      <p style="margin-top:8px">If you try to compare all three at once in your head, it's easy to get confused about which leaf is proving what. The fix: treat it like a table, one row per group.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: THE CLUE TABLE METHOD -->
+  <section class="screen" data-s="5">
+    <h2>The Clue Table Method 📋</h2>
+    <div class="rulebar">STEP 1: Find the group that is completely normal, untouched — that's your CONTROL. STEP 2: For every OTHER group, ask "what is the ONE thing different from the control?" STEP 3: That ONE difference tells you exactly what that group is testing.</div>
+    <div class="tablewrap">
+      <table class="clue">
+        <tr><th>Group</th><th>What's different from the control?</th><th>What this group tests</th></tr>
+        <tr><td><b>Leaf X</b></td><td>Nothing — normal light, normal air</td><td>This is the CONTROL — the "everything normal" comparison point</td></tr>
+        <tr><td><b>Leaf Y</b></td><td>Half was blocked from LIGHT</td><td>Whether LIGHT is needed for that half to make starch</td></tr>
+        <tr><td><b>Leaf Z</b></td><td>CARBON DIOXIDE was removed (light stayed normal)</td><td>Whether CARBON DIOXIDE is needed to make starch</td></tr>
+      </table>
+    </div>
+    <div class="job"><b>Key rule:</b> once you've built the table, answer the question ONE ROW AT A TIME. Never try to compare all the groups to each other directly — always compare each group back to the control, one at a time. That's the whole trick.</div>
+    <div class="job"><b>What you'd expect to find:</b> Leaf X (the control) tests blue-black everywhere — it had everything it needed. Leaf Y tests blue-black only on the half that got light — the covered half stayed brown (no starch, because no light reached it). Leaf Z tests brown everywhere — even though it had light, with no carbon dioxide it couldn't make any starch at all.</div>
+  </section>
+
+  <!-- SCREEN 6: DECISION TREE -->
+  <section class="screen" data-s="6">
+    <h2>Spotting the Control in ANY Multi-Group Set-Up 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Look at each group. Has ANYTHING about it been changed from what's normal?</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">No — this group is completely normal/untouched</div>
+          <div class="dleaf">THIS IS THE CONTROL</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">Yes — exactly ONE thing about it is different</div>
+          <div class="dleaf">THIS GROUP TESTS THAT ONE THING</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Warning sign:</b> if you ever find a group where TWO or more things changed at once compared to the control (like temperature AND amount of water both changing together), that group is NOT a fair test on its own — flag it, because you can't tell which change caused the result.</div>
+  </section>
+
+  <!-- SCREEN 7: SECOND WORKED EXAMPLE -->
+  <section class="screen" data-s="7">
+    <h2>Second Worked Example: Seed Germination 🌱</h2>
+    <div class="card">
+      <p><b>Set-up:</b> Four identical trays of bean seeds are prepared. Tray A: normal soil, normal water, normal room temperature (20°C), left in a sunlit spot. Tray B: same as Tray A, but placed in a dark cupboard instead. Tray C: same as Tray A, but given NO water at all. Tray D: same as Tray A, but kept in a cold fridge (4°C) instead of room temperature.</p>
+    </div>
+    <div class="tablewrap">
+      <table class="clue">
+        <tr><th>Group</th><th>What's different from Tray A?</th><th>What this group tests</th></tr>
+        <tr><td><b>Tray A</b></td><td>Nothing — this is normal</td><td>CONTROL</td></tr>
+        <tr><td><b>Tray B</b></td><td>No light (dark cupboard)</td><td>Whether LIGHT is needed for germination</td></tr>
+        <tr><td><b>Tray C</b></td><td>No water at all</td><td>Whether WATER is needed for germination</td></tr>
+        <tr><td><b>Tray D</b></td><td>Cold temperature (4°C)</td><td>Whether WARMTH is needed for germination</td></tr>
+      </table>
+    </div>
+    <div class="job"><b>The payoff:</b> seeds actually germinate WITHOUT light (Tray B would still sprout) but NOT without water or warmth (Trays C and D would fail). Once you've isolated exactly what each tray tests, you can predict — and explain — the results with confidence, instead of guessing.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. In a multi-group experiment, the CONTROL group is the one that:</p>
+      <button class="opt">Gets the most extreme change of all the groups</button>
+      <button class="opt">Is measured twice instead of once</button>
+      <button class="opt">Is left completely normal, with nothing changed</button>
+      <button class="opt">Always finishes with the best result</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the control is the untouched, normal group you compare every other group against.</div>
+      <div class="fb no">✘ Re-check Screen 5 — the control is whichever group has nothing changed at all.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Three identical plants are tested. Plant P gets normal water and normal soil. Plant Q gets normal water but soil mixed with extra sand. Plant R gets normal soil but double the usual water. What does comparing Plant Q to Plant P tell you about?</p>
+      <button class="opt">Whether water amount affects growth</button>
+      <button class="opt">Whether the sandy soil affects growth</button>
+      <button class="opt">Whether sunlight affects growth</button>
+      <button class="opt">Nothing useful — Q isn't a fair comparison</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — soil is the ONLY thing different between Q and P, so comparing them isolates the effect of the sandy soil.</div>
+      <div class="fb no">✘ Re-check Screen 5's method — find the ONE thing different between Q and the control (P). That one difference is soil, not water.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. In the same experiment (Q2), what does comparing Plant R to Plant P tell you about?</p>
+      <button class="opt">Whether sandy soil affects growth</button>
+      <button class="opt">Whether temperature affects growth</button>
+      <button class="opt">Whether light affects growth</button>
+      <button class="opt">Whether water amount affects growth</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — water amount is the ONE thing different between R and the control (P).</div>
+      <div class="fb no">✘ Re-check Screen 5's method — compare R only to the control P, and find the one difference: water amount, not soil.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A student sets up 3 cups of ice: Cup A is left on the counter as normal. Cup B is wrapped in a towel. Cup C is wrapped in a towel AND placed next to a warm heater. Why is Cup C NOT a fair single-variable test on its own (compared to Cup A)?</p>
+      <button class="opt">Because TWO things changed at once — the towel AND the heater — so you can't tell which one caused the result</button>
+      <button class="opt">Because ice always melts at the same speed no matter what</button>
+      <button class="opt">Because towels can never affect melting speed</button>
+      <button class="opt">Because Cup C needs to be compared to Cup B instead of Cup A</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — when two things change at once, you can no longer tell which change is responsible for the result. That's the warning sign from Screen 6.</div>
+      <div class="fb no">✘ Re-check Screen 6 — Cup C has TWO changes (towel + heater) compared to Cup A, which breaks the one-clue-at-a-time rule.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. Four identical cups of the same juice are left out: Cup 1 (control, sealed, room temperature). Cup 2 (sealed, but in the fridge). Cup 3 (left open/unsealed, room temperature). What does comparing Cup 3 to Cup 1 test?</p>
+      <button class="opt">Whether temperature affects the juice</button>
+      <button class="opt">Whether the type of juice matters</button>
+      <button class="opt">Whether being open to the air affects the juice</button>
+      <button class="opt">Nothing, because Cup 3 has no control to compare to</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — being unsealed/open to air is the ONE difference between Cup 3 and the control, Cup 1.</div>
+      <div class="fb no">✘ Re-check Screen 5's method — find the one difference between Cup 3 and the control Cup 1. It's not temperature (that's Cup 2's test).</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:var(--green)">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:var(--green-d)"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='SciSkills_Lesson_DataTrendsAndConductors.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! The clue-table method is locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>
