@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Mock_Test_1_ASMOPSS2026_FullSyllabus.html — Luikishi-built mock test
+     ------------------------------------------------------------
+     First of 2 planned ASMOPSS-style mock tests, built 7 Aug 2026 with
+     2 days left to ASMOPSS 2026 (9 Aug). NOT a real past paper — an
+     original test written by Luikishi in the exact G4 Set B format
+     (40Q, 1.25/2.5/5 mark weighting = 100 marks total), covering the
+     FULL syllabus (U1-U35) with weight toward the themes that recur
+     every year across all 5 real ASMOPSS papers analysed (classification,
+     fair-test/experiment design, light, magnetism, photosynthesis,
+     forces, astronomy, graph/data reading) plus the program's current
+     open watch-items (magnet-vs-magnetic-material reverse-inference
+     format, conductor/insulator, dependent/controlled variable
+     vocabulary). All questions are original scenarios — no diagrams
+     reused from any real paper; spatial content is described in words.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ASMOPSS 2026 — Mock Test 1 — Full Syllabus Practice</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --teal:#00695c; --teal-d:#00332c; --amber2:#e65100;
+    --a-fill:#dbf0ec; --a-text:#00695c;
+    --b-fill:#ffe0b2; --b-text:#8a4a00;
+    --c-fill:#ffcdd2; --c-text:#7f0000;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5fa;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--teal-d),var(--teal));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e4e6f2;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--teal-d),var(--amber2));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--teal-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .comp-note{background:#e8f6f3;border:1.5px solid var(--teal);color:#00332c;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--teal)}
+  .q.B{border-left-color:#b8860b}
+  .q.C{border-left-color:#b71c1c}
+  .q p.body{font-weight:700;margin:0 0 10px;font-size:.98rem}
+  .q p.body .qnum{color:var(--teal-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--teal)}
+  .opt.selected{border-color:var(--teal);background:#eaf5f3;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--teal-d),var(--amber2));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,#1565c0,#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8f9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e0f2f1,#b2dfdb);border:2px solid var(--teal)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--teal-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,10,30,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--teal-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">ASMOPSS 2026 — Mock Test 1 (Full Syllabus)</b>
+      <span class="sub">Mock exam &bull; G4 Set B format &bull; built by Luikishi, 7 Aug 2026</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. For "experiment" questions, ask: what changed, what stayed the same? For data/tables, look only at what's actually shown, not what you assume.</div>
+  <div class="comp-note">&#127942; This is MOCK TEST 1 of 2 — an ORIGINAL practice paper built by Luikishi in the real ASMOPSS G4 Set B format (40 questions, weighted 1.25 / 2.5 / 5 marks = 100 total), covering the FULL syllabus. It is not a real past paper, but it's built to feel like one.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MOCK TEST CONFIG ---------- */
+const COMP_ID = "MockTest1_ASMOPSS2026_FullSyllabus";
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // real ASMOPSS G4 weighting: Q1-16 / Q17-32 / Q33-40
+const TOTAL_MARKS = 100;
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold used across the project
+const BASELINE_MARKS = 71.25;              // Prem's most recent ASMOPSS-format sitting (C1 retake, 1 Aug 2026)
+
+const Q = [
+  /* ===================== PART 1 — Q1-16 (1.25 marks each) ===================== */
+  { n:1, section:'A', body:"Which ONE of these four animals is an invertebrate: crab, turtle, frog, or bat?",
+    options:["Crab, because it has no backbone at all","Turtle, because it has no backbone at all","Frog, because it has no backbone at all","Bat, because it has no backbone at all"], ans:1,
+    why:"A crab is a crustacean — an invertebrate with a hard outer exoskeleton but no internal backbone. Turtles, frogs and bats are all vertebrates (a reptile, an amphibian, and a mammal) — every one of them has a backbone." },
+  { n:2, section:'A', body:"Which ONE of these four digestive organs mainly breaks food down using chemical digestive juices (enzymes), rather than simply moving or storing it?",
+    options:["The oesophagus, because that is where enzymes mainly break down food","The stomach, because that is where enzymes mainly break down food","The mouth's teeth, because that is where enzymes mainly break down food","The large intestine, because that is where enzymes mainly break down food"], ans:2,
+    why:"The stomach churns food and bathes it in gastric juices (acid + enzymes) that chemically break it down. The oesophagus is just a muscular tube that pushes food to the stomach, the teeth mechanically chew food (that's physical, not chemical, digestion), and the large intestine mainly absorbs water from waste." },
+  { n:3, section:'A', body:"Nam wants to find out if the amount of sunlight affects how tall a bean plant grows. She keeps everything else the same (soil, water, pot size) and changes only how many hours of sunlight each plant gets each day. What is the INDEPENDENT variable in Nam's experiment?",
+    options:["The type of soil in each plant's pot","The final height each bean plant reaches","The number of hours of sunlight given each day","The size of the pot each bean plant sits in"], ans:3,
+    why:"The independent variable is the ONE thing you deliberately change on purpose — here, that's the hours of sunlight. Plant height is the DEPENDENT variable (what she measures as the result), and soil type and pot size are CONTROLLED variables (kept the same on purpose)." },
+  { n:4, section:'A', body:"Which ONE of these four light sources is a POINT source of light (small and concentrated), rather than a broad source?",
+    options:["A fluorescent office ceiling light","A large lit window at sunset","A wide bank of stadium floodlights","A single small torch bulb, far away"], ans:4,
+    why:"A point source is small/concentrated and produces sharp shadows with NO penumbra (blurry edge) — a single small torch bulb far away acts like one. Fluorescent panels, lit windows, and floodlight banks are all BROAD sources, which is why they produce soft shadows with a blurry penumbra." },
+  { n:5, section:'A', body:"Two bar magnets are brought close together, N-pole facing N-pole. What will happen?",
+    options:["The two magnets will push each other away","The two magnets will pull toward each other","The two magnets will spin in circles","The two magnets will attract, but weakly"], ans:1,
+    why:"Like poles (N-N or S-S) always repel. Only unlike poles (N-S) attract. This is a basic property of every magnet and has nothing to do with wires or compasses." },
+  { n:6, section:'A', body:"A steel nail is held near a strong magnet and gets pulled toward it. On its own — without ever touching a magnet — could this same steel nail pull a second steel nail toward itself?",
+    options:["Yes — any object attracted to a magnet becomes a magnet","No — being attracted to a magnet doesn't make it a magnet","Yes — but only after being heated up first","No — because steel isn't a magnetic material"], ans:2,
+    why:"Steel is a MAGNETIC MATERIAL — it gets attracted to magnets — but that does not automatically make it a magnet itself. A magnet is something that can pull OTHER magnetic objects toward itself, unaided. An ordinary steel nail can't do that just from being magnetic material." },
+  { n:7, section:'A', body:"Which FOUR things does a green plant need in order to carry out photosynthesis and make its own food?",
+    options:["Sunlight, water, warmth, and soil nutrients","Sunlight, oxygen, minerals, and darkness","Sunlight, carbon dioxide, water, and chlorophyll","Water, minerals, warmth, and darkness"], ans:3,
+    why:"Photosynthesis needs sunlight (energy), carbon dioxide (from the air), water (from the roots), and chlorophyll (the green pigment that captures light) — it happens in leaves, and makes glucose (food) plus oxygen as a byproduct." },
+  { n:8, section:'A', body:"Which ONE of these four forces is a NON-CONTACT force — one that can act on an object without physically touching it?",
+    options:["Friction between a shoe and the floor","The push you use to open a door","Air resistance on a falling leaf","The pull of gravity on a falling apple"], ans:4,
+    why:"Gravity is a non-contact force — Earth pulls the apple down without touching it. Friction, pushing a door, and air resistance all need direct physical contact between two surfaces or objects to happen." },
+  { n:9, section:'A', body:"What is the main reason Earth has different seasons throughout the year?",
+    options:["Earth's axis is tilted as it orbits the Sun","Earth moves closer to and further from the Sun each year","The Moon blocks sunlight at certain times of year","The Sun gets hotter and cooler throughout the year"], ans:1,
+    why:"Earth's axis stays tilted at the same angle all year as it orbits the Sun, so different hemispheres get more or less direct sunlight at different times of year — that's what causes seasons, not distance from the Sun or the Moon." },
+  { n:10, section:'A', body:"Which ONE of these four objects is an electrical INSULATOR, not a conductor?",
+    options:["A copper wire","A rubber eraser","An aluminium can","A steel paperclip"], ans:2,
+    why:"Rubber does not allow electricity to flow through it, which makes it an insulator — that's why wires are coated in rubber or plastic. Copper, aluminium and steel are all metals, and metals are electrical conductors." },
+  { n:11, section:'A', body:"An onion is made of thick, layered rings wrapped around a very short stem at its base. Which type of underground stem is an onion?",
+    options:["A tuber — a swollen stem storing food, with buds called 'eyes'","A rhizome — a stem that grows sideways underground","A bulb — layers of modified leaves around a short stem","A corm — a solid, rounded underground stem base"], ans:3,
+    why:"A bulb (like an onion or garlic) is made of thick fleshy LEAF layers wrapped around a very short stem. A tuber (potato) is a swollen stem itself with buds/eyes; a rhizome (ginger) grows sideways; a corm (gladiolus) is solid all the way through, not layered." },
+  { n:12, section:'A', body:"Object A has a mass of 40g and a volume of 50cm&sup3;. Object B has a mass of 60g and the same volume, 50cm&sup3;. If both are placed in water (density 1g/cm&sup3;), what happens?",
+    options:["Both sink, since both have volume","Both float, since both are solids","Object A sinks; Object B floats","Object A floats; Object B sinks"], ans:4,
+    why:"Density = mass &divide; volume. Object A: 40 &divide; 50 = 0.8 g/cm&sup3;, which is LESS than water's density (1 g/cm&sup3;), so it floats. Object B: 60 &divide; 50 = 1.2 g/cm&sup3;, MORE than water, so it sinks." },
+  { n:13, section:'A', body:"A guitar string is plucked harder (with more force) but its length and tightness stay exactly the same. What changes about the sound?",
+    options:["It gets louder, but the pitch stays the same","It gets higher-pitched, but volume stays the same","Both pitch and volume increase together","Nothing changes, since string length stayed the same"], ans:1,
+    why:"Plucking harder makes the string vibrate with a bigger swing (amplitude), which makes the sound LOUDER — that's volume. Pitch depends on how FAST something vibrates, which is set mainly by the string's length and tightness, not how hard it's plucked." },
+  { n:14, section:'A', body:"A wind-up toy car is wound up tightly, then released and rolls across the floor. What is the MAIN energy transformation happening as it rolls?",
+    options:["Chemical energy to heat energy","Elastic energy to kinetic energy","Kinetic energy to potential energy","Light energy to sound energy"], ans:2,
+    why:"Winding the toy stretches/twists a spring inside, storing ELASTIC potential energy. As it unwinds and the car rolls, that stored energy converts into KINETIC energy (movement energy) — no batteries or fuel are involved, so it isn't chemical energy." },
+  { n:15, section:'A', body:"Tiny droplets gather together in the sky and form the fluffy white clouds we see on a sunny day, after starting out as invisible water vapour. What is the name of this water-cycle stage?",
+    options:["Evaporation","Precipitation","Condensation","Collection"], ans:3,
+    why:"Condensation is water vapour (gas) cooling and turning back into liquid droplets, forming clouds. Evaporation is the opposite (liquid turning to vapour), precipitation is water falling as rain/snow, and collection is water gathering in oceans/rivers/lakes." },
+  { n:16, section:'A', body:"A train covers 240 km in 4 hours, at an even pace the whole trip. How fast is it moving, in km/h?",
+    options:["960 km/h","4 km/h","244 km/h","60 km/h"], ans:4,
+    why:"Its rate of travel = distance &divide; time = 240 km &divide; 4 h = 60 km/h." },
+
+  /* ===================== PART 2 — Q17-32 (2.5 marks each) ===================== */
+  { n:17, section:'B', body:"In a forest food web, a mushroom breaks down a dead fallen log into simpler nutrients that return to the soil. What role does the mushroom play in this food web?",
+    options:["The mushroom decomposes dead matter into soil nutrients","The mushroom produces its own food using sunlight","The mushroom directly eats living green plants","The mushroom eats other animals that eat plants"], ans:1,
+    why:"A decomposer (like a mushroom/fungus) breaks down dead plant and animal matter into simple nutrients, returning them to the soil for plants to reuse. Producers make their own food (plants), and consumers eat other living things." },
+  { n:18, section:'B', body:"In a simple food chain: grass &rarr; grasshopper &rarr; frog &rarr; snake, a disease wipes out most of the frogs. What is the MOST likely effect on the grasshopper and snake populations?",
+    options:["Both increase, since nothing really changed","Grasshoppers increase; snakes decrease","Grasshoppers decrease; snakes increase","Both decrease sharply right away"], ans:2,
+    why:"With fewer frogs to eat them, grasshoppers have one less predator, so their numbers tend to rise. Snakes lose one of their main food sources (frogs), so their numbers tend to fall as food becomes scarcer." },
+  { n:19, section:'B', body:"Four identical bean plants were each given a different number of hours of sunlight per day for two weeks, and their height growth was measured. Plant W (2 hrs/day) grew 3cm. Plant X (4 hrs/day) grew 7cm. Plant Y (6 hrs/day) grew 11cm. Plant Z (8 hrs/day) grew 9cm. Based ONLY on this data, which statement is best supported?",
+    options:["Growth kept rising the more sunlight it got","More sunlight always meant less growth","Growth rose, then fell at the highest level","Sunlight made no real difference to growth"], ans:3,
+    why:"Growth rose from W to X to Y (3&rarr;7&rarr;11cm) as sunlight increased, but then DROPPED at Z (9cm) even though it got the MOST sunlight — showing there's a point where extra sunlight stops helping. It's not a simple 'more is always better' pattern." },
+  { n:20, section:'B', body:"To test which brand of paper towel absorbs the most water, Tam pours exactly 20ml of water onto each towel, using towels cut to the same size, and records how much water each one soaks up. What was KEPT THE SAME (controlled) in this test?",
+    options:["The brand of paper towel being tested","How much water each towel soaked up","The surface the water was poured onto","The amount of water used and towel size"], ans:4,
+    why:"The brand of towel is the INDEPENDENT variable (what's deliberately changed/compared), and how much water is absorbed is the DEPENDENT variable (the result measured). The amount of water poured (20ml) and the towel size are CONTROLLED — kept exactly the same for every towel, so the test is fair." },
+  { n:21, section:'B', body:"A ball is placed close to a large lamp, casting a shadow on a wall. If the ball is then moved further away from the lamp (the wall stays in the same place), what happens to its shadow?",
+    options:["The shadow gets smaller and sharper","The shadow gets bigger and blurrier","The shadow disappears completely","The shadow stays exactly the same size"], ans:1,
+    why:"Moving an object further from a broad light source (relatively closer to the wall) makes its shadow get SMALLER and sharper-edged, because less of the spreading light is blocked. Moving an object closer to the light source makes its shadow bigger." },
+  { n:22, section:'B', body:"Toy Magnet Red has its S pole on the top and N pole on the bottom. Its bottom end (N pole) is lowered to touch Toy Magnet Blue's top end, and the two toys click together (attract). What must Toy Magnet Blue's top end be?",
+    options:["Toy Magnet Blue's top end must also be N","Toy Magnet Blue's top end must be S instead","It could be either pole — not enough info","Toy Magnet Blue must have no poles at all"], ans:2,
+    why:"Magnets only click together (attract) when UNLIKE poles touch. Red's bottom end is N, so for the two touching ends to attract, Blue's top end touching it must be S (N attracts S)." },
+  { n:23, section:'B', body:"A steel paperclip touches a strong magnet for a few seconds and briefly picks up a second small paperclip. About ten seconds after the first paperclip is pulled away from the magnet, the second paperclip falls off by itself. What does this best show about the first paperclip?",
+    options:["It was secretly a fake, not real steel","It became a permanent magnet for life","It only borrowed magnetism, then lost it","It was never attracted to the magnet"], ans:3,
+    why:"Touching a strong magnet can TEMPORARILY turn a magnetic material like steel into a weak, borrowed magnet — but this induced magnetism usually fades quickly once the real magnet is taken away, which is exactly why the second paperclip fell off on its own." },
+  { n:24, section:'B', body:"Two children pull on opposite ends of a rope in a tug-of-war. Child A pulls with 120 newtons to the left. Child B pulls with 95 newtons to the right. What is the size and direction of the net (combined) force on the rope?",
+    options:["215 newtons to the left","215 newtons to the right","25 newtons to the right","25 newtons to the left"], ans:4,
+    why:"When forces act in opposite directions, subtract the smaller from the larger: 120 &minus; 95 = 25 newtons. Since Child A's pull (120N, left) is bigger, the net force is 25 newtons to the LEFT — the rope moves toward Child A." },
+  { n:25, section:'B', body:"Imagine looking down at the Earth-Sun-Moon system from above. The Sun is far to the left. The Moon orbits Earth, and can be at Position 1 (directly between the Sun and Earth), Position 2 (at a right angle to the Sun-Earth line, above), Position 3 (on the far side of Earth, directly opposite the Sun), or Position 4 (at a right angle to the Sun-Earth line, below). At which position would we see a FULL MOON from Earth?",
+    options:["Position 3, directly opposite the Sun","Position 1, between the Sun and Earth","Position 2, at a right angle to the Sun","Position 4, at a right angle to the Sun"], ans:1,
+    why:"A Full Moon happens when the Moon is on the OPPOSITE side of Earth from the Sun (Position 3) — the Sun fully lights up the side of the Moon that faces Earth. Position 1 (Moon between Sun and Earth) is actually a New Moon, where the lit side faces away from us." },
+  { n:26, section:'B', body:"A balloon is rubbed on hair and becomes negatively charged. A second identical balloon is also rubbed on hair and becomes negatively charged. What will happen when the two balloons are brought close together?",
+    options:["They will stick together strongly","They will repel and push apart","Nothing at all will happen between them","They will attract only through a wire"], ans:2,
+    why:"Like charges (negative-negative, or positive-positive) always repel each other, just like like magnetic poles. Only opposite charges (positive-negative) attract." },
+  { n:27, section:'B', body:"A circuit has one battery, one bulb, and one switch, all connected by wires in a single complete loop. If the switch is opened (turned off), what happens to the bulb?",
+    options:["It gets noticeably brighter","It stays exactly the same","It goes out, since the loop breaks","It flickers on and off repeatedly"], ans:3,
+    why:"Opening a switch breaks the complete loop that electricity needs to flow around. With the loop broken, no current can flow at all, so the bulb goes out completely — it doesn't dim gradually or flicker." },
+  { n:28, section:'B', body:"Railway tracks are often built with small gaps left between sections of metal rail. Why do engineers deliberately leave these gaps?",
+    options:["To save money on the metal used","To make the train ride bumpier","To let rainwater drain away easily","To leave room for the metal to expand"], ans:4,
+    why:"Metal expands (gets slightly bigger) when it heats up, such as on a hot sunny day. If rails were laid with no gaps at all, the expanding metal would have nowhere to go and could buckle or bend the track. The gaps leave safe room for that expansion." },
+  { n:29, section:'B', body:"A distance-time graph shows a cyclist's journey: from 0-10 minutes, the line rises steeply and steadily. From 10-20 minutes, the line is completely flat (horizontal). From 20-30 minutes, the line rises again, but less steeply than before. During which time period was the cyclist moving FASTEST?",
+    options:["0-10 minutes, the steepest rising section","10-20 minutes, the completely flat section","20-30 minutes, the gentler rising section","The cyclist's speed was the same throughout"], ans:1,
+    why:"On a distance-time graph, the STEEPER the line, the faster the speed (more distance covered in the same amount of time). The 0-10 minute section is the steepest, so that's when the cyclist was moving fastest. The flat section (10-20 min) means the cyclist wasn't moving at all." },
+  { n:30, section:'B', body:"Four balls, all with the same volume (100cm&sup3;), have different masses: Ball P = 70g, Ball Q = 130g, Ball R = 95g, Ball S = 110g. Water has a density of 1g/cm&sup3; (so 100cm&sup3; of water has a mass of 100g). Which balls will FLOAT in water?",
+    options:["Only Ball P will float","Ball P and Ball R will float","Ball Q and Ball S will float","All four balls will float"], ans:2,
+    why:"An object floats if its density is LESS than water's (mass under 100g for this 100cm&sup3; volume). Ball P (70g) and Ball R (95g) are both under 100g, so they float. Ball Q (130g) and Ball S (110g) are both over 100g, so they sink." },
+  { n:31, section:'B', body:"A see-saw (a type of lever) has its pivot point exactly in the middle. A heavy adult sits on one end, and a light child sits on the other end, at the same distance from the pivot. What will happen?",
+    options:["It will balance out evenly","It will spin around in a circle","The adult's end will go down","The child's end will go down"], ans:3,
+    why:"With the pivot exactly in the middle and both people the same distance from it, the heavier person (the adult) will go DOWN and the lighter person (the child) will go UP — equal distance from the pivot means weight decides which way it tips." },
+  { n:32, section:'B', body:"Sort materials using this rule: HARD materials that also SINK in water go in Group 1. HARD materials that FLOAT go in Group 2. SOFT materials go in Group 3. Glass sinks and is hard. A cork is soft and floats. A steel spoon sinks and is hard. A wood block is hard and floats. Which group does the wood block belong to?",
+    options:["Group 1, together with the glass","Group 3, together with the cork","Group 1, all completely on its own","Group 2, since it's hard but floats"], ans:4,
+    why:"The wood block is hard (Group 1 or 2) AND it floats — so by the rule given, it belongs in Group 2 (hard materials that float), not Group 1 (hard + sinks) or Group 3 (which is for soft materials only)." },
+
+  /* ===================== PART 3 — Q33-40 (5 marks each) ===================== */
+  { n:33, section:'C', body:"Three bar magnets, X, Y and Z, are lined up in a row, touching end to end: X-Y-Z. X and Y ATTRACT each other. Y and Z REPEL each other. Magnet X's LEFT end (the end not touching Y) is a SOUTH (S) pole. What are the poles at BOTH ends of Magnet Z?",
+    options:["Left end N, right end S","Left end S, right end N","Both ends are N poles","Both ends are S poles"], ans:1,
+    why:"Work one join at a time. X's left is S, so X's right (touching Y) is N. X-Y ATTRACT means unlike poles touch, so Y's left (touching X) must be S — making Y's right (touching Z) N. Y-Z REPEL means LIKE poles touch, so Z's left (touching Y) must also be N — making Z's right end S." },
+  { n:34, section:'C', body:"A metal spoon is held near a strong magnet and is pulled toward it. The spoon is then taken away from the magnet and held near a small pile of iron filings — nothing happens, the filings do not move at all. What does this tell us about the spoon?",
+    options:["Nothing — the iron filings must be fake","It is a magnetic material, but not a magnet itself","It is a magnet, since a magnet just pulled it","It lost all its magnetic properties for good"], ans:2,
+    why:"Being pulled toward a magnet only proves the spoon is made of a MAGNETIC MATERIAL (like steel or iron). A real magnet must be able to pull OTHER magnetic objects toward itself, unaided — since the spoon couldn't move the iron filings on its own, it is a magnetic material, not a magnet." },
+  { n:35, section:'C', body:"Ploy wants to find out if the amount of water affects how tall a sunflower grows. She grows Plant A in a sunny spot with 50ml of water per day, and Plant B in a shady spot with 100ml of water per day. After 3 weeks, Plant B is taller. Ploy concludes: 'more water makes sunflowers grow taller.' What is the main problem with Ploy's experiment?",
+    options:["Sunflowers cannot grow indoors at all","Nothing — more water clearly helped","She changed two things at once, not one","She should have measured weight, not height"], ans:3,
+    why:"A fair test can only change ONE variable at a time while keeping everything else the same. Ploy changed BOTH the water amount and the amount of sunlight between the two plants, so the height difference could be caused by either factor (or both) — she can't fairly conclude it was the water alone." },
+  { n:36, section:'C', body:"Three leaves are tested for starch after a day in full sunlight: Leaf X was left completely untouched all day. Leaf Y had black paper covering half of it all day (the other half was uncovered). Leaf Z had ALL of its carbon dioxide supply removed with a special chemical, but was left in full light. After testing each leaf with iodine solution (which turns blue-black wherever starch is present), which result would you expect?",
+    options:["X: no change. Y: all over. Z: all over","All three: blue-black all over","All three show no colour change","X: all over. Y: half only. Z: no change"], ans:4,
+    why:"Leaf X made starch normally everywhere (fully lit, all needs met) &rarr; blue-black all over. Leaf Y's covered half got no light, so it couldn't photosynthesise there &rarr; blue-black only on the uncovered half. Leaf Z had no carbon dioxide (a required ingredient), so even with light it couldn't make starch anywhere &rarr; no colour change at all." },
+  { n:37, section:'C', body:"Nine identical biscuit pieces were tested in three set-ups, each with 30ml of the same digestive juice: Set-up P used large chunks and took 40 minutes to fully break down. Set-up Q used medium pieces and took 25 minutes. Set-up R used tiny crushed crumbs and took 10 minutes. What conclusion can be drawn from this experiment?",
+    options:["Smaller pieces break down faster due to more surface area","Larger pieces simply taste better than smaller ones","The type of digestive juice makes no difference here","Biscuits only break down once crushed into crumbs"], ans:1,
+    why:"Cutting food into smaller pieces increases its total surface area — more of the biscuit's surface is touching the digestive juice at once, so the chemical breakdown happens faster. This is one reason chewing your food well before swallowing helps digestion." },
+  { n:38, section:'C', body:"Ben grouped organisms by two factors he measured: Factor X (how much water the organism's habitat gets) and Factor Y (how hot the organism's habitat usually is). A cactus was found in a place where Factor X is LOW and Factor Y is HIGH. Based on this, what are Factor X and Factor Y most likely measuring?",
+    options:["X = temperature; Y = rainfall amount","X = rainfall amount; Y = temperature","X = number of predators; Y = plant height","X = soil colour; Y = number of animals"], ans:2,
+    why:"A cactus lives in a desert — a place with very LOW rainfall (low Factor X) and very HIGH temperature (high Factor Y). This matches Factor X = rainfall amount and Factor Y = temperature. The other option pairs don't match what we know about where cacti actually grow." },
+  { n:39, section:'C', body:"A table shows the peak date of the Perseid meteor shower over five different years: 2020 &ndash; 12 August. 2021 &ndash; 13 August. 2022 &ndash; 12 August. 2023 &ndash; 13 August. 2024 &ndash; 12 August. The peak date barely changes each year, always falling in the same few days of August. What does this pattern suggest the meteor shower's timing depends on?",
+    options:["Random chance, with no real pattern at all","How many satellites are in orbit that year","Earth's yearly orbital position, which repeats","The Moon's phase on that specific day"], ans:3,
+    why:"Meteor showers happen when Earth's orbit passes through a trail of dust left behind by a comet. Because Earth returns to roughly the SAME position in its orbit at the SAME time every year, it passes through that same dust trail around the same date each year — which is why the peak date barely changes." },
+  { n:40, section:'C', body:"Read these four statements about electrical safety at home: A: Metal objects like forks should never be poked into a wall socket, because metal conducts electricity. B: A wire with its plastic coating peeled off and the bare metal showing is just as safe to touch as one with the coating intact. C: You should turn off and unplug an appliance before trying to fix it yourself. D: Water conducts electricity, so hands should be completely dry before touching any switch or plug. Which of these statements are CORRECT?",
+    options:["A and B only","B and C only","A, B, and D only","A, C, and D only"], ans:4,
+    why:"A is correct (metal is a conductor — dangerous in a socket). B is FALSE — bare exposed wire is far MORE dangerous to touch than coated wire, since the plastic coating is an insulator that normally protects you. C is correct (always unplug before attempting any fix). D is correct (water is a conductor, so wet hands + electricity is dangerous). That makes A, C, and D the correct statements." },
+];
+/* ---------- END MOCK TEST CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "PART 1 — Q1&ndash;16 (1.25 marks each)",
+  B: "PART 2 — Q17&ndash;32 (2.5 marks each)",
+  C: "PART 3 — Q33&ndash;40 (5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Mock Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+    }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, chosen: given, correct: q.ans, isCorrect, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS on Mock Test 1 (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort on Mock Test 1! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your most recent ASMOPSS-style sitting (C1 retake, 71.25/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Part ${s==='A'?1:s==='B'?2:3}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    competition: COMP_ID,
+    title: "ASMOPSS 2026 Mock Test 1 - Full Syllabus Practice",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `${COMP_ID}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

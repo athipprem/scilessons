@@ -106,27 +106,38 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     </div>
     <div id="content">
       <div class="panel active" id="panel-thisunit">
-        <div class="sec-div">This Unit &mdash; Unit 35 &middot; Final Gap-Closure Checkpoint</div>
+        <div class="sec-div">This Unit &mdash; Mock Test 1 &middot; Full Syllabus Practice</div>
         <div class="grid-3">
-          <div class="lesson-card" style="border-top-color:#DAA520">
-            <div class="lc-unit" style="color:#8a6a00">Checkpoint &middot; Unit 35 &middot; Review</div>
-            <div class="lc-title">Quick Review &mdash; No New Lessons</div>
-            <div class="lc-desc">Review-only capstone, the FIFTH and FINAL unit before ASMOPSS 2026 &mdash; 8 quick recap cards sweeping Units 21&ndash;30 (plus U6/U34 circuits and Observation-vs-Inference), then three Priority Refreshers with interactive Quick Checks: a brand-new fair-test/graph-reading exam-skills refresher, the magnet-vs-magnetic-material reverse-inference trap from Unit 34, and longer magnet chains with a freshly-varied worked example.</div>
+          <div class="lesson-card" style="border-top-color:#00695c">
+            <div class="lc-unit" style="color:#00695c">Mock Test 1 &middot; ASMOPSS-style</div>
+            <div class="lc-title">Mock Test 1 &mdash; Full Syllabus Practice</div>
+            <div class="lc-desc">FIRST of 2 planned ASMOPSS-style mock tests, 2 days before ASMOPSS 2026 (9 Aug). NOT a real past paper &mdash; an original test built by Luikishi in the real G4 Set B format (40 questions, 16A/16B/8C, 1.25/2.5/5 marks = 100 total, pass bar 80), covering the FULL syllabus. Weighted toward every recurring ASMOPSS theme (classification, fair-test, light, magnetism, photosynthesis, forces, astronomy, graph reading) plus three rising-difficulty magnet-vs-material questions, a conductor/insulator recall + safety question, and dedicated variable-vocabulary questions targeting Unit 35's open items.</div>
             <div class="lc-badges"><span class="badge badge-new">New</span></div>
-            <a class="btn-start" href="Checkpoint_U35_Review.html">Start Review</a>
-          </div>
-          <div class="lesson-card" style="border-top-color:#6a1b9a">
-            <div class="lc-unit" style="color:#6a1b9a">Unit 35 &middot; Test</div>
-            <div class="lc-title">Unit 35 Test &mdash; Final Gap-Closure Checkpoint</div>
-            <div class="lc-desc">20 questions, 3 sections &mdash; fresh confirming reps for Unit 34's two partially-closed watch-items (magnet-vs-material, 3-magnet chain), a light touch on Unit 34's isolated conductor/insulator slip, brand-new dedicated fair-test/graph-reading questions, and a light resweep of Units 21&ndash;30. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
-            <div class="lc-badges"><span class="badge badge-new">New</span></div>
-            <a class="btn-start purple" href="Tests/Unit_35_Test_FinalGapClosureCheckpoint.html">Start Test</a>
+            <a class="btn-start purple" href="Tests/Mock_Test_1_ASMOPSS2026_FullSyllabus.html">Start Test</a>
           </div>
         </div>
         <div class="pattern" id="pattern-box"></div>
       </div>
       <div class="panel" id="panel-done">
         <div class="sec-div">Completed</div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 35 &middot; Final Gap-Closure Checkpoint</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Checkpoint &middot; Unit 35 &middot; Review</div>
+            <div class="lc-title">Quick Review &mdash; No New Lessons</div>
+            <div class="lc-desc">Review-only capstone, the FIFTH and FINAL unit before ASMOPSS 2026 &mdash; 8 quick recap cards sweeping Units 21&ndash;30 (plus U6/U34 circuits and Observation-vs-Inference), then three Priority Refreshers with interactive Quick Checks: a brand-new fair-test/graph-reading exam-skills refresher, the magnet-vs-magnetic-material reverse-inference trap from Unit 34, and longer magnet chains with a freshly-varied worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Checkpoint_U35_Review.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 35 &middot; Test</div>
+            <div class="lc-title">Unit 35 Test &mdash; Final Gap-Closure Checkpoint</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; fresh confirming reps for Unit 34's two partially-closed watch-items (magnet-vs-material, 3-magnet chain), a light touch on Unit 34's isolated conductor/insulator slip, brand-new dedicated fair-test/graph-reading questions, and a light resweep of Units 21&ndash;30. Section C went a PERFECT 10/10 &mdash; the 3-magnet chain is CONFIRMED CLOSED, but magnet-vs-material is still only partially closed (missed the reverse-inference format a second time), and conductor/insulator is now a confirmed 2-instance gap. This completes all five units of the final-5-unit plan. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_35_Test_FinalGapClosureCheckpoint.html">Review Test</a>
+          </div>
+        </div>
 
         <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 34 &middot; Physics: Electricity, Magnetism &amp; Forces Recap</div>
         <div class="grid-3" style="margin-bottom:18px">
@@ -1056,10 +1067,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   var days = Math.max(0, Math.ceil((new Date(D.asmopssDate)-new Date())/86400000));
   document.getElementById('tb-days').textContent = days;
   document.getElementById('h-weeks').textContent = Math.ceil(days/7);
-  var curLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n;
+  var curLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.indexOf('MockTest')===0) ? 'Mock Test '+D.currentUnit.n.slice(8)
+               : (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1)
+               : 'U'+D.currentUnit.n;
   document.getElementById('h-unit').textContent = curLabel;
   document.getElementById('h-unit-sub').innerHTML = D.currentUnit.topic;
-  document.getElementById('tb-unit').textContent = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'Unit '+D.currentUnit.n;
+  document.getElementById('tb-unit').textContent = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.indexOf('MockTest')===0) ? 'Mock Test '+D.currentUnit.n.slice(8)
+               : (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1)
+               : 'Unit '+D.currentUnit.n;
   var unitTestCount = D.scores.filter(function(s){ return typeof s.unit === 'number'; }).length;
   var milestoneCount = D.scores.filter(function(s){ return typeof s.unit === 'string' && s.unit.charAt(0) === 'M'; }).length;
   document.getElementById('h-done').textContent = unitTestCount+'+'+milestoneCount;
