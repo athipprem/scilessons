@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_37_Test_CombustionAndFireSafety.html — Chemistry:
+     Combustion, Burning & Fire Safety
+     ------------------------------------------------------------
+     First unit of the post-ASMOPSS 2026 rotation (§49/§50 of the
+     Executive Summary). Physical-Science-weighted per the
+     retrospective: closes the real 2026 exam's Q30 gap (combustion
+     needs oxygen, not nitrogen) and embeds Trap-Recognition Drill
+     #1 — spotting absolute/overgeneralized language ("always,"
+     "never," "only," "all") in stems and options, the real exam's
+     single highest-value miss cluster (Q6/Q9/Q26/Q28, never before
+     drilled anywhere in the program). Every question tagged with
+     its ASMOPSS difficulty tier (Basic=Section A, Intermediate=
+     Section B, Applied=Section C) so tier-split results are now
+     reported automatically, not just topic-split, per §49's tier
+     mismatch finding. Flame-themed (new colour). Built under the
+     ANSWER-BALANCE RULE (5/5/5/5).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 37 Test — Combustion &amp; Fire Safety</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --flame:#d84315; --flame-d:#bf360c; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#fdf6f3;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--flame-d),var(--flame));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#fde3d8;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--flame-d),var(--flame));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--flame-d);white-space:nowrap}
+
+  .readfirst{background:#fdece4;border:1.5px solid var(--flame);color:var(--flame-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--flame-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--flame)}
+  .opt.selected{border-color:var(--flame-d);background:#fdece4;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--flame-d),var(--flame));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#fdece4,#ffccbc);border:2px solid var(--flame)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--flame-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--flame-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 37 Test — Combustion &amp; Fire Safety</b>
+      <span class="sub" id="hdr-sub">The fire triangle • Oxygen vs nitrogen • Firefighting methods • Spotting overgeneralized claims</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. If a real exception exists, that option is probably wrong — look for the more carefully-scoped answer instead.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 37;
+const UNIT_TITLE = "Combustion & Fire Safety";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 4 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"What is the chemical reaction called when a fuel burns?",
+    options:["Evaporation","Combustion","Condensation","Photosynthesis"], ans:2,
+    why:"Burning is the chemical reaction called combustion — a fuel reacting with oxygen, releasing heat and light." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Which THREE things does every fire need, at the same time, to keep burning?",
+    options:["Wood, water, and wind","Smoke, ash, and carbon dioxide","Nitrogen, fuel, and light","Fuel, oxygen, and heat"], ans:4,
+    why:"The fire triangle: fuel, oxygen, and heat, all three present at once." },
+  { n:3, section:'A', tier:'Basic', star:0, body:"Which gas in the air actually supports burning?",
+    options:["Oxygen","Nitrogen","Argon","Hydrogen"], ans:1,
+    why:"Oxygen supports burning, even though it's a smaller share of the air than nitrogen." },
+  { n:4, section:'A', tier:'Basic', star:0, body:"A fire blanket placed over a small fire works mainly by removing which side of the fire triangle?",
+    options:["Fuel","Heat","Oxygen","Nitrogen"], ans:3,
+    why:"A fire blanket smothers the fire, cutting off the oxygen supply." },
+
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier, star 1) — 6 questions ===================== */
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A pan of oil catches fire in the kitchen. Which of these is the SAFEST first action?",
+    options:["Throw water on it immediately","Fan it to blow the flames out","Turn off the heat and cover with a lid","Add more oil so it burns out faster"], ans:3,
+    why:"Covering the pan removes oxygen and turning off the heat helps too — water on burning oil makes it splash and spread." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"Why should water NEVER be used on an electrical fire?",
+    options:["Water always makes any fire worse, no matter the cause","Water conducts electricity, risking a shock","Water instantly evaporates near electricity","Electricity is not affected by heat or cooling"], ans:2,
+    why:"Water conducts electricity, so it can send a dangerous shock back through the water stream." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"A firefighter clears a strip of dry grass ahead of a wildfire. Which side of the fire triangle does this target?",
+    options:["The heat side","The oxygen side","The nitrogen side","The fuel side"], ans:4,
+    why:"Clearing the grass removes the fuel the fire would otherwise burn once it arrives." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"A lit candle is covered with a sealed glass jar and goes out after a minute, even though wax is still left. What's the best explanation?",
+    options:["The jar's limited oxygen ran out and couldn't be replaced","The wax quietly finished even though some looks left over","Nitrogen slowly built up inside and smothered the flame","The glass jar completely blocked all heat from the flame"], ans:1,
+    why:"With fuel (wax) clearly left, the only triangle side that explains it is the sealed jar's limited oxygen running out." },
+  { n:9, section:'B', tier:'Intermediate', star:1, body:"Which statement about metal near fire is the SAFER one to trust?",
+    options:["Metal never gets hot, no matter how close to a fire","Metal is always the best choice for every fire-safety job","Metal conducts heat, so it can get dangerously hot without burning","Metal completely stops every fire from spreading nearby"], ans:3,
+    why:"The scoped statement, without an absolute word like never/always/completely, is the trustworthy one." },
+  { n:10, section:'B', tier:'Intermediate', star:1, body:"If a closed door feels hot during a fire, what should you do?",
+    options:["Open the door and run through it quickly","Use a different exit instead of opening it","Pour water underneath the door first","Wait quietly next to the hot door for help"], ans:2,
+    why:"A hot door likely means fire on the other side — always use a different exit instead." },
+
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier, star 2) — 10 questions ===================== */
+  { n:11, section:'C', tier:'Applied', star:2, body:"Which of these statements about fire is the SAFEST to trust?",
+    options:["Water always puts out every kind of fire, no matter what","Fires can never possibly restart once they look completely out","All liquids are equally good at stopping any kind of fire","Water puts out most ordinary fires, but not electrical or oil fires"], ans:4,
+    why:"The scoped, exception-aware statement is the one to trust — the other three all use an untrue absolute word." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"A student claims \"nitrogen must be what makes fires burn, since it's the most common gas in air.\" Why is this wrong?",
+    options:["Nitrogen is unreactive; oxygen's smaller share supports burning","Nitrogen actually only exists deep underground, not in air","Fires don't actually need any gas at all in order to burn","Being the most common gas always means it's the most reactive"], ans:1,
+    why:"Being common and being reactive are different things — nitrogen mostly doesn't react, while oxygen does." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"A fire in a sealed metal box goes out on its own after a minute, even though there's plenty of fuel and it started hot enough. What does this tell us?",
+    options:["The sealed box's oxygen ran out and couldn't be replaced","Metal boxes always extinguish any fire immediately","The fuel inside must have secretly run out already","Sealed boxes slowly generate their own fresh nitrogen"], ans:1,
+    why:"With fuel and heat both present, the only triangle side left to fail is oxygen — sealed off with nothing to replace it." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"\"All liquids are good at putting out fires.\" Is this TRUE or FALSE, and why?",
+    options:["True — every liquid removes heat from a fire","True — liquids always block oxygen from reaching a fire","False — liquids can never be used to fight any fire","False — oil is a liquid that spreads fire, not stops it"], ans:4,
+    why:"Oil is a liquid, but it makes fires worse rather than better — proving the \"all liquids\" claim false." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"A cook's pan of oil catches fire. What is the single best immediate action?",
+    options:["Pour a large jug of water on it right away","Turn off the heat and cover the pan with a lid","Fan the flames hard to try to blow them out","Leave it to burn out completely on its own"], ans:2,
+    why:"Covering the pan removes oxygen (and cuts heat) without the splashing danger water would cause on burning oil." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"Blowing gently on a candle can put the flame out, but blowing very hard on a campfire can make it flare up bigger. Why do these two actions have opposite effects?",
+    options:["Candles and campfires are made from completely different kinds of fuel","Blowing harder on any fire always puts it out faster","A gentle puff cools a small flame, but wind feeds a big fire more oxygen","Campfires do not actually need any oxygen to burn, unlike candles"], ans:3,
+    why:"A gentle puff removes just enough heat from a tiny flame, but strong wind on a bigger fire adds fresh oxygen instead, feeding it." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"A science class is told \"always use water to cool down anything that's on fire.\" A student disagrees. Who is right, and why?",
+    options:["The student is right — water is dangerous on electrical and oil fires","The teacher is right — water is always the correct answer for fire","Neither is right — nothing can ever put out a real fire","The student is right, but only because water is too heavy to carry"], ans:1,
+    why:"\"Always\" claims about fire safety are almost never fully true — electrical and oil fires are real exceptions." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"Two identical candles are lit: Candle A is left in the open room. Candle B is covered by a large glass jar. Which goes out first, and why?",
+    options:["Candle A, because open candles always burn out faster","They go out at the same time, since wax amount is identical","Candle B — its sealed, limited oxygen supply runs out","Candle B, because glass jars use up wax faster than air does"], ans:3,
+    why:"Candle B's oxygen is trapped and limited by the jar, so it runs out — Candle A has an unlimited supply from the open room." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"A wildfire is approaching a house. Firefighters (a) wet the ground near the house, and (b) clear a strip of brush around it. What do actions (a) and (b) each target?",
+    options:["(a) targets fuel, (b) targets oxygen","(a) targets heat/cooling, (b) targets fuel","(a) targets oxygen, (b) targets heat","Both actions target the exact same triangle side"], ans:2,
+    why:"Wetting the ground cools it (heat), while clearing brush removes what the fire would burn next (fuel) — two different triangle sides." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Under time pressure on a test, what's the most reliable way to judge whether a fire-related answer choice is trustworthy?",
+    options:["Pick whichever option sounds the most detailed and most confident","Always choose the shortest-looking option to save time","Pick the same letter choice as the previous question","Check for an untrue absolute word like \"always\" or \"never\""], ans:4,
+    why:"Even under time pressure, scanning for an untrue absolute word is the fastest reliable check — sounding confident or detailed is not proof of being correct." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

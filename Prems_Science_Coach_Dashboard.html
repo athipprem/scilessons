@@ -327,11 +327,19 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   function buildScoreChart(){
     var svg = document.getElementById('scoreChartSvg');
     var scores = D.scores, n = scores.length;
-    var W=560, H=210, padL=32, padR=14, padT=20, padB=28;
+    // more points need more vertical room for rotated x-axis labels, and a wider
+    // viewBox so each point has enough horizontal room even before labels are thinned
+    var W = Math.max(560, n*15), H=250, padL=32, padR=14, padT=20, padB=64;
+    svg.setAttribute('viewBox', '0 0 '+W+' '+H);
     var innerW = W-padL-padR, innerH = H-padT-padB;
     function xAt(i){ return n<=1 ? padL+innerW/2 : padL + innerW*i/(n-1); }
     function yAt(pct){ return padT + innerH*(1-Math.max(0,Math.min(100,pct))/100); }
     function svgEl(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+    // thin out x-axis labels once there are too many points to read side-by-side;
+    // milestones/mock tests (string unit ids) always keep their label, since
+    // they're the key reference points in the story
+    var labelStep = n>44 ? 3 : (n>28 ? 2 : 1);
+    function showLabel(i, s){ return (typeof s.unit === 'string') || (i % labelStep === 0) || (i === n-1); }
 
     // gridlines: 0%, 50%, 80% (pass, dashed), 100%
     [0,50,80,100].forEach(function(v){
@@ -382,11 +390,18 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
       vlab.textContent = s.score+'/'+s.outOf;
       svg.appendChild(vlab);
 
-      var xlab = svgEl('text');
-      xlab.setAttribute('x',x); xlab.setAttribute('y', H-padB+16); xlab.setAttribute('text-anchor','middle');
-      xlab.setAttribute('font-size','9'); xlab.setAttribute('fill','#8a7a4a');
-      xlab.textContent = (typeof s.unit==='number' ? 'U'+s.unit : s.unit);
-      svg.appendChild(xlab);
+      if (showLabel(i, s)){
+        var isMilestone = typeof s.unit === 'string';
+        var ly = H-padB+10;
+        var xlab = svgEl('text');
+        xlab.setAttribute('x',x); xlab.setAttribute('y', ly); xlab.setAttribute('text-anchor','end');
+        xlab.setAttribute('font-size', isMilestone ? '9.5' : '9');
+        xlab.setAttribute('fill', isMilestone ? '#8a6a00' : '#8a7a4a');
+        if (isMilestone) xlab.setAttribute('font-weight','700');
+        xlab.setAttribute('transform', 'rotate(-60 '+x+' '+ly+')');
+        xlab.textContent = (typeof s.unit==='number' ? 'U'+s.unit : s.unit);
+        svg.appendChild(xlab);
+      }
     });
   }
 

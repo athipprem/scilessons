@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 37 · Lesson 1 — What Burning Needs: The Fire Triangle</title>
+<style>
+  :root{
+    --flame:#d84315; --flame-d:#bf360c; --ember:#ff7043;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#fdf6f3;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--flame);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--flame-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:#fff3ec;border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--ember)}
+  .job b{color:var(--flame-d)}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fdf6f3;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fdf6f3}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--flame-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fdf6f3;max-width:520px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem;background:#fff3ec;color:var(--flame-d);border:2px solid var(--flame)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:#fff3e8;color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--flame);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔥 Lesson 1 · What Burning Needs: The Fire Triangle</b><span class="pill">Unit 37 · Chemistry</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Map for Today 🗺️</h2>
+    <div class="rulebar">BIG IDEA: burning is a chemical reaction that needs THREE things at once — fuel, oxygen, and heat. Take away any ONE and the fire stops.</div>
+    <p>You've already learned that chemical reactions make brand-new substances that can't easily be changed back (Unit 9). Burning — the proper science word is <b>combustion</b> — is one of the most common chemical reactions in the world, and it shows up in real ASMOPSS questions almost every year. Today you'll learn exactly what a fire needs, and — just as important — exactly which gas in the air actually feeds it.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔥</div><div class="t">What Is Combustion?</div><div class="j">a chemical reaction between a fuel and oxygen</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔺</div><div class="t">The Fire Triangle</div><div class="j">fuel + oxygen + heat, all three at once</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">💨</div><div class="t">Oxygen, Not Nitrogen</div><div class="j">the gas that actually supports burning</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Will It Keep Burning?</div><div class="j">a decision tree that always works</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> name the three things any fire needs, explain exactly which part of the air feeds a fire (and which part doesn't), and predict whether a fire will keep burning or go out in any real-life scenario.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall from Unit 9 &amp; Unit 2 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 9 (Chemical Reactions)?</b> When a chemical reaction happens, the atoms rearrange into brand-new substances with different properties — you can't just cool the ash back into wood, the same way you can't un-bake a cake. 🔁 <b>Remember Unit 2 (What Is Matter)?</b> Air is a mixture of gases, not one single gas — it's mostly nitrogen, with a smaller share of oxygen, plus tiny amounts of other gases.</div>
+    <p>Put those two ideas together and burning makes perfect sense: it's a chemical reaction where a fuel reacts with ONE specific gas from that air mixture — not "the air" in general.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Fire is everywhere in daily life — cooking stoves, campfires, birthday candles, car engines, even the Sun. Understanding exactly what a fire needs is also exactly how firefighters know how to put fires OUT, and how safety rules at home and school are designed. Get the fire triangle solid, and both the science AND the safety side make sense together.</div>
+    <div class="card"><b>Real life:</b> a chef turning off a gas stove's flame the instant the gas valve is shut (fuel removed); a firefighter spraying water on a burning house (heat removed); a candle snuffer cutting off air to a candle flame (oxygen removed).</div>
+  </section>
+
+  <!-- SCREEN 4: WHAT IS COMBUSTION -->
+  <section class="screen" data-s="4">
+    <h2>What Is Combustion? 🔥</h2>
+    <div class="job"><b>Combustion</b> is the scientific name for burning — a chemical reaction where a <b>fuel</b> (something that can burn, like wood, gas, or wax) reacts quickly with <b>oxygen</b> from the air, releasing <b>heat and light</b> and forming new substances.</div>
+    <div class="card">
+      <p><b>What actually happens when wood burns:</b> the wood (fuel) combines with oxygen from the air. New substances form — mostly carbon dioxide gas and water vapour (which float away, so you don't see them), plus the ash and soot left behind. This is exactly like Unit 9's chemical reactions: new substances form, and you can't turn the ash back into wood by cooling it down.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 5: THE FIRE TRIANGLE -->
+  <section class="screen" data-s="5">
+    <h2>The Fire Triangle 🔺</h2>
+    <div class="rulebar">A fire needs all THREE sides of the triangle at once. Take away just ONE side, and the fire goes out.</div>
+    <svg viewBox="0 0 320 260" width="320" height="260">
+      <polygon points="160,20 40,220 280,220" fill="none" stroke="#d84315" stroke-width="4"/>
+      <circle cx="160" cy="20" r="34" fill="#ffe0b2" stroke="#ef6c00" stroke-width="2"/>
+      <text x="160" y="16" text-anchor="middle" font-size="20">🔥</text>
+      <text x="160" y="34" text-anchor="middle" font-size="11" font-weight="bold" fill="#bf360c">HEAT</text>
+      <circle cx="40" cy="220" r="34" fill="#c8e6c9" stroke="#2e7d32" stroke-width="2"/>
+      <text x="40" y="216" text-anchor="middle" font-size="20">🪵</text>
+      <text x="40" y="234" text-anchor="middle" font-size="11" font-weight="bold" fill="#1b5e20">FUEL</text>
+      <circle cx="280" cy="220" r="34" fill="#bbdefb" stroke="#1565c0" stroke-width="2"/>
+      <text x="280" y="216" text-anchor="middle" font-size="20">💨</text>
+      <text x="280" y="234" text-anchor="middle" font-size="11" font-weight="bold" fill="#0d47a1">OXYGEN</text>
+    </svg>
+    <div class="svgcap">The fire triangle: FUEL (something that can burn), OXYGEN (from the air), and HEAT (enough to start and keep the reaction going). All three corners must be present at the same time.</div>
+    <div class="job"><b>Key rule:</b> remove ANY ONE side and the fire stops — no fuel left, no oxygen reaching it, or cooled below its ignition temperature. This single rule explains almost every fire-safety method that exists.</div>
+  </section>
+
+  <!-- SCREEN 6: OXYGEN, NOT NITROGEN -->
+  <section class="screen" data-s="6">
+    <h2>Oxygen, Not Nitrogen 💨</h2>
+    <div class="rulebar">Air is roughly 78% nitrogen and 21% oxygen. Nitrogen is unreactive — it does NOT support burning. Oxygen is the part of the air that a fire actually uses up.</div>
+    <div class="card">
+      <p>It's tempting to think "nitrogen must matter, since there's so much more of it in the air" — but being the MOST COMMON gas doesn't mean it's the one doing the job. Nitrogen mostly just sits there, chemically unreactive, while the much smaller share of oxygen is what combines with the fuel.</p>
+      <p style="margin-top:8px"><b>Proof:</b> if you could somehow burn something in pure nitrogen with no oxygen at all, it would NOT catch fire, no matter how much you tried to light it. But burning something in extra pure oxygen makes it burn much more fiercely and quickly than in normal air.</p>
+    </div>
+    <div class="job"><b>Watch out:</b> "there's more of it, so it must be doing more" is a trap. Being common and being reactive are two completely different things — always check what a gas actually DOES, not just how much of it is there.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Will the Fire Keep Burning? 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Is FUEL still available to burn?</div>
+      <div class="dbranch">
+        <div class="dcol"><div class="dlbl">No</div><div class="dleaf">FIRE GOES OUT</div></div>
+        <div class="dcol">
+          <div class="dlbl">Yes → Is OXYGEN reaching the fuel?</div>
+          <div class="dbranch">
+            <div class="dcol"><div class="dlbl">No</div><div class="dleaf">FIRE GOES OUT (smothered)</div></div>
+            <div class="dcol">
+              <div class="dlbl">Yes → Is it HOT enough to keep going?</div>
+              <div class="dbranch">
+                <div class="dcol"><div class="dlbl">No</div><div class="dleaf">FIRE GOES OUT (cooled)</div></div>
+                <div class="dcol"><div class="dlbl">Yes</div><div class="dleaf">FIRE KEEPS BURNING</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Try it:</b> a fire in a sealed metal box has plenty of fuel and started off hot — but after a minute, it goes out on its own. Walk the tree: fuel ✔, but oxygen inside a sealed box is limited and can't be replaced from outside — so the oxygen branch answers "No," and the fire goes out.</div>
+  </section>
+
+  <!-- SCREEN 8: WORKED EXAMPLE -->
+  <section class="screen" data-s="8">
+    <h2>Worked Example: The Candle Under a Jar 🕯️</h2>
+    <div class="card">
+      <p><b>Set-up:</b> A lit candle is covered with a large glass jar, sealing it off from the room's air. After about a minute, the flame shrinks and goes out — even though the candle still has plenty of wax left, and the jar hasn't gotten any colder.</p>
+    </div>
+    <div class="job"><b>Wrong explanation (a trap!):</b> "The wax must have run out." This is a classic overgeneralized-sounding claim that doesn't fit the evidence — there's clearly still wax left.</div>
+    <div class="job"><b>Correct explanation:</b> the sealed jar only had a limited amount of oxygen inside it to begin with. As the flame burned, it used up that oxygen and turned it into carbon dioxide — and since the jar is sealed, no fresh oxygen from the room could get in to replace it. Once the oxygen level inside dropped too low, the OXYGEN corner of the triangle failed, and the flame went out — with fuel (wax) still left over.</div>
+    <div class="why">🧠 <b>Habit to build:</b> whenever a "why did it stop" question comes up, check ALL THREE triangle sides against the evidence before picking an answer — don't just grab the first explanation that sounds familiar.</div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What are the three things every fire needs, at the same time, to keep burning?</p>
+      <button class="opt">Wood, water, and wind</button>
+      <button class="opt">Fuel, oxygen, and heat</button>
+      <button class="opt">Nitrogen, fuel, and light</button>
+      <button class="opt">Smoke, ash, and carbon dioxide</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the fire triangle: fuel, oxygen, and heat, all three at once.</div>
+      <div class="fb no">✘ Re-check Screen 5 — the fire triangle's three corners are fuel, oxygen, and heat.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Which gas in the air is the one that actually supports burning?</p>
+      <button class="opt">Nitrogen, because it's the most common gas in air</button>
+      <button class="opt">Carbon dioxide</button>
+      <button class="opt">Oxygen</button>
+      <button class="opt">All the gases in air equally</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — oxygen supports burning, even though it's a smaller share of the air than nitrogen.</div>
+      <div class="fb no">✘ Re-check Screen 6 — nitrogen is unreactive and does NOT support burning, even though there's more of it.</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A campfire is completely doused with a large bucket of water and goes out. Which side of the fire triangle did the water remove?</p>
+      <button class="opt">Fuel</button>
+      <button class="opt">Oxygen</button>
+      <button class="opt">Nitrogen</button>
+      <button class="opt">Heat</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — water cools the fire down below the temperature it needs to keep burning, removing the HEAT corner.</div>
+      <div class="fb no">✘ Re-check Screen 5 — water works mainly by cooling the fire, which removes the HEAT corner of the triangle.</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A lit candle is covered by a sealed glass jar. After a minute it goes out, even though plenty of wax is left. What is the BEST explanation?</p>
+      <button class="opt">The limited oxygen inside the jar got used up and couldn't be replaced</button>
+      <button class="opt">The wax secretly finished even though it looks like there's some left</button>
+      <button class="opt">Nitrogen built up inside the jar and put the flame out</button>
+      <button class="opt">Glass jars always block heat from candles</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the sealed jar's limited oxygen supply ran out, and no fresh oxygen could get in to replace it.</div>
+      <div class="fb no">✘ Re-check Screen 8 — with plenty of wax (fuel) still there, the only triangle side that can explain it is oxygen running out inside the sealed jar.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A firefighter clears a strip of dry brush and grass in front of an approaching wildfire so it has nothing left to burn once it reaches that strip. Which side of the fire triangle is this targeting?</p>
+      <button class="opt">Heat</button>
+      <button class="opt">Fuel</button>
+      <button class="opt">Oxygen</button>
+      <button class="opt">None — this doesn't affect the fire triangle at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — clearing the brush removes the FUEL the fire would otherwise burn once it arrives.</div>
+      <div class="fb no">✘ Re-check Screen 5 — brush and grass are what the fire would burn, so clearing it removes the FUEL corner.</div>
+    </div>
+
+    <div class="card fb-summary" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = (i===screens.length-1) ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Combustion_Lesson_FireSafetyAndTrapRecognition.html';}
+  };
+
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! The fire triangle is locked in.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but re-read the parts you missed before moving on.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+
+  render();
+</script>
+</body>
+</html>
