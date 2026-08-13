@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_38_Test_FruitAndSeedOutcomes.html — Biology:
+     Plant Reproduction Outcomes — Fruit vs Seed
+     ------------------------------------------------------------
+     Second unit of the post-ASMOPSS 2026 rotation (§49/§50 of the
+     Executive Summary). Closes the real 2026 exam's Q25 gap
+     (ovary wall -> fruit, ovule -> seed), building on the already-
+     closed anther/ovary and stamen/pistil identity facts from
+     U25/U32. Embeds the program's FIRST Spaced-Retention Checkpoint
+     (Q7, Q8, Q17 — re-testing anther/ovary/stigma roles and
+     duckweed-root function, both closed a month or more ago, using
+     fresh scenes rather than the original framings) and continues
+     Trap-Recognition Drill rotation (Q11, Q12, Q16, Q19 — absolute-
+     language traps, now fruit/seed-flavoured). Every question
+     tagged with its ASMOPSS difficulty tier (Basic=Section A,
+     Intermediate=Section B, Applied=Section C). Built under the
+     ANSWER-BALANCE RULE (5/5/5/5) and the new same-fact-pair design
+     rule (create-new-test-pack skill G.7) — no two questions in
+     this test share the same underlying fact via a bare reword.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 38 Test — Fruit vs Seed Development</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --leaf:#2e7d32; --leaf-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f6fbf3;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--leaf-d),var(--leaf));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dcf0dc;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--leaf-d),var(--leaf));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--leaf-d);white-space:nowrap}
+
+  .readfirst{background:#eaf6ea;border:1.5px solid var(--leaf);color:var(--leaf-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--leaf-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--leaf)}
+  .opt.selected{border-color:var(--leaf-d);background:#eaf6ea;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--leaf-d),var(--leaf));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#eaf6ea,#c8e6c9);border:2px solid var(--leaf)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--leaf-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--leaf-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 38 Test — Fruit vs Seed Development</b>
+      <span class="sub" id="hdr-sub">Ovary → fruit, ovule → seed • Seed structure • Dispersal • Spaced-retention recap • Spotting overgeneralized claims</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. If a real exception exists, that option is probably wrong — look for the more carefully-scoped answer instead.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 38;
+const UNIT_TITLE = "Fruit vs Seed Development";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 4 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"After fertilization, what does the OVARY WALL develop into?",
+    options:["A new root","The fruit","A new flower","Extra leaves"], ans:2,
+    why:"The ovary wall swells and develops into the fruit — the case that protects the seeds." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Once a flower is fertilized, each OVULE grows into which structure?",
+    options:["The seed","A new root","A petal","A new stem"], ans:1,
+    why:"Each ovule already contains the fertilized egg, so it develops into a seed." },
+  { n:3, section:'A', tier:'Basic', star:0, body:"What are the three main parts found inside every seed?",
+    options:["The anther, filament, and stigma","The petal, sepal, and stem","Seed coat, embryo, food store","The root, shoot, and flower"], ans:3,
+    why:"Every seed has a seed coat (protection), an embryo (baby plant), and a food store (energy)." },
+  { n:4, section:'A', tier:'Basic', star:0, body:"Which single part acts like a protective outer shell around the embryo and food store?",
+    options:["The ovary wall","The flower's petal","The sticky stigma","The outer seed coat"], ans:4,
+    why:"The seed coat is the outer layer that protects everything inside the seed." },
+
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier, star 1) — 6 questions ===================== */
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A gardener picks a ripe tomato from her vine. Scientifically speaking, is the tomato a fruit or a vegetable, and why?",
+    options:["A fruit, because it grew from the flower's fertilized ovary and contains seeds","A vegetable, because it isn't sweet enough to be called a fruit like an apple is","Neither one — tomatoes don't actually grow from a flower's ovary at all","A vegetable, because people almost always eat it in savory, non-dessert meals"], ans:1,
+    why:"Taste and cooking use don't matter — a tomato grew from a fertilized ovary and holds seeds, so it's scientifically a fruit." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"Two students argue about a bell pepper. One says, \"It's savory, not sweet, so it must be a vegetable.\" What is the flaw in this reasoning?",
+    options:["There is actually no flaw — savory-tasting foods are always classified as vegetables, never fruits","The flaw is that bell peppers don't actually grow from a flower's ovary at all, unlike real fruits","The flaw is assuming taste decides it — a bell pepper grew from an ovary and has seeds, so it's a fruit","The flaw is that true vegetables can never be picked from any flowering plant of any kind"], ans:3,
+    why:"Taste has nothing to do with the rule — a bell pepper grew from a fertilized ovary and holds seeds, so it's scientifically a fruit regardless of how it tastes." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"A greenhouse worker uses a small brush to move pollen from flower A to flower B. Which part of flower A did the brush collect pollen from, and which part of flower B does it deliver the pollen to?",
+    options:["Collects from the ovary; delivers to the stigma","Collects from the anther; delivers to the stigma","Collects from the stigma; delivers to the anther","Collects from the anther; delivers straight to the ovary"], ans:2,
+    why:"The anther is where pollen is made and collected from; the stigma is the sticky part that receives it — this is the same anther-and-stigma job split from Unit 25 and Unit 32, just in a new greenhouse scene." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"A hobbyist grows water lettuce, a plant that floats freely with its roots dangling loosely and never reaching the bottom. Why does the hobbyist need to add fertilizer directly into the water instead of into a soil bed?",
+    options:["Because floating plants like this one can't actually absorb any minerals through their roots at all","Because the roots' only real job here is to anchor the plant firmly, not to absorb anything","Because water lettuce doesn't actually grow any real roots to begin with, unlike other plants","Because the roots' only real job now is absorbing water and minerals directly from the surrounding water"], ans:4,
+    why:"Since the surrounding water already supports and holds up the whole plant, the roots' anchoring job disappears — absorbing water and minerals straight from the water is their one remaining job, so that's where any fertilizer needs to go." },
+  { n:9, section:'B', tier:'Intermediate', star:1, body:"A pea pod holds several round peas in a row inside a long green case. Is the pea pod a true fruit, and why?",
+    options:["No, because pea pods taste savory and are almost always eaten as a vegetable","No, because seed pods like this one never actually grow from a flower","Yes, because it grew from a fertilized ovary and holds the seeds (peas) inside","Yes, but only because the pod happens to be colored green on the outside"], ans:3,
+    why:"A pea pod grew from a fertilized ovary and contains seeds — it's a real fruit even though it's savory and dry, not sweet and juicy." },
+  { n:10, section:'B', tier:'Intermediate', star:1, body:"Why do some fruits, like berries, taste sweet and colorful, while the ovary wall of a dry pea pod does not?",
+    options:["Sweet fruits actually aren't real fruits at all — only dry, splitting pods count as true fruits","Sweet, colorful fruits attract animals to eat and spread the seeds; dry pods split open to release theirs instead","The ovary wall always turns sweet, juicy, and brightly colored, no matter which kind of plant produced it","A fruit's taste and color really have nothing at all to do with how its seeds actually end up spreading"], ans:2,
+    why:"A fruit's traits match its dispersal method — sweet and colorful fruits are built to be eaten, while dry pods are built to split open and fling seeds out instead." },
+
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier, star 2) — 10 questions ===================== */
+  { n:11, section:'C', tier:'Applied', star:2, body:"A student claims, \"A fruit is always sweet and eaten as a dessert.\" Explain what's wrong with this, using an example.",
+    options:["The claim is actually completely correct, and nothing at all is wrong with it here","It's wrong, simply because fruits are never actually eaten by people in any form","It's wrong, simply because only vegetables are ever able to come from flowers at all","It's wrong — tomatoes, cucumbers, and pea pods are biological fruits, but savory, not sweet"], ans:4,
+    why:"\"Always\" is the giveaway — plenty of real fruits (tomato, cucumber, pea pod) are savory, not sweet desserts." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"Which of these statements about fruits and seeds is SAFE to trust?",
+    options:["A fruit develops from a fertilized ovary and typically contains seeds, though the number varies","All fruits grow only on tall trees, and never on vines, bushes, or small low plants","A fruit always contains exactly one single seed inside it, and never more than one","Every single part of a plant that grows underground automatically counts as a real fruit"], ans:1,
+    why:"The scoped, exception-aware statement is the trustworthy one — the other three all use an untrue absolute word (all/always/every)." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"Explain, step by step, what happens inside a flower from the moment pollen lands on the stigma to the moment a ripe fruit with seeds is ready.",
+    options:["Fertilization happens first inside the flower's ovary, and pollination only follows afterward as a separate later step","The flower's petals turn directly into the ripe fruit later on, with no pollen or fertilization ever being involved","The anther itself gradually swells up over time and turns directly into the fruit once its pollen is released","Pollination (pollen lands on stigma) → fertilization (ovule fertilized) → ovule becomes seed, ovary wall becomes fruit"], ans:4,
+    why:"The full pathway in order: pollination, then fertilization, then the ovule becomes a seed while the ovary wall becomes the fruit around it." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"A carrot, a potato, and a stick of celery never developed from a flower's ovary. Why are none of these a fruit in the scientific sense, even though people sometimes talk about \"fruits and vegetables\" loosely?",
+    options:["They are all secretly true fruits deep down, just ones that happen not to taste sweet","Any plant part that happens to grow underground in soil automatically counts as a fruit","Carrot is a root, potato is an underground stem, and celery is a leaf stalk — none formed from an ovary","Fruits and vegetables are actually the exact same thing to a scientist, with no real difference at all"], ans:3,
+    why:"None of the three grew from a flower's fertilized ovary — they're a root, a stem, and a leaf stalk, so the fruit rule rules them out immediately." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"A dandelion seed has a fluffy white parachute attached, while a burr seed case has hooks that stick to animal fur. Both came from the same ovary-to-fruit, ovule-to-seed pathway. Why do their fruit coverings look so different?",
+    options:["Each fruit's shape matches its own dispersal method — fluffy parachutes catch wind, hooks grab onto animals","The shapes are completely random and have nothing at all to do with how the seeds actually travel","Only wind-dispersed seeds like the dandelion actually come from a real fertilized ovary","Hooked seeds like the burr always grow much bigger in size than fluffy wind-blown ones"], ans:1,
+    why:"A fruit's shape closely matches how it travels — light and fluffy for wind, hooked and sticky for hitching a ride on an animal." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"Under exam time pressure, what is the most reliable way to judge whether a \"fruit vs vegetable\" answer choice is trustworthy?",
+    options:["Pick whichever answer choice happens to sound the most food-related or delicious overall","Check the claim's scope, avoiding words like \"always/never/all,\" and match it to the ovary-and-seeds rule","Always trust and pick whichever option happens to mention sweetness or taste directly","Choose the longest-sounding answer choice, since it's usually assumed to be the most detailed"], ans:2,
+    why:"Checking the claim's scope against the actual ovary-and-seeds rule beats guessing from confidence, sweetness, or length — the same strategy that works on any topic, not just fruit questions." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"A student is asked to sort flower parts into two teams. Which team does the OVARY belong to, and which team does the ANTHER belong to?",
+    options:["Ovary → stamen (male); anther → pistil (female)","Ovary → pistil (female); anther → stamen (male)","Both belong to the same team, the stamen","Both belong to the same team, the pistil"], ans:2,
+    why:"The ovary is part of the pistil (female team); the anther is part of the stamen (male team) — the same team split confirmed back in Unit 25 and Unit 32." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"A cucumber has visible seeds running through its middle when sliced open, even though most people call it a \"vegetable\" in cooking. A carrot has no seeds anywhere inside it. Using the fruit rule, explain why one is a true fruit and the other is not.",
+    options:["The cucumber counts as a fruit simply because it happens to be long and thin in shape","The carrot is actually secretly a fruit too, just one that grows underground instead","Both of them are fruits, since they both ultimately grow from soil in a garden","The cucumber developed from a fertilized ovary and has seeds — the carrot is a root, never an ovary"], ans:4,
+    why:"Shape, soil, or kitchen habit don't decide it — only the ovary-and-seeds rule does, and the cucumber passes while the carrot (a root) never even had an ovary." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"A gardener wonders why a watermelon (juicy, sweet, brightly colored) and a poppy seed pod (dry, brown, splits open) both count as \"fruits,\" even though they look and behave so differently. What do they have in common that makes both true fruits?",
+    options:["Both developed from a fertilized ovary and hold seeds, even though dispersal differs","Both of them must taste sweet in order to count as a real fruit at all","Only juicy, sweet fruits are real fruits — dry splitting pods don't actually count","They happen to share the exact same color, shape, and overall size"], ans:1,
+    why:"However different they look or taste, both grew from a fertilized ovary and hold seeds — the only two things the fruit rule actually requires." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Why does it make biological sense that the OVARY becomes the FRUIT while the OVULE becomes the SEED, rather than the other way around?",
+    options:["It's completely arbitrary which part becomes which — the ovary and ovule could just as easily swap roles entirely","The ovule turns into the fruit mainly because it happens to be the sweetest and juiciest part inside the flower","The ovule holds the fertilized egg that grows into a new plant, becoming the seed, while the ovary wall becomes the protective fruit","The ovary always turns into the seed instead of the fruit, simply because it happens to be the smaller structure"], ans:3,
+    why:"The ovule holds the fertilized egg itself, so it must become the seed; the ovary wall is just the surrounding case, which becomes the protective fruit around it." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
