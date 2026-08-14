@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 39 · Lesson 1 — Free-Fall Under Pressure</title>
+<style>
+  :root{
+    --steel:#37474f; --steel-d:#20282d; --steel-l:#eceff1;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>⏱️ Lesson 1 · Free-Fall Under Pressure</b><span class="pill">Unit 39 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Stress-Test Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: you already KNOW the falling-objects rule perfectly on quiet unit tests. Today's job is making sure it holds up when you're moving fast, comparing several things at once, or facing a question that looks "too easy" to double-check.</div>
+    <p>Unit 39 is a special kind of unit — instead of brand-new content, it deliberately re-tests two skills you've already mastered, but under harder, faster, more crowded conditions, closer to what a real exam actually feels like.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Quick fix from Unit 38</div><div class="j">two ungraded checks first</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🪨</div><div class="t">Gravity + air resistance, fast</div><div class="j">recap, then multi-object comparisons</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🚩</div><div class="t">Trap-Recognition Drill #2</div><div class="j">absolute words, force &amp; gravity flavour</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧲</div><div class="t">Coming in Lesson 2</div><div class="j">force combination + a magnet chain with a twist</div></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> correctly compare how several falling objects behave at once, spot when a question is trying to rush you into skipping a check, and catch overgeneralized ("always/never") claims about gravity and forces.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX FROM U38 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix from Unit 38 🔁</h2>
+    <div class="recall">These two are UNGRADED warm-ups — just to keep Unit 38's ideas fresh before we move to today's topic.</div>
+    <div class="ungraded">
+      <p>Warm-up A. A market stall sells cherry tomatoes, cucumbers, and carrots. A customer says, "Only the cucumber and tomato are real fruits — carrots definitely aren't, no exceptions." Is this a safe claim?</p>
+      <button class="opt" data-w="A" data-c="false">No — actually all three, including the carrot, count as true fruits</button>
+      <button class="opt" data-w="A" data-c="true">Yes — cucumber and tomato both grew from a fertilized ovary and hold seeds; a carrot is a root, so it never had an ovary to begin with</button>
+      <button class="btn next chkw" data-w="A">Check</button>
+      <div class="fb ok" data-w="A">✔ Correct — and notice this claim used "definitely, no exceptions" but was still actually TRUE this time. Absolute-sounding language isn't automatically wrong — you still have to check the facts underneath it, every time.</div>
+      <div class="fb no" data-w="A">✘ Re-think it: a carrot is a root, and never grew from a fertilized ovary — so it was correctly excluded here.</div>
+    </div>
+    <div class="ungraded">
+      <p>Warm-up B. Which strategy from Unit 38 helps you judge whether an answer choice is trustworthy under exam pressure, no matter the topic?</p>
+      <button class="opt" data-w="B" data-c="false">Pick whichever option sounds the most confident or detailed</button>
+      <button class="opt" data-w="B" data-c="true">Check the claim's scope for words like always/never/only/all, and compare it against what you actually know</button>
+      <button class="btn next chkw" data-w="B">Check</button>
+      <div class="fb ok" data-w="B">✔ Correct — checking scope against the real facts beats guessing from confidence or length. Today you'll use this exact strategy on gravity and force claims instead of fruit claims.</div>
+      <div class="fb no" data-w="B">✘ Re-think it: confidence and length are traps, not clues — the real test is whether the claim's scope actually matches the facts.</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">On ASMOPSS 2026, the falling-objects rule — one of the most heavily practiced, most confirmed-closed facts in this entire program — was still missed on the real exam. Not because the idea was forgotten, but most likely because the question LOOKED easy, and easy-looking questions get rushed. Today is about making sure that never happens again.</div>
+    <div class="stress">📋 <b>The real finding:</b> Prem scored 20/20 on Unit 21 (gravity), and correctly re-confirmed the same rule on the ASMOPSS 2024 retake — but still missed a very similar question on the real 2026 exam. A skill can be fully understood and still lost to a moment of rushing. That's a speed-and-care problem, not a knowledge problem — and it needs its own kind of practice.</div>
+    <div class="card"><b>Real life:</b> pilots, surgeons, and competition athletes all train for exactly this — performing a skill they already know perfectly, but under time pressure, distraction, or a crowded field of choices, so it doesn't fail them when it matters most.</div>
+  </section>
+
+  <!-- SCREEN 4: RECALL GRAVITY + AIR RESISTANCE -->
+  <section class="screen" data-s="4">
+    <h2>Fast Recap: Gravity &amp; Air Resistance 🔁</h2>
+    <div class="rulebar">Without air resistance, EVERY object falls at exactly the same rate, no matter its mass. WITH air resistance, an object's SHAPE and SURFACE AREA can slow its fall — a flat, spread-out shape catches more air than a compact, heavy one.</div>
+    <div class="job"><b>Remember from Unit 21:</b> a bowling ball and a feather dropped together in true vacuum land at the same instant. Drop them in normal air instead, and the feather's large, spread-out shape catches far more air resistance relative to its tiny weight, so it drifts down slowly while the bowling ball falls almost as if the air wasn't there at all.</div>
+    <p>Two flat sheets of paper — one crumpled into a tight ball, one left flat — have the exact same MASS. Which one lands first, and why?</p>
+    <div class="job"><b>Answer:</b> the crumpled ball lands first. Crumpling doesn't change its mass at all — it only shrinks its surface area, so it catches far less air resistance than the flat sheet on the way down.</div>
+  </section>
+
+  <!-- SCREEN 5: MULTI-OBJECT STRESS SCENARIO -->
+  <section class="screen" data-s="5">
+    <h2>The Stress Test: Three at Once 🎯</h2>
+    <div class="rulebar">Real exam questions rarely compare just two objects — sometimes you have to rank THREE or more, all at once, without losing track.</div>
+    <svg viewBox="0 0 340 190" xmlns="http://www.w3.org/2000/svg" aria-label="Three objects released from the same height at the same moment: a golf ball, a flat paper plate, and a screwed-up ball of the same paper">
+      <text x="170" y="16" font-size="10" font-weight="700" fill="#20282d" text-anchor="middle">Released together, same height, same moment</text>
+      <line x1="20" y1="30" x2="320" y2="30" stroke="#90a4ae" stroke-width="2"/>
+      <circle cx="70" cy="45" r="11" fill="#c9b458"/>
+      <text x="70" y="65" font-size="8.5" text-anchor="middle" fill="#546e7a">Golf ball</text>
+      <text x="70" y="76" font-size="7.5" text-anchor="middle" fill="#90a4ae">(small, heavy, compact)</text>
+      <ellipse cx="170" cy="45" rx="26" ry="7" fill="#e0e0e0" stroke="#90a4ae"/>
+      <text x="170" y="65" font-size="8.5" text-anchor="middle" fill="#546e7a">Paper plate</text>
+      <text x="170" y="76" font-size="7.5" text-anchor="middle" fill="#90a4ae">(flat, spread out)</text>
+      <circle cx="265" cy="45" r="9" fill="#e0e0e0" stroke="#90a4ae"/>
+      <text x="265" y="65" font-size="8.5" text-anchor="middle" fill="#546e7a">Crumpled plate</text>
+      <text x="265" y="76" font-size="7.5" text-anchor="middle" fill="#90a4ae">(same paper, balled up)</text>
+      <rect x="0" y="170" width="340" height="10" fill="#a1887f"/>
+      <text x="170" y="150" font-size="8.5" text-anchor="middle" fill="#546e7a" font-style="italic">landing order — can you rank all three?</text>
+    </svg>
+    <div class="svgcap">A golf ball, a flat paper plate, and that SAME plate crumpled into a tight ball are all released together from the same height. Two of the three (golf ball, crumpled plate) are both small and compact; only the flat plate spreads out.</div>
+    <div class="job"><b>Work it through ONE object at a time, don't rush:</b> the golf ball is small and dense (little air resistance). The crumpled plate is also small and compact now (little air resistance). The FLAT plate is spread wide open — lots of air resistance. So the golf ball and crumpled plate land at nearly the same time, first; the flat plate lands last, clearly behind them.</div>
+  </section>
+
+  <!-- SCREEN 6: TRAP-RECOGNITION DRILL #2 -->
+  <section class="screen" data-s="6">
+    <h2>Trap-Recognition Drill #2 🚩</h2>
+    <div class="rulebar">Watch for ALWAYS / NEVER / ONLY / ALL in claims about gravity and falling objects — the same trap that cost real exam marks on Q6, Q9, Q26, and Q28.</div>
+    <div class="job"><b>Try this one:</b> "Heavier objects ALWAYS fall faster than lighter ones — no exceptions." Is this claim safe to trust?</div>
+    <div class="job" style="border-left-color:#c62828"><b>No.</b> It's only true when air resistance affects the two objects differently. Drop a bowling ball and a feather TOGETHER in a vacuum, with no air at all, and they fall at exactly the same rate — the claim's "no exceptions" wording makes it false.</div>
+    <p>The trap isn't the idea of a heavier object seeming to fall faster — that can genuinely happen in real air. The trap is claiming it ALWAYS happens, with no exceptions, when a real exception (true vacuum, or negligible air resistance) exists.</p>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Before You Answer — Slow Down Once 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does this falling-objects question feel obvious or "too easy" to bother double-checking?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES — it looks easy</div>
+          <div class="dleaf no">That's exactly when to slow down: check air resistance AND scan for always/never/only/all before locking in an answer</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — it already looks tricky</div>
+          <div class="dleaf yes">Compare each object one at a time (shape, then surface area), same as always</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> the real 2026 exam showed that "easy-looking" is exactly where marks get lost — not because the rule was unknown, but because it felt too obvious to check. From now on, "this looks easy" is itself a signal to check once more, not a reason to skip the check.</div>
+  </section>
+
+  <!-- SCREEN 8: WORKED EXAMPLE -->
+  <section class="screen" data-s="8">
+    <h2>Worked Example: The Coin and the Card 🪙</h2>
+    <div class="card">
+      <b>Scenario:</b> a 1-baht coin and a flat playing card are held at the same height and dropped together. A student says, "The coin is heavier, so it always lands first — end of story." A second student disagrees.
+      <br><br><b>Step 1 — check for air resistance difference:</b> the coin is small, thick, and compact. The card is thin and spread out flat. Their SHAPES are very different, so air resistance affects them very differently.
+      <br><br><b>Step 2 — apply the rule correctly:</b> because air resistance really is different here, the coin lands first — but NOT simply because it's heavier. It lands first because its compact shape catches far less air resistance than the card's flat, spread-out shape.
+      <br><br><b>Step 3 — spot the trap:</b> the first student's reasoning ("heavier always wins, end of story") happened to reach the right answer for the wrong reason. If you turned that same card edge-on and dropped it point-down, it would fall almost as fast as the coin — same weight, same materials, totally different result — because shape and air resistance are the real cause, not weight alone.
+    </div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully, and don't rush even the ones that look easy!</div>
+
+    <div class="q" data-correct="4">
+      <p>1. A marble and a flat sheet of paper (same mass, different shapes) are dropped together. Which lands first, and why?</p>
+      <button class="opt">The paper, because flat shapes always fall fastest</button>
+      <button class="opt">Neither — objects with the same mass always land together</button>
+      <button class="opt">The marble, only because it is the heavier of the two</button>
+      <button class="opt">The marble, because its compact shape catches far less air resistance than the flat, spread-out paper</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — same mass, but very different shapes, means very different air resistance — the compact marble wins.</div>
+      <div class="fb no">✘ Re-check Screen 4 — with equal mass, what actually decides which one lands first?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. A golf ball, a crumpled ball of paper, and a flat sheet of the SAME paper are dropped together from the same height. Which lands LAST?</p>
+      <button class="opt">The golf ball</button>
+      <button class="opt">The flat sheet of paper</button>
+      <button class="opt">The crumpled ball of paper</button>
+      <button class="opt">All three land at exactly the same instant</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the flat sheet spreads its surface out widely, catching the most air resistance of the three, so it falls slowest and lands last.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which of the three shapes is the LEAST compact, catching the most air on the way down?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>3. "Heavier objects always fall faster than lighter ones." What's the BEST way to evaluate this claim?</p>
+      <button class="opt">Trust it completely — heavier objects are always faster</button>
+      <button class="opt">Reject it completely — mass never affects how fast anything falls</button>
+      <button class="opt">Check for the word "always" and test it against a no-air-resistance case (like a vacuum) before trusting it</button>
+      <button class="opt">Judge it by how confident it sounds, not by checking any facts</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — spotting "always" and checking it against the vacuum exception is exactly the Trap-Recognition strategy from Screen 6.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what specific word should make you pause and double-check a claim like this?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A student sees a question that looks very simple and thinks, "This is obviously easy, I don't need to check it carefully." What does Screen 7 recommend instead?</p>
+      <button class="opt">Treat "this looks easy" as a signal to slow down and check once more, not skip the check</button>
+      <button class="opt">Answer as fast as possible, since easy questions never hide anything</button>
+      <button class="opt">Skip easy-looking questions entirely and come back to them last</button>
+      <button class="opt">Assume the first answer choice is always correct on easy questions</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — "easy-looking" is exactly where the real 2026 exam lost marks, so it's a cue to slow down, not speed up.</div>
+      <div class="fb no">✘ Re-check Screen 7 — what should an "easy-looking" question actually make you do?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>5. A coin dropped flat-side-down lands quickly. The SAME coin, somehow dropped perfectly on its thin edge, would fall almost as fast too. Why does turning it on its edge barely change anything?</p>
+      <button class="opt">Because the coin's mass changes when it's turned on its edge</button>
+      <button class="opt">Because coins are magnetic and gravity treats them differently</button>
+      <button class="opt">Because air resistance always stays exactly the same no matter the shape</button>
+      <button class="opt">Because edge-on, the coin still presents very little surface area to the air — its shape is still compact either way</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — whether flat-down or edge-on, the coin never spreads out much surface area to the air, so air resistance stays small either way.</div>
+      <div class="fb no">✘ Re-check Screen 8 — what actually decided the coin-vs-card result, mass or surface area facing the air?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='GravityForces_Lesson_CombiningForcesAndMagnetChains.html';}
+  };
+
+  // ungraded warm-up checks (Screen 2)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const w = block.querySelector('.opt').dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    block.querySelector('.chkw').onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      block.querySelector('.chkw').disabled=true;
+      block.querySelector('.chkw').textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

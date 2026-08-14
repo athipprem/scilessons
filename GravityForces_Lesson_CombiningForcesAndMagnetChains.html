@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 39 · Lesson 2 — Combining Forces &amp; Magnet Chains With a Twist</title>
+<style>
+  :root{
+    --steel:#37474f; --steel-d:#20282d; --steel-l:#eceff1;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .step{background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;font-size:.88rem}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:var(--amber)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🧲 Lesson 2 · Combining Forces &amp; Magnet Chains With a Twist</b><span class="pill">Unit 39 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Stress-Test Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: chaining two confirmed skills together — force combination AND magnet-pole logic with an extra "flip" step — tests whether your working memory can hold onto everything at once, not just one fact at a time.</div>
+    <p>Both skills below have already been confirmed closed in this program. Today isn't about learning them again — it's about handling them when there's MORE than one step to track.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Recall: adding &amp; cancelling forces</div><div class="j">from Unit 29/30</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">➕➕➕</div><div class="t">Multi-step force combination</div><div class="j">3+ forces, one at a time</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧲🔄</div><div class="t">Magnet chains WITH a flip</div><div class="j">the exact skill missed on the real exam</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">✅</div><div class="t">Practice</div><div class="j">5 questions, mixing both skills</div></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> combine three or more forces acting on the same object, and correctly re-work a magnet chain after one magnet in it gets physically flipped around.</div>
+  </section>
+
+  <!-- SCREEN 2: RECALL -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recall: Add or Cancel? 🔁</h2>
+    <div class="recall">🔁 <b>Remember Unit 29/30?</b> Forces in the SAME direction ADD fully. Forces in OPPOSITE directions SUBTRACT — if they're equal, they cancel completely (balanced); if unequal, the leftover (bigger minus smaller) pushes the object toward the stronger side. 🔁 <b>Remember Unit 34/35?</b> A chain of touching magnets is read ONE JOIN at a time: matching poles (N–N or S–S) repel, different poles (N–S) attract — and every single magnet always has a North end AND a South end, never just one.</div>
+    <p>Today both ideas come back — but this time, with THREE forces at once instead of two, and a magnet chain where one magnet gets physically turned around partway through.</p>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">On the real ASMOPSS 2026 exam, Prem correctly solved a 2-magnet chain question — but missed an almost identical chain that had ONE EXTRA STEP: one magnet had been physically flipped around. Same rule, same underlying skill, but one extra thing to track broke it. This is exactly what working-memory stress-testing is for.</div>
+    <div class="stress">📋 <b>The real finding:</b> Q18 (a straightforward magnet chain, no flip) was answered correctly, with matching working shown. Q33 (the same kind of chain, but with a flip added) was missed. The magnet-pole rule itself wasn't the problem — tracking one extra operation on top of it was.</div>
+    <div class="card"><b>Real life:</b> engineers assembling machines with multiple magnetic parts, or technicians wiring circuits with several components, constantly have to track multiple changes at once without losing their place — exactly the skill this lesson builds.</div>
+  </section>
+
+  <!-- SCREEN 4: MULTI-STEP FORCE COMBINATION -->
+  <section class="screen" data-s="4">
+    <h2>Three Forces, One at a Time ➕➕➕</h2>
+    <div class="rulebar">With 3+ forces, don't try to combine them all in your head at once — group SAME-direction forces together FIRST, then compare the two totals.</div>
+    <svg viewBox="0 0 340 150" xmlns="http://www.w3.org/2000/svg" aria-label="A crate with three forces acting on it: 12N left, 8N left, and 15N right">
+      <rect x="150" y="55" width="40" height="35" fill="#8d6e63"/>
+      <line x1="20" y1="60" x2="146" y2="60" stroke="#2e7d32" stroke-width="3" marker-end="url(#g1)"/>
+      <text x="80" y="52" font-size="9" fill="#1b5e20" text-anchor="middle">12N (push)</text>
+      <line x1="20" y1="80" x2="146" y2="80" stroke="#1565c0" stroke-width="3" marker-end="url(#g2)"/>
+      <text x="80" y="98" font-size="9" fill="#0d47a1" text-anchor="middle">8N (push)</text>
+      <line x1="320" y1="70" x2="194" y2="70" stroke="#c62828" stroke-width="3" marker-end="url(#g3)"/>
+      <text x="260" y="62" font-size="9" fill="#c62828" text-anchor="middle">15N (push)</text>
+      <text x="170" y="120" font-size="8.5" text-anchor="middle" fill="#546e7a">Group left-pushers first: 12N + 8N = 20N left.</text>
+      <text x="170" y="133" font-size="8.5" text-anchor="middle" fill="#546e7a">Then compare to the right: 20N − 15N = 5N net, crate moves LEFT.</text>
+      <defs>
+        <marker id="g1" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#2e7d32"/></marker>
+        <marker id="g2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#1565c0"/></marker>
+        <marker id="g3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#c62828"/></marker>
+      </defs>
+    </svg>
+    <div class="svgcap">A crate has three forces acting on it: 12N and 8N both pushing left, and 15N pushing right.</div>
+    <div class="job"><b>Method, step by step:</b> (1) Sort every force into two piles by direction — left-pushers and right-pushers. (2) Add up each pile separately: left pile = 12+8 = 20N. Right pile = 15N (only one force). (3) Compare the two totals like a simple tug-of-war: 20N − 15N = 5N net force, toward the bigger pile's direction (left).</div>
+  </section>
+
+  <!-- SCREEN 5: MAGNET CHAIN WITH A FLIP -->
+  <section class="screen" data-s="5">
+    <h2>Magnet Chains WITH a Flip 🔄</h2>
+    <div class="rulebar">A "flip" means one magnet in the chain gets physically turned end-for-end AFTER you've already worked out its poles. Once it's flipped, that magnet's North and South ends SWAP PLACES — everything past that point must be re-checked.</div>
+    <svg viewBox="0 0 380 180" xmlns="http://www.w3.org/2000/svg" aria-label="Two magnets X and Y touching, X's left end labelled N, then magnet Y gets flipped around">
+      <text x="95" y="16" font-size="9.5" font-weight="700" text-anchor="middle" fill="#20282d">STEP 1 — before the flip</text>
+      <rect x="30" y="35" width="50" height="26" fill="#37474f"/>
+      <text x="55" y="52" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">N</text>
+      <text x="80" y="52" font-size="9" fill="#fff" text-anchor="middle">S</text>
+      <rect x="80" y="35" width="50" height="26" fill="#78909c"/>
+      <text x="105" y="52" font-size="9" fill="#fff" text-anchor="middle">N</text>
+      <text x="130" y="52" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">S</text>
+      <text x="80" y="76" font-size="8" text-anchor="middle" fill="#546e7a">X's right end (S) touches Y's left end (N) — different poles, they ATTRACT</text>
+      <text x="80" y="86" font-size="8" text-anchor="middle" fill="#546e7a">X = N–S, Y = N–S (given: X–Y join attracts)</text>
+
+      <text x="285" y="16" font-size="9.5" font-weight="700" text-anchor="middle" fill="#20282d">STEP 2 — Y gets FLIPPED around</text>
+      <rect x="220" y="35" width="50" height="26" fill="#37474f"/>
+      <text x="245" y="52" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">N</text>
+      <text x="270" y="52" font-size="9" fill="#fff" text-anchor="middle">S</text>
+      <rect x="270" y="35" width="50" height="26" fill="#78909c"/>
+      <text x="295" y="52" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">S</text>
+      <text x="320" y="52" font-size="9" fill="#fff" text-anchor="middle">N</text>
+      <text x="270" y="76" font-size="8" text-anchor="middle" fill="#546e7a">Y is turned end-for-end: its N and S ends SWAP</text>
+      <text x="270" y="86" font-size="8" text-anchor="middle" fill="#546e7a">places. Now X's S touches Y's NEW left end (S).</text>
+      <text x="270" y="104" font-size="9" font-weight="700" text-anchor="middle" fill="#c62828">Same poles (S–S) now touch → they REPEL</text>
+
+      <text x="190" y="140" font-size="9" text-anchor="middle" fill="#546e7a" font-style="italic">The rule never changed — only Y's orientation did.</text>
+      <text x="190" y="155" font-size="9" text-anchor="middle" fill="#546e7a" font-style="italic">Re-check the join fresh, exactly like it's brand new.</text>
+    </svg>
+    <div class="svgcap">Before the flip, X (N–S) and Y (N–S) touch S-to-N, so they attract. After Y is physically flipped end-for-end, Y's poles swap places — now X's S touches Y's S, so the SAME join now repels instead.</div>
+    <div class="job"><b>The one rule that fixes this every time:</b> a flip does NOT change the rule (same poles still repel, different poles still attract) — it only changes WHICH pole is facing which way. Treat the touching join AFTER a flip as a brand-new join, and re-apply the rule fresh, exactly like Screen 2's reminder that this is the same skill you already know — just one more thing to track.</div>
+  </section>
+
+  <!-- SCREEN 6: DECISION TREE -->
+  <section class="screen" data-s="6">
+    <h2>Handling a Multi-Step Chain 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the problem mention a magnet being flipped, turned around, or reversed partway through?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">NO flip mentioned</div>
+          <div class="dleaf yes">Work the chain join by join as usual, start to finish</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">YES, a flip happens</div>
+          <div class="dleaf no">Work the chain up to the flip normally, THEN treat every join touching the flipped magnet as brand new — re-derive from scratch, don't assume the old answer still holds</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Same idea applies to forces:</b> if a question adds a NEW force partway through a scenario (a third person joins the tug-of-war, a second engine turns on), don't just adjust your old total by guessing — redo the "sort into piles, then compare" method fresh with all the forces now in play.</div>
+  </section>
+
+  <!-- SCREEN 7: WORKED EXAMPLE -->
+  <section class="screen" data-s="7">
+    <h2>Worked Example: Three Magnets, One Flip 🧩</h2>
+    <div class="card">
+      <b>Scenario:</b> Magnets P, Q, and R touch in a row: P–Q, then Q–R. P's left end is S. The P–Q join attracts. The Q–R join repels. THEN, magnet R gets physically flipped around.
+      <div class="step"><b>Step 1:</b> P's left is S (given), so P's right (touching Q) must be N (every magnet has two opposite poles).</div>
+      <div class="step"><b>Step 2:</b> P–Q join attracts, meaning the two touching ends are DIFFERENT poles. P's touching end is N, so Q's left end (touching P) must be S.</div>
+      <div class="step"><b>Step 3:</b> Q has two opposite poles — its left is S, so Q's right end (touching R) must be N.</div>
+      <div class="step"><b>Step 4:</b> Q–R join repels (BEFORE the flip), meaning the two touching ends are the SAME pole. Q's touching end is N, so R's left end (touching Q) must also be N — and R's other end must be S.</div>
+      <div class="step" style="border-color:#c62828;background:#fdecea"><b>Step 5 — the flip:</b> R is physically turned around. R's poles SWAP places: what was R's left end (N) is now on the right, and what was R's right end (S) is now on the left, touching Q.</div>
+      <div class="step" style="border-color:#c62828;background:#fdecea"><b>Step 6 — re-check the Q–R join fresh:</b> Q's touching end is still N (nothing about Q changed). R's NEW touching end (after the flip) is S. Different poles touching now → the Q–R join now ATTRACTS, the opposite of before the flip.</div>
+    </div>
+    <div class="job"><b>Final answer:</b> before the flip, Q–R repelled. After flipping R, Q–R attracts instead — even though the underlying rule (same poles repel, different poles attract) never changed at all.</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully, and track each step slowly!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. A crate has three forces acting on it: 10N left, 6N left, and 9N right. What is the net force, and which way does the crate move?</p>
+      <button class="opt">3N net, crate moves right</button>
+      <button class="opt">7N net, crate moves left</button>
+      <button class="opt">25N net, crate moves left</button>
+      <button class="opt">The crate stays perfectly still, forces cancel exactly</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — left pile: 10+6=16N. Right pile: 9N. 16−9=7N net, toward the bigger pile (left).</div>
+      <div class="fb no">✘ Re-check Screen 4 — group the same-direction forces into piles first, then compare the two totals.</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Magnets A and B touch. A's left end is N. The A–B join attracts. Then B is physically flipped around. What happens to the A–B join AFTER the flip?</p>
+      <button class="opt">Nothing changes — flipping a magnet never affects a join</button>
+      <button class="opt">It stays attracting, since A never moved</button>
+      <button class="opt">It now repels, because flipping B swaps which pole faces A</button>
+      <button class="opt">It is impossible to know without seeing a picture</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — A's left is N, so A's right (touching B) is S. Attracting means B's original touching end was N. After B is flipped, B's touching end becomes S instead — same poles (S–S) now touch, so it repels.</div>
+      <div class="fb no">✘ Re-check Screen 5 — what does a flip actually do to a magnet's poles, and why does that mean the join must be re-checked?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. A tug-of-war has two teams pulling with 18N and 18N in opposite directions — balanced. A THIRD person joins the 18N team, adding 7N more force on that same side. What happens now?</p>
+      <button class="opt">Still perfectly balanced — a third person never changes anything</button>
+      <button class="opt">The rope snaps immediately once a third person joins</button>
+      <button class="opt">The other team suddenly becomes stronger instead</button>
+      <button class="opt">No longer balanced — that side now totals 25N, so the rope moves toward them</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — re-total that side fresh (18+7=25N) and compare to the other side (18N) — 25 beats 18, so the rope moves toward the reinforced side.</div>
+      <div class="fb no">✘ Re-check Screen 6 — when a new force joins partway through, should you guess the new result or redo the "sort and compare" method fresh?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. Magnets P, Q, R touch in a row. Before any flip, the Q–R join repels. Someone flips R around. What is now true about the P–Q join, which is far away from R?</p>
+      <button class="opt">The P–Q join is completely unaffected — only joins touching the FLIPPED magnet itself can change</button>
+      <button class="opt">The P–Q join automatically flips too, since one magnet in the chain moved</button>
+      <button class="opt">The whole chain becomes impossible to determine after any flip</button>
+      <button class="opt">P and Q swap positions in the chain once R is flipped</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — only the join(s) actually touching the flipped magnet can change; P and Q never moved, so their join stays exactly as it was.</div>
+      <div class="fb no">✘ Re-check Screen 7 — a flip only swaps the poles of the ONE magnet that moved. Which join does that actually affect?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. A student claims: "Once you flip any magnet in a chain, the whole chain's rule changes completely — same poles start attracting instead." What's wrong with this claim?</p>
+      <button class="opt">Nothing is wrong — the claim is entirely correct</button>
+      <button class="opt">Flipping a magnet is actually impossible in real life</button>
+      <button class="opt">The RULE never changes (same poles still repel, different poles still attract) — only which pole faces which way changes</button>
+      <button class="opt">Flipping a magnet makes it stop being magnetic entirely</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the underlying rule is permanent; a flip only changes which end is facing which direction, not the rule itself. This is the exact overgeneralization trap from Trap-Recognition Drill #2.</div>
+      <div class="fb no">✘ Re-check Screen 5 — does a flip change the RULE, or just which pole happens to be facing which way?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Go to Test →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_39_Test_GravityForcesStressTest.html';}
+  };
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

@@ -384,12 +384,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
         star.setAttribute('font-size','11'); star.textContent='⭐';
         svg.appendChild(star);
       }
-      var vlab = svgEl('text');
-      vlab.setAttribute('x',x); vlab.setAttribute('y', perfect ? y-24 : y-12); vlab.setAttribute('text-anchor','middle');
-      vlab.setAttribute('font-size','9'); vlab.setAttribute('font-weight','700'); vlab.setAttribute('fill','#2b2205');
-      vlab.textContent = s.score+'/'+s.outOf;
-      svg.appendChild(vlab);
-
       if (showLabel(i, s)){
         var isMilestone = typeof s.unit === 'string';
         var ly = H-padB+10;
