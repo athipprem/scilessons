@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 40 · Lesson 2 — Separating Mixtures</title>
+<style>
+  :root{
+    --steel:#ef6c00; --steel-d:#c25600; --steel-l:#fff3e8;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#00695c; --amber-l:#e0f2f1;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:250px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--steel-l);color:var(--steel-d)}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔬 Lesson 2 · Separating Mixtures</b><span class="pill">Unit 40 · Chemistry</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Pulling Mixtures Back Apart 🗺️</h2>
+    <div class="rulebar">BIG IDEA: HOW you separate a mixture depends entirely on WHAT kind of mixture it is — different sized solids, an insoluble solid in a liquid, or a fully dissolved solution each need a different method.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🧵</div><div class="t">Sieving</div><div class="j">solids sorted by SIZE</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🫗</div><div class="t">Filtering</div><div class="j">insoluble solid out of a liquid</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">☀️</div><div class="t">Evaporation</div><div class="j">dissolved solid out of a liquid</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧩</div><div class="t">Multi-step challenge</div><div class="j">combining all three in the right order</div><span class="today">TODAY</span></div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: RECALL FROM L1 -->
+  <section class="screen" data-s="2">
+    <h2>Fast Recap: Mixture vs Solution 🔁</h2>
+    <div class="recall">From Lesson 1: a MIXTURE is two or more substances physically combined. A SOLUTION is a special mixture where a SOLUTE dissolves completely into a SOLVENT. SOLUBLE things dissolve; INSOLUBLE things never do — they just sit mixed in.</div>
+    <div class="job"><b>Why this matters today:</b> whether a mixture contains a true solution or just insoluble solid pieces completely changes which separating method will actually work.</div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Separating mixtures is one of the most useful skills in all of science — it's how we get clean drinking water, mine metals out of rock, make coffee, and recycle materials instead of throwing everything away together.</div>
+    <div class="card"><b>Real life:</b> a desalination plant separates drinkable fresh water from salty seawater. A recycling centre separates different plastics by size and density. Even making a cup of tea uses a filter (the tea bag) to keep the leaves out of your cup!</div>
+  </section>
+
+  <!-- SCREEN 4: SIEVING -->
+  <section class="screen" data-s="4">
+    <h2>Sieving: Sorting by Size 🧵</h2>
+    <div class="rulebar">SIEVING separates solids of DIFFERENT PARTICLE SIZES using a mesh — small pieces fall through the holes, big pieces stay on top. No liquid needed at all.</div>
+    <svg viewBox="0 0 320 130" xmlns="http://www.w3.org/2000/svg" aria-label="A sieve mesh with large stones staying on top and small sand grains falling through into a bowl below">
+      <rect x="70" y="30" width="180" height="14" fill="#b0bec5" stroke="#546e7a" stroke-width="1.5"/>
+      <line x1="80" y1="30" x2="80" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="95" y1="30" x2="95" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="110" y1="30" x2="110" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="125" y1="30" x2="125" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="140" y1="30" x2="140" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="155" y1="30" x2="155" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="170" y1="30" x2="170" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="185" y1="30" x2="185" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="200" y1="30" x2="200" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="215" y1="30" x2="215" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <line x1="230" y1="30" x2="230" y2="44" stroke="#546e7a" stroke-width="1"/>
+      <circle cx="105" cy="24" r="9" fill="#8d6e63"/>
+      <circle cx="150" cy="22" r="7" fill="#8d6e63"/>
+      <circle cx="195" cy="25" r="8" fill="#8d6e63"/>
+      <text x="160" y="14" font-size="8.5" text-anchor="middle" fill="#546e7a">big stones stay on top</text>
+      <circle cx="100" cy="70" r="1.4" fill="#c9b39a"/><circle cx="115" cy="80" r="1.4" fill="#c9b39a"/><circle cx="130" cy="65" r="1.4" fill="#c9b39a"/>
+      <circle cx="150" cy="85" r="1.4" fill="#c9b39a"/><circle cx="170" cy="70" r="1.4" fill="#c9b39a"/><circle cx="190" cy="80" r="1.4" fill="#c9b39a"/>
+      <circle cx="210" cy="65" r="1.4" fill="#c9b39a"/><circle cx="140" cy="75" r="1.4" fill="#c9b39a"/><circle cx="180" cy="60" r="1.4" fill="#c9b39a"/>
+      <path d="M75 60 L245 60 L235 118 Q160 130 85 118 Z" fill="#fafbfb" stroke="#90a4ae" stroke-width="1.5"/>
+      <text x="160" y="112" font-size="8.5" text-anchor="middle" fill="#546e7a">tiny sand grains fall through into the bowl</text>
+    </svg>
+    <div class="svgcap">A garden sieve separates big stones from fine sand this way — the mesh holes are sized so only the small particles pass through.</div>
+    <p><b>Other examples:</b> sifting flour to remove lumps, a colander separating cooked pasta from water (its holes are too small for pasta but let water pass), sorting gravel by size at a quarry.</p>
+  </section>
+
+  <!-- SCREEN 5: FILTERING -->
+  <section class="screen" data-s="5">
+    <h2>Filtering: Solid Out of Liquid 🫗</h2>
+    <div class="rulebar">FILTERING separates an INSOLUBLE solid from a liquid, using filter paper with holes far too small for the solid pieces, but big enough to let the liquid through.</div>
+    <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" aria-label="A funnel lined with filter paper, cloudy sandy water poured in at the top, with sand trapped on the paper and clear water dripping through into a beaker below">
+      <path d="M90 20 L210 20 L165 80 L135 80 Z" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+      <path d="M100 25 L200 25 L162 74 L138 74 Z" fill="none" stroke="#90a4ae" stroke-width="1" stroke-dasharray="3,2"/>
+      <circle cx="130" cy="35" r="2" fill="#8d6e63"/><circle cx="150" cy="30" r="2" fill="#8d6e63"/><circle cx="170" cy="38" r="2" fill="#8d6e63"/>
+      <circle cx="140" cy="45" r="2" fill="#8d6e63"/><circle cx="160" cy="50" r="2" fill="#8d6e63"/>
+      <rect x="145" y="66" width="20" height="8" fill="#a1887f"/>
+      <text x="150" y="14" font-size="8.5" text-anchor="middle" fill="#546e7a">cloudy sand + water poured in</text>
+      <line x1="150" y1="80" x2="150" y2="105" stroke="#1565c0" stroke-width="2"/>
+      <rect x="115" y="105" width="70" height="50" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+      <text x="150" y="145" font-size="8.5" text-anchor="middle" fill="#0d47a1">clear water (filtrate)</text>
+      <text x="150" y="98" font-size="8" text-anchor="middle" fill="#8a1c1c" font-style="italic">sand trapped on the paper</text>
+    </svg>
+    <div class="svgcap">Filter paper traps the insoluble sand on top, while clear water — now called the FILTRATE — drips through into the beaker below.</div>
+    <div class="stress">⚠️ <b>Important limit:</b> filtering only catches solid pieces that are still there to be caught. A truly DISSOLVED solute has spread into particles far too small for filter paper to trap — it passes straight through with the liquid, unchanged.</div>
+  </section>
+
+  <!-- SCREEN 6: EVAPORATION -->
+  <section class="screen" data-s="6">
+    <h2>Evaporation: Getting the Solute Back ☀️</h2>
+    <div class="rulebar">EVAPORATION separates a DISSOLVED solid (the solute) from its liquid (the solvent) by heating gently — the solvent turns to gas and escapes into the air, leaving the solute behind as a solid.</div>
+    <div class="job"><b>Remember from Unit 19:</b> in the water cycle, heat turns liquid water into invisible water vapour — that's the same evaporation, just happening in nature instead of on a stove.</div>
+    <svg viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg" aria-label="A shallow dish of salt water over a gentle flame, with wavy arrows showing water vapour rising away, and dry salt crystals left behind in the dish">
+      <path d="M70 70 Q150 55 230 70 L225 95 Q150 108 75 95 Z" fill="#e3f2fd" stroke="#1565c0" stroke-width="2"/>
+      <path d="M100 60 Q95 45 105 32" stroke="#90a4ae" stroke-width="2" fill="none"/>
+      <path d="M150 58 Q145 42 155 28" stroke="#90a4ae" stroke-width="2" fill="none"/>
+      <path d="M200 60 Q195 45 205 32" stroke="#90a4ae" stroke-width="2" fill="none"/>
+      <text x="150" y="20" font-size="8.5" text-anchor="middle" fill="#546e7a">water vapour escapes into the air</text>
+      <rect x="60" y="95" width="180" height="10" fill="#90a4ae"/>
+      <path d="M90 108 L110 130 L130 108 M150 108 L170 130 L190 108" stroke="#e65100" stroke-width="3" fill="none"/>
+      <text x="150" y="148" font-size="8.5" text-anchor="middle" fill="#546e7a">gentle heat below</text>
+    </svg>
+    <div class="svgcap">Salt water gently heated in a shallow pan — this is exactly how salt farms near the Thai coast make salt, letting the sun do the evaporating for free.</div>
+    <p><b>Key idea:</b> the solute (salt, sugar, etc.) doesn't turn to gas — only the solvent does. That's WHY the solid gets left behind, dry and ready to collect.</p>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Choosing the Right Method 🌳</h2>
+    <div class="dtree">
+      <div class="dbox dq">Has the solid actually DISSOLVED into the liquid (can't see separate pieces, won't settle back out)?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES — it's a true solution</div>
+          <div class="dleaf yes">Use EVAPORATION — heat gently so the solvent turns to vapour and escapes, leaving the dissolved solute behind</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — it's just mixed in, not dissolved</div>
+          <div class="dleaf no">If it's solid pieces IN A LIQUID, use FILTERING (paper traps the solid, lets liquid through). If it's dry solids of different SIZES with no liquid, use SIEVING (a mesh sorts by size)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: TRAP-RECOGNITION DRILL #4 -->
+  <section class="screen" data-s="8">
+    <h2>Trap-Recognition Drill #4 🚩</h2>
+    <div class="rulebar">Watch for ALWAYS / NEVER / ONLY / ALL in claims about separating mixtures.</div>
+    <div class="job"><b>Try this one:</b> "Filtering can ALWAYS get a dissolved solid back out of its solution." Is this claim safe to trust?</div>
+    <div class="job" style="border-left-color:#c62828"><b>No.</b> A dissolved solute has spread into particles far too small for filter paper to trap — it slips straight through with the liquid. Filtering only works on solids that HAVEN'T dissolved. To recover a true solute, you need evaporation instead.</div>
+    <p>The trap isn't that filtering is a bad method — it genuinely works well for insoluble solids. The trap is claiming it works on EVERYTHING, with no exceptions, when dissolved solutions are a real exception.</p>
+  </section>
+
+  <!-- SCREEN 9: WORKED EXAMPLE -->
+  <section class="screen" data-s="9">
+    <h2>Worked Example: Ravi's Muddy Jar 🧩</h2>
+    <div class="card">
+      <b>Scenario:</b> Ravi has a jar containing sand, salt, and water — all stirred together at once. He wants clean, dry salt at the end. Design his plan, one step at a time.
+      <br><br><b>Step 1 — check what's in the jar:</b> sand is insoluble (never dissolves); salt is soluble (dissolves completely into the water, forming a true solution with the water).
+      <br><br><b>Step 2 — filter first:</b> pour the mixture through filter paper. The insoluble sand gets trapped on the paper. The filtrate that drips through is salty water — now a clear solution, with the sand fully removed.
+      <br><br><b>Step 3 — evaporate second:</b> gently heat the filtered salty water. The water (solvent) turns to vapour and escapes, leaving dry, clean salt crystals (the solute) behind in the dish.
+      <br><br><b>Why this ORDER matters:</b> if Ravi evaporated first without filtering, the sand would get left behind mixed in with the salt, ruining the clean result — filtering has to come first to remove the insoluble solid, before evaporation deals with the dissolved one.
+    </div>
+  </section>
+
+  <!-- SCREEN 10: PRACTICE -->
+  <section class="screen" data-s="10">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. Which method separates dry solids of DIFFERENT SIZES using a mesh, with no liquid involved at all?</p>
+      <button class="opt">Evaporation</button>
+      <button class="opt">Sieving</button>
+      <button class="opt">Filtering</button>
+      <button class="opt">Dissolving</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — sieving uses a mesh to let small particles through while keeping big ones back, no liquid needed.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which method is about particle SIZE, not liquids at all?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. What does filtering actually separate?</p>
+      <button class="opt">Two liquids that don't mix, like oil and water</button>
+      <button class="opt">A dissolved solute from its solvent</button>
+      <button class="opt">An insoluble solid from a liquid</button>
+      <button class="opt">Two gases mixed together in the air</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — filter paper traps insoluble solid pieces while letting the liquid pass through as the filtrate.</div>
+      <div class="fb no">✘ Re-check Screen 5 — filtering needs the solid piece to still exist as a separate piece. What kind of solid does that describe?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Why does gently heating salt water leave dry salt crystals behind?</p>
+      <button class="opt">The water (solvent) turns to vapour and escapes, but the dissolved salt does not turn to gas, so it's left behind</button>
+      <button class="opt">Heating makes the salt sink to the bottom on its own, without any water leaving at all</button>
+      <button class="opt">Heat destroys the water molecules completely, creating new salt out of nothing</button>
+      <button class="opt">The salt evaporates first, leaving the water behind in the dish</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — only the solvent (water) turns to vapour during evaporation; the solute (salt) stays behind as a solid.</div>
+      <div class="fb no">✘ Re-check Screen 6 — which one actually turns into a gas during evaporation, the solute or the solvent?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A student claims: "Filtering can ALWAYS get a dissolved solid back out of its solution, no exceptions." Is this safe to trust?</p>
+      <button class="opt">Yes, completely safe — filtering removes every kind of solid from every kind of liquid without exception</button>
+      <button class="opt">Yes, because dissolved solutes are actually too large to pass through any filter paper</button>
+      <button class="opt">No, because filter paper dissolves in water and stops working entirely</button>
+      <button class="opt">No — a dissolved solute's particles are far too small for filter paper to trap; evaporation is needed instead</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — filtering only catches solid pieces that still exist as pieces; a truly dissolved solute needs evaporation, not filtering.</div>
+      <div class="fb no">✘ Re-check Screen 8 — what happens to a dissolved solute's particles that makes filter paper unable to catch them?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A jar contains sand, salt, and water all mixed together. What should be done FIRST to end up with clean, dry salt?</p>
+      <button class="opt">Evaporate the whole jar right away, sand and all</button>
+      <button class="opt">Filter the mixture first, to trap and remove the insoluble sand</button>
+      <button class="opt">Sieve the mixture first, since sand and salt are both solids</button>
+      <button class="opt">Add more water first, to dissolve the sand as well</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — filtering removes the insoluble sand first, leaving a clear salt solution ready for evaporation next.</div>
+      <div class="fb no">✘ Re-check Screen 9 — what has to be removed BEFORE evaporation, so it doesn't get left behind mixed with the salt?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_40_Test_MixturesSolutionsSeparatingMaterials.html';}
+  };
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
