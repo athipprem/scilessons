@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Milestone_04_Test.html — Milestone Test 4 (Science / Luikishi)
+     ------------------------------------------------------------
+     Built from Milestone_03_Test.html, same milestone format: 40
+     questions, weighted marks (1.25 / 2.5 / 5) matching the real
+     ASMOPSS G4 paper's scale (100 marks total). Covers cumulative
+     content from U31-U40: Biology (Classification & Digestion,
+     Plant Structures & Adaptation, Fruit vs Seed Development),
+     Physics (Heat/Temperature/Materials, Electricity/Magnetism/
+     Forces, Gravity/Forces), Chemistry (Combustion & Fire Safety,
+     Mixtures/Solutions/Separating Materials), and Scientific
+     Investigation Skills (Fair Tests, Data Trends, Conductors).
+     U35 (Final Gap-Closure Checkpoint) is review-only with no new
+     content, so it is not separately represented here. No lessons
+     for a milestone test, per project rules. Benchmarked against
+     Milestone 3's 90/100.
+
+     Every question tagged with its ASMOPSS difficulty tier
+     (Basic=Section A, Intermediate=Section B, Applied=Section C),
+     per the Science-Specific Coaching Protocol (create-new-test-
+     pack skill, Section G / D.4) — the first milestone test built
+     under this standard.
+
+     Dedicated coverage in this build, per Executive Summary §39-54:
+     - Anther-vs-ovary/stigma (B1): the "one more confirming rep at
+       a future milestone-level checkpoint" explicitly owed since
+       U31/U32's escalation (§39/§43 coaching strategy).
+     - The 3-object air-resistance ranking (B14): U39's Q17 miss,
+       explicitly "still owed" a confirming rep (§53).
+     - Sieve/filter/evaporate (A16, B15, C1, C2): U40's dominant
+       gap (3 of 5 misses), touched 4 times with genuinely different
+       cognitive tasks and scenes per the same-fact-pair design rule
+       (create-new-test-pack skill G.7) — bare recall, applied
+       decision, multi-step construction, and multi-step critique.
+     - U40's Q7/Q9 abstract-vs-concrete split and Q16/Q18 explain-
+       vs-critique split, both re-tested at Applied tier (C1, C2).
+     - Lighter single confirming reps for U31 (root-hairs/villi
+       analogy, fair-test "kept the same" variable), U32 (cold-metal
+       illusion, simultaneous multi-transfer-type), U34 (magnet-vs-
+       magnetic reverse-inference, 3-magnet chain), U36 (two-clue
+       reverse-factor inference, conductor/insulator), U37 (oil-fire
+       immediate action, dual-triangle-side reasoning), and U38
+       (multi-step pollination-to-fruit pathway ordering).
+     - A dedicated absolute-language trap-recognition item (A12,
+       C7) per the standing trap-recognition drill rule (G.2).
+     - Three genuine cross-topic Applied synthesis items (C3, C4,
+       C5, C6) sourced as unseen multi-step problems rather than
+       harder versions of a single just-taught lesson, per the
+       Post-ASMOPSS 2026 forward plan (§49).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milestone Test 4 — All Units</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#DAA520; --gold-d:#8a6a00;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Milestone Test 4 — All Units (U31–U40)</b>
+      <span class="sub">Biology &bull; Physics &bull; Chemistry &bull; Scientific Investigation Skills — cumulative review</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. Watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. For magnet-chain and force problems, trace or group one step at a time.</div>
+  <div class="milestone-note">&#127942; This is your FOURTH MILESTONE TEST — 40 questions covering everything from Unit 31 through Unit 40, weighted like a real ASMOPSS paper (1.25 / 2.5 / 5 marks) so your score can be compared directly to Milestone Tests 1, 2, and 3.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- MILESTONE CONFIG ---------- */
+const MILESTONE_NUM = 4;
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };   // matches the real ASMOPSS G4 paper's weighting
+const TOTAL_MARKS = 100;                   // 16*1.25 + 16*2.5 + 8*5 = 20 + 40 + 40 = 100
+const PASS_MARKS = 80;                     // 80/100 = 80%, same threshold as every unit test
+const BASELINE_MARKS = 90;                 // Milestone Test 3's real result, for comparison
+
+const Q = [
+  // Section A — Basic Recall (warm-up, 1.25 marks each)
+  { n:1, section:'A', tier:'Basic', star:0, body:"Which of these is an example of a VERTEBRATE animal?",
+    options:["A salmon, because it has a backbone", "A jellyfish, because it lives in the ocean", "An ant, because it has six legs", "A snail, because it has a shell"], ans:1,
+    why:"Vertebrates are animals with a backbone — a salmon (a fish) has one; jellyfish, ants, and snails are all invertebrates." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Which body part digests food using strong acid?",
+    options:["The small intestine", "The stomach", "The mouth", "The oesophagus"], ans:2,
+    why:"The stomach churns food together with strong acid to help break it down." },
+  { n:3, section:'A', tier:'Basic', star:0, body:"What does a THERMOMETER actually measure?",
+    options:["The total heat energy stored in an object", "The exact material an object is made from", "How hot or cold something is", "How much an object weighs"], ans:3,
+    why:"A thermometer measures temperature — how hot or cold something is — not the total heat energy stored inside it." },
+  { n:4, section:'A', tier:'Basic', star:0, body:"Sunlight warming your skin, even across empty space with no air in between, travels by:",
+    options:["Conduction", "Convection", "Evaporation", "Radiation"], ans:4,
+    why:"Radiation is the only heat transfer that can cross empty space, with no touching or fluid needed — that's how sunlight reaches us." },
+  { n:5, section:'A', tier:'Basic', star:0, body:"A desert plant like a cactus has a thick, waxy outer layer. What is this adaptation mainly for?",
+    options:["To reduce water loss in the hot, dry climate", "To trap extra sunlight for photosynthesis", "To attract more pollinating insects", "To make the stem heavier for stability"], ans:1,
+    why:"A thick, waxy layer cuts down water loss through the plant's surface — essential for surviving a hot, dry desert." },
+  { n:6, section:'A', tier:'Basic', star:0, body:"A potato is an example of which type of underground stem?",
+    options:["A bulb", "A tuber", "A corm", "A rhizome"], ans:2,
+    why:"A potato is a tuber — a swollen underground stem that stores food, with buds (\"eyes\") that can grow new plants." },
+  { n:7, section:'A', tier:'Basic', star:0, body:"Being ATTRACTED to a magnet is enough proof that an object:",
+    options:["Is itself a magnet, with its own north and south pole", "Has recently been heated to a very high temperature nearby", "Might just be a magnetic material, like steel, not a magnet itself", "Cannot ever be attracted to any other magnet again in future"], ans:3,
+    why:"Being pulled toward a magnet only shows an object might be a magnetic material (like steel or iron) — it doesn't prove the object is itself a magnet." },
+  { n:8, section:'A', tier:'Basic', star:0, body:"Which one of these objects is an ELECTRICAL INSULATOR?",
+    options:["A copper wire", "A steel spoon", "An aluminium can", "A rubber eraser"], ans:4,
+    why:"Rubber does not let electricity flow through it easily, making it an insulator — copper, steel, and aluminium are all metals, and metals conduct electricity." },
+  { n:9, section:'A', tier:'Basic', star:0, body:"In a fair test with several groups, the CONTROL group is the one that:",
+    options:["Is left unchanged, so every other group can be compared back to it", "Gets the biggest possible change applied to it during the test", "Is always left out of the final results completely, every time", "Gets tested twice as many times as the rest of the groups"], ans:1,
+    why:"The control group is left unchanged, giving every other group a fixed baseline to be compared back to." },
+  { n:10, section:'A', tier:'Basic', star:0, body:"In a set of results, a single point that doesn't fit the overall pattern of the rest is called:",
+    options:["The control", "An anomaly in the data", "The independent variable", "The dependent variable"], ans:2,
+    why:"A single result that breaks from the overall pattern is called an anomaly — worth a second look, but not necessarily the whole trend." },
+  { n:11, section:'A', tier:'Basic', star:0, body:"Which THREE things does a fire need at the same time to keep burning?",
+    options:["Wood, water, and wind", "Smoke, ash, and light", "Fuel, oxygen, and heat", "Nitrogen, fuel, and cold"], ans:3,
+    why:"The fire triangle: fuel, oxygen, and heat, all three present together." },
+  { n:12, section:'A', tier:'Basic', star:0, body:"\"Water can ALWAYS be used to put out any fire, no matter what.\" Is this statement safe to trust?",
+    options:["Yes, water always works on every single kind of fire, no exceptions", "Yes, but only if the fire is already extremely small to begin with", "No, because water can never put out any fire of any kind at all", "No — pouring it on an electrical or oil fire can make things worse"], ans:4,
+    why:"\"Always...no matter what\" is the kind of claim worth double-checking — water is actually dangerous on electrical and oil fires." },
+  { n:13, section:'A', tier:'Basic', star:0, body:"A gardener watches a flower's ovary wall slowly swell and change after the flower is fertilized. What is it becoming?",
+    options:["The ripening fruit", "A new root growing lower", "A new flower bud forming", "Extra petals unfolding"], ans:1,
+    why:"The ovary wall swells and develops into the fruit — the case that protects the seeds." },
+  { n:14, section:'A', tier:'Basic', star:0, body:"In a vacuum with absolutely no air at all, a heavy hammer and a light feather are dropped together. What happens?",
+    options:["The hammer always lands first", "They land at exactly the same time", "The feather always lands first", "Neither object falls at all"], ans:2,
+    why:"With no air resistance at all, mass doesn't change the fall rate — every object falls at exactly the same speed." },
+  { n:15, section:'A', tier:'Basic', star:0, body:"A cook shakes oil and vinegar together in a jar, then watches them slowly separate back into two layers. What best describes oil and vinegar together?",
+    options:["A true solution, since shaking combined them evenly together", "A brand-new substance formed by a chemical reaction", "A mixture — the oil never actually dissolves into the vinegar", "Neither a mixture nor a solution of any kind"], ans:3,
+    why:"Oil doesn't dissolve into vinegar — shaking just spreads it around briefly before it separates back out, so this is only a mixture, not a true solution." },
+  { n:16, section:'A', tier:'Basic', star:0, body:"A baker wants to remove hard little lumps from a bag of dry brown sugar, with no water involved at all. Which method fits?",
+    options:["Filtering, using paper", "Evaporation of the liquid", "Dissolving in water first", "Sieving through a mesh"], ans:4,
+    why:"With no liquid at all, sieving is the right choice — it sorts dry particles by size, letting the fine sugar through while catching the lumps." },
+  // Section B — Applying What You Know (2.5 marks each)
+  { n:17, section:'B', tier:'Intermediate', star:1, body:"A student examines a flower and correctly finds fine pollen dust on one part, and a sticky, receptive tip on another part. Which part MAKES the pollen, and which part CATCHES it?",
+    options:["The anther makes it; the stigma catches it", "The stigma makes it; the anther catches it", "The ovary makes it; the stigma catches it", "The anther makes it; the ovary catches it"], ans:1,
+    why:"The anther is the part that makes/produces pollen; the stigma is the sticky part that catches it — different jobs from the ovary, which develops into the fruit." },
+  { n:18, section:'B', tier:'Intermediate', star:1, body:"Root hairs on a plant's roots and villi lining the small intestine both have millions of tiny finger-like bumps. What job do they BOTH do?",
+    options:["They both pump blood or sap around the body", "They both increase surface area to absorb things faster", "They both protect against harmful germs entering", "They both produce food through photosynthesis"], ans:2,
+    why:"Both root hairs and villi are covered in tiny bumps that massively increase surface area — root hairs for absorbing water and minerals, villi for absorbing digested nutrients." },
+  { n:19, section:'B', tier:'Intermediate', star:1, body:"A student tests three plants with different amounts of water, but keeps the same pot size, soil type, and sunlight for all three. Which variable is being KEPT THE SAME on purpose?",
+    options:["How much water each plant received", "The plant's height, measured at the end", "The soil type, pot size, and sunlight", "The type of plant being tested"], ans:3,
+    why:"Soil type, pot size, and sunlight are deliberately kept identical across all three plants — only the amount of water is allowed to change." },
+  { n:20, section:'B', tier:'Intermediate', star:1, body:"A metal spoon and a wooden spoon sit on the same kitchen counter for an hour, both at exactly the same room temperature. The metal spoon still feels colder when touched. Why?",
+    options:["The metal spoon is actually colder than the wooden spoon", "Wooden spoons always warm themselves up on their own somehow", "Metal spoons secretly generate their own coldness over time", "Metal conducts heat away from your hand faster, so it just feels colder"], ans:4,
+    why:"Both spoons are the same temperature — metal just conducts heat away from your hand much faster, which is what makes it feel colder, even though it isn't actually colder." },
+  { n:21, section:'B', tier:'Intermediate', star:1, body:"A camper sits near a lit stove: the metal handle gets hot from touching the flame, warm air rises and drifts toward the camper's face, and heat also reaches the camper's skin directly with no air movement needed. How many different types of heat transfer are happening at once?",
+    options:["All three types — conduction, convection, and radiation — at the same time", "Just one — only conduction is happening here, and nothing else at all", "Just one — only radiation is happening here, and nothing else at all", "Two types only are happening here at once, not all three together"], ans:1,
+    why:"The handle heats by conduction (touching), warm air rising is convection, and heat reaching skin directly is radiation — all three can happen in the very same scene at once." },
+  { n:22, section:'B', tier:'Intermediate', star:1, body:"A water lily has broad, flat leaves that float on the pond's surface. What is the MAIN purpose of this flat, floating shape?",
+    options:["To anchor the plant firmly to the muddy bottom", "To soak up as much sunlight as possible while floating", "To absorb extra minerals directly from the air", "To protect the leaf from strong winds and rain"], ans:2,
+    why:"A flat, floating leaf spreads out to catch as much sunlight as possible for photosynthesis, while floating keeps it above the water's surface." },
+  { n:23, section:'B', tier:'Intermediate', star:1, body:"A thin metal sheet is held near a magnetized bar and gets pulled toward it. The same sheet is then held near a plain, non-magnetized iron bar, and nothing happens. What does this tell us about the metal sheet?",
+    options:["The metal sheet is itself a full magnet, complete with its own north and south poles", "The metal sheet has lost all of its magnetic properties permanently and completely", "The metal sheet may be made of a magnetic material, like steel, but isn't a magnet itself", "The metal sheet cannot possibly be made of any metal at all, ever"], ans:3,
+    why:"Being attracted by an actual magnet, but showing no pull toward a plain iron bar, points to the sheet being a magnetic material — not a magnet itself, since it has no pulling power of its own." },
+  { n:24, section:'B', tier:'Intermediate', star:1, body:"Three magnets, X, Y, Z, sit in a row and touch. X's left end is labelled S. The X–Y join REPELS. What is Y's end that touches X?",
+    options:["S — because repelling always means the far pole gets copied over exactly as it was", "Impossible to know for certain without an actual labelled diagram of the setup", "Both N and S at once, since only a single join needed to be carefully traced here", "N — because X's touching end is N, and repelling means Y's touching end must match it"], ans:4,
+    why:"X's left is S, so X's right (touching Y) is N. Since the X–Y join repels, matching poles are touching — so Y's touching end must also be N." },
+  { n:25, section:'B', tier:'Intermediate', star:1, body:"A pond has clear water and lots of oxygen-loving fish. A nearby marsh has murky water and mostly oxygen-poor mud-dwelling creatures. A student is given two clues: (1) which habitat has more dissolved oxygen, and (2) which habitat has murkier water. Which habitat matches EACH clue?",
+    options:["The pond has more oxygen; the marsh has murkier water", "The pond has murkier water; the marsh has more oxygen", "Both habitats have exactly the same oxygen and clarity", "The marsh has more oxygen AND murkier water"], ans:1,
+    why:"Matching each clue to its own habitat carefully: the clear pond has more dissolved oxygen, and the murky marsh has the murkier water — don't swap the labels." },
+  { n:26, section:'B', tier:'Intermediate', star:1, body:"A simple circuit with a battery and a bulb only lights up when a certain object is placed in the gap between the wires. Which object, when placed in the gap, would make the bulb light up?",
+    options:["A wooden ruler", "A copper key", "A rubber band", "A glass marble"], ans:2,
+    why:"Only a conductor, like a copper key, completes the circuit and lets electricity flow through to light the bulb — wood, rubber, and glass are all insulators." },
+  { n:27, section:'B', tier:'Intermediate', star:1, body:"A pan of frying oil suddenly catches fire on the stove. What is the SAFEST first action?",
+    options:["Grab the nearest cup and splash water straight onto it", "Wave a tea towel at it to try to blow the flames out", "Cut the stove's heat and drop a lid over the pan", "Pour more oil in to smother it"], ans:3,
+    why:"Turning off the heat and covering the pan removes both fuel-feeding heat and oxygen — water on burning oil makes it splash and spread dangerously." },
+  { n:28, section:'B', tier:'Intermediate', star:1, body:"A camp counsellor puts out a small campfire by (a) pouring water on it AND (b) shovelling dirt over it, both at the same time. Why might doing both together work faster than either one alone?",
+    options:["Because water and dirt are actually made of the exact same underlying material somehow, deep down", "Because trying more than one method at a time is against the rules and only ever slows things down", "Because dirt works by quietly adding extra fuel to balance out the water being poured", "Because water cools the fire (removes heat) while dirt smothers it (removes oxygen) — two different sides at once"], ans:4,
+    why:"Water removes heat while dirt cuts off oxygen — attacking two different sides of the fire triangle at the same time works faster than removing just one." },
+  { n:29, section:'B', tier:'Intermediate', star:1, body:"Put these four events of a flower's life in the CORRECT order: seed forms, pollen lands on stigma, fruit ripens, egg is fertilized.",
+    options:["Pollen lands on stigma → egg is fertilized → seed forms → fruit ripens", "Fruit ripens → pollen lands on stigma → egg is fertilized → seed forms", "Egg is fertilized → pollen lands on stigma → seed forms → fruit ripens", "Seed forms → egg is fertilized → pollen lands on stigma → fruit ripens"], ans:1,
+    why:"The correct order is: pollination (pollen lands on stigma) → fertilization (egg is fertilized) → the ovule becomes a seed → the ovary ripens into fruit around it." },
+  { n:30, section:'B', tier:'Intermediate', star:1, body:"A golf ball, a flat, spread-out sheet of paper, and a tightly crumpled ball of that SAME sheet of paper are dropped together from the same height. Rank them from FIRST to LAST to land.",
+    options:["Flat sheet, then crumpled paper, then golf ball", "Golf ball, then crumpled paper, then flat sheet of paper", "The paper always beats the golf ball, whatever its shape", "Crumpled paper, then golf ball, then flat sheet"], ans:2,
+    why:"The dense, compact golf ball catches the least air resistance and lands first; the crumpled paper is compact too, just lighter, so it lands second; the flat, spread-out sheet catches the most air resistance and lands last." },
+  { n:31, section:'B', tier:'Intermediate', star:1, body:"A fish-tank hobbyist wants to separate small bits of broken plastic decoration from the tank water. Which method works, and why?",
+    options:["Evaporation — heating the water makes the plastic bits dissolve away completely somehow", "A sieve works fine here too, since mesh tools handle liquids just as well as dry solids", "Filtering catches the plastic bits since they are insoluble — the water passes right through the paper", "There is actually no way at all to get plastic bits back out of a bucket of water once they fall in"], ans:3,
+    why:"The plastic bits are insoluble solid pieces in the tank water, so filtering is the right method — filter paper traps them while the water passes through." },
+  { n:32, section:'B', tier:'Intermediate', star:1, body:"A student stirs a spoon of instant coffee into hot water, and it completely disappears, spreading evenly through the cup. The same student then stirs a spoon of fine sand into a different cup of water, and the sand just sits at the bottom, clouding the water slightly. Which one is soluble?",
+    options:["Only the sand is soluble, since it's a completely natural material", "Both the coffee and the sand are equally soluble in the water", "Neither the coffee nor the sand is soluble in the water at all", "Only the coffee is soluble, since it dissolved completely and disappeared"], ans:4,
+    why:"The coffee dissolved completely and spread evenly through the water — it's soluble. The sand just sits at the bottom without dissolving — it's insoluble." },
+  // Section C — Think Like a Scientist (★★ applied, 5 marks each)
+  { n:33, section:'C', tier:'Applied', star:2, body:"A mixture in a bucket contains large twigs, fine sand, and dissolved sugar all together in water. Describe the CORRECT step-by-step plan to end up with three separate piles: dry twigs, dry sand, and dry sugar.",
+    options:["First sieve away the twigs, next run the water through a filter to catch the sand, and finish by evaporating it to leave the sugar behind", "Boil the whole bucket completely dry first, then pick carefully through the leftover solids by hand to sort them out", "Filter the whole mixture first of all, since filter paper is supposedly able to catch objects of any size at all", "Sieving and filtering are really just two different names for the exact same method, so either order works just fine"], ans:1,
+    why:"Sieve out the large twigs first (size-based), then filter the fine sand from the remaining sugar water (insoluble-solid-based), then evaporate the clear water to recover the dissolved sugar." },
+  { n:34, section:'C', tier:'Applied', star:2, body:"For a science fair display, a student has a tub of small plastic beads, table salt, and water all mixed together. They evaporate the whole tub FIRST, without filtering out the beads beforehand. What problem does this create?",
+    options:["No trouble at all — the order of evaporating and filtering never actually changes the final result", "Evaporation only removes the liquid — it does nothing to solid, insoluble beads, which stay stuck in the dried salt", "The heat from evaporating actually breaks the plastic beads down into nothing, so they vanish completely", "Only the water and the beads evaporate together, while the salt is somehow left floating on top"], ans:2,
+    why:"Evaporation only removes the liquid solvent — it does nothing to insoluble solid pieces like plastic beads, so skipping filtering first leaves the beads stuck in with the dried salt." },
+  { n:35, section:'C', tier:'Applied', star:2, body:"A bracelet has three small magnetic charms, D, E, and F, linked together in a row. Charm D's left end is labelled S. The D–E link ATTRACTS. The E–F link REPELS. What is charm F's end that touches E?",
+    options:["S, because the attracting D–E link means E's touching end simply copies D's far pole exactly as it is", "There's genuinely no way to tell for certain without actually seeing the real bracelet in person", "N, because tracing each link shows E's far end is N, and the repelling E–F link means F's touching end must also be N", "F's end could honestly be either pole — you'd need to trace three links, not two, to be sure"], ans:3,
+    why:"D's left is S, so D's right (touching E) is N. D–E attracts, meaning opposite poles touch, so E's touching-D end is S — making E's far end (touching F) N. E–F repels, meaning matching poles touch, so F's touching end must also be N." },
+  { n:36, section:'C', tier:'Applied', star:2, body:"A tomato plant is classified as a flowering plant, and its ripe tomatoes contain seeds inside juicy flesh. Explain the connection between the flower's job and the tomato fruit — and why a seed's stored food inside it matters for a NEW seedling, using what you know about digestion too.",
+    options:["The flower and the fruit are actually completely unrelated structures with absolutely no real connection to each other at all, not even indirectly", "Tomatoes never actually grow from real flowers at all, and their seeds contain no stored food of any kind whatsoever, ever", "The tomato's seed actually fully digests the fruit around it before germinating, quite similar to how a human stomach digests food", "The flower's ovary becomes the tomato fruit around the seeds; the seed's stored food feeds the tiny embryo until it can grow leaves and make its own food"], ans:4,
+    why:"The ovary develops into the fruit around the seeds after fertilization; the seed's stored food nourishes the new embryo the same way digested nutrients nourish a growing body, until the seedling can photosynthesize on its own." },
+  { n:37, section:'C', tier:'Applied', star:2, body:"A student claims: \"Since metal conducts heat well, holding a metal poker in a campfire for even a few seconds is always completely safe.\" Using what you know about both heat transfer AND fire safety, explain the flaw.",
+    options:["Metal conducts heat well, which means it heats up fast and can get dangerously hot, even far from the flame", "There is no flaw at all here — metal never actually gets dangerously hot anywhere near any open fire", "The flaw is that metal actually blocks all heat completely, so the claim doesn't even really make sense", "The flaw is that campfires don't actually produce any real heat at all, only bright light"], ans:1,
+    why:"Metal being a good conductor is exactly why it heats up quickly and can become dangerously hot to touch, even along a handle held well away from the flame — \"conducts heat well\" should be a warning, not reassurance." },
+  { n:38, section:'C', tier:'Applied', star:2, body:"A student wants to test the claim: \"Cactus spines reduce water loss compared to broad leaves.\" Design the fairest way to test this with two potted plants — a cactus and a broad-leafed plant — over one week.",
+    options:["Give the cactus much less water overall than the broad-leafed plant, then compare which one wilts first", "Keep both plants in identical pots, soil, and sunlight, with the same starting water, then measure water loss over the week", "Put the cactus in full sun and the broad-leafed plant in full shade, then compare their water loss", "Measure water loss across two entirely different weeks, one for each plant, so they don't affect each other"], ans:2,
+    why:"A fair test keeps every other variable (pot, soil, sunlight, starting water) identical between the two plants, changing only their real difference — the type of leaf/spine covering — so any difference in water loss can be trusted." },
+  { n:39, section:'C', tier:'Applied', star:2, body:"A textbook says: \"Sieving, filtering, and magnets can ALWAYS separate any two substances mixed together, no matter what they are.\" Evaluate this claim using what you know from this term.",
+    options:["True — these three methods together can always separate absolutely any possible combination of substances there is", "False, but only because magnets are technically banned from ever being used in real separation methods at all", "False — sieving and filtering can't separate a dissolved solution, and magnets only pull magnetic materials like iron and steel", "True, though only after the mixture has been left to sit undisturbed for a full week beforehand"], ans:3,
+    why:"\"Always...no matter what\" rules out every exception — but a solution needs evaporation, not sieving or filtering, and magnets only pull magnetic materials like iron and steel, not everything." },
+  { n:40, section:'C', tier:'Applied', star:2, body:"Across everything from this stretch of units — classification, heat and materials, plant adaptations, magnets and forces, fair tests, combustion, fruit and seeds, gravity, and separating mixtures — which idea connects them ALL?",
+    options:["Only living things ever really follow any true scientific rules", "Nothing in nature can really be explained or predicted by science", "Every topic in science is completely unrelated to every other topic", "Every system in nature follows specific, predictable, testable rules"], ans:4,
+    why:"Every topic this term — living or non-living — follows specific, predictable rules that can be investigated, tested, and understood, whether it's a magnet's poles, a fire's triangle, or a fruit's development." },
+];
+/* ---------- END MILESTONE CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Basic Recall (warm-up, 1.25 marks each)",
+  B: "SECTION B — Applying What You Know (&#9733; Intermediate, 2.5 marks each)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied, 5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === TOTAL_Q){
+    btn.disabled = false;
+    btn.textContent = 'Submit Milestone Test';
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let marksEarned = 0;
+  let numCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++;
+    sectionTally[q.section].marksTotal += qMarks;
+    tierTally[q.tier].t++;
+    if (isCorrect) {
+      numCorrect++;
+      marksEarned += qMarks;
+      sectionTally[q.section].c++;
+      sectionTally[q.section].marks += qMarks;
+      tierTally[q.tier].c++;
+    }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect, marks: qMarks };
+  });
+
+  marksEarned = Math.round(marksEarned * 100) / 100;
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 10) / 10;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your Milestone Test 3 result (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${sectionTally[s].marks}/${sectionTally[s].marksTotal} marks)</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    milestone: MILESTONE_NUM,
+    title: "Milestone Test 4 - All Units (U31-U40)",
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:sectionTally[s].marks, marksOutOf:sectionTally[s].marksTotal })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, correct:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `SCI_M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+      // fall through to download fallback on real errors
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
