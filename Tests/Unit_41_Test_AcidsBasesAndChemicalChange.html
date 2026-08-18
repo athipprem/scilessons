@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_41_Test_AcidsBasesAndChemicalChange.html —
+     Chemistry: Acids, Bases & Chemical vs Physical Change
+     ------------------------------------------------------------
+     First unit of a fresh 10-unit rotation block (U41-U50),
+     opened after Milestone Test 4 closed U31-U40. New topic never
+     given dedicated coverage before: acid/base testing via litmus
+     paper, and the deeper signs of chemical vs physical change,
+     capped by a worked vinegar+baking soda reaction that bridges
+     both halves of the unit. Opens with a REDESIGNED escalation
+     device (Lesson 1's "Find the Flaw" click-based mini-game,
+     genuinely different mechanic from the two prior failed MCQ
+     attempts) targeting the sieve/filter/evaporate critique-format
+     gap (U40 Q18, Milestone 4 Q34 — now a confirmed 2-instance
+     pattern). Also carries a Biology U31 spiral-maintenance warm-up
+     (classification/digestion) per the newly-formalized rotation
+     plan. Every question tagged with its ASMOPSS difficulty tier
+     (Basic=Section A, Intermediate=Section B, Applied=Section C).
+     Section C deliberately sources genuine cross-topic synthesis
+     from OLDER units (U2 dissolving, U9 reactions, U36 fair tests,
+     U37 combustion, U40 separating) rather than harder versions of
+     this unit's own just-taught lesson, per skill rule G.6. Embeds
+     Trap-Recognition Drill #5 (Q4 explicit + several absolute-
+     language distractors woven through Section C). Built under the
+     ANSWER-BALANCE RULE (5/5/5/5).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 41 Test — Chemistry: Acids, Bases &amp; Chemical vs Physical Change</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#c2185b; --steel-d:#8c0e3d; --a-fill:#f8bbd0; --a-text:#8c0e3d;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#00838f; --amber-l:#e0f7fa;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:#fce4ec;border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:#fce4ec;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#00575f}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#e0f7fa,#b2ebf2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#00575f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 41 Test — Chemistry: Acids, Bases &amp; Chemical vs Physical Change</b>
+      <span class="sub" id="hdr-sub">Acid/base testing with litmus paper • Signs of chemical vs physical change • Vinegar + baking soda reaction • Spotting overgeneralized claims</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 41;
+const UNIT_TITLE = "Chemistry: Acids, Bases & Chemical vs Physical Change";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 4 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"A gardener tests soil with litmus paper. The red strip turns blue, and the blue strip stays blue. What does this tell the gardener about the soil?",
+    options:["The soil is a base (alkaline)", "The soil is acidic", "The soil is neutral", "The test failed and must be redone"], ans:1,
+    why:"Red litmus turning blue is the base signature — the soil is alkaline (basic)." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Which of these is an everyday ACID?",
+    options:["A spoonful of baking soda", "A splash of orange juice", "A dab of minty toothpaste", "A bar of hand soap"], ans:2,
+    why:"Orange juice is acidic — sour-tasting and turns blue litmus red; the other three are all bases." },
+  { n:3, section:'A', tier:'Basic', star:0, body:"A wax candle is melted by a flame into a puddle of liquid wax, then cools and hardens again into solid wax. What kind of change is this?",
+    options:["A chemical change, because the candle looks completely different as a liquid", "Neither kind of change at all, since melting wax doesn't really count as changing anything", "A physical change — it's still the same wax, just in a different state, and it can be re-solidified", "A chemical change, because heat was involved in melting it, and heat always signals a reaction"], ans:3,
+    why:"Melting and re-solidifying wax is a physical change — same substance, different state, and reversible by cooling." },
+  { n:4, section:'A', tier:'Basic', star:0, body:"A textbook states: \"Every single gas bubble you will EVER see appearing in any liquid ALWAYS proves a chemical reaction is taking place.\" Is this safe to trust completely?",
+    options:["Yes, bubbles of any kind are always 100% proof that a chemical reaction is taking place", "Yes, because the word \"textbook\" printed on the page means the claim must always be completely true", "No, because liquids of every kind are actually never able to produce any bubbles whatsoever", "No — boiling water also produces bubbles, and that's just a physical state change, not a reaction"], ans:4,
+    why:"\"Every...always\" is an overgeneralized claim — boiling water proves bubbles alone don't guarantee a chemical change." },
+
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier, star 1) — 6 questions ===================== */
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A student dips ONLY a blue litmus strip into a mystery liquid, and it does not change colour at all. What can the student NOT yet be sure of?",
+    options:["Whether the liquid is a base or is neutral — both would leave a blue strip unchanged", "Whether the liquid is an acid — a blue strip not changing already rules that out completely", "Whether litmus paper is actually a safe and reliable testing method to use at all", "Whether the liquid being tested is a liquid at all, rather than being a solid"], ans:1,
+    why:"A blue strip alone can rule OUT acid, but can't tell base from neutral — both leave a blue strip unchanged; a red strip is needed too." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"A cleaning spray label reads: \"feels slightly slippery on skin, and turns red litmus paper blue.\" What type of substance is this most likely?",
+    options:["An acidic substance", "A basic (alkaline) substance", "A neutral substance", "Impossible to classify from this description"], ans:2,
+    why:"Slippery feel and turning red litmus blue are both classic base (alkaline) signatures." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"A chef notices a peeled apple slowly turning brown after being left out, with a new smell developing and no way to turn it back white again. What kind of change is this most likely?",
+    options:["Physical, because the apple's size and shape haven't changed at all", "Physical, because apples are food, and only food can undergo physical changes", "Chemical — a new substance (with new colour and smell) has formed, and it can't be undone", "Impossible to tell what kind of change this is without actually tasting the apple first"], ans:3,
+    why:"New colour, new smell, and no easy way to reverse it are three separate signs pointing to a chemical change." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"A glass of water is left in the freezer overnight and turns to solid ice. The next day, it's left on the counter and melts back to liquid water. What kind of change is happening both times?",
+    options:["It was a chemical change the first night, then a physical change the next day", "Chemical both times, since temperature changed the water noticeably", "Impossible to know without testing the ice with litmus paper", "Physical both times — same water, just changing state, and easily reversed"], ans:4,
+    why:"Freezing and melting are both physical changes — the water stays water, and each change reverses the other." },
+  { n:9, section:'B', tier:'Intermediate', star:1, body:"A cook adds a spoonful of vinegar to a bowl of baking soda and sees it fizz vigorously. Based on what you know, what TWO types of substance combined to cause this?",
+    options:["An acid combined together with a base", "Two neutral substances mixed together", "Two different acids mixed together", "Two different bases mixed together"], ans:1,
+    why:"Vinegar is an acid and baking soda is a base — the fizzing is the chemical reaction between them." },
+  { n:10, section:'B', tier:'Intermediate', star:1, body:"A farmer's soil test shows the soil turns blue litmus paper red. A neighbouring field's soil doesn't change either colour of litmus paper at all. Which field's soil is closer to neutral?",
+    options:["The first field, since red litmus is the neutral signature", "The second field, since neither strip changed colour at all", "Both fields are equally neutral", "Neither field's soil can be classified as any type at all"], ans:2,
+    why:"No colour change on either strip is the neutral signature; the first field's soil is acidic (blue turned red)." },
+
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier, star 2) — 10 questions ===================== */
+  { n:11, section:'C', tier:'Applied', star:2, body:"Sugar fully dissolves into water, disappearing from sight but not changing what it actually is. Using what you learned about mass and dissolving back in earlier units, is this a chemical or physical change?",
+    options:["Chemical, because the sugar completely disappeared from view and seemed to vanish entirely", "Chemical, because water and sugar were combined together at all, forming one single mixture", "Physical — the sugar is still sugar, just spread into tiny particles, and evaporation would bring it back", "Impossible to know for certain unless the mixture is heated up first to check"], ans:3,
+    why:"Dissolving doesn't destroy or change the sugar — it's the same substance, spread out, and can be recovered by evaporation. That makes it physical, not chemical." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"Using what you know about the fire triangle from Unit 37, is burning a candle's wick a chemical change or a physical change? Explain using real evidence.",
+    options:["Physical — the candle just changes shape and size as it burns down over time, nothing new forms", "Physical, because fire only ever changes an object's temperature, and never changes its substance at all", "Impossible to classify at all, since fire itself is a form of energy rather than a substance", "Chemical — burning combines fuel with oxygen to form new substances like smoke and ash, and can't be reversed"], ans:4,
+    why:"Burning creates new substances (smoke, ash, gases) through a reaction with oxygen, and it can't be undone — a genuine chemical change, connecting directly to Unit 37's fire triangle." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"A student claims: \"Litmus paper turning bright red versus pale pink both mean the exact same thing — there's no extra information there at all.\" Evaluate this claim about what litmus paper can and can't tell you.",
+    options:["True — litmus paper only tells acid, base, or neutral, not HOW strong, so shade adds no real info", "False — a brighter shade of red always means the acid is more dangerous to touch or handle", "False, because litmus paper actually measures the exact temperature of the liquid being tested", "True, but only because litmus paper stops working correctly after its very first use"], ans:1,
+    why:"Litmus paper is a simple acid/base/neutral test — it doesn't measure how STRONG an acid or base is, so at this level, shade differences aren't meaningful information." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"A student wants to test whether adding more baking soda makes vinegar fizz for LONGER. Using what you know about fair tests, what should stay exactly the same between each trial?",
+    options:["Nothing needs to stay the same, since baking soda amount is the only thing being tested", "The amount and type of vinegar used, and everything else except the baking soda amount", "The type of container used only, with vinegar amount changing freely each time", "The room temperature only, while changing both vinegar and baking soda amounts"], ans:2,
+    why:"A fair test changes ONE variable (baking soda amount) while keeping everything else — vinegar amount, type, container, temperature — the same, so the results can be trusted." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"A student pours vinegar onto baking soda, sees fizzing, waits for it to stop, then claims: \"If I just wait long enough, the fizzing will reverse itself and I'll get plain vinegar and baking soda back.\" Evaluate this claim.",
+    options:["True — all chemical reactions of every kind naturally reverse themselves if you simply wait long enough", "True, but only on days when there happens to be a full moon in the night sky", "False — this is a chemical change; waiting alone can't turn the new substances back into vinegar and baking soda", "False, because vinegar and baking soda are actually never able to react with each other in the first place"], ans:3,
+    why:"A chemical change is not undone by waiting — the acid and base reacted to form new substances, which is exactly why it counts as chemical rather than physical." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"A claim states: \"Any substance that changes colour has DEFINITELY undergone a chemical change, no exceptions.\" A student mixes blue paint and yellow paint together, and the mixture turns green. Does this fit the claim?",
+    options:["Yes, and this single example proves that colour change always means a chemical change happened", "Yes, because paint is a very special substance that always reacts chemically whenever it's mixed", "No, because paint is actually completely incapable of ever changing colour when mixed with anything", "No — mixing two paints is a physical mixture; colour changed, but no new substance formed, unlike rusting or burning"], ans:4,
+    why:"Mixing blue and yellow paint just combines two colours physically — no new substance forms the way it does in rusting or burning, showing that \"any colour change\" overstates the real rule." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"Explain how testing with litmus paper and checking for signs of chemical change are connected ideas.",
+    options:["Both rely on gathering real EVIDENCE first — litmus colour for acid/base, and signs like colour, smell, or heat for chemical/physical change", "They aren't connected at all — acids and bases, and chemical and physical change, are two completely separate and unrelated topics", "Litmus paper is actually the only method that works for testing acids, bases, or any kind of chemical change at all", "Chemical changes always involve an acid of some kind, and physical changes always involve a base, with no exceptions ever"], ans:1,
+    why:"Both ideas share the same scientific habit: gather real evidence (a colour test, or checking multiple signs) rather than assuming from a quick glance." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"A student mixes vinegar and baking soda in a cup, and after the fizzing stops, a small amount of white solid remains dissolved in the leftover liquid. Which method from Unit 40 would correctly recover that solid?",
+    options:["Sieving it out, since sieves are able to work on any mixture regardless of whether it's truly dissolved", "Evaporating the leftover liquid, since the solid is dissolved and evaporation is the only way to recover it", "Filtering it out, since filtering is able to catch any substance no matter how it happens to be mixed in", "No method could ever recover it at all, since it was involved in a chemical reaction beforehand"], ans:2,
+    why:"A dissolved solid (solute) can only be recovered by evaporating the liquid it's dissolved in — sieving and filtering can't catch something that's truly dissolved, exactly as Unit 40 taught." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"Three unlabelled cups — X, Y, Z — are tested with both colours of litmus paper. Cup X: blue strip stays blue, red strip turns blue. Cup Y: blue strip turns red, red strip stays red. Cup Z: neither strip changes. Which cup is most likely to react vigorously (fizz) if mixed with Cup Y?",
+    options:["Cup Y, because mixing any two identical acids always causes fizzing", "Cup Z, because neutral substances react the most vigorously with acids", "Cup X, because mixing a base (Cup X) with an acid (Cup Y) can cause a chemical reaction", "None of them — no combination of any two cups could ever cause a reaction"], ans:3,
+    why:"Cup X shows the base signature (red turns blue) and Cup Y shows the acid signature (blue turns red) — mixing an acid and a base is exactly the combination that caused the vinegar and baking soda reaction." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Which idea best sums up everything from both lessons in Unit 41?",
+    options:["Only advanced scientists working in real laboratories can ever test for acids, bases, or chemical change", "Every acid always causes a chemical change, and every base always stays only a physical change, no exceptions", "Chemical changes and physical changes are actually just the exact same thing, only with two different names", "Real evidence — like a litmus colour test, or checking for new substances and reversibility — beats guessing from looks alone"], ans:4,
+    why:"Both lessons share one big idea: use real, checkable evidence — a colour test, or specific signs of change — rather than relying on first impressions." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
