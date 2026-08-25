@@ -129,6 +129,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
     <a class="sb-btn" href="javascript:void(0)" onclick="openMath()" title="Math Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
     <a class="sb-btn" href="javascript:void(0)" onclick="openEnglish()" title="English Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
     <a class="sb-btn" href="https://athipprem.github.io/scigame/" target="_blank" rel="noopener" title="Science Quest" style="text-decoration:none;cursor:pointer"><span class="sb-icon"><img src="quest_icon.svg" alt="Science Quest" style="width:18px;height:18px;display:block"></span><span class="sb-lbl">Quest</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openCoding()" title="Coding Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon"><img src="https://athipprem.github.io/codinglessons/assets/rover-ship.svg" alt="Coding" style="width:18px;height:18px;display:block"></span><span class="sb-lbl">Coding</span></a>
     <div class="sb-spacer"></div>
   </nav>
   <div id="main">
@@ -279,6 +280,11 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
   }
   function openEnglish(){
     var url = 'https://athipprem.github.io/englessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openCoding(){
+    var url = 'https://athipprem.github.io/codinglessons/';
     if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
     window.location.href = url;
   }
