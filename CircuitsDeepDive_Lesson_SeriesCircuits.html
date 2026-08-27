@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 42 · Lesson 1 — Series Circuits</title>
+<style>
+  :root{
+    --steel:#1565c0; --steel-d:#0d47a1; --steel-l:#e3f2fd;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ef6c00; --amber-l:#fff3e8;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:#8a4a00}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔋 Lesson 1 · Series Circuits</b><span class="pill">Unit 42 · Physics</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Circuits Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: how bulbs are CONNECTED to each other — not just whether the loop is complete — decides what happens when one of them fails.</div>
+    <p>Unit 42 opens a new topic: a deeper look at circuits. First, two quick check-ins on older material. Then: what a SERIES circuit is, and the one big rule that makes it behave so differently from what you'll learn in Lesson 2.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🧪</div><div class="t">Quick Fix</div><div class="j">acids &amp; bases from Unit 41</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Spiral warm-up</div><div class="j">Earth's tilt &amp; seasons</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔗</div><div class="t">Series circuits</div><div class="j">one shared loop, one after another</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">💡</div><div class="t">Series behaviour</div><div class="j">one gap breaks everything</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> recognise a series circuit from a diagram, and predict exactly what happens to every other bulb when one bulb in a series circuit fails.</div>
+  </section>
+
+  <!-- SCREEN 2: QUICK FIX FROM U41 -->
+  <section class="screen" data-s="2">
+    <h2>Quick Fix from Unit 41 🧪</h2>
+    <div class="recall">Unit 41's test found a mix-up between everyday ACIDS and BASES — three separate questions all pointed the same way. Two fresh, ungraded checks before we move on to circuits.</div>
+    <div class="ungraded">
+      <p>Warm-up. A cleaning spray label says: "feels a bit slippery on your hands, and turns red litmus paper blue." Is this spray an acid or a base?</p>
+      <button class="opt" data-w="A" data-c="false">An acid</button>
+      <button class="opt" data-w="A" data-c="true">A base</button>
+      <button class="opt" data-w="A" data-c="false">Impossible to tell from this description</button>
+      <button class="btn next chkw" data-w="A">Check</button>
+      <div class="fb ok" data-w="A">✔ Correct — slippery feel and turning red litmus blue are both classic BASE signs. Soap and baking soda are everyday bases, even though neither one tastes sour.</div>
+      <div class="fb no" data-w="A">✘ Re-think it: an ACID turns blue litmus RED. This spray turned RED litmus BLUE — that's the opposite direction, the base signature.</div>
+    </div>
+    <div class="ungraded">
+      <p>Warm-up. A student mixes vinegar with baking soda and it fizzes. Vinegar is sour-tasting and turns blue litmus red. Baking soda feels slightly slippery and turns red litmus blue. What TWO types of substance just combined?</p>
+      <button class="opt" data-w="B" data-c="true">An acid and a base</button>
+      <button class="opt" data-w="B" data-c="false">Two different acids</button>
+      <button class="opt" data-w="B" data-c="false">Two different bases</button>
+      <button class="btn next chkw" data-w="B">Check</button>
+      <div class="fb ok" data-w="B">✔ Correct — vinegar (sour, turns blue litmus red) is an ACID. Baking soda (slippery, turns red litmus blue) is a BASE. The fizzing happens when an acid meets a base.</div>
+      <div class="fb no" data-w="B">✘ Re-think it: look at what each substance does to litmus paper. One turns blue→red (that's the acid signature); the other turns red→blue (that's the base signature) — they're not the same type.</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: SPIRAL WARM-UP (Earth & Space, U27/U28) -->
+  <section class="screen" data-s="3">
+    <h2>Quick Warm-Up 🔁</h2>
+    <div class="recall">This is an UNGRADED refresher pulling from Units 27-28 — Earth's tilt and the seasons — content you haven't seen tested in a while. Just to keep it fresh.</div>
+    <div class="ungraded">
+      <p>Warm-up. Does Earth's axis change how much it's tilted at different times of the year?</p>
+      <button class="opt" data-w="C" data-c="false">Yes — the tilt itself grows and shrinks throughout the year</button>
+      <button class="opt" data-w="C" data-c="true">No — the tilt stays the same all year; what changes is where Earth is in its orbit</button>
+      <button class="opt" data-w="C" data-c="false">Yes, but only during winter</button>
+      <button class="btn next chkw" data-w="C">Check</button>
+      <div class="fb ok" data-w="C">✔ Correct — Earth's axis stays tilted about 23.5° all year round, always pointing the same direction in space. What changes is WHERE Earth is in its orbit, which decides which hemisphere leans toward the Sun.</div>
+      <div class="fb no" data-w="C">✘ Re-think it: nothing about the tilt ITSELF changes — Earth just moves around the Sun while the tilt stays fixed, always pointing the same way.</div>
+    </div>
+    <div class="ungraded">
+      <p>Warm-up. Is Earth's changing distance from the Sun the real reason we have seasons?</p>
+      <button class="opt" data-w="D" data-c="false">Yes — Earth is closer to the Sun in summer and farther away in winter</button>
+      <button class="opt" data-w="D" data-c="true">No — the real cause is Earth's tilt, not its distance from the Sun</button>
+      <button class="opt" data-w="D" data-c="false">Yes, distance is the only thing that matters</button>
+      <button class="btn next chkw" data-w="D">Check</button>
+      <div class="fb ok" data-w="D">✔ Correct — it's the TILT that matters, not distance. A tilted hemisphere facing the Sun gets more direct sunlight and longer days, which is what actually causes summer.</div>
+      <div class="fb no" data-w="D">✘ Re-think it: Unit 28's big idea was that distance is a myth — it's the tilt of Earth's axis that causes seasons, not how close Earth happens to be to the Sun.</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 4: WHY -->
+  <section class="screen" data-s="4">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">You already know a circuit needs a complete loop to work. But real gadgets often have MORE than one bulb or component — and HOW they're connected changes everything about how the whole thing behaves.</div>
+    <div class="stress">📋 <b>ASMOPSS connection:</b> circuit diagrams are a recurring favourite on real papers — you'll often be shown a diagram and asked to predict what happens if one part fails, which is exactly what Units 42's two lessons build toward.</div>
+    <div class="card"><b>Real life:</b> old-style Christmas lights sometimes had a famous, annoying problem — if ONE bulb burned out, the ENTIRE string went dark, and you had to test every bulb one by one to find the broken one. By the end of Lesson 2, you'll know exactly why that happened.</div>
+  </section>
+
+  <!-- SCREEN 5: RECAP -->
+  <section class="screen" data-s="5">
+    <h2>Quick Recap: Complete Circuits 🔁</h2>
+    <div class="job"><b>From Unit 6:</b> a circuit needs a POWER SOURCE, a PATH (wires), and something to USE the energy — all connected in ONE unbroken loop. A gap ANYWHERE breaks the whole loop.</div>
+    <div class="job"><b>From Units 6 &amp; 34:</b> a CONDUCTOR lets electricity flow through it easily (like copper wire); an INSULATOR blocks it (like plastic or rubber). A broken wire, a flat battery, or an open switch all create the same kind of gap.</div>
+    <div class="stress">Today we go further: what happens when there's MORE THAN ONE bulb in the circuit, and they're all connected one after another in a single chain?</div>
+  </section>
+
+  <!-- SCREEN 6: SERIES CIRCUITS -->
+  <section class="screen" data-s="6">
+    <h2>What Is a Series Circuit? 🔗</h2>
+    <div class="rulebar">A SERIES circuit connects everything — battery and every bulb — along ONE single loop, one after another, with no branches.</div>
+    <svg viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-label="A series circuit: battery connected to three bulbs in a row, all on one single loop with no branches">
+      <rect x="20" y="55" width="50" height="28" rx="5" fill="#fff3e8" stroke="#ef6c00" stroke-width="2"/>
+      <text x="45" y="73" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="700">BATTERY</text>
+      <circle cx="130" cy="30" r="16" fill="#fff9db" stroke="#DAA520" stroke-width="2"/>
+      <text x="130" y="34" font-size="8" text-anchor="middle" fill="#8a6a00" font-weight="700">BULB 1</text>
+      <circle cx="200" cy="30" r="16" fill="#fff9db" stroke="#DAA520" stroke-width="2"/>
+      <text x="200" y="34" font-size="8" text-anchor="middle" fill="#8a6a00" font-weight="700">BULB 2</text>
+      <circle cx="270" cy="30" r="16" fill="#fff9db" stroke="#DAA520" stroke-width="2"/>
+      <text x="270" y="34" font-size="8" text-anchor="middle" fill="#8a6a00" font-weight="700">BULB 3</text>
+      <line x1="45" y1="55" x2="45" y2="30" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="45" y1="30" x2="114" y2="30" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="146" y1="30" x2="184" y2="30" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="216" y1="30" x2="254" y2="30" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="270" y1="46" x2="270" y2="110" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="270" y1="110" x2="45" y2="110" stroke="#546e7a" stroke-width="2.5"/>
+      <line x1="45" y1="110" x2="45" y2="83" stroke="#546e7a" stroke-width="2.5"/>
+      <text x="160" y="128" font-size="9" text-anchor="middle" fill="#546e7a">ONE loop — every bulb shares the same single path</text>
+    </svg>
+    <div class="svgcap">Follow the wire with your finger: battery → bulb 1 → bulb 2 → bulb 3 → back to battery. There's only ONE path — every bulb sits along that same single chain, one after another.</div>
+    <div class="job"><b>Key idea:</b> in a series circuit, electricity has no choice but to pass through EVERY bulb, one at a time, because there's only one road and no branches off it.</div>
+  </section>
+
+  <!-- SCREEN 7: SERIES BEHAVIOUR -->
+  <section class="screen" data-s="7">
+    <h2>Series Circuits: What Happens When One Bulb Fails? 💥</h2>
+    <div class="rulebar">If ANY bulb in a series circuit breaks (or is removed), the WHOLE loop is broken — EVERY bulb in the circuit goes out, not just the broken one.</div>
+    <p>Remember Unit 6's rule: a gap ANYWHERE breaks the whole loop. A series circuit is just one long loop with several bulbs sitting on it — so a broken bulb IS a gap in that one and only path. With the path broken, nothing can complete the loop, so every bulb on it loses power at the same time.</p>
+    <div class="job"><b>Bonus fact — brightness:</b> the more bulbs you add to a series circuit, the DIMMER each one glows, because they're all sharing the same single stream of electricity between them. Three bulbs in series are each dimmer than just one bulb alone on the same battery.</div>
+    <div class="dtree">
+      <div class="dbox dq">Is EVERY component connected along just ONE single loop, one after another, with no branching paths?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">YES</div>
+          <div class="dleaf yes">SERIES circuit — one bulb failing breaks ALL of them</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">NO — there are branches</div>
+          <div class="dleaf no">NOT series (see Lesson 2 for what this is instead!)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: WORKED EXAMPLE -->
+  <section class="screen" data-s="8">
+    <h2>Worked Example: The Old Christmas Lights Problem 🎄</h2>
+    <div class="card">
+      <b>Scenario:</b> An old string of 20 Christmas lights is wired as ONE series circuit — every bulb sits along a single loop, one after another. One bulb's filament breaks.
+      <br><br><b>Step 1 — is this circuit still complete?</b> No. The broken filament is a gap, and it sits directly on the ONLY path the electricity has.
+      <br><br><b>Step 2 — what happens to the other 19 bulbs?</b> They ALL go dark too, even though they're perfectly fine — because the single shared loop is broken, none of them can complete their circuit either.
+      <br><br><b>Step 3 — why is this so annoying to fix?</b> You can't just look at the string and see which bulb is broken — you have to test bulbs one at a time until you find the one gap breaking the whole loop.
+      <br><br><b>Conclusion:</b> this is the real-world cost of a series circuit — simple to build, but ONE failure anywhere takes down everything connected to that same loop.
+    </div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. What is the defining feature of a series circuit?</p>
+      <button class="opt">It always has exactly one bulb</button>
+      <button class="opt">It uses two batteries instead of one</button>
+      <button class="opt">Every component sits along one single shared loop, one after another</button>
+      <button class="opt">It never needs a switch</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a series circuit connects everything along ONE loop, with no branches.</div>
+      <div class="fb no">✘ Re-check Screen 6 — what makes a circuit "series" isn't the number of bulbs, it's how they're connected.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. A series circuit has 3 bulbs. One of them burns out. What happens to the other 2?</p>
+      <button class="opt">They get brighter, since less current is being shared</button>
+      <button class="opt">They both go out too, because the one shared loop is now broken</button>
+      <button class="opt">They stay exactly the same as before</button>
+      <button class="opt">Only the bulb next to the broken one goes out</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a broken bulb is a gap in the only path available, so the whole loop stops working and every bulb goes dark.</div>
+      <div class="fb no">✘ Re-check Screen 7 — in a series circuit, is there more than one path the electricity could take instead?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Which is dimmer: ONE bulb alone on a battery, or that SAME battery powering THREE identical bulbs wired in series?</p>
+      <button class="opt">The three bulbs in series are each dimmer than the one bulb alone</button>
+      <button class="opt">All four bulbs (the lone one and the three) are exactly equally bright</button>
+      <button class="opt">The three bulbs in series are each brighter than the one bulb alone</button>
+      <button class="opt">Brightness has nothing to do with how many bulbs share a circuit</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — sharing the same single stream of electricity between more bulbs means each one gets less, so more bulbs in series means each glows dimmer.</div>
+      <div class="fb no">✘ Re-check Screen 7's bonus fact — what happens to each bulb's share of electricity as more bulbs join the same series loop?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A circuit has a battery, a bulb, and a switch, all connected in one loop with no gaps. The switch is flicked so its two metal contacts pull apart. What state is the switch in, and what happens to the bulb?</p>
+      <button class="opt">Closed; the bulb turns on</button>
+      <button class="opt">Closed; the bulb turns off</button>
+      <button class="opt">Open; the bulb turns on</button>
+      <button class="opt">Open; the bulb turns off</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — pulling the contacts apart makes a gap, so the switch is OPEN, which breaks the loop and turns the bulb off.</div>
+      <div class="fb no">✘ Re-check Screen 5's recap — a gap in the switch means it's OPEN, and an open switch always means an incomplete circuit.</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. In Unit 41's Quick Fix, a spray that feels slippery and turns red litmus blue was identified as which type of substance?</p>
+      <button class="opt">An acid</button>
+      <button class="opt">A base</button>
+      <button class="opt">Neutral</button>
+      <button class="opt">Impossible to classify at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — slippery feel plus turning red litmus blue are both base signs.</div>
+      <div class="fb no">✘ Re-check Screen 2 — which direction of litmus colour change (red→blue, or blue→red) matches a BASE?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='CircuitsDeepDive_Lesson_ParallelCircuits.html';}
+  };
+
+  // ungraded checks (data-w keyed blocks)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
