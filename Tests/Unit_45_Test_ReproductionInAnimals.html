@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_45_Test_ReproductionInAnimals.html —
+     Biology: Reproduction in Animals (school-aligned)
+     ------------------------------------------------------------
+     Third unit of the 7-unit school-aligned block, matching
+     Chapter 3 of Prem's Y5 i-Science course book. Recaps Unit 31's
+     five vertebrate groups (mammal/bird/reptile/amphibian/fish)
+     and extends with genuinely new content: sexual reproduction,
+     internal vs external fertilisation, and three life-cycle types
+     (no metamorphosis, incomplete metamorphosis, complete
+     metamorphosis) — never taught before in this program. Lesson 1
+     opens with a fresh-scene confirming rep for U44's real-taken
+     miss pattern (Q12/Q17 — confusing total cell quantity/body size
+     with active division RATE/purpose right now), per Executive
+     Summary §60's recommendation, plus a spiral-maintenance warm-up
+     from Physics Unit 21 (gravity/free-fall/air resistance), stale
+     since June 2026 and untouched by any milestone. Section C sources
+     genuine cross-topic synthesis from Units 4 (microorganisms/binary
+     fission), 11 (human body), 25 (plant pollination/fertilisation),
+     36 (fair-test design), and 44 (cell division after fertilisation).
+     Trap-Recognition Drill #9 (the "ALL animals go through
+     metamorphosis" absolute-claim trap) is taught in Lesson 2 and
+     graded once in the test (n15) — no same-day retest, per skill
+     rule G.7.
+     LESSON-TEST OVERLAP CHECK: cross-referenced all 20 test items
+     against both lessons' own 10 graded practice questions via
+     stem+answer Jaccard (0.30 threshold); n4, n5, n6, n7, n8, n14,
+     and n16 were flagged as near-duplicates and rewritten with
+     different scenes and/or cognitive tasks before shipping — see
+     feedback-no-near-duplicate-confirming-reps in project memory.
+     Built under the ANSWER-BALANCE RULE (5/5/5/5) — position tally
+     confirmed {1:5,2:5,3:5,4:5}. Length-margin clean (0 violations
+     after 2 fix passes). Within-test and lesson-vs-test Jaccard both
+     clean (0 flags). Cross-corpus Jaccard clean against 23 relevant
+     files (0 flags above 0.4).
+     TIER SPLIT: 2 Basic / 6 Intermediate / 12 Applied (10/30/60%),
+     per the standing U43-U49 reweighting rule (Lui, 28 Aug 2026).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 45 Test — Biology: Reproduction in Animals</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#3949ab; --steel-d:#1a237e; --a-fill:#e8eaf6; --a-text:#1a237e;
+    --blue:#1565c0; --b-fill:#c8e6c9; --b-text:#1b5e20;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ffa000; --amber-l:#fff8e1;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a5300}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#ff8f00);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#c5cae9);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e0,#ffe0b2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#a84f00}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 45 Test — Biology: Reproduction in Animals</b>
+      <span class="sub" id="hdr-sub">Male, Female &amp; Fertilisation • Life Cycles &amp; Metamorphosis</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 45;
+const UNIT_TITLE = "Biology: Reproduction in Animals";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 2 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"A farmer's hen lays an egg. For that egg to ever develop into a baby chick, what must it be joined with?",
+    options:["A rooster's sperm, to fertilise the egg", "A lot more sunlight shining on the nest", "Extra warmth from the farmer's hands", "A change in what the hen has been eating"], ans:1,
+    why:"An egg can only develop into a chick after it has been fertilised — joined with sperm from a rooster (the male parent)." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"A student says: \"Fertilisation always happens INSIDE the mother's body, no matter which animal it is.\" Is this correct?",
+    options:["Yes — that is actually correct for every single animal species without any exception at all", "No — many fish and amphibians use EXTERNAL fertilisation, which happens outside the body, usually in water", "Yes, but this is only true for animals that live entirely on dry land instead", "No — external fertilisation is only ever used by insects, never by any fish or amphibians"], ans:2,
+    why:"This is false — many fish and amphibians use EXTERNAL fertilisation, where the sperm meets the egg outside the body, usually in water." },
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier) — 6 questions ===================== */
+  { n:3, section:'B', tier:'Intermediate', star:1, body:"A goldfish releases eggs into the pond water, and a nearby male goldfish releases sperm into that same water. Where does fertilisation happen?",
+    options:["Inside the female goldfish's body — internal fertilisation", "Inside the male goldfish's body instead", "Outside the body, in the water — external fertilisation", "Fertilisation cannot happen this way at all"], ans:3,
+    why:"Since the eggs and sperm meet outside the body, in the water, this is EXTERNAL fertilisation — typical for most fish." },
+  { n:4, section:'B', tier:'Intermediate', star:1, body:"A breeder discovers a gecko's clutch of eggs were already fertilised before she ever laid them, since mating took place earlier inside her body. What type of fertilisation does this describe?",
+    options:["External fertilisation", "No fertilisation at all", "Both types happen together", "Internal fertilisation"], ans:4,
+    why:"Reptiles typically use INTERNAL fertilisation — the sperm meets the egg inside the female's body, even though the egg is laid afterwards." },
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A cockroach hatches from its egg, becomes a nymph, and finally reaches adulthood. Put these three stages in the correct developmental order.",
+    options:["Egg &rarr; nymph &rarr; adult", "Nymph &rarr; egg &rarr; adult", "Egg &rarr; adult &rarr; nymph", "Adult &rarr; nymph &rarr; egg"], ans:1,
+    why:"Incomplete metamorphosis happens in this order: egg, then nymph, then adult." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"Arrange these four stages in the order a butterfly actually develops, from egg to adult.",
+    options:["Egg &rarr; pupa &rarr; larva &rarr; adult", "Egg &rarr; larva &rarr; pupa &rarr; adult", "Larva &rarr; egg &rarr; pupa &rarr; adult", "Egg &rarr; larva &rarr; adult &rarr; pupa"], ans:2,
+    why:"Complete metamorphosis happens in this order: egg, then larva, then pupa, then adult." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"After hatching, a cicada spends years living underground with the same six-legged shape it will keep as a grown insect, only smaller and unable to fly. It later climbs a tree trunk and transforms into a fully flying insect. Which life cycle type is this?",
+    options:["Complete metamorphosis", "No metamorphosis", "Incomplete metamorphosis", "This is not a real life cycle pattern"], ans:3,
+    why:"A nymph stage that already resembles a smaller, wingless version of the adult is the sign of INCOMPLETE metamorphosis." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"A ladybird begins life as a spiky, elongated larva that shares no resemblance at all to the round, spotted adult it will become. After a still, non-feeding pupal stage attached to a leaf, it finally emerges as an adult ladybird. Which life cycle type is this?",
+    options:["Incomplete metamorphosis", "No metamorphosis", "A life cycle with only two stages total", "Complete metamorphosis"], ans:4,
+    why:"A larva that looks nothing like the adult, followed by a pupa stage, is the sign of COMPLETE metamorphosis." },
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier) — 12 questions ===================== */
+  { n:9, section:'C', tier:'Applied', star:2, body:"Frogs (amphibians) spend part of their life in water and part on land. Using what you know about WHERE fertilisation happens, explain why frogs typically use EXTERNAL fertilisation.",
+    options:["Frogs mate and lay their eggs in water, so the sperm can simply swim through the water to reach the eggs, without needing to be inside the body", "Frogs actually always use internal fertilisation, exactly like mammals do, because their skin is too moist for water to matter", "Frogs don't need fertilisation at all, since tadpoles simply appear on their own whenever there is enough water nearby", "Frogs use external fertilisation only because they have no eggs at all, relying entirely on splitting cells instead"], ans:1,
+    why:"Because frogs mate and lay eggs in water, the sperm can reach the eggs directly through the water — this is why external fertilisation works well for animals that breed in water." },
+  { n:10, section:'C', tier:'Applied', star:2, body:"In Unit 4, you learned a bacterium reproduces by simply dividing itself in two, with no mate needed at all. Explain how a dog's reproduction is different.",
+    options:["A dog also reproduces by splitting its own body in two, exactly like a bacterium does, without ever needing any mate at all to begin", "A dog reproduces sexually, needing BOTH a male parent's sperm and a female parent's egg to meet through fertilisation — unlike a bacterium, which needs no mate", "A dog needs a mate only for external fertilisation, never for anything else, since its internal fertilisation happens completely automatically", "There is actually no real difference at all between how dogs and bacteria reproduce, since both processes work in exactly the same way"], ans:2,
+    why:"A bacterium reproduces asexually (dividing alone), but a dog reproduces sexually — requiring a male parent's sperm and a female parent's egg to meet through fertilisation." },
+  { n:11, section:'C', tier:'Applied', star:2, body:"After fertilisation, a single fertilised egg cell must become a whole kitten made of millions of cells. Using what you learned in Unit 44, explain how this actually happens.",
+    options:["The single fertilised cell simply stretches and inflates itself directly into the full adult shape of a kitten, without ever dividing", "New cells appear instantly all at once, the very moment fertilisation happens, with no time needed for any dividing at all", "The one fertilised cell divides repeatedly &mdash; grows, copies its parts, splits in two &mdash; over and over, producing enough new cells to build the whole kitten", "The fertilised cell stays exactly one single cell throughout the kitten's entire early development, never dividing even once"], ans:3,
+    why:"Just like in Unit 44, the single fertilised cell divides repeatedly (grow, copy, split) many times, producing enough cells to build the whole kitten." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"In Unit 25, you learned a flower's egg cell (inside the ovule) is fertilised by pollen carried from another flower. Compare this to internal fertilisation in a mammal &mdash; what is SIMILAR between the two?",
+    options:["Nothing at all is similar — plant and animal reproduction work in completely unrelated ways, sharing no common underlying process whatsoever between them", "Both processes actually happen entirely outside of any body or flower altogether, taking place only out in open water instead of anywhere else", "Plants actually use sperm and eggs in exactly the same way insects do, complete with an in-between nymph stage involved in the process too", "Both involve a male sex cell joining with a female egg cell to start a new life, even though a plant's happens inside a flower and an animal's happens inside a body"], ans:4,
+    why:"In both cases, a male sex cell (pollen in plants, sperm in animals) joins with a female egg cell to start a new life &mdash; just in different locations." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"A scientist wants to test whether warmer water makes frog eggs hatch faster. Using fair-test rules from Unit 36, what should stay the SAME between the warm-water group and the cool-water group of eggs?",
+    options:["The type of frog eggs used, the amount of water, and the light conditions — changing ONLY the water temperature", "Nothing at all needs to stay the same between the two groups, since only the final result actually matters here", "The water temperature itself should be allowed to vary randomly, in a completely uncontrolled way", "The type of frog eggs used should actually be different in each group as well, just for more variety"], ans:1,
+    why:"A fair test changes ONE variable (water temperature) while keeping everything else the same, so any hatching-speed difference can be trusted as caused by the temperature." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"A human baby already resembles a tiny person at birth, having grown to full term while carried by its mother. Which life cycle type AND fertilisation type does this combination point to?",
+    options:["Complete metamorphosis, and external fertilisation", "No metamorphosis, and internal fertilisation", "Incomplete metamorphosis, and internal fertilisation", "No metamorphosis, and external fertilisation"], ans:2,
+    why:"A baby that already looks like a small human (no dramatic shape change) is NO METAMORPHOSIS, and developing inside the mother's body is INTERNAL fertilisation." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"A student claims: \"A young animal ALWAYS looks completely different from its parents before growing up.\" Is this true?",
+    options:["True — every single young animal on Earth looks completely nothing like its own parents at first", "True, but this rule only actually applies to animals that spend their whole lives living in water", "False — animals with no metamorphosis, like puppies and chicks, already look like small versions of their parents", "False, because actually no young animal at all ever looks any different from its own parents"], ans:3,
+    why:"This is a false absolute claim (the word \"ALWAYS\" is the giveaway) &mdash; animals with no metamorphosis already look like small copies of their parents." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"A praying mantis nymph already looks like a smaller, wingless version of the adult mantis and hunts prey the same way an adult does. A moth caterpillar, on the other hand, looks nothing like the adult moth and must pass through a cocoon (pupa) first. Explain why these two insects are classified under different metamorphosis types.",
+    options:["Both insects actually go through the exact same metamorphosis type overall, since both of them will eventually grow a full pair of functioning adult wings in the end anyway", "The mantis nymph actually needs to pass through its own separate pupa stage too, in exactly the same way that the moth caterpillar eventually and always does", "Neither insect really goes through any true metamorphosis at all, since both of them simply hatch out already looking exactly like fully grown adult insects", "The mantis nymph keeps the same basic body plan as it grows (incomplete metamorphosis), while the moth's larva looks completely different and needs a pupa stage to transform (complete metamorphosis)"], ans:4,
+    why:"The mantis nymph already resembles the adult (incomplete metamorphosis), while the moth's larva looks completely different and needs a pupa stage to transform (complete metamorphosis) — different starting appearances mean different metamorphosis types." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"A sea turtle (a reptile) mates out at sea, and fertilisation happens right then &mdash; before she later crawls onto a beach to dig a nest and lay her already-fertilised eggs in the sand. Where did fertilisation ACTUALLY happen?",
+    options:["Inside the female turtle's body, out at sea — internal fertilisation, even though the eggs are laid later on land", "On the beach, inside the sand nest, right after all of the eggs had already been laid there", "Outside the turtle's body entirely, out in the open seawater, in the same way a typical fish does", "Fertilisation actually never happened at all for this particular sea turtle in this story"], ans:1,
+    why:"Fertilisation happened INSIDE the female turtle's body while mating at sea &mdash; the eggs were already fertilised before she ever laid them on the beach." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"Compare a chicken's life cycle to a frog's life cycle. Which statement is correct?",
+    options:["Both a chicken and a frog actually go through the exact same complete metamorphosis pattern, complete with a larva stage and a separate pupa stage too", "A chicken has no metamorphosis (it hatches looking like a small chicken), while a frog has complete metamorphosis (its tadpole looks nothing like the adult)", "A chicken actually goes through complete metamorphosis instead of a frog, while the frog itself has no metamorphosis of any kind at all", "Neither a chicken nor a frog ever goes through any kind of noticeable life cycle change whatsoever as each one grows up over time"], ans:2,
+    why:"A chicken follows NO METAMORPHOSIS (hatches looking like a small adult), while a frog follows COMPLETE METAMORPHOSIS (the tadpole looks nothing like the adult frog)." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"Imagine a caterpillar somehow skipped the pupa stage completely and tried to grow wings directly. Based on what you know about the pupa's role, what would most likely go wrong?",
+    options:["Nothing at all would happen — the pupa stage is not actually a necessary part of complete metamorphosis anyway", "The caterpillar would instantly become a fully-formed adult butterfly anyway, just noticeably faster than usual", "Its body could not properly rebuild itself into an adult shape, since the pupa stage is exactly when that transformation happens", "The caterpillar would simply turn back into an egg instead of ever becoming an adult at all"], ans:3,
+    why:"The pupa stage is when the body's dramatic rebuilding into the adult shape actually happens &mdash; skipping it would mean that transformation never properly occurs." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Which idea best sums up everything from both of Unit 45's lessons?",
+    options:["All animals reproduce in exactly the same identical way, using only internal fertilisation and absolutely no metamorphosis whatsoever, regardless of their species or vertebrate group", "Fertilisation and life cycles are actually two completely separate and unrelated topics in Science class, with no real meaningful connection between them at all, ever", "Only insects ever go through any kind of noticeable life cycle change at all — every single other kind of animal is simply born already looking exactly like a full adult", "Animals reproduce sexually through fertilisation (internal or external), and then grow up following one of three life cycle patterns — no metamorphosis, incomplete metamorphosis, or complete metamorphosis"], ans:4,
+    why:"Both lessons build one connected picture: animals reproduce sexually through fertilisation (internal or external), then grow up through one of three life cycle patterns &mdash; no metamorphosis, incomplete metamorphosis, or complete metamorphosis." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
