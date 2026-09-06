@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_46_Test_ReproductionInPlants.html —
+     Biology: Reproduction in Plants (school-aligned)
+     ------------------------------------------------------------
+     Fourth unit of the 7-unit school-aligned block, matching
+     Chapter 4 of Prem's Y5 i-Science course book. Recaps Unit 25's
+     sexual reproduction in flowering plants (pollination,
+     fertilisation, seed formation) and Unit 33's underground stems,
+     then extends with genuinely new content: reproduction from
+     spores (ferns, mosses) and reproduction from other plant parts
+     (runners, cuttings), plus comparing all methods (sexual vs
+     asexual). Lesson 1 opens with a spiral-maintenance warm-up from
+     Biology Unit 17 (ecosystems/food chains), stale since mid-July
+     2026. Section C sources genuine cross-topic synthesis from
+     Units 4 (microorganisms/binary fission), 25 (pollination
+     recap-synthesis), 33 (underground stems recap-synthesis), 36
+     (fair-test design), 44 (cell division), and 45 (animal sexual
+     reproduction, cross-subject Bio comparison).
+     Trap-Recognition Drill #10 (the "ALL new plants come from
+     seeds" absolute-claim trap) is taught in Lesson 2 and graded
+     once in the test (n15) — no same-day retest, per skill rule G.7.
+     LESSON-TEST OVERLAP CHECK: cross-referenced all 20 test items
+     against both lessons' own 10 graded practice questions via
+     stem+answer Jaccard (0.30 threshold) — test items deliberately
+     use different plant examples than the lessons (mint/rose/tulip/
+     iris/yam vs the lessons' strawberry/basil/potato/onion/ginger)
+     to avoid near-duplicates.
+     Built under the ANSWER-BALANCE RULE (5/5/5/5) — position tally
+     confirmed {1:5,2:5,3:5,4:5}. Length-margin, within-test Jaccard,
+     lesson-vs-test Jaccard, and cross-corpus Jaccard all verified
+     clean before shipping.
+     TIER SPLIT: 2 Basic / 6 Intermediate / 12 Applied (10/30/60%),
+     per the standing U43-U49 reweighting rule (Lui, 28 Aug 2026).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 46 Test — Biology: Reproduction in Plants</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#2e7d32; --steel-d:#1b5e20; --a-fill:#e8f5e9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#c8e6c9; --b-text:#1b5e20;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ad1457; --amber-l:#fce4ec;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a0044}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#c8e6c9);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 46 Test — Biology: Reproduction in Plants</b>
+      <span class="sub" id="hdr-sub">Seeds &amp; Spores • Other Plant Parts &amp; Comparing Methods</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 46;
+const UNIT_TITLE = "Biology: Reproduction in Plants";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 2 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"What TWO flower parts are directly involved in pollination — one that makes pollen, one that receives it?",
+    options:["The anther (makes pollen) and the stigma (receives pollen)", "The petal (makes pollen) and the root (receives pollen)", "The ovary (makes pollen) and the leaf (receives pollen)", "The stem (makes pollen) and the seed (receives pollen)"], ans:1,
+    why:"Pollination is pollen moving from the anther (part of the male stamen) to the stigma (part of the female pistil)." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Prem's classmate says: \"A fern grows a fruit that ripens and holds its seeds inside, the exact same way an apple tree does.\" Is this classmate correct?",
+    options:["Yes — this is actually true for every kind of plant, since all plants reproduce using the exact same underlying method", "No — a fern skips fruit and seeds altogether, releasing tiny spores from spore cases instead", "Yes, but only for ferns that grow in very warm, tropical rainforest climates specifically", "No — ferns simply do not reproduce at all, and have never once produced any new plants of any kind"], ans:2,
+    why:"Ferns and mosses reproduce from SPORES, not seeds — they have no flowers or fruits at all." },
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier) — 6 questions ===================== */
+  { n:3, section:'B', tier:'Intermediate', star:1, body:"Prem spots tiny brown dots arranged in neat rows on the underside of a fern leaf in his garden. What are these, and what will they eventually do?",
+    options:["Seeds — they will fall to the ground and sprout into new fern seedlings", "Insect eggs — they will hatch into small beetles that eat the fern", "Spore cases — they will release spores that can grow directly into new ferns", "Pollen grains — they will be carried by bees to a nearby flower"], ans:3,
+    why:"Rows of tiny dots on the underside of a fern leaf are spore cases, which release spores that grow directly into new ferns." },
+  { n:4, section:'B', tier:'Intermediate', star:1, body:"Prem notices his mother's mint pot has sent out a thin side-shoot that arched over the rim and touched down in the neighbouring pot, where a completely separate little mint plant has now popped up with roots of its own. What method of reproduction is this?",
+    options:["Reproduction from a spore case", "Reproduction from a seed", "Reproduction from a bulb", "Reproduction from a runner"], ans:4,
+    why:"A side-shoot that arches over and takes root somewhere new, sprouting a separate plant where it touches down, is a RUNNER." },
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A gardener snips a healthy stem from a rose bush, stands it in a jar of water until roots grow, then plants it in soil. What method of reproduction is this, and will the new rose bush be genetically identical to the parent, or different?",
+    options:["This is reproduction from a cutting, and the new rose bush will be genetically identical to the parent", "This is reproduction from a seed, and the new rose bush will be genetically different from the parent", "This is reproduction from a spore, and the new rose bush will be genetically different from the parent", "This is reproduction from a runner, and it is impossible to know if it will be identical or different"], ans:1,
+    why:"This is a CUTTING — asexual reproduction from one parent, so the new rose bush is a genetic copy (a clone) of it." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"Which of these two methods actually needs pollination to happen before a new plant can form: reproduction from seeds, or reproduction from spores?",
+    options:["Only reproduction from spores needs pollination to happen first, not reproduction from seeds at all", "Reproduction from seeds needs pollination first; reproduction from spores does not", "Both methods equally need pollination to happen first, with no real difference between the two at all", "Neither method needs any pollination at all, ever, regardless of which type of plant is involved"], ans:2,
+    why:"Reproduction from SEEDS needs pollination first (pollen must reach the stigma); reproduction from SPORES needs no pollination at all." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"A gardener digs up part of an iris plant's underground rhizome, cuts off a piece that has a bud on it, and replants that piece — months later, it has grown into a brand-new iris plant. Which Chapter 4 reproduction method does this match?",
+    options:["Sexual reproduction from a seed, formed only after pollination has taken place between two flowers", "Reproduction from a spore case, exactly like a fern or a moss reproduces, with no pollination at all", "Reproduction from other plant parts (an underground stem, like Unit 33's tubers and bulbs)", "This is not a real method of plant reproduction at all, and no such process actually exists in nature"], ans:3,
+    why:"A piece of underground stem (a rhizome, like the ginger example from Unit 33) growing into a new plant is reproduction from other plant parts." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"A single yam with several visible buds is cut into 4 separate pieces, each containing at least one bud, and all 4 pieces are planted. How many PARENT yam plants were actually needed to eventually grow all 4 new yam plants this way?",
+    options:["Four separate parent plants would be needed, one for each of the four new pieces that were planted", "Two parent plants would be needed, since yams typically need a mating pair in order to reproduce at all", "It cannot be determined at all without directly testing each new yam plant's genetics in a laboratory", "Just one parent plant — reproducing from plant parts needs only one parent, unlike sexual reproduction"], ans:4,
+    why:"Reproduction from plant parts is asexual, needing only ONE parent — cutting that one yam into pieces doesn't change how many parents were needed." },
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier) — 12 questions ===================== */
+  { n:9, section:'C', tier:'Applied', star:2, body:"Compare reproduction from SEEDS to reproduction from SPORES. What is the key DIFFERENCE between the two?",
+    options:["Seeds form after pollination between two parent flowers; spores are made directly by one parent plant, with no pollination needed at all", "There is actually no real difference between the two methods at all — they both work in exactly the same way", "Spores actually form only after pollination has taken place, while seeds need absolutely no pollination whatsoever to ever form at all", "Seeds can only ever be produced by ferns and mosses, while spores can only ever be produced by flowering plants instead"], ans:1,
+    why:"Seeds require pollination between two parents; spores are made directly by a single parent plant, with no pollination step at all." },
+  { n:10, section:'C', tier:'Applied', star:2, body:"In Unit 4, you learned a bacterium reproduces asexually by simply splitting itself in two, needing no mate at all. Explain how reproduction from a cutting or a bulb is SIMILAR to this.",
+    options:["Both actually require two separate parents to combine their genetic material together before anything at all can happen", "Both are examples of asexual reproduction — only one parent is needed, and the offspring is a genetic copy of that one parent, unlike sexual reproduction", "There is no real similarity at all — bacteria and plants reproduce in two completely unrelated ways, sharing nothing in common", "A cutting or bulb must first be pollinated by an insect, in exactly the same way a bacterium supposedly must be before it can ever divide"], ans:2,
+    why:"Both a bacterium splitting in two AND a plant growing from a cutting or bulb are asexual — one parent only, producing a genetic copy." },
+  { n:11, section:'C', tier:'Applied', star:2, body:"Compare pollination in flowering plants to fertilisation in animals (Unit 45). What is the KEY similarity between the two processes?",
+    options:["Neither process actually requires any genetic material from a second parent at all, in plants or in animals", "Pollination in plants and fertilisation in animals are actually two completely unrelated processes, sharing nothing at all in common", "Both require genetic material from TWO parents to combine — pollen and ovule in plants, sperm and egg in animals — to create new offspring", "Both processes can only happen entirely underwater, whether in a pond, a puddle, or the open sea"], ans:3,
+    why:"Both pollination-then-fertilisation in plants and fertilisation in animals combine genetic material from TWO parents to create new offspring." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"Prem trims a piece of stem off his mum's basil plant and stands it in a glass of water. A week later, a cluster of tiny new roots has grown from the bottom of the stem. Applying the cell-division fact from Unit 44, what really happened to produce those new root cells?",
+    options:["The water itself changed into new plant cells directly, without any of the stem's own cells being involved in the process at all", "The bottom of the stem simply swelled up and stretched into root shapes, with none of its cells ever splitting into two", "New root cells popped into existence the instant the stem touched water, with no growing or dividing needed beforehand", "Cells already in the stem's bottom tip kept growing, copying their parts, and splitting into two new cells, over and over, to build up the new roots"], ans:4,
+    why:"Unit 44 taught that all new cells come from existing cells dividing &mdash; growing, copying their contents, then splitting in two. The stem's own cells divided repeatedly to build the new roots; no new material appeared from nowhere." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"A gardener already ran her basil-cuttings root test &mdash; but she put the water jar on a sunny windowsill while she left the soil pots in a shady corner of the garden shed. The soil cuttings grew roots much more slowly. Why can't she be sure this proves that soil is worse than water for growing roots?",
+    options:["Because the light changed along with the growing medium, so she can't tell whether the medium or the light actually caused the slower root growth", "Nothing is wrong with her test at all, since basil cuttings will always grow roots at exactly the same speed no matter what conditions they're kept in", "The real problem is the cuttings themselves, since basil stems can never regrow roots once they've been cut away from the parent plant", "She should have used more cuttings overall, since the number of cuttings tested is the only thing that could ever affect how trustworthy a test is"], ans:1,
+    why:"A fair test changes only ONE variable at a time. Here two things changed together (medium AND light), so she can't tell which one caused the difference &mdash; the test needs to be redone with only the medium changed." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"A bee visits a flower, picks up pollen from its anther, and carries that pollen to a different flower's stigma. Which specific step of the full reproduction cycle from Unit 25 does this describe, and what must still happen afterward for a seed to actually form?",
+    options:["This describes FERTILISATION itself, meaning nothing else at all needs to happen afterward for a brand-new seed to actually form", "This describes POLLINATION; fertilisation must still happen, with the pollen travelling down the style to join the ovule in the ovary", "This describes germination instead; the already-formed seed must still be watered before it can ever sprout into a seedling", "This describes seed dispersal instead; the wind must still carry the already-formed seed away from its parent plant"], ans:2,
+    why:"A bee carrying pollen from one flower's anther to another's stigma is POLLINATION — fertilisation (pollen reaching the ovule) must still happen afterward." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"A student claims: \"ALL new plants come from seeds.\" Is this true?",
+    options:["True &mdash; every single new plant that has ever existed on Earth began its life specifically as a seed, without any exception whatsoever", "True, but only for plants that are deliberately grown and cared for by a human gardener rather than growing wild in nature", "False &mdash; plants can also grow from spores (ferns, mosses) or from other plant parts (bulbs, tubers, rhizomes, runners, cuttings), with no seed involved", "False, because actually no plant of any single kind has ever grown from an actual seed at all, under any circumstances"], ans:3,
+    why:"This is a false absolute claim (the word \"ALL\" is the giveaway) &mdash; spores and other plant parts also grow directly into new plants, without any seed." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"A farmer wants to grow 50 new plants that are EXACTLY identical to one prize-winning tomato plant, as fast as possible. Should she plant its seeds, or take cuttings from it? Explain your reasoning.",
+    options:["She should plant its seeds instead &mdash; seeds always grow into a brand-new plant that is a perfect genetic copy of its one parent plant", "It honestly makes no real difference at all which specific method she ends up choosing, since both will always produce identical results either way", "She should actually do neither, since tomato plants cannot ever be reproduced by either seeds or cuttings under any circumstances", "She should take cuttings &mdash; seeds come from sexual reproduction and mix genes from two parents, so seedlings won't be identical, while cuttings are asexual clones"], ans:4,
+    why:"Cuttings are asexual, producing exact genetic clones; seeds come from sexual reproduction, mixing genes from two parents, so they won't match the prize plant exactly." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"If a fern's tiny spores landed on completely dry rock with no moisture at all, ever, what would most likely happen?",
+    options:["The spores would most likely fail to grow into new ferns, since spores generally need a damp environment to develop", "The spores would grow into new ferns just as easily and successfully as they would in a damp, shady spot", "The spores would instantly turn into fully-formed seeds instead, and would grow into new ferns that way", "The spores would grow into a completely different plant species entirely, instead of growing into a fern"], ans:1,
+    why:"Spores generally need moisture to develop into new plants — this is why ferns and mosses are usually found in damp, shady places." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"A gardener grows a brand-new ginger plant by planting a piece of rhizome with a bud on it — no flower, pollen, or fertilisation was involved anywhere in the process. Explain why this counts as ASEXUAL rather than SEXUAL reproduction.",
+    options:["Because the ginger rhizome technically counts as a very unusual type of flower, even though it never actually produces any visible petals", "Because a bud on a piece of the parent plant's own tissue grew directly into a new plant, with no genetic material from a second parent combined in at all", "Because ginger plants are actually incapable of ever reproducing sexually, under any circumstances, unlike every other plant species", "Because two separate parent ginger plants must have secretly combined their genetic material before that bud could ever grow at all"], ans:2,
+    why:"Sexual reproduction needs genetic material from TWO parents to combine (via pollination and fertilisation); here, a bud grew directly from the ONE parent's own tissue, with no second parent's genes involved — that's what makes it asexual." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"A student claims: \"Every single method of plant reproduction produces offspring that are genetically identical to the parent plant.\" Which response correctly evaluates this claim?",
+    options:["This is correct &mdash; reproduction from seeds, from spores, and from other plant parts all produce a perfect genetic copy of the parent plant every single time", "This is correct, but this is only actually true for plants that reproduce from seeds specifically, and not from spores or other plant parts", "This is incorrect &mdash; only asexual methods (spores, other plant parts) tend to produce identical offspring; seeds mix genes from two parents, so seedlings differ genetically", "This is incorrect, because actually no method of plant reproduction of any kind ever produces offspring that resemble the parent at all"], ans:3,
+    why:"Only asexual methods (spores, plant parts) tend to produce genetically identical offspring; seeds mix genes from two parents, producing genetic differences." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Which sentence best captures the big idea from both of Unit 46's lessons put together?",
+    options:["Not a single flowering plant on Earth can ever reproduce without seeds, no matter what growing conditions it experiences or which part of the plant happens to be used", "Seeds and spores are honestly just two completely different names for the exact same identical reproductive structure, depending only on which country you happen to live in", "Ferns and mosses are supposedly the only plants capable of making new plants at all, meaning every other kind of plant in the world is simply unable to reproduce", "Plants can make new plants sexually with seeds (combining genes from two parent plants) or asexually with spores or other plant parts such as bulbs, tubers, runners, and cuttings (copying just one parent)"], ans:4,
+    why:"Both lessons build one connected picture: plants reproduce sexually through seeds (mixing genes from two parents), or asexually through spores or other plant parts (copying one parent)." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 46 · Lesson 1 — Plant Reproduction: Seeds Recap &amp; Reproduction from Spores</title>
+<style>
+  :root{
+    --steel:#2e7d32; --steel-d:#1b5e20; --steel-l:#e8f5e9;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ad1457; --amber-l:#fce4ec;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .cmptable{width:100%;border-collapse:collapse;margin:12px 0;font-size:.88rem}
+  .cmptable th,.cmptable td{border:1.5px solid var(--line);padding:8px 10px;text-align:left}
+  .cmptable th{background:var(--steel-l);color:var(--steel-d)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:#8a004d}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌱 Lesson 1 · Plant Reproduction: Seeds Recap &amp; Reproduction from Spores</b><span class="pill">Unit 46 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Reproduction Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: flowering plants reproduce with seeds (after pollination) — but not every plant needs a flower or a seed at all!</div>
+    <p>This unit matches Chapter 4 of your school Science book — <b>Reproduction in Plants</b>. You already learned how flowers make seeds back in Unit 25, so today's a quick recap, then something brand new: plants that reproduce from tiny spores instead of seeds.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🌳</div><div class="t">Quick warm-up</div><div class="j">food chains &amp; ecosystems, from Unit 17</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌸</div><div class="t">Quick recap</div><div class="j">pollination &amp; seeds, from Unit 25</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌿</div><div class="t">Spores</div><div class="j">ferns &amp; mosses — brand new</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⚖️</div><div class="t">Compare</div><div class="j">seeds vs spores</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> recall how flowers make seeds, explain how ferns and mosses reproduce from spores instead, and tell the two methods apart.</div>
+  </section>
+
+  <!-- SCREEN 2: SPIRAL WARM-UP (Bio U17 Ecosystems) -->
+  <section class="screen" data-s="2">
+    <h2>Quick Warm-Up 🌳</h2>
+    <div class="recall">This is an UNGRADED refresher pulling from Unit 17 — ecosystems and food chains — content you haven't seen tested in a while. Just to keep it fresh.</div>
+    <div class="ungraded">
+      <p>Warm-up. In a garden food chain, a caterpillar eats a lettuce leaf, then a bird eats the caterpillar. What job does the LETTUCE plant do in this food chain?</p>
+      <button class="opt" data-w="A" data-c="true">Producer — it makes its own food using sunlight, so it's the starting point of the food chain</button>
+      <button class="opt" data-w="A" data-c="false">Consumer — it eats other living things to survive</button>
+      <button class="opt" data-w="A" data-c="false">Decomposer — it breaks down dead material into nutrients</button>
+      <button class="btn next chkw" data-w="A">Check</button>
+      <div class="fb ok" data-w="A">✔ Correct — a plant that makes its own food using sunlight is a PRODUCER, and every food chain starts with one.</div>
+      <div class="fb no" data-w="A">✘ Re-think it: does the lettuce plant EAT anything else, or does it make its own food using sunlight?</div>
+    </div>
+    <div class="ungraded">
+      <p>Warm-up. Factories and cars burning fuel release extra carbon dioxide into the air, trapping more heat near Earth's surface. What is this effect called?</p>
+      <button class="opt" data-w="B" data-c="false">The water cycle</button>
+      <button class="opt" data-w="B" data-c="true">The greenhouse effect</button>
+      <button class="opt" data-w="B" data-c="false">Photosynthesis</button>
+      <button class="btn next chkw" data-w="B">Check</button>
+      <div class="fb ok" data-w="B">✔ Correct — extra carbon dioxide trapping more heat near Earth's surface is the GREENHOUSE EFFECT.</div>
+      <div class="fb no" data-w="B">✘ Re-think it: which effect is specifically about trapped heat from extra carbon dioxide, not water or sunlight capture?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Your school class is starting Chapter 4 of your i-Science book: Reproduction in Plants. This unit matches it step by step, so what you learn here is exactly what you'll see in class and on your school tests.</div>
+    <div class="card"><b>Real life:</b> gardeners and farmers need to know exactly HOW a plant reproduces before they can grow more of it — a rose grower waits for seeds, but someone growing ferns for a shady garden knows to look for spores instead. Understanding both methods helps you make sense of gardens, forests, and even the mossy patches on a damp wall.</div>
+  </section>
+
+  <!-- SCREEN 4: RECAP SEXUAL REPRODUCTION IN FLOWERING PLANTS -->
+  <section class="screen" data-s="4">
+    <h2>Recap: Sexual Reproduction in Flowering Plants 🌸</h2>
+    <div class="job"><b>From Unit 25:</b> a flower has male parts (the STAMEN — anther makes pollen, sitting on a filament) and female parts (the PISTIL — a sticky stigma leading down a style into the ovary, which holds the ovule). POLLINATION is pollen moving from an anther to a stigma. FERTILISATION happens afterward, when the pollen travels down the style and joins with the ovule inside the ovary — that fertilised ovule becomes a new SEED.</div>
+    <div class="rulebar">NEW idea: this whole process needs a flower, pollen, AND pollination between two parts. But not every plant reproduces this way — some plants skip flowers and seeds completely!</div>
+  </section>
+
+  <!-- SCREEN 5: WHAT IS A SPORE -->
+  <section class="screen" data-s="5">
+    <h2>Reproduction from Spores 🌿</h2>
+    <div class="rulebar">Ferns and mosses don't have flowers at all. Instead, they make tiny, lightweight SPORES — and each spore can grow directly into a brand-new plant, with no pollination needed.</div>
+    <svg viewBox="0 0 420 160" xmlns="http://www.w3.org/2000/svg" aria-label="A fern frond with small brown spore cases in rows on the underside of its leaflets, with an arrow showing released spores landing on damp soil and growing directly into a small new fern plant">
+      <path d="M40 140 C40 100 55 60 90 40 C95 70 90 100 70 130 C60 120 50 115 40 140 Z" fill="#66bb6a" stroke="#1b5e20" stroke-width="2.5"/>
+      <circle cx="58" cy="105" r="3" fill="#5d4037"/>
+      <circle cx="66" cy="90" r="3" fill="#5d4037"/>
+      <circle cx="74" cy="75" r="3" fill="#5d4037"/>
+      <circle cx="80" cy="60" r="3" fill="#5d4037"/>
+      <text x="70" y="152" font-size="9" text-anchor="middle" fill="#1b5e20" font-weight="700">FERN LEAF (brown dots = spore cases)</text>
+      <text x="180" y="90" font-size="16" text-anchor="middle" fill="#546e7a">→</text>
+      <circle cx="240" cy="95" r="3.5" fill="#5d4037"/>
+      <circle cx="255" cy="100" r="3.5" fill="#5d4037"/>
+      <circle cx="270" cy="90" r="3.5" fill="#5d4037"/>
+      <text x="255" y="118" font-size="9" text-anchor="middle" fill="#5d4037" font-weight="700">spores released</text>
+      <text x="320" y="90" font-size="16" text-anchor="middle" fill="#546e7a">→</text>
+      <path d="M370 140 C370 118 378 98 395 88 C398 105 395 120 385 135 C380 130 375 128 370 140 Z" fill="#a5d6a7" stroke="#1b5e20" stroke-width="2"/>
+      <text x="385" y="152" font-size="9" text-anchor="middle" fill="#1b5e20" font-weight="700">grows into a NEW fern</text>
+    </svg>
+    <div class="svgcap">Spore cases sit in rows on the underside of a fern leaf. When ripe, they release tiny spores — and each spore that lands somewhere damp can grow directly into a brand-new fern plant, with no flower, pollen, or pollination involved at all.</div>
+    <div class="card">
+      <b>SPORE:</b> a tiny, lightweight reproductive cell made directly by the parent plant. Unlike a seed, a spore does NOT form after pollination — it's simply released and can grow into a new plant on its own, usually somewhere damp.
+    </div>
+    <div class="job"><b>Key idea:</b> mosses reproduce from spores too, released from tiny capsules on thin stalks. This is why moss and ferns often grow in damp, shady places — their spores need moisture to develop into new plants.</div>
+  </section>
+
+  <!-- SCREEN 6: SEEDS VS SPORES COMPARISON -->
+  <section class="screen" data-s="6">
+    <h2>Comparing: Seeds vs Spores ⚖️</h2>
+    <table class="cmptable">
+      <tr><th></th><th>Reproduction from SEEDS</th><th>Reproduction from SPORES</th></tr>
+      <tr><td><b>Needs a flower?</b></td><td>Yes</td><td>No</td></tr>
+      <tr><td><b>Needs pollination?</b></td><td>Yes — pollen must reach the stigma first</td><td>No — no pollen or pollination involved</td></tr>
+      <tr><td><b>Example plants</b></td><td>Roses, sunflowers, apple trees</td><td>Ferns, mosses</td></tr>
+    </table>
+    <div class="job"><b>Key idea:</b> the presence of a spore case (usually on the underside of a leaf) instead of a flower is your biggest clue that a plant reproduces from spores, not seeds.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Seeds or Spores? 🔍</h2>
+    <div class="dtree">
+      <div class="dbox dq">Does the plant have flowers that were pollinated?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">Yes — it has flowers</div>
+          <div class="dleaf yes">Reproduces from SEEDS (sexual reproduction)</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">No — but it has small spore cases (e.g. under a leaf)</div>
+          <div class="dleaf no" style="background:#e8f5e9;color:#1b5e20;border-color:#2e7d32">Reproduces from SPORES</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> if a plant has no flowers at all, don't assume it can't reproduce — check for spore cases instead. Not every plant follows the same method!</div>
+  </section>
+
+  <!-- SCREEN 8: PRACTICE -->
+  <section class="screen" data-s="8">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What is POLLINATION?</p>
+      <button class="opt">When a seed sprouts into a new seedling</button>
+      <button class="opt">Pollen moving from an anther to a stigma</button>
+      <button class="opt">A spore case releasing spores into the air</button>
+      <button class="opt">A fruit ripening on a tree branch</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — pollination is pollen moving from an anther (male) to a stigma (female).</div>
+      <div class="fb no">✘ Re-check Screen 4 — what exactly did Unit 25 define as "pollination"?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. What is a SPORE?</p>
+      <button class="opt">A fertilised ovule that has become a seed</button>
+      <button class="opt">The sticky top part of a pistil that catches pollen</button>
+      <button class="opt">A tiny, lightweight reproductive cell that can grow directly into a new plant, with no pollination needed</button>
+      <button class="opt">A thin stalk that holds an anther up inside a flower</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a spore is a tiny reproductive cell that can grow directly into a new plant, without any pollination.</div>
+      <div class="fb no">✘ Re-check Screen 5's card — how exactly is a spore described?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Which of these plants reproduces from SPORES, not seeds?</p>
+      <button class="opt">A sunflower</button>
+      <button class="opt">An apple tree</button>
+      <button class="opt">A rose bush</button>
+      <button class="opt">A fern</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — ferns reproduce from spores, released from spore cases on the underside of their leaves.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which plant was named as a spore example, alongside mosses?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. A student says: "Ferns must be pollinated by insects before they can make new spores." Is this correct?</p>
+      <button class="opt">No — spores are made directly by the fern, with no pollination involved at all</button>
+      <button class="opt">Yes — every plant, including ferns, needs pollination before reproducing</button>
+      <button class="opt">Yes, but only if the fern has flowers first</button>
+      <button class="opt">No, because ferns actually never reproduce in any way</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — spores are made directly by the parent plant, with no pollination step involved at all.</div>
+      <div class="fb no">✘ Re-check Screen 6's table — does reproduction from spores need pollination?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. You find a plant growing in a damp shady corner with no flowers anywhere, but small brown dots in neat rows on the underside of its leaves. What should you check for?</p>
+      <button class="opt">A fruit hidden underneath the soil nearby</button>
+      <button class="opt">A hidden flower bud that hasn't opened yet</button>
+      <button class="opt">Spore cases — this plant likely reproduces from spores, not seeds</button>
+      <button class="opt">Nothing — a plant with no flowers cannot reproduce at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — brown dots in rows on the underside of a leaf, with no flowers anywhere, are the classic sign of spore cases.</div>
+      <div class="fb no">✘ Re-check Screen 7's decision tree — what should you look for on a plant with no flowers?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='PlantReproSchool_Lesson_OtherPartsAndComparingMethods.html';}
+  };
+
+  // ungraded checks (data-w keyed blocks)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>

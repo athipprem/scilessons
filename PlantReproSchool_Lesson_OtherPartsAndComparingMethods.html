@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 46 · Lesson 2 — Reproduction from Other Plant Parts &amp; Comparing All Methods</title>
+<style>
+  :root{
+    --steel:#ad1457; --steel-d:#880e4f; --steel-l:#fce4ec;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#2e7d32; --amber-l:#e8f5e9;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .cmptable{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem}
+  .cmptable th,.cmptable td{border:1.5px solid var(--line);padding:8px 9px;text-align:left}
+  .cmptable th{background:var(--steel-l);color:var(--steel-d)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .trap b{color:#880e4f}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--steel-l);color:#8a004d}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🥔 Lesson 2 · Reproduction from Other Plant Parts &amp; Comparing All Methods</b><span class="pill">Unit 46 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Reproduction Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: some plants don't need a flower, a seed, OR a spore at all — a whole new plant can grow directly from a piece of the parent plant.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Recap</div><div class="j">seeds vs spores, from Lesson 1</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧅</div><div class="t">Recap</div><div class="j">underground stems, from Unit 33</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🍓</div><div class="t">Runners &amp; cuttings</div><div class="j">brand new</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">⚖️</div><div class="t">Comparing</div><div class="j">all the ways plants reproduce</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> describe reproduction from runners, cuttings, and underground stems, compare sexual vs asexual reproduction, and spot a false "only from seeds" claim.</div>
+  </section>
+
+  <!-- SCREEN 2: RECAP -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recap 🔁</h2>
+    <div class="job"><b>From Lesson 1:</b> flowering plants reproduce SEXUALLY from SEEDS — pollination moves pollen from an anther to a stigma, then fertilisation joins the pollen with the ovule, forming a seed. Ferns and mosses instead reproduce from SPORES — tiny cells released directly by the parent plant, with no pollination needed at all.</div>
+    <div class="stress">Today we go further: some plants don't even need spores. A whole new plant can grow directly from a PIECE of the parent plant — no flower, no seed, no spore case required.</div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">This is exactly what Chapter 4, Section C of your school book covers next — and it explains everyday sights: why a piece of potato with "eyes" can grow into a whole new plant, and why gardeners often grow new plants from cuttings instead of waiting for seeds.</div>
+    <div class="card"><b>Real life:</b> farmers and gardeners often WANT an exact copy of a great plant — a strawberry farmer doesn't want to gamble on seeds mixing genes unpredictably, so growing from runners and cuttings guarantees the new plant is identical to a proven, tasty parent.</div>
+  </section>
+
+  <!-- SCREEN 4: RECAP UNDERGROUND STEMS -->
+  <section class="screen" data-s="4">
+    <h2>Recap: Underground Stems Can Grow New Plants 🧅</h2>
+    <div class="job"><b>From Unit 33:</b> a potato TUBER is covered in "eyes" (buds) that can each sprout a whole new plant. An onion BULB, a ginger RHIZOME, and a corm can all do the same thing — because every piece with a bud can grow into a brand-new plant, without needing any flower, seed, or spore at all.</div>
+    <div class="rulebar">NEW idea: underground stems are just ONE example of "reproduction from other plant parts." There are more ways a new plant can grow directly from a piece of its parent — let's look at two more.</div>
+  </section>
+
+  <!-- SCREEN 5: RUNNERS AND CUTTINGS -->
+  <section class="screen" data-s="5">
+    <h2>Runners &amp; Cuttings 🍓✂️</h2>
+    <div class="rulebar">A RUNNER is a long stem that grows sideways along the ground and sprouts roots (and a new plant) where it touches soil. A CUTTING is a piece of stem or leaf cut off on purpose and grown into a new plant.</div>
+    <svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg" aria-label="Left panel shows a strawberry parent plant with a runner stem reaching sideways to a new baby plant growing roots where it touches the soil. Right panel shows a basil stem cutting placed in a glass of water, growing new roots at the bottom.">
+      <ellipse cx="60" cy="140" rx="30" ry="10" fill="#a1887f" opacity=".5"/>
+      <path d="M55 130 Q45 100 60 80 Q70 100 65 130" fill="#66bb6a" stroke="#1b5e20" stroke-width="2"/>
+      <text x="60" y="155" font-size="8" text-anchor="middle" fill="#1b5e20" font-weight="700">PARENT PLANT</text>
+      <path d="M75 128 C110 128 140 128 170 128" fill="none" stroke="#558b2f" stroke-width="3"/>
+      <text x="120" y="120" font-size="8" text-anchor="middle" fill="#558b2f" font-weight="700">RUNNER</text>
+      <ellipse cx="180" cy="140" rx="26" ry="9" fill="#a1887f" opacity=".5"/>
+      <path d="M176 130 Q168 108 180 92 Q190 108 184 130" fill="#81c784" stroke="#1b5e20" stroke-width="2"/>
+      <line x1="178" y1="136" x2="172" y2="150" stroke="#6d4c41" stroke-width="2"/>
+      <line x1="182" y1="136" x2="188" y2="150" stroke="#6d4c41" stroke-width="2"/>
+      <text x="180" y="163" font-size="8" text-anchor="middle" fill="#1b5e20" font-weight="700">NEW PLANT (roots forming)</text>
+      <line x1="230" y1="20" x2="230" y2="160" stroke="#e2e8f0" stroke-width="2"/>
+      <rect x="330" y="90" width="70" height="60" rx="4" fill="#e1f5fe" stroke="#0277bd" stroke-width="2"/>
+      <line x1="365" y1="40" x2="365" y2="105" stroke="#558b2f" stroke-width="4"/>
+      <ellipse cx="365" cy="42" rx="14" ry="8" fill="#81c784" stroke="#1b5e20" stroke-width="1.5" transform="rotate(-20 365 42)"/>
+      <ellipse cx="365" cy="55" rx="13" ry="7" fill="#81c784" stroke="#1b5e20" stroke-width="1.5" transform="rotate(15 365 55)"/>
+      <path d="M362 108 Q355 122 360 138 M368 108 Q372 124 366 140" stroke="#fff" stroke-width="2" fill="none"/>
+      <text x="365" y="163" font-size="8" text-anchor="middle" fill="#0277bd" font-weight="700">CUTTING in water (new roots below)</text>
+    </svg>
+    <div class="svgcap">Left: a runner stem reaches sideways from the parent plant and sprouts a new plant with its own roots where it touches soil. Right: a stem cutting placed in water grows new roots, and can then be planted.</div>
+    <div class="card">
+      <b>Examples:</b> a strawberry plant sends out runners that root into new strawberry plants nearby. A gardener can snip a healthy stem from a basil plant, stand it in a glass of water until roots grow, then plant it — a basil cutting.
+    </div>
+    <div class="job"><b>Key idea:</b> runners, cuttings, and underground stems (bulbs/tubers/rhizomes/corms) are all examples of REPRODUCTION FROM OTHER PLANT PARTS — no flower, seed, or spore is involved in any of them.</div>
+  </section>
+
+  <!-- SCREEN 6: COMPARING ALL METHODS -->
+  <section class="screen" data-s="6">
+    <h2>Comparing All the Ways Plants Reproduce ⚖️</h2>
+    <table class="cmptable">
+      <tr><th>Method</th><th>Parents needed</th><th>Offspring genetically identical to parent?</th></tr>
+      <tr><td><b>Seeds</b> (pollination + fertilisation)</td><td>TWO (pollen + ovule)</td><td>No — genes mix, so offspring differ from both parents</td></tr>
+      <tr><td><b>Spores</b> (ferns, mosses)</td><td>ONE</td><td>Yes — no genes mixed in from a second parent</td></tr>
+      <tr><td><b>Other plant parts</b> (bulbs, tubers, rhizomes, runners, cuttings)</td><td>ONE</td><td>Yes — an exact genetic copy (a clone) of the parent</td></tr>
+    </table>
+    <div class="job"><b>Key idea:</b> reproduction from seeds is called SEXUAL reproduction (two parents' genes combine). Reproduction from spores or other plant parts is called ASEXUAL reproduction (only one parent is needed, and the new plant is genetically identical, or almost identical, to it).</div>
+  </section>
+
+  <!-- SCREEN 7: TRAP-RECOGNITION DRILL #10 -->
+  <section class="screen" data-s="7">
+    <h2>Trap-Recognition Drill #10 🚨</h2>
+    <div class="trap">
+      <b>Watch for words like ALWAYS, NEVER, ONLY, and ALL.</b> A claim using one of these words is often too extreme to be true — even if it SOUNDS confident.
+    </div>
+    <div class="ungraded">
+      <p>Drill. A student claims: "ALL new plants come from seeds." Is this claim true?</p>
+      <button class="opt" data-w="C" data-c="false">True — every single new plant on Earth begins life as a seed</button>
+      <button class="opt" data-w="C" data-c="true">False — plants can also grow from spores (ferns, mosses) or from other plant parts (bulbs, tubers, runners, cuttings), with no seed involved at all</button>
+      <button class="opt" data-w="C" data-c="false">True, but only for plants that live in gardens rather than in the wild</button>
+      <button class="btn next chkw" data-w="C">Check</button>
+      <div class="fb ok" data-w="C">✔ Correct — this is a false absolute claim (the word "ALL" is the giveaway). Ferns, mosses, and plants grown from cuttings or bulbs all prove new plants don't always need a seed.</div>
+      <div class="fb no" data-w="C">✘ Re-think it: does a potato with "eyes" or a fern's spore need a seed to grow into a new plant?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: DECISION TREE -->
+  <section class="screen" data-s="8">
+    <h2>Which Method Is It? 🔍</h2>
+    <div class="dtree">
+      <div class="dbox dq">How did the new plant actually form?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">From a seed, after pollination</div>
+          <div class="dleaf yes">SEXUAL — reproduction from seeds</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">From a tiny spore, no pollination</div>
+          <div class="dleaf no" style="background:#e8f5e9;color:#1b5e20;border-color:#2e7d32">ASEXUAL — reproduction from spores</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">From a bulb, tuber, rhizome, runner, or cutting</div>
+          <div class="dleaf no" style="background:#fce4ec;color:#880e4f;border-color:#ad1457">ASEXUAL — reproduction from other plant parts</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> only ONE of these three methods (seeds) is sexual reproduction. The other two are both asexual — but they're still two DIFFERENT methods from each other (spores vs. plant parts), so don't mix them up.</div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What is a RUNNER?</p>
+      <button class="opt">A tightly-packed underground bud, like an onion</button>
+      <button class="opt">A long stem that grows sideways along the ground and sprouts a new plant where it touches soil</button>
+      <button class="opt">A tiny cell released from a spore case</button>
+      <button class="opt">The sticky top part of a flower's pistil</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a runner is a stem that grows sideways and sprouts a new plant where it touches the ground.</div>
+      <div class="fb no">✘ Re-check Screen 5 — how exactly was a "runner" described?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. What is a CUTTING?</p>
+      <button class="opt">A whole plant grown entirely from a seed</button>
+      <button class="opt">A spore case found under a fern leaf</button>
+      <button class="opt">A piece of stem or leaf cut off on purpose and grown into a new plant</button>
+      <button class="opt">A bulb dug up and split into two halves</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a cutting is a piece of stem or leaf deliberately cut off and grown into a whole new plant.</div>
+      <div class="fb no">✘ Re-check Screen 5's card — how was a "cutting" defined?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Reproduction from seeds is called SEXUAL reproduction. Why?</p>
+      <button class="opt">Because it needs TWO parents' genetic material (pollen and ovule) to combine</button>
+      <button class="opt">Because only flowers that smell nice can reproduce this way</button>
+      <button class="opt">Because it only happens in animals, never in plants</button>
+      <button class="opt">Because it always produces an exact genetic copy of one parent</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — sexual reproduction combines genetic material from TWO parents (pollen and ovule), which is exactly what seed formation involves.</div>
+      <div class="fb no">✘ Re-check Screen 6's table — how many parents does reproducing from seeds need?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A gardener plants a cutting from her favourite basil plant. Will the new basil plant be genetically identical to the parent, or different?</p>
+      <button class="opt">Different — cuttings always mix genes from two separate parent plants</button>
+      <button class="opt">Different, because cuttings are actually a form of sexual reproduction</button>
+      <button class="opt">It's impossible to know without testing the plant's DNA directly</button>
+      <button class="opt">Identical — a cutting is asexual reproduction, so it's a genetic copy (a clone) of the one parent plant</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a cutting is asexual reproduction from one parent, so the new plant is a genetic copy (a clone) of it.</div>
+      <div class="fb no">✘ Re-check Screen 6's table — does asexual reproduction from plant parts produce an identical copy, or a mixed-genes offspring?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. Which of these is TRUE about reproduction from spores AND reproduction from other plant parts (like cuttings)?</p>
+      <button class="opt">Both need pollination between two separate flowers first</button>
+      <button class="opt">Both are asexual — each only needs ONE parent plant</button>
+      <button class="opt">Both always produce genetically different offspring from the parent</button>
+      <button class="opt">Both are actually the exact same method with two different names</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — spores and other-plant-part reproduction are both asexual, needing only ONE parent plant — even though they're still two different specific methods.</div>
+      <div class="fb no">✘ Re-check Screen 8's decision tree — how many parents do spores and plant-part reproduction each need?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_46_Test_ReproductionInPlants.html';}
+  };
+
+  // ungraded checks (data-w keyed blocks)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
