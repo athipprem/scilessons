@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 47 · Lesson 1 — Eclipses & Earth's Shield</title>
+<style>
+  :root{
+    --steel:#4527a0; --steel-d:#2a1458; --steel-l:#ede7f6;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#ff8f00; --amber-l:#fff3e0;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:#8a4a00}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🌑 Lesson 1 · Eclipses & Earth's Shield</b><span class="pill">Unit 47 · Earth & Space</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Space Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: sometimes the Sun, Earth and Moon line up perfectly — and when they do, something dramatic happens in the sky.</div>
+    <p>Unit 43 taught you the Sun, the Earth, the Moon, the 8 planets, and man-made satellites — everything Chapter 1 of your school book covers. This unit goes further than the book, into extra facts that build on it and often show up in ASMOPSS-style questions: eclipses, Earth's invisible shield, and (in Lesson 2) the objects beyond the 8 planets and real space missions.</p>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🧪</div><div class="t">Quick warm-up</div><div class="j">reversible changes, from Unit 9</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔁</div><div class="t">Quick recap</div><div class="j">the Sun & Earth, from Unit 43</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🌘</div><div class="t">Eclipses</div><div class="j">when Sun, Earth & Moon line up</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🛡️</div><div class="t">Earth's shield</div><div class="j">the magnetic field & atmosphere</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain how a solar eclipse and a lunar eclipse each happen, say why eclipses don't happen every single month, and explain how Earth's magnetic field and atmosphere protect us from the Sun.</div>
+  </section>
+
+  <!-- SCREEN 2: SPIRAL WARM-UP (Chemistry U9) -->
+  <section class="screen" data-s="2">
+    <h2>Quick Warm-Up 🔁</h2>
+    <div class="recall">This is an UNGRADED refresher pulling from Unit 9 — reversible changes — content you haven't seen tested in a while. Just to keep it fresh.</div>
+    <div class="ungraded">
+      <p>Warm-up. Prem melts an ice cube into water, then puts the water in the freezer and it turns back into ice. Is melting ice a REVERSIBLE or IRREVERSIBLE change?</p>
+      <button class="opt" data-w="A" data-c="true">Reversible — freezing the water turns it back into ice, the same substance as before</button>
+      <button class="opt" data-w="A" data-c="false">Irreversible — once ice melts, it can never become ice again</button>
+      <button class="opt" data-w="A" data-c="false">It depends on the temperature of the room, not on the ice itself</button>
+      <button class="btn next chkw" data-w="A">Check</button>
+      <div class="fb ok" data-w="A">✔ Correct — melting and freezing are REVERSIBLE changes of state; the water is still the same substance, just in a different state.</div>
+      <div class="fb no" data-w="A">✘ Re-think it: can the water be turned back into ice by cooling it again? If yes, that's the definition of reversible.</div>
+    </div>
+    <div class="ungraded">
+      <p>Warm-up. A piece of paper is burned to ash. Can the ash be changed back into paper?</p>
+      <button class="opt" data-w="B" data-c="false">Yes — burning is reversible if you cool the ash down</button>
+      <button class="opt" data-w="B" data-c="true">No — burning paper is an IRREVERSIBLE change; a new substance (ash) has formed</button>
+      <button class="opt" data-w="B" data-c="false">Yes, but only using a very hot oven</button>
+      <button class="btn next chkw" data-w="B">Check</button>
+      <div class="fb ok" data-w="B">✔ Correct — burning creates a brand-new substance (ash and smoke) that cannot be turned back into paper, so it's IRREVERSIBLE.</div>
+      <div class="fb no" data-w="B">✘ Re-think it: has a completely new substance been formed here, one that didn't exist before the change?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 3: WHY -->
+  <section class="screen" data-s="3">
+    <h2>Why learn this? 🤔</h2>
+    <div class="why">Your school book's Chapter 1 covered the Sun, Earth, Moon, the 8 planets, and satellites — but competition papers like ASMOPSS often go one step further, asking WHY things happen (like eclipses) rather than just naming what's out there. This unit builds that extra layer on top of what you already know.</div>
+    <div class="card"><b>Real life:</b> people travel across the world just to stand in the path of a total solar eclipse for a few minutes — it's one of the most dramatic things you can see in nature. And every single day, Earth's invisible shield is quietly protecting you from dangerous particles streaming from the Sun, without you ever noticing.</div>
+  </section>
+
+  <!-- SCREEN 4: RECAP SUN & EARTH -->
+  <section class="screen" data-s="4">
+    <h2>Quick Recap: The Sun & Earth ☀️🌍</h2>
+    <div class="job"><b>From Unit 43:</b> the Sun is a STAR — a giant ball of hot gases that makes its own light and heat. Earth has three layers (crust, mantle, core) and orbits the Sun once a year while spinning on its axis once a day. The Moon orbits Earth roughly every 27–29 days, reflecting the Sun's light rather than making its own.</div>
+    <div class="stress">Today we ask: what happens when the Sun, Earth, and Moon all line up in a straight line? And what invisible force keeps dangerous particles from the Sun away from us?</div>
+  </section>
+
+  <!-- SCREEN 5: SOLAR ECLIPSE -->
+  <section class="screen" data-s="5">
+    <h2>Solar Eclipse ☀️🌑</h2>
+    <div class="rulebar">A SOLAR ECLIPSE happens when the MOON passes directly between the Sun and Earth, blocking the Sun's light from reaching a small part of Earth.</div>
+    <svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" aria-label="The Sun, then the Moon, then the Earth in a straight line, with the Moon's shadow falling on a small part of Earth">
+      <circle cx="40" cy="70" r="30" fill="#ffb300" stroke="#e65100" stroke-width="2"/>
+      <text x="40" y="112" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="700">SUN</text>
+      <circle cx="180" cy="70" r="10" fill="#78909c" stroke="#37474f" stroke-width="1.5"/>
+      <text x="180" y="90" font-size="9" text-anchor="middle" fill="#37474f" font-weight="700">MOON</text>
+      <path d="M170 70 L280 55 L280 85 Z" fill="#37474f" opacity="0.35"/>
+      <circle cx="330" cy="70" r="35" fill="#42a5f5" stroke="#1565c0" stroke-width="2"/>
+      <ellipse cx="300" cy="70" rx="6" ry="35" fill="#263238" opacity="0.55"/>
+      <text x="330" y="118" font-size="9" text-anchor="middle" fill="#0d47a1" font-weight="700">EARTH</text>
+      <text x="300" y="130" font-size="8" text-anchor="middle" fill="#37474f">small shadow area sees the eclipse</text>
+    </svg>
+    <div class="svgcap">The Moon's shadow only covers a small part of Earth at a time — that's why a solar eclipse is only ever visible from a narrow path, not the whole planet at once.</div>
+    <div class="job"><b>Key idea:</b> a solar eclipse can only happen at NEW MOON (when the Moon is between the Sun and Earth). It doesn't happen at every new moon, though — the Moon's orbit is slightly tilted, so most months its shadow misses Earth completely, passing just above or below.</div>
+    <div class="job"><b>Safety note:</b> never look directly at the Sun during a solar eclipse without special eclipse glasses — even when most of it is covered, the small sliver still visible can seriously damage your eyes.</div>
+  </section>
+
+  <!-- SCREEN 6: LUNAR ECLIPSE -->
+  <section class="screen" data-s="6">
+    <h2>Lunar Eclipse 🌍🌕</h2>
+    <div class="rulebar">A LUNAR ECLIPSE happens when the EARTH passes directly between the Sun and the Moon, blocking sunlight from reaching the Moon.</div>
+    <svg viewBox="0 0 420 140" xmlns="http://www.w3.org/2000/svg" aria-label="The Sun, then the Earth, then the Moon in a straight line, with Earth's shadow falling on the Moon">
+      <circle cx="40" cy="70" r="30" fill="#ffb300" stroke="#e65100" stroke-width="2"/>
+      <text x="40" y="112" font-size="9" text-anchor="middle" fill="#7a4a00" font-weight="700">SUN</text>
+      <circle cx="200" cy="70" r="22" fill="#42a5f5" stroke="#1565c0" stroke-width="2"/>
+      <text x="200" y="105" font-size="9" text-anchor="middle" fill="#0d47a1" font-weight="700">EARTH</text>
+      <path d="M222 70 L340 50 L340 90 Z" fill="#37474f" opacity="0.3"/>
+      <circle cx="330" cy="70" r="10" fill="#b71c1c" opacity="0.8" stroke="#5d0d0d" stroke-width="1.5"/>
+      <text x="330" y="95" font-size="9" text-anchor="middle" fill="#5d0d0d" font-weight="700">MOON (reddish)</text>
+    </svg>
+    <div class="svgcap">The Moon passes through Earth's shadow and can turn a dim reddish colour — sometimes called a "blood moon" — because a little sunlight still bends through Earth's atmosphere and reaches it.</div>
+    <div class="job"><b>Key idea:</b> a lunar eclipse can only happen at FULL MOON (when Earth is between the Sun and the Moon). Unlike a solar eclipse, a lunar eclipse can be seen from the entire night-side of Earth at once, not just a narrow path — which is why lunar eclipses are seen by far more people than solar eclipses.</div>
+  </section>
+
+  <!-- SCREEN 7: DECISION TREE -->
+  <section class="screen" data-s="7">
+    <h2>Solar or Lunar? 🔍</h2>
+    <div class="dtree">
+      <div class="dbox dq">Which object sits in the MIDDLE of the straight line?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">The MOON is in the middle (blocking the Sun)</div>
+          <div class="dleaf yes">SOLAR ECLIPSE — happens at New Moon</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">The EARTH is in the middle (blocking sunlight to the Moon)</div>
+          <div class="dleaf no" style="background:#e8f5e9;color:#1b5e20;border-color:#2e7d32">LUNAR ECLIPSE — happens at Full Moon</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> eclipses are rare (not every month) because the Moon's orbit is tilted slightly compared to Earth's orbit around the Sun — the three objects only line up closely enough a few times a year.</div>
+  </section>
+
+  <!-- SCREEN 8: EARTH'S SHIELD -->
+  <section class="screen" data-s="8">
+    <h2>Earth's Invisible Shield 🛡️</h2>
+    <div class="rulebar">The Sun constantly streams out tiny charged particles called the SOLAR WIND. Earth has TWO shields that protect us from it: a magnetic field, and the atmosphere.</div>
+    <div class="job"><b>Key idea — the magnetic field:</b> deep inside Earth's metal core, moving liquid metal creates a giant MAGNETIC FIELD that surrounds the whole planet, like an invisible force field. It deflects most of the solar wind's charged particles around Earth instead of letting them crash into us.</div>
+    <div class="job"><b>Key idea — the atmosphere:</b> the layer of gases wrapped around Earth (which you also learned makes life possible, back in Unit 43) blocks most of the Sun's harmful radiation and burns up small space rocks before they reach the ground.</div>
+    <div class="job"><b>Bonus fact:</b> near the North and South Poles, some solar wind particles do slip through and collide with gases in the atmosphere, making them glow — this beautiful glow is called the AURORA (the Northern or Southern Lights).</div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. What causes a SOLAR eclipse?</p>
+      <button class="opt">Earth passing between the Sun and the Moon</button>
+      <button class="opt">The Sun temporarily switching off</button>
+      <button class="opt">The Moon passing between the Sun and Earth</button>
+      <button class="opt">Clouds covering the Sun completely</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a solar eclipse happens when the Moon moves between the Sun and Earth, blocking sunlight from a small area.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which object sits in the middle during a solar eclipse?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. Why can a lunar eclipse be seen by far more people than a solar eclipse?</p>
+      <button class="opt">Because lunar eclipses last for several days in a row</button>
+      <button class="opt">Because Earth's shadow covers the whole Moon, visible from the entire night-side of Earth at once</button>
+      <button class="opt">Because the Moon becomes much bigger during a lunar eclipse</button>
+      <button class="opt">Because solar eclipses only happen once every hundred years</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — everyone on Earth's night-side can see a lunar eclipse at once, unlike a solar eclipse's narrow shadow path.</div>
+      <div class="fb no">✘ Re-check Screen 6 — how much of Earth can see a lunar eclipse at the same time?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>3. Why don't eclipses happen every single month, even though the Moon orbits Earth every month?</p>
+      <button class="opt">Because the Moon only has enough energy to cause an eclipse a few times a year</button>
+      <button class="opt">Because the Sun moves out of the way most months</button>
+      <button class="opt">Because Earth's rotation speed changes throughout the year</button>
+      <button class="opt">Because the Moon's orbit is slightly tilted, so it usually misses lining up exactly</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the Moon's tilted orbit means the Sun, Earth, and Moon rarely line up closely enough for an eclipse.</div>
+      <div class="fb no">✘ Re-check Screen 7 — what specific fact about the Moon's orbit was given as the reason eclipses are rare?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>4. What TWO things protect Earth from the Sun's solar wind and harmful radiation?</p>
+      <button class="opt">Earth's magnetic field and its atmosphere</button>
+      <button class="opt">Earth's oceans and its mountains</button>
+      <button class="opt">The Moon and the asteroid belt</button>
+      <button class="opt">Earth's rotation and its revolution</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — the magnetic field deflects charged particles, and the atmosphere blocks harmful radiation and burns up small space rocks.</div>
+      <div class="fb no">✘ Re-check Screen 8 — what TWO shields were named?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. Prem burns a piece of paper into ash. Can he reverse this change and get his paper back?</p>
+      <button class="opt">Yes, by simply cooling the ash back down to room temperature</button>
+      <button class="opt">Yes, but only by adding water to the ash</button>
+      <button class="opt">No — burning is an irreversible change; a new substance (ash) has formed</button>
+      <button class="opt">No, because paper can never be burned in the first place</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — burning creates a genuinely new substance, so it cannot be reversed back into paper.</div>
+      <div class="fb no">✘ Re-check Screen 2 — is burning a reversible or an irreversible change, and why?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Next Lesson →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='SolarSystemExt_Lesson_DwarfPlanetsCometsAndRealMissions.html';}
+  };
+
+  // ungraded checks (data-w keyed blocks)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
