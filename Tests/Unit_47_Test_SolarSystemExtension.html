@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_47_Test_SolarSystemExtension.html —
+     Earth & Space: Solar System Extension (broadening, beyond Ch.1)
+     ------------------------------------------------------------
+     Follow-up to Unit 43 (Ch.1: Sun, Earth, Moon, 8 planets,
+     man-made satellites). Since the uploaded course-book PDF only
+     contains its 4-page cover+ToC (no full chapter text available
+     to verify page-by-page), this unit's new content is built from
+     standard, well-established Grade-5-level astronomy facts rather
+     than a page-verified match to the book's own wording — closing
+     genuine topic gaps U43 didn't reach (eclipses, Earth's magnetic
+     shield, dwarf planets, comet/meteor classification, real space
+     missions) and laddering up beyond the book's own scope.
+     Lesson 1 opens with a spiral-maintenance warm-up from Chemistry
+     Unit 9 (reversible/irreversible changes, stale since early Jul
+     2026); Lesson 2 opens with one from Physics Unit 21 (gravity).
+     Section C sources genuine cross-topic synthesis from Units 19
+     (tides/Moon's gravity), 21 (gravity), 28 (tilt-not-distance
+     causes seasons), 36 (fair-test design), and 43 (Sun-as-star,
+     atmosphere, orbit mechanics) — all fact-checked by direct grep
+     against those lessons' own wording before use.
+     Trap-recognition drill: two dedicated absolute-claim items
+     (n10 "every Full Moon", n18 "only man-made satellites"),
+     different scenes, per skill rule G.2.
+     Built under the ANSWER-BALANCE RULE (5/5/5/5) — position tally
+     confirmed {1:5,2:5,3:5,4:5}.
+     TIER SPLIT: 2 Basic / 6 Intermediate / 12 Applied (10/30/60%),
+     per the standing U43-U49 reweighting rule (Lui, 28 Aug 2026).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 47 Test — Earth &amp; Space: Solar System Extension</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#4527a0; --steel-d:#2a1458; --a-fill:#ede7f6; --a-text:#2a1458;
+    --blue:#1565c0; --b-fill:#c5cae9; --b-text:#1a237e;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ad1457; --amber-l:#fce4ec;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a0044}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#c5cae9);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 47 Test — Earth &amp; Space: Solar System Extension</b>
+      <span class="sub" id="hdr-sub">Eclipses &amp; Earth's Shield • Dwarf Planets, Comets &amp; Real Missions</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 47;
+const UNIT_TITLE = "Earth & Space: Solar System Extension";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 2 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"What happens during a SOLAR eclipse?",
+    options:["The Moon passes between the Sun and Earth, blocking sunlight from a small part of Earth", "The Earth passes between the Sun and the Moon, blocking sunlight from the Moon", "The Sun completely stops producing any light or heat for several minutes at a time", "Thick clouds spread across the entire Earth at once, blocking sunlight everywhere"], ans:1,
+    why:"A solar eclipse happens when the Moon moves between the Sun and Earth, blocking sunlight from a small area." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Earth has two invisible 'shields' working together against the Sun's dangerous particles and rays — one built from moving liquid metal deep in the core, the other a blanket of gases wrapped around the whole planet. What are these two shields called?",
+    options:["Earth's oceans and its mountains", "Earth's magnetic field and its atmosphere", "The Moon and the asteroid belt", "Earth's core temperature and its overall size"], ans:2,
+    why:"Earth's magnetic field deflects most charged particles from the solar wind, and the atmosphere blocks harmful radiation." },
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier) — 6 questions ===================== */
+  { n:3, section:'B', tier:'Intermediate', star:1, body:"Makemake is round, clearly orbits the Sun, and even has a small moon of its own — yet astronomers still classify it as a dwarf planet rather than a full planet. Which one requirement does it fail to meet?",
+    options:["It doesn't travel around the Sun the way every true planet is required to", "Its shape isn't a sphere, unlike how a true planet must look", "Its orbital path still has other space debris in it that it hasn't swept aside", "It sits too far away for any telescope on Earth to see it clearly"], ans:3,
+    why:"Pluto meets the 'orbits the Sun' and 'round shape' rules, but fails the third rule — it hasn't cleared other objects from its orbital path." },
+  { n:4, section:'B', tier:'Intermediate', star:1, body:"Prem's camping group counts eleven bright, fast flashes crossing the night sky within one hour and calls it a great show. What is each of those individual flashes correctly called?",
+    options:["A meteorite, now resting on the ground", "A meteoroid, still travelling through space", "A comet, still far from Earth's atmosphere", "A meteor, actively burning up right now"], ans:4,
+    why:"While the rock is actively burning up and glowing in the sky, it is called a meteor." },
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"Halley's famous visitor to the inner Solar System is made of ice, dust and rock, and grows a glowing tail as sunlight warms it — a tail that always streams away from the Sun. What kind of object is this?",
+    options:["A comet, made of ice and dust", "An asteroid, made of rock", "A dwarf planet like Pluto", "A meteor burning up in the sky"], ans:1,
+    why:"A comet's ice releases gas and dust as it nears the Sun's heat, forming a tail that always points away from the Sun." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"China's Zhurong rover touched down on Mars and has been rolling across the dusty surface, studying rocks and soil along its route. Why does this correctly make it a ROVER rather than a probe or a satellite?",
+    options:["Because it circles high above Mars in orbit and has never actually touched down", "Because it physically touched down on the Martian surface and continues to roam across it", "Because it merely sped past Mars on its way to somewhere farther in space", "Because it snaps pictures purely from orbit, the same way a satellite does"], ans:2,
+    why:"A rover lands on a surface and physically moves around it, which is exactly what makes Perseverance a rover." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"News about a recent lunar eclipse reached family members on three separate continents, each reporting they'd watched it from home that same night. Why does one lunar eclipse reach so many observers at once, unlike a solar eclipse's narrow path?",
+    options:["Because a lunar eclipse actually stretches on for several days in a row before it eventually ends completely", "Because the Moon appears to swell dramatically larger for everyone watching during the eclipse", "Because the Moon sits entirely inside Earth's shadow during the event, so every night-side observer looking up can see it", "Because a solar eclipse is something that can actually only ever occur once every single hundred years"], ans:3,
+    why:"Everyone on Earth's night-side can see a lunar eclipse at once, unlike a solar eclipse's narrow shadow path." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"Why is it dangerous to look directly at the Sun during a solar eclipse, even when most of it is covered by the Moon?",
+    options:["Because the temperature of sunlight increases dramatically during an eclipse", "Because the Moon's shadow contains harmful gases from the Moon's surface", "Because looking at an eclipse can permanently damage the Moon's orbit", "Because even the small sliver of the Sun still visible can seriously damage your eyes"], ans:4,
+    why:"Even a thin sliver of exposed Sun during an eclipse is still bright enough to seriously damage your eyes." },
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier) — 12 questions ===================== */
+  { n:9, section:'C', tier:'Applied', star:2, body:"Compare a solar eclipse to a lunar eclipse. What is the key difference in which object sits in the MIDDLE of the straight line?",
+    options:["In a solar eclipse the Moon is in the middle, blocking the Sun; in a lunar eclipse Earth is in the middle, blocking sunlight from the Moon", "In a solar eclipse Earth is in the middle; in a lunar eclipse the Moon is in the middle — the two are simply swapped versions of each other", "There is no real difference between a solar eclipse and a lunar eclipse at all, since both happen for the exact same reason", "In both eclipses, the Sun itself always sits in the middle of the straight line"], ans:1,
+    why:"Solar eclipse: Moon in the middle, blocking the Sun. Lunar eclipse: Earth in the middle, blocking sunlight from reaching the Moon." },
+  { n:10, section:'C', tier:'Applied', star:2, body:"Prem's friend insists: \"Since the Moon turns full every month, that means a lunar eclipse must happen every single month too.\" Is this friend correct?",
+    options:["True — a lunar eclipse always happens automatically every single time the Moon becomes completely full in the sky", "False — the Moon's orbit is slightly tilted, so most Full Moons don't line up closely enough with Earth's shadow to cause an eclipse", "True, but this only actually happens specifically during the coldest winter months when nights are at their longest", "False, because lunar eclipses can actually only ever happen specifically during a New Moon phase instead of Full Moon"], ans:2,
+    why:"This is a false absolute claim (the word \"Every\" is the giveaway) — the Moon's tilted orbit means most Full Moons miss Earth's shadow." },
+  { n:11, section:'C', tier:'Applied', star:2, body:"Two students want to test whether a certain plastic film reduces sunlight glare. One taped the film over a telescope lens outdoors on a clear day; the other taped a different, thicker film over an identical telescope indoors, near a lamp. Both then compared how bright the light looked. Why can't they trust this comparison to show which film reduces glare better?",
+    options:["Because telescopes cannot ever be used to measure the brightness of any light source, under any conditions at all", "Because using two different students automatically makes any science test invalid, regardless of what changed", "Because both the film thickness AND the light source changed at once, so they can't tell which difference caused the different brightness", "Because sunlight and lamp light are actually identical in every single way, so the comparison should have worked fine"], ans:3,
+    why:"A fair test changes only ONE variable at a time. Here the film thickness AND the light source both changed, so they can't isolate which one caused the brightness difference." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"You learned the Moon's gravity is weaker than Earth's (Unit 21), yet the Moon's gravity is still strong enough to pull ocean water into tidal bulges on Earth (Unit 19). How can a weaker gravity still cause this effect?",
+    options:["It can't — the tides are actually caused entirely by wind blowing across the ocean, not by the Moon's gravity at all", "The Moon's gravity secretly becomes far stronger than Earth's own gravity, but only at night, which is when tides occur", "Ocean water is actually completely unaffected by gravity, so the tides must be caused by Earth's own rotation alone", "Even a weaker pull can still noticeably move something as light and fluid as ocean water, since the Moon is relatively close to Earth"], ans:4,
+    why:"Gravity doesn't need to be the strongest force to have a visible effect — the Moon's relatively close, steady pull is enough to shift fluid ocean water into bulges." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"A classmate says: \"Earth must be closer to the Sun in summer, which is why summer is hotter.\" You know from Unit 28 that seasons are actually caused by Earth's tilt, not its distance from the Sun. Using that same idea, is a solar eclipse more likely to happen when the Moon is closer to Earth in its orbit?",
+    options:["No — like seasons, an eclipse depends on the alignment (the Moon's tilted orbit lining up with Earth's), not simply on distance", "Yes — the Moon must always be sitting at its closest possible point to Earth for any solar eclipse to happen at all", "Yes — the Moon's distance from Earth is the only factor that ever affects whether any eclipse can occur", "No — eclipses and seasons actually work by completely opposite rules, sharing no similarity with each other at all"], ans:1,
+    why:"Just as seasons come from Earth's tilt rather than distance, eclipses depend on the Sun-Earth-Moon alignment (the Moon's tilted orbit lining up), not simply on how close the Moon is." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"Unit 43 taught that a satellite stays in orbit because its sideways speed balances Earth's gravity pulling it inward, so it keeps falling around Earth instead of into it. A probe travelling to Jupiter without ever entering orbit around it does NOT use this same balance. What does that tell you about a probe's path?",
+    options:["The probe's path is completely unaffected by gravity from any object at all throughout its entire journey through space", "The probe's speed isn't balanced to circle Jupiter — gravity bends its path, but it continues onward instead of settling into orbit", "The probe must actually be orbiting Jupiter perfectly, in exactly the same way that a satellite orbits around Earth", "The probe stops moving completely and permanently the very moment it passes anywhere near Jupiter"], ans:2,
+    why:"Without the speed-gravity balance that keeps a satellite circling, a probe's path bends under gravity but keeps going, rather than settling into a repeating orbit." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"Trace one single object's journey: it starts as a chunk of rock drifting silently through space, then flares into a bright momentary streak as it plunges into Earth's atmosphere, and finally a blackened surviving fragment of it is found lying in a farmer's field. What are the THREE correct names for this one object, in order?",
+    options:["Meteorite, then meteor, then meteoroid", "Comet, then asteroid, then meteorite", "Meteoroid, then meteor, then meteorite", "Meteor, then meteoroid, then comet"], ans:3,
+    why:"The same rock is a meteoroid in space, becomes a meteor while burning up in the atmosphere, and is a meteorite once a surviving piece lands." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"Near the North and South Poles, some solar wind particles slip past Earth's magnetic field and collide with gases in the atmosphere, creating a glowing light show. Explain why this glow (the aurora) happens mainly near the Poles rather than everywhere on Earth.",
+    options:["Because the atmosphere is actually completely missing at the North and South Poles, letting all particles through freely", "Because the Poles receive far more direct sunlight than the rest of Earth does, which causes this extra glow", "Because the magnetic field is actually strongest exactly at the Equator, which pushes all particles toward the Poles instead", "Because Earth's magnetic field funnels charged particles toward the Poles, where they're more likely to collide with atmospheric gases"], ans:4,
+    why:"Earth's magnetic field channels charged solar wind particles toward the Poles, which is why the aurora glow appears mainly there." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"Ceres is the largest object in the asteroid belt, yet it is classified as a DWARF PLANET rather than just an asteroid. What must be true about Ceres for this classification to make sense?",
+    options:["Ceres orbits the Sun and is round from its own gravity, though like other dwarf planets it hasn't cleared its orbital neighbourhood", "Ceres must have cleared every single other object out of the entire asteroid belt completely, the way true planets do", "Ceres must not actually orbit the Sun at all, which would make it completely unlike true asteroids in the belt", "Ceres must be irregularly shaped rather than round, unlike round asteroids found nearby in the belt"], ans:1,
+    why:"Ceres meets the dwarf-planet rules — orbits the Sun, round from its own gravity — but like Pluto, hasn't cleared its orbital neighbourhood." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"A classmate claims: \"Only man-made objects can ever be called satellites.\" Is this claim correct?",
+    options:["Correct — natural objects like the Moon are never actually classified as satellites under any real definition", "Incorrect — a satellite is anything that orbits a planet, so the Moon is a natural satellite just as much as the ISS is a man-made one", "Correct, because the word \"satellite\" was invented specifically only to describe human-built spacecraft in orbit", "Incorrect, because actually nothing at all can ever correctly be called a satellite, whether man-made or natural"], ans:2,
+    why:"This is a false absolute claim (the word \"Only\" is the giveaway) — a satellite is anything orbiting a planet, natural or man-made." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"Unit 43 taught that Earth's atmosphere makes life possible by providing air and trapping heat. Today you learned the atmosphere also burns up most small space rocks before they reach the ground. What do both of these facts have in common about the atmosphere's role?",
+    options:["Both facts show the atmosphere actually blocks all forms of sunlight completely from ever reaching Earth's surface", "Both facts show the atmosphere is only useful during the daytime, becoming inactive at night", "Both facts show the atmosphere acts as a protective layer around Earth, supporting life and shielding it from outside hazards", "Both facts show the atmosphere is identical in function to Earth's magnetic field, with no difference between the two"], ans:3,
+    why:"Both facts point to the same big idea — the atmosphere is a protective layer, both supporting life and shielding Earth from outside hazards like small space rocks." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Which sentence best captures the big idea connecting both of Unit 47's lessons together?",
+    options:["Eclipses, dwarf planets, comets, and every kind of space mission are all completely unrelated topics that share nothing at all in common", "The Solar System only ever contains the Sun, Earth, and the Moon — nothing else has ever existed beyond just these three specific objects", "Only man-made satellites are ever worth studying carefully, since natural objects like comets and dwarf planets rarely affect Earth at all", "Beyond the 8 planets, the Solar System holds dramatic alignments, varied smaller objects, and real space missions that all extend what Unit 43 first introduced"], ans:4,
+    why:"Both lessons build one connected picture beyond Unit 43's basics: dramatic alignments (eclipses), a wider variety of smaller Solar System objects, and the real machines used to explore it all." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
