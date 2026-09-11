@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_48_Test_CellsOrganisation.html —
+     Biology: Ch.2 §A — Cell Organisation & the Microscope
+     (beyond-class — first unit of the new course-book-section
+     format, both lessons go beyond what the school book states)
+     ------------------------------------------------------------
+     Lesson 1 opens with a spiral-maintenance warm-up from Physics
+     Unit 13 (Light — point vs broad source, stale since 10 Jul
+     2026) and a Quick Fix from Unit 46's real seeds-vs-spores-vs-
+     other-plant-parts miss pattern (Q4, Q9, Q19). Lesson 2 opens
+     with a recap bridge into the microscope.
+     Section C sources genuine cross-topic synthesis from Units 13
+     (light under the stage), 11 (locate an organ on the ladder),
+     8 (which level photosynthesis happens at), 36 (fair test
+     comparing two stains), 4 (why bacteria were invisible before
+     microscopes), 15/24 (density — why a thick specimen fails),
+     40 (why a stain must dissolve), and 9 (reversible/irreversible
+     — rinsing a stain out). Six of the twelve Applied questions
+     are Chemistry/Physics-sourced or physical/geometric reasoning
+     (surface-area-to-volume, magnification arithmetic), satisfying
+     the standing ≥half Physical-Science-share rule during this
+     twelve-unit Biology chapter block (skill G.5).
+     Trap-recognition: Drill #11 (Lesson 2, "highest magnification
+     always best") plus one further Applied-tier absolute-claim
+     item on a fresh scene (Q10, staining necessity).
+     Built under the ANSWER-BALANCE RULE (5/5/5/5) — position tally
+     confirmed {1:5,2:5,3:5,4:5}.
+     TIER SPLIT: 2 Basic / 6 Intermediate / 12 Applied (10/30/60%),
+     per the standing U43-U49 reweighting rule (now permanent).
+     Off-limits U44 scenes avoided throughout (see build plan §2).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 48 Test — Biology: Cell Organisation &amp; the Microscope</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#059669; --steel-d:#065f46; --a-fill:#d1fae5; --a-text:#065f46;
+    --blue:#1565c0; --b-fill:#c5cae9; --b-text:#1a237e;
+    --purple:#6a1b9a; --c-fill:#fef3c7; --c-text:#92400e;
+    --amber:#ad1457; --amber-l:#fce4ec;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a0044}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#c5e8d0);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 48 Test — Biology: Cell Organisation &amp; the Microscope</b>
+      <span class="sub" id="hdr-sub">The Organisation Ladder &amp; Why Cells Are Small • The Microscope</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 48;
+const UNIT_TITLE = "Biology: Cell Organisation & the Microscope";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* ===================== SECTION A — Warm-Up (Basic tier) — 2 questions ===================== */
+  { n:1, section:'A', tier:'Basic', star:0, body:"Prem's classroom microscope is fitted with a 5&times; eyepiece and a 4&times; objective. What is its TOTAL magnification?",
+    options:["20&times;", "9&times;", "45&times;", "1.25&times;"], ans:1,
+    why:"Total magnification = eyepiece × objective = 5 × 4 = 20×." },
+  { n:2, section:'A', tier:'Basic', star:0, body:"Which level of the organisation ladder comes FIRST — the smallest, that everything else is built from?",
+    options:["Tissue", "Cell", "Organ", "Organism"], ans:2,
+    why:"The cell is the smallest, foundational level — tissues, organs, organ systems and organisms are all built up from cells." },
+  /* ===================== SECTION B — Applying the Skills (Intermediate tier) — 6 questions ===================== */
+  { n:3, section:'B', tier:'Intermediate', star:1, body:"Your lungs are built from lung tissue and other tissues working together to do one shared job — breathing. What level of the organisation ladder are your lungs?",
+    options:["Tissue", "Cell", "Organ", "Organ system"], ans:3,
+    why:"An organ (like the lungs) is built from several tissues working together to do one job." },
+  { n:4, section:'B', tier:'Intermediate', star:1, body:"Which sequence below runs from the TINIEST level up to the whole living plant?",
+    options:["The whole tree &rarr; a leaf &rarr; leaf tissue &rarr; a leaf cell", "A leaf cell &rarr; the whole tree &rarr; leaf tissue &rarr; a leaf", "A leaf cell &rarr; a leaf &rarr; leaf tissue &rarr; the whole tree", "A leaf cell &rarr; leaf tissue &rarr; a leaf &rarr; the whole tree"], ans:4,
+    why:"From smallest to biggest: a leaf cell → leaf tissue → a leaf (the organ) → the whole tree (the organism)." },
+  { n:5, section:'B', tier:'Intermediate', star:1, body:"A paramecium is a single-celled organism that swims around in pond water, feeding and sensing its surroundings using nothing but that one cell. Which levels of the organisation ladder does it actually have?",
+    options:["Just one level of the ladder — its one cell also counts as the whole organism", "Two levels — a cell plus a simple tissue layer", "Every level of the ladder, the same as a person has", "It doesn't belong on the ladder at all, since it's too small to count"], ans:1,
+    why:"A unicellular organism like a paramecium has just the cell level, and that single cell also IS the whole organism — there's nothing above it to skip to." },
+  { n:6, section:'B', tier:'Intermediate', star:1, body:"As you increase a microscope's magnification, what happens to the FIELD OF VIEW (how much of the specimen you can see at once)?",
+    options:["It stays exactly the same, no matter the magnification", "It shrinks — you get more detail, but see less of the specimen at once", "It gets bigger every time, letting you see far more of the whole specimen than before", "It disappears completely, at any magnification setting"], ans:2,
+    why:"Higher magnification always narrows the field of view — more detail, but a smaller visible area." },
+  { n:7, section:'B', tier:'Intermediate', star:1, body:"Prem prepares two slides: one is a paper-thin peel of onion skin, the other is a thick chunk cut straight from a potato. Which slide will actually work under the microscope?",
+    options:["Neither slide will work at all — potatoes and onions can never be properly viewed under any microscope", "The thick potato chunk, since more material means more to see", "The thin onion peel, since light needs to pass all the way through to the lenses above", "Both will work exactly the same, since thickness makes no real difference"], ans:3,
+    why:"Light must travel all the way through a specimen to reach the lenses, so only the thin onion peel — not the thick potato chunk — will actually work." },
+  { n:8, section:'B', tier:'Intermediate', star:1, body:"What is the main job of the OBJECTIVE lens — the one closest to the specimen?",
+    options:["It holds the slide steady in place on the stage", "It shines light up through the specimen from below", "It moves the stage gradually up and down in order to bring the specimen into sharp focus", "It does most of the magnifying work, before the eyepiece magnifies it again"], ans:4,
+    why:"The objective lens does most of the magnifying; the eyepiece then magnifies that image again before it reaches your eye." },
+  /* ===================== SECTION C — Think Like a Scientist (Applied tier) — 12 questions ===================== */
+  { n:9, section:'C', tier:'Applied', star:2, body:"A whale is far bigger than a mouse, yet a whale's individual cells are roughly the SAME size as a mouse's cells — not gigantic ones. Why doesn't a whale just have bigger cells instead of more of them?",
+    options:["A bigger cell's surface couldn't keep up with supplying its much larger volume, so it would struggle to get enough food and oxygen", "Whale cells are actually completely incapable of ever dividing again after birth, so they could only ever grow much larger instead", "Bigger cells would make the whale weigh less, which would be dangerous underwater", "There is no real reason — it's simply a random coincidence of nature"], ans:1,
+    why:"As a cell grows, its surface area falls behind its volume — a giant cell couldn't take in enough food and oxygen through its relatively tiny surface, so big organisms grow by making MORE cells instead." },
+  { n:10, section:'C', tier:'Applied', star:2, body:"A classmate claims: \"Every specimen viewed under a microscope MUST be stained, or you won't be able to see anything at all.\" Is this claim correct?",
+    options:["True — an unstained specimen is always completely invisible under any microscope, no matter how it's prepared or lit", "False — staining helps different parts stand out more clearly, but a specimen can still be seen unstained, just with less contrast", "True, but only for animal specimens, never for plant specimens", "False, because stains are actually never used with real microscopes at all"], ans:2,
+    why:"This is a false absolute claim (the word \"MUST\" is the giveaway) — staining improves contrast between parts, but an unstained specimen isn't invisible, it just shows less detail." },
+  { n:11, section:'C', tier:'Applied', star:2, body:"In Unit 13 you learned light travels in straight lines and needs a source. A microscope's light source sits UNDERNEATH the stage, shining upward. Why does it need to be positioned there rather than above?",
+    options:["Because light only ever physically travels in a downward direction, never upward, under any circumstances at all", "Because the objective lens is only sensitive to light coming from below it", "Because the light must travel straight up THROUGH the thin, see-through specimen to reach the lenses above it", "Because placing a light above the stage would completely block the eyepiece lens"], ans:3,
+    why:"A microscope forms its image from light that has passed straight through the specimen, so the light source sits below, shining upward through it." },
+  { n:12, section:'C', tier:'Applied', star:2, body:"In Unit 11 you learned the digestive system includes the stomach as one of its organs, working as a team with others. Using today's ladder, what level of organisation is the stomach itself?",
+    options:["Cell", "Tissue", "Organ system", "Organ"], ans:4,
+    why:"The stomach is an ORGAN — built from several tissues working together — and it's part of the digestive ORGAN SYSTEM along with other organs." },
+  { n:13, section:'C', tier:'Applied', star:2, body:"In Unit 8 you learned chlorophyll, found inside a leaf's cells, captures sunlight for photosynthesis. At which level of today's organisation ladder does photosynthesis actually take place?",
+    options:["Inside the cell — the chlorophyll that captures sunlight is found inside individual leaf cells", "At the organ level only — it can only ever happen inside a whole leaf, never inside just one single cell by itself", "At the organ system level only — the whole shoot system must be involved every time", "At the organism level only — a single leaf cell alone could never do it"], ans:1,
+    why:"Photosynthesis happens inside individual leaf cells, where the light-capturing chlorophyll is found — the cell is the level where it actually takes place." },
+  { n:14, section:'C', tier:'Applied', star:2, body:"Prem wants to test whether iodine or methylene blue shows a nucleus more clearly. He stains one slide with iodine under a bright lamp, and a second slide with methylene blue under a dim lamp, then compares how clear each nucleus looks. Why can't he trust this comparison, based on what you learned in Unit 36?",
+    options:["Because iodine and methylene blue are actually exactly the same chemical substance sold under two different names", "Because both the STAIN and the LIGHT BRIGHTNESS changed at once, so he can't tell which difference caused any clearer result", "Because a fair test can never involve more than one slide at a time", "Because nuclei can never be seen clearly under any stain at all"], ans:2,
+    why:"A fair test changes only ONE variable at a time — here the stain type AND the light brightness both changed, so Prem can't isolate which one caused the difference." },
+  { n:15, section:'C', tier:'Applied', star:2, body:"In Unit 4 you learned bacteria cause bread mould and food spoilage. Before microscopes existed, why couldn't anyone actually SEE the bacteria responsible?",
+    options:["Because bacteria didn't exist yet at that point in history", "Because bacteria actually only started causing spoilage after microscopes were first invented and used", "Because bacteria are far too small to see with the naked eye — an instrument was needed to reveal them", "Because bacteria are invisible even under a modern microscope today"], ans:3,
+    why:"Bacteria are far too small for the naked eye — just like cells, they stayed invisible to everyone until the microscope was invented." },
+  { n:16, section:'C', tier:'Applied', star:2, body:"In Units 15 and 24 you learned some materials are denser (more tightly packed) than others. A very thick, densely-packed slice of tissue blocks almost all light from passing through it under a microscope. What does this tell you about preparing a good specimen?",
+    options:["Denser, more tightly-packed materials always let MORE light pass straight through them, so thickness never matters at all", "A microscope's light source only ever works with liquids, never with solid tissue", "Density has no real connection to how well light passes through a specimen", "A thinner, less densely-packed slice lets more light through — which is exactly why specimens must be sliced thin"], ans:4,
+    why:"A thick, dense slice blocks light from passing through, which is exactly why a good specimen must be a thin, less densely-packed slice." },
+  { n:17, section:'C', tier:'Applied', star:2, body:"In Unit 40 you learned about solute, solvent, soluble and insoluble. A biological stain has to DISSOLVE into a liquid before it can soak evenly into a specimen. What does this tell you about a good stain?",
+    options:["It must be soluble in the liquid used to apply it, or it can't spread through the specimen evenly", "It must be completely insoluble, so it never mixes with any liquid at all", "Solubility has no real connection to how well a stain works", "It must stay a solid block that never dissolves at any point"], ans:1,
+    why:"A stain needs to be soluble in its carrier liquid so it can dissolve, spread evenly, and soak into the specimen." },
+  { n:18, section:'C', tier:'Applied', star:2, body:"In Unit 9 you learned some changes are reversible (can be undone) and some are irreversible (can't). Iodine stain soaks into a specimen, but rinsing the slide with water afterwards washes most of the stain back out. Is staining a slide a reversible or an irreversible change?",
+    options:["Irreversible — once a stain touches a specimen, it can never be removed again", "Reversible — the stain washes back out with water, without permanently changing the specimen", "Neither — staining isn't a change of any kind at all", "Irreversible, but only when methylene blue is used instead of iodine"], ans:2,
+    why:"Since rinsing washes the stain back out without permanently altering the specimen, staining a slide is a REVERSIBLE change." },
+  { n:19, section:'C', tier:'Applied', star:2, body:"A microscope's objective lens breaks and needs replacing. Prem wants a TOTAL magnification of exactly 300&times;, using his 15&times; eyepiece. What replacement objective lens does he need?",
+    options:["15&times;", "4&times;", "20&times;", "30&times;"], ans:3,
+    why:"300 ÷ 15 = 20× — working backwards, divide the total magnification by the eyepiece to find the objective needed." },
+  { n:20, section:'C', tier:'Applied', star:2, body:"Which sentence best captures why BOTH of today's lessons matter together — the organisation ladder AND the microscope?",
+    options:["They're totally unrelated topics that just happen to share the same unit by coincidence", "The ladder only ever applies to plants, while the microscope only ever applies to animals", "Cells are only worth studying once they've divided into tissues and organs", "The microscope is the TOOL that first revealed cells, and the ladder is the STRUCTURE those revealed cells build up into"], ans:4,
+    why:"Both lessons connect into one picture: the microscope is what let anyone see cells at all, and the organisation ladder is the structure those cells build, level by level." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  if (n === 20){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = `Answer all 20 to submit (${20-n} left)`;
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    submittedAt: new Date().toISOString(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 48 · Lesson 2 — The Microscope</title>
+<style>
+  :root{
+    --steel:#d97706; --steel-d:#92400e; --steel-l:#fef3c7;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#059669; --amber-l:#d1fae5;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .dtree{display:flex;flex-direction:column;align-items:center;gap:6px;margin:14px 0}
+  .dbox{border-radius:10px;padding:9px 16px;text-align:center;font-size:.86rem;border:2px solid var(--line);background:#fafbfb;max-width:480px}
+  .dbox.dq{background:var(--blue-l);border-color:var(--blue);font-weight:bold}
+  .darrow{color:var(--grey);font-size:1.1rem;text-align:center}
+  .dbranch{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+  .dcol{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:230px}
+  .dlbl{font-size:.75rem;font-weight:bold;color:var(--grey)}
+  .dleaf{border-radius:10px;padding:9px 14px;text-align:center;font-weight:bold;font-size:.85rem}
+  .dleaf.yes{background:#e8f5e9;color:#1b5e20;border:2px solid #2e7d32}
+  .dleaf.no{background:#fdecea;color:#c62828;border:2px solid #c62828}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .trap b{color:#880e4f}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--steel-l);color:#7a4a00}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+  .magbar{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0;align-items:center}
+  .magbar label{font-size:.85rem;font-weight:bold;color:var(--steel-d);display:block;margin-bottom:4px}
+  .magbar select{font-size:1rem;padding:6px 10px;border-radius:8px;border:1.5px solid var(--line)}
+  #magbox{text-align:center;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:14px;margin-top:6px}
+  #magbox .big{font-size:1.5rem;font-weight:900;color:var(--steel-d)}
+  #fovcircle{display:block;margin:10px auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔬 Lesson 2 · The Microscope</b><span class="pill">Unit 48 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Cells Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: an instrument opened up a whole level of reality nobody had ever seen before — and knowing how to USE it is real Physics living inside a Biology unit.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🪜</div><div class="t">Recap</div><div class="j">the organisation ladder, from Lesson 1</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🕰️</div><div class="t">1665</div><div class="j">the very first person to see a cell</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🔬</div><div class="t">How it works</div><div class="j">eyepiece × objective = total magnification</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🚨</div><div class="t">Trap-Recognition Drill #11</div><div class="j">is "highest magnification" always best?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain why nobody saw a cell before 1665, calculate a microscope's total magnification in both directions, and decide when to increase or decrease magnification.</div>
+  </section>
+
+  <!-- SCREEN 2: RECAP -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recap 🔁</h2>
+    <div class="job"><b>From Lesson 1:</b> the organisation ladder runs CELL → TISSUE → ORGAN → ORGAN SYSTEM → ORGANISM, and cells stay small because their surface can't keep up with supplying a growing volume.</div>
+    <div class="stress">Today: cells are tiny enough that nobody on Earth even knew they existed for almost all of human history. What changed that — and how do you actually use the instrument that changed it?</div>
+  </section>
+
+  <!-- SCREEN 3: 1665 -->
+  <section class="screen" data-s="3">
+    <h2>The Year Nobody Had Ever Seen a Cell 🕰️</h2>
+    <div class="rulebar">Cells are far too small to see with the naked eye. For almost all of human history, nobody knew living things were built from them at all.</div>
+    <div class="card">
+      <b>1665 — Robert Hooke:</b> looking through an early microscope at a thin slice of cork (dead bark), Hooke saw tiny empty box-like compartments. They reminded him of the small bare rooms monks lived in — so he named them <b>"cells,"</b> from the Latin word for "small room." The name stuck for over 350 years.
+    </div>
+    <div class="card">
+      <b>Soon after — Antonie van Leeuwenhoek:</b> using microscopes he ground and polished himself, Leeuwenhoek was the first person to see living, moving, single-celled organisms swimming in pond water. He called these tiny moving creatures <b>"animalcules"</b> — today we'd call them microorganisms (Unit 4).
+    </div>
+    <div class="job"><b>Key idea:</b> Hooke and Leeuwenhoek didn't discover cells because they were smarter than everyone before them — they discovered cells because an INSTRUMENT finally let them see a level of reality that had always been there, just always invisible.</div>
+  </section>
+
+  <!-- SCREEN 4: HOW A MICROSCOPE WORKS -->
+  <section class="screen" data-s="4">
+    <h2>How a Microscope Works 🔬</h2>
+    <div class="rulebar">Light travels UP through the microscope: light source → through the thin specimen → through the OBJECTIVE lens → through the EYEPIECE lens → into your eye.</div>
+    <svg viewBox="0 0 280 320" xmlns="http://www.w3.org/2000/svg" aria-label="Diagram of a microscope labelling the eyepiece, body tube, objective turret, stage with clips, focus knobs, and light source at the base">
+      <rect x="120" y="10" width="26" height="55" rx="4" fill="#fde7c8" stroke="#92400e" stroke-width="2.5"/>
+      <text x="200" y="35" font-size="11" fill="#92400e" font-weight="700">EYEPIECE</text>
+      <line x1="196" y1="30" x2="150" y2="30" stroke="#92400e" stroke-width="1.5"/>
+      <rect x="118" y="65" width="30" height="70" fill="#fff3e0" stroke="#92400e" stroke-width="2"/>
+      <text x="210" y="100" font-size="11" fill="#92400e" font-weight="700">BODY TUBE</text>
+      <line x1="206" y1="95" x2="150" y2="95" stroke="#92400e" stroke-width="1.5"/>
+      <circle cx="133" cy="150" r="20" fill="#fde7c8" stroke="#92400e" stroke-width="2.5"/>
+      <rect x="95" y="140" width="20" height="20" rx="3" fill="#e0e0e0" stroke="#616161" stroke-width="1.5"/>
+      <rect x="150" y="140" width="20" height="20" rx="3" fill="#e0e0e0" stroke="#616161" stroke-width="1.5"/>
+      <text x="215" y="155" font-size="11" fill="#92400e" font-weight="700">OBJECTIVE TURRET</text>
+      <line x1="211" y1="150" x2="155" y2="150" stroke="#92400e" stroke-width="1.5"/>
+      <rect x="60" y="180" width="146" height="14" rx="3" fill="#d1fae5" stroke="#065f46" stroke-width="2"/>
+      <rect x="100" y="176" width="66" height="6" fill="#a5d6a7" stroke="#065f46" stroke-width="1"/>
+      <line x1="102" y1="180" x2="102" y2="192" stroke="#065f46" stroke-width="3"/>
+      <line x1="164" y1="180" x2="164" y2="192" stroke="#065f46" stroke-width="3"/>
+      <text x="230" y="189" font-size="11" fill="#065f46" font-weight="700">STAGE + CLIPS</text>
+      <line x1="226" y1="185" x2="168" y2="184" stroke="#065f46" stroke-width="1.5"/>
+      <text x="50" y="189" font-size="11" fill="#065f46" font-weight="700" text-anchor="end">SPECIMEN</text>
+      <line x1="54" y1="183" x2="98" y2="180" stroke="#065f46" stroke-width="1.5"/>
+      <circle cx="18" cy="215" r="11" fill="#fff" stroke="#546e7a" stroke-width="2.5"/>
+      <text x="18" y="219" font-size="9" text-anchor="middle" fill="#546e7a" font-weight="700">F</text>
+      <text x="18" y="238" font-size="9.5" text-anchor="middle" fill="#546e7a" font-weight="700">FOCUS</text>
+      <text x="18" y="249" font-size="9.5" text-anchor="middle" fill="#546e7a" font-weight="700">KNOB</text>
+      <rect x="105" y="210" width="55" height="55" fill="none"/>
+      <rect x="90" y="225" width="86" height="60" rx="8" fill="#eceff1" stroke="#546e7a" stroke-width="2"/>
+      <circle cx="133" cy="290" r="16" fill="#fff9c4" stroke="#f9a825" stroke-width="2.5"/>
+      <text x="133" y="295" font-size="9" text-anchor="middle" fill="#f9a825" font-weight="700">💡</text>
+      <text x="220" y="293" font-size="11" fill="#f9a825" font-weight="700">LIGHT SOURCE</text>
+      <line x1="216" y1="290" x2="152" y2="290" stroke="#f9a825" stroke-width="1.5"/>
+      <line x1="133" y1="282" x2="133" y2="200" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="133" y1="165" x2="133" y2="65" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <line x1="133" y1="65" x2="133" y2="10" stroke="#f9a825" stroke-width="1.5" stroke-dasharray="3,3"/>
+    </svg>
+    <div class="svgcap">Light travels UP from the light source, through the thin specimen on the stage, through the objective lens (which does most of the magnifying), up the body tube, and through the eyepiece lens into your eye. The focus knob moves the stage up and down to sharpen the image.</div>
+    <div class="job"><b>Key idea:</b> the specimen MUST be thin enough for light to pass all the way through it — that's why you'll prepare wafer-thin slices, not thick chunks, whenever you use a real microscope.</div>
+  </section>
+
+  <!-- SCREEN 5: MAGNIFICATION ARITHMETIC -->
+  <section class="screen" data-s="5">
+    <h2>Total Magnification 🧮</h2>
+    <div class="rulebar">NEW numeric skill: TOTAL MAGNIFICATION = EYEPIECE magnification × OBJECTIVE magnification.</div>
+    <div class="card">
+      <b>Worked example 1:</b> a 10× eyepiece with a 4× objective gives 10 &times; 4 = <b>40&times; total magnification</b>.
+    </div>
+    <div class="card">
+      <b>Worked example 2:</b> the SAME 10× eyepiece, now with a 40× objective, gives 10 &times; 40 = <b>400&times; total magnification</b> — ten times stronger, just by switching the objective lens.
+    </div>
+    <div class="card">
+      <b>Working BACKWARDS:</b> if you need 100&times; total magnification and your eyepiece is 10&times;, what objective do you need? 100 &divide; 10 = <b>a 10&times; objective</b>.
+    </div>
+    <p>Try the calculator — pick an eyepiece and an objective and watch the total magnification (and how much of the specimen you can actually see) change:</p>
+    <div class="magbar">
+      <div><label>Eyepiece</label>
+        <select id="eyepiece" onchange="calcMag()">
+          <option value="5">5×</option>
+          <option value="10" selected>10×</option>
+          <option value="15">15×</option>
+        </select>
+      </div>
+      <div><label>Objective</label>
+        <select id="objective" onchange="calcMag()">
+          <option value="4" selected>4×</option>
+          <option value="10">10×</option>
+          <option value="40">40×</option>
+        </select>
+      </div>
+    </div>
+    <div id="magbox"></div>
+    <svg id="fovsvg" viewBox="0 0 200 120" width="200" height="120">
+      <circle id="fovcircle" cx="100" cy="60" r="50" fill="#fff9c4" stroke="#92400e" stroke-width="2.5"/>
+      <circle cx="100" cy="60" r="4" fill="#065f46"/>
+    </svg>
+    <div class="svgcap" style="text-align:center">The yellow circle is your FIELD OF VIEW — the visible area shrinks as total magnification goes up.</div>
+  </section>
+
+  <!-- SCREEN 6: THE TRADE-OFF -->
+  <section class="screen" data-s="6">
+    <h2>The Trade-Off ⚖️</h2>
+    <div class="rulebar">Higher magnification shows MORE detail but LESS of the specimen at once — and the image gets DIMMER too.</div>
+    <div class="dtree">
+      <div class="dbox dq">What's the problem right now?</div>
+      <div class="darrow">↓</div>
+      <div class="dbranch">
+        <div class="dcol">
+          <div class="dlbl">You can see the whole specimen, but no fine detail</div>
+          <div class="dleaf yes">GO UP — switch to a stronger objective</div>
+        </div>
+        <div class="dcol">
+          <div class="dlbl">You've lost the specimen from view entirely</div>
+          <div class="dleaf no" style="background:#fff8e1;color:#8a4a00;border-color:#d97706">GO BACK DOWN and re-centre first — THEN go back up</div>
+        </div>
+      </div>
+    </div>
+    <div class="job"><b>Key idea:</b> jumping straight to the highest magnification usually means you can't even find the specimen — it's easy to lose it once your field of view shrinks. Always find and centre it at LOW magnification first, then step up.</div>
+  </section>
+
+  <!-- SCREEN 7: WHY STAIN -->
+  <section class="screen" data-s="7">
+    <h2>Why Specimens Are Stained 🎨</h2>
+    <div class="job"><b>Quick preview:</b> most cells are almost completely see-through (transparent) under a microscope, which makes their inner parts very hard to tell apart. Scientists add coloured STAINS to make different parts show up clearly — you'll prepare and stain a real slide in a future unit.</div>
+  </section>
+
+  <!-- SCREEN 8: TRAP-RECOGNITION DRILL #11 -->
+  <section class="screen" data-s="8">
+    <h2>Trap-Recognition Drill #11 🚨</h2>
+    <div class="trap">
+      <b>Watch for words like ALWAYS, NEVER, ONLY, and EVERY.</b> A claim using one of these words is often too extreme to be true — even if it SOUNDS like the "stronger" or more impressive choice.
+    </div>
+    <div class="ungraded">
+      <p>Drill. A student claims: "The highest magnification a microscope offers is ALWAYS the best one to use." Is this claim true?</p>
+      <button class="opt" data-w="E" data-c="false">True — more magnification is always simply better, no matter the situation</button>
+      <button class="opt" data-w="E" data-c="true">False — it depends what you're trying to see, and starting at the highest setting usually means you can't even find the specimen</button>
+      <button class="opt" data-w="E" data-c="false">True, but only for plant specimens, never for animal specimens</button>
+      <button class="btn next chkw" data-w="E">Check</button>
+      <div class="fb ok" data-w="E">✔ Correct — this is a false absolute claim (the word "ALWAYS" is the giveaway). The right magnification depends on the job: find and centre the specimen at LOW magnification first, then increase it.</div>
+      <div class="fb no" data-w="E">✘ Re-think it: at the very highest magnification, is the field of view large enough to easily FIND a specimen you haven't centred yet?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 9: PRACTICE -->
+  <section class="screen" data-s="9">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="3">
+      <p>1. In science class, a microscope is set up with a 10× eyepiece and a 40× objective lens attached. What total magnification does this give?</p>
+      <button class="opt">50×</button>
+      <button class="opt">4×</button>
+      <button class="opt">400×</button>
+      <button class="opt">10×</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — total magnification = eyepiece × objective = 10 × 40 = 400×.</div>
+      <div class="fb no">✘ Re-check Screen 5 — do you ADD the two numbers, or MULTIPLY them?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>2. You need a total magnification of 150× and your eyepiece is 15×. Which objective lens do you need?</p>
+      <button class="opt">15×</button>
+      <button class="opt">10×</button>
+      <button class="opt">135×</button>
+      <button class="opt">150×</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — 150 ÷ 15 = 10×. Working backwards, you divide the total by the eyepiece to find the objective.</div>
+      <div class="fb no">✘ Re-check Screen 5's "working backwards" example — what operation undoes multiplication?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. Why must a specimen be sliced very thin before viewing it under a microscope?</p>
+      <button class="opt">So light can pass all the way through it, up to the lenses</button>
+      <button class="opt">So it fits inside the eyepiece lens itself</button>
+      <button class="opt">Thin specimens are simply easier to stain, for no other reason</button>
+      <button class="opt">A thin specimen weighs less, so the stage can support it</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a microscope works by shining light THROUGH the specimen, so it has to be thin enough to let that light pass.</div>
+      <div class="fb no">✘ Re-check Screen 4 — which direction does light travel through the microscope, and what does it need to pass through?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. You're looking through a microscope and have completely lost sight of your specimen at high magnification. What should you do?</p>
+      <button class="opt">Keep increasing the magnification further until it reappears</button>
+      <button class="opt">Add more stain to make it show up again</button>
+      <button class="opt">Switch off the light source and try again in the dark</button>
+      <button class="opt">Go back down to low magnification, re-centre the specimen, then step back up</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — always re-find and re-centre a lost specimen at LOW magnification before stepping back up.</div>
+      <div class="fb no">✘ Re-check Screen 6's decision tree — what's the right move once you've lost the specimen entirely?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>5. A classmate says: "You should always start on the HIGHEST magnification, since that gives you the most detail straight away." Evaluate this claim.</p>
+      <button class="opt">True — the highest setting is always correct, in every single situation</button>
+      <button class="opt">True, but only for staining, never for focusing</button>
+      <button class="opt">False — the tiny field of view at high magnification makes it very hard to find the specimen in the first place</button>
+      <button class="opt">False, because high magnification never actually shows any extra detail at all</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — this overgeneralizes. Start LOW to find and centre the specimen, since high magnification's narrow field of view makes it easy to lose.</div>
+      <div class="fb no">✘ Re-check Screen 8's Trap-Recognition Drill — was the "always use the highest magnification" claim confirmed true or false?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(screens[i].dataset.s==='5') calcMag();
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_48_Test_CellsOrganisation.html';}
+  };
+
+  function calcMag(){
+    const eye = +document.getElementById('eyepiece').value;
+    const obj = +document.getElementById('objective').value;
+    const total = eye*obj;
+    document.getElementById('magbox').innerHTML =
+      `<div class="big">${eye}× &times; ${obj}× = ${total}× total magnification</div>
+       <div style="margin-top:4px;color:#718096;font-size:.85rem">${total<=60?"Wide field of view — easy to find the specimen.":total<=200?"Field of view is noticeably smaller now — more detail, less of the specimen visible.":"Very narrow field of view — lots of detail, but easy to lose the specimen if it isn't centred first."}</div>`;
+    const r = Math.max(8, 60 - total/12);
+    document.getElementById('fovcircle').setAttribute('r', r);
+  }
+
+  // ungraded checks (data-w keyed blocks)
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
