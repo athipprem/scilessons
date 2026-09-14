@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 49 · Lesson 2 — Partially Permeable Membranes &amp; Osmosis</title>
+<style>
+  :root{
+    --steel:#8a6a00; --steel-d:#5c4600; --steel-l:#f7f1dc;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#1b5e20; --amber-l:#e1eed9;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .recall{background:var(--purple-l);border:1.5px solid var(--purple);color:var(--purple);border-radius:10px;padding:10px 14px;margin:10px 0}
+  .stress{background:#fdecea;border:1.5px solid #c62828;color:#8a1c1c;border-radius:10px;padding:10px 14px;margin:10px 0}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .map4{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mapcell{border:2px solid var(--line);border-radius:12px;padding:12px;text-align:center;background:#fafbfb}
+  .mapcell .ico{font-size:2rem}
+  .mapcell .t{font-weight:bold;color:var(--steel-d);margin-top:4px}
+  .mapcell .j{font-size:.8rem;color:var(--grey)}
+  .today{display:inline-block;background:var(--amber);color:#fff;font-size:.68rem;padding:1px 7px;border-radius:10px;margin-top:6px}
+  svg{display:block;margin:10px auto;max-width:100%}
+  .svgcap{font-size:.85rem;color:var(--ink);margin:6px 0 14px;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .trap b{color:#880e4f}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--steel-l);color:#5c4600}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+  .route{border:2px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .route.concrete{border-color:#1565c0;background:#eef5fc}
+  .route.procedural{border-color:#6a1b9a;background:#f7f1fc}
+  .routelbl{font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em}
+  .route.concrete .routelbl{color:#1565c0}
+  .route.procedural .routelbl{color:#6a1b9a}
+  .bridge{text-align:center;color:var(--grey);font-size:.85rem;margin:6px 0 12px;font-style:italic}
+  .steplist{margin:8px 0 0;padding-left:0;list-style:none}
+  .steplist li{background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:7px 12px;margin:5px 0;font-size:.9rem}
+  .steplist li b{color:var(--purple)}
+  .osmobar{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+  .osmobtn{width:auto;flex:0 0 auto;padding:10px 16px;text-align:center}
+  .osmobtn.active{background:var(--steel-l);border-color:var(--steel);font-weight:bold}
+  #osmobox{text-align:center;background:#fafbfb;border:1.5px solid var(--line);border-radius:10px;padding:14px;margin-top:6px}
+  #osmobox .big{font-size:1.15rem;font-weight:800;color:var(--steel-d)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>💧 Lesson 2 · Partially Permeable Membranes &amp; Osmosis</b><span class="pill">Unit 49 · Biology</span></div>
+
+  <!-- SCREEN 1: POCKET MAP -->
+  <section class="screen active" data-s="1">
+    <h2>Your Plant Cell Map 🗺️</h2>
+    <div class="rulebar">BIG IDEA: water itself can move through a membrane, all on its own, with nobody "opening a door" — and that single fact explains wilting, watering, and even why salty soil can kill a plant.</div>
+    <div class="map4">
+      <div class="mapcell"><div class="ico">🚪</div><div class="t">Recap</div><div class="j">the hinge question, from Lesson 1</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🧊</div><div class="t">Partially permeable</div><div class="j">holes small enough for water, not bigger particles</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">💧</div><div class="t">Osmosis</div><div class="j">water moves from more &rarr; less, brand new</div><span class="today">TODAY</span></div>
+      <div class="mapcell"><div class="ico">🚨</div><div class="t">Trap-Recognition Drill #12</div><div class="j">does osmosis ONLY happen in plants?</div><span class="today">TODAY</span></div>
+    </div>
+    <div class="why" style="margin-top:14px">🎯 <b>By the end you can:</b> explain what "partially permeable" really means, predict which way water will move between two areas, and explain why a watered plant goes firm again while a salted one wilts.</div>
+  </section>
+
+  <!-- SCREEN 2: RECAP -->
+  <section class="screen" data-s="2">
+    <h2>Quick Recap 🔁</h2>
+    <div class="job"><b>From Lesson 1:</b> the wall lets EVERYTHING through — it's fully permeable. The MEMBRANE, sitting just inside it, is the real chooser about what enters and leaves the cell.</div>
+    <div class="stress">Today: exactly HOW does the membrane choose? And what happens when the thing moving through is water itself?</div>
+  </section>
+
+  <!-- SCREEN 3: PARTIALLY PERMEABLE -->
+  <section class="screen" data-s="3">
+    <h2>What "Partially Permeable" Means 🧊</h2>
+    <div class="rulebar">NEW idea: the membrane has holes so small that WATER can pass through, but bigger dissolved particles (like sugar) can't. That's called being PARTIALLY permeable — only some things get through.</div>
+    <div class="card"><b>Start with a sieve you already know:</b> a kitchen sieve has holes that let both water AND dissolved sugar pass straight through together — a sieve can't tell the two apart at all.</div>
+    <div class="stress">Now break that picture: a partially permeable membrane is NOT like a kitchen sieve. Its holes are so small that only tiny water particles fit through — a dissolved sugar particle is too big, and stays trapped on its own side.</div>
+    <div class="job"><b>Key idea:</b> "partially permeable" doesn't mean "half-open" — it means SELECTIVE: small particles like water pass, bigger dissolved particles don't.</div>
+  </section>
+
+  <!-- SCREEN 4: OSMOSIS MECHANISM -->
+  <section class="screen" data-s="4">
+    <h2>Osmosis 💧</h2>
+    <div class="rulebar">NEW idea, never taught before: OSMOSIS is water moving through a partially permeable membrane, from a side with MORE water (fewer dissolved particles) to a side with LESS water (more dissolved particles) — until both sides even out.</div>
+    <p>Try it — pick which side starts with more dissolved sugar, and watch which way the water actually moves:</p>
+    <div class="osmobar">
+      <button class="opt osmobtn" id="ob1" onclick="setOsmo(1)">More sugar on LEFT</button>
+      <button class="opt osmobtn" id="ob2" onclick="setOsmo(2)">More sugar on RIGHT</button>
+      <button class="opt osmobtn" id="ob3" onclick="setOsmo(3)">Equal on both sides</button>
+    </div>
+    <div id="osmobox">Pick a setup above to see which way the water moves.</div>
+    <div class="job" style="margin-top:12px"><b>Key idea:</b> the dissolved particles themselves CANNOT cross the membrane — only water can. Water always moves toward the side that has proportionally less of it (more crowded with dissolved particles), diluting that side, until both sides have an equal balance.</div>
+  </section>
+
+  <!-- SCREEN 5: TURGOR AND WILTING -->
+  <section class="screen" data-s="5">
+    <h2>Turgor &amp; Wilting — the Mechanism 🌱</h2>
+    <div class="rulebar">You already know a plant wilts when it loses water (Unit 14). Here's WHY, mechanically.</div>
+    <div class="job"><b>Turgid:</b> when a plant cell takes in water by osmosis, its vacuole swells and pushes outward against the rigid wall. A cell in this firm, full state is called <b>TURGID</b> — and a plant made of turgid cells stands up straight.</div>
+    <div class="job"><b>Flaccid:</b> when a cell loses water instead, the vacuole shrinks and stops pressing against the wall. A cell in this limp state is called <b>FLACCID</b> — and a plant made of flaccid cells wilts.</div>
+    <div class="card">Unit 14 told you a plant wilts when its cells lose water. Now you know the mechanism underneath that fact: losing water means losing turgor, and a flaccid cell can't hold the plant upright.</div>
+  </section>
+
+  <!-- SCREEN 6: EVERYDAY EVIDENCE -->
+  <section class="screen" data-s="6">
+    <h2>Everyday Evidence 🥬</h2>
+    <div class="card">A limp stick of celery is left standing in a glass overnight. Predict what happens — pick a liquid and see the result:</div>
+    <div class="osmobar">
+      <button class="opt osmobtn" id="cel1" onclick="setCelery(1)">Plain water</button>
+      <button class="opt osmobtn" id="cel2" onclick="setCelery(2)">Very salty water</button>
+    </div>
+    <div id="celerybox">Pick a liquid above to see the prediction.</div>
+    <div class="job" style="margin-top:12px"><b>Key idea:</b> celery in plain water has MORE water outside its cells than inside, so water moves IN by osmosis and the celery crisps back up. Celery in very salty water has LESS water outside (the salt takes up the "room"), so water moves OUT instead, and the celery goes even limper. Same rule, opposite outcome — this is exactly what happens to a gardener's plant if too much fertiliser or salt gets into the soil.</div>
+  </section>
+
+  <!-- SCREEN 7: TWO EXPLANATION ROUTES -->
+  <section class="screen" data-s="7">
+    <h2>Two Ways to See Osmosis Direction 🔗</h2>
+    <div class="route concrete">
+      <div class="routelbl">Concrete route — a picture you can imagine</div>
+      <p style="margin:8px 0 0">Picture a very CROWDED room next to a completely EMPTY room, joined by a doorway that only PEOPLE can fit through (not the room's furniture). People naturally drift from the crowded room into the empty one, spreading out, until both rooms feel about equally full. Water does the same thing — it drifts from the side with more of it into the side with less, through the membrane's doorway.</p>
+    </div>
+  </section>
+
+  <!-- SCREEN 8: PROCEDURAL ROUTE + OPEN QUESTION -->
+  <section class="screen" data-s="8">
+    <h2>Two Ways to See Osmosis Direction — Route 2 🔗</h2>
+    <div class="bridge">Same idea, now as a step-by-step rule instead of a picture.</div>
+    <div class="route procedural">
+      <div class="routelbl">Procedural route — the rule, one step at a time</div>
+      <ol class="steplist">
+        <li><b>Step 1:</b> Which side has MORE water (fewer dissolved particles)?</li>
+        <li><b>Step 2:</b> Which side has LESS water (more dissolved particles)?</li>
+        <li><b>Step 3:</b> Water moves from the MORE side to the LESS side.</li>
+        <li><b>Step 4:</b> Stop when both sides are equal.</li>
+      </ol>
+    </div>
+    <div class="stress" style="margin-top:14px">Open question — carried to Unit 50: a plant cell can take in a huge amount of water by osmosis and just get nice and firm. An animal cell (no wall at all) taking in the same amount of water would actually BURST. Why do you think the wall makes that difference? Keep it in mind — Unit 50 answers it properly.</div>
+  </section>
+
+  <!-- SCREEN 9: TRAP-RECOGNITION DRILL #12 -->
+  <section class="screen" data-s="9">
+    <h2>Trap-Recognition Drill #12 🚨</h2>
+    <div class="trap">
+      <b>Watch for words like ALWAYS, NEVER, ONLY, and EVERY.</b> A claim using one of these words is often too extreme to be true.
+    </div>
+    <div class="ungraded">
+      <p>Drill. A student claims: "Osmosis ONLY happens in plants." Is this claim true?</p>
+      <button class="opt" data-w="H" data-c="false">True — animal cells never contain water moving through membranes at all</button>
+      <button class="opt" data-w="H" data-c="true">False — osmosis is just water moving through ANY partially permeable membrane, and animal cells have membranes too</button>
+      <button class="opt" data-w="H" data-c="false">True, but only because plant cell walls invented the process</button>
+      <button class="btn next chkw" data-w="H">Check</button>
+      <div class="fb ok" data-w="H">✔ Correct — this is a false absolute claim (the word "ONLY" is the giveaway). Osmosis happens wherever there's a partially permeable membrane with water on both sides — that includes animal cells too, not just plants.</div>
+      <div class="fb no" data-w="H">✘ Re-think it: does osmosis need a plant CELL WALL specifically, or just any partially permeable membrane?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 10: PRE-TEST SELF-CHECK -->
+  <section class="screen" data-s="10">
+    <h2>Pre-Test Self-Check ✅</h2>
+    <div class="rulebar">Two quick checks before the graded practice. Answer both, then read your result.</div>
+    <div class="ungraded">
+      <p>Self-check 1 (concrete-style). Picture the crowded room and the empty room joined by a people-only doorway. Which way do people drift?</p>
+      <button class="opt" data-w="SC1" data-c="true">From the crowded room into the empty one, until both feel about equally full</button>
+      <button class="opt" data-w="SC1" data-c="false">From the empty room into the crowded one, making it even more crowded</button>
+      <button class="opt" data-w="SC1" data-c="false">Nobody moves at all, since the doorway is too narrow</button>
+      <button class="btn next chkw" data-w="SC1">Check</button>
+      <div class="fb ok" data-w="SC1">✔ Correct.</div>
+      <div class="fb no" data-w="SC1">✘ Not quite.</div>
+    </div>
+    <div class="ungraded">
+      <p>Self-check 2 (procedural-style). Step 1: which side has more water? Step 2: which side has less? Step 3: water moves from ___ to ___.</p>
+      <button class="opt" data-w="SC2" data-c="true">From the side with more water to the side with less water</button>
+      <button class="opt" data-w="SC2" data-c="false">From the side with less water to the side with more water</button>
+      <button class="opt" data-w="SC2" data-c="false">Water never actually moves anywhere on its own</button>
+      <button class="btn next chkw" data-w="SC2">Check</button>
+      <div class="fb ok" data-w="SC2">✔ Correct.</div>
+      <div class="fb no" data-w="SC2">✘ Not quite.</div>
+    </div>
+    <div id="selfcheck-result" class="card" style="display:none;text-align:center"></div>
+  </section>
+
+  <!-- SCREEN 11: PRACTICE -->
+  <section class="screen" data-s="11">
+    <h2>Your Turn — Check Yourself ✅</h2>
+    <div class="rulebar">Pick an answer, then press <b>Check</b>. Once you check, that answer is locked in — so choose carefully!</div>
+
+    <div class="q" data-correct="2">
+      <p>1. What does "partially permeable" mean?</p>
+      <button class="opt">Nothing at all can ever pass through it</button>
+      <button class="opt">Small particles like water can pass through, but bigger dissolved particles can't</button>
+      <button class="opt">Every particle, of every size, passes through equally easily</button>
+      <button class="opt">It only lets things through during the daytime</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — partially permeable means selective: small particles pass, bigger ones don't.</div>
+      <div class="fb no">✘ Re-check Screen 3 — is a partially permeable membrane like a kitchen sieve, or more selective than that?</div>
+    </div>
+
+    <div class="q" data-correct="3">
+      <p>2. Two areas are separated by a partially permeable membrane. One side has lots of dissolved sugar (little free water); the other side is pure water. Which way will water move?</p>
+      <button class="opt">From the sugary side to the pure water side</button>
+      <button class="opt">Water won't move at all, since sugar blocks the membrane completely</button>
+      <button class="opt">From the pure water side to the sugary side</button>
+      <button class="opt">Both the water AND the sugar move together, in the same direction</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — water moves from the side with MORE water (the pure side) to the side with LESS water (the sugary side).</div>
+      <div class="fb no">✘ Re-check Screen 4 — which side has more free water: the pure side, or the sugary side?</div>
+    </div>
+
+    <div class="q" data-correct="1">
+      <p>3. A plant cell has taken in plenty of water and its vacuole is pushing firmly against the wall. What is this state called?</p>
+      <button class="opt">Turgid</button>
+      <button class="opt">Flaccid</button>
+      <button class="opt">Fully permeable</button>
+      <button class="opt">Chlorophyll-filled</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — a full, firm cell pressing against its wall is TURGID.</div>
+      <div class="fb no">✘ Re-check Screen 5 — which word describes a cell that's full and firm, not limp?</div>
+    </div>
+
+    <div class="q" data-correct="4">
+      <p>4. A gardener spills a large amount of salt onto the soil around a plant. Using osmosis, what will most likely happen?</p>
+      <button class="opt">Nothing — salt in soil has no effect on a plant's cells at all</button>
+      <button class="opt">The plant will grow faster, since salty water is more nutritious</button>
+      <button class="opt">Extra water will rush INTO the plant's roots, making it more turgid than ever</button>
+      <button class="opt">Water may actually move OUT of the root cells into the salty soil, causing wilting</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — very salty soil water now has LESS free water than inside the root cells, so water can move OUT of the cells by osmosis, making them flaccid and the plant wilt.</div>
+      <div class="fb no">✘ Re-check Screen 6 — in very salty water, is there MORE or LESS free water than inside the cell?</div>
+    </div>
+
+    <div class="q" data-correct="2">
+      <p>5. A classmate claims: "Osmosis only happens in plants." Evaluate this claim.</p>
+      <button class="opt">True — only plant cell walls can make osmosis happen</button>
+      <button class="opt">False — osmosis happens through any partially permeable membrane, including in animal cells</button>
+      <button class="opt">True, but only for cells that contain chlorophyll</button>
+      <button class="opt">False, because osmosis has actually never been observed in a real plant</button>
+      <button class="btn next chk">Check</button>
+      <div class="fb ok">✔ Correct — this overgeneralizes. Osmosis just needs a partially permeable membrane with water on both sides — plant and animal cells both qualify.</div>
+      <div class="fb no">✘ Re-check Screen 9's Trap-Recognition Drill — was the "only in plants" claim confirmed true or false?</div>
+    </div>
+
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+  const screens=[...document.querySelectorAll('.screen')];
+  let i=0;
+  const prev=document.getElementById('prev'),next=document.getElementById('next'),
+        hub=document.getElementById('hub'),dots=document.getElementById('dots');
+  function render(){
+    screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+    prev.disabled=i===0;
+    dots.textContent=`Screen ${i+1} of ${screens.length}`;
+    next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+  prev.onclick=()=>{if(i>0){i--;render();}};
+  next.onclick=()=>{
+    if(i<screens.length-1){i++;render();}
+    else{window.location.href='Tests/Unit_49_Test_PlantCell.html';}
+  };
+
+  // osmosis demo
+  function setOsmo(n){
+    document.querySelectorAll('#osmobox').forEach(()=>{});
+    document.querySelectorAll('.osmobar .osmobtn').forEach(b=>{});
+    [1,2,3].forEach(k=>document.getElementById('ob'+k).classList.remove('active'));
+    document.getElementById('ob'+n).classList.add('active');
+    let msg;
+    if(n===1) msg = `<div class="big">More sugar on LEFT &rarr; water moves LEFT</div>The right side has more free water (less crowded with sugar), so water moves from RIGHT to LEFT, diluting the sugary side until both sides even out.`;
+    else if(n===2) msg = `<div class="big">More sugar on RIGHT &rarr; water moves RIGHT</div>The left side has more free water, so water moves from LEFT to RIGHT, diluting the sugary side until both sides even out.`;
+    else msg = `<div class="big">Equal on both sides &rarr; no NET movement</div>Water still crosses both ways, but equally in each direction, so there's no overall change on either side.`;
+    document.getElementById('osmobox').innerHTML = msg;
+  }
+
+  // celery demo
+  function setCelery(n){
+    [1,2].forEach(k=>document.getElementById('cel'+k).classList.remove('active'));
+    document.getElementById('cel'+n).classList.add('active');
+    let msg;
+    if(n===1) msg = `<div class="big">Plain water &rarr; the celery crisps up</div>Plain water has more free water than the inside of the celery's cells, so water moves IN by osmosis, making the cells turgid again.`;
+    else msg = `<div class="big">Very salty water &rarr; the celery goes even LIMPER</div>Salty water has less free water than the inside of the celery's cells, so water moves OUT by osmosis, making the cells flaccid.`;
+    document.getElementById('celerybox').innerHTML = msg;
+  }
+
+  // ungraded checks (data-w keyed blocks) — also feeds the self-check summary
+  const selfCheckResult = { SC1: null, SC2: null };
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+      if (w === 'SC1' || w === 'SC2'){
+        selfCheckResult[w] = chosen;
+        if (selfCheckResult.SC1 !== null && selfCheckResult.SC2 !== null) showSelfCheckResult();
+      }
+    };
+  });
+  function showSelfCheckResult(){
+    const el = document.getElementById('selfcheck-result');
+    if (!el) return;
+    let msg;
+    if (selfCheckResult.SC1 && selfCheckResult.SC2){
+      msg = "✅ Both correct — you're ready for the test!";
+    } else if (!selfCheckResult.SC1 && selfCheckResult.SC2){
+      msg = "Go back and review the CONCRETE route (Screen 7's crowded-room picture) before the test.";
+    } else if (selfCheckResult.SC1 && !selfCheckResult.SC2){
+      msg = "Go back and review the PROCEDURAL route (Screen 8's step-by-step rule) before the test.";
+    } else {
+      msg = "Review BOTH routes — Screen 7 (crowded room) and Screen 8 (step-by-step rule) — before the test.";
+    }
+    el.textContent = msg;
+    el.style.display = 'block';
+  }
+
+  // practice: locked after Check, running score + summary once all 5 answered
+  let practiceCorrect = 0, practiceAnswered = 0, missedQs = [];
+  const practiceQs = [...document.querySelectorAll('.q[data-correct]')];
+  const totalPractice = practiceQs.length;
+  practiceQs.forEach((q, idx) => {
+    const correct = +q.dataset.correct, opts = [...q.querySelectorAll('.opt')];
+    let chosen = 0, locked = false;
+    opts.forEach((o, n) => o.onclick = () => {
+      if (locked) return;
+      opts.forEach(x => x.style.outline = '');
+      o.style.outline = '3px solid #1565c0';
+      chosen = n + 1;
+    });
+    q.querySelector('.chk').onclick = () => {
+      if (!chosen || locked) return;
+      locked = true;
+      opts.forEach((o, n) => {
+        o.classList.remove('correct', 'wrong');
+        if (n + 1 === correct) o.classList.add('correct');
+        if (n + 1 === chosen && chosen !== correct) o.classList.add('wrong');
+        o.disabled = true;
+      });
+      q.querySelector('.fb.ok').classList.toggle('show', chosen === correct);
+      q.querySelector('.fb.no').classList.toggle('show', chosen !== correct);
+      q.querySelector('.chk').disabled = true;
+      q.querySelector('.chk').textContent = chosen === correct ? '✔ Checked' : '✗ Checked';
+      practiceAnswered++;
+      if (chosen === correct) practiceCorrect++; else missedQs.push(idx + 1);
+      if (practiceAnswered === totalPractice) showPracticeSummary();
+    };
+  });
+  function showPracticeSummary(){
+    const el = document.getElementById('practice-summary');
+    if (!el) return;
+    const pct = Math.round(practiceCorrect / totalPractice * 100);
+    document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${totalPractice} (${pct}%)`;
+    let advice;
+    if (practiceCorrect === totalPractice) advice = "Perfect score! You've got this fully down - no gaps here.";
+    else if (practiceCorrect >= totalPractice - 1) advice = "Great job! You understood almost everything.";
+    else if (practiceCorrect >= Math.ceil(totalPractice/2)) advice = "You're getting the basics, but a few ideas still need another look - re-read the Key idea boxes tied to what you missed.";
+    else advice = "This needs a bit more practice - go back through the lesson slowly and try these again before continuing.";
+    if (missedQs.length) advice += ` Review Q${missedQs.join(' and Q')} before moving on.`;
+    document.getElementById('ps-advice').textContent = advice;
+    el.style.display = 'block';
+    el.scrollIntoView({behavior:'smooth'});
+  }
+  render();
+</script>
+</body>
+</html>
