@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 50 · Lesson 1 — The Water Journey</title>
+<style>
+  :root{
+    --steel:#00695c; --steel-d:#003d33; --steel-l:#e0f2f1;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#8a6a00; --amber-l:#fdf6e3;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .why{background:var(--amber-l);border-left:6px solid var(--amber);padding:12px 16px;border-radius:10px;margin:10px 0}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel)}
+  .job b{color:var(--steel-d)}
+  .q{background:#f7fafc;border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:14px 0}
+  .q p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:#7a5a00}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .route{border:2px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .route.concrete{border-color:#1565c0;background:#eef5fc}
+  .route.procedural{border-color:#6a1b9a;background:#f7f1fc}
+  .routelbl{font-weight:800;font-size:.78rem;text-transform:uppercase;letter-spacing:.03em}
+  .route.concrete .routelbl{color:#1565c0}
+  .route.procedural .routelbl{color:#6a1b9a}
+  .bridge{text-align:center;color:var(--grey);font-size:.85rem;margin:6px 0 12px;font-style:italic}
+
+  /* plant module */
+  .plantbox{background:#fafbfb;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+  #plantStage{width:100%;max-width:480px;margin:0 auto}
+  .waterbar{display:flex;gap:10px;justify-content:center;margin:10px 0}
+  .waterbtn{width:auto;flex:0 0 auto;padding:9px 16px}
+  .waterbtn.active{background:var(--steel-l);border-color:var(--steel);font-weight:bold}
+  .statecap{font-weight:800;font-size:1rem;margin:6px 0;color:var(--steel-d)}
+  .stepper{display:flex;justify-content:space-between;gap:4px;margin:12px 0 4px}
+  .steppill{flex:1;text-align:center;font-size:.72rem;padding:7px 3px;border-radius:8px;border:1.5px solid var(--line);background:#fff;cursor:pointer;font-weight:700;color:var(--grey)}
+  .steppill.current{background:var(--steel);color:#fff;border-color:var(--steel-d)}
+  .axis{display:flex;justify-content:space-between;font-size:.72rem;color:var(--grey);font-weight:700;margin:2px 4px 10px}
+  .stopcaption{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:.92rem;min-height:2.4em}
+  .sortbin{border:2px dashed var(--line);border-radius:12px;padding:10px;min-height:70px}
+  .sortbin.over{border-color:var(--blue);background:var(--blue-l)}
+  .sortcard{display:inline-block;background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:6px 10px;margin:4px;cursor:grab;font-size:.85rem}
+  .binrow{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;margin-top:10px}
+  .binlbl{font-size:.75rem;font-weight:800;text-align:center;color:var(--steel-d);margin-bottom:4px}
+  .toggler{display:flex;gap:10px;justify-content:center;margin:10px 0}
+  .togbtn{width:auto;flex:0 0 auto;padding:9px 16px}
+  .togbtn.active{background:var(--steel-l);border-color:var(--steel);font-weight:bold}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>💧 Lesson 1 · The Water Journey</b><span class="pill">Unit 50 · Biology</span></div>
+
+  <!-- SCREEN 1: MEET THE PLANT -->
+  <section class="screen active" data-s="1">
+    <h2>Meet the Plant 🌱</h2>
+    <div class="rulebar">Water it. Watch what happens. Then use the stepper to zoom all the way in — same plant, five sizes.</div>
+    <div class="plantbox">
+      <div id="plantStage"></div>
+      <div class="waterbar">
+        <button class="opt waterbtn" id="wbtnWater" onclick="setWater(true)">💧 Water the plant</button>
+        <button class="opt waterbtn" id="wbtnDry" onclick="setWater(false)">☀️ Dry day</button>
+      </div>
+      <div class="statecap" id="stateCap">TURGID</div>
+      <div class="stepper" id="stepper"></div>
+      <div class="axis"><span>◀ biggest (whole plant)</span><span>smallest (one cell) ▶</span></div>
+      <div class="stopcaption" id="stopCaption"></div>
+    </div>
+    <div class="card" style="margin-top:14px"><b>Why this matters:</b> a wilted plant perks back up a few hours after watering, and a gardener has to be careful with fertiliser because too much salt in the soil can make a plant wilt WORSE. Both come down to water moving in and out of cells — at every single size on this stepper, at once.</div>
+  </section>
+
+  <!-- SCREEN 2: TISSUE - CONCRETE ROUTE -->
+  <section class="screen" data-s="2">
+    <h2>Tissue: One New Idea 🐝</h2>
+    <div class="route concrete">
+      <div class="routelbl">Concrete route — look at the honeycomb</div>
+      <p style="margin:8px 0 0">Stop 4 on the plant is a <b>TISSUE</b>: many cells of the exact <b>SAME</b> kind, side by side. Compare it with stop 3, the whole root: that's <b>SEVERAL DIFFERENT</b> tissues working together as ONE lump. <b>Tissue</b> = same kind of cell, repeated. <b>Organ</b> = different tissues, teamed up.</p>
+    </div>
+    <div class="job"><b>Key idea:</b> "many of the same" vs. "several different working as a team" is the whole difference between a tissue and the organ built from it.</div>
+  </section>
+
+  <!-- SCREEN 3: TISSUE - DO-IT ROUTE -->
+  <section class="screen" data-s="3">
+    <h2>Sort It Yourself 🗂️</h2>
+    <div class="bridge">Same idea, now as something you do rather than read.</div>
+    <div class="route procedural">
+      <div class="routelbl">Do-it route — drag each picture into its bin</div>
+      <p style="margin:8px 0 8px">Drag all six cards below into the correct bin.</p>
+      <div id="sortcards"></div>
+      <div class="binrow" id="sortbins"></div>
+    </div>
+    <div class="job" id="sortresult" style="display:none;margin-top:10px"></div>
+  </section>
+
+  <!-- SCREEN 4: ORGAN VS ORGAN SYSTEM, SHOWN -->
+  <section class="screen" data-s="4">
+    <h2>Organ vs. Organ System — Watch, Don't Read 👀</h2>
+    <div class="rulebar">Click each button. Same plant — only the highlight changes.</div>
+    <div class="plantbox">
+      <div id="toggleStage"></div>
+      <div class="toggler">
+        <button class="opt togbtn active" id="togOrgan" onclick="setToggle('organ')">One root = ORGAN</button>
+        <button class="opt togbtn" id="togSystem" onclick="setToggle('system')">Every root = ORGAN SYSTEM</button>
+      </div>
+      <div class="stopcaption" id="toggleCaption"></div>
+    </div>
+    <div class="job" style="margin-top:10px"><b>Key idea:</b> one lump you could pick up on its own is an ORGAN. Several organs as a team is an ORGAN SYSTEM. Same rule as Unit 49 — now with a picture under it.</div>
+  </section>
+
+  <!-- SCREEN 5: THE TUBER CORRECTION -->
+  <section class="screen" data-s="5">
+    <h2>Fixing One Wrong Idea 🥔</h2>
+    <div class="rulebar">A potato is a swollen underground STEM — it belongs to the shoot system, not the root system.</div>
+    <svg viewBox="0 0 400 130" xmlns="http://www.w3.org/2000/svg" aria-label="A potato tuber shown connected to the stem above ground, not to the roots">
+      <line x1="200" y1="10" x2="200" y2="130" stroke="#c8e6c9" stroke-width="3"/>
+      <text x="60" y="20" font-size="11" fill="#33691e" font-weight="700">SHOOT SYSTEM (above)</text>
+      <ellipse cx="200" cy="35" rx="16" ry="30" fill="#43a047"/>
+      <path d="M200,60 C 190,75 175,80 165,95" stroke="#6d4c41" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <ellipse cx="150" cy="100" rx="34" ry="24" fill="#a1887f" stroke="#6d4c41" stroke-width="2"/>
+      <text x="150" y="104" font-size="10.5" text-anchor="middle" fill="#3e2723" font-weight="700">TUBER</text>
+      <path d="M200,60 C 220,90 235,110 245,120" stroke="#8d6e63" stroke-width="3" fill="none" stroke-linecap="round"/>
+      <text x="60" y="118" font-size="11" fill="#8d6e63" font-weight="700">roots (below, separate)</text>
+    </svg>
+    <div class="job">A tuber grows from the STEM, underground — it stores food, but it is one lump connected to the shoot, not to the roots. So: a tuber is an <b>ORGAN</b> (part of the shoot system), never an organ system.</div>
+  </section>
+
+  <!-- SCREEN 6: PRACTICE -->
+  <section class="screen" data-s="6">
+    <h2>Your Turn — Click the Level ✅</h2>
+    <div class="rulebar">Read each description, then click the matching level. Once you check, that answer is locked in!</div>
+    <div id="practiceHost"></div>
+    <div class="card" id="practice-summary" style="display:none;text-align:center;background:#e8f5e9;border-color:#2e7d32">
+      <div id="ps-score" style="font-size:1.3rem;font-weight:800;color:#1b5e20"></div>
+      <div id="ps-advice" style="margin-top:6px"></div>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+/* ===================== SHARED PLANT MODULE ===================== */
+const RUNGS = ['Organism','Organ system','Organ','Tissue','Cell'];
+function hexPoints(cx,cy,r){
+  let pts=[];
+  for(let k=0;k<6;k++){const a=Math.PI/180*(60*k-30);pts.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}
+  return pts.join(' ');
+}
+function bucketOf(wet){ return wet ? 2 : 0; } // simple 2-state (turgid/flaccid) for stops 1-4
+function stopSVG(stop, wet){
+  const b = bucketOf(wet);
+  const leafFill = b===2 ? '#2e7d32' : '#8a8a3a';
+  const soilFill = b===2 ? '#4e342e' : '#a1887f';
+  const droop = b===2 ? 0 : 18;
+  if(stop===1){
+    return `<svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg">
+      <rect x="130" y="225" width="260" height="70" rx="6" fill="${soilFill}"/>
+      <g transform="rotate(${droop} 260 225)">
+        <path d="M260,225 C 255,190 265,150 258,70" stroke="#3e5c1f" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <ellipse cx="228" cy="150" rx="32" ry="15" fill="${leafFill}" transform="rotate(-25 228 150)"/>
+        <ellipse cx="292" cy="128" rx="32" ry="15" fill="${leafFill}" transform="rotate(20 292 128)"/>
+        <ellipse cx="246" cy="92" rx="28" ry="13" fill="${leafFill}" transform="rotate(-8 246 92)"/>
+      </g>
+      <g stroke="#8d6e63" stroke-width="3" fill="none" stroke-linecap="round">
+        <path d="M260,230 C 250,250 230,262 208,282"/>
+        <path d="M260,230 C 265,255 270,272 264,294"/>
+        <path d="M260,230 C 272,248 296,260 312,277"/>
+      </g>
+      <rect x="188" y="228" width="145" height="70" rx="10" fill="none" stroke="#d81b60" stroke-width="3" stroke-dasharray="6 4"/>
+      <text x="260" y="316" font-size="12" text-anchor="middle" fill="#d81b60" font-weight="700">next: zoom into the roots ↓</text>
+    </svg>`;
+  }
+  if(stop===2){
+    return `<svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg">
+      <rect x="130" y="225" width="260" height="70" rx="6" fill="${soilFill}" opacity="0.5"/>
+      <g opacity="0.28">
+        <path d="M260,225 C 255,190 265,150 258,70" stroke="#3e5c1f" stroke-width="9" fill="none" stroke-linecap="round"/>
+        <ellipse cx="228" cy="150" rx="32" ry="15" fill="#6d6d6d"/>
+        <ellipse cx="292" cy="128" rx="32" ry="15" fill="#6d6d6d"/>
+        <ellipse cx="246" cy="92" rx="28" ry="13" fill="#6d6d6d"/>
+      </g>
+      <g stroke="#e6ff00" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.45">
+        <path d="M260,230 C 250,250 230,262 208,282"/>
+        <path d="M260,230 C 265,255 270,272 264,294"/>
+        <path d="M260,230 C 272,248 296,260 312,277"/>
+      </g>
+      <g stroke="#8bc34a" stroke-width="4" fill="none" stroke-linecap="round">
+        <path d="M260,230 C 250,250 230,262 208,282"/>
+        <path d="M260,230 C 265,255 270,272 264,294"/>
+        <path d="M260,230 C 272,248 296,260 312,277"/>
+      </g>
+      <rect x="230" y="252" width="70" height="38" rx="8" fill="none" stroke="#d81b60" stroke-width="3" stroke-dasharray="6 4" transform="rotate(18 265 271)"/>
+      <text x="260" y="316" font-size="12" text-anchor="middle" fill="#d81b60" font-weight="700">next: zoom into ONE root ↓</text>
+    </svg>`;
+  }
+  if(stop===3){
+    return `<svg viewBox="0 0 520 330" xmlns="http://www.w3.org/2000/svg">
+      <path d="M240,40 C 228,120 248,220 258,290 L 300,290 C 292,210 282,110 302,40 Z" fill="${soilFill}" stroke="#6d4c41" stroke-width="2.5"/>
+      <g stroke="#8d6e63" stroke-width="2">
+        <line x1="238" y1="140" x2="212" y2="150"/>
+        <line x1="242" y1="180" x2="214" y2="192"/>
+        <line x1="300" y1="150" x2="326" y2="158"/>
+        <line x1="296" y1="190" x2="322" y2="200"/>
+      </g>
+      <rect x="222" y="150" width="86" height="34" rx="6" fill="none" stroke="#d81b60" stroke-width="3" stroke-dasharray="6 4"/>
+      <text x="265" y="316" font-size="12" text-anchor="middle" fill="#d81b60" font-weight="700">next: zoom into a slice ↓</text>
+    </svg>`;
+  }
+  if(stop===4){
+    let hexes='';
+    const r=30;
+    for(let row=0;row<3;row++){
+      for(let col=0;col<4;col++){
+        const cx=140+col*68+(row%2?34:0), cy=90+row*58;
+        const hi = (row===1 && col===2);
+        hexes+=`<polygon points="${hexPoints(cx,cy,r)}" fill="${leafFill}" stroke="${hi?'#d81b60':'#1b3d0f'}" stroke-width="${hi?4:1.5}" ${hi?'stroke-dasharray="6 4"':''}/>`;
+      }
+    }
+    return `<svg viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">${hexes}
+      <text x="260" y="246" font-size="12" text-anchor="middle" fill="#d81b60" font-weight="700">next: zoom into ONE cell ↓</text>
+    </svg>`;
+  }
+  return cellSVG(wet?85:15);
+}
+function cellSVG(level){
+  const r = 18 + (level/100)*54;
+  const cx=260, cy=150;
+  return `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+    <rect x="150" y="60" width="220" height="180" rx="16" fill="none" stroke="#6d4c41" stroke-width="7"/>
+    <rect x="164" y="74" width="192" height="152" rx="12" fill="#fdf6e3" stroke="#1565c0" stroke-width="3"/>
+    <circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" fill="#b3e5fc" stroke="#0277bd" stroke-width="2"/>
+    <circle cx="210" cy="105" r="13" fill="#8e24aa"/>
+    <line x1="150" y1="150" x2="90" y2="150" stroke="#6d4c41" stroke-width="4"/>
+    <circle cx="78" cy="150" r="6" fill="#a1887f"/><circle cx="70" cy="140" r="5" fill="#a1887f"/><circle cx="70" cy="162" r="5" fill="#a1887f"/>
+    <text x="260" y="278" font-size="11" text-anchor="middle" fill="#718096">soil grains (left) &middot; wall &middot; membrane &middot; cell sap in the vacuole</text>
+  </svg>`;
+}
+const stopCaptions = [
+  'Stop 1 &middot; ORGANISM. The whole plant, roots in the soil. Every rung of the ladder is happening inside this one living thing right now.',
+  'Stop 2 &middot; ORGAN SYSTEM. Every root, working together as ONE team &mdash; the root system. The rest of the plant fades because we\'re looking at just this team.',
+  'Stop 3 &middot; ORGAN. ONE single root, pulled out on its own. You could physically pick this one lump up &mdash; that\'s what makes it an organ.',
+  'Stop 4 &middot; TISSUE. A slice through that root: many cells of the exact SAME kind, side by side, doing one shared job.',
+  'Stop 5 &middot; CELL. One root hair cell. Its wall, membrane and vacuole are what everything else on this stepper is built from.'
+];
+let curStop = 1, watered = true;
+function renderStage(){
+  document.getElementById('plantStage').innerHTML = stopSVG(curStop, watered);
+  document.getElementById('stateCap').textContent = watered ? 'TURGID' : 'FLACCID';
+  document.getElementById('stateCap').style.color = watered ? '#1b5e20' : '#8a1c1c';
+  document.getElementById('stopCaption').innerHTML = stopCaptions[curStop-1];
+  renderStepper();
+}
+function renderStepper(){
+  const host = document.getElementById('stepper');
+  host.innerHTML = RUNGS.map((r,idx)=>`<div class="steppill ${idx+1===curStop?'current':''}" onclick="goStop(${idx+1})">${r}</div>`).join('');
+}
+function goStop(n){ curStop=n; renderStage(); }
+function setWater(w){
+  watered = w;
+  document.getElementById('wbtnWater').classList.toggle('active', w);
+  document.getElementById('wbtnDry').classList.toggle('active', !w);
+  renderStage();
+}
+
+/* ===================== TOGGLE (organ vs organ system) ===================== */
+let toggleMode = 'organ';
+function toggleSVG(mode){
+  if(mode==='organ') return stopSVG(3, true);
+  return stopSVG(2, true);
+}
+function renderToggle(){
+  document.getElementById('toggleStage').innerHTML = toggleSVG(toggleMode);
+  document.getElementById('togOrgan').classList.toggle('active', toggleMode==='organ');
+  document.getElementById('togSystem').classList.toggle('active', toggleMode==='system');
+  document.getElementById('toggleCaption').textContent = toggleMode==='organ'
+    ? 'ONE root, pulled out on its own — one lump you could pick up. That makes it an ORGAN.'
+    : 'EVERY root, all working together as one team. Several organs as a team makes it an ORGAN SYSTEM.';
+}
+function setToggle(m){ toggleMode=m; renderToggle(); }
+
+/* ===================== SORT-IT-YOURSELF (tissue vs organ etc.) ===================== */
+const sortItems = [
+  {id:1, label:'Six identical skin cells in a row', bin:'Tissue'},
+  {id:2, label:'A mix of nerve + muscle + skin cells forming one lump', bin:'Organ'},
+  {id:3, label:'One single cell, alone', bin:'Cell'},
+  {id:4, label:'The stomach, small intestine and liver working as a team', bin:'Organ system'},
+  {id:5, label:'A patch of identical root-hair cells', bin:'Tissue'},
+  {id:6, label:'The whole root, built from several different tissues', bin:'Organ'}
+];
+const binNames = ['Cell','Tissue','Organ','Organ system'];
+let sortPlaced = {};
+function renderSort(){
+  document.getElementById('sortcards').innerHTML = sortItems.map(it=>
+    `<span class="sortcard" draggable="true" id="card${it.id}" ondragstart="dragStart(event,${it.id})">${it.label}</span>`
+  ).join('');
+  document.getElementById('sortbins').innerHTML = binNames.map(b=>
+    `<div><div class="binlbl">${b}</div><div class="sortbin" id="bin_${b.replace(' ','_')}" ondrop="dropCard(event,'${b}')" ondragover="event.preventDefault()"></div></div>`
+  ).join('');
+}
+function dragStart(ev,id){ ev.dataTransfer.setData('text/plain', id); }
+function dropCard(ev,binName){
+  ev.preventDefault();
+  const id = +ev.dataTransfer.getData('text/plain');
+  const item = sortItems.find(i=>i.id===id);
+  const card = document.getElementById('card'+id);
+  if(!card || sortPlaced[id]) return;
+  const bin = document.getElementById('bin_'+binName.replace(' ','_'));
+  bin.appendChild(card);
+  card.style.cursor='default';
+  card.draggable=false;
+  card.style.background = (item.bin===binName) ? '#e8f5e9' : '#fdecea';
+  card.style.borderColor = (item.bin===binName) ? '#2e7d32' : '#e53935';
+  sortPlaced[id] = binName;
+  if(Object.keys(sortPlaced).length === sortItems.length) showSortResult();
+}
+function showSortResult(){
+  const correct = sortItems.filter(i=>sortPlaced[i.id]===i.bin).length;
+  const el = document.getElementById('sortresult');
+  el.style.display='block';
+  el.innerHTML = `<b>You placed ${correct} of ${sortItems.length} correctly.</b> ${correct===sortItems.length ? 'Every card landed in the right bin — the same-kind-of-cell vs different-tissues-as-a-team distinction is clicking.' : 'Green = correct, pink = re-think that one: is it ONE kind repeated, or SEVERAL different things teamed up?'}`;
+}
+
+/* ===================== SCREEN NAV ===================== */
+const screens=[...document.querySelectorAll('.screen')];
+let i=0;
+const prev=document.getElementById('prev'),next=document.getElementById('next'),
+      hub=document.getElementById('hub'),dots=document.getElementById('dots');
+function render(){
+  screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+  prev.disabled=i===0;
+  dots.textContent=`Screen ${i+1} of ${screens.length}`;
+  next.textContent = i===screens.length-1 ? 'Next Lesson →' : 'Next →';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+prev.onclick=()=>{if(i>0){i--;render();}};
+next.onclick=()=>{
+  if(i<screens.length-1){i++;render();}
+  else{window.location.href='Ch2Water_Lesson_InsideTheCell.html';}
+};
+
+/* ===================== PRACTICE (click-the-level) ===================== */
+const practiceItems = [
+  {body:'A leaf, on its own — one lump you could pick.', correct:'Organ'},
+  {body:'A patch of leaf-surface cells, all the exact same kind.', correct:'Tissue'},
+  {body:'The shoot system: stems, leaves and buds all working together.', correct:'Organ system'},
+  {body:'One single leaf cell, alone.', correct:'Cell'},
+  {body:'The whole plant — roots, stem, leaves — as one living thing.', correct:'Organism'}
+];
+let practiceCorrect=0, practiceAnswered=0, missedQs=[];
+function renderPractice(){
+  const host = document.getElementById('practiceHost');
+  host.innerHTML = practiceItems.map((it,idx)=>`
+    <div class="q" data-idx="${idx}" data-correct="${it.correct}">
+      <p>${idx+1}. ${it.body}</p>
+      <div class="stepper" style="margin-bottom:8px">
+        ${RUNGS.map(r=>`<div class="steppill" data-choice="${r}">${r}</div>`).join('')}
+      </div>
+      <button class="btn next chk" disabled>Check</button>
+      <div class="fb ok"></div>
+      <div class="fb no"></div>
+    </div>`).join('');
+  host.querySelectorAll('.q').forEach(q=>{
+    const correct = q.dataset.correct;
+    let chosen=null, locked=false;
+    const pills = [...q.querySelectorAll('.steppill')];
+    const chkBtn = q.querySelector('.chk');
+    pills.forEach(p=>p.onclick=()=>{
+      if(locked) return;
+      pills.forEach(x=>x.classList.remove('current'));
+      p.classList.add('current');
+      chosen = p.dataset.choice;
+      chkBtn.disabled=false;
+    });
+    chkBtn.onclick=()=>{
+      if(!chosen||locked) return;
+      locked=true;
+      pills.forEach(p=>{
+        if(p.dataset.choice===correct) p.style.outline='3px solid #2e7d32';
+        if(p.dataset.choice===chosen && chosen!==correct) p.style.outline='3px solid #e53935';
+      });
+      const ok = chosen===correct;
+      q.querySelector('.fb.ok').textContent = `✔ Correct — ${correct.toUpperCase()}.`;
+      q.querySelector('.fb.no').textContent = `✘ That's ${chosen} — the correct level was ${correct}.`;
+      q.querySelector('.fb.ok').classList.toggle('show', ok);
+      q.querySelector('.fb.no').classList.toggle('show', !ok);
+      chkBtn.disabled=true;
+      practiceAnswered++;
+      if(ok) practiceCorrect++; else missedQs.push(+q.dataset.idx+1);
+      if(practiceAnswered===practiceItems.length) showPracticeSummary();
+    };
+  });
+}
+function showPracticeSummary(){
+  const el = document.getElementById('practice-summary');
+  const pct = Math.round(practiceCorrect/practiceItems.length*100);
+  document.getElementById('ps-score').textContent = `You scored ${practiceCorrect} / ${practiceItems.length} (${pct}%)`;
+  let advice;
+  if(practiceCorrect===practiceItems.length) advice="Perfect — every level placed correctly.";
+  else if(practiceCorrect>=practiceItems.length-1) advice="Great job — almost every level placed correctly.";
+  else advice="Go back to the stepper on Screen 1 and walk through the five stops again before moving on.";
+  if(missedQs.length) advice += ` Review Q${missedQs.join(' and Q')}.`;
+  document.getElementById('ps-advice').textContent = advice;
+  el.style.display='block';
+  el.scrollIntoView({behavior:'smooth'});
+}
+
+/* ===================== INIT ===================== */
+renderStage();
+renderToggle();
+renderSort();
+renderPractice();
+render();
+</script>
+</body>
+</html>

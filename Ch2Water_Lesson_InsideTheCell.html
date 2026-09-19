@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 50 · Lesson 2 — Inside the Cell</title>
+<style>
+  :root{
+    --steel:#c9a227; --steel-d:#8a6a00; --steel-l:#fdf6e3;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#00695c; --amber-l:#e0f2f1;
+    --purple:#6a1b9a; --purple-l:#f3e8ff; --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px;animation:fade .3s}
+  .screen.active{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1}}
+  h2{color:var(--steel-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .card{border:1.5px solid var(--line);border-radius:12px;padding:14px;margin:12px 0}
+  .job{background:var(--steel-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--steel-d)}
+  .job b{color:var(--steel-d)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .trap b{color:#880e4f}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--steel-l);color:#5c4600}
+  .nav{display:flex;justify-content:space-between;margin-top:18px;gap:10px}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--steel-d);color:#fff}
+  .btn.hub{background:var(--blue);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:10px;color:var(--grey);font-size:.8rem}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+  .plantbox{background:#fafbfb;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+  #cellStage,#cellStage2,#cellStage3{width:100%;max-width:480px;margin:0 auto}
+  .chiprow{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:7px 14px;cursor:pointer;font-size:.88rem;font-weight:700}
+  .chip.selected{background:var(--steel-l);border-color:var(--steel-d)}
+  .chip.done{opacity:.4;cursor:default}
+  .slider{width:90%;margin:14px auto;display:block}
+  .statecap{font-weight:800;font-size:1.05rem;margin:6px 0;color:var(--steel-d);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔬 Lesson 2 · Inside the Cell</b><span class="pill">Unit 50 · Biology</span></div>
+
+  <!-- SCREEN 1: LABEL THE DIAGRAM -->
+  <section class="screen active" data-s="1">
+    <h2>Label the Cell 🏷️</h2>
+    <div class="rulebar">You're already inside the plant, at the smallest stop. Click a label below, then click its matching spot on the diagram.</div>
+    <div class="plantbox">
+      <div id="cellStage"></div>
+      <div class="chiprow" id="chipRow"></div>
+      <div class="statecap" id="labelStatus">0 / 5 placed</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 2: CELL SAP -->
+  <section class="screen" data-s="2">
+    <h2>What Fills the Vacuole 💧</h2>
+    <div class="rulebar">The vacuole is a sac. Watch what happens when it fills.</div>
+    <div class="plantbox">
+      <div id="cellStage2"></div>
+      <button class="opt" id="fillBtn" style="max-width:260px;margin:10px auto" onclick="toggleFill()">💧 Fill with cell sap</button>
+    </div>
+    <div class="job"><b>Cell sap</b> is the watery liquid that fills the vacuole. As it fills, it pushes outward against the wall &mdash; that outward push is what keeps the whole cell firm.</div>
+  </section>
+
+  <!-- SCREEN 3: WALL VS MEMBRANE, AS A PICTURE -->
+  <section class="screen" data-s="3">
+    <h2>Wall vs. Membrane, as a Picture 🧱</h2>
+    <div class="rulebar">Same two particles &mdash; one small (water), one big (dissolved sugar) &mdash; hitting each layer.</div>
+    <svg viewBox="0 0 500 170" xmlns="http://www.w3.org/2000/svg">
+      <text x="120" y="20" font-size="13" text-anchor="middle" font-weight="700" fill="#00695c">THE WALL</text>
+      <line x1="120" y1="35" x2="120" y2="140" stroke="#6d4c41" stroke-width="6" stroke-dasharray="14 10"/>
+      <circle cx="60" cy="60" r="7" fill="#1565c0"/><text x="60" y="82" font-size="9" text-anchor="middle">water</text>
+      <circle cx="60" cy="110" r="14" fill="#c62828"/><text x="60" y="140" font-size="9" text-anchor="middle">sugar</text>
+      <path d="M75,60 L165,60" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M78,110 L165,110" stroke="#c62828" stroke-width="2" marker-end="url(#arrow)"/>
+      <text x="200" y="14" font-size="10.5" text-anchor="middle" fill="#00695c">FULLY PERMEABLE &mdash; everything gets through</text>
+      <text x="330" y="20" font-size="13" text-anchor="middle" font-weight="700" fill="#8a6a00">THE MEMBRANE</text>
+      <g>
+        <line x1="330" y1="35" x2="330" y2="60" stroke="#8a6a00" stroke-width="6"/>
+        <line x1="330" y1="70" x2="330" y2="95" stroke="#8a6a00" stroke-width="6"/>
+        <line x1="330" y1="105" x2="330" y2="140" stroke="#8a6a00" stroke-width="6"/>
+      </g>
+      <path d="M285,60 L385,60" stroke="#1565c0" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M288,110 L320,110" stroke="#c62828" stroke-width="2"/>
+      <text x="304" y="98" font-size="14" fill="#c62828" font-weight="700">✕</text>
+      <text x="330" y="158" font-size="10.5" text-anchor="middle" fill="#8a6a00">PARTIALLY PERMEABLE &mdash; only the small one fits</text>
+      <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#546e7a"/></marker></defs>
+    </svg>
+    <div class="job"><b>Key idea:</b> the wall's gaps are big enough for everything &mdash; that's fully permeable. The membrane's gaps are small enough to block the big sugar particle but let the small water particle through &mdash; that's partially permeable. Because the wall is fully permeable, it never does any sorting itself; the real gatekeeper is the partially permeable membrane sitting just inside it.</div>
+  </section>
+
+  <!-- SCREEN 4: TURGID <-> FLACCID SLIDER -->
+  <section class="screen" data-s="4">
+    <h2>Turgid ↔ Flaccid, on a Slider 🎛️</h2>
+    <div class="rulebar">Drag the slider. Watch the vacuole, not just the words.</div>
+    <div class="plantbox">
+      <div id="cellStage3"></div>
+      <input type="range" class="slider" id="turgorSlider" min="0" max="100" value="50" oninput="updateSlider(this.value)">
+      <div class="statecap" id="sliderState">WILTING (in between)</div>
+    </div>
+    <div class="job"><b>Key idea:</b> turgid and flaccid aren't two switches &mdash; they're two ends of the same slider. Every amount of water in between shows up as a slightly bigger or smaller vacuole. That water only moves across because the membrane is partially permeable &mdash; it lets water through but keeps the bigger dissolved particles out.</div>
+  </section>
+
+  <!-- SCREEN 5: TRAP-RECOGNITION DRILL #13 -->
+  <section class="screen" data-s="5">
+    <h2>Trap-Recognition Drill #13 🚨</h2>
+    <div class="trap"><b>Watch for ALWAYS, NEVER, ONLY, EVERY.</b> A claim using one of these words is often too extreme.</div>
+    <div class="ungraded">
+      <p>Drill. A student claims: "The cell membrane and the cell wall are ALWAYS made of the exact same material." True or false?</p>
+      <button class="opt" data-w="H" data-c="false">True &mdash; one material does both jobs</button>
+      <button class="opt" data-w="H" data-c="true">False &mdash; the wall is cellulose and fully permeable; the membrane is a different, thinner layer that controls entry and exit</button>
+      <button class="opt" data-w="H" data-c="false">True, but only in root cells specifically</button>
+      <button class="btn next chkw" data-w="H">Check</button>
+      <div class="fb ok" data-w="H">✔ Correct &mdash; this is a false absolute claim. The wall and membrane are two separate layers doing two separate jobs.</div>
+      <div class="fb no" data-w="H">✘ Re-think it: does the wall block anything the way the membrane does?</div>
+    </div>
+  </section>
+
+  <!-- SCREEN 6: TERM-CHECK -->
+  <section class="screen" data-s="6">
+    <h2>Term-Check ✅</h2>
+    <div class="rulebar">Match each description to its word. Get all six correct to unlock the test.</div>
+    <div id="termHost"></div>
+    <div class="card" id="termResult" style="display:none;text-align:center"></div>
+  </section>
+
+  <!-- SCREEN 7: PRE-TEST SELF-CHECK -->
+  <section class="screen" data-s="7">
+    <h2>Pre-Test Self-Check ✅</h2>
+    <div class="rulebar">Two quick checks before the test.</div>
+    <div class="ungraded">
+      <p>Self-check 1. One root, on its own, is one lump you could pick up. What rung is that?</p>
+      <button class="opt" data-w="SC1" data-c="true">Organ</button>
+      <button class="opt" data-w="SC1" data-c="false">Organ system</button>
+      <button class="opt" data-w="SC1" data-c="false">Tissue</button>
+      <button class="btn next chkw" data-w="SC1">Check</button>
+      <div class="fb ok" data-w="SC1">✔ Correct.</div>
+      <div class="fb no" data-w="SC1">✘ Not quite.</div>
+    </div>
+    <div class="ungraded">
+      <p>Self-check 2. The wall lets everything through. Which word describes that?</p>
+      <button class="opt" data-w="SC2" data-c="true">Fully permeable</button>
+      <button class="opt" data-w="SC2" data-c="false">Partially permeable</button>
+      <button class="opt" data-w="SC2" data-c="false">Waterproof</button>
+      <button class="btn next chkw" data-w="SC2">Check</button>
+      <div class="fb ok" data-w="SC2">✔ Correct.</div>
+      <div class="fb no" data-w="SC2">✘ Not quite.</div>
+    </div>
+    <div id="selfcheck-result" class="card" style="display:none;text-align:center"></div>
+  </section>
+
+  <!-- NAV -->
+  <div class="nav">
+    <button class="btn prev" id="prev">← Back</button>
+    <a class="btn hub" id="hub" href="index.html">🏠 Hub</a>
+    <button class="btn next" id="next">Next →</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+
+<script>
+function cellSVG(level, withTargets){
+  const r = 18 + (level/100)*54;
+  const cx=260, cy=150;
+  let targets = '';
+  if(withTargets){
+    targets = `
+      <circle class="target" data-part="wall" cx="150" cy="150" r="14" fill="#fff" stroke="#333" stroke-width="2" onclick="placeTarget('wall')"/>
+      <circle class="target" data-part="membrane" cx="356" cy="150" r="14" fill="#fff" stroke="#333" stroke-width="2" onclick="placeTarget('membrane')"/>
+      <circle class="target" data-part="vacuole" cx="260" cy="150" r="14" fill="#fff" stroke="#333" stroke-width="2" onclick="placeTarget('vacuole')"/>
+      <circle class="target" data-part="cytoplasm" cx="330" cy="205" r="14" fill="#fff" stroke="#333" stroke-width="2" onclick="placeTarget('cytoplasm')"/>
+      <circle class="target" data-part="nucleus" cx="210" cy="105" r="14" fill="#fff" stroke="#333" stroke-width="2" onclick="placeTarget('nucleus')"/>`;
+  }
+  return `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+    <rect x="150" y="60" width="220" height="180" rx="16" fill="none" stroke="#6d4c41" stroke-width="7"/>
+    <rect x="164" y="74" width="192" height="152" rx="12" fill="#fdf6e3" stroke="#1565c0" stroke-width="3"/>
+    <circle cx="${cx}" cy="${cy}" r="${r.toFixed(1)}" fill="#b3e5fc" stroke="#0277bd" stroke-width="2"/>
+    <circle cx="210" cy="105" r="13" fill="#8e24aa"/>
+    <line x1="150" y1="150" x2="90" y2="150" stroke="#6d4c41" stroke-width="4"/>
+    <circle cx="78" cy="150" r="6" fill="#a1887f"/><circle cx="70" cy="140" r="5" fill="#a1887f"/><circle cx="70" cy="162" r="5" fill="#a1887f"/>
+    ${targets}
+  </svg>`;
+}
+
+/* SCREEN 1: label the diagram */
+const labelParts = [
+  {part:'wall', name:'Cell wall'},
+  {part:'membrane', name:'Cell membrane'},
+  {part:'vacuole', name:'Vacuole'},
+  {part:'cytoplasm', name:'Cytoplasm'},
+  {part:'nucleus', name:'Nucleus'}
+];
+let selectedChip = null, placedCount = 0;
+function renderLabelScreen(){
+  document.getElementById('cellStage').innerHTML = cellSVG(50, true);
+  document.getElementById('chipRow').innerHTML = labelParts.map(p=>
+    `<span class="chip" id="chip_${p.part}" onclick="selectChip('${p.part}')">${p.name}</span>`
+  ).join('');
+}
+function selectChip(part){
+  const chipEl = document.getElementById('chip_'+part);
+  if(chipEl.classList.contains('done')) return;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+  chipEl.classList.add('selected');
+  selectedChip = part;
+}
+function placeTarget(part){
+  if(!selectedChip) return;
+  const target = document.querySelector(`.target[data-part="${part}"]`);
+  if(target.classList.contains('correct')) return;
+  if(selectedChip === part){
+    target.setAttribute('fill','#a5d6a7');
+    target.classList.add('correct');
+    document.getElementById('chip_'+part).classList.add('done');
+    placedCount++;
+    document.getElementById('labelStatus').textContent = `${placedCount} / 5 placed`;
+    selectedChip = null;
+    document.querySelectorAll('.chip').forEach(c=>c.classList.remove('selected'));
+  } else {
+    target.setAttribute('fill','#ef9a9a');
+    setTimeout(()=>{ if(!target.classList.contains('correct')) target.setAttribute('fill','#fff'); }, 500);
+  }
+}
+
+/* SCREEN 2: cell sap fill toggle */
+let filled = false;
+function renderFillScreen(){ document.getElementById('cellStage2').innerHTML = cellSVG(filled?85:12,false); }
+function toggleFill(){
+  filled = !filled;
+  renderFillScreen();
+  document.getElementById('fillBtn').textContent = filled ? '↩ Empty the vacuole' : '💧 Fill with cell sap';
+}
+
+/* SCREEN 4: slider */
+function updateSlider(v){
+  document.getElementById('cellStage3').innerHTML = cellSVG(+v,false);
+  const cap = document.getElementById('sliderState');
+  if(v<30){ cap.textContent='FLACCID'; cap.style.color='#8a1c1c'; }
+  else if(v>70){ cap.textContent='TURGID'; cap.style.color='#1b5e20'; }
+  else { cap.textContent='WILTING (in between)'; cap.style.color='#8a6a00'; }
+}
+
+/* SCREEN 6: term-check */
+const termBank = [
+  {desc:'Many cells of the exact SAME kind, working together.', term:'tissue'},
+  {desc:'The watery liquid that fills the vacuole.', term:'cell sap'},
+  {desc:'Lets absolutely everything through, nothing blocked.', term:'fully permeable'},
+  {desc:'Lets some things through (like water) but not others (like dissolved sugar).', term:'partially permeable'},
+  {desc:'Firm and full of water, pushing against the wall.', term:'turgid'},
+  {desc:'Limp, having lost water — the vacuole has shrunk.', term:'flaccid'}
+];
+const allTerms = termBank.map(t=>t.term);
+let termScore = {};
+function renderTermCheck(){
+  const host = document.getElementById('termHost');
+  host.innerHTML = termBank.map((t,idx)=>{
+    const opts = shuffle([...allTerms]);
+    return `<div class="ungraded" data-idx="${idx}" data-correct="${t.term}">
+      <p>${idx+1}. ${t.desc}</p>
+      ${opts.map(o=>`<button class="opt" data-term="${o}">${o}</button>`).join('')}
+      <button class="btn next chk" disabled>Check</button>
+      <div class="fb ok"></div><div class="fb no"></div>
+    </div>`;
+  }).join('');
+  host.querySelectorAll('.ungraded').forEach(block=>{
+    const idx = block.dataset.idx, correct = block.dataset.correct;
+    const opts = [...block.querySelectorAll('.opt')];
+    const chkBtn = block.querySelector('.chk');
+    let chosen=null, locked=false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen=o.dataset.term;
+      chkBtn.disabled=false;
+    });
+    chkBtn.onclick=()=>{
+      if(!chosen||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.disabled=true;
+        if(o.dataset.term===correct) o.classList.add('correct');
+        else if(o.dataset.term===chosen) o.classList.add('wrong');
+      });
+      const ok = chosen===correct;
+      block.querySelector('.fb.ok').textContent='✔ Correct.';
+      block.querySelector('.fb.no').textContent=`✘ That word is "${correct}".`;
+      block.querySelector('.fb.ok').classList.toggle('show',ok);
+      block.querySelector('.fb.no').classList.toggle('show',!ok);
+      chkBtn.disabled=true;
+      termScore[idx]=ok;
+      checkTermComplete();
+    };
+  });
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function checkTermComplete(){
+  if(Object.keys(termScore).length < termBank.length) return;
+  const correctCount = Object.values(termScore).filter(Boolean).length;
+  const el = document.getElementById('termResult');
+  el.style.display='block';
+  if(correctCount===termBank.length){
+    el.innerHTML = '<b>6 / 6 — unlocked!</b> You can move on to the test.';
+    termCheckPassed = true;
+  } else {
+    el.innerHTML = `<b>${correctCount} / 6.</b> Not yet — <button class="btn next" id="termRetry" onclick="retryTermCheck()">Try Again</button>`;
+    termCheckPassed = false;
+  }
+  updateNextLock();
+}
+function retryTermCheck(){
+  termScore = {};
+  document.getElementById('termResult').style.display='none';
+  renderTermCheck();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+let termCheckPassed = false;
+function updateNextLock(){
+  if (i === 5){ // Screen 6 (0-indexed screen 5) = term-check
+    next.disabled = !termCheckPassed;
+    next.title = termCheckPassed ? '' : 'Score 6/6 on the term-check first';
+  } else {
+    next.disabled = false;
+    next.title = '';
+  }
+}
+
+/* SCREEN NAV */
+const screens=[...document.querySelectorAll('.screen')];
+let i=0;
+const prev=document.getElementById('prev'),next=document.getElementById('next'),dots=document.getElementById('dots');
+function render(){
+  screens.forEach((s,n)=>s.classList.toggle('active',n===i));
+  prev.disabled=i===0;
+  dots.textContent=`Screen ${i+1} of ${screens.length}`;
+  next.textContent = i===screens.length-1 ? 'Go to Test →' : 'Next →';
+  updateNextLock();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+prev.onclick=()=>{if(i>0){i--;render();}};
+next.onclick=()=>{
+  if(i<screens.length-1){i++;render();}
+  else{window.location.href='Tests/Unit_50_Test_WaterJourney.html';}
+};
+
+/* pre-test self-check */
+const selfCheckResult = { SC1: null, SC2: null };
+document.querySelectorAll('.ungraded').forEach(block=>{
+  const firstOpt = block.querySelector('.opt[data-w]');
+  if(!firstOpt) return;
+  const w = firstOpt.dataset.w;
+  const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+  let chosen = null, locked = false;
+  opts.forEach(o=>o.onclick=()=>{
+    if(locked) return;
+    opts.forEach(x=>x.style.outline='');
+    o.style.outline='3px solid #1565c0';
+    chosen = o.dataset.c === 'true';
+  });
+  const chkBtn = block.querySelector('.chkw');
+  if(!chkBtn) return;
+  chkBtn.onclick=()=>{
+    if(chosen===null||locked) return;
+    locked=true;
+    opts.forEach(o=>{
+      o.classList.remove('correct','wrong');
+      if(o.dataset.c==='true') o.classList.add('correct');
+      else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+      o.disabled=true;
+    });
+    block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+    block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+    chkBtn.disabled=true;
+    chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    if (w === 'SC1' || w === 'SC2'){
+      selfCheckResult[w] = chosen;
+      if (selfCheckResult.SC1 !== null && selfCheckResult.SC2 !== null) showSelfCheckResult();
+    }
+  };
+});
+function showSelfCheckResult(){
+  const el = document.getElementById('selfcheck-result');
+  if (!el) return;
+  let msg;
+  if (selfCheckResult.SC1 && selfCheckResult.SC2){
+    msg = "✅ Both correct — you're ready for the test!";
+  } else if (!selfCheckResult.SC1 && selfCheckResult.SC2){
+    msg = "Go back to THE PLANT (Lesson 1) and walk the stepper again before the test.";
+  } else if (selfCheckResult.SC1 && !selfCheckResult.SC2){
+    msg = "Go back to THE CELL DIAGRAM (Screen 3 of this lesson) before the test.";
+  } else {
+    msg = "Go back to BOTH — the plant (Lesson 1) and the cell diagram (Screen 3) — before the test.";
+  }
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+/* INIT */
+renderLabelScreen();
+renderFillScreen();
+updateSlider(50);
+renderTermCheck();
+render();
+</script>
+</body>
+</html>

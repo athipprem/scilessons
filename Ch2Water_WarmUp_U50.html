@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 50 · Warm-Up</title>
+<style>
+  :root{
+    --steel:#00695c; --steel-d:#003d33; --steel-l:#e0f2f1;
+    --blue:#1565c0; --blue-l:#e3f2fd; --amber:#8a6a00; --amber-l:#fdf6e3;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--steel);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .card{background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .rulebar{background:var(--blue-l);border:1.5px solid var(--blue);color:var(--blue);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .ungraded{background:#eceff1;border:1.5px dashed var(--grey);border-radius:12px;padding:14px;margin:12px 0}
+  .ungraded p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.correct{background:#e8f5e9;border-color:#2e7d32;font-weight:bold}
+  .opt.wrong{background:#fdecea;border-color:#e53935}
+  .opt:disabled{opacity:.65;cursor:not-allowed}
+  .fb{display:none;margin-top:8px;padding:10px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show{display:block}
+  .fb.ok{background:#e8f5e9;color:#1b5e20}
+  .fb.no{background:var(--amber-l);color:#7a5a00}
+  .btn{border:none;border-radius:10px;padding:11px 20px;font-size:.95rem;font-weight:bold;cursor:pointer}
+  .btn.next{background:var(--steel);color:#fff;display:block;margin:18px auto 0}
+  .chkw{background:#eceff1;color:#546e7a;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><b>🔁 Warm-Up</b><span class="pill">Unit 50 · Biology</span></div>
+  <div class="card">
+    <div class="rulebar">Two quick refreshers from Chemistry Unit 40 — separating mixtures. This is unrelated to today's plant topic; it's just keeping an older skill sharp.</div>
+
+    <div class="ungraded">
+      <p>1. A bowl holds water with sand mixed in, but nothing dissolved. Which method separates the sand out fastest?</p>
+      <button class="opt" data-w="A" data-c="true">Sieving — the sand grains are too big to pass through the holes, but the water passes through</button>
+      <button class="opt" data-w="A" data-c="false">Evaporating — heat the whole bowl until only sand is left</button>
+      <button class="opt" data-w="A" data-c="false">Filtering — pour it through filter paper to catch the dissolved sand</button>
+      <button class="btn next chkw" data-w="A">Check</button>
+      <div class="fb ok" data-w="A">✔ Correct — sand is solid pieces, too big to pass through, with nothing dissolved.</div>
+      <div class="fb no" data-w="A">✘ Re-think it: is the sand DISSOLVED, or just mixed in as solid pieces?</div>
+    </div>
+
+    <div class="ungraded">
+      <p>2. A classmate claims: "Evaporating NEVER works for recovering a dissolved solid, no matter what it is." Is this true?</p>
+      <button class="opt" data-w="B" data-c="false">True — evaporation can never recover any dissolved solid</button>
+      <button class="opt" data-w="B" data-c="true">False — evaporating the water away leaves the dissolved solid behind, as long as the solid itself doesn't burn or evaporate too</button>
+      <button class="opt" data-w="B" data-c="false">True, but only for salt specifically</button>
+      <button class="btn next chkw" data-w="B">Check</button>
+      <div class="fb ok" data-w="B">✔ Correct — evaporating the water away is exactly how you get a dissolved solid (like salt) back out.</div>
+      <div class="fb no" data-w="B">✘ Re-think it: if you boil away all the water, what's left behind in the bowl?</div>
+    </div>
+
+    <a class="btn next" id="startLesson" href="Ch2Water_Lesson_TheWaterJourney.html">Start Lesson 1 →</a>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.ungraded').forEach(block=>{
+    const firstOpt = block.querySelector('.opt');
+    if(!firstOpt) return;
+    const w = firstOpt.dataset.w;
+    const opts = [...block.querySelectorAll(`.opt[data-w="${w}"]`)];
+    let chosen = null, locked = false;
+    opts.forEach(o=>o.onclick=()=>{
+      if(locked) return;
+      opts.forEach(x=>x.style.outline='');
+      o.style.outline='3px solid #1565c0';
+      chosen = o.dataset.c === 'true';
+    });
+    const chkBtn = block.querySelector('.chkw');
+    if(!chkBtn) return;
+    chkBtn.onclick=()=>{
+      if(chosen===null||locked) return;
+      locked=true;
+      opts.forEach(o=>{
+        o.classList.remove('correct','wrong');
+        if(o.dataset.c==='true') o.classList.add('correct');
+        else if(o===opts.find(x=>x.style.outline)) o.classList.add('wrong');
+        o.disabled=true;
+      });
+      block.querySelector(`.fb.ok[data-w="${w}"]`).classList.toggle('show', chosen===true);
+      block.querySelector(`.fb.no[data-w="${w}"]`).classList.toggle('show', chosen===false);
+      chkBtn.disabled=true;
+      chkBtn.textContent = chosen ? '✔ Checked' : '✗ Checked';
+    };
+  });
+</script>
+</body>
+</html>
