@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 51 · Lesson 2 — Slides, Stains and Reading Real Cells</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#7b2d6b;--pl-d:#4a1744;--pl-l:#f6e9f3;--sv:#8a93a0;--sv-l:#eef0f3;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .stage{max-width:520px;margin:0 auto}
+  .stepbar{display:flex;gap:6px;justify-content:center;margin:8px 0}.stepbar span{width:30px;height:30px;border-radius:50%;background:var(--sv-l);display:inline-flex;align-items:center;justify-content:center;font-weight:800}
+  .stepbar span.on{background:var(--pl);color:#fff}
+  .sline{min-height:3em;font-weight:700;text-align:center;margin:6px 0;color:var(--pl-d)}
+  .obj{cursor:pointer}.obj:hover circle,.obj:hover ellipse,.obj:hover path{stroke-width:4}
+  .obj.done circle,.obj.done ellipse,.obj.done path{stroke:#2e7d32}
+  .askbar{display:none;margin-top:8px}.askbar.show{display:block}
+  .clchoice{display:flex;flex-wrap:wrap;gap:6px}.clchoice .cl{width:auto;flex:1 1 45%}
+  .oi{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:6px 0}.oi p{flex:1 1 60%;margin:0;font-weight:400}
+  .oi .pbrow{flex:0 0 auto}
+</style>
+</head>
+<body data-next-href="Tests/Unit_51_Test_AnimalCell.html" data-last-label="Go to Test &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#128300; Lesson 2 · Slides &amp; Stains</b><span class="pill">Unit 51 · Biology</span></div>
+
+  <!-- 1 -->
+  <section class="screen active" id="t1">
+    <h2>Make a Real Slide</h2>
+    <div class="why">In Unit 48 you were promised you would one day prepare and stain a real slide. Today is the day. Scientists use slides to see cells that are far too small to see by eye, including the ones that make up your own body.</div>
+    <div class="job">First, one thing to recall: the specimen must be very thin, so light can shine through it. A coverslip then goes on top, to flatten it and protect it.</div>
+  </section>
+
+  <!-- 2 route A -->
+  <section class="screen" id="tRouteA" data-route="A" data-label="Route A: the slide animation">
+    <h2>Making a Cheek-Cell Slide (Route A)</h2>
+    <div class="box"><svg id="slide" class="stage" data-step="1" data-lid="" viewBox="0 0 520 240" xmlns="http://www.w3.org/2000/svg">
+  <rect x="60" y="150" width="400" height="26" rx="4" fill="#dfe8ee" stroke="#8a93a0" stroke-width="2"/>
+  <text x="260" y="199" font-size="12" text-anchor="middle" fill="#555">glass slide</text>
+  <g id="st1"><rect x="330" y="60" width="90" height="12" rx="6" fill="#f3ead2" stroke="#8a6a00"/><circle cx="330" cy="66" r="9" fill="#fff" stroke="#8a6a00"/><path d="M300,70 C270,95 262,120 255,142" fill="none" stroke="#8a93a0" stroke-dasharray="4 4"/><text x="375" y="46" font-size="12" text-anchor="middle" fill="#555">cotton bud</text></g>
+  <g id="st2" style="display:none"><ellipse cx="260" cy="146" rx="46" ry="6" fill="#f4d9c6" stroke="#b58a6e"/><text x="260" y="128" font-size="12" text-anchor="middle" fill="#555">smear</text></g>
+  <g id="st3" style="display:none"><ellipse cx="260" cy="146" rx="46" ry="6" fill="#9fc1e8" stroke="#2c5aa0"/><path d="M262,60 C250,84 250,98 262,106 C274,98 274,84 262,60 Z" fill="#2c5aa0"/><text x="330" y="90" font-size="12" fill="#2c5aa0">one drop of methylene blue</text></g>
+  <g id="st4" style="display:none"><ellipse cx="260" cy="146" rx="46" ry="6" fill="#9fc1e8" stroke="#2c5aa0"/>
+    <g id="lidflat" style="display:none"><rect x="214" y="136" width="92" height="6" fill="#d7edf8" stroke="#5b9fd0"/><circle cx="238" cy="146" r="6" fill="#fff" stroke="#555"/><circle cx="272" cy="147" r="8" fill="#fff" stroke="#555"/><circle cx="256" cy="144" r="4" fill="#fff" stroke="#555"/><text x="260" y="118" font-size="12" text-anchor="middle" fill="#c62828" font-weight="700">air bubbles trapped!</text></g>
+    <g id="lidangle" style="display:none"><rect x="214" y="136" width="92" height="6" fill="#d7edf8" stroke="#5b9fd0"/><text x="260" y="118" font-size="12" text-anchor="middle" fill="#2e7d32" font-weight="700">smooth, no air bubbles</text></g>
+  </g>
+  <g id="st5" style="display:none"><ellipse cx="260" cy="146" rx="46" ry="6" fill="#9fc1e8" stroke="#2c5aa0"/><rect x="214" y="136" width="92" height="6" fill="#d7edf8" stroke="#5b9fd0"/><text x="260" y="108" font-size="12" text-anchor="middle" fill="#4a1744" font-weight="700">ready for the microscope</text></g>
+</svg>
+      <div class="stepbar"><span class="on" data-n="1">1</span><span data-n="2">2</span><span data-n="3">3</span><span data-n="4">4</span><span data-n="5">5</span></div>
+      <div class="sline" id="sline">1. Gently scrape the inside of your cheek with a clean cotton bud. Use your own, then throw it away.</div>
+      <div id="stline" style="display:none">
+        <span data-n="1">1. Gently scrape the inside of your cheek with a clean cotton bud. Use your own, then throw it away.</span>
+        <span data-n="2">2. Smear it thinly on the glass slide.</span>
+        <span data-n="3">3. Add one drop of methylene blue.</span>
+        <span data-n="4">4. Now lower the coverslip. Try both ways!</span>
+        <span data-n="5">5. Look at low power first (Unit 48).</span>
+        <span data-n="f">The coverslip fell flat, and air bubbles are trapped under the glass.</span>
+        <span data-n="a">One edge went down first, held with a toothpick. The liquid pushed the air out ahead of the glass.</span>
+      </div>
+      <div id="lidbtns" style="display:none"><button class="actbtn" id="bFlat">Drop the coverslip flat</button><button class="actbtn alt" id="bAngle">Lower it at an angle</button></div>
+      <button class="actbtn" id="bStep">Next step</button>
+    </div>
+  </section>
+
+  <!-- 3 route B -->
+  <section class="screen" id="tRouteB" data-route="B" data-label="Route B: the step list">
+    <h2>Same Slide, as a List (Route B)</h2>
+    <div class="rulebar">Same idea, now as steps with the reason for each.</div>
+    <ol class="stepol">
+      <li>Scrape the inside of your cheek gently, with your own clean cotton bud. This gives a few thin cells.</li>
+      <li>Smear it on the slide. A thin smear lets light shine through.</li>
+      <li>Add one drop of methylene blue (iodine for plant cells). Almost everything in a cell is see-through, so the stain makes the nucleus stand out.</li>
+      <li>Lower the coverslip at an angle, one edge first, using a toothpick. The liquid pushes the air out ahead of the glass, so no air bubbles get trapped.</li>
+      <li>Look on low power first, then move up. You find the cells before you zoom in.</li>
+    </ol>
+  </section>
+
+  <!-- 4 stains -->
+  <section class="screen" id="tStain" data-lock="pick">
+    <h2>Two Stains, Two Jobs</h2>
+    <div class="job"><b>Methylene blue</b> is used for animal cells, like your cheek cells. It colours the nucleus blue.</div>
+    <div class="job"><b>Iodine</b> is used for plant cells, like onion cells. It colours the nucleus yellow-brown.</div>
+    <div class="rulebar">Plant cell? Reach for the iodine. Animal cell? Reach for the methylene blue. A stain makes some parts stand out from the rest.</div>
+    <div class="pick" data-why="Iodine stains plant cells such as onion. Methylene blue is for animal cells.">
+      <p>Which stain goes with an onion-skin slide?</p><div class="pbrow"><button class="pb" data-ok>Iodine</button><button class="pb">Methylene blue</button></div><div class="pfb"></div></div>
+    <div class="pick" data-why="Methylene blue stains animal cells such as cheek cells. Iodine is for plant cells.">
+      <p>Which stain goes with a cheek-cell slide?</p><div class="pbrow"><button class="pb">Iodine</button><button class="pb" data-ok>Methylene blue</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 5 game -->
+  <section class="screen" id="tGame" data-label="the Cell or bubble game" data-lock="game">
+    <h2>Cell or Air Bubble?</h2>
+    <div class="job"><b>Rule: use at least two clues before you decide.</b><br>Air bubble clues: perfectly round, thick black rim, bright empty centre, no stained dot. A bubble also slides about if you press the coverslip. Cell clues: uneven outline, thin edge, a darker stained dot.</div>
+    <div class="box"><div class="stage"><svg id="micro" viewBox="0 0 520 250" xmlns="http://www.w3.org/2000/svg"><circle cx="260" cy="125" r="120" fill="#e8f1f7" stroke="#555" stroke-width="3"/><g class="obj" data-kind="bubble" data-clue="Perfectly round, a thick black rim and a bright empty centre: an air bubble."><circle cx="190" cy="95" r="30" fill="#f4f7fa" stroke="#222" stroke-width="5"/><circle cx="190" cy="95" r="13" fill="#fff" opacity=".8"/></g><g class="obj" data-kind="cell" data-clue="Uneven outline, thin edge, and a darker stained dot (the nucleus): a cell."><path d="M255,70 C285,55 320,72 318,100 C316,125 290,138 262,128 C240,118 236,85 255,70 Z" fill="#f4e4ef" stroke="#9a6b86" stroke-width="1.5"/><circle cx="283" cy="98" r="9" fill="#3f51b5"/></g><g class="obj" data-kind="bubble" data-clue="Perfectly round, a thick black rim and a bright empty centre, no stained dot: an air bubble."><circle cx="345" cy="160" r="22" fill="#f4f7fa" stroke="#222" stroke-width="5"/><circle cx="345" cy="160" r="9" fill="#fff" opacity=".8"/></g><g class="obj" data-kind="cell" data-clue="Uneven outline, thin edge, and a darker stained dot: a cell, even though it is partly hidden."><path d="M170,150 C195,138 222,150 220,170 C218,190 190,198 172,188 C160,178 160,160 170,150 Z" fill="#f4e4ef" stroke="#9a6b86" stroke-width="1.5"/><circle cx="196" cy="170" r="8" fill="#3f51b5"/></g><g class="obj" data-kind="bubble" data-clue="Perfectly round with a thick black rim and a bright empty centre. It also slides about when you press the coverslip: an air bubble."><circle cx="300" cy="190" r="16" fill="#f4f7fa" stroke="#222" stroke-width="5"/><circle cx="300" cy="190" r="7" fill="#fff" opacity=".8"/></g><g class="obj" data-kind="cell" data-clue="Uneven outline, thin edge, and a darker stained dot (the nucleus): a cell."><path d="M335,85 C360,75 385,92 380,112 C375,130 350,134 335,124 C322,114 322,95 335,85 Z" fill="#f4e4ef" stroke="#9a6b86" stroke-width="1.5"/><circle cx="356" cy="105" r="8" fill="#3f51b5"/></g></svg></div>
+      <div class="askbar" id="ask"><div class="sline" id="askq">Is it a cell or an air bubble?</div><div class="pbrow"><button class="actbtn" id="aCell">A cell</button><button class="actbtn alt" id="aBub">An air bubble</button></div></div>
+      <div class="sline" id="gamefb">Click any object. Find all six.</div>
+      <div id="gamecount" style="font-size:.85rem;color:#718096">0 / 6 sorted</div>
+      <div id="gtxt" style="display:none"><span data-k="wrong">Not quite. Check the rule above, using at least two clues, then try again.</span><span data-k="right">Yes!</span><span data-k="all">All six sorted.</span></div>
+    </div>
+  </section>
+
+  <!-- 6 observation vs inference -->
+  <section class="screen" id="tOI" data-lock="pick">
+    <h2>Observation or Inference?</h2>
+    <div class="job">An <b>observation</b> is what you actually see. An <b>inference</b> is what you work out from it.</div>
+    <div class="rulebar">Mia's slide diary. Sort each line.</div>
+    <div class="pick oi" data-why="You can see this directly."><p>The blue dots are darker than the rest.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You can see this directly."><p>The shapes have uneven edges.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You can count this directly."><p>There are about 20 shapes in view.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You worked this out. The slide does not say so."><p>These are cells from my cheek.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You worked this out from clues."><p>The round empty shape is an air bubble.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You worked this out. You cannot see the label."><p>The blue dot is the nucleus.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 7 plant or animal -->
+  <section class="screen" id="tPA" data-lock="clue">
+    <h2>Plant or Animal? Pick Two Clues</h2>
+    <div class="rulebar">One clue is not enough. Pick exactly two good clues for each slide.</div>
+    <div class="twocol">
+      <div class="box"><svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg"><rect x="10" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="18" cy="29" r="4" fill="#a36a1e"/><rect x="48" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="56" cy="29" r="4" fill="#a36a1e"/><rect x="86" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="94" cy="29" r="4" fill="#a36a1e"/><rect x="124" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="132" cy="29" r="4" fill="#a36a1e"/><rect x="162" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="170" cy="29" r="4" fill="#a36a1e"/><rect x="200" y="12" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="208" cy="29" r="4" fill="#a36a1e"/><rect x="10" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="18" cy="65" r="4" fill="#a36a1e"/><rect x="48" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="56" cy="65" r="4" fill="#a36a1e"/><rect x="86" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="94" cy="65" r="4" fill="#a36a1e"/><rect x="124" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="132" cy="65" r="4" fill="#a36a1e"/><rect x="162" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="170" cy="65" r="4" fill="#a36a1e"/><rect x="200" y="48" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="208" cy="65" r="4" fill="#a36a1e"/><rect x="10" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="18" cy="101" r="4" fill="#a36a1e"/><rect x="48" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="56" cy="101" r="4" fill="#a36a1e"/><rect x="86" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="94" cy="101" r="4" fill="#a36a1e"/><rect x="124" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="132" cy="101" r="4" fill="#a36a1e"/><rect x="162" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="170" cy="101" r="4" fill="#a36a1e"/><rect x="200" y="84" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="208" cy="101" r="4" fill="#a36a1e"/><rect x="10" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="18" cy="137" r="4" fill="#a36a1e"/><rect x="48" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="56" cy="137" r="4" fill="#a36a1e"/><rect x="86" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="94" cy="137" r="4" fill="#a36a1e"/><rect x="124" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="132" cy="137" r="4" fill="#a36a1e"/><rect x="162" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="170" cy="137" r="4" fill="#a36a1e"/><rect x="200" y="120" width="36" height="34" fill="#f6ecc0" stroke="#7a4b2a" stroke-width="2.5"/><circle cx="208" cy="137" r="4" fill="#a36a1e"/></svg><div>Stained with iodine</div></div>
+      <div class="box"><svg viewBox="0 0 240 160" xmlns="http://www.w3.org/2000/svg"><rect width="240" height="160" fill="#f3f7fc"/><path d="M30,40 C55,20 95,32 92,58 C88,84 52,92 32,74 C20,62 20,50 30,40 Z" fill="#e6e9f7" stroke="#6c7bb8" stroke-width="1.5"/><circle cx="64" cy="58" r="9" fill="#2c3aa0"/><path d="M130,84 C160,70 196,88 190,114 C184,140 148,146 130,128 C118,114 118,96 130,84 Z" fill="#e6e9f7" stroke="#6c7bb8" stroke-width="1.5"/><circle cx="160" cy="110" r="9" fill="#2c3aa0"/><path d="M150,16 C176,8 206,22 200,44 C194,64 160,66 146,50 C138,38 140,22 150,16 Z" fill="#e6e9f7" stroke="#6c7bb8" stroke-width="1.5"/><circle cx="172" cy="38" r="8" fill="#2c3aa0"/></svg><div>Stained with methylene blue</div></div>
+    </div>
+    <div class="cluebox" data-good="1,3" data-one="Not enough. Find a second clue." data-bad="Not quite. Look at both clues again." data-why="Plant. The thick walls make a tidy brick pattern, and the cells are stained with iodine, the plant stain.">
+      <p>Slide 1 (left): plant or animal? Pick two clues.</p>
+      <div class="clchoice"><button class="cl" data-n="1">Tidy, brick-like pattern of cells</button><button class="cl" data-n="2">The cells are small</button><button class="cl" data-n="3">Thick, stiff outlines around each cell</button><button class="cl" data-n="4">There is no green colour</button></div>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="cluebox" data-good="1,2" data-one="Not enough. Find a second clue." data-bad="Not quite. Look at both clues again." data-why="Animal. The cells have uneven outlines and thin edges, with no wall.">
+      <p>Slide 2 (right): plant or animal? Pick two clues.</p>
+      <div class="clchoice"><button class="cl" data-n="1">Uneven, rounded outlines</button><button class="cl" data-n="2">Thin soft edges and no thick wall</button><button class="cl" data-n="3">The cells are small</button><button class="cl" data-n="4">There is no green colour</button></div>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="job"><b>The surprise:</b> onion cells have no chloroplasts. The bulb grows underground in the dark. So "no green" does not prove a cell is from an animal. That is why you need two clues. An onion slide stained with iodine shows thick walls but no green.</div>
+  </section>
+
+  <!-- 8 trap -->
+  <section class="screen" id="tTrap" data-lock="mcq">
+    <h2>Trap-Recognition Drill #14</h2>
+    <div class="trap"><b>Watch for MUST, ALWAYS, NEVER, ONLY.</b> A claim with one of these words is often too extreme.</div>
+    <div class="mcq" data-why="False. In a plant cell the big vacuole often squashes the nucleus flat against the wall, so it is easy to miss. Use two clues.">
+      <p>A student says: "If you can't see a nucleus, the cell MUST be an animal cell." True or false?</p>
+      <button class="opt">True: every plant cell shows a clear nucleus</button><button class="opt" data-ok>False: a plant cell's nucleus can be squashed against the wall and hard to see</button><button class="opt">True, but only for onion cells</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <!-- 9 term check -->
+  <section class="screen" id="tTerms" data-lock="term">
+    <h2>Word Check</h2>
+    <div class="rulebar">Tap a word, then tap its meaning. Get all six right to unlock the test.</div>
+    <div class="termcheck">
+      <div class="tchips"><button class="tchip" data-t="regulate">regulate</button><button class="tchip" data-t="coverslip">coverslip</button><button class="tchip" data-t="iodine">iodine</button><button class="tchip" data-t="methylene blue">methylene blue</button><button class="tchip" data-t="observation">observation</button><button class="tchip" data-t="inference">inference</button></div>
+      <div class="trow" data-t="coverslip"><span class="slot">&hellip;</span><span>The thin glass sheet lowered over the specimen</span></div>
+      <div class="trow" data-t="inference"><span class="slot">&hellip;</span><span>Something you work out from what you saw</span></div>
+      <div class="trow" data-t="regulate"><span class="slot">&hellip;</span><span>To keep something steady, not too much and not too little</span></div>
+      <div class="trow" data-t="methylene blue"><span class="slot">&hellip;</span><span>The stain that turns an animal cell's nucleus blue</span></div>
+      <div class="trow" data-t="observation"><span class="slot">&hellip;</span><span>Something you can actually see</span></div>
+      <div class="trow" data-t="iodine"><span class="slot">&hellip;</span><span>The stain that turns a plant cell's nucleus yellow-brown</span></div>
+      <button class="btn chk tchk">Check</button><div class="tres"></div>
+    </div>
+  </section>
+
+  <!-- 10 self-check -->
+  <section class="screen" id="tSelf" data-lock="self">
+    <h2>Before the Test: Self-Check</h2>
+    <div class="rulebar">One try each. Then you will either be ready, or sent back to the right place.</div>
+    <div class="mcq selfq" data-fail="route">
+      <p>1. Why is the coverslip lowered at an angle over the specimen?</p>
+      <button class="opt" data-ok>So the air is pushed out and no air bubbles are trapped</button><button class="opt">So the stain turns a darker colour</button><button class="opt">So the slide does not crack</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="tGame">
+      <p>2. A round shape has a thick black rim and a bright empty centre. What is it most likely to be?</p>
+      <button class="opt">A cell with a hidden nucleus</button><button class="opt" data-ok>An air bubble</button><button class="opt">A burst cell</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch2Animal_L2.js"></script>
+</body>
+</html>

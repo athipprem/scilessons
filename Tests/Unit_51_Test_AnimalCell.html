@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_51_Test_AnimalCell.html — Biology: Inside the Animal Cell
+     (Ch.2 §C, school-aligned, beyond-class). Built from
+     BUILD_PLAN_SCI_U51_AnimalCell.md (12 Oct 2026).
+     Section A: cellulose recall; methylene blue for cheek cells.
+     Section B: coverslip technique, regulation (animals vs wall),
+     why no chloroplasts, a picture item (air bubble), two
+     shape->job items on taught cells.
+     Section C: osmosis in a wall-less cell (x2), U47 orbit-vs-flyby
+     spaced item, U13 light/contrast, U2/U40 spreading dye, U42
+     series circuit, observation vs inference, a picture item
+     (plant or animal), U8 chloroplast location, an unseen-cell
+     structure->function item, U32 fat insulation, and a
+     magnification/real-size item. Answer positions are the pinned,
+     randomised key (not a cycle). TIER SPLIT 2/6/12. PASS BAR 16/20.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 51 Test — Biology: Inside the Animal Cell</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#7b2d6b; --steel-d:#4a1744; --a-fill:#f6e9f3; --a-text:#7b2d6b;
+    --blue:#1565c0; --b-fill:#c5cae9; --b-text:#1a237e;
+    --purple:#5f6b78; --c-fill:#eef0f3; --c-text:#4b5662;
+    --amber:#7b2d6b; --amber-l:#f6e9f3;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#4a1744}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#e3d6e8);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 51 Test — Biology: Inside the Animal Cell</b>
+      <span class="sub" id="hdr-sub">Animal Cells • Slides &amp; Stains • Reading Real Cells</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Once you submit, you can't change your answers. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="doSubmit()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 51;
+const UNIT_TITLE = "Biology: Inside the Animal Cell (Ch.2 §C)";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+
+const Q = [
+  /* A (Basic) Q1-2 · B (Intermediate) Q3-8 · C (Applied) Q9-20 */
+  { n:1, section:"A", tier:"Basic", star:0, body:"Paper is made from plant fibres. The tough material in those fibres is the same material that a plant cell's wall is built from. What is it?",
+    options:["Cellulose", "Chlorophyll", "Cytoplasm", "Iodine"], ans:1,
+    why:"A plant cell's wall is built from cellulose, a tough material. Plant fibres in paper are made of it too." },
+  { n:2, section:"A", tier:"Basic", star:0, body:"Which stain do you use to see the nucleus in a smear of cheek cells?",
+    options:["Iodine", "Weak salt water", "Pure water", "Methylene blue"], ans:4,
+    why:"Methylene blue is the stain for animal cells such as cheek cells. Iodine is the stain for plant cells." },
+  { n:3, section:"B", tier:"Intermediate", star:1, body:"Why is a coverslip lowered slowly, one edge first, instead of being dropped flat on the specimen?",
+    options:["So the liquid pushes the air out and no air bubbles get trapped", "To stop the cells drying out before you have had a good look at them", "To make the stain soak in and turn a darker colour", "To stop the glass slide cracking when the coverslip lands"], ans:1,
+    why:"Lowering it at an angle lets the liquid push the air out ahead of the glass, so no air bubbles are trapped over the cells." },
+  { n:4, section:"B", tier:"Intermediate", star:1, body:"An animal cell has no wall, yet your body's cells don't burst when you drink a lot of water. What protects them?",
+    options:["The cell membrane turns stiff and hard whenever it gets wet, just like a wall does", "The body regulates the liquid around the cells, with the kidneys removing extra water", "The cells push any extra water straight back out again through tiny holes in the membrane", "The stomach stores all of the extra water safely until you need it later on"], ans:2,
+    why:"An animal has no wall, so its body regulates the liquid around the cells. The kidneys remove extra water and salt to keep it at the right strength." },
+  { n:5, section:"B", tier:"Intermediate", star:1, body:"Why don't your cells contain chloroplasts?",
+    options:["Animal cells are much too small to fit any chloroplasts inside them at all", "Chloroplasts only work for plants in hot countries", "A cell wall would be needed to hold them in place", "Animals get food by eating, so their cells needn't make it from light"], ans:4,
+    why:"A chloroplast uses light to make food. Animals get food by eating it, so their cells have no use for chloroplasts." },
+  { n:6, section:"B", tier:"Intermediate", star:1, body:"This is one object seen through a microscope. What is it most likely to be?",
+    options:["A cheek cell with its nucleus hidden", "An air bubble", "A cell that has burst", "A nucleus on its own"], ans:2,
+    fig:"<svg viewBox=\"0 0 320 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"One object in a microscope view\"><circle cx=\"160\" cy=\"110\" r=\"104\" fill=\"#e8f1f7\" stroke=\"#555\" stroke-width=\"4\"/><circle cx=\"168\" cy=\"106\" r=\"50\" fill=\"#f7fbfd\" stroke=\"#1a1a1a\" stroke-width=\"10\"/><circle cx=\"168\" cy=\"106\" r=\"26\" fill=\"#ffffff\"/></svg>",
+    why:"It is perfectly round, with a thick black rim, a bright empty centre and no stained dot. Those clues add up to an air bubble." },
+  { n:7, section:"B", tier:"Intermediate", star:1, body:"A cell lining your windpipe has a row of tiny hairs along one edge. What is its most likely job?",
+    options:["Sweeping dust-trapping mucus up and out of the airway", "Storing a supply of energy for the body to use later", "Carrying messages from the windpipe up to the brain", "Holding the windpipe open by making it stiff and hard"], ans:1,
+    why:"The hairs wave together like a tiny brush. They sweep sticky mucus, with dust stuck in it, up and out of the airway." },
+  { n:8, section:"B", tier:"Intermediate", star:1, body:"A cell's job is to find a germ, wrap around it and swallow it. Which cell shape suits that job best?",
+    options:["A long thin cell with branches reaching out", "A cell that is almost one huge droplet", "A soft blob that can change its shape", "A stiff cell surrounded by a wall"], ans:3,
+    why:"To wrap around and swallow a germ, a cell must be soft enough to change its shape. A white blood cell does exactly this." },
+  { n:9, section:"C", tier:"Applied", star:2, body:"A hospital drip going into a patient's blood is made of salt water at the same strength as blood, not pure water. Why?",
+    options:["Pure water would move into blood cells by osmosis, and with no wall they would burst", "Salt water is the only kind of liquid that is able to mix properly with blood in a vein", "Pure water is too heavy to flow into the body through a tube", "Blood cells need salt to make chlorophyll and stay alive"], ans:1,
+    why:"Blood cells have no wall. In pure water, osmosis would push water into them until they burst. Salt water at the same strength as blood keeps them safe." },
+  { n:10, section:"C", tier:"Applied", star:2, body:"Very salty water is dripped beside some cheek cells on a slide. What will you see after a few minutes?",
+    options:["The cells burst open as water rushes in", "The cells shrink and shrivel as water moves out of them", "Nothing happens, because animal cells NEVER take in or lose water", "The cells quickly grow a cell wall to protect themselves"], ans:2,
+    why:"Salty water has less free water than the cells do, so water moves out by osmosis. With no wall to hold the shape, the cells shrivel." },
+  { n:11, section:"C", tier:"Applied", star:2, body:"A space probe flies close past Saturn. Its path curves sharply around the planet, then it heads off into deep space and does not come back. Why did it not stay circling Saturn?",
+    options:["Saturn's gravity can NEVER bend the path of any probe that is moving at high speed", "It is secretly still orbiting Saturn, just from very far away", "Its engines pulled it clear of the planet's gravity entirely", "Saturn's gravity bent its path, but it was moving too fast to be held in a circle"], ans:4,
+    why:"Gravity did bend the path. But to stay in a circle a probe must move at just the right speed. This one was too fast, so it escaped." },
+  { n:12, section:"C", tier:"Applied", star:2, body:"An unstained cheek cell is very hard to see under the microscope. After staining, its nucleus shows up clearly. Which idea about light explains this?",
+    options:["The stain makes the cell give off its own light", "The stain makes the cell much bigger, and a bigger cell ALWAYS blocks more light than a small one does", "The unstained cell is almost transparent, so light passes straight through; the stain makes the nucleus block light", "The stain makes the cell reflect light like a mirror"], ans:3,
+    why:"A clear cell lets light straight through, so every part looks alike. The stain makes the nucleus block more light, which gives contrast." },
+  { n:13, section:"C", tier:"Applied", star:2, body:"A drop of iodine is placed at one edge of a coverslip over onion cells. Over ten minutes the yellow-brown colour creeps across under the glass and grows lighter as it goes. Why does it grow lighter?",
+    options:["The iodine is slowly destroyed a little more each time it moves further along under the glass", "The onion cells use up the iodine as it passes over them", "The dye particles spread out through more liquid, so they sit further apart and look paler", "Iodine ALWAYS loses its colour when it is in the light"], ans:3,
+    why:"The amount of dye is the same, but it is shared through more liquid. The particles are further apart, so the colour looks paler." },
+  { n:14, section:"C", tier:"Applied", star:2, body:"A microscope's lamp and its small cooling fan are wired so that when the lamp's bulb burns out, the fan stops too. How are they wired?",
+    options:["In parallel branches, so each one could work on its own even if the other failed", "The fan is pushed round by the lamp's glow", "The bulb powers the fan using its light", "One after another in a single loop (series), so one break stops both"], ans:4,
+    why:"If one break stops both, they share one loop. That is a series circuit. In parallel branches the fan would carry on." },
+  { n:15, section:"C", tier:"Applied", star:2, body:"Leo writes in his diary: \"I saw oval shapes with a dark dot in each. So these cells are still alive.\" Which statement is right?",
+    options:["Both parts are observations, because he used a microscope to look at them", "\"Still alive\" is the observation and \"oval shapes\" is the inference, as he saw life", "Anything seen through a microscope is ALWAYS an observation", "\"Oval shapes with a dark dot\" is an observation; \"still alive\" is an inference"], ans:4,
+    why:"What he saw (oval shapes, dark dots) is an observation. That the cells are alive is an inference, and a stained slide cannot show it." },
+  { n:16, section:"C", tier:"Applied", star:2, body:"Look at the cells in the picture. Is this a plant or an animal? Pick the best reasoning.",
+    options:["Animal, because having no chloroplasts means it can ONLY be an animal cell, whatever else might be true", "Plant: the regular brick pattern comes from stiff walls, and a big vacuole pushes the nucleus aside", "Plant, because the cells are small", "Animal, because a nucleus at the edge means there is no vacuole"], ans:2,
+    fig:"<svg viewBox=\"0 0 320 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A group of cells under a microscope\"><rect width=\"320\" height=\"200\" rx=\"10\" fill=\"#f8f4e6\"/><rect x=\"26\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"35\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"71\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"80\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"116\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"125\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"161\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"170\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"206\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"215\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"251\" y=\"22\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"260\" cy=\"39\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"48\" y=\"57\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"57\" cy=\"74\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"93\" y=\"57\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"102\" cy=\"74\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"138\" y=\"57\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"147\" cy=\"74\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"183\" y=\"57\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"192\" cy=\"74\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"228\" y=\"57\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"237\" cy=\"74\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"26\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"35\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"71\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"80\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"116\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"125\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"161\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"170\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"206\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"215\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"251\" y=\"92\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"260\" cy=\"109\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"48\" y=\"127\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"57\" cy=\"144\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"93\" y=\"127\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"102\" cy=\"144\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"138\" y=\"127\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"147\" cy=\"144\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"183\" y=\"127\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"192\" cy=\"144\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"228\" y=\"127\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"237\" cy=\"144\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"26\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"35\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"71\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"80\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"116\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"125\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"161\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"170\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"206\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"215\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/><rect x=\"251\" y=\"162\" width=\"44\" height=\"34\" fill=\"#f3e6bf\" stroke=\"#7a4b2a\" stroke-width=\"3\"/><circle cx=\"260\" cy=\"179\" r=\"5\" fill=\"#5b3a14\"/></svg>",
+    why:"Stiff walls make the tidy brick pattern, and a big vacuole pushes the nucleus aside. Missing chloroplasts alone prove nothing, since some plant cells never see light." },
+  { n:17, section:"C", tier:"Applied", star:2, body:"Two plant cells are compared. Cell P comes from the green outer skin of a pea pod. Cell R comes from the white inner flesh of a radish. Which is more likely to contain chloroplasts, and why?",
+    options:["Cell R, because roots need much more energy than pods do, so they need more", "Both, because EVERY plant cell has chloroplasts, no matter where it grows on the plant", "Cell P, because it gets sunlight, but cell R sits in the dark and would not use them", "Neither, because chloroplasts are found only in leaves"], ans:3,
+    why:"Chloroplasts trap light, so they sit where light reaches. The pea-pod skin gets sunlight. Radish flesh is in the dark, so chloroplasts there would be useless." },
+  { n:18, section:"C", tier:"Applied", star:2, body:"A cell lining the small intestine has its outer edge folded into hundreds of tiny finger-like bumps. Why does that help its job?",
+    options:["The bumps give far more surface, so it can soak up food faster", "The bumps grip the digested food so it is not pushed along too quickly", "The bumps make the cell much stronger", "The bumps are where the cell keeps spare energy"], ans:1,
+    why:"More surface means more places for digested food to pass in. Folding the edge into bumps gives a huge surface in a tiny space." },
+  { n:19, section:"C", tier:"Applied", star:2, body:"Seals swim in icy water, with a thick layer of fat cells under their skin. How does that layer help?",
+    options:["The fat makes heat inside the seal's body", "Fat carries heat away slowly, so a thick layer slows heat loss into the water", "The fat stops all heat from ever leaving the body of the seal", "The fat makes the seal float high, so it spends much less time down in the icy water"], ans:2,
+    why:"Fat is a poor conductor of heat, so heat leaks out slowly through a thick layer. Fat cells store energy, and the layer also slows heat loss." },
+  { n:20, section:"C", tier:"Applied", star:2, body:"An onion cell is viewed with a ×10 eyepiece and a ×40 objective lens. In a photo taken through the microscope it measures 80 mm long. How long is the real cell?",
+    options:["32,000 mm", "8 mm", "0.2 mm", "2 mm"], ans:3,
+    why:"Total magnification is 10 × 40 = 400. The photo is 400 times bigger than the real cell, so divide: 80 ÷ 400 = 0.2 mm." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const chosen = {};   // { qn: optionIndex(1-based) }
+const openedAt = new Date();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>`;
+    q.options.forEach((opt, idx) => {
+      html += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    html += `<div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function choose(qn, idx){
+  if (submitted) return;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov(), pvDone = pv.helped && pv.usedNotes;
+  if (n === 20 && pvDone){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < 20 ? `Answer all 20 to submit (${20-n} left)` : 'Answer the two questions above to submit';
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20 || !(prov().helped && prov().usedNotes)) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+let lastResults = null;
+
+function doSubmit(){
+  closeConfirm();
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+
+  let score = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date().toISOString(),
+    minutesSpent: Math.round((Date.now()-openedAt.getTime())/6000)/10,
+    provenance: prov(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
