@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 52 · Lesson 2 — Budding and From Microscope to Genes</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#1f4e9c;--pl-d:#0f2a5e;--pl-l:#e8effb;--sv:#b0426b;--sv-l:#fbeef3;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#f3f6fc;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .oi{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:6px 0}.oi p{flex:1 1 60%;margin:0;font-weight:400}.oi .pbrow{flex:0 0 auto}
+  .zlabels{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0}.zlabels span{padding:3px 10px;border-radius:14px;background:#e5e9f0;font-size:.82rem;font-weight:700}.zlabels span.on{background:var(--pl);color:#fff}
+  .dstage svg,#budStage svg,#zoomStage svg{width:100%;height:auto}
+</style>
+</head>
+<body data-next-href="Tests/Unit_52_Test_CellDivision.html" data-last-label="Go to Test &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#127838; Lesson 2 · Budding &amp; Genes</b><span class="pill">Unit 52 · Biology</span></div>
+
+  <!-- 1 -->
+  <section class="screen active" id="sWhy">
+    <h2>One Cell Makes a Crowd</h2>
+    <div class="why">Bread rises because of a living thing called <b>yeast</b>. One yeast cell can turn into millions in a day. Today you see how a yeast cell makes a new cell, how fast the numbers grow, and how scientists zoom into a cell to find the instructions inside.</div>
+    <div class="job">Recall: yeast is a <b>fungus</b> made of just one cell, so it is <b>unicellular</b>. You met it in Unit 4, making bread dough rise.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="screen" id="sBud" data-label="the budding animation" data-lock="game">
+    <h2>Budding: A New Cell Grows Out</h2>
+    <div class="rulebar">Yeast, a fungus, makes new cells by <b>budding</b>. It is the dividing slice of the yeast&#39;s <b>cell cycle</b>. Press the button to watch one bud.</div>
+    <div class="box"><div id="budStage"></div>
+      <div class="stepbar" id="budBar"><span data-n="0">1</span><span data-n="1">2</span><span data-n="2">3</span><span data-n="3">4</span></div>
+      <div class="cap show" id="budCap"></div>
+      <div><button class="actbtn" id="bBud">Next step</button><button class="actbtn alt" id="bBudAgain">Start again</button></div>
+      <div id="budtext" class="hid">
+        <span data-k="0">A yeast cell, with its nucleus. We draw 2 chromosomes to keep it clear.</span>
+        <span data-k="1">A small bump grows on the side. In the nucleus, each chromosome makes a copy.</span>
+        <span data-k="2">One copy of every chromosome moves into the bump. The other copy stays.</span>
+        <span data-k="3">The bud pinches off. Now there are two cells, and each has all the chromosomes.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="screen" id="sAsex" data-lock="pick">
+    <h2>Budding Makes an Identical Cell</h2>
+    <div class="job">Budding is <b>asexual</b>: one parent, chromosomes copied exactly. So the new cell is <b>identical</b> to its parent, and it starts its own <b>cell cycle</b>: grow, then bud. It is the same rule as runners and cuttings in Unit 46.</div>
+    <div class="pick" data-why="One parent, an exact copy of the chromosomes, so the bud is identical to its parent."><p>Which cell does a new yeast bud match?</p><div class="pbrow" style="flex-direction:column"><button class="pb" data-ok>Its one parent cell</button><button class="pb">A different yeast cell nearby</button><button class="pb">No cell at all</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 4 route A -->
+  <section class="screen" id="sRouteA" data-route="A" data-label="the animation">
+    <h2>One Becomes Two Becomes Four (Route A)</h2>
+    <div class="rulebar">Every yeast cell here (a fungus) buds once each round, one trip round its <b>cell cycle</b>. Press <b>Bud!</b> and count the cells.</div>
+    <div class="box"><div class="dstage" id="dblStage"></div>
+      <div class="counter"><span id="dblRoundLbl">Round</span> <span id="dblRound">0</span> &middot; <span id="dblCellsLbl">cells</span>: <span id="dblCells">1</span></div>
+      <div><button class="actbtn" id="bDbl">Bud!</button><button class="actbtn alt" id="bDblAgain">Start again</button></div>
+    </div>
+    <div class="job">Every round, <b>every</b> cell buds, so the number doubles: 1, 2, 4, 8, 16.</div>
+  </section>
+
+  <!-- 5 route B -->
+  <section class="screen" id="sRouteB" data-route="B" data-label="the steps">
+    <h2>The Same Thing, in Steps (Route B)</h2>
+    <div class="rulebar">The animation showed it. Now the steps, so you can work out any number.</div>
+    <div class="job"><b>Example:</b> a yeast cell buds every 3 hours. How many cells after 6 hours?</div>
+    <ol class="stepol">
+      <li><b>Find the gap:</b> 3 hours between budding rounds. The gap tells you how long one round takes.</li>
+      <li><b>Rounds = total time &divide; gap:</b> 6 hours &divide; 3 hours = 2 rounds. Dividing counts how many gaps fit in the time.</li>
+      <li><b>Start at 1 and double once per round:</b> 1 &rarr; 2 &rarr; 4. Each round, every cell buds.</li>
+      <li><b>Sense-check:</b> does 4 make sense? Doubling grows fast, but it cannot make cells from nothing, and it cannot give 6 just because there were 6 hours.</li>
+    </ol>
+    <div class="job">Answer: <b>4 cells</b>. Gap first, then rounds, then doubling.</div>
+  </section>
+
+  <!-- 6 practice doubling -->
+  <section class="screen" id="sPractice" data-lock="mcq">
+    <h2>Practice: Doubling</h2>
+    <div class="rulebar">Think first: write a quick guess. Then press Show options and Check.</div>
+    <div class="mcq pred" data-why="The gap is 5 hours. Rounds = 15 &divide; 5 = 3. Doubling 3 times: 1 &rarr; 2 &rarr; 4 &rarr; 8."><p>1. One yeast cell buds every 5 hours, and every new cell keeps budding too. How many cells after 15 hours?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt">3</button><button class="opt">6</button><button class="opt" data-ok>8</button><button class="opt">15</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+    <div class="mcq pred" data-why="The gap is 10 hours. Rounds = 20 &divide; 10 = 2. Doubling twice: 1 &rarr; 2 &rarr; 4."><p>2. One yeast cell buds every 10 hours. How many cells after 20 hours?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt">2</button><button class="opt" data-ok>4</button><button class="opt">8</button><button class="opt">20</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+    <div class="mcq pred" data-why="Rounds = 30 &divide; 10 = 3, so 8 cells. Cells do not equal hours: that skipped the doubling."><p>3. A student says: &ldquo;A yeast cell buds every 10 hours. After 30 hours there are 30 cells, since 30 hours is 30.&rdquo; Is that sensible?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt">Yes: the number of cells is the number of hours</button><button class="opt" data-ok>No: 30 hours is 3 rounds, so the cells go 1 &rarr; 2 &rarr; 4 &rarr; 8, not 30</button><button class="opt">No: the cells would still be just 1</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+  </section>
+
+  <!-- 7 zoom -->
+  <section class="screen" id="sZoom" data-label="the zoom-in ladder" data-lock="game">
+    <h2>From Microscope to Genes</h2>
+    <div class="rulebar">Zoom in, one step at a time. The pink dashed box shows where the next zoom comes from.</div>
+    <div class="box"><div id="zoomStage"></div>
+      <div class="zlabels" id="zlabels"><span data-n="0">person</span><span data-n="1">cells</span><span data-n="2">one cell</span><span data-n="3">nucleus</span><span data-n="4">chromosome</span></div>
+      <div class="cap show" id="zoomCap"></div>
+      <div><button class="actbtn" id="bZoom">Zoom in</button><button class="actbtn alt" id="bZoomAgain">Zoom out</button></div>
+      <div id="ztext" class="hid">
+        <span data-k="0">A whole person. Zoom in on a patch of skin.</span>
+        <span data-k="1">The skin is made of cells. Zoom in on one cell.</span>
+        <span data-k="2">One cell, with its nucleus in the middle. Zoom into the nucleus.</span>
+        <span data-k="3">The nucleus holds long thin threads: the chromosomes. Zoom into one.</span>
+        <span data-k="4">Along each chromosome sit tiny sections called genes.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 genes -->
+  <section class="screen" id="sGene" data-lock="pick">
+    <h2>What Is a Gene?</h2>
+    <div class="job">A <b>gene</b> is an instruction for one feature, such as eye colour. A chromosome carries many genes, like a recipe book with many recipes. In each <b>cell cycle</b>, a cell copies its chromosomes, and so copies every gene.</div>
+    <div class="why">Children get chromosomes from both parents, so they get a mix of instructions. That is why a child can look a bit like each parent. You will learn more in Chapter 3.</div>
+    <div class="pick" data-why="A gene is an instruction for one feature of a living thing, such as eye colour."><p>Which of these could one gene give an instruction for?</p><div class="pbrow" style="flex-direction:column"><button class="pb" data-ok>The colour of a person&#39;s eyes</button><button class="pb">How many cells are in a room</button><button class="pb">What the weather will do</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 9 O/I -->
+  <section class="screen" id="sOI" data-lock="pick">
+    <h2>Observation or Inference?</h2>
+    <div class="job">An <b>observation</b> is what you actually see. An <b>inference</b> is what you work out from it. New scene: yeast cells under a microscope.</div>
+    <div class="rulebar">Sort each line from a yeast diary.</div>
+    <div class="pick oi" data-why="You can see this directly."><p>Some cells are bigger than others.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You worked this out. You cannot see &ldquo;alive&rdquo; in a picture."><p>The cells are alive.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You can count this directly."><p>There are about 30 cells in view.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="You worked this out. The slide does not tell you the temperature."><p>The yeast was kept warm.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 10 terms -->
+  <section class="screen" id="sTerms" data-lock="term">
+    <h2>Word Check</h2>
+    <div class="rulebar">Tap a word, then tap its meaning. Get all four right to go on.</div>
+    <div class="termcheck">
+      <div class="tchips"><button class="tchip" data-t="chromosome">chromosome</button><button class="tchip" data-t="gene">gene</button><button class="tchip" data-t="cell cycle">cell cycle</button><button class="tchip" data-t="budding">budding</button></div>
+      <div class="trow" data-t="gene"><span class="slot">&hellip;</span><span>An instruction for one feature</span></div>
+      <div class="trow" data-t="budding"><span class="slot">&hellip;</span><span>A new yeast cell grows out of the side of a parent</span></div>
+      <div class="trow" data-t="chromosome"><span class="slot">&hellip;</span><span>A long thin thread in the nucleus that carries the genes</span></div>
+      <div class="trow" data-t="cell cycle"><span class="slot">&hellip;</span><span>The loop of growing, doing its job, dividing, and starting again</span></div>
+      <button class="btn chk tchk">Check</button><div class="tres"></div>
+    </div>
+  </section>
+
+  <!-- 11 self-check -->
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before the Test: Self-Check</h2>
+    <div class="rulebar">One try each. Then you will either be ready, or sent back to the right place.</div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>1. To find how many cells there are after some time, what do you work out first?</p><button class="opt">Total time &times; gap</button><button class="opt" data-ok>How many rounds: total time &divide; gap</button><button class="opt">Total time + gap</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="sBud" data-why=""><p>2. What happens to the chromosomes when a yeast cell buds?</p><button class="opt" data-ok>They are copied, and one copy of each goes into the bud</button><button class="opt">They stay in the parent and the bud gets none</button><button class="opt">They are shared out without copying</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch2Division_L2.js"></script>
+</body>
+</html>

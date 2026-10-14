@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 52 · Warm-Up</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#1f4e9c;--pl-d:#0f2a5e;--pl-l:#e8effb;--sv:#b0426b;--sv-l:#fbeef3;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#f3f6fc;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+</style>
+</head>
+<body data-next-href="Ch2Division_Lesson_ChromosomesAndTheCellCycle.html" data-last-label="Start Lesson 1 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#128260; Warm-Up</b><span class="pill">Unit 52 · Biology</span></div>
+
+  <!-- 1 -->
+  <section class="screen active" id="s1">
+    <h2>S.T.O.P.: How Scientists Read a Question</h2>
+    <div class="why">Last test you finished 20 questions in under 5 minutes. Four of your five misses were not about science at all. They were about reading. Here is the fix real scientists use.</div>
+    <div class="stopcard"><div class="ltr">S</div><div><b class="t">Spot the twist.</b> Find the one word that changes the answer.<div class="real">Your real question (Unit 51, Q10): &ldquo;Very <b>salty</b> water is dripped beside some cheek cells.&rdquo; You chose the answer for pure water. The twist was &ldquo;salty&rdquo;.</div></div></div>
+    <div class="stopcard"><div class="ltr">T</div><div><b class="t">Think first.</b> Answer in your head before you read the options.<div class="real">Unit 51, Q20: you chose 32,000 mm. That is 32 metres, a cell bigger than a classroom. Thinking &ldquo;cells are tiny&rdquo; first would have ruled it out.</div></div></div>
+    <div class="stopcard"><div class="ltr">O</div><div><b class="t">Open all four.</b> Read every option, even after one looks right.<div class="real">Unit 51, Q15: the option you chose had the two labels swapped. Reading all four shows the one with the labels the right way round.</div></div></div>
+    <div class="stopcard"><div class="ltr">P</div><div><b class="t">Prove it.</b> Point to the word in the question that makes your answer right.<div class="real">Unit 51, Q5: the question was about food, so the right option had to be about food.</div></div></div>
+    <div class="job">Scientists check twice. It is how they get the right answer.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="screen" id="s2" data-lock="twist mcq">
+    <h2>Try It: Tap the Twist</h2>
+    <div class="rulebar">Tap the one word that changes the answer. Then the options appear.</div>
+    <div class="twist" data-why="The twist was &ldquo;dark&rdquo;. Without light, a plant cannot make chlorophyll."><p class="tq"><span class="tw">A</span> <span class="tw">bean</span> <span class="tw">plant</span> <span class="tw">is</span> <span class="tw">kept</span> <span class="tw">in</span> <span class="tw">a</span> <span class="tw" data-ok>dark</span> <span class="tw">cupboard</span> <span class="tw">for</span> <span class="tw">two</span> <span class="tw">weeks,</span> <span class="tw">but</span> <span class="tw">it</span> <span class="tw">is</span> <span class="tw">watered</span> <span class="tw">every</span> <span class="tw">day.</span> <span class="tw">How</span> <span class="tw">do</span> <span class="tw">its</span> <span class="tw">leaves</span> <span class="tw">look</span> <span class="tw">at</span> <span class="tw">the</span> <span class="tw">end?</span></p><div class="pfb"></div>
+      <div class="after hid">
+        <div class="mcq" data-why="Without light, new leaves cannot make chlorophyll, so they come out pale and yellowish."><p>Which is the best answer?</p>
+          <button class="opt">A deeper green than before</button><button class="opt" data-ok>Paler and yellowish</button><button class="opt">The same bright green as before</button><button class="opt">Covered in tiny green spots</button>
+          <button class="btn chk">Check</button><div class="fb"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="screen" id="s3" data-lock="mcq pick">
+    <h2>Chemistry Refresher: Fire (Unit 37)</h2>
+    <div class="rulebar">Two quick refreshers. Not scored. Try again until right.</div>
+    <div class="mcq" data-why="A lid cuts off the oxygen, so the fire goes out. Carrying it or fanning it would feed the fire.">
+      <p>1. Paper catches fire in a metal wastebin. What is the fastest safe action?</p>
+      <button class="opt">Throw water on it, because water ALWAYS puts out every fire</button><button class="opt">Carry the bin outside</button><button class="opt" data-ok>Cover it with a metal lid</button><button class="opt">Fan it so the smoke blows away</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <p><b>2. Which side of the fire triangle does each action remove?</b></p>
+    <div class="pick" data-why="A lid keeps the air out."><p>Putting a lid on the fire</p><div class="pbrow"><button class="pb" data-ok>Oxygen</button><button class="pb">Heat</button><button class="pb">Fuel</button></div><div class="pfb"></div></div>
+    <div class="pick" data-why="Water cools the fire down."><p>Spraying water on it</p><div class="pbrow"><button class="pb">Oxygen</button><button class="pb" data-ok>Heat</button><button class="pb">Fuel</button></div><div class="pfb"></div></div>
+    <div class="pick" data-why="Take the fuel away and there is nothing left to burn."><p>Moving the paper pile away from the flame</p><div class="pbrow"><button class="pb">Oxygen</button><button class="pb">Heat</button><button class="pb" data-ok>Fuel</button></div><div class="pfb"></div></div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+</body>
+</html>

@@ -16,6 +16,7 @@ function screenOK(sc){
   if(lock.indexOf('term')>=0 && sc.getAttribute('data-term-pass')!=='1') ok=false;
   if(lock.indexOf('self')>=0 && sc.getAttribute('data-self-pass')!=='1') ok=false;
   if(lock.indexOf('game')>=0 && sc.getAttribute('data-game-pass')!=='1') ok=false;
+  if(lock.indexOf('twist')>=0) $$('.twist',sc).forEach(function(m){if(!solved(m))ok=false});
   if(lock.indexOf('clue')>=0) $$('.cluebox',sc).forEach(function(m){if(!solved(m))ok=false});
   return ok;
 }
@@ -85,6 +86,7 @@ $$('.pick').forEach(function(p){
       b.classList.add('bad'); b.disabled=true;
       fb.className='pfb show no'; fb.textContent='✘ '+(p.getAttribute('data-hint')||'Not quite. Try the other one.');
     }
+    var nx=p.nextElementSibling; if(solved(p)&&nx&&nx.classList.contains('gated')) nx.classList.remove('gated');
     refresh(); document.dispatchEvent(new CustomEvent('pickdone',{detail:{el:p}}));
   };});
 });
@@ -117,6 +119,28 @@ function resetSelf(sc){
   var r=$('.selfres',sc); r.className='selfres'; r.innerHTML='';
 }
 
+
+/* ---- twist: tap the one word that changes the answer, then the options appear ---- */
+$$('.twist').forEach(function(t){
+  var fb=$('.pfb',t), after=$('.after',t);
+  $$('.tw',t).forEach(function(w){w.onclick=function(){
+    if(solved(t)) return;
+    if(w.hasAttribute('data-ok')){
+      t.setAttribute('data-done','1'); w.classList.add('good');
+      fb.className='pfb show ok'; fb.textContent='\u2714 '+(t.getAttribute('data-why')||'');
+      if(after) after.classList.remove('hid');
+      refresh();
+    } else { w.classList.add('bad'); fb.className='pfb show no'; fb.textContent='\u2718 '+(t.getAttribute('data-hint')||'Not that word. Which one word changes the answer?'); }
+  };});
+});
+
+/* ---- predict-first: type a short guess, then the options appear ---- */
+$$('.pred').forEach(function(m){
+  var inp=$('.pin',m), btn=$('.pshow',m), body=$('.pbody',m);
+  inp.oninput=function(){ btn.disabled=(inp.value.trim().length<2); };
+  btn.onclick=function(){ if(inp.value.trim().length<2) return; inp.readOnly=true; btn.style.display='none'; body.classList.remove('hid'); m.setAttribute('data-pred',inp.value.trim()); };
+});
+
 /* ---- word-match term check ---- */
 $$('.termcheck').forEach(function(tc){
   var sc=tc.closest('.screen'), chips=$$('.tchip',tc), rows=$$('.trow',tc), sel=null, res=$('.tres',tc), chk=$('.tchk',tc);
@@ -129,7 +153,7 @@ $$('.termcheck').forEach(function(tc){
     r.setAttribute('data-got',sel.getAttribute('data-t')); slot.textContent=sel.textContent; sel.classList.add('used'); sel.classList.remove('sel'); sel=null;
   };});
   chk.onclick=function(){
-    if(rows.some(function(r){return !r.getAttribute('data-got')})){ res.textContent='Match all six words first.'; return; }
+    if(rows.some(function(r){return !r.getAttribute('data-got')})){ res.textContent='Match all '+rows.length+' words first.'; return; }
     var n=0;
     rows.forEach(function(r){ var ok=r.getAttribute('data-got')===r.getAttribute('data-t'); r.classList.toggle('rgood',ok); r.classList.toggle('rbad',!ok); if(ok){n++; r.classList.add('locked');} });
     if(n===rows.length){ sc.setAttribute('data-term-pass','1'); res.innerHTML='<b>'+n+' / '+n+' — unlocked!</b>'; chk.disabled=true; }

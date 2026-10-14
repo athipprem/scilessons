@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '12 Oct 2026',
+  updated:        '14 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-  currentUnit: { n:51, topic:'Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (Ch.2 &sect;C, beyond-class)', status:'&#127381; Built 12 Oct 2026 (warm-up, 2 lessons, test), ready for Prem. Gate 0 FAIL(s). From `BUILD_PLAN_SCI_U51_AnimalCell.md`.' },
+  currentUnit: { n:52, topic:'Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle &amp; From Microscope to Genes (Ch.2 &sect;D, beyond-class) &mdash; LAST UNIT BEFORE MILESTONE 5', status:'&#9989; Built 14 Oct 2026, ready for Prem (warm-up, 2 lessons, 20Q test), from `BUILD_PLAN_SCI_U52_CellDivision.md`. First unit under the pace protocol (S.T.O.P.). Last unit before Milestone 5: after the result, analyse, then plan M5.' },
 
   lastUnit: {
-    n:50, score:18, outOf:20, pct:90, passBar:16, delta:30, prevScore:60, passed:true,
-    patternLabel: 'Unit 50 result - Biology: The Water Journey, consolidation (18/20, 90% PASS)',
-    patternInsight: '<strong>18/20 (90%)</strong> - PASS, +6 marks on Unit 49. Section A = <strong>1/2</strong>. Section B = <strong>6/6</strong>. Section C = <strong>11/12</strong>. Tier breakdown: Basic 1/2 (50%), Intermediate 6/6 (100%), Applied 11/12 (92%). Taken 12 Oct 2026, alone, one attempt, unaided (provenance confirmed by Lui). A consolidation unit inserted ahead of the Animal Cell unit.',
-    analysisLabel: 'The organisation ladder is CLOSED: all five ladder items correct, including the deciding off-plant item (the heart as an organ in the circulatory system)',
-    analysisInsight: '<strong>Teaching the ladder as one interactive plant worked where two text attempts had not.</strong> All five ladder items (Q3, Q5, Q6, Q9, Q10) were correct. Osmosis held 3 of 3. He chose none of the roughly nine absolute-worded distractors. <strong>Both misses were words the lessons barely gave him:</strong> Q1 (cell wall = cellulose, used once in the lessons) and Q18 (chloroplast holds the chlorophyll, used zero times). The paper itself had build defects found on analysis: a strict 1-2-3-4 answer-key cycle (he did not use it: both misses break the cycle), a cell-sap and tissue-definition leak, and terms under their 8-use floor. Each now has a scripted ship gate (`sci_gate.py`) from Unit 51.',
-    qSummary: '<strong>18 / 20 (90%) - PASS.</strong> Section A 1/2, Section B 6/6, Section C 11/12. Eighth real-taken result of the school-aligned block. Full per-question record: `Memory Backup\\TEST_RECORD_SCI_U050.md`. Provenance: independent, unaided, one attempt (Lui, 12 Oct 2026).',
+    n:51, score:15, outOf:20, pct:75, passBar:16, delta:-15, prevScore:90, passed:false, minutesSpent:4.7, minutesNote:'rushed, known habit',
+    patternLabel: 'Unit 51 result - Biology: Inside the Animal Cell (15/20, 75% FAIL by one mark, 4.7 minutes)',
+    patternInsight: '<strong>15/20 (75%)</strong> - FAIL by one mark, -3 marks on Unit 50. Section A = <strong>2/2</strong>. Section B = <strong>5/6</strong>. Section C = <strong>8/12</strong>. Tier breakdown: Basic 2/2, Intermediate 5/6, Applied 8/12. Taken 13 Oct 2026, self-reported no help and no notes. <strong>Time: 4.7 minutes for 20 questions</strong> (about 14 seconds each), a known habit across subjects per Lui.',
+    analysisLabel: 'Five misses: Q5, Q10, Q15, Q18, Q20 - most look like fast-read slips, one is the deciding unseen-cell item',
+    analysisInsight: '<strong>Held:</strong> cellulose, methylene blue, coverslip, regulation, both picture items, shape-to-job items Q7/Q8/Q19, and all five spaced cross-topic items. <strong>Missed:</strong> Q10 (very salty water, chose the burst outcome), Q15 (observation/inference labels swapped), Q20 (multiplied 10 x 40 x 80 and accepted 32,000 mm), Q5 (chloroplast, chose the wall option), Q18 (unseen intestine cell, chose "grip"). Gate-passed build; no leak found. Record: `Memory Backup\\TEST_RECORD_SCI_U051.md`.',
+    qSummary: '<strong>15 / 20 (75%) - FAIL by one mark.</strong> Section A 2/2, Section B 5/6, Section C 8/12. 4.7 minutes. Provenance: self-reported no help/no notes; rushed (known habit per Lui, 13 Oct). Full record: `Memory Backup\\TEST_RECORD_SCI_U051.md`.',
     qBreakdown: []
   },
 
@@ -93,12 +93,24 @@ var PREM_DATA = {
     { unit:46, topic:'Biology: Reproduction in Plants (school-aligned)', score:16, outOf:20, pct:80, passBar:16, date:'2026-09-10' },
     { unit:48, topic:'Biology: Cell Organisation &amp; the Microscope (school-aligned)', score:16, outOf:20, pct:80, passBar:16, date:'2026-09-11' },
     { unit:49, topic:'Biology: Inside the Plant Cell &mdash; What the Parts Are Made Of, and Osmosis (school-aligned)', score:12, outOf:20, pct:60, passBar:16, date:'2026-09-18' },
-    { unit:50, topic:'Biology: The Water Journey &mdash; Levels of Life &amp; the Words That Name Them (consolidation, school-aligned)', score:18, outOf:20, pct:90, passBar:16, date:'2026-10-12' }
+    { unit:50, topic:'Biology: The Water Journey &mdash; Levels of Life &amp; the Words That Name Them (consolidation, school-aligned)', score:18, outOf:20, pct:90, passBar:16, date:'2026-10-12' },
+    { unit:51, topic:'Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (school-aligned, beyond-class)', score:15, outOf:20, pct:75, passBar:16, date:'2026-10-13' }
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 51, badge: 'linear-gradient(135deg,#7b2d6b,#c9a227)',
+      title: 'Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (school-aligned, beyond-class)',
+      tags: [
+        { t:'&#10060; 15/20 (75%) FAIL by one', s:'background:#fdecea;color:#c62828;font-weight:700' },
+        { t:'4.7 minutes - rushed', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: '45th assessment of the program. Chapter 2 &sect;C, beyond-class, built from `BUILD_PLAN_SCI_U51_AnimalCell.md` (gate 0 FAIL(s)). <strong>Taken 13 Oct 2026: 15/20 (75%) FAIL by one mark in 4.7 minutes</strong> &mdash; Section A 2/2, Section B 5/6, Section C 8/12. Misses: Q5, Q10, Q15, Q18, Q20. Held: regulation, osmosis with pure water, both picture items, ciliated/white-blood/fat cells and all five spaced cross-topic items. Provenance self-reported (no help, no notes); the speed is a known habit across subjects per Lui (13 Oct), which led to the pace protocol starting at Unit 52. Record: `Memory Backup\\TEST_RECORD_SCI_U051.md`.',
+      status: 'done'
+    },
     {
       n: 50, badge: 'linear-gradient(135deg,#00695c,#c9a227)',
       title: 'Biology: The Water Journey &mdash; Levels of Life &amp; the Words That Name Them (consolidation, school-aligned)',

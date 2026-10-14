@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_52_Test_CellDivision.html — Biology: What Gets Copied
+     (Ch.2 §D, school-aligned, beyond-class). Built from
+     BUILD_PLAN_SCI_U52_CellDivision.md (14 Oct 2026). LAST UNIT BEFORE MILESTONE 5.
+     First unit under the PACE PROTOCOL (feedback-pace-protocol.md):
+       - Q12, Q13, Q15, Q19 are predict-first (options hidden until a
+         short guess is typed; the guess is saved, not scored);
+       - per-question timing (secsSincePrev, firstChoice, firstClickAt);
+       - at Submit, every Section C item answered <20 s after the
+         previous answer comes back once: Keep / Change. Correctness is
+         never shown there. Final choice is scored; firstPassScore is saved too.
+     No timer, no minimum time, no locked Submit.
+     Section A: chromosomes live in the nucleus; yeast is a fungus.
+     Section B: why chromosomes are copied, a picture item (20 root
+     cells, 3 dividing), gene, budding, grow-before-dividing, a picture
+     item (the X). Section C: asexual copy (U46), a damaged copy, rate vs
+     total (U26), doubling, an unseen ear cell (deciding item), sample
+     size (U36), mass vs space (U2), conduction (U32), dissolving (U40),
+     observation vs inference, shoot growth (U33), hair and nails (U44).
+     Answer positions are the pinned key (seed 52). TIER SPLIT 2/6/12. PASS BAR 16/20.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 52 Test — Biology: What Gets Copied</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#1f4e9c; --steel-d:#0f2a5e; --a-fill:#e8effb; --a-text:#1f4e9c;
+    --blue:#1565c0; --b-fill:#f9dce7; --b-text:#8a1e4a;
+    --purple:#2b3a67; --c-fill:#eceff8; --c-text:#2b3a67;
+    --amber:#b0426b; --amber-l:#fbeef3;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#0f2a5e}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#cfdcf5);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .pacebar{background:#fbeef3;border:1.5px solid var(--amber);color:#5a1030;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#f3f6fc;border:1.5px dashed var(--steel);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--steel-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--steel-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.change{background:#eceff1;color:#2b3a67}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--steel-d)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 52 Test — Biology: What Gets Copied</b>
+      <span class="sub" id="hdr-sub">Chromosomes • The Cell Cycle • From Microscope to Genes</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+  <div class="pacebar">Section C questions take about 1–2 minutes each to think properly. Use S.T.O.P.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="pace-lines"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Some answers may come back for one more look before your results. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="startReview()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-overlay">
+  <div class="rv-box">
+    <h3>Quick check: you answered this one fast. Read it once more.</h3>
+    <div class="rv-count" id="rv-count"></div>
+    <div id="rv-body"></div>
+    <div class="rv-actions" id="rv-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 52;
+const UNIT_TITLE = "Biology: What Gets Copied (Ch.2 §D)";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+const LAST_TEST_MINUTES = 4.7;                // Unit 51, for the results line
+const REVIEW_SECS = 20;                       // Section C answers faster than this come back once
+
+const Q = [
+  /* A (Basic) Q1-2 · B (Intermediate) Q3-8 · C (Applied) Q9-20 */
+  { n:1, section:"A", tier:"Basic", star:0, body:"Where in a cell are the chromosomes kept?",
+    options:["In the cell membrane", "In the cytoplasm", "In the nucleus", "In the vacuole"], ans:3,
+    why:"The chromosomes are long thin threads kept in the nucleus, the cell's control centre." },
+  { n:2, section:"A", tier:"Basic", star:0, body:"Yeast, which makes bread rise, is best described as…",
+    options:["A tiny plant that lives in damp soil", "A fungus whose body is a single cell", "A kind of bacterium", "An animal cell"], ans:2,
+    why:"Yeast is a fungus, and each yeast is just one cell." },
+  { n:3, section:"B", tier:"Intermediate", star:1, body:"Before a cell divides, it copies every one of its chromosomes. Why?",
+    options:["To make the cell much bigger before it splits in two", "Because the old chromosomes wear out", "To give the cell twice as many as normal", "So each new cell gets a full set of chromosomes"], ans:4,
+    why:"If every chromosome is copied first, each of the two new cells can receive a full set. Without the copying step, one of them would be short." },
+  { n:4, section:"B", tier:"Intermediate", star:1, body:"This is a microscope view of 20 cells from a growing onion root. Three of the cells show dark thread shapes, which means they are dividing. What does this suggest?",
+    options:["Cells are ALWAYS dividing, and the dark threads are what a busy cell looks like", "The other 17 cells are dead", "Only 3 cells in a root can ever divide", "A cell spends most of its life NOT dividing; dividing is only a short part"], ans:4,
+    fig:"<svg viewBox=\"0 0 340 228\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Twenty cells from a growing onion root under a microscope; three show dark thread shapes\"><rect width=\"340\" height=\"228\" rx=\"10\" fill=\"#fbf7ea\"/><rect x=\"14\" y=\"11\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"30\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"74\" y=\"11\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"30\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"134\" y=\"11\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"160\" cy=\"30\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"194\" y=\"11\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><path d=\"M203,21 L217,39\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M217,21 L203,39\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M229,20 Q236,30 230,40\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"254\" y=\"11\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"280\" cy=\"30\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"14\" y=\"61\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"80\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"74\" y=\"61\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"80\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"134\" y=\"61\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"160\" cy=\"80\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"194\" y=\"61\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"220\" cy=\"80\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"254\" y=\"61\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"280\" cy=\"80\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"14\" y=\"111\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"130\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"74\" y=\"111\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><path d=\"M83,121 L97,139\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M97,121 L83,139\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M109,120 Q116,130 110,140\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><rect x=\"134\" y=\"111\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"160\" cy=\"130\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"194\" y=\"111\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"220\" cy=\"130\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"254\" y=\"111\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"280\" cy=\"130\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"14\" y=\"161\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"40\" cy=\"180\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"74\" y=\"161\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"100\" cy=\"180\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"134\" y=\"161\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"160\" cy=\"180\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"194\" y=\"161\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><circle cx=\"220\" cy=\"180\" r=\"8\" fill=\"#b9a0cf\" stroke=\"#6b4f8a\" stroke-width=\"2\"/><rect x=\"254\" y=\"161\" width=\"52\" height=\"38\" rx=\"7\" fill=\"#f3e9cf\" stroke=\"#8a6a3a\" stroke-width=\"2\"/><path d=\"M263,171 L277,189\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M277,171 L263,189\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><path d=\"M289,170 Q296,180 290,190\" fill=\"none\" stroke=\"#1d1d3a\" stroke-width=\"4\" stroke-linecap=\"round\"/><text x=\"170\" y=\"221\" font-size=\"11\" text-anchor=\"middle\" fill=\"#444\">Dark threads = chromosomes showing</text></svg>",
+    why:"Only 3 of the 20 cells are dividing at this moment. So dividing is a short part of a cell's life, and the rest is spent growing and doing its job." },
+  { n:5, section:"B", tier:"Intermediate", star:1, body:"What is a gene?",
+    options:["An instruction for one feature, carried on a chromosome", "A tiny part of the nucleus that stores food for the cell", "A whole cell", "A group of cells working together"], ans:1,
+    why:"A gene is an instruction for one feature, such as eye colour. Many genes sit along each chromosome." },
+  { n:6, section:"B", tier:"Intermediate", star:1, body:"How does a yeast cell make a new cell by budding?",
+    options:["It releases pollen into the air around it", "Two yeast cells join together to make a seed that falls off", "It splits into four equal pieces at once", "A small new cell grows out of its side and then pinches off"], ans:4,
+    why:"A bud grows on the side of the yeast cell, takes a copy of the chromosomes, and pinches off as a new yeast cell." },
+  { n:7, section:"B", tier:"Intermediate", star:1, body:"A cell has just divided into two, and each new cell is half-sized. What usually happens next?",
+    options:["It divides again straight away, still at its small size", "It grows to full size before it can divide again", "It stays small for the rest of its life", "It joins back together with its partner"], ans:2,
+    why:"A new cell is small. It grows to full size, and only then can it divide again. That is why the cell cycle is a loop." },
+  { n:8, section:"B", tier:"Intermediate", star:1, body:"This picture shows one chromosome, drawn as an X, just before a cell splits. What are the two arms?",
+    options:["One chromosome from mum and a different one from dad, stuck together", "Two different chromosomes stuck together", "Two identical copies of the same chromosome, joined in the middle", "A chromosome that is breaking apart"], ans:3,
+    fig:"<svg viewBox=\"0 0 240 200\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A single chromosome shaped like an X, just before a cell splits\"><rect width=\"240\" height=\"200\" rx=\"10\" fill=\"#f4f1fb\"/><line x1=\"70\" y1=\"30\" x2=\"170\" y2=\"170\" stroke=\"#3a4fa3\" stroke-width=\"20\" stroke-linecap=\"round\"/><line x1=\"170\" y1=\"30\" x2=\"70\" y2=\"170\" stroke=\"#3a4fa3\" stroke-width=\"20\" stroke-linecap=\"round\"/><circle cx=\"120\" cy=\"100\" r=\"9\" fill=\"#f4f1fb\" stroke=\"#1f2f6e\" stroke-width=\"3\"/></svg>",
+    why:"Before a cell splits, every chromosome has made an exact copy. The two copies stay joined in the middle, which makes the X shape." },
+  { n:9, section:"C", tier:"Applied", star:2, body:"One yeast cell can live in very sugary juice that kills other yeast. It buds. Can the new cell live in sugary juice too?",
+    options:["No — offspring ALWAYS differ from their parent, so it could not live there", "Yes — a bud is an exact copy of its parent, so it has the same features", "Only if a second yeast cell joins it", "No, a bud only gets half of what the parent has"], ans:2,
+    why:"Budding is asexual: one parent, chromosomes copied exactly. So the bud has the same features, including living in sugary juice." },
+  { n:10, section:"C", tier:"Applied", star:2, body:"A cell copies its chromosomes, but one copy is damaged and is missing a piece. The cell splits. What is most likely?",
+    options:["The new cell that gets the damaged copy may not be able to do all its jobs", "Both new cells are fine, because cells automatically fix every problem in a copy", "Both new cells get the damaged copy", "The damaged copy disappears when the cell splits"], ans:1,
+    why:"The new cell that receives the damaged copy is missing part of what it needs. The other new cell has a complete copy." },
+  { n:11, section:"C", tier:"Applied", star:2, body:"Patch A has 500 cells, and each one divides once every 4 days. Patch B has 100 cells, and each one divides once a day. During one day, which statement is right?",
+    options:["B's cells are faster, but A makes more new cells (about 125 against 100) because it has far more cells", "B makes more new cells, because each of its cells divides four times as fast as each cell in A, so B wins", "A and B make the same number of new cells", "A's cells divide faster than B's cells"], ans:1,
+    sense:true,
+    why:"How fast each cell divides is one thing. How many cells there are is another. A: 500 ÷ 4 = 125 new cells a day. B: 100 new cells a day." },
+  { n:12, section:"C", tier:"Applied", star:2, body:"One yeast cell starts in a flask of food. Every yeast cell buds once every 2 hours, and the new cells keep budding too. How many yeast cells are there after 8 hours?",
+    options:["8", "5", "16", "256"], ans:3,
+    predict:true,
+    sense:true,
+    why:"8 hours ÷ 2 hours = 4 rounds. Each round, every cell buds: 1, 2, 4, 8, 16." },
+  { n:13, section:"C", tier:"Applied", star:2, body:"A cell deep inside your ear has a bundle of tiny stiff hairs on top. Sound makes the liquid around them vibrate, and the hairs bend. What is this cell's most likely job?",
+    options:["Sweeping dust and mucus out of the ear, like the cells that line the windpipe", "Detecting sound: when the vibrations bend the hairs, the cell can sense it", "Storing wax", "Keeping the ear warm"], ans:2,
+    predict:true,
+    why:"Step 1: tiny stiff hairs that bend. Step 2: bending is a way of sensing movement. Step 3: the job is to detect sound. These hairs do not sweep, because they are stiff and the liquid moves them." },
+  { n:14, section:"C", tier:"Applied", star:2, body:"Mia wants to know if warm sugar water makes yeast bud more than cool sugar water. She looks at just one yeast cell from each flask. What is the main problem?",
+    options:["One cell is ALWAYS enough in science, because the cells in a flask are all the same", "She should use salt water instead", "She should look at the flasks without a microscope", "One cell is far too few — she should count many cells from each flask, or repeat it"], ans:4,
+    why:"One cell could be lucky or unlucky. Counting many cells, and repeating the test, makes the result more trustworthy." },
+  { n:15, section:"C", tier:"Applied", star:2, body:"Bread dough rises as the yeast inside it gives off gas. Does the dough's mass go up as it rises?",
+    options:["No — the gas comes from food already in the dough, so it takes more space but the mass stays the same", "Yes — rising ALWAYS adds mass", "Yes, because the yeast pulls in air from the room and that air gets trapped inside the dough as it rises", "No, because the dough loses all of its mass"], ans:1,
+    predict:true,
+    why:"Rising means taking up more space, not gaining matter. The gas comes from food already in the dough, so the mass stays about the same." },
+  { n:16, section:"C", tier:"Applied", star:2, body:"Two lumps of dough sit in the same warm kitchen. One is on a metal tray straight from the fridge, and one is on a wooden board. Which rises faster, and why?",
+    options:["The wooden-board one — the cold metal conducts heat away from its dough, so that yeast stays cooler and slower", "The one on the metal tray, because metal is shiny and attracts light", "Both the same, because the whole kitchen is warm and the tray and board match it", "The metal one — metal ALWAYS warms things up quickly, so its dough rises faster than the other"], ans:1,
+    why:"Metal is a good conductor, so the cold tray draws heat out of its dough. Yeast works faster when it is warm, so the wooden-board dough rises faster." },
+  { n:17, section:"C", tier:"Applied", star:2, body:"A baker stirs sugar into warm water before adding yeast, instead of dropping in a sugar lump. Why does this help the yeast?",
+    options:["Warm water kills the extra yeast, so only the strongest cells are left to use the sugar", "Stirring mixes oxygen bubbles into the water, and yeast needs oxygen to bud", "Dissolved sugar is spread through the water in tiny pieces, so it reaches every yeast cell", "A sugar lump is too big to fit in the flask"], ans:3,
+    why:"Dissolved sugar breaks into tiny particles that spread through all the water, so food reaches every yeast cell." },
+  { n:18, section:"C", tier:"Applied", star:2, body:"Ana looks at yeast under a microscope. She writes: “One cell has a small bump on its side. So this yeast cell is reproducing.” Which statement is right?",
+    options:["Both parts are observations", "“Reproducing” is the observation, and “a small bump” is the inference", "Anything written in a science diary is ALWAYS an observation, because a scientist wrote it down", "“A small bump on its side” is an observation; “it is reproducing” is an inference — a likely one"], ans:4,
+    why:"She can see the bump. She cannot see reproducing happen, so it is worked out from the clue. A likely inference, but still an inference." },
+  { n:19, section:"C", tier:"Applied", star:2, body:"A gardener cuts off the very top of a young plant's main shoot. What happens to that shoot's growth upward, at least at first?",
+    options:["It grows faster to repair itself", "Nothing — cutting NEVER affects growth, because the plant carries on exactly as it did before the cut", "It stops growing upward there, because the part where cells were dividing fastest has been removed", "The roots start growing upward instead"], ans:3,
+    predict:true,
+    why:"The top of a shoot is where cells divide fastest. With that part gone, growth upward stops there for a while." },
+  { n:20, section:"C", tier:"Applied", star:2, body:"A teenager has stopped growing taller, but their hair and nails keep growing. A friend says: “When you stop growing taller, ALL your cells stop dividing.” What is wrong with this?",
+    options:["Nothing is wrong with it", "Cells in some places — like where hair and nails grow — keep dividing even after you stop growing taller", "Hair and nails are not made of cells, so they cannot divide at all, and that is the whole problem here", "Only skin cells ever divide"], ans:2,
+    why:"Growing taller stops, but cells still divide where new cells are always needed, such as where hair and nails grow." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const nowMs = () => Date.now();
+const chosen = {};            // current choice per question (1-based option)
+const firstChoice = {};       // very first click per question
+const firstAt = {};           // ISO time of that first click
+const secsPrev = {};          // seconds since his previous answer click (or since opening), at the first click
+const predictions = {};       // { qn: text he typed }
+const openedAt = new Date(nowMs());
+let lastClick = nowMs();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false, reviewing = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    let opts = '';
+    q.options.forEach((opt, idx) => {
+      opts += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    if (q.sense) opts += `<div class="sense">Does that number make sense?</div>`;
+    let optBlock;
+    if (q.predict){
+      optBlock = `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words or a number, then press Show options.</label>
+        <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+        <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div>
+        <div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+    } else optBlock = opts;
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>
+      ${optBlock}
+      <div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function predTyped(qn){
+  const v = document.getElementById('pin-'+qn).value.trim();
+  document.getElementById('pshow-'+qn).disabled = v.length < 2;
+}
+function predShow(qn){
+  const inp = document.getElementById('pin-'+qn);
+  const v = inp.value.trim();
+  if (v.length < 2 || qn in predictions) return;
+  predictions[qn] = v;                         // saved, never scored, cannot be edited after this
+  inp.readOnly = true;
+  document.getElementById('pshow-'+qn).style.display = 'none';
+  document.getElementById('pbody-'+qn).classList.remove('hid');
+}
+
+function choose(qn, idx){
+  if (submitted || reviewing) return;
+  const t = nowMs();
+  if (!(qn in firstChoice)){
+    firstChoice[qn] = idx;
+    firstAt[qn] = new Date(t).toISOString();
+    secsPrev[qn] = Math.round((t - lastClick)/100)/10;
+  }
+  lastClick = t;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov(), pvDone = pv.helped && pv.usedNotes;
+  if (n === 20 && pvDone){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < 20 ? `Answer all 20 to submit (${20-n} left)` : 'Answer the two questions above to submit';
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20 || !(prov().helped && prov().usedNotes)) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+/* ---------- fast-answer review (Section C items answered < REVIEW_SECS after the previous answer) ---------- */
+let preReview = {}, reviewList = [], reviewPos = 0, reviewLog = {};
+function startReview(){
+  closeConfirm();
+  preReview = Object.assign({}, chosen);
+  reviewList = Q.filter(q => q.section === 'C' && (q.n in secsPrev) && secsPrev[q.n] < REVIEW_SECS).map(q => q.n);
+  reviewPos = 0; reviewLog = {};
+  if (!reviewList.length){ doSubmit(); return; }
+  reviewing = true;
+  document.getElementById('review-overlay').classList.add('show');
+  showReviewItem();
+}
+function showReviewItem(){
+  const qn = reviewList[reviewPos];
+  const q = Q.find(x => x.n === qn);
+  document.getElementById('rv-count').textContent = `Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h = `${q.fig ? `<div class="fig">${q.fig}</div>` : ''}<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>`;
+  q.options.forEach((opt, i) => {
+    h += `<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${opt}</button>`;
+  });
+  document.getElementById('rv-body').innerHTML = h;
+  document.getElementById('rv-actions').innerHTML =
+    `<button class="btn keep" id="rv-keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" id="rv-change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){ reviewLog[reviewList[reviewPos]] = {kept:true}; rvNext(); }
+function rvChange(){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.disabled = false);
+  document.getElementById('rv-actions').innerHTML = `<button class="btn keep" id="rv-use" onclick="rvUse()">Use this answer</button>`;
+}
+function rvPick(i){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('rv-opt-'+i).classList.add('selected');
+  chosen[reviewList[reviewPos]] = i;
+}
+function rvUse(){
+  const qn = reviewList[reviewPos];
+  reviewLog[qn] = {kept:false, changed: chosen[qn] !== preReview[qn]};
+  rvNext();
+}
+function rvNext(){
+  reviewPos++;
+  if (reviewPos >= reviewList.length){
+    reviewing = false;
+    document.getElementById('review-overlay').classList.remove('show');
+    doSubmit();
+  } else showReviewItem();
+}
+
+let lastResults = null;
+
+function doSubmit(){
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.pin').forEach(b => b.readOnly = true);
+
+  let score = 0, firstPassScore = 0, preReviewScore = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const swing = { wrongToRight:0, rightToWrong:0, wrongToWrong:0 };
+  const changes = [];
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    if (firstChoice[q.n] === q.ans) firstPassScore++;
+    if (preReview[q.n] === q.ans) preReviewScore++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    let dir = null;
+    const rv = reviewLog[q.n];
+    if (rv && rv.changed){
+      const was = preReview[q.n] === q.ans;
+      dir = was ? 'right->wrong' : (isCorrect ? 'wrong->right' : 'wrong->wrong');
+      if (dir === 'wrong->right') swing.wrongToRight++; else if (dir === 'right->wrong') swing.rightToWrong++; else swing.wrongToWrong++;
+      changes.push({ q:q.n, from:preReview[q.n], to:given, direction:dir });
+    }
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect,
+             firstChoice: firstChoice[q.n], firstCorrect: firstChoice[q.n] === q.ans,
+             preReviewChoice: preReview[q.n], finalChoice: given,
+             secsSincePrev: secsPrev[q.n], firstClickAt: firstAt[q.n],
+             prediction: (q.n in predictions) ? predictions[q.n] : null,
+             reviewed: q.n in reviewLog, changedOnReview: rv ? !!rv.changed : false, reviewDirection: dir };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const minutes = Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  const nChanged = changes.length;
+  document.getElementById('pace-lines').innerHTML =
+    `<div><b>Time:</b> ${minutes} min (last test: ${LAST_TEST_MINUTES} min)</div>` +
+    (reviewList.length
+      ? `<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${nChanged}: ${swing.wrongToRight} wrong→right, ${swing.rightToWrong} right→wrong.</div>`
+      : `<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date(nowMs()).toISOString(),
+    minutesSpent: minutes,
+    lastTestMinutes: LAST_TEST_MINUTES,
+    provenance: prov(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    firstPassScore, preReviewScore,
+    predictions: Object.assign({}, predictions),
+    reviewedQs: reviewList.slice(),
+    changedOnReview: changes,
+    reviewSwing: { reviewed: reviewList.length, changed: nChanged, wrongToRight: swing.wrongToRight, rightToWrong: swing.rightToWrong, wrongToWrong: swing.wrongToWrong },
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

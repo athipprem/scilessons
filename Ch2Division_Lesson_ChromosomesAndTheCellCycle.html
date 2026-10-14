@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 52 · Lesson 1 — What Gets Copied</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#1f4e9c;--pl-d:#0f2a5e;--pl-l:#e8effb;--sv:#b0426b;--sv-l:#fbeef3;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#f3f6fc;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+</style>
+</head>
+<body data-next-href="Ch2Division_Lesson_BuddingAndFromMicroscopeToGenes.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#129516; Lesson 1 · What Gets Copied</b><span class="pill">Unit 52 · Biology</span></div>
+
+  <!-- 1 -->
+  <section class="screen active" id="sRead">
+    <h2>Read the Shape</h2>
+    <div class="why">Every cell has a shape for a reason. If you can read the shape, you can work out the job, even for a cell you have never seen. And every time a cell divides, something gets copied. Today you find out what.</div>
+    <div class="rulebar" style="text-align:left;font-weight:600"><b>Read the shape:</b> 1. What is unusual about the shape? 2. What would that feature help with? 3. Which job needs that?</div>
+    <div class="job">Use the same three steps on every new cell. Try it on two cells you have never met.</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="screen" id="sGuard" data-lock="pick">
+    <h2>Practice: A Cell You Have Never Met</h2>
+    <div class="rulebar" style="text-align:left;font-weight:600"><b>Read the shape:</b> 1. What is unusual about the shape? 2. What would that feature help with? 3. Which job needs that?</div>
+    <div class="box"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two bean-shaped cells curving around a tiny hole in a leaf surface"><rect width="220" height="140" rx="10" fill="#eef7ea"/><path d="M100,16 C60,20 50,68 64,104 C74,128 102,126 102,112 C92,88 92,48 100,16Z" fill="#9ed48f" stroke="#2f7a2a" stroke-width="3"/><path d="M120,16 C160,20 170,68 156,104 C146,128 118,126 118,112 C128,88 128,48 120,16Z" fill="#9ed48f" stroke="#2f7a2a" stroke-width="3"/><circle cx="82" cy="70" r="7" fill="#2f9c3f" opacity=".6"/><circle cx="138" cy="70" r="7" fill="#2f9c3f" opacity=".6"/><text x="110" y="136" font-size="11" text-anchor="middle" fill="#2f5b2a" font-weight="700">a cell pair, from the outside of a leaf</text></svg></div>
+    <div class="pick" data-why="Two curved cells around a tiny hole."><p>Step 1. What is unusual about the shape?</p><div class="pbrow" style="flex-direction:column"><button class="pb">It is perfectly round</button><button class="pb" data-ok>Two bean shapes curve round a tiny hole</button><button class="pb">It has a long tail</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="Curved cells can bend apart or close together."><p>Step 2. What would that feature help with?</p><div class="pbrow" style="flex-direction:column"><button class="pb">Swimming along</button><button class="pb">Storing food</button><button class="pb" data-ok>Bending apart or together, to open and close the hole</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="These are guard cells. They guard the holes in a leaf&#39;s surface."><p>Step 3. Which job needs that?</p><div class="pbrow" style="flex-direction:column"><button class="pb">Carrying messages</button><button class="pb">Making food from light</button><button class="pb" data-ok>Opening and closing the hole that lets gases in and water vapour out</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="screen" id="sPollen" data-lock="pick">
+    <h2>Practice: Another New Cell</h2>
+    <div class="rulebar" style="text-align:left;font-weight:600"><b>Read the shape:</b> 1. What is unusual about the shape? 2. What would that feature help with? 3. Which job needs that?</div>
+    <div class="box"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A round pollen grain covered in tiny hooks"><rect width="220" height="140" rx="10" fill="#fff9e6"/><circle cx="110" cy="70" r="36" fill="#f6d36b" stroke="#a8761a" stroke-width="3"/><path d="M146.0,70.0 L162.0,70.0 q-0.0,6.0 -0.0,1.2" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="162.0" cy="76.0" r="2.6" fill="#a8761a"/><path d="M143.3,83.8 L158.0,89.9 q-2.3,5.5 -0.5,1.1" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="155.7" cy="95.4" r="2.6" fill="#a8761a"/><path d="M135.5,95.5 L146.8,106.8 q-4.2,4.2 -0.8,0.8" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="142.5" cy="111.0" r="2.6" fill="#a8761a"/><path d="M123.8,103.3 L129.9,118.0 q-5.5,2.3 -1.1,0.5" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="124.4" cy="120.3" r="2.6" fill="#a8761a"/><path d="M110.0,106.0 L110.0,122.0 q-6.0,0.0 -1.2,0.0" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="104.0" cy="122.0" r="2.6" fill="#a8761a"/><path d="M96.2,103.3 L90.1,118.0 q-5.5,-2.3 -1.1,-0.5" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="84.6" cy="115.7" r="2.6" fill="#a8761a"/><path d="M84.5,95.5 L73.2,106.8 q-4.2,-4.2 -0.8,-0.8" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="69.0" cy="102.5" r="2.6" fill="#a8761a"/><path d="M76.7,83.8 L62.0,89.9 q-2.3,-5.5 -0.5,-1.1" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="59.7" cy="84.4" r="2.6" fill="#a8761a"/><path d="M74.0,70.0 L58.0,70.0 q-0.0,-6.0 -0.0,-1.2" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="58.0" cy="64.0" r="2.6" fill="#a8761a"/><path d="M76.7,56.2 L62.0,50.1 q2.3,-5.5 0.5,-1.1" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="64.3" cy="44.6" r="2.6" fill="#a8761a"/><path d="M84.5,44.5 L73.2,33.2 q4.2,-4.2 0.8,-0.8" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="77.5" cy="29.0" r="2.6" fill="#a8761a"/><path d="M96.2,36.7 L90.1,22.0 q5.5,-2.3 1.1,-0.5" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="95.6" cy="19.7" r="2.6" fill="#a8761a"/><path d="M110.0,34.0 L110.0,18.0 q6.0,-0.0 1.2,-0.0" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="116.0" cy="18.0" r="2.6" fill="#a8761a"/><path d="M123.8,36.7 L129.9,22.0 q5.5,2.3 1.1,0.5" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="135.4" cy="24.3" r="2.6" fill="#a8761a"/><path d="M135.5,44.5 L146.8,33.2 q4.2,4.2 0.8,0.8" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="151.0" cy="37.5" r="2.6" fill="#a8761a"/><path d="M143.3,56.2 L158.0,50.1 q2.3,5.5 0.5,1.1" fill="none" stroke="#a8761a" stroke-width="3" stroke-linecap="round"/><circle cx="160.3" cy="55.6" r="2.6" fill="#a8761a"/><text x="110" y="136" font-size="11" text-anchor="middle" fill="#6a4a00" font-weight="700">a grain of pollen</text></svg></div>
+    <div class="pick" data-why="Hooks all over the outside."><p>Step 1. What is unusual about the shape?</p><div class="pbrow" style="flex-direction:column"><button class="pb" data-ok>It is covered in tiny hooks</button><button class="pb">It has a long tail</button><button class="pb">It has no outline</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="Hooks catch hold."><p>Step 2. What would that feature help with?</p><div class="pbrow" style="flex-direction:column"><button class="pb">Swimming along</button><button class="pb" data-ok>Catching hold of whatever touches it</button><button class="pb">Making food from light</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="A pollen grain hooks on to a visiting bee."><p>Step 3. Which job needs that?</p><div class="pbrow" style="flex-direction:column"><button class="pb">Soaking up water from soil</button><button class="pb">Carrying messages</button><button class="pb" data-ok>Hooking on to a bee&#39;s hairy body, to be carried to another flower</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 4 route A -->
+  <section class="screen" id="sRouteA" data-route="A" data-label="the animation">
+    <h2>What Gets Copied? (Route A)</h2>
+    <div class="job">A nucleus holds long thin threads called <b>chromosomes</b>. This cell has 4. Press the buttons and watch.</div>
+    <div class="box"><div id="chromoStage"></div>
+      <div class="cap show" id="chromoCap"></div>
+      <div><button class="actbtn" id="bCopy">Before dividing</button><button class="actbtn" id="bSplit">Divide</button><button class="actbtn alt" id="bAgain">Start again</button></div>
+      <div class="counter">parent cell: 4 chromosomes &rarr; each new cell: 4 chromosomes</div>
+      <div id="ctext" class="hid">
+        <span data-k="0">The nucleus holds 4 chromosomes.</span>
+        <span data-k="1">Every chromosome has made an exact copy. The two copies stay joined in the middle, so each looks like an X.</span>
+        <span data-k="2">The copies pulled apart, one to each side, and the cell split in two. Each new cell has all 4 chromosomes.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 route B -->
+  <section class="screen" id="sRouteB" data-route="B" data-label="the steps">
+    <h2>Same Story, as Steps (Route B)</h2>
+    <div class="rulebar">Same story, as steps you can write.</div>
+    <ol class="stepol">
+      <li>The nucleus holds the chromosomes.</li>
+      <li>Before splitting, every chromosome is copied.</li>
+      <li>The two copies stay joined: an X.</li>
+      <li>When the cell splits, the copies pull apart, one to each new cell.</li>
+      <li>So each new cell gets the same chromosomes as the parent. That is why the two new cells are <b>identical</b>.</li>
+    </ol>
+    <div class="job">Unit 44 told you the new cells are identical. Now you know why.</div>
+  </section>
+
+  <!-- 6 X routine -->
+  <section class="screen" id="sX" data-lock="pick">
+    <h2>Read the Shape: the X</h2>
+    <div class="rulebar" style="text-align:left;font-weight:600"><b>Read the shape:</b> 1. What is unusual about the shape? 2. What would that feature help with? 3. Which job needs that?</div>
+    <div class="box"><svg viewBox="0 0 160 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A chromosome drawn as an X"><rect width="160" height="120" rx="10" fill="#f1f4fc"/><line x1="48" y1="20" x2="112" y2="100" stroke="#2f5bb5" stroke-width="14" stroke-linecap="round"/><line x1="112" y1="20" x2="48" y2="100" stroke="#2f5bb5" stroke-width="14" stroke-linecap="round"/></svg></div>
+    <div class="pick" data-why="Two matching arms, joined in the middle."><p>Step 1. What is unusual about the shape?</p><div class="pbrow" style="flex-direction:column"><button class="pb">One long straight line</button><button class="pb" data-ok>Two matching arms, joined in the middle</button><button class="pb">It has a tail</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="Matching arms can pull apart into two equal halves."><p>Step 2. What would that feature help with?</p><div class="pbrow" style="flex-direction:column"><button class="pb" data-ok>Splitting into two equal halves</button><button class="pb">Swimming along</button><button class="pb">Making food from light</button></div><div class="pfb"></div></div>
+    <div class="pick gated" data-why="Each new cell gets its own copy of the chromosome."><p>Step 3. Which job needs that?</p><div class="pbrow" style="flex-direction:column"><button class="pb">Letting water in</button><button class="pb" data-ok>Giving each new cell its own copy</button><button class="pb">Carrying messages</button></div><div class="pfb"></div></div>
+  </section>
+
+  <!-- 7 perfect copy -->
+  <section class="screen" id="sPerfect">
+    <h2>Why the Copy Must Be Perfect</h2>
+    <div class="job">Imagine copying a recipe by hand. Miss one line and the cake fails. A cell works from instructions too. These instructions are called <b>genes</b>, and they sit along the chromosomes.</div>
+    <div class="why">If a copy has a piece missing, the new cell that gets it lacks something it needs. That is why a cell copies every chromosome carefully before it splits.</div>
+  </section>
+
+  <!-- 8 cell cycle -->
+  <section class="screen" id="sCycle" data-label="the cell cycle loop">
+    <h2>The Cell Cycle Is a Loop</h2>
+    <div class="rulebar">Press the button to run one <b>cell cycle</b>.</div>
+    <div class="box">
+      <svg class="wide" viewBox="0 0 560 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A ring clock with a long growing part and a short dividing slice, next to a cell">
+        <g fill="none" stroke-width="22"><path d="M132.7,42.0 A78,78 0 1 1 79.9,60.2" stroke="#9fc0ee"/><path d="M84.2,56.9 A78,78 0 0 1 127.3,42.0" stroke="#e77aa0"/></g>
+        <circle cx="130" cy="120" r="5" fill="#0f2a5e"/>
+        <g id="cycHand" style="transform-origin:130px 120px;transform:rotate(0deg)"><line x1="130" y1="120" x2="130" y2="48" stroke="#0f2a5e" stroke-width="5" stroke-linecap="round"/></g>
+        <text x="130" y="228" font-size="12" text-anchor="middle" fill="#0f2a5e" font-weight="700">long part: growing and doing its job</text>
+        <text x="130" y="20" font-size="12" text-anchor="start" dx="40" fill="#8a1e4a" font-weight="800">short slice: dividing</text>
+        <g id="cycCell"></g>
+      </svg>
+      <button class="actbtn" id="cycBtn">Run a cycle</button>
+      <div class="cap show" id="cycCap"></div>
+      <div id="cyctext" class="hid">
+        <span data-k="0">Press the button to run one cycle.</span>
+        <span data-k="1">Growing and doing its job. This is the long part.</span>
+        <span data-k="2">Dividing! This is the short slice.</span>
+        <span data-k="3">Two new cells, each half-sized. Each one starts its own loop, growing first.</span>
+      </div>
+    </div>
+    <div class="job">Cells do not divide all the time. Most of a cell&#39;s time is spent growing and doing its job. A new cell grows to full size before it can divide again.</div>
+  </section>
+
+  <!-- 9 where fastest -->
+  <section class="screen" id="sWhere">
+    <h2>Where Is Division Fastest?</h2>
+    <div class="box"><svg viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A seedling with its shoot tip and root tip highlighted"><rect width="300" height="210" rx="10" fill="#f6f9ff"/><rect y="112" width="300" height="98" fill="#e6d3b8"/><line x1="0" y1="112" x2="300" y2="112" stroke="#8a6a3a" stroke-width="3"/><path d="M150,112 L150,42" stroke="#3a8a3a" stroke-width="8" stroke-linecap="round"/><path d="M150,80 C120,70 100,78 92,92 C112,98 136,94 150,80Z" fill="#6cc26c" stroke="#2f7a2a" stroke-width="2"/><path d="M150,64 C180,52 204,60 210,74 C190,82 164,80 150,64Z" fill="#6cc26c" stroke="#2f7a2a" stroke-width="2"/><g stroke="#8a5a2a" stroke-width="5" stroke-linecap="round" fill="none"><path d="M150,112 C140,140 120,164 108,186"/><path d="M150,112 L152,190"/><path d="M150,112 C162,140 184,160 196,182"/></g><circle cx="150" cy="38" r="16" fill="#e77aa0" opacity=".55" stroke="#b0426b" stroke-width="3"/><circle cx="152" cy="190" r="13" fill="#e77aa0" opacity=".55" stroke="#b0426b" stroke-width="3"/><text x="182" y="30" font-size="12" font-weight="800" fill="#8a1e4a">shoot tip</text><text x="176" y="196" font-size="12" font-weight="800" fill="#8a1e4a">root tip</text></svg></div>
+    <div class="job">In a plant, cells divide fastest at the root tip and the shoot tip, where the plant grows longer (Unit 33). In an animal, division is fastest where cells are replaced all the time, like the bottom layer of skin and the lining of the gut.</div>
+  </section>
+
+  <!-- 10 practice -->
+  <section class="screen" id="sPractice" data-lock="mcq pick">
+    <h2>Practice</h2>
+    <div class="rulebar">Type a quick guess first. Press Check. If you are wrong, try again.</div>
+    <div class="mcq pred" data-why="Each new cell gets a copy of every chromosome, so it has the same number as the parent: 6.">
+      <p>1. A parent cell has 6 chromosomes. How many does each new cell get?</p>
+      <div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div>
+      <div class="pbody hid"><button class="opt">3</button><button class="opt" data-ok>6</button><button class="opt">12</button><button class="opt">9</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    </div>
+    <div class="pick" data-why="The short slice is the dividing part. Most of a cell&#39;s life is the long parts.">
+      <p>2. Click the slice where the cell is dividing.</p><div class="box"><svg viewBox="0 0 220 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A ring split into three slices"><g fill="none" stroke-width="26"><path class="pb" d="M112.7,22.0 A78,78 0 0 1 126.2,176.3" stroke="#7aa0dc"/><path class="pb" d="M120.9,177.2 A78,78 0 0 1 62.0,38.5" stroke="#9fc0ee"/><path class="pb" data-ok d="M66.4,35.3 A78,78 0 0 1 107.3,22.0" stroke="#e77aa0"/></g><text x="110" y="104" font-size="12" text-anchor="middle" fill="#0f2a5e" font-weight="800">one cell&#39;s life</text></svg></div><div class="pfb"></div></div>
+    <div class="mcq pred" data-why="A long hollow tube lets water flow along it, so cells joined end to end make a pipe up the stem.">
+      <p>3. Cells shaped like long hollow tubes are joined end to end into a pipe. What job do they do best?</p>
+      <div class="box"><svg viewBox="0 0 120 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A stack of long hollow cells joined end to end, forming a pipe"><rect width="120" height="190" rx="10" fill="#f3f7fc"/><g fill="#fff" stroke="#7a4b2a" stroke-width="4"><rect x="42" y="14" width="36" height="52"/><rect x="42" y="72" width="36" height="52"/><rect x="42" y="130" width="36" height="46"/></g><g stroke="#cfe1f5" stroke-width="3"><line x1="46" y1="66" x2="74" y2="66"/><line x1="46" y1="124" x2="74" y2="124"/></g></svg></div>
+      <div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div>
+      <div class="pbody hid"><button class="opt">Making food from light</button><button class="opt">Storing fat</button><button class="opt" data-ok>Carrying water up a stem</button><button class="opt">Sending signals along the body</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    </div>
+    <div class="mcq" data-why="With no copy, the chromosomes would be shared out, so each new cell would be missing some.">
+      <p>4. A cell splits without copying its chromosomes first. What goes wrong?</p>
+      <button class="opt">Nothing, the new cells would be fine</button><button class="opt" data-ok>The new cells would each be missing some chromosomes</button><button class="opt">The new cells would each have twice as many</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <!-- 11 trap -->
+  <section class="screen" id="sTrap" data-lock="mcq">
+    <h2>Trap-Recognition Drill #15</h2>
+    <div class="trap"><b>Watch for ALL, ALWAYS, NEVER.</b> A claim with one of these words is often too extreme.</div>
+    <div class="mcq" data-why="False. Most cells are in the growing and working part of the cycle. Some, like most nerve cells, rarely divide at all.">
+      <p>A student says: &ldquo;All the cells in your body are dividing right now.&rdquo; True or false?</p>
+      <button class="opt">True: cells never stop dividing</button><button class="opt" data-ok>False: most cells are growing and doing their job, and some rarely divide at all</button><button class="opt">True, but only in children</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <!-- 12 self-check -->
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before Lesson 2: Self-Check</h2>
+    <div class="rulebar">One try each. Then you will either be ready, or sent back to the right place.</div>
+    <div class="mcq selfq" data-fail="route">
+      <p>1. Why does a cell copy its chromosomes before it splits?</p>
+      <button class="opt">So the cell gets lighter</button><button class="opt" data-ok>So each new cell can get its own copy of every chromosome</button><button class="opt">So the nucleus can disappear</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="sCycle">
+      <p>2. Which picture fits the cell cycle best?</p>
+      <button class="opt">A straight line that ends when the cell divides</button><button class="opt">A circle where the cell divides non-stop</button><button class="opt" data-ok>A loop: grow, do its job, divide, then start again</button>
+      <button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch2Division_L1.js"></script>
+</body>
+</html>
