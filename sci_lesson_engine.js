@@ -27,6 +27,8 @@ function refresh(){
   next.textContent= last ? (body.getAttribute('data-last-label')||'Finish') : 'Next →';
   next.disabled=!screenOK(sc);
   next.title=next.disabled?'Finish this screen first':'';
+  var lm=$('#lockmsg'); if(!lm&&dots){lm=document.createElement('div'); lm.id='lockmsg'; lm.style.cssText='text-align:center;font-size:.85rem;font-weight:700;color:#b0426b;margin-top:4px'; dots.parentNode.insertBefore(lm,dots.nextSibling);}
+  if(lm) lm.textContent=next.disabled?'Next unlocks when every question on this screen is answered.':'';
   if(dots) dots.textContent='Screen '+(cur+1)+' of '+screens.length;
 }
 function show(n){
