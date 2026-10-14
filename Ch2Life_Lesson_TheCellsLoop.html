@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 53 · Lesson 1 — The Cell's Loop</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#c2540a;--pl-d:#4a2205;--pl-l:#fdf0e3;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#fdf6ee;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#f1ebe4;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#c2540a}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-next-href="Ch2Life_Lesson_FastOrMany.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#128260; Lesson 1 · The Cell&#39;s Loop</b><span class="pill">Unit 53 · Biology</span></div>
+
+  <section class="screen active" id="sSim" data-lock="game">
+    <h2>The Cell&#39;s Loop</h2>
+    <div class="why">Every part of you grew from cells that copy themselves. That is how you grow taller and how a scrape heals. Press Run and watch one cell live one full loop.</div>
+    <div class="box sim" data-mode="body" data-need="loop" data-caps="0"><div class="simtabs"><button class="actbtn mode" data-mode="body">Body cell</button><button class="actbtn mode" data-mode="yeast">Yeast</button><button class="actbtn mode" data-mode="plant">Plant</button></div><div class="simstage"><div class="simsvg"></div></div><div class="cap show simcap"></div><div class="counter simcnt"></div><div class="simctl"><button class="actbtn sPlay">&#9654; Run</button></div></div>
+    <div class="job">The whole ring is one <b>cell cycle</b>. The long green part is the cell growing and doing its job. The short red slice is dividing.</div>
+  </section>
+
+  <section class="screen" id="sRouteA" data-route="A" data-label="the simulator" data-lock="game">
+    <h2>Run It Again, With Captions</h2>
+    <div class="rulebar">Watch what happens to the chromosomes.</div>
+    <div class="box sim" data-mode="body" data-need="loop" data-caps="1"><div class="simstage"><div class="simsvg"></div></div><div class="cap show simcap"></div><div class="counter simcnt"></div><div class="simctl"><button class="actbtn sPlay">&#9654; Run</button></div></div>
+  </section>
+
+  <section class="screen" id="sRouteB" data-route="B" data-label="the Loop card">
+    <h2>The Loop Card</h2>
+    <div class="rulebar">Same story, one step per line.</div>
+    <ol class="stepol">
+      <li>Grow and do its job. That is <b>most of its life</b>.</li>
+      <li>Copy every chromosome <b>inside the nucleus</b>.</li>
+      <li>Split into two <b>identical</b> cells.</li>
+      <li>Each new cell starts the same loop again. That is why it is called the <b>cell cycle</b>.</li>
+    </ol>
+  </section>
+
+  <section class="screen" id="sPhoto" data-lock="game">
+    <h2>Photo: Catch Cells at Random</h2>
+    <div class="rulebar">Press Photo three times. Count the red-outlined cells each time.</div>
+    <div class="box sim" data-mode="body" data-need="photo3" data-caps="0"><div class="simstage"><div class="simsvg"></div></div><div class="cap show simcap"></div><div class="counter simcnt"></div><div class="simctl"><button class="actbtn sPlay">&#9654; Run</button><button class="actbtn alt sPhoto">&#128247; Photo</button><button class="actbtn alt sBack">Back to the cell</button></div></div>
+    <div class="job">Only a few cells are dividing in each photo, because most of its life, a cell is growing and doing its job. The red slice is 1 in 10 of the ring, so a photo catches about 1 in 10 cells dividing: 2 of 20.</div>
+  </section>
+
+  <section class="screen" id="sYeast" data-lock="game">
+    <h2>Yeast: Budding</h2>
+    <div class="job">Yeast is a fungus made of one cell. It makes new cells by <b>budding</b>. Press Run.</div>
+    <div class="box sim" data-mode="yeast" data-need="bud" data-caps="1"><div class="simtabs"><button class="actbtn mode" data-mode="body">Body cell</button><button class="actbtn mode" data-mode="yeast">Yeast</button><button class="actbtn mode" data-mode="plant">Plant</button></div><div class="simstage"><div class="simsvg"></div></div><div class="cap show simcap"></div><div class="counter simcnt"></div><div class="simctl"><button class="actbtn sPlay">&#9654; Run</button></div></div>
+    <div class="job">In budding, a bump grows out of the side and the bud pinches off. The bud is an <b>identical</b> copy of its one parent, just like runners in Unit 46.</div>
+  </section>
+
+  <section class="screen" id="sPlant">
+    <h2>Plants: The Growing Points</h2>
+    <div class="rulebar">Watch the little clocks. Fast spinning means fast dividing.</div>
+    <div class="box sim" data-mode="plant" data-need="" data-caps="1"><div class="simtabs"><button class="actbtn mode" data-mode="body">Body cell</button><button class="actbtn mode" data-mode="yeast">Yeast</button><button class="actbtn mode" data-mode="plant">Plant</button></div><div class="simstage"><div class="simsvg"></div></div><div class="cap show simcap"></div><div class="counter simcnt"></div><div class="simctl"><button class="actbtn sPlay">&#9654; Run</button></div></div>
+    <div class="job">The growing points are the root and shoot tips. That is where the plant gets longer.</div>
+  </section>
+
+  <section class="screen" id="sP1" data-lock="mcq">
+    <h2>Practice 1 of 2</h2>
+    <div class="rulebar">Write a quick guess first. Press Check. If you are wrong, try again.</div>
+    <div class="mcq pred" data-why="Yes. Chromosomes are kept inside the nucleus."><p>1. In which part of a cell would you look to see its chromosomes?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt">In the cell&#39;s outer edge</button><button class="opt" data-ok>In the nucleus</button><button class="opt">Floating loose in the jelly of the cell</button><button class="opt">On the outside of the cell</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+    <div class="mcq" data-why="No. Most of its life a cell is growing and doing its job, so only a few cells in any photo are dividing."><p>2. A photo shows 30 cells. Are most of them dividing right now?</p><button class="opt">Yes, cells are dividing all the time</button><button class="opt" data-ok>No, only a few are: most are growing and doing their job</button><button class="opt">Yes, but only the biggest ones</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq" data-why="Yes. Yeast is a fungus made of one cell, and it buds."><p>3. Which description fits yeast?</p><button class="opt">A tiny plant that makes its own food</button><button class="opt" data-ok>A fungus made of one cell</button><button class="opt">A kind of animal with a nucleus</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sP2" data-lock="pick game">
+    <h2>Practice 2 of 2</h2>
+    <div class="ordq" data-ans="0,1,2" data-why="Right. The bump grows first, a copy of every chromosome moves in, and last the bud pinches off."><p>4. Put the budding steps in order. Tap a step, then tap a place.</p><div class="ocards"><button class="ocard" data-i="1">A copy of every chromosome moves into the bump</button><button class="ocard" data-i="2">The bud pinches off</button><button class="ocard" data-i="0">A bump grows out of the side</button></div><div class="oslots"><span class="oslot" data-s="0"><b>1.</b><span class="st"></span></span><span class="oslot" data-s="1"><b>2.</b><span class="st"></span></span><span class="oslot" data-s="2"><b>3.</b><span class="st"></span></span></div><button class="btn chk ochk">Check</button><div class="fb"></div></div>
+    <div class="pick" data-why="Yes. Cells divide fastest at the root and shoot tips, the growing points."><p>5. Tap the place where the most cells are dividing.</p><div class="box"><svg viewBox="0 0 300 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A bean seedling with four parts you can tap"><rect width="300" height="220" rx="10" fill="#fdf6ee"/><rect y="116" width="300" height="104" fill="#e6d3b8"/><line x1="0" y1="116" x2="300" y2="116" stroke="#8a6a3a" stroke-width="3"/><path d="M150,116 L150,46" stroke="#3a8a3a" stroke-width="8" stroke-linecap="round"/><g class="pb"><ellipse cx="96" cy="88" rx="40" ry="16" fill="#6cc26c" stroke="#2f7a2a" stroke-width="2.5" transform="rotate(-18 96 88)"/></g><g class="pb"><rect x="134" y="62" width="32" height="46" rx="8" fill="#ffffff" fill-opacity=".35" stroke="#546e7a" stroke-width="2.5" stroke-dasharray="5 4"/></g><g stroke="#8a5a2a" stroke-width="5" stroke-linecap="round" fill="none"><path d="M150,116 L150,190"/><path d="M150,140 C136,160 124,172 112,184"/><path d="M150,146 C164,164 178,174 190,184"/></g><g class="pb" data-ok><circle cx="150" cy="38" r="20" fill="#e8710a" fill-opacity=".3" stroke="#c2540a" stroke-width="3" stroke-dasharray="5 4"/></g><g class="pb" data-ok><circle cx="150" cy="196" r="16" fill="#e8710a" fill-opacity=".3" stroke="#c2540a" stroke-width="3" stroke-dasharray="5 4"/></g></svg></div><div class="pfb"></div></div>
+    <div class="rulebar">An <b>observation</b> is what you see. An <b>inference</b> is what you work out.</div>
+    <div class="pick oi" data-why="Yes, an observation: you can see the X shapes."><p>6. In a photo of cells, two cells show X shapes inside.</p><div class="pbrow"><button class="pb" data-ok>Observation</button><button class="pb">Inference</button></div><div class="pfb"></div></div>
+    <div class="pick oi" data-why="An inference: you worked it out from the X shapes. You cannot see &ldquo;dividing&rdquo; directly."><p>6b. Those two cells are dividing.</p><div class="pbrow"><button class="pb">Observation</button><button class="pb" data-ok>Inference</button></div><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before Lesson 2: Self-Check</h2>
+    <div class="rulebar">One try each. Then you are ready, or you go back to the right place.</div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>1. Which part of a cell&#39;s ring is the longest?</p><button class="opt">Dividing</button><button class="opt" data-ok>Growing and doing its job</button><button class="opt">Copying the chromosomes</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>2. After a cell splits, what does each new cell do?</p><button class="opt">Stops for good</button><button class="opt" data-ok>Starts the same loop again</button><button class="opt">Waits for a partner cell</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+  <div id="simtext" class="hid"><span data-k="lab-chromo">chromosomes &mdash; kept inside the nucleus</span><span data-k="lg1">GROWING &amp; DOING ITS JOB</span><span data-k="lg2">most of its life</span><span data-k="ld">DIVIDING</span><span data-k="slow">(slow motion)</span><span data-k="cap-idle">Press Run to start one loop.</span><span data-k="cap-grow">Growing and doing its job. This is most of its life.</span><span data-k="cap-copy">Every chromosome is copied inside the nucleus, so each looks like an X.</span><span data-k="cap-pull">The copies pull apart, one to each side.</span><span data-k="cap-split">The cell splits in two.</span><span data-k="cap-again">Two new cells. Each starts the same loop again, growing first. That is why it is called the cell cycle.</span><span data-k="photo-key">Red outline = dividing right now</span><span data-k="cnt-photo">Dividing right now: {n} of 20</span><span data-k="cap-photo">Most of its life, a cell is growing, not dividing.</span><span data-k="lab-yeast">Yeast &mdash; a fungus made of one cell</span><span data-k="y0">A yeast cell. Its chromosomes are inside the nucleus.</span><span data-k="y1">A bump grows out of the side.</span><span data-k="y2">Every chromosome is copied inside the nucleus.</span><span data-k="y3">One copy of each moves into the bump.</span><span data-k="y4">The bud pinches off.</span><span data-k="cnt-y0">1 parent cell</span><span data-k="cnt-y1">1 parent &rarr; 2 identical cells</span><span data-k="lab-shoot">shoot tip: fast</span><span data-k="lab-root">root tip: fast</span><span data-k="lab-mid">middle: slow</span><span data-k="cap-plant">Cells divide fastest at the root and shoot tips, the growing points.</span><span data-k="ord-fill">Fill all three places first.</span><span data-k="ord-no">Not quite. Try the order again.</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch2Life_Sim.js"></script>
+</body>
+</html>

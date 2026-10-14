@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 53 · Lesson 2 — Fast or Many?</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#c2540a;--pl-d:#4a2205;--pl-l:#fdf0e3;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#fdf6ee;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#f1ebe4;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#c2540a}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-next-href="Tests/Unit_53_Test_LifeOfACell.html" data-last-label="Go to Test &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#9878;&#65039; Lesson 2 · Fast or Many?</b><span class="pill">Unit 53 · Biology</span></div>
+
+  <section class="screen active" id="sRace" data-route="A" data-label="the race" data-lock="game">
+    <h2>Race: Fast or Many?</h2>
+    <div class="why">Gardeners count new seedlings to plan their space. Two patches of cells race for one day. Which makes more new cells?</div>
+    <div class="rulebar">Press Run 1 day. Then move the sliders and run again.</div>
+    <div class="racebox box" data-s-cells="10" data-s-loop="1"><div class="race">
+      <div class="patch"><h3>Patch Small</h3><div class="pS"></div><div>10 cells &middot; each loop takes 1 day</div><div class="big nS">0</div><div>new cells</div></div>
+      <div class="patch"><h3>Patch Big</h3><div class="pB"></div><div><span class="vCells"></span> cells &middot; each loop takes <span class="vLoop"></span> <span class="vUnit"></span></div><div class="big nB">0</div><div>new cells</div></div></div>
+      <div class="rcctl">Patch Big: number of cells<input type="range" class="rcCells" min="20" max="80" step="20" value="40"></div>
+      <div class="rcctl">Patch Big: days per loop<input type="range" class="rcLoop" min="1" max="3" step="1" value="2"></div>
+      <button class="actbtn rcRun">Run 1 day</button><div class="sline rcWin"></div><div class="cap show rcCap"></div></div>
+  </section>
+
+  <section class="screen" id="sSteps" data-route="B" data-label="the two steps">
+    <h2>Two Steps to Any Answer</h2>
+    <div class="rulebar">The race showed it. Here is how to work it out without a race.</div>
+    <ol class="stepol">
+      <li><b>What share of the cells divide today?</b> A loop of N days means 1 in N cells divides each day.</li>
+      <li><b>Multiply</b> by how many cells there are.</li>
+    </ol>
+    <div class="job"><b>Example:</b> 200 cells, 2-day loop: 200 &divide; 2 = 100 new cells. 60 cells, 1-day loop: 60 new cells. The big slow patch wins. So remember: fast is not the same as many.</div>
+    <div class="why">It also explains the Photo: with a 4-day loop, only about 1 in 4 cells divides on any day, so a photo catches just a few.</div>
+  </section>
+
+  <section class="screen" id="sCans" data-lock="mcq">
+    <h2>Same Rule, New Costume</h2>
+    <div class="mcq pred" data-why="A: 30 &times; 1 = 30. B: 10 &times; 2 = 20. B&#39;s students bring more each, but A has more students. Fast is not the same as many."><p>Two classes collect cans for a week. Class A has 30 students who each bring 1 can. Class B has 10 students who each bring 2 cans. Which class collects more?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt">Class B, because each student brings more</button><button class="opt" data-ok>Class A: 30 cans, against 20</button><button class="opt">They collect the same</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+  </section>
+
+  <section class="screen" id="sTrap" data-lock="mcq">
+    <h2>Trap-Recognition Drill #16</h2>
+    <div class="trap"><b>Watch for ALL, ALWAYS, NEVER.</b> A claim with one of these words is often too extreme.</div>
+    <div class="mcq" data-why="False. A fast patch with few cells can lose to a slow patch with many. Fast is not the same as many."><p>A student says: &ldquo;The faster one ALWAYS makes more.&rdquo; True or false?</p><button class="opt">True: speed is what counts</button><button class="opt" data-ok>False: count how many there are first, then find the share dividing</button><button class="opt">True, but only for yeast</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sFacts" data-lock="term">
+    <h2>Fact Check</h2>
+    <div class="rulebar">Tap a phrase, then tap what it matches. Get all six right to go on.</div>
+    <div class="termcheck"><div class="tchips"><button class="tchip" data-t="0">inside the nucleus</button><button class="tchip" data-t="1">most of its life</button><button class="tchip" data-t="2">pinches off</button><button class="tchip" data-t="3">fungus made of one cell</button><button class="tchip" data-t="4">root and shoot tips</button><button class="tchip" data-t="5">fast is not the same as many</button></div><div class="trow" data-t="4"><span class="slot">&hellip;</span><span>Where cells divide fastest in a seedling</span></div><div class="trow" data-t="0"><span class="slot">&hellip;</span><span>Where the chromosomes are kept</span></div><div class="trow" data-t="5"><span class="slot">&hellip;</span><span>What Patch Small taught us</span></div><div class="trow" data-t="2"><span class="slot">&hellip;</span><span>What the bud does at the end of budding</span></div><div class="trow" data-t="1"><span class="slot">&hellip;</span><span>How long a cell spends not dividing</span></div><div class="trow" data-t="3"><span class="slot">&hellip;</span><span>What yeast is</span></div><button class="btn chk tchk">Check</button><div class="tres"></div></div>
+  </section>
+
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before the Test: Self-Check</h2>
+    <div class="rulebar">One try each. Then you are ready, or you go back to the right place.</div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>1. Patch X has many cells with a slow loop. Patch Y has a few cells with a fast loop. How do you find which makes more new cells?</p><button class="opt">Pick the patch with the fastest cells</button><button class="opt" data-ok>Find the share dividing in each patch, then multiply by how many cells</button><button class="opt">Pick the patch with the longest loop</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>2. A photo shows 40 cells. Why are only a few of them dividing?</p><button class="opt">Cells only divide at night</button><button class="opt">The others are too small to divide</button><button class="opt" data-ok>Dividing is only the short red slice of a cell&#39;s loop</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+  <div id="simtext" class="hid"><span data-k="day">day</span><span data-k="days">days</span><span data-k="win-s">Patch Small makes more new cells.</span><span data-k="win-b">Patch Big makes more new cells.</span><span data-k="win-t">A tie.</span><span data-k="cap-fast">Patch Small&#39;s cells are faster &mdash; but fast is not the same as many.</span><span data-k="cap-same">The cells are equally fast here, so the patch with more cells makes more.</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch2Life_Sim.js"></script>
+</body>
+</html>

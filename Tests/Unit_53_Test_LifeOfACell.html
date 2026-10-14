@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_53_Test_LifeOfACell.html — Biology: The Life of a Cell
+     (consolidation, inserted before Milestone 5). Built from
+     BUILD_PLAN_SCI_U53_LifeOfACell.md (14 Oct 2026).
+     PACE PROTOCOL v2 (feedback-pace-protocol.md):
+       - Q9, Q10, Q12, Q17 are predict-first (options hidden until a
+         short guess is typed; the guess is saved, not scored);
+       - per-question timing (secsSincePrev, firstChoice, firstClickAt);
+       - at Submit, every answer given <15 s (Sections A and B) or <20 s
+         (Section C) after the previous answer comes back once:
+         Keep / Change. Correctness is never shown there.
+       - the headline counts every change since the first click.
+     No timer, no minimum time, no locked Submit.
+     Section A: chromosomes live in the nucleus; yeast is a fungus.
+     Section B: budding in order (picture item), growing points,
+     observation, the cell cycle, a copy keeps its features, speed vs
+     distance (U26). Section C: speed vs amount on cells (deciding
+     item) and in bakeries, the shoot top, the dividing share of a
+     photo, warmth and budding, dissolving (U40), lid and water (U19),
+     conduction (U32), a number pattern (U36), observation vs
+     inference, density (U15/U24), cuttings (U46).
+     Answer positions are the pinned key (seed 53). TIER SPLIT 2/6/12. PASS BAR 16/20.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 53 Test — Biology: The Life of a Cell</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#c2540a; --steel-d:#4a2205; --a-fill:#fdf0e3; --a-text:#c2540a;
+    --blue:#1565c0; --b-fill:#f6d5b5; --b-text:#5a2a05;
+    --purple:#37474f; --c-fill:#e8ecef; --c-text:#37474f;
+    --amber:#c2540a; --amber-l:#fdf0e3;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#4a2205}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#f3dcc3);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:#fdf0e3;border:1.5px solid var(--amber);color:#4a2205;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#fdf6ee;border:1.5px dashed var(--steel);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--steel-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--steel-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--steel-d)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Unit 53 Test — Biology: The Life of a Cell</b>
+      <span class="sub" id="hdr-sub">The Cell's Loop • Budding • Growing Points • Fast vs Many</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+  <div class="pacebar">Section C takes about 1–2 minutes a question. Use S.T.O.P.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="pace-lines"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Some answers may come back for one more look before your results. Make sure you're happy with all 20!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="startReview()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-overlay">
+  <div class="rv-box">
+    <h3>Quick check: you answered this one fast. Read it once more.</h3>
+    <div class="rv-count" id="rv-count"></div>
+    <div id="rv-body"></div>
+    <div class="rv-actions" id="rv-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 53;
+const UNIT_TITLE = "Biology: The Life of a Cell (consolidation)";
+const PASS_BAR   = 16;                        // out of 20 (80%)
+const LAST_TEST_MINUTES = 8.6;                // Unit 52, for the results line
+const REVIEW_SECS_AB = 15;                    // Section A/B answers faster than this come back once
+const REVIEW_SECS_C  = 20;                    // Section C answers faster than this come back once
+
+const Q = [
+  /* A (Basic) Q1-2 · B (Intermediate) Q3-8 · C (Applied) Q9-20 */
+  { n:1, section:"A", tier:"Basic", star:0, body:"A scientist wants to look closely at a cell's chromosomes. Which part should she zoom in on?",
+    options:["The cell membrane", "The nucleus", "The vacuole", "The cytoplasm"], ans:2,
+    why:"The chromosomes are kept in the nucleus, the cell's control centre." },
+  { n:2, section:"A", tier:"Basic", star:0, body:"Which of these is a fungus whose whole body is just one cell?",
+    options:["A mushroom", "A bacterium", "Yeast", "A moss plant"], ans:3,
+    why:"Yeast is a fungus, and each yeast is a single cell. A mushroom is a fungus too, but it is made of many cells." },
+  { n:3, section:"B", tier:"Intermediate", star:1, body:"Each strip below shows three pictures of a yeast cell. Which strip shows budding in the right order?",
+    options:["Strip A", "Strip B", "Strip C", "Strip D"], ans:3,
+    fig:"<svg class=\"wide\" viewBox=\"0 0 720 540\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Four strips, A to D, each with three pictures of a yeast cell\"><defs><marker id=\"ar\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"4\" orient=\"auto\"><path d=\"M0,0 L8,4 L0,8Z\" fill=\"#2e7d32\"/></marker></defs><rect width=\"720\" height=\"540\" rx=\"10\" fill=\"#fffaf3\"/><text x=\"34\" y=\"70\" font-size=\"20\" font-weight=\"800\" fill=\"#4a2205\" text-anchor=\"middle\">Strip A</text><g class=\"panel\"><rect x=\"76\" y=\"8\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"156\" cy=\"52\" rx=\"28\" ry=\"25\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><ellipse cx=\"196\" cy=\"52\" rx=\"28\" ry=\"25\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"156\" cy=\"52\" r=\"9\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"151\" y1=\"48\" x2=\"159\" y2=\"57\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"161\" y1=\"47\" x2=\"153\" y2=\"56\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"196\" cy=\"52\" r=\"9\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"191\" y1=\"48\" x2=\"199\" y2=\"57\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"201\" y1=\"47\" x2=\"193\" y2=\"56\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"176\" y=\"104\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">Two cells join</text></g><text x=\"283\" y=\"76\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"291\" y=\"8\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"391\" cy=\"52\" rx=\"24\" ry=\"16\" fill=\"#a1887f\" stroke=\"#5d4037\" stroke-width=\"3\"/><line x1=\"379\" y1=\"52\" x2=\"403\" y2=\"52\" stroke=\"#5d4037\" stroke-width=\"2\"/><text x=\"391\" y=\"104\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">A seed forms</text></g><text x=\"498\" y=\"76\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"506\" y=\"8\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"576\" cy=\"44\" rx=\"28\" ry=\"25\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"576\" cy=\"44\" r=\"9\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"571\" y1=\"40\" x2=\"579\" y2=\"49\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"581\" y1=\"39\" x2=\"573\" y2=\"48\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"640\" cy=\"74\" rx=\"17\" ry=\"11\" fill=\"#a1887f\" stroke=\"#5d4037\" stroke-width=\"3\"/><text x=\"606\" y=\"104\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">The seed falls off</text></g><text x=\"34\" y=\"203\" font-size=\"20\" font-weight=\"800\" fill=\"#4a2205\" text-anchor=\"middle\">Strip B</text><g class=\"panel\"><rect x=\"76\" y=\"141\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"150\" cy=\"185\" rx=\"30\" ry=\"27\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"150\" cy=\"185\" r=\"10\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"145\" y1=\"181\" x2=\"153\" y2=\"190\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"155\" y1=\"180\" x2=\"147\" y2=\"189\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"210\" cy=\"179\" rx=\"22\" ry=\"20\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"210\" cy=\"179\" r=\"8\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"205\" y1=\"175\" x2=\"213\" y2=\"184\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"215\" y1=\"174\" x2=\"207\" y2=\"183\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"176\" y=\"237\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">The bud pinches off</text></g><text x=\"283\" y=\"209\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"291\" y=\"141\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"425\" cy=\"173\" rx=\"12\" ry=\"11\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><ellipse cx=\"383\" cy=\"185\" rx=\"32\" ry=\"28\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"383\" cy=\"185\" r=\"11\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"378\" y1=\"181\" x2=\"386\" y2=\"190\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"388\" y1=\"180\" x2=\"380\" y2=\"189\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"391\" y=\"237\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">A bump grows on the side</text></g><text x=\"498\" y=\"209\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"506\" y=\"141\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"642\" cy=\"175\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><ellipse cx=\"596\" cy=\"187\" rx=\"32\" ry=\"28\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"596\" cy=\"187\" r=\"14\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"584\" y1=\"181\" x2=\"596\" y2=\"193\" stroke=\"#e8710a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"596\" y1=\"181\" x2=\"584\" y2=\"193\" stroke=\"#e8710a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"596\" y1=\"181\" x2=\"608\" y2=\"193\" stroke=\"#37474f\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"608\" y1=\"181\" x2=\"596\" y2=\"193\" stroke=\"#37474f\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><path d=\"M608,181 L636,175\" stroke=\"#2e7d32\" stroke-width=\"3\" fill=\"none\" marker-end=\"url(#ar)\"/><text x=\"606\" y=\"237\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">Chromosomes are copied;</text><text x=\"606\" y=\"252\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">one copy moves into the bump</text></g><text x=\"34\" y=\"336\" font-size=\"20\" font-weight=\"800\" fill=\"#4a2205\" text-anchor=\"middle\">Strip C</text><g class=\"panel\"><rect x=\"76\" y=\"274\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"210\" cy=\"306\" rx=\"12\" ry=\"11\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><ellipse cx=\"168\" cy=\"318\" rx=\"32\" ry=\"28\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"168\" cy=\"318\" r=\"11\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"163\" y1=\"314\" x2=\"171\" y2=\"323\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"173\" y1=\"313\" x2=\"165\" y2=\"322\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"176\" y=\"370\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">A bump grows on the side</text></g><text x=\"283\" y=\"342\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"291\" y=\"274\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"427\" cy=\"308\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><ellipse cx=\"381\" cy=\"320\" rx=\"32\" ry=\"28\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"381\" cy=\"320\" r=\"14\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"369\" y1=\"314\" x2=\"381\" y2=\"326\" stroke=\"#e8710a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"381\" y1=\"314\" x2=\"369\" y2=\"326\" stroke=\"#e8710a\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"381\" y1=\"314\" x2=\"393\" y2=\"326\" stroke=\"#37474f\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><line x1=\"393\" y1=\"314\" x2=\"381\" y2=\"326\" stroke=\"#37474f\" stroke-width=\"3.5\" stroke-linecap=\"round\"/><path d=\"M393,314 L421,308\" stroke=\"#2e7d32\" stroke-width=\"3\" fill=\"none\" marker-end=\"url(#ar)\"/><text x=\"391\" y=\"370\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">Chromosomes are copied;</text><text x=\"391\" y=\"385\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">one copy moves into the bump</text></g><text x=\"498\" y=\"342\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"506\" y=\"274\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"580\" cy=\"318\" rx=\"30\" ry=\"27\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"580\" cy=\"318\" r=\"10\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"575\" y1=\"314\" x2=\"583\" y2=\"323\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"585\" y1=\"313\" x2=\"577\" y2=\"322\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"640\" cy=\"312\" rx=\"22\" ry=\"20\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"640\" cy=\"312\" r=\"8\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"635\" y1=\"308\" x2=\"643\" y2=\"317\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"645\" y1=\"307\" x2=\"637\" y2=\"316\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"606\" y=\"370\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">The bud pinches off</text></g><text x=\"34\" y=\"469\" font-size=\"20\" font-weight=\"800\" fill=\"#4a2205\" text-anchor=\"middle\">Strip D</text><g class=\"panel\"><rect x=\"76\" y=\"407\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"176\" cy=\"451\" rx=\"34\" ry=\"30\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"176\" cy=\"451\" r=\"11\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><line x1=\"171\" y1=\"447\" x2=\"179\" y2=\"456\" stroke=\"#e8710a\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"181\" y1=\"446\" x2=\"173\" y2=\"455\" stroke=\"#37474f\" stroke-width=\"3\" stroke-linecap=\"round\"/><text x=\"176\" y=\"503\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">A cell gets ready</text></g><text x=\"283\" y=\"475\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"291\" y=\"407\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"391\" cy=\"451\" rx=\"36\" ry=\"32\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><line x1=\"391\" y1=\"421\" x2=\"391\" y2=\"481\" stroke=\"#c2540a\" stroke-width=\"3\" stroke-dasharray=\"4 3\"/><line x1=\"357\" y1=\"451\" x2=\"425\" y2=\"451\" stroke=\"#c2540a\" stroke-width=\"3\" stroke-dasharray=\"4 3\"/><text x=\"391\" y=\"503\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">It starts to split in four</text></g><text x=\"498\" y=\"475\" font-size=\"20\" text-anchor=\"middle\" fill=\"#546e7a\">&#8594;</text><g class=\"panel\"><rect x=\"506\" y=\"407\" width=\"200\" height=\"122\" rx=\"10\" fill=\"#fff\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"584\" cy=\"433\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"584\" cy=\"433\" r=\"6\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"584\" cy=\"469\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"584\" cy=\"469\" r=\"6\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"628\" cy=\"433\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"628\" cy=\"433\" r=\"6\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><ellipse cx=\"628\" cy=\"469\" rx=\"17\" ry=\"15\" fill=\"#fff1e0\" stroke=\"#c2540a\" stroke-width=\"3\"/><circle cx=\"628\" cy=\"469\" r=\"6\" fill=\"#eceff1\" stroke=\"#546e7a\" stroke-width=\"2\"/><text x=\"606\" y=\"503\" font-size=\"12.5\" text-anchor=\"middle\" fill=\"#37474f\" font-weight=\"700\">It splits into four at once</text></g></svg>",
+    why:"In budding, a bump grows on the side, a copy of every chromosome moves into the bump, and last of all the bud pinches off. Strip B has the right pictures in the wrong order." },
+  { n:4, section:"B", tier:"Intermediate", star:1, body:"On a young bean seedling, where would you find the most cells dividing?",
+    options:["At the very ends of the root and the shoot", "In the middle of the stem, where the plant is thickest", "Inside the seed coat", "Along the veins of the leaves"], ans:1,
+    why:"Cells divide fastest at the growing points, which are the ends of the root and the shoot. That is where the plant grows longer." },
+  { n:5, section:"B", tier:"Intermediate", star:1, body:"Mo is growing a bean. Which of his notes is an observation?",
+    options:["“The root is growing because it is thirsty”", "“It will be ready to eat next week”", "“Beans grow best in spring”", "“The root is 2 millimetres longer than yesterday”"], ans:4,
+    why:"You can measure the root, so that is what he saw. The other notes are worked out, guessed, or general claims." },
+  { n:6, section:"B", tier:"Intermediate", star:1, body:"Why is it called the cell cycle?",
+    options:["Each new cell starts the same loop again: grow, copy, split", "Cells move round and round in circles inside the body, like runners on a track", "Cells divide in a ring shape, like a doughnut", "It ALWAYS takes exactly one day"], ans:1,
+    why:"After a cell splits, each new cell grows and starts the loop again. A loop that repeats is a cycle. The time it takes is different for different cells." },
+  { n:7, section:"B", tier:"Intermediate", star:1, body:"A yeast cell that makes a strong smell buds. What about the new cell?",
+    options:["It ALWAYS differs from its parent", "It gets only half of the smell", "It makes the smell only if a second cell joins it and the two mix together", "It makes the same strong smell, because it is a copy of its parent"], ans:4,
+    why:"Budding copies the chromosomes exactly, so the new cell has the parent's features, including the smell." },
+  { n:8, section:"B", tier:"Intermediate", star:1, body:"Car A drives 150 km in 3 hours. Car B drives 200 km in 5 hours. Which statement is true?",
+    options:["B is faster and went further", "A is faster and also went further than B", "They are equally fast", "A is faster, but B went further"], ans:4,
+    why:"A: 150 ÷ 3 = 50 km each hour. B: 200 ÷ 5 = 40 km each hour. So A is faster. But B travelled 200 km, which is further than 150 km." },
+  { n:9, section:"C", tier:"Applied", star:2, body:"Patch P has 300 cells, and each cell divides once every 3 days. Patch Q has 80 cells, and each cell divides once a day. Which patch makes more new cells in one day?",
+    options:["Q — faster cells ALWAYS make more", "P — about 100 new cells, against Q's 80", "P — about 900 new cells (that is 300 × 3)", "They make the same number"], ans:2,
+    predict:true,
+    sense:true,
+    why:"Each day, 1 cell in every 3 of patch P divides: 300 ÷ 3 = 100 new cells. Patch Q makes 80. Q's cells are faster, but P has so many more cells that P wins. Fast is not the same as many." },
+  { n:10, section:"C", tier:"Applied", star:2, body:"Bakery A's big oven bakes 60 loaves every 3 hours. Bakery B's small oven bakes 15 loaves every hour. Which bakery bakes more in 3 hours?",
+    options:["B — its oven is faster", "B — it makes a batch every hour, so it must bake more", "They bake the same amount", "A — 60 loaves, against B's 45"], ans:4,
+    predict:true,
+    sense:true,
+    why:"In 3 hours B bakes 15 × 3 = 45 loaves. A bakes 60. B's oven is faster, but A bakes more." },
+  { n:11, section:"C", tier:"Applied", star:2, body:"Ben accidentally snaps the very top off his sunflower seedling. A week later the main stem is no taller, but the leaves have grown bigger. Why didn't the stem get taller?",
+    options:["It was busy repairing the damage at the top, so every part of the plant stopped growing for a week", "The top was the growing point, where cells divide fastest; the leaves' own cells kept growing", "Snapped plants NEVER grow again at all", "The roots stole all of the food from the stem"], ans:2,
+    why:"The top of a shoot is the growing point. With it gone, the stem has nowhere fast to grow, but the leaves have their own cells that keep growing." },
+  { n:12, section:"C", tier:"Applied", star:2, body:"A type of cell takes 24 hours from one split to the next. The dividing part lasts 2 hours of that. A photo catches 120 of these cells at random moments. About how many would you expect to see dividing?",
+    options:["2 cells", "60 cells", "120 cells", "10 cells"], ans:4,
+    predict:true,
+    sense:true,
+    why:"The dividing part is 2 out of 24 hours, which is 1 in 12. So 120 ÷ 12 = 10 cells." },
+  { n:13, section:"C", tier:"Applied", star:2, body:"Two flasks hold the same amount of yeast at the beginning. One is kept at 30 °C and the other at 15 °C. After 6 hours the warm flask has far more cells. What is the best explanation?",
+    options:["The warm yeast cells grow much bigger than the cold ones, so they count as more cells in the flask", "Cold ALWAYS kills yeast, so the cold flask has none left", "Warmth speeds up each round of growing and budding, so the warm yeast fits in more rounds", "The warm flask had more sugar at the start"], ans:3,
+    why:"Warmth speeds up each round of growing and budding. In 6 hours the warm yeast fits in more rounds, so it makes more cells." },
+  { n:14, section:"C", tier:"Applied", star:2, body:"Salt stirred into soup flavours every spoonful, but an unstirred lump of salt at the bottom only makes the bottom salty. Why?",
+    options:["Stirring makes the salt stronger, so each spoonful ends up tasting saltier than the last", "Dissolved salt breaks into tiny pieces that spread through all of the soup", "The salt lump is heavier, so it tastes saltier", "Salt ALWAYS stays where it lands and never spreads"], ans:2,
+    why:"Dissolving breaks salt into tiny pieces that spread through the liquid. Stirring spreads them faster. Without stirring, the pieces take much longer to reach the top." },
+  { n:15, section:"C", tier:"Applied", star:2, body:"Seed trays are often covered with a clear plastic lid. Why does this keep the soil moist?",
+    options:["The lid makes new water for the soil", "Water evaporates from the soil, turns back into drops on the cool lid and drips down, so less water escapes", "The lid keeps all of the sunlight out, and the shade it makes keeps the soil damp for much longer", "The lid stops the seeds from breathing, so they drink less"], ans:2,
+    why:"Water evaporates from the soil and meets the cooler lid. There it turns back into liquid drops that drip down, which is called condensation. So the water stays in the tray." },
+  { n:16, section:"C", tier:"Applied", star:2, body:"Two seed trays sit on a heat mat: one is metal and one is foam. The seeds in the metal tray sprout first. Why?",
+    options:["Metal conducts the mat's heat into the soil quickly; foam is an insulator, so that soil stays cooler", "Metal ALWAYS makes things cold, so the seeds are cooler", "Foam is much too heavy for the little seeds to push their way up through it, so they sprout later", "The metal tray reflects more light onto the seeds"], ans:1,
+    why:"Metal is a good conductor, so heat flows through it to the soil. Foam is an insulator, so little heat gets through and those seeds stay cooler." },
+  { n:17, section:"C", tier:"Applied", star:2, body:"Jin measures a bean root. Day 0: 12 mm. Day 1: 16 mm. Day 2: 20 mm. Day 3: 24 mm. If the pattern continues, how long will the root be on Day 5?",
+    options:["28 mm", "48 mm", "32 mm", "27 mm"], ans:3,
+    predict:true,
+    sense:true,
+    why:"The root grows 4 mm each day. Day 4 is 28 mm and Day 5 is 32 mm. 28 mm is only one day, and 48 mm doubles it, which the pattern does not do." },
+  { n:18, section:"C", tier:"Applied", star:2, body:"Lin writes in her diary: “My yeast flask was clear yesterday and cloudy today. So the yeast cells multiplied.” Which statement is right, and how could she check?",
+    options:["“Cloudy today” is an observation; “the cells multiplied” is an inference. She could count the cells under a microscope on both days", "Both are observations, so no check is needed", "“The cells multiplied” is the observation, and “cloudy today” is the inference, so she should check by looking at the flask again tomorrow", "Anything you write down is ALWAYS an observation"], ans:1,
+    why:"She can see that the flask is cloudy. She cannot see the cells multiplying. A check, like counting cells on both days, turns the inference into an observation." },
+  { n:19, section:"C", tier:"Applied", star:2, body:"A gardener drops seeds into water. Some sink and some float. She plants only the ones that sink. Why might that be sensible?",
+    options:["Floating seeds are ALWAYS the healthiest", "Sinking seeds already have long roots", "Sinking seeds are denser, so they are likely full of food store; floating ones may be empty or damaged", "The water makes the sinking ones sprout faster, because they soak up much more of it than the others do"], ans:3,
+    why:"A seed packed with food store is denser, so it sinks. A seed that floats may have an empty space inside, because it is empty or damaged." },
+  { n:20, section:"C", tier:"Applied", star:2, body:"A gardener wants roses exactly like her best rose bush, so she plants cuttings instead of its seeds. Why?",
+    options:["Cuttings come from one parent, so they are identical copies; seeds mix two parents and may differ", "Seeds ALWAYS grow slower", "Cuttings grow much bigger flowers than seeds do, because they start from a bigger piece of the plant", "Roses cannot make seeds"], ans:1,
+    why:"A cutting is part of one plant, so the new plant is an identical copy. Seeds mix two parents, so the new plants can differ." },
+];
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)"
+};
+
+document.getElementById('hdr-title').textContent = `Unit ${UNIT_NUM} Test — ${UNIT_TITLE}`;
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const nowMs = () => Date.now();
+const chosen = {};            // current choice per question (1-based option)
+const firstChoice = {};       // very first click per question
+const firstAt = {};           // ISO time of that first click
+const secsPrev = {};          // seconds since his previous answer click (or since opening), at the first click
+const predictions = {};       // { qn: text he typed }
+const openedAt = new Date(nowMs());
+let lastClick = nowMs();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false, reviewing = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    let opts = '';
+    q.options.forEach((opt, idx) => {
+      opts += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    if (q.sense) opts += `<div class="sense">Does that number make sense?</div>`;
+    let optBlock;
+    if (q.predict){
+      optBlock = `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words or a number, then press Show options.</label>
+        <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+        <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div>
+        <div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+    } else optBlock = opts;
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>
+      ${optBlock}
+      <div class="why" id="why-${q.n}">💡 <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function predTyped(qn){
+  const v = document.getElementById('pin-'+qn).value.trim();
+  document.getElementById('pshow-'+qn).disabled = v.length < 2;
+}
+function predShow(qn){
+  const inp = document.getElementById('pin-'+qn);
+  const v = inp.value.trim();
+  if (v.length < 2 || qn in predictions) return;
+  predictions[qn] = v;                         // saved, never scored, cannot be edited after this
+  inp.readOnly = true;
+  document.getElementById('pshow-'+qn).style.display = 'none';
+  document.getElementById('pbody-'+qn).classList.remove('hid');
+}
+
+function choose(qn, idx){
+  if (submitted || reviewing) return;
+  const t = nowMs();
+  if (!(qn in firstChoice)){
+    firstChoice[qn] = idx;
+    firstAt[qn] = new Date(t).toISOString();
+    secsPrev[qn] = Math.round((t - lastClick)/100)/10;
+  }
+  lastClick = t;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / 20 answered`;
+  document.getElementById('progress-fill').style.width = (n/20*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov(), pvDone = pv.helped && pv.usedNotes;
+  if (n === 20 && pvDone){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < 20 ? `Answer all 20 to submit (${20-n} left)` : 'Answer the two questions above to submit';
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < 20 || !(prov().helped && prov().usedNotes)) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+/* ---------- fast-answer review (A/B items < REVIEW_SECS_AB, C items < REVIEW_SECS_C after the previous answer) ---------- */
+let preReview = {}, reviewList = [], reviewPos = 0, reviewLog = {};
+function startReview(){
+  closeConfirm();
+  preReview = Object.assign({}, chosen);
+  reviewList = Q.filter(q => (q.n in secsPrev) && secsPrev[q.n] < (q.section === 'C' ? REVIEW_SECS_C : REVIEW_SECS_AB)).map(q => q.n);
+  reviewPos = 0; reviewLog = {};
+  if (!reviewList.length){ doSubmit(); return; }
+  reviewing = true;
+  document.getElementById('review-overlay').classList.add('show');
+  showReviewItem();
+}
+function showReviewItem(){
+  const qn = reviewList[reviewPos];
+  const q = Q.find(x => x.n === qn);
+  document.getElementById('rv-count').textContent = `Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h = `${q.fig ? `<div class="fig">${q.fig}</div>` : ''}<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>`;
+  q.options.forEach((opt, i) => {
+    h += `<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${opt}</button>`;
+  });
+  document.getElementById('rv-body').innerHTML = h;
+  document.getElementById('rv-actions').innerHTML =
+    `<button class="btn keep" id="rv-keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" id="rv-change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){ reviewLog[reviewList[reviewPos]] = {kept:true}; rvNext(); }
+function rvChange(){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.disabled = false);
+  document.getElementById('rv-actions').innerHTML = `<button class="btn keep" id="rv-use" onclick="rvUse()">Use this answer</button>`;
+}
+function rvPick(i){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('rv-opt-'+i).classList.add('selected');
+  chosen[reviewList[reviewPos]] = i;
+}
+function rvUse(){
+  const qn = reviewList[reviewPos];
+  reviewLog[qn] = {kept:false, changed: chosen[qn] !== preReview[qn]};
+  rvNext();
+}
+function rvNext(){
+  reviewPos++;
+  if (reviewPos >= reviewList.length){
+    reviewing = false;
+    document.getElementById('review-overlay').classList.remove('show');
+    doSubmit();
+  } else showReviewItem();
+}
+
+let lastResults = null;
+
+function doSubmit(){
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.pin').forEach(b => b.readOnly = true);
+
+  let score = 0, firstPassScore = 0, preReviewScore = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const swing = { wrongToRight:0, rightToWrong:0, wrongToWrong:0 };
+  const selfSwing = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // changes made before the review
+  const allSwing  = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // every change since the first click
+  const changes = [];
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    if (firstChoice[q.n] === q.ans) firstPassScore++;
+    if (preReview[q.n] === q.ans) preReviewScore++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    const fc = firstChoice[q.n], pr = preReview[q.n];
+    if (pr !== fc){ selfSwing.changed++; if (fc === q.ans) selfSwing.rightToWrong++; else if (pr === q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++; }
+    if (given !== fc){ allSwing.changed++; if (fc === q.ans) allSwing.rightToWrong++; else if (given === q.ans) allSwing.wrongToRight++; else allSwing.wrongToWrong++; }
+    let dir = null;
+    const rv = reviewLog[q.n];
+    if (rv && rv.changed){
+      const was = preReview[q.n] === q.ans;
+      dir = was ? 'right->wrong' : (isCorrect ? 'wrong->right' : 'wrong->wrong');
+      if (dir === 'wrong->right') swing.wrongToRight++; else if (dir === 'right->wrong') swing.rightToWrong++; else swing.wrongToWrong++;
+      changes.push({ q:q.n, from:preReview[q.n], to:given, direction:dir });
+    }
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect,
+             firstChoice: firstChoice[q.n], firstCorrect: firstChoice[q.n] === q.ans,
+             preReviewChoice: preReview[q.n], finalChoice: given,
+             secsSincePrev: secsPrev[q.n], firstClickAt: firstAt[q.n],
+             prediction: (q.n in predictions) ? predictions[q.n] : null,
+             reviewed: q.n in reviewLog, changedBeforeReview: pr !== fc, changedOnReview: rv ? !!rv.changed : false, reviewDirection: dir };
+  });
+
+  const pct = Math.round(score/20*100);
+  const pass = score >= PASS_BAR;
+  const minutes = Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${score} / 20  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/20). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/20 — look through the highlighted answers below, then talk it through with Luikishi.`;
+  const nChanged = changes.length;
+  document.getElementById('pace-lines').innerHTML =
+    `<div><b>First clicks:</b> ${firstPassScore}/20 &rarr; <b>final:</b> ${score}/20. Your checking changed ${allSwing.changed} answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>` +
+    `<div><b>Time:</b> ${minutes} min (last test: ${LAST_TEST_MINUTES} min)</div>` +
+    (reviewList.length
+      ? `<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${nChanged}: ${swing.wrongToRight} wrong→right, ${swing.rightToWrong} right→wrong.</div>`
+      : `<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date(nowMs()).toISOString(),
+    minutesSpent: minutes,
+    lastTestMinutes: LAST_TEST_MINUTES,
+    provenance: prov(),
+    score, outOf: 20, pct, passBar: PASS_BAR, passed: pass,
+    firstPassScore, preReviewScore,
+    reviewSecs: { AB: REVIEW_SECS_AB, C: REVIEW_SECS_C },
+    selfChanged: { changed: selfSwing.changed, wrongToRight: selfSwing.wrongToRight, rightToWrong: selfSwing.rightToWrong, wrongToWrong: selfSwing.wrongToWrong },
+    checkingSwing: { changed: allSwing.changed, wrongToRight: allSwing.wrongToRight, rightToWrong: allSwing.rightToWrong, wrongToWrong: allSwing.wrongToWrong },
+    predictions: Object.assign({}, predictions),
+    reviewedQs: reviewList.slice(),
+    changedOnReview: changes,
+    reviewSwing: { reviewed: reviewList.length, changed: nChanged, wrongToRight: swing.wrongToRight, rightToWrong: swing.rightToWrong, wrongToWrong: swing.wrongToWrong },
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
