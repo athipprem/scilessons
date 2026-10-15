@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem's Science Lessons</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#FFFBEF; color:#2b2205; font-size:13px; line-height:1.5; height:100vh; overflow:hidden; }
+#app { display:flex; height:100vh; overflow:hidden; }
+#sidebar { width:66px; background:#4a3800; display:flex; flex-direction:column; align-items:center; padding:14px 0; gap:4px; flex-shrink:0; }
+.sb-logo { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:12px; }
+.sb-btn { width:48px; height:48px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.5); }
+.sb-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.sb-btn.active { background:rgba(255,255,255,0.18); color:#fff; }
+.sb-icon { font-size:18px; } .sb-lbl { font-size:8px; font-weight:600; letter-spacing:.3px; text-transform:uppercase; }
+.sb-divider { width:30px; height:1px; background:rgba(255,255,255,0.14); margin:6px 0; }
+#main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+#topbar { background:#fff; border-bottom:1px solid #f0dfa8; padding:0 20px; height:54px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+#topbar-title { font-size:15px; font-weight:800; color:#4a3800; }
+#topbar-sub { font-size:11px; color:#8a7a4a; margin-left:10px; }
+.tb-badge { border-radius:20px; padding:3px 11px; font-size:11px; font-weight:700; }
+.tb-green { background:#FFF3CD; border:1px solid #FFD700; color:#8a6a00; }
+.tb-orange { background:#fff5e6; border:1px solid #fbd38d; color:#c05621; }
+.gold { background:linear-gradient(135deg,#FFD700,#FFA500); color:#5a3d00; border:1px solid #e0a800; }
+#hero { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; padding:14px 20px; background:#fff; border-bottom:1px solid #f0dfa8; flex-shrink:0; }
+.hero-box { background:#f5faf6; border-radius:10px; padding:10px 14px; border:1px solid #f0dfa8; }
+.hero-val { font-size:22px; font-weight:800; line-height:1.1; }
+.hero-lbl { font-size:10px; color:#8a7a4a; margin-top:2px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; }
+.hero-sub { font-size:10px; font-weight:600; margin-top:1px; color:#a89568; }
+#content { flex:1; overflow-y:auto; padding:20px; }
+.panel { display:none; } .panel.active { display:block; }
+.pattern { background:#fff; border:1px solid #f0dfa8; border-left:5px solid #DAA520; border-radius:12px; padding:14px 18px; margin-bottom:16px; }
+.pattern .lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; color:#8a7a4a; }
+.pattern p { font-size:12px; color:#3a4f42; margin:4px 0 8px; }
+.grid-3 { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; }
+.lesson-card { background:#fff; border-radius:12px; padding:16px; border:1px solid #f0dfa8; border-top:4px solid #DAA520; display:flex; flex-direction:column; gap:6px; }
+.lesson-card:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.1); }
+.lesson-card.blue { border-top-color:#1565c0; }
+.lc-unit { font-size:9px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:#a89568; }
+.lc-title { font-size:13px; font-weight:800; color:#2b2205; line-height:1.3; }
+.lc-desc { font-size:11px; color:#8a7a4a; flex:1; }
+.lc-badges { display:flex; gap:5px; flex-wrap:wrap; }
+.badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:12px; }
+.badge-new { background:#FFF3CD; color:#8a6a00; } .badge-asm { background:#fff3e0; color:#E65100; }
+.badge-soon { background:#f3f3f3; color:#999; }
+.btn-start { margin-top:6px; color:#5a3d00; text-decoration:none; font-size:11px; font-weight:700; padding:8px 16px; border-radius:8px; text-align:center; width:fit-content; background:linear-gradient(135deg,#FFC107,#FFA500); }
+.btn-start.blue, .btn-start.purple { color:#fff; }
+.btn-start.blue { background:linear-gradient(135deg,#1565c0,#1e88e5); }
+.btn-start.purple { background:linear-gradient(135deg,#6a1b9a,#8e24aa); }
+.sec-div { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:#a89568; padding:6px 0 10px; }
+.empty { color:#a89568; font-size:12px; padding:20px; text-align:center; border:1px dashed #cfdcd4; border-radius:12px; }
+#pw-overlay { position:fixed; inset:0; background:rgba(10,30,18,0.93); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
+#pw-overlay.hidden { display:none; }
+.pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.pw-box h2 { font-size:1.3rem; color:#8a6a00; margin-bottom:6px; }
+.pw-box p { font-size:0.85rem; color:#8a7a4a; margin-bottom:20px; }
+.pw-input { width:100%; padding:11px 14px; border:2px solid #f0dfa8; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; }
+.pw-input:focus { border-color:#DAA520; }
+.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#FFC107,#FFA500); color:#5a3d00; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; }
+.pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div class="pw-box">
+    <div style="font-size:2.2rem;margin-bottom:10px">&#127793;</div>
+    <h2>Prem's Science Lessons</h2>
+    <p>Enter the password to continue</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password" inputmode="numeric"
+           onkeydown="if(event.key==='Enter') checkPassword()">
+    <button class="pw-btn" onclick="checkPassword()">Unlock &#8594;</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+<div id="app">
+  <nav id="sidebar">
+    <div class="sb-logo">&#127793;</div>
+    <button class="sb-btn active" onclick="showPanel('thisunit',this)"><span class="sb-icon">&#128218;</span><span class="sb-lbl">Unit</span></button>
+    <button class="sb-btn" onclick="showPanel('done',this)"><span class="sb-icon">&#9989;</span><span class="sb-lbl">Done</span></button>
+    <button class="sb-btn" onclick="showPanel('competitions',this)"><span class="sb-icon">&#127942;</span><span class="sb-lbl">Comp</span></button>
+    <div class="sb-divider"></div>
+    <button class="sb-btn" onclick="openDashboard()"><span class="sb-icon">&#128202;</span><span class="sb-lbl">Board</span></button>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openMath()" title="Math Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openEnglish()" title="English Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
+    <a class="sb-btn" href="https://athipprem.github.io/scigame/" target="_blank" rel="noopener" title="Science Quest" style="text-decoration:none;cursor:pointer"><span class="sb-icon"><img src="quest_icon.svg" alt="Science Quest" style="width:18px;height:18px;display:block"></span><span class="sb-lbl">Quest</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openCoding()" title="Coding Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">C</span><span class="sb-lbl">Coding</span></a>
+  </nav>
+  <div id="main">
+    <div id="topbar">
+      <div style="display:flex;align-items:baseline">
+        <span id="topbar-title">Science Lessons</span>
+        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ASMOPSS 2026 &nbsp;|&nbsp; Coach: Luikishi</span>
+      </div>
+      <div style="display:flex;gap:10px">
+        <span class="tb-badge gold">&#129351; Target: GOLD</span>
+        <span class="tb-badge tb-green" id="tb-unit">Unit 1</span>
+        <span class="tb-badge tb-orange">&#8987; <span id="tb-days">...</span> days to ASMOPSS</span>
+      </div>
+    </div>
+    <div id="hero">
+      <div class="hero-box"><div class="hero-val" id="h-done">&mdash;</div><div class="hero-lbl">Unit + Milestone tests done</div><div class="hero-sub">Baseline: 72.5/100 (28/40)</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-skill" style="color:#ef6c00">&mdash;</div><div class="hero-lbl">Skills achievement</div><div class="hero-sub">vs gold &#129351; target</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-weeks">&mdash;</div><div class="hero-lbl">Weeks to ASMOPSS</div><div class="hero-sub">9 Aug 2026</div></div>
+    </div>
+    <div id="content">
+      <div class="panel active" id="panel-thisunit">
+<div class="sec-div" style="padding-top:0;color:#c2570c">Unit 53 &middot; Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points and Fast vs Many (consolidation &mdash; last unit before Milestone 5)</div>
+        <div class="grid-3" style="margin-bottom:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+          <div class="lesson-card" style="border-top-color:#5f6b78">
+            <div class="lc-unit" style="color:#5f6b78">Biology &middot; Unit 53 &middot; Warm-up</div>
+            <div class="lc-title">Warm-Up: Your Checking Works</div>
+            <div class="lc-desc">A short look at how checking answers earned marks in Unit 52, the S.T.O.P. steps again, and a Chemistry refresher on dissolving from Unit 40. Not scored.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
+            <a class="btn-start" style="background:#5f6b78" href="Ch2Life_WarmUp_U53.html">Start Warm-Up</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#c2570c">
+            <div class="lc-unit" style="color:#c2570c">Biology &middot; Unit 53 &middot; Lesson 1</div>
+            <div class="lc-title">The Cell&#39;s Loop</div>
+            <div class="lc-desc">Run the Cell Life Simulator: a body ring, a photo of cells, a budding yeast and plant growing tips. See that a cell spends most of its life not dividing, copies its chromosomes inside the nucleus, then splits.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
+            <a class="btn-start" style="background:#c2570c" href="Ch2Life_Lesson_TheCellsLoop.html">Start Lesson 1</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#3d4f63">
+            <div class="lc-unit" style="color:#3d4f63">Biology &middot; Unit 53 &middot; Lesson 2</div>
+            <div class="lc-title">Fast or Many?</div>
+            <div class="lc-desc">Race two patches of cells. Change the number of cells and the loop days, and find out why fast is not the same as many. Then pass a six-chip check.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
+            <a class="btn-start" style="background:#3d4f63" href="Ch2Life_Lesson_FastOrMany.html">Start Lesson 2</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#7a3a05">
+            <div class="lc-unit" style="color:#7a3a05">Unit 53 &middot; Test</div>
+            <div class="lc-title">Unit 53 Test &mdash; The Life of a Cell</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged: 2 Basic, 6 Intermediate, 12 Applied. Pass bar 16/20. Review on all sections.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
+            <a class="btn-start" style="background:#7a3a05" href="Tests/Unit_53_Test_LifeOfACell.html">Start Test</a>
+          </div>
+        </div>
+
+<div class="pattern" id="pattern-box"></div>
+      </div>
+      <div class="panel" id="panel-done">
+        <div class="sec-div">Completed</div>
+
+        <div class="sec-div" style="padding-top:0;color:#1f4e9c">Unit 52 &middot; Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle and From Microscope to Genes (school-aligned, beyond-class)</div>
+        <div class="grid-3" style="margin-bottom:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#5f6b78">
+            <div class="lc-unit" style="color:#5f6b78">Biology &middot; Unit 52 &middot; Warm-up</div>
+            <div class="lc-title">Warm-Up: S.T.O.P. and a Chemistry Refresher</div>
+            <div class="lc-desc">Four steps for reading a question carefully (Spot the twist, Think first, Open all four, Prove it), tried on real questions from Unit 51, plus a quick Chemistry refresher from Unit 37. Not scored.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#5f6b78" href="Ch2Division_WarmUp_U52.html">Review Warm-Up</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#1f4e9c">
+            <div class="lc-unit" style="color:#1f4e9c">Biology &middot; Unit 52 &middot; Lesson 1</div>
+            <div class="lc-title">What Gets Copied</div>
+            <div class="lc-desc">Read the shape of a new cell, then watch a nucleus copy its 4 chromosomes before it splits into two identical cells. Run the cell cycle as a loop, see where division is fastest, and try a short self-check with two ways to learn it.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#1f4e9c" href="Ch2Division_Lesson_ChromosomesAndTheCellCycle.html">Review Lesson 1</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#b0426b">
+            <div class="lc-unit" style="color:#b0426b">Biology &middot; Unit 52 &middot; Lesson 2</div>
+            <div class="lc-title">Budding and From Microscope to Genes</div>
+            <div class="lc-desc">Watch a yeast cell bud, then press Bud! to see 1, 2, 4, 8, 16 cells. Learn the doubling steps with a worked example, zoom from a person down to a gene, sort observation from inference, and pass a four-word check.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#b0426b" href="Ch2Division_Lesson_BuddingAndFromMicroscopeToGenes.html">Review Lesson 2</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#0f2a5e">
+            <div class="lc-unit" style="color:#0f2a5e">Unit 52 &middot; Test</div>
+            <div class="lc-title">Unit 52 Test &mdash; What Gets Copied</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged: 2 Basic, 6 Intermediate, 12 Applied. Pass bar 16/20. Four think-first questions, two picture items, and a quick re-look at fast answers before you submit.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#10060; Done &middot; 13/20 (65%) FAIL &middot; 8.6 min (first click 9 &rarr; final 13)</span></div>
+            <a class="btn-start" style="background:#0f2a5e" href="Tests/Unit_52_Test_CellDivision.html">Review Test</a>
+          </div>
+        </div>
+
+
+        <div class="sec-div" style="padding-top:0;color:#7b2d6b">Unit 51 &middot; Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (school-aligned, beyond-class)</div>
+        <div class="grid-3" style="margin-bottom:18px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#5f6b78">
+            <div class="lc-unit" style="color:#5f6b78">Biology &middot; Unit 51 &middot; Warm-up</div>
+            <div class="lc-title">Warm-Up</div>
+            <div class="lc-desc">Two quick Heat refreshers from Unit 32 (nothing to do with cells), to keep an older skill sharp. Not scored.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#5f6b78" href="Ch2Animal_WarmUp_U51.html">Review Warm-Up</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#7b2d6b">
+            <div class="lc-unit" style="color:#7b2d6b">Biology &middot; Unit 51 &middot; Lesson 1</div>
+            <div class="lc-title">Two Solutions to One Problem</div>
+            <div class="lc-desc">A leaf cell and a cheek cell face the same water danger. Drag the water slider and watch both cells, then see how an animal&rsquo;s body regulates the water instead of building a wall. Shape tells the job: ciliated, fat, bone and white blood cells. Two ways to learn it (a picture route and a steps route), then a self-check.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#7b2d6b" href="Ch2Animal_Lesson_TwoSolutionsAndSpecialisation.html">Review Lesson 1</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#c9a227">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 51 &middot; Lesson 2</div>
+            <div class="lc-title">Slides, Stains and Reading Real Cells</div>
+            <div class="lc-desc">Make a cheek-cell slide step by step (try the coverslip both ways), pick the right stain, sort cells from air bubbles, tell observation from inference, and pick two good clues for plant or animal. A six-word check must be passed before the test.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#8a6a00" href="Ch2Animal_Lesson_SlidesStainsAndReadingRealCells.html">Review Lesson 2</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#6a1b9a">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 51 &middot; Test</div>
+            <div class="lc-title">Unit 51 Test &mdash; Inside the Animal Cell</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged &mdash; 2 Basic/6 Intermediate/12 Applied. Pass bar 16/20. Two picture items, one unseen cell to reason about, and spaced items from Units 2, 8, 13, 32, 40, 42 and 47.</div>
+            <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#10060; Done &middot; 15/20 (75%) FAIL by one mark &middot; 4.7 min</span></div>
+            <a class="btn-start purple" style="background:#6a1b9a" href="Tests/Unit_51_Test_AnimalCell.html">Review Test</a>
+          </div>
+        </div>
+
+
+        <div class="sec-div" style="padding-top:0;color:#065f46">Unit 50 &middot; Consolidation: The Water Journey (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#00695c">
+            <div class="lc-unit" style="color:#00695c">Biology &middot; Unit 50 &middot; Lesson 1</div>
+            <div class="lc-title">The Water Journey</div>
+            <div class="lc-desc">A consolidation unit, inserted after Unit 49's real 12/20 FAIL. Built around one interactive plant shown at five zoom stops (organism &rarr; organ system &rarr; organ &rarr; tissue &rarr; cell), each stop showing exactly where the next one zooms from, with a Water/Dry-Day control that plumps or wilts the plant at every stop. Teaches the organisation ladder as a picture he manipulates &mdash; the first attempt at teaching it visually, after two text-based attempts (U48, U49) both failed.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#00695c" href="Ch2Water_WarmUp_U50.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#c9a227">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 50 &middot; Lesson 2</div>
+            <div class="lc-title">Inside the Cell</div>
+            <div class="lc-desc">Opens at the plant's cell-level zoom stop. Label-the-diagram practice (wall, membrane, vacuole, cytoplasm, nucleus), cell sap shown as the vacuole fills, the wall-vs-membrane hinge as a picture, and turgid/flaccid on a slider he drags. A scored six-term retrieval check must be passed before the test. Trap-Recognition Drill #13.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#c9a227" href="Ch2Water_Lesson_InsideTheCell.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 50 &middot; Test</div>
+            <div class="lc-title">Unit 50 Test &mdash; The Water Journey</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%). 4 ladder-placement items (2 forward, 2 reverse) on clean scenes, 5 term items, &ge;4 unlabelled absolute-worded distractors, 3 osmosis spaced-retention items. Section C draws genuine cross-topic synthesis from U40/U2/U15&amp;24/U8/U36/U19/U11.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_50_Test_WaterJourney.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#c62828">Unit 49 &middot; Biology: Inside the Plant Cell &mdash; What the Parts Are Made Of, and Osmosis (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#1b5e20">
+            <div class="lc-unit" style="color:#1b5e20">Biology &middot; Unit 49 &middot; Lesson 1</div>
+            <div class="lc-title">What the Parts Are Made Of</div>
+            <div class="lc-desc">Sixth unit of the 7-unit school-aligned block, built directly from Unit 48's real result. Opens with a spiral-maintenance warm-up from Chemistry U40 (Mixtures &amp; Solutions) and a Quick Fix targeting Unit 48's real ladder-placement gap via a two-box "What IS it? / What system does it belong to?" sort on the root water-uptake pathway, then teaches what the cell wall, membrane, chloroplast and vacuole are actually made of and do &mdash; closing on the hinge question: the wall lets everything through, so what's doing the choosing?</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#1b5e20" href="Ch2Plant_Lesson_WhatThePartsAreMadeOf.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#8a6a00">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 49 &middot; Lesson 2</div>
+            <div class="lc-title">Partially Permeable Membranes &amp; Osmosis</div>
+            <div class="lc-desc">Sourced from the Activity Book (2.4), never taught before. Covers what "partially permeable" means, osmosis (water moves from more to less until it evens out), turgor and wilting as the mechanism under Unit 14's bare fact, everyday evidence (celery, salted cucumber), and Trap-Recognition Drill #12 &mdash; "osmosis only happens in plants."</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#8a6a00" href="Ch2Plant_Lesson_PartiallyPermeableAndOsmosis.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 49 &middot; Test</div>
+            <div class="lc-title">Unit 49 Test &mdash; Plant Cell</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%). Section C draws genuine cross-topic synthesis from U40/U2/U15&amp;24/U8/U33/U36/U19. Taken 18 Sep 2026 &mdash; osmosis fully CLOSED (every scenario held), but the ladder-placement Quick Fix missed both directions (Q16, Q17); six of eight misses were a word he didn't own.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdecea;color:#c62828">&#10060; Done &middot; 12/20 (60%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_49_Test_PlantCell.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#065f46">Unit 48 &middot; Biology: Cell Organisation &amp; the Microscope (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#059669">
+            <div class="lc-unit" style="color:#059669">Biology &middot; Unit 48 &middot; Lesson 1</div>
+            <div class="lc-title">The Organisation Ladder &amp; Why Cells Are Small</div>
+            <div class="lc-desc">Fifth unit of the 7-unit school-aligned block, and the FIRST built under the new format: both lessons go beyond the course book. Opens with a spiral-maintenance warm-up from Physics U13 (Light, stale since 10 Jul) and a Quick Fix confirming rep for Unit 46's real seeds-vs-spores gap, then teaches the organisation ladder (cell &rarr; tissue &rarr; organ &rarr; organ system &rarr; organism, with a Unit 11 callback) and WHY cells are small via an interactive surface-area-to-volume cube demo.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#059669" href="Ch2Cells_Lesson_OrganisationAndCellSize.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#d97706">
+            <div class="lc-unit" style="color:#d97706">Biology &middot; Unit 48 &middot; Lesson 2</div>
+            <div class="lc-title">The Microscope: History, How It Works &amp; Magnification</div>
+            <div class="lc-desc">Sourced from the Activity Book's microscope section. Covers the 1665 Hooke/Leeuwenhoek history, how a microscope actually works, magnification arithmetic (eyepiece &times; objective, interactive calculator with a shrinking field-of-view), the resolution-vs-field-of-view trade-off, a why-stain preview, and Trap-Recognition Drill #11 &mdash; "highest magnification is always best."</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#d97706" href="Ch2Cells_Lesson_TheMicroscope.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 48 &middot; Test</div>
+            <div class="lc-title">Unit 48 Test &mdash; Cell Organisation &amp; the Microscope</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%). Section C draws genuine cross-topic synthesis from U13/U11/U8/U36/U4/U15&amp;24/U40/U9. Taken 11 Sep 2026 &mdash; two findings, not four misses: a one-rung-too-high ladder-placement pattern (Q3, Q12, Q13) and unlabelled absolute-worded distractors (Q13, Q18).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_48_Test_CellsOrganisation.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#3949ab">Unit 47 &middot; Earth &amp; Space: Solar System Extension <span style="font-weight:600;text-transform:none;letter-spacing:0">&mdash; built ahead of Unit 46, taken out of order</span></div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#3949ab">
+            <div class="lc-unit" style="color:#3949ab">Earth &amp; Space &middot; Unit 47 &middot; Lesson 1</div>
+            <div class="lc-title">Eclipses &amp; Earth's Shield</div>
+            <div class="lc-desc">A follow-up to Unit 43, closing course-book Chapter 1 gaps and going beyond it. Opens with a Chemistry U9 spiral-maintenance warm-up, briefly recaps Unit 43's Sun/Earth facts, then teaches genuinely new content: solar &amp; lunar eclipses (why they're rare) and Earth's magnetic-field/atmosphere shield against the solar wind, plus the aurora as a bonus fact.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#3949ab" href="SolarSystemExt_Lesson_EclipsesAndEarthsShield.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#e65100">
+            <div class="lc-unit" style="color:#e65100">Earth &amp; Space &middot; Unit 47 &middot; Lesson 2</div>
+            <div class="lc-title">Dwarf Planets, Comets &amp; Real Missions</div>
+            <div class="lc-desc">Opens with a Physics U21 (gravity) warm-up, recaps Unit 43's 8-planet fact, then teaches genuinely new content: the dwarf-planet definition, asteroid/comet/meteor-meteoroid-meteorite classification, and satellite-vs-probe-vs-rover with real examples (ISS/Hubble/GPS, Voyager, Perseverance/Zhurong).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#e65100" href="SolarSystemExt_Lesson_DwarfPlanetsCometsAndRealMissions.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 47 &middot; Test</div>
+            <div class="lc-title">Unit 47 Test &mdash; Solar System Extension</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%). Section C draws genuine cross-topic synthesis from U19/U21/U28/U36/U43. Taken 7 Sep 2026, ahead of Unit 46 &mdash; the only miss (Q14) was a fresh orbit-vs-flyby distinction, not a repeat of any tracked pattern.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_47_Test_SolarSystemExtension.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#3949ab">Unit 46 &middot; Biology: Reproduction in Plants (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#2e7d32">
+            <div class="lc-unit" style="color:#2e7d32">Biology &middot; Unit 46 &middot; Lesson 1</div>
+            <div class="lc-title">Seeds Recap &amp; Reproduction from Spores</div>
+            <div class="lc-desc">Fourth unit of the 7-unit school-aligned block, matching Chapter 4 of Prem's Y5 i-Science course book. Opens with a spiral-maintenance warm-up from Biology U17 (ecosystems/food chains, stale since mid-July), briefly recaps Unit 25's pollination &amp; seed facts, then teaches genuinely new content: reproduction from spores (ferns, mosses).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#2e7d32;color:#fff" href="PlantReproSchool_Lesson_SexualRecapAndSpores.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ad1457">
+            <div class="lc-unit" style="color:#ad1457">Biology &middot; Unit 46 &middot; Lesson 2</div>
+            <div class="lc-title">Reproduction from Other Plant Parts &amp; Comparing Methods</div>
+            <div class="lc-desc">Recaps Unit 33's underground stems, then teaches genuinely new content: runners and cuttings. Compares all reproduction methods (seeds vs spores vs other plant parts) and sexual vs asexual reproduction. Includes Trap-Recognition Drill #10 &mdash; the "ALL new plants come from seeds" absolute-claim trap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ad1457;color:#fff" href="PlantReproSchool_Lesson_OtherPartsAndComparingMethods.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 46 &middot; Test</div>
+            <div class="lc-title">Unit 46 Test &mdash; Biology: Reproduction in Plants</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%), per the standing U43&ndash;U49 reweighting rule. Section C draws genuine cross-topic synthesis from U4/U25/U33/U36/U44/U45 rather than harder versions of this unit's own lessons. Taken 10 Sep 2026, 16/20 (80%) PASS, right at the bar &mdash; three of four misses (Q4, Q9, Q19) cluster on one coherent seeds-vs-spores-vs-other-plant-parts gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_46_Test_ReproductionInPlants.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#3949ab">Unit 45 &middot; Biology: Reproduction in Animals (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#3949ab">
+            <div class="lc-unit" style="color:#3949ab">Biology &middot; Unit 45 &middot; Lesson 1</div>
+            <div class="lc-title">Animal Reproduction: Male, Female &amp; Fertilisation</div>
+            <div class="lc-desc">Third unit of the 7-unit school-aligned block, matching Chapter 3 of Prem's Y5 i-Science course book. Opens with a fresh-scene confirming rep for Unit 44's real-taken miss pattern, then a spiral-maintenance warm-up from Physics U21 (gravity/free fall/air resistance, stale since June), briefly recaps Unit 31's five vertebrate groups, then teaches genuinely new content: sexual reproduction and internal vs external fertilisation.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#3949ab" href="AnimalReproSchool_Lesson_MaleFemaleAndFertilisation.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ffa000">
+            <div class="lc-unit" style="color:#e65100">Biology &middot; Unit 45 &middot; Lesson 2</div>
+            <div class="lc-title">Life Cycles: With and Without Metamorphosis</div>
+            <div class="lc-desc">The three life-cycle types &mdash; no metamorphosis (young already look like small adults), incomplete metamorphosis (egg &rarr; nymph &rarr; adult), and complete metamorphosis (egg &rarr; larva &rarr; pupa &rarr; adult). Includes Trap-Recognition Drill #9 &mdash; the "ALL animals go through metamorphosis" absolute-claim trap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ffa000" href="AnimalReproSchool_Lesson_LifeCyclesAndMetamorphosis.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 45 &middot; Test</div>
+            <div class="lc-title">Unit 45 Test &mdash; Biology: Reproduction in Animals</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%), per the standing U43&ndash;U49 reweighting rule. Section C draws genuine cross-topic synthesis from U4/U11/U25/U36/U44 rather than harder versions of this unit's own lessons. Every cross-topic question and both hardest-designed items held clean &mdash; zero misses anywhere.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#127942; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_45_Test_ReproductionInAnimals.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#00695c">Unit 44 &middot; Biology: Cells &amp; Cell Division (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#00695c">
+            <div class="lc-unit" style="color:#00695c">Biology &middot; Unit 44 &middot; Lesson 1</div>
+            <div class="lc-title">Cells Recap &amp; Why Cells Divide</div>
+            <div class="lc-desc">Second unit of the 7-unit school-aligned block, matching Chapter 2 of Prem's Y5 i-Science course book. Opens with a spiral-maintenance warm-up from Physics U16 (Sound, stale since mid-July), briefly recaps Unit 14's cell-structure facts (plant vs animal cell parts, unicellular vs multicellular), then teaches genuinely new content: cell division and its two purposes, growth and repair.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#00695c" href="Cells2School_Lesson_CellsRecapAndWhyDivide.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ff7043">
+            <div class="lc-unit" style="color:#bf360c">Biology &middot; Unit 44 &middot; Lesson 2</div>
+            <div class="lc-title">How Cells Divide: Growth vs Repair</div>
+            <div class="lc-desc">The three-stage mechanism (grows &rarr; copies its parts &rarr; splits in two), why healing takes days rather than happening instantly, and growth-over-a-lifetime reasoning (division slows for growth but never stops for repair). Includes Trap-Recognition Drill #8 &mdash; the "adult cells never divide again" absolute-claim trap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ff7043" href="Cells2School_Lesson_HowCellsDivideGrowthVsRepair.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 44 &middot; Test</div>
+            <div class="lc-title">Unit 44 Test &mdash; Biology: Cells &amp; Cell Division</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; 2 Basic/6 Intermediate/12 Applied (10/30/60%), per the standing U43&ndash;U49 reweighting rule. Section C draws genuine cross-topic synthesis from U4/U8/U11/U17/U36/U38 rather than harder versions of this unit's own lessons. Both misses (Q12, Q17) traced to ONE shared root cause &mdash; confusing cell quantity/body size with active division rate.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_44_Test_Cells.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1a237e">Unit 43 &middot; Earth &amp; Space: The Solar System (school-aligned)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#1a237e">
+            <div class="lc-unit" style="color:#1a237e">Earth &amp; Space &middot; Unit 43 &middot; Lesson 1</div>
+            <div class="lc-title">The Sun &amp; Earth</div>
+            <div class="lc-desc">First unit of a NEW 7-unit school-aligned block, matching Chapter 1 of Prem's Y5 i-Science course book &mdash; the U41&ndash;U50 ASMOPSS-track rotation is postponed after only 2 units. Opens with a spiral-maintenance warm-up from Chemistry U9/U12 (material origins) and a brief Unit 7 rotation/revolution recap, then teaches the Sun (a star, hot gases, energy source) and Earth (three layers, life-supporting conditions) as genuinely new content.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#1a237e" href="SolarSystemSchool_Lesson_TheSunAndEarth.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ffb300">
+            <div class="lc-unit" style="color:#8a6a00">Earth &amp; Space &middot; Unit 43 &middot; Lesson 2</div>
+            <div class="lc-title">Moon, Solar System &amp; Man-Made Satellites</div>
+            <div class="lc-desc">A brief Unit 7 Moon-phases recap, then new surface-feature content, the 8-planet order and two planet families (rocky vs gas giant), and man-made satellites &mdash; never taught before in this program. Includes Trap-Recognition Drill #7.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ffb300;color:#1a237e" href="SolarSystemSchool_Lesson_MoonSolarSystemAndSatellites.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 43 &middot; Test</div>
+            <div class="lc-title">Unit 43 Test &mdash; Earth &amp; Space: The Solar System</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied) &mdash; reweighted to 2 Basic/6 Intermediate/12 Applied (10/30/60%) per Lui's instruction to weight all 7 school-aligned units more heavily toward Intermediate &amp; Applied ASMOPSS tiers. Section C draws genuine cross-topic synthesis from U6/U8 (energy chain, photosynthesis) and U36 (fair-test design) rather than harder versions of this unit's own lessons. Both newly-added Applied-tier questions (Q19, Q20) held correct; the one miss (Q10) was an isolated absolute-claim trap on satellite solar panels.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_43_Test_SolarSystem.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1a237e">Unit 42 &middot; Physics: Circuits Deep Dive &mdash; Series vs Parallel</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#1565c0">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 42 &middot; Lesson 1</div>
+            <div class="lc-title">Series Circuits</div>
+            <div class="lc-desc">Second unit of the U41&ndash;U50 block. Opens with 2 quick confirming checks from Unit 41 (fresh-scene acid/base identity questions), plus an Earth &amp; Space (U27/U28) spiral-maintenance warm-up. Then: what makes a series circuit, and the one big rule &mdash; one gap breaks ALL the bulbs &mdash; via the old Christmas-lights problem.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#1565c0" href="CircuitsDeepDive_Lesson_SeriesCircuits.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ef6c00">
+            <div class="lc-unit" style="color:#ef6c00">Physics &middot; Unit 42 &middot; Lesson 2</div>
+            <div class="lc-title">Parallel Circuits &amp; Series vs Parallel</div>
+            <div class="lc-desc">What makes a parallel circuit, Trap-Recognition Drill #6 ("more bulbs doesn't always mean parallel"), and a worked comparison &mdash; old Christmas lights (series, all go dark) vs a real house (parallel, one room's failure doesn't affect the others).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ef6c00" href="CircuitsDeepDive_Lesson_ParallelCircuits.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 42 &middot; Test</div>
+            <div class="lc-title">Unit 42 Test &mdash; Circuits Deep Dive: Series vs Parallel</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied). Section C draws genuine cross-topic synthesis from U6 (energy chain, conductor/insulator) and U36 (fair-test design) rather than harder versions of this unit's own lessons. Includes a dedicated trap-recognition item and a contrasting switch-placement pair (before vs after the branch split) &mdash; both correct.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#127942; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_42_Test_CircuitsSeriesVsParallel.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#c2185b">Unit 41 &middot; Chemistry: Acids, Bases &amp; Chemical vs Physical Change</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#c2185b">
+            <div class="lc-unit" style="color:#c2185b">Chemistry &middot; Unit 41 &middot; Lesson 1</div>
+            <div class="lc-title">Acids &amp; Bases</div>
+            <div class="lc-desc">First unit of a fresh 10-unit block (U41&ndash;U50), opened after Milestone 4 closed U31&ndash;U40. Opens with a redesigned "Find the Flaw" click-based device targeting the sieve/filter/evaporate critique gap (now confirmed across 2 real tests), plus a Biology U31 spiral-maintenance warm-up. Then: what makes an acid or a base, litmus paper testing, and a decision tree covering acid/base/neutral.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#c2185b" href="AcidsBasesChem_Lesson_AcidsAndBases.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#00838f">
+            <div class="lc-unit" style="color:#00838f">Chemistry &middot; Unit 41 &middot; Lesson 2</div>
+            <div class="lc-title">Chemical vs Physical Change</div>
+            <div class="lc-desc">The four real signs of a chemical change (colour, bubbles, temperature, smell), Trap-Recognition Drill #5 (boiling water isn't a chemical change!), and a worked vinegar + baking soda example that bridges both lessons into one live reaction.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#00838f" href="AcidsBasesChem_Lesson_ChemicalVsPhysicalChange.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 41 &middot; Test</div>
+            <div class="lc-title">Unit 41 Test &mdash; Acids, Bases &amp; Chemical vs Physical Change</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied). Section C draws genuine cross-topic synthesis from U2, U9, U36, U37 &amp; U40 rather than harder versions of this unit's own lessons. Acid/base identity confusion drove 3 of 5 misses; the sieve/filter/evaporate gap actually improved into a milder overgeneralization trap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdecea;color:#c62828">&#10060; Done &middot; 15/20 (75%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_41_Test_AcidsBasesAndChemicalChange.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Milestone Test 4 &middot; All Units (U31&ndash;U40)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#DAA520">
+            <div class="lc-unit" style="color:#8a6a00">Milestone Test 4 &middot; Test</div>
+            <div class="lc-title">Milestone Test 4 &mdash; All Units (U31&ndash;U40)</div>
+            <div class="lc-desc">No new lessons, per the milestone-test rule &mdash; 40 questions, 16A/16B/8C, ASMOPSS-weighted marks (1.25/2.5/5), 100 marks total, benchmarked against Milestone 3's 90/100. First milestone test tier-tagged (Basic/Intermediate/Applied) throughout. Dedicated coverage: the anther-vs-ovary/stigma fact's owed milestone-level confirming rep, Unit 39's owed 3-object air-resistance ranking rep, and Unit 40's sieve/filter/evaporate swap gap touched four times with genuinely different cognitive tasks and scenes, plus lighter reps for U31/U32/U34/U36/U37/U38's remaining open items and two cross-topic Applied synthesis items. Sieve/filter/evaporate critique-format gap (Q34) missed a second time, now escalated in Unit 41's opening lesson.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 36/40, 91.25/100 (91%) PASS</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Milestone_04_Test.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#6a1b9a">Unit 40 &middot; Chemistry: Mixtures, Solutions &amp; Separating Materials</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#00695c">
+            <div class="lc-unit" style="color:#00695c">Chemistry &middot; Unit 40 &middot; Lesson 1</div>
+            <div class="lc-title">Mixtures &amp; Solutions</div>
+            <div class="lc-desc">Opens with 2 quick confirming checks from Unit 39 (a fresh 3-object air-resistance ranking, plus trap-recognition generalized to friction). Then: what makes a mixture, what makes a solution, and the vocabulary &mdash; solute, solvent, soluble, insoluble &mdash; that ties them together. Brand-new content, building on Unit 2's dissolving fact.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#00695c" href="MixturesSolutions_Lesson_MixturesAndSolutions.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8;border-top-color:#ef6c00">
+            <div class="lc-unit" style="color:#ef6c00">Chemistry &middot; Unit 40 &middot; Lesson 2</div>
+            <div class="lc-title">Separating Mixtures: Sieving, Filtering &amp; Evaporation</div>
+            <div class="lc-desc">Three separating methods and when each one applies, Trap-Recognition Drill #4, and a multi-step worked challenge (sand + salt + water) that mirrors the exact "chain several facts together" format that has repeatedly been this program's fragile point.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#ef6c00" href="MixturesSolutions_Lesson_SeparatingMixtures.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 40 &middot; Test</div>
+            <div class="lc-title">Unit 40 Test &mdash; Mixtures, Solutions &amp; Separating Materials</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied). Regular new-content unit &mdash; a standard recurring ASMOPSS G4 topic never given its own dedicated unit before. Includes a spaced-retention re-check of Unit 2's dissolving-mass fact (Q17) and Trap-Recognition Drill #4 (Q4, Q9, Q19). Sieve-vs-filter vocabulary swap drove 3 of 6 misses; Applied tier was actually the strongest section at 90%.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdecea;color:#c62828">&#10060; Done &middot; 14/20 (70%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_40_Test_MixturesSolutionsSeparatingMaterials.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#37474f">Unit 39 &middot; Physics: Gravity, Forces &amp; Working-Memory Stress Test</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8;border-top-color:#37474f">
+            <div class="lc-unit" style="color:#37474f">Physics &middot; Unit 39 &middot; Lesson 1</div>
+            <div class="lc-title">Free-Fall Under Pressure</div>
+            <div class="lc-desc">Opens with 2 quick confirming checks from Unit 38. Then: a fast recap of gravity/air-resistance, multi-object ranking under time pressure, and Trap-Recognition Drill #2 &mdash; directly targeting the real 2026 exam's Q12 regression on a heavily-drilled, previously-confirmed-closed fact.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="GravityForces_Lesson_FreeFallUnderPressure.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 39 &middot; Lesson 2</div>
+            <div class="lc-title">Combining Forces &amp; Magnet Chains With a Twist</div>
+            <div class="lc-desc">Multi-step 3+ force combination, and magnet-pole chains with a physical "flip" step added &mdash; the exact working-memory failure mode behind the real exam's Q33 miss (a correct 2-magnet chain, but a missed chain-with-a-flip).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="GravityForces_Lesson_CombiningForcesAndMagnetChains.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 39 &middot; Test</div>
+            <div class="lc-title">Unit 39 Test &mdash; Gravity, Forces &amp; Working-Memory Stress Test</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied). A deliberate spaced re-test of already-closed skills under harder, multi-step, more crowded conditions &mdash; not new content. Embeds Trap-Recognition Drill #2 (Q4, Q9, Q15, Q19). Both deliberate real-exam re-tests (Q12 gravity, Q33 magnet-flip) held clean.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_39_Test_GravityForcesStressTest.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 38 &middot; Biology: Plant Reproduction Outcomes &mdash; Fruit vs Seed</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Biology &middot; Unit 38 &middot; Lesson 1</div>
+            <div class="lc-title">From Flower to Fruit: Ovary to Fruit, Ovule to Seed</div>
+            <div class="lc-desc">Opens with 2 quick confirming checks from Unit 37 (oil-fire immediate-action framing on a fresh campsite scene, trap-recognition strategy generalized beyond fire). Then: what the ovary wall and each ovule become after fertilization, the fruit-vs-vegetable science rule, and a decision tree that works on any plant part &mdash; directly closes the real 2026 exam's Q25 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="FruitAndSeed_Lesson_OvaryToFruitOvuleToSeed.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 38 &middot; Lesson 2</div>
+            <div class="lc-title">Inside a Seed &amp; How Fruits Help Seeds Travel</div>
+            <div class="lc-desc">Seed structure (seed coat, embryo, food store), how a fruit's shape matches its dispersal method, and Trap-Recognition Drill #3 (fruit/seed absolute-language traps).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="FruitAndSeed_Lesson_SeedStructureAndDispersal.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 38 &middot; Test</div>
+            <div class="lc-title">Unit 38 Test &mdash; Fruit vs Seed Development</div>
+            <div class="lc-desc">20 questions, 3 sections, every question tier-tagged (Basic/Intermediate/Applied). Embeds the program's FIRST Spaced-Retention Checkpoint (anther/ovary/stigma roles and duckweed-root function, both confirmed closed a month or more ago, re-tested with fresh scenes) plus Trap-Recognition Drill items. Built under the new same-fact-pair design rule &mdash; no two questions share an underlying fact via a bare reword.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_38_Test_FruitAndSeedOutcomes.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#d84315">Unit 37 &middot; Chemistry: Combustion, Burning &amp; Fire Safety</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#d84315">Chemistry &middot; Unit 37 &middot; Lesson 1</div>
+            <div class="lc-title">What Burning Needs: The Fire Triangle</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" style="background:#d84315" href="Combustion_Lesson_FireTriangleAndOxygen.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 37 &middot; Lesson 2</div>
+            <div class="lc-title">Fire Safety &amp; Spotting Overgeneralized Claims</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Combustion_Lesson_FireSafetyAndTrapRecognition.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Chemistry &middot; Unit 37 &middot; Test</div>
+            <div class="lc-title">Combustion &amp; Fire Safety Test</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_37_Test_CombustionAndFireSafety.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#283593">Unit 36 &middot; Scientific Investigation Skills: Multi-Group Fair Tests, Data Trends &amp; Conductors</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Scientific Investigation &middot; Unit 36 &middot; Lesson 1</div>
+            <div class="lc-title">Fair Tests: Checking Many Clues at Once</div>
+            <div class="lc-desc">The &quot;clue table&quot; method for multi-group (3+) fair tests &mdash; find the control, then compare each other group back to it ONE AT A TIME. Directly targets Mock Test 1's Q36 failure mode (a 3-leaf multi-condition set-up).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="SciSkills_Lesson_FairTestsAndVariables.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Scientific Investigation &middot; Unit 36 &middot; Lesson 2</div>
+            <div class="lc-title">Data Trends, Two-Clue Thinking &amp; Conductors Sorted</div>
+            <div class="lc-desc">Reading a data table for a real trend vs a one-off anomaly, working out TWO hidden factors from a single example, plus an ESCALATED conductor/insulator Quick Fix &mdash; a 2-bin sort-game built around the exact objects (steel spoon, brass button, steel paperclip) missed three times running.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="SciSkills_Lesson_DataTrendsAndConductors.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 36 &middot; Test</div>
+            <div class="lc-title">Unit 36 Test &mdash; Scientific Investigation Skills</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; multi-group fair tests, data trends &amp; anomalies, two-clue reverse-factor thinking, and 3 dedicated conductor/insulator confirming reps. A bonus unit built the day before ASMOPSS 2026, directly from Mock Test 1's hard-tier analysis. Conductor/insulator (the confirmed 3-instance gap) CLOSED, both hard-tier failure modes confirmed closed, zero new watch-items. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_36_Test_ScientificInvestigationSkills.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#00695c">Mock Test 1 &middot; Full Syllabus Practice</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#00695c;opacity:.8">
+            <div class="lc-unit" style="color:#00695c">Mock Test 1 &middot; ASMOPSS-style</div>
+            <div class="lc-title">Mock Test 1 &mdash; Full Syllabus Practice</div>
+            <div class="lc-desc">FIRST of up to 2 planned ASMOPSS-style mock tests. NOT a real past paper &mdash; an original test built by Luikishi in the real G4 Set B format (40 questions, 16A/16B/8C, 1.25/2.5/5 marks = 100 total, pass bar 80), covering the FULL syllabus (U1-U35). Both of Unit 35's open watch-items (magnet-vs-material, 3-magnet chain) CONFIRMED CLOSED; conductor/insulator now an urgent 3-instance recurring gap; a new cross-topic wrong-direction reading pattern surfaced. With only 1 day left to ASMOPSS, Mock Test 2 was not built &mdash; Unit 36 was built instead. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#fdecea;color:#c62828">&#10060; Done &middot; 31/40, 77.5/100 marks (78%) FAIL by 2.5</span></div>
+            <a class="btn-start purple" href="Tests/Mock_Test_1_ASMOPSS2026_FullSyllabus.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 35 &middot; Final Gap-Closure Checkpoint</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Checkpoint &middot; Unit 35 &middot; Review</div>
+            <div class="lc-title">Quick Review &mdash; No New Lessons</div>
+            <div class="lc-desc">Review-only capstone, the FIFTH and FINAL unit before ASMOPSS 2026 &mdash; 8 quick recap cards sweeping Units 21&ndash;30 (plus U6/U34 circuits and Observation-vs-Inference), then three Priority Refreshers with interactive Quick Checks: a brand-new fair-test/graph-reading exam-skills refresher, the magnet-vs-magnetic-material reverse-inference trap from Unit 34, and longer magnet chains with a freshly-varied worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Checkpoint_U35_Review.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 35 &middot; Test</div>
+            <div class="lc-title">Unit 35 Test &mdash; Final Gap-Closure Checkpoint</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; fresh confirming reps for Unit 34's two partially-closed watch-items (magnet-vs-material, 3-magnet chain), a light touch on Unit 34's isolated conductor/insulator slip, brand-new dedicated fair-test/graph-reading questions, and a light resweep of Units 21&ndash;30. Section C went a PERFECT 10/10 &mdash; the 3-magnet chain is CONFIRMED CLOSED, but magnet-vs-material is still only partially closed (missed the reverse-inference format a second time), and conductor/insulator is now a confirmed 2-instance gap. This completes all five units of the final-5-unit plan. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_35_Test_FinalGapClosureCheckpoint.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 34 &middot; Physics: Electricity, Magnetism &amp; Forces Recap</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Physics &middot; Unit 34 &middot; Lesson 1</div>
+            <div class="lc-title">Circuits, Charges &amp; Magnetism Recap</div>
+            <div class="lc-desc">Recaps circuits (Unit 6) and static charges/induction (Unit 23), then introduces a brand-new distinction: being attracted to a magnet does NOT make an object a magnet itself &mdash; only something that can pull OTHER magnetic objects, unaided, is a true magnet.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="ElecMagForces_Lesson_CircuitsChargesAndMagnetism.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 34 &middot; Lesson 2</div>
+            <div class="lc-title">Magnet Chains &amp; Combining Forces</div>
+            <div class="lc-desc">Teaches a harder 3-magnet chain-reading method (check ONE join at a time) directly targeting the ASMOPSS 2024 retake's magnet-pole diagram-reading regression, then recaps forces and how to combine two or more of them.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="ElecMagForces_Lesson_MagnetChainsAndCombiningForces.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 34 &middot; Test</div>
+            <div class="lc-title">Unit 34 Test &mdash; Electricity, Magnetism &amp; Forces</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; circuits, conductors/insulators, static charges, two dedicated magnet-vs-magnetic-material questions, two dedicated 3-magnet-chain questions, and combining-forces reasoning. Fourth of the final 5 units before ASMOPSS 2026. Both watch-items landed as partial closures (2/3 each); directly targeted by Unit 35. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_34_Test_ElectricityMagnetismAndForces.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 33 &middot; Biology: Plant Structures &amp; Adaptation</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Biology &middot; Unit 33 &middot; Lesson 1</div>
+            <div class="lc-title">How Plants Adapt to Where They Live</div>
+            <div class="lc-desc">Recalls Unit 1's root/stem/leaf jobs, then desert-plant adaptations (cactus: spines, water-storing stem, wide shallow roots) and water-plant adaptations (duckweed: floating leaves, short non-anchoring roots) &mdash; directly targeting the ASMOPSS 2024 retake's duckweed-roots watch-item.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="PlantAdaptations_Lesson_DesertAndWaterPlants.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 33 &middot; Lesson 2</div>
+            <div class="lc-title">A Closer Look at Underground Stems</div>
+            <div class="lc-desc">Recaps Unit 1's buds/eyes test (potato = stem, not root), then deepens it into a full tuber/bulb/rhizome/corm classification (potato/onion/ginger/taro) plus a storage-root-vs-stem-tuber contrast (sweet potato/carrot vs potato).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="PlantAdaptations_Lesson_UndergroundStemsCloserLook.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 33 &middot; Test</div>
+            <div class="lc-title">Unit 33 Test &mdash; Plant Structures &amp; Adaptation</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; desert &amp; water plant adaptations, duckweed, all four underground stem types, storage roots, general Unit 1 recall, and applied/fair-test reasoning. Third of the final 5 units before ASMOPSS 2026. BOTH priority watch-items (duckweed-roots, underground-stem classification) confirmed closed on the first attempt, with zero new gaps. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_33_Test_PlantStructuresAndAdaptation.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 32 &middot; Physics: Heat, Temperature &amp; Materials</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Physics &middot; Unit 32 &middot; Lesson 1</div>
+            <div class="lc-title">Heat vs Temperature</div>
+            <div class="lc-desc">Opens with an ESCALATED anther/stigma/ovary Quick Fix &mdash; an interactive 3-way JOB-sort mini-game (MAKES/CATCHES/BECOMES), replacing the verbal mnemonic that failed twice in Unit 31. Then: heat vs temperature (bathtub-vs-teacup analogy) and measuring temperature on the Celsius scale, with a thermometer diagram.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Heat_Lesson_HeatVsTemperature.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 32 &middot; Lesson 2</div>
+            <div class="lc-title">Heat Transfer &amp; Materials</div>
+            <div class="lc-desc">The three ways heat travels &mdash; conduction, convection, radiation &mdash; insulators vs conductors of heat (bridging Unit 6), and melting/freezing/boiling points, including the melting-point-equals-freezing-point insight.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Heat_Lesson_TransferAndMaterials.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 32 &middot; Test</div>
+            <div class="lc-title">Unit 32 Test &mdash; Heat, Temperature &amp; Materials</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; heat vs temperature, Celsius measurement, conduction/convection/radiation, insulators &amp; conductors, melting/freezing/boiling points, plus two dedicated anther/stigma/ovary confirming reps (bare recall + applied). The escalated 3-bin sort-game Quick Fix worked cleanly on the first attempt. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_32_Test_HeatTemperatureAndMaterials.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1b5e20">Unit 31 &middot; Biology: Classification &amp; Digestion</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Biology &middot; Unit 31 &middot; Lesson 1</div>
+            <div class="lc-title">Classifying Living Things</div>
+            <div class="lc-desc">Opens with a Quick Fix on Milestone 3's two Biology regressions (anther-vs-ovary, germination-light bare recall), then the backbone split (vertebrates vs invertebrates) and the five vertebrate groups &mdash; mammals, birds, fish, reptiles, amphibians &mdash; with a decision tree for classifying any animal.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Classification_Lesson_VertebratesAndInvertebrates.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 31 &middot; Lesson 2</div>
+            <div class="lc-title">The Journey of Food: Digestion</div>
+            <div class="lc-desc">The five-organ digestive journey (mouth &rarr; esophagus &rarr; stomach &rarr; small intestine &rarr; large intestine), why food must be broken down, and enzymes &mdash; a topic identified as a recurring ASMOPSS theme never yet taught in the program.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Digestion_Lesson_JourneyOfFood.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 31 &middot; Test</div>
+            <div class="lc-title">Unit 31 Test &mdash; Classification &amp; Digestion</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; vertebrate/invertebrate classification, the five vertebrate groups, the digestive organs and enzymes, plus confirming reps for the anther-vs-ovary and germination-light gaps from Milestone Test 3. First of the final 5 units before ASMOPSS 2026. The anther-vs-ovary Quick Fix failed both reps identically, escalated to Unit 32; germination-light fully resolved.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_31_Test_ClassificationAndDigestion.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Milestone Test 3 &middot; All Units (U21&ndash;U30)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Milestone Test 3 &middot; Test</div>
+            <div class="lc-title">Milestone Test 3 &mdash; All Units (U21&ndash;U30)</div>
+            <div class="lc-desc">No new lessons, per the milestone-test rule &mdash; 40 questions, 16A/16B/8C, ASMOPSS-weighted marks (1.25/2.5/5), 100 marks total, benchmarked against Milestone 2's 95/100. Section C went a perfect 8/8 for the second consecutive milestone test; the anther-vs-ovary confusion regressed after being closed by Unit 30, and two previously-solid facts (air-resistance/gravity, electrostatic induction) cracked under fresh framings. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 34/40 (90%) PASS</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Milestone_03_Test.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 30 &middot; Gap-Closure Checkpoint (Units 21-29 review)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Checkpoint &middot; Unit 30 &middot; Review</div>
+            <div class="lc-title">Quick Review &mdash; No New Lessons</div>
+            <div class="lc-desc">Review-only capstone, no new content &mdash; 10 quick recap cards sweeping every topic from Units 21&ndash;29 (plus a bonus Unit 3 magnets card), each linking back to its full lesson, plus a Priority Refresher on combining THREE forces (Unit 29's Q13 gap).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Checkpoint_U30_Review.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 30 &middot; Test</div>
+            <div class="lc-title">Unit 30 Test &mdash; Gap-Closure Checkpoint</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; resweeps gravity/air resistance, static induction, density/thermal expansion, seeds/reproduction, speed/distance/time, solar system models, seasons, and mechanical energy, with two brand-new 3-force grouping questions. Tenth and final unit test of the cycle. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_30_Test_GapClosureCheckpoint.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 29 &middot; Physics: Energy, Forces &amp; Simple Machines</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#2e7d32">Physics &middot; Unit 29 &middot; Lesson 1</div>
+            <div class="lc-title">Simple Machines &amp; the Work They Do</div>
+            <div class="lc-desc">Opens with a Quick Fix from Unit 28 (hemisphere derive-then-flip + the distance myth), then teaches what "work" really means in science (force &times; distance moved, zero if nothing moves) and how levers, ramps, and pulleys trade force for distance.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Energy_Lesson_SimpleMachinesAndWork.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 29 &middot; Lesson 2</div>
+            <div class="lc-title">Mechanical Energy &amp; Combining Forces</div>
+            <div class="lc-desc">Calculating stored (mechanical) energy and lifting force with simple multiplication, plus extending Unit 10's tug-of-war rule to work out whether two forces add up or cancel out.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Energy_Lesson_MechanicalEnergyAndCombiningForces.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 29 &middot; Test</div>
+            <div class="lc-title">Unit 29 Test &mdash; Energy, Forces &amp; Simple Machines</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; work &amp; machine basics, calculating stored energy and lifting force, combining forces, plus applied reasoning re-testing Unit 28's two gaps and critiquing/synthesizing energy-and-force claims. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_29_Test_EnergyForcesSimpleMachines.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 28 &middot; Earth &amp; Space: Earth's Tilt &amp; the Seasons</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Earth &amp; Space &middot; Unit 28 &middot; Lesson 1</div>
+            <div class="lc-title">Earth's Tilt &amp; Why We Have Seasons</div>
+            <div class="lc-desc">Recalls Unit 7's rotation/revolution facts, then the real mechanism behind the seasons &mdash; Earth's fixed 23.5&deg; tilt pointing the same hemisphere toward or away from the Sun &mdash; plus busting the "seasons are caused by distance" myth.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Seasons_Lesson_EarthsTiltAndSeasons.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Earth &amp; Space &middot; Unit 28 &middot; Lesson 2</div>
+            <div class="lc-title">Same Time, Opposite Seasons</div>
+            <div class="lc-desc">Transfers the tilt rule to a new case &mdash; why the two hemispheres always have opposite seasons &mdash; plus real-life applications like Christmas in Australia and the equator's mild, steady climate.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Seasons_Lesson_HemisphereReversal.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 28 &middot; Test</div>
+            <div class="lc-title">Unit 28 Test &mdash; Earth's Tilt &amp; the Seasons</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; tilt basics, applying tilt direction to hemisphere seasons, the distance myth-bust, and applied reasoning critiquing claims and transferring the direct-vs-slanted-rays logic to new contexts. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_28_Test_EarthsTiltAndTheSeasons.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 27 &middot; Earth &amp; Space: Models of the Solar System</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Earth &amp; Space &middot; Unit 27 &middot; Lesson 1</div>
+            <div class="lc-title">Geocentric vs Heliocentric</div>
+            <div class="lc-desc">Recalls Unit 7's Sun-centred layout, then the old geocentric (Earth-centred) idea and why it was a genuinely reasonable belief before telescopes, followed by the heliocentric (Sun-centred) model and Copernicus.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="SolarSystem_Lesson_GeocentricVsHeliocentric.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Earth &amp; Space &middot; Unit 27 &middot; Lesson 2</div>
+            <div class="lc-title">Venus's Phases &mdash; The Evidence</div>
+            <div class="lc-desc">How to test between two equally-fitting ideas with a new prediction, Venus showing phases like the Moon, and Galileo's actual 1610 telescope observation &mdash; the evidence that decided between the two models.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="SolarSystem_Lesson_VenusPhasesEvidence.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 27 &middot; Test</div>
+            <div class="lc-title">Unit 27 Test &mdash; Models of the Solar System</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; geocentric vs heliocentric models, Copernicus, Galileo, Venus's phases as evidence, and applied reasoning critiquing claims about the history of science. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_27_Test_ModelsOfTheSolarSystem.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#1565c0">Unit 26 &middot; Physics: Speed, Distance &amp; Time</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 26 &middot; Lesson 1</div>
+            <div class="lc-title">What Is Speed?</div>
+            <div class="lc-desc">Opens with two ESCALATED Quick Fixes &mdash; a new "delivery-truck" analogy for Iron, and an interactive sort-the-parts game for stamen/pistil &mdash; then the Speed = Distance &divide; Time formula and comparing speeds.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="SpeedDistanceTime_Lesson_WhatIsSpeed.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 26 &middot; Lesson 2</div>
+            <div class="lc-title">The DST Triangle</div>
+            <div class="lc-desc">The full Distance-Speed-Time cover-up triangle with all three rearranged formulas, worked examples, plus a new "Average Speed" idea &mdash; why equal-distance segments at different speeds don't average to the simple midpoint.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="SpeedDistanceTime_Lesson_TheDSTTriangle.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 26 &middot; Test</div>
+            <div class="lc-title">Unit 26 Test &mdash; Speed, Distance &amp; Time</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; the speed formula and all three rearrangements, comparing speeds, average speed, fair-test reasoning, plus a 4th-framing Iron re-test and a 3rd-framing stamen/pistil re-test. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_26_Test_SpeedDistanceTime.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#c05621">Unit 25 &middot; Biology: Seeds, Plant Reproduction &amp; Dispersal</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 25 &middot; Lesson 1</div>
+            <div class="lc-title">Germination to Seedling</div>
+            <div class="lc-desc">Opens with an escalated Iron re-test (symptom-recognition vs causal-mechanism), recalls Unit 17's germination rule, then teaches the real reasons WHY warmth matters and WHY soil isn't needed yet &mdash; plus the new seed-to-seedling stage transition.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Seeds_Lesson_GerminationToSeedling.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 25 &middot; Lesson 2</div>
+            <div class="lc-title">Reproduction &amp; Dispersal</div>
+            <div class="lc-desc">Male stamen vs female pistil with a new labelled flower diagram (targeting the anther-vs-ovary mix-up), the full pollination-to-seed cycle, plus new content on seed dispersal by wind, animals, and water.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Seeds_Lesson_ReproductionAndDispersal.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#c05621;opacity:.8">
+            <div class="lc-unit" style="color:#c05621">Unit 25 &middot; Test</div>
+            <div class="lc-title">Unit 25 Test &mdash; Seeds, Plant Reproduction &amp; Dispersal</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; germination requirements, seed-to-seedling needs, flower anatomy, pollination &amp; fertilization, seed dispersal, plus a fresh blood-test-framed Iron re-test. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; Done &middot; 14/20 (70%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_25_Test_SeedsPlantReproduction.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 24 &middot; Chemistry: Density, Buoyancy &amp; Thermal Expansion</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry &middot; Unit 24 &middot; Lesson 1</div>
+            <div class="lc-title">Calculating Density</div>
+            <div class="lc-desc">Opens with an ESCALATED Quick Fix for the null-result fair-test gap (a coin-flip fairness analogy), recalls Unit 15's density shortcuts, then teaches the full Density = Mass &divide; Volume formula.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Density_Lesson_CalculatingDensity.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 24 &middot; Lesson 2</div>
+            <div class="lc-title">Thermal Expansion &amp; Buoyancy</div>
+            <div class="lc-desc">Heating lowers density (same mass, bigger volume), buoyancy vs temperature (warm rises through cool, convection currents), plus why hollow steel ships float &mdash; directly built to close the real competition paper's Q27/Q30 gaps.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Density_Lesson_ThermalExpansionAndBuoyancy.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 24 &middot; Test</div>
+            <div class="lc-title">Unit 24 Test &mdash; Density, Buoyancy &amp; Thermal Expansion</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; density calculations, comparing objects, thermal expansion, buoyancy vs temperature, a gold-ring identification question, plus a saucepan-lid null-result fair-test re-test. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_24_Test_DensityBuoyancyThermalExpansion.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 23 &middot; Physics: Static Electricity &amp; Electric Charges</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 23 &middot; Lesson 1</div>
+            <div class="lc-title">Charges &amp; Friction</div>
+            <div class="lc-desc">Opens with a Quick Fix from Unit 22 (symptom-to-nutrient reverse-lookup drill + a null-result fair-test note), then protons/electrons, neutral vs charged, and charging by rubbing (friction).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Static_Lesson_ChargesAndFriction.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 23 &middot; Lesson 2</div>
+            <div class="lc-title">Induction &amp; Everyday Effects</div>
+            <div class="lc-desc">Electrostatic induction (attracting a neutral object without touching it) &mdash; directly built to close the real competition paper's Q17b gap &mdash; plus static cling, hair standing up, and lightning.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Static_Lesson_InductionAndEverydayEffects.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 23 &middot; Test</div>
+            <div class="lc-title">Unit 23 Test &mdash; Static Electricity &amp; Electric Charges</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; charges, friction, induction, everyday effects, lightning, plus 3 embedded verification questions re-testing Unit 22's symptom-to-nutrient and null-result fair-test gaps. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_23_Test_StaticElectricityElectricCharges.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#c05621">Unit 22 &middot; Biology: Nutrition, Vitamins &amp; a Balanced Diet</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 22 &middot; Lesson 1</div>
+            <div class="lc-title">What Nutrients Do We Need?</div>
+            <div class="lc-desc">Recalls Unit 11's digestive system, then the six main nutrient groups (carbs, protein, fats, vitamins &amp; minerals, fibre, water) and what a balanced plate actually looks like.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Nutrition_Lesson_NutrientsAndBalancedDiet.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 22 &middot; Lesson 2</div>
+            <div class="lc-title">Vitamins &amp; Minerals</div>
+            <div class="lc-desc">Key vitamins and minerals by name (A, C, D, calcium, iron), plus the real story of scurvy and James Lind's 1747 fair-test experiment &mdash; directly built to close the real competition paper's Q18 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Nutrition_Lesson_VitaminsAndMinerals.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#c05621;opacity:.8">
+            <div class="lc-unit" style="color:#c05621">Unit 22 &middot; Test</div>
+            <div class="lc-title">Unit 22 Test &mdash; Nutrition, Vitamins &amp; a Balanced Diet</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; nutrient groups, the balanced plate, key vitamins &amp; minerals, Vitamin C &amp; scurvy, and fair-test reasoning via James Lind's experiment. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; Done &middot; 15/20 (75%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_22_Test_NutritionVitaminsBalancedDiet.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 21 &middot; Physics: Falling Objects, Gravity &amp; Air Resistance</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 21 &middot; Lesson 1</div>
+            <div class="lc-title">What Is Gravity?</div>
+            <div class="lc-desc">Recalls Unit 10's mass-vs-weight distinction, then reveals the surprising fact that gravity pulls every object at the same rate regardless of mass &mdash; with a Galileo-style diagram.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Gravity_Lesson_WhatIsGravity.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 21 &middot; Lesson 2</div>
+            <div class="lc-title">Air Resistance &amp; Free Fall</div>
+            <div class="lc-desc">Air resistance as a friction-like force affected by shape and surface area, then the real 1971 Apollo 15 hammer-and-feather Moon experiment tying both lessons together &mdash; directly built to close the real competition paper's Q16-vs-Q22 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Gravity_Lesson_AirResistanceAndFreeFall.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 21 &middot; Test</div>
+            <div class="lc-title">Unit 21 Test &mdash; Falling Objects, Gravity &amp; Air Resistance</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; gravity, mass vs weight, air resistance, shape/surface area, and the vacuum equal-fall-rate rule, in both standalone and comparison framings. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 (100%) PERFECT</span></div>
+            <a class="btn-start purple" href="Tests/Unit_21_Test_FallingObjectsGravityAirResistance.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Milestone Test 2 &middot; All Units (U11&ndash;U20)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Milestone Test 2 &middot; Test</div>
+            <div class="lc-title">Milestone Test 2 &mdash; Biology, Chemistry &amp; Physics (U11&ndash;U19)</div>
+            <div class="lc-desc">No new lessons, per the milestone-test rule &mdash; 40 questions, 16A/16B/8C, ASMOPSS-weighted marks (1.25/2.5/5), 100 marks total, benchmarked against Milestone 1's 98.75/100. Gave dedicated coverage to Unit 20's two open items: germination "no light needed" and observation-vs-inference &mdash; both confirmed via dedicated re-test questions. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 36/40 (95%) PASS</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Milestone_02_Test.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 20 &middot; Gap-Closure Checkpoint</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Checkpoint &middot; Unit 20 &middot; Review</div>
+            <div class="lc-title">Quick Review &mdash; No New Lessons</div>
+            <div class="lc-desc">Review-only capstone, no new content &mdash; 11 quick recap cards sweeping every gap topic from Units 11&ndash;19, plus a dedicated Tide Frequency Refresher (2 quick-check questions) prioritised per Unit 19's finding.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Checkpoint_U20_Review.html">Review</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 20 &middot; Test</div>
+            <div class="lc-title">Unit 20 Test &mdash; Gap-Closure Checkpoint</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; sweeps 13 Competition gap items from Units 11&ndash;19 with entirely fresh scenarios, weighted heaviest on tides (3 questions). Tenth and final unit test of the cycle. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 16/20 (80%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_20_Test_GapClosureCheckpoint.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="padding-top:0;color:#8a6a00">Unit 19 &middot; Physics: Water Cycle</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 19 &middot; Lesson 1</div>
+            <div class="lc-title">The Water Cycle</div>
+            <div class="lc-desc">The four-stage water cycle (evaporation, condensation, precipitation, collection) as a continuous loop &mdash; plus a mandatory Quick Fix from Unit 18 locking in the potential-vs-kinetic energy rule.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Water_Lesson_TheWaterCycle.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 19 &middot; Lesson 2</div>
+            <div class="lc-title">Precipitation, Collection &amp; Tides</div>
+            <div class="lc-desc">Precipitation types by temperature (rain/snow/sleet/hail), reservoirs bridging Unit 18's dam concept, and tides via a labelled Earth/Moon diagram &mdash; directly built to close the real competition paper's Q30 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Water_Lesson_PrecipitationAndTides.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 19 &middot; Test</div>
+            <div class="lc-title">Unit 19 Test &mdash; Physics: Water Cycle</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; evaporation, condensation, precipitation, collection, reservoirs, tides, plus 2 embedded PE/KE recap questions verifying Unit 18's vocabulary-swap gap is closed. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%) PASS</span></div>
+            <a class="btn-start purple" href="Tests/Unit_19_Test_WaterCycle.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#c05621">Unit 18 &middot; Physics: Energy Transformations</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 18 &middot; Lesson 1</div>
+            <div class="lc-title">Forms &amp; Transformations of Energy</div>
+            <div class="lc-desc">The main forms of energy (kinetic, potential, chemical, thermal, light, sound), transformation chains, and the conservation-of-energy rule &mdash; plus a fresh observation-vs-inference refresher.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Energy_Lesson_FormsAndTransformations.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 18 &middot; Lesson 2</div>
+            <div class="lc-title">Gravitational PE, KE &amp; Hydroelectric Power</div>
+            <div class="lc-desc">Gravitational potential energy, the PE&rarr;KE transformation (falling objects, roller coasters), and hydroelectric power via an interactive labelled dam diagram &mdash; directly built to close the real competition paper's Q3 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Energy_Lesson_PotentialKineticAndHydroelectric.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#c05621;opacity:.8">
+            <div class="lc-unit" style="color:#c05621">Unit 18 &middot; Test</div>
+            <div class="lc-title">Unit 18 Test &mdash; Physics: Energy Transformations</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; forms of energy, transformation chains, conservation of energy, gravitational PE, PE&rarr;KE, and hydroelectric power. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; Done &middot; 15/20 (75%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_18_Test_EnergyTransformations.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 17 &middot; Biology: Ecosystems</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 17 &middot; Lesson 1</div>
+            <div class="lc-title">Ecosystems, Food Chains &amp; Human Impact</div>
+            <div class="lc-desc">Producer/consumer/decomposer roles, nutrients &amp; the air (nitrogen fixation, directly built to close the real competition paper's Q7 gap), food chains &amp; webs, and human impact via pollution vs the greenhouse effect.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Ecosystems_Lesson_FoodChainsAndHumanImpact.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 17 &middot; Lesson 2</div>
+            <div class="lc-title">Life Cycles &mdash; Germination to Flower</div>
+            <div class="lc-desc">Seed germination requirements (water, warmth, air &mdash; not soil or light) and detailed flower-part anatomy via a labelled cross-section diagram (stigma, anther, ovule), directly built to close the real competition paper's Q31/Q32 gaps.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Ecosystems_Lesson_LifeCycles.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 17 &middot; Test</div>
+            <div class="lc-title">Unit 17 Test &mdash; Biology: Ecosystems</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; producer/consumer/decomposer roles, nutrients &amp; air composition, food chains &amp; webs, human impact, seed germination, and flower parts. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%)</span></div>
+            <a class="btn-start purple" href="Tests/Unit_17_Test_Ecosystems.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 16 &middot; Physics: Sound</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 16 &middot; Lesson 1</div>
+            <div class="lc-title">How Sound Travels</div>
+            <div class="lc-desc">What sound actually is (vibrations &rarr; compression waves) and the sound-needs-a-medium rule &mdash; including a direct contrast with light, which can cross a vacuum but sound cannot.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Sound_Lesson_WhatIsSound.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 16 &middot; Lesson 2</div>
+            <div class="lc-title">Sound Through Different Media, Pitch &amp; Volume</div>
+            <div class="lc-desc">Speed of sound through solids/liquids/gases (fastest &rarr; slowest), directly built to close the real competition paper's Q9 gap, plus pitch (frequency) vs volume (amplitude) as independent properties.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Sound_Lesson_MediaPitchAndVolume.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 16 &middot; Test</div>
+            <div class="lc-title">Unit 16 Test &mdash; Physics: Sound</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; vibration/sound basics, sound-needs-a-medium, speed through solids/liquids/gases, and pitch vs volume. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 17/20 (85%)</span></div>
+            <a class="btn-start purple" href="Tests/Unit_16_Test_Sound.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 15 &middot; Chemistry: Density &amp; Buoyancy</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry &middot; Unit 15 &middot; Lesson 1</div>
+            <div class="lc-title">What Is Density?</div>
+            <div class="lc-desc">What density really means, comparing objects by mass and size, and ranking objects by density &mdash; directly mirroring the competition's same-volume-balls question style.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Density_Lesson_WhatIsDensity.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 15 &middot; Lesson 2</div>
+            <div class="lc-title">Floating, Sinking &amp; Buoyancy</div>
+            <div class="lc-desc">The float/sink rule (density vs water), bridging from Unit 12's floating/sinking content, plus a dedicated observation-vs-inference bridge screen built to close the real competition paper's Q19 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Density_Lesson_FloatingSinkingBuoyancy.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 15 &middot; Test</div>
+            <div class="lc-title">Unit 15 Test &mdash; Chemistry: Density &amp; Buoyancy</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; 19 on Density &amp; Buoyancy plus 1 standalone Physics recap question checking Unit 14's point-source shadow finding. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20 (90%)</span></div>
+            <a class="btn-start purple" href="Tests/Unit_15_Test_DensityAndBuoyancy.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 14 &middot; Biology: Cells</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 14 &middot; Lesson 1</div>
+            <div class="lc-title">What Is a Cell? Plant vs Animal Cells</div>
+            <div class="lc-desc">What a cell is, the parts every cell shares (nucleus, cytoplasm, membrane), the extra parts only plant cells have (wall, chloroplasts, vacuole) &mdash; plus a Quick Fix recap locking in Unit 13's point-vs-broad light source rule.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Cells_Lesson_WhatIsACell.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 14 &middot; Lesson 2</div>
+            <div class="lc-title">Unicellular vs Multicellular &amp; Specialized Cells</div>
+            <div class="lc-desc">One-celled vs many-celled organisms, and how specialized cells (nerve, muscle, red blood, root hair) are shaped for their own job &mdash; bridging from Unit 4's microorganisms and Unit 11's body systems.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Cells_Lesson_UnicellularAndMulticellular.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 14 &middot; Test</div>
+            <div class="lc-title">Unit 14 Test &mdash; Biology: Cells</div>
+            <div class="lc-desc">20 questions, 3 sections &mdash; 18 on Cells plus 2 embedded Physics recap questions verifying Unit 13's point-vs-broad-source gap is closed. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%)</span></div>
+            <a class="btn-start purple" href="Tests/Unit_14_Test_Cells.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#c05621">Unit 13 &middot; Physics: Light</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 13 &middot; Lesson 1</div>
+            <div class="lc-title">Light Sources &amp; How Light Travels</div>
+            <div class="lc-desc">Luminous vs non-luminous objects, natural vs man-made light sources, why light travels in straight lines, and how reflection lets you see almost everything around you.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Light_Lesson_SourcesAndHowLightTravels.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 13 &middot; Lesson 2</div>
+            <div class="lc-title">Shadows, Umbra &amp; Penumbra</div>
+            <div class="lc-desc">Opaque vs translucent vs transparent, and point-source vs broad-source shadows &mdash; with two side-by-side ray diagrams, directly built to close the real competition paper's Q10 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Light_Lesson_ShadowsUmbraAndPenumbra.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#c05621;opacity:.8">
+            <div class="lc-unit" style="color:#c05621">Unit 13 &middot; Test</div>
+            <div class="lc-title">Unit 13 Test &mdash; Physics: Light</div>
+            <div class="lc-desc">20 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; Done &middot; 14/20 (70%) FAIL</span></div>
+            <a class="btn-start purple" href="Tests/Unit_13_Test_Light.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 12 &middot; Chemistry: Materials, Origins &amp; Classification</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry &middot; Unit 12 &middot; Lesson 1</div>
+            <div class="lc-title">Where Do Materials Come From?</div>
+            <div class="lc-desc">Sort materials into plant, animal, ground/mineral, or man-made origins, and spot the two classic mix-ups &mdash; rubber (a plant material) and silk (an animal material).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Materials_Lesson_WhereDoMaterialsComeFrom.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 12 &middot; Lesson 2</div>
+            <div class="lc-title">Sorting Materials by Properties</div>
+            <div class="lc-desc">Hard vs soft, flexible vs rigid, and floating/sinking in water and oil &mdash; plus a step-by-step classification flowchart, directly built to close the real competition paper's Q17 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Materials_Lesson_SortingByProperties.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 12 &middot; Test</div>
+            <div class="lc-title">Unit 12 Test &mdash; Materials, Origins &amp; Classification</div>
+            <div class="lc-desc">20 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20 (95%)</span></div>
+            <a class="btn-start purple" href="Tests/Unit_12_Test_MaterialsOriginsAndClassification.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 11 &middot; Biology: Human Body Systems</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 11 &middot; Lesson 1</div>
+            <div class="lc-title">What Are Body Systems?</div>
+            <div class="lc-desc">Meet the digestive, respiratory and circulatory systems, what each one does, and how they team up to turn a meal into energy for your muscles.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="HumanBody_Lesson_WhatAreBodySystems.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 11 &middot; Lesson 2</div>
+            <div class="lc-title">Breathing &amp; Gas Exchange</div>
+            <div class="lc-desc">How breathing and gas exchange work, how air changes as you breathe it out, and what happens to the air in a sealed-up space over time &mdash; directly built to close the real competition paper's Q24 gap.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="HumanBody_Lesson_BreathingAndGasExchange.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 11 &middot; Test</div>
+            <div class="lc-title">Unit 11 Test &mdash; Human Body Systems</div>
+            <div class="lc-desc">20 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_11_Test_HumanBodySystems.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Milestone Test 1 &middot; All Units (U1&ndash;U10)</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="border-top-color:#DAA520;opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Milestone Test 1 &middot; Test</div>
+            <div class="lc-title">Milestone Test 1 &mdash; Biology, Chemistry, Physics &amp; Earth/Space</div>
+            <div class="lc-desc">40 questions, weighted like a real ASMOPSS paper (1.25/2.5/5 marks &mdash; 100 marks total, pass bar 80). Benchmarked directly against the original baseline score of 72.5/100. No lessons for this one &mdash; it's a pure assessment covering all 10 units.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 39/40 (99%) &#127881;</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Milestone_01_Test.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 10 &middot; Physics: Forces</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 10 &middot; Lesson 1</div>
+            <div class="lc-title">What Is a Force? Contact vs Non-Contact</div>
+            <div class="lc-desc">What a force is (a push or a pull) and what it can do to motion, contact vs non-contact forces, and a decision tree for sorting any force.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Forces_Lesson_WhatIsAForce.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 10 &middot; Lesson 2</div>
+            <div class="lc-title">Balanced &amp; Unbalanced Forces, Gravity &amp; Friction</div>
+            <div class="lc-desc">Balanced vs unbalanced forces with a decision tree, gravity &amp; friction (incl. mass vs weight), and a fair-test worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Forces_Lesson_BalancedForcesGravityAndFriction.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 10 &middot; Test</div>
+            <div class="lc-title">Unit 10 Test &mdash; Physics: Forces</div>
+            <div class="lc-desc">20 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 19/20</span></div>
+            <a class="btn-start purple" href="Tests/Unit_10_Test_Forces.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 9 &middot; Chemistry: Reactions</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry &middot; Unit 9 &middot; Lesson 1</div>
+            <div class="lc-title">What Is a Chemical Reaction?</div>
+            <div class="lc-desc">Physical vs chemical change, the clue-signs a reaction has happened (gas, colour, heat, smell), and a decision tree for spotting one.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Reactions_Lesson_WhatIsAChemicalReaction.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 9 &middot; Lesson 2</div>
+            <div class="lc-title">Reversible Changes &amp; Reaction Speed</div>
+            <div class="lc-desc">Reversible vs irreversible changes, what makes a reaction speed up or slow down (temperature, surface area), and a fair-test worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Reactions_Lesson_ReversibleAndSpeed.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 9 &middot; Test</div>
+            <div class="lc-title">Unit 9 Test &mdash; Chemistry: Reactions</div>
+            <div class="lc-desc">20 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 18/20</span></div>
+            <a class="btn-start purple" href="Tests/Unit_09_Test_Reactions.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 8 &middot; Biology: Photosynthesis</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 8 &middot; Lesson 1</div>
+            <div class="lc-title">What Is Photosynthesis?</div>
+            <div class="lc-desc">The photosynthesis recipe (sunlight + water + CO2 &rarr; food + oxygen), chlorophyll, and where in a leaf it all happens.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Photosynthesis_Lesson_WhatIsPhotosynthesis.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 8 &middot; Lesson 2</div>
+            <div class="lc-title">Gas Exchange &amp; What Makes Photosynthesis Speed Up</div>
+            <div class="lc-desc">The leaf-bubbles mystery solved (stomata gas exchange vs. photosynthesis), factors that affect the rate, and a fair-test worked example.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Photosynthesis_Lesson_GasExchangeAndFactors.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 8 &middot; Test</div>
+            <div class="lc-title">Unit 8 Test &mdash; Biology: Photosynthesis</div>
+            <div class="lc-desc">20 questions, 3 sections (first in the new format). Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 20/20 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_08_Test_Photosynthesis.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 7 &middot; Earth &amp; Space: Astronomy</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Earth &amp; Space &middot; Unit 7 &middot; Lesson 1</div>
+            <div class="lc-title">Earth's Rotation, Revolution &amp; the Changing Night Sky</div>
+            <div class="lc-desc">What causes day and night, what makes a year, and why you see different constellations at different times of year.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="EarthSpace_Lesson_RotationAndRevolution.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Earth &amp; Space &middot; Unit 7 &middot; Lesson 2</div>
+            <div class="lc-title">The Moon &amp; Our Solar System</div>
+            <div class="lc-desc">Why the Moon shines, why its shape seems to change, the basic layout of the solar system, and modelling Moon phases like a scientist.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="EarthSpace_Lesson_MoonAndSolarSystem.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 7 &middot; Test</div>
+            <div class="lc-title">Unit 7 Test &mdash; Earth &amp; Space: Astronomy</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 15/15 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_07_Test_EarthAndSpace.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 6 &middot; Physics: Electricity &amp; Circuits</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 6 &middot; Lesson 1</div>
+            <div class="lc-title">Building a Circuit</div>
+            <div class="lc-desc">What makes a circuit complete, how switches work, and the energy transfer chain from battery to bulb.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Circuits_Lesson_BuildingACircuit.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 6 &middot; Lesson 2</div>
+            <div class="lc-title">Conductors, Insulators &amp; Circuit Faults</div>
+            <div class="lc-desc">Electrical conductors vs insulators, a step-by-step fault-finding check, and fair-testing which material conducts.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Circuits_Lesson_ConductorsAndFaults.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 6 &middot; Test</div>
+            <div class="lc-title">Unit 6 Test &mdash; Electricity &amp; Circuits</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 14/15</span></div>
+            <a class="btn-start purple" href="Tests/Unit_06_Test_CircuitsAndElectricity.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 5 &middot; Chemistry: States of Matter &amp; Materials</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry &middot; Unit 5 &middot; Lesson 1</div>
+            <div class="lc-title">Changes of State</div>
+            <div class="lc-desc">Melting, freezing, evaporating &amp; condensing, and proving that no matter is lost when it changes state.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="States_Lesson_ChangesOfState.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 5 &middot; Lesson 2</div>
+            <div class="lc-title">Material Properties &amp; Choosing the Right Material</div>
+            <div class="lc-desc">Hard/soft, flexible/rigid, waterproof/absorbent, sorting materials by two properties at once, and fair-testing a property.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="States_Lesson_MaterialProperties.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 5 &middot; Test</div>
+            <div class="lc-title">Unit 5 Test &mdash; States of Matter &amp; Materials</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 13/15</span></div>
+            <a class="btn-start purple" href="Tests/Unit_05_Test_StatesAndMaterials.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 4 &middot; Biology: Microorganisms</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 4 &middot; Lesson 1</div>
+            <div class="lc-title">Microorganisms: The Tiny Living Things</div>
+            <div class="lc-desc">What microorganisms are (bacteria &amp; fungi), helpful vs harmful, and how decomposers recycle nutrients in nature.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Microorganisms_Lesson_WhatAreThey.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 4 &middot; Lesson 2</div>
+            <div class="lc-title">What Mould Needs to Grow &amp; Fair Tests</div>
+            <div class="lc-desc">Food, moisture &amp; warmth, why fridges/freezers slow mould down, and designing a fair bread-mould experiment.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Microorganisms_Lesson_MouldAndFairTests.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 4 &middot; Test</div>
+            <div class="lc-title">Unit 4 Test &mdash; Biology: Microorganisms</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 15/15 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_04_Test_Microorganisms.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 3 &middot; Physics: Magnetism &amp; Heat</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Physics &middot; Unit 3 &middot; Lesson 1</div>
+            <div class="lc-title">Magnets &amp; Poles</div>
+            <div class="lc-desc">Magnetic vs non-magnetic materials, the North/South pole rule, and reading whole rows of magnets to spot attract vs repel.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Physics_Lesson_MagnetsAndPoles.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Physics &middot; Unit 3 &middot; Lesson 2</div>
+            <div class="lc-title">Heat, Conduction &amp; Fair Tests</div>
+            <div class="lc-desc">Why heat always flows hot&rarr;cold, good conductors vs insulators, and designing a fair test to compare them.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Physics_Lesson_HeatAndFairTests.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 3 &middot; Test</div>
+            <div class="lc-title">Unit 3 Test &mdash; Magnetism &amp; Heat</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 15/15 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_03_Test_MagnetismAndHeat.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 2 &middot; Chemistry/Matter: What Is Matter?</div>
+        <div class="grid-3" style="margin-bottom:18px">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Chemistry/Matter &middot; Unit 2 &middot; Lesson 1</div>
+            <div class="lc-title">What Is Matter?</div>
+            <div class="lc-desc">What matter really is, the three states, and the big misconception-buster: <strong>gases have mass too</strong>.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Matter_Lesson_WhatIsMatter.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Chemistry/Matter &middot; Unit 2 &middot; Lesson 2</div>
+            <div class="lc-title">Mass, Volume &amp; Dissolving</div>
+            <div class="lc-desc">Mass vs volume told apart for good, what really happens when sugar dissolves, and how to spot a fair test.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Matter_Lesson_MassVolumeDissolving.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
+            <div class="lc-unit" style="color:#6a1b9a">Unit 2 &middot; Test</div>
+            <div class="lc-title">Unit 2 Test &mdash; What Is Matter?</div>
+            <div class="lc-desc">15 questions, 3 sections. Interactive HTML test &mdash; instant score, right/wrong, and explanations.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 15/15 &#127881;</span></div>
+            <a class="btn-start purple" href="Tests/Unit_02_Test_MatterAndMass.html">Review Test</a>
+          </div>
+        </div>
+
+        <div class="sec-div" style="color:#8a6a00">Unit 1 &middot; Biology: Plants</div>
+        <div class="grid-3">
+          <div class="lesson-card" style="opacity:.8">
+            <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 1 &middot; Lesson 1</div>
+            <div class="lc-title">Plant Parts &amp; Their Jobs</div>
+            <div class="lc-desc">Roots, stem, leaves, flower &mdash; and the tricky <strong>underground stems</strong> (potato, ginger).</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start" href="Plants_Lesson_PartsAndJobs.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card blue" style="opacity:.8">
+            <div class="lc-unit" style="color:#1565c0">Biology &middot; Unit 1 &middot; Lesson 2</div>
+            <div class="lc-title">Water Transport + Think Like a Scientist</div>
+            <div class="lc-desc">How water travels roots&rarr;stem&rarr;leaves, the coloured-water &amp; leaf-bubble experiments, and fair tests.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
+            <a class="btn-start blue" href="Plants_Lesson_WaterTransport.html">Review Lesson</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#9e9e9e;opacity:.65">
+            <div class="lc-unit">Unit 1 &middot; Test</div>
+            <div class="lc-title">Unit 1 Test &mdash; Biology: Plants</div>
+            <div class="lc-desc">15 questions, 3 sections. Paper/DOCX format &mdash; the last one. From Unit 2 onward, tests are interactive HTML pages you open and submit right here.</div>
+            <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done &middot; 14/15</span><span class="badge badge-soon">Archived format</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="panel" id="panel-competitions">
+        <div class="sec-div">Completed</div>
+        <div class="grid-3">
+          <div class="lesson-card" style="border-top-color:#b71c1c;opacity:.8">
+            <div class="lc-unit" style="color:#b71c1c">ASMOPSS 2023 &middot; 2nd Round National Selection &middot; G4-6</div>
+            <div class="lc-title">ASMOPSS 2023 Real Competition Paper (National Selection)</div>
+            <div class="lc-desc">A genuine ASMOPSS Thailand 2023 2nd Round National Selection paper (sat 1 Oct 2023) &mdash; combines Grades 4-6, a step up from Prem's usual G4 level. 30 questions across 3 parts: 15 multiple choice, 10 short-answer fill-in-the-blank, and 5 essay/calculation questions. Real diagrams from the original paper, answers verified against the official ASMOPSS key. A stretch challenge, not a pass/fail test &mdash; score staircased cleanly with curriculum level (40% MCQ &rarr; 0% essay/calc), and directly revealed the Q16-vs-Q22 gravity gap now being closed in Unit 21.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; 19.5/102 (19%) &middot; stretch paper, no bar</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Competition_ASMOPSS2023_G4to6_NationalSelection.html">Review Test</a>
+          </div>
+          <div class="lesson-card" style="border-top-color:#b71c1c;opacity:.8">
+            <div class="lc-unit" style="color:#b71c1c">ASMOPSS 2024 &middot; Grade 4 Science &middot; Set B</div>
+            <div class="lc-title">ASMOPSS 2024 Real Competition Paper (Set B)</div>
+            <div class="lc-desc">A genuine, complete ASMOPSS 2024 Grade 4 Science paper (sat 4 Aug 2024) &mdash; real diagrams from the original test, official weighting (1.25/2.5/5 marks, 100 total, pass bar 80), answers verified against the official ASMOPSS key.</div>
+            <div class="lc-badges"><span class="badge" style="background:#ffe0b2;color:#c05621">&#9888; 20/40 (53%) &middot; below pass</span><span class="badge badge-asm">ASMOPSS</span></div>
+            <a class="btn-start purple" href="Tests/Competition_ASMOPSS2024_G4_SetB.html">Review Test</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="prem_data.js"></script>
+<script>
+  var PW_HASH = 2088511772;
+  function djb2(str){ var h=5381; for(var i=0;i<str.length;i++){ h=(((h<<5)+h)+str.charCodeAt(i))>>>0; } return h; }
+  var hubToken = new URLSearchParams(window.location.search).get('hub');
+  var tokenValid = hubToken && (Date.now() - parseInt(hubToken, 10)) < 15000;
+  if (sessionStorage.getItem('unlocked')==='yes' || tokenValid){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); }
+  else { document.getElementById('pw-input').focus(); }
+  function checkPassword(){
+    var e=document.getElementById('pw-input').value;
+    if (djb2(e)===PW_HASH){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); }
+    else { document.getElementById('pw-error').textContent='Wrong password. Try again!'; document.getElementById('pw-input').value=''; document.getElementById('pw-input').focus(); }
+  }
+  var D = PREM_DATA;
+  function showPanel(id, btn){
+    var ps=document.querySelectorAll('.panel'); for(var i=0;i<ps.length;i++) ps[i].classList.remove('active');
+    document.getElementById('panel-'+id).classList.add('active');
+    var bs=document.querySelectorAll('.sb-btn'); for(var j=0;j<bs.length;j++) bs[j].classList.remove('active');
+    if(btn) btn.classList.add('active');
+  }
+  function openDashboard(){
+    var url = 'Prems_Science_Coach_Dashboard.html';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openMath(){
+    var url = 'https://athipprem.github.io/mathlessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openEnglish(){
+    var url = 'https://athipprem.github.io/englessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openCoding(){
+    var url = 'https://athipprem.github.io/codinglessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  var days = Math.max(0, Math.ceil((new Date(D.asmopssDate)-new Date())/86400000));
+  document.getElementById('tb-days').textContent = days;
+  document.getElementById('h-weeks').textContent = Math.ceil(days/7);
+  var curLabel = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.indexOf('MockTest')===0) ? 'Mock Test '+D.currentUnit.n.slice(8)
+               : (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1)
+               : 'U'+D.currentUnit.n;
+  document.getElementById('tb-unit').textContent = (typeof D.currentUnit.n === 'string' && D.currentUnit.n.indexOf('MockTest')===0) ? 'Mock Test '+D.currentUnit.n.slice(8)
+               : (typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1)
+               : 'Unit '+D.currentUnit.n;
+  var unitTestCount = D.scores.filter(function(s){ return typeof s.unit === 'number'; }).length;
+  var milestoneCount = D.scores.filter(function(s){ return typeof s.unit === 'string' && /^M\d/.test(s.unit); }).length;
+  document.getElementById('h-done').textContent = unitTestCount+'+'+milestoneCount;
+  var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
+  document.getElementById('h-skill').textContent = Math.round(sc/st*100)+'%';
+  var lu=D.lastUnit;
+  document.getElementById('pattern-box').innerHTML =
+    '<div class="lbl">'+lu.patternLabel+'</div><p>'+lu.patternInsight+'</p>'+
+    '<div class="lbl">'+lu.analysisLabel+'</div><p style="margin-bottom:0">'+lu.analysisInsight+'</p>';
+</script>
+</body>
+</html>

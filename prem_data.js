@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '14 Oct 2026',
+  updated:        '15 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-  currentUnit: { n:53, topic:'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted) &mdash; LAST UNIT BEFORE MILESTONE 5', status:'&#9989; Built and gated (14 Oct 2026, 0 FAIL), from `BUILD_PLAN_SCI_U53_LifeOfACell.md`. Warm-up + two lessons + test. An inserted consolidation after U52&#39;s 13/20: one Cell Life Simulator, a fact floor, pace protocol v2. Milestone 5 follows.' },
+  currentUnit: { n:'M5', topic:'Milestone Test 5 &mdash; Units 41&ndash;53 (40 questions, ASMOPSS-weighted, pass 80/100)', status:'&#9989; Built and gated (15 Oct 2026, 0 FAIL), from `BUILD_PLAN_SCI_M5_Milestone5.md`. Warm-up page plus a 40-question test (100 marks, pass 80, M4 baseline 91.25); no lessons. Ready for Prem.' },
 
   lastUnit: {
-    n:52, score:13, outOf:20, pct:65, passBar:16, delta:-10, prevScore:75, passed:false, minutesSpent:8.6, minutesNote:'first click 9, final 13', firstPassScore:9,
-    patternLabel: 'Unit 52 result - Biology: What Gets Copied (13/20, 65% FAIL, 8.6 minutes; first clicks 9, after his own changes 12, final 13)',
-    patternInsight: '<strong>13/20 (65%)</strong> - FAIL by three marks, -2 marks on Unit 51. Section A = <strong>0/2</strong>. Section B = <strong>4/6</strong>. Section C = <strong>9/12</strong>. Tier breakdown: Basic 0/2, Intermediate 4/6, Applied 9/12. Taken 14 Oct 2026, self-reported no help and no notes. <strong>Time: 8.6 minutes</strong> (U51: 4.7). <strong>Checking earned 4 marks:</strong> first clicks 9, own changes before submit 12, review 13, with 0 right-to-wrong changes.',
-    analysisLabel: 'Seven misses: Q1, Q2, Q4, Q6, Q11, Q17, Q19 - the lessons were done, but the tested facts were stated too few times',
-    analysisInsight: '<strong>Held:</strong> why chromosomes are copied, gene, growth before dividing again, the X chromosome, bud keeps features, doubling (Q12, predict-first), the unseen ear cell (Q13, predict-first), sample size, mass, conduction, observation vs inference in a new scene, hair and nails. <strong>Missed:</strong> Q1 (nucleus), Q2 (yeast a fungus), Q4 (most of life not dividing), Q6 (budding), Q11 (speed vs amount, 3rd time), Q17 (dissolving), Q19 (shoot tip). Planner finding: each missed fact appeared in the lessons only 0-4 times. Record: `Memory Backup\\TEST_RECORD_SCI_U052.md`.',
-    qSummary: '<strong>13 / 20 (65%) - FAIL.</strong> Section A 0/2, Section B 4/6, Section C 9/12. 8.6 minutes. First clicks 9 / 20, final 13 / 20. Provenance: self-reported no help/no notes. Full record: `Memory Backup\\TEST_RECORD_SCI_U052.md`.',
+    n:53, score:17, outOf:20, pct:85, passBar:16, delta:+20, prevScore:65, passed:true, minutesSpent:6.5, minutesNote:'first click 16, final 17', firstPassScore:16,
+    patternLabel: 'Unit 53 result - Biology: The Life of a Cell (17/20, 85% PASS, 6.5 minutes; first clicks 16, final 17)',
+    patternInsight: '<strong>17/20 (85%)</strong> - PASS, +4 marks on Unit 52. Section A = <strong>2/2</strong>. Section B = <strong>6/6</strong>. Section C = <strong>9/12</strong>. Tier breakdown: Basic 2/2, Intermediate 6/6, Applied 9/12. Taken 15 Oct 2026, self-reported no help and no notes. <strong>Time: 6.5 minutes</strong> (U52: 8.6). First clicks 16, own changes 17 (Q13 wrong to right), review 17; the review changed nothing.',
+    analysisLabel: 'Three misses: Q9, Q15, Q17 - every Unit 52 miss was right this time except speed vs amount',
+    analysisInsight: '<strong>Held:</strong> the nucleus, yeast, the loop, growing tips, budding, speed vs distance, doubling fraction, dissolved salt. <strong>Missed:</strong> Q9 (typed Patch Q, chose P at about 900 = 300 x 3; keyed about 100 against 80), Q15 (the lid keeps sunlight out; keyed evaporate, condense, drip back), Q17 (chose 28 mm, the Day 4 value; keyed 32 mm).',
+    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Section A 2/2, Section B 6/6, Section C 9/12. 6.5 minutes. First clicks 16 / 20, final 17 / 20. Provenance: self-reported no help/no notes. Full record: `Memory Backup\\TEST_RECORD_SCI_U053.md`.',
     qBreakdown: []
   },
 
@@ -96,11 +96,24 @@ var PREM_DATA = {
     { unit:50, topic:'Biology: The Water Journey &mdash; Levels of Life &amp; the Words That Name Them (consolidation, school-aligned)', score:18, outOf:20, pct:90, passBar:16, date:'2026-10-12' },
     { unit:51, topic:'Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (school-aligned, beyond-class)', score:15, outOf:20, pct:75, passBar:16, date:'2026-10-13' },
     { unit:52, topic:'Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle &amp; From Microscope to Genes (school-aligned, beyond-class)', score:13, outOf:20, pct:65, passBar:16, date:'2026-10-14' },
+    { unit:53, topic:'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-15' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 53, badge: 'linear-gradient(135deg,#c2570c,#3d4f63)',
+      title: 'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)',
+      tags: [
+        { t:'&#9989; 17/20 (85%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 16 &rarr; final 17', c:'tgreen' },
+        { t:'6.5 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: '47th assessment of the program. Inserted consolidation after Unit 52, built from `BUILD_PLAN_SCI_U53_LifeOfACell.md` (gate 0 FAIL(s)): a Cell Life Simulator, a gated fact floor and pace protocol v2. <strong>Taken 15 Oct 2026: 17/20 (85%) PASS</strong> &mdash; Section A 2/2, Section B 6/6, Section C 9/12. First clicks 16, 17 after his own changes, 17 after the review (which changed nothing). Every Unit 52 miss was right this time except speed vs amount. Missed: Q9, Q15, Q17. Record: `Memory Backup\\TEST_RECORD_SCI_U053.md`.',
+      status: 'done'
+    },
     {
       n: 52, badge: 'linear-gradient(135deg,#1f4e9c,#b0426b)',
       title: 'Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle &amp; From Microscope to Genes (school-aligned, beyond-class)',

@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Milestone_05_Test.html — Milestone Test 5 (Units 41-53).
+     Built from BUILD_PLAN_SCI_M5_Milestone5.md (15 Oct 2026).
+     40 questions, ASMOPSS-weighted: 16 x 1.25 + 16 x 2.5 + 8 x 5 = 100,
+     pass 80/100. Baseline: Milestone Test 4 = 91.25.
+     PACE PROTOCOL v2 + review cap (feedback-pace-protocol.md):
+       - Q27, Q30, Q34, Q35, Q37, Q40 are predict-first;
+       - per-question timing (secsSincePrev, firstChoice, firstClickAt);
+       - at Submit, answers given <15 s (A/B) or <20 s (C) after the previous
+         one are eligible for one more look; at most 6 are shown, Section C
+         first, then the fastest. reviewEligible and reviewedQs are both saved.
+     No timer, no minimum time, no locked Submit.
+     Every question carries tier and strand (Bio / Chem / Phys / E&S / Method).
+     Answer positions are the pinned key (seed 5, 10/10/10/10).
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Milestone Test 5 — Units 41–53</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#DAA520; --gold-d:#8a6a00; --steel:#DAA520; --steel-d:#8a6a00;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#fffaf0;border:1.5px dashed var(--gold);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--gold-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--gold-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--gold-d)}
+
+  .tbl{border-collapse:collapse;margin:8px 0;font-weight:400;font-size:.9rem}.tbl th,.tbl td{border:1.5px solid var(--line);padding:4px 12px;text-align:left}.tbl th{background:#f4f0e2}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <div>
+      <b id="hdr-title">Milestone Test 5 — Units 41–53</b>
+      <span class="sub">Chemistry &bull; Physics &bull; Earth &amp; Space &bull; Biology — cumulative review</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — read every question carefully, underline what it actually asks, choose the ONE best answer. Watch for words like ALWAYS, NEVER, ONLY, and ALL in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+  <div class="milestone-note">&#127942; This is your FIFTH MILESTONE TEST — 40 questions covering Units 41 to 53, weighted like a real ASMOPSS paper (1.25 / 2.5 / 5 marks).</div>
+  <div class="pacebar">About 45–60 minutes. Section C is worth 5 marks a question, so give each one 2–3 minutes. Use S.T.O.P.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 40 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="score-baseline"></div>
+    <div id="pace-lines"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 40 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Some answers may come back for one more look before your results. Make sure you're happy with all 40!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="startReview()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-overlay">
+  <div class="rv-box">
+    <h3>Quick check: you answered this one fast. Read it once more.</h3>
+    <div class="rv-count" id="rv-count"></div>
+    <div id="rv-body"></div>
+    <div class="rv-actions" id="rv-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- MILESTONE CONFIG ---------- */
+const MILESTONE_NUM = 5;
+const MILESTONE_TITLE = "Milestone Test 5 - Units 41-53";
+const TOTAL_Q = 40;
+const MARKS = { A: 1.25, B: 2.5, C: 5 };      // the real ASMOPSS weighting
+const TOTAL_MARKS = 100;                      // 16*1.25 + 16*2.5 + 8*5
+const PASS_MARKS = 80;
+const BASELINE_MARKS = 91.25;                 // Milestone Test 4
+const LAST_TEST_MINUTES = 6.5;                // Unit 53, for the results line
+const REVIEW_SECS_AB = 15;                    // Section A/B answers faster than this are eligible for one more look
+const REVIEW_SECS_C  = 20;                    // Section C answers faster than this are eligible
+const REVIEW_MAX     = 6;                     // at most this many are shown (Section C first, then the fastest)
+const STRANDS = ['Bio','Chem','Phys','E&S','Method'];
+
+const Q = [
+ {
+  "n": 1,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Chem",
+  "body": "Which liquid turns blue litmus paper red?",
+  "options": [
+   "Soapy water",
+   "Baking-soda water",
+   "Vinegar",
+   "Pure water"
+  ],
+  "ans": 3,
+  "why": "Vinegar is an acid, and acids turn blue litmus red. Soapy water and baking-soda water are bases. Pure water is neutral and changes nothing."
+ },
+ {
+  "n": 2,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "A bee carries pollen from the anther to which part of another flower?",
+  "options": [
+   "The coloured petals",
+   "The thick green stem",
+   "The stigma",
+   "The long hidden roots"
+  ],
+  "ans": 3,
+  "why": "The stigma is the sticky top of the female part, where pollen lands. This is pollination."
+ },
+ {
+  "n": 3,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "E&S",
+  "body": "Which is the largest planet in our solar system?",
+  "options": [
+   "Earth",
+   "Jupiter",
+   "Saturn",
+   "Neptune"
+  ],
+  "ans": 2,
+  "why": "Jupiter is the largest planet. Saturn is second largest."
+ },
+ {
+  "n": 4,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "E&S",
+  "body": "Which of these is a dwarf planet?",
+  "options": [
+   "Mars",
+   "The Moon",
+   "Venus",
+   "Pluto"
+  ],
+  "ans": 4,
+  "why": "Pluto is a dwarf planet: round, but too small to clear other rocks out of its path. Mars and Venus are planets, and the Moon is a moon."
+ },
+ {
+  "n": 5,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "What do we call the instruction for one feature, carried on a chromosome?",
+  "options": [
+   "A nucleus",
+   "A cell wall",
+   "A vacuole",
+   "A gene"
+  ],
+  "ans": 4,
+  "why": "A gene is one instruction for one feature. Chromosomes carry many genes."
+ },
+ {
+  "n": 6,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "In animals, fertilisation is when…",
+  "options": [
+   "a sperm and an egg join",
+   "an egg hatches out of its shell",
+   "a baby is born and takes its first breath",
+   "an animal grows up into an adult"
+  ],
+  "ans": 1,
+  "why": "Fertilisation is the joining of a male sex cell (sperm) and a female sex cell (egg)."
+ },
+ {
+  "n": 7,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "Once a flower has made seeds, which part of it swells and becomes the fruit?",
+  "options": [
+   "The petals",
+   "The roots",
+   "The ovary",
+   "The leaves"
+  ],
+  "ans": 3,
+  "why": "The ovary swells into the fruit, and the ovules inside it become the seeds."
+ },
+ {
+  "n": 8,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "A microscope has a ×10 eyepiece and a ×40 objective. What is the total magnification?",
+  "options": [
+   "×50",
+   "×4",
+   "×100",
+   "×400"
+  ],
+  "ans": 4,
+  "why": "Multiply the two lenses: 10 × 40 = 400. Adding them (×50) is the common slip.",
+  "sense": true
+ },
+ {
+  "n": 9,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "The thin skin of an onion is flat, and all of its cells are alike and do the same job. What level of organisation is that?",
+  "options": [
+   "Cell",
+   "Organ",
+   "Organ system",
+   "Tissue"
+  ],
+  "ans": 4,
+  "why": "Many similar cells working together make a tissue."
+ },
+ {
+  "n": 10,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "Which part of a plant cell controls what goes in and out?",
+  "options": [
+   "The strong cell wall",
+   "The cell membrane",
+   "The big water vacuole",
+   "The green chloroplasts"
+  ],
+  "ans": 2,
+  "why": "The membrane is the gatekeeper. The cell wall is strong but lets almost everything through."
+ },
+ {
+  "n": 11,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "Water passing through a partially permeable layer, into or out of a cell, is called…",
+  "options": [
+   "Melting",
+   "Osmosis",
+   "Freezing",
+   "Boiling"
+  ],
+  "ans": 2,
+  "why": "Osmosis is the movement of water through a partially permeable layer."
+ },
+ {
+  "n": 12,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "A plant cell so full of water that it presses hard on its wall is…",
+  "options": [
+   "Turgid",
+   "Flaccid",
+   "Frozen",
+   "Dissolved"
+  ],
+  "ans": 1,
+  "why": "A turgid cell is full and firm. A flaccid cell has lost water and goes floppy."
+ },
+ {
+  "n": 13,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Bio",
+  "body": "Which of these is used to stain onion cells so they show up under a microscope?",
+  "options": [
+   "Salt water",
+   "Ink cleaner",
+   "Iodine",
+   "Lemon juice"
+  ],
+  "ans": 3,
+  "why": "Iodine stains onion cells so the nucleus and walls show up."
+ },
+ {
+  "n": 14,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Phys",
+  "body": "There is no air between the Sun and the Earth, yet the Sun's warmth still arrives. How does it travel?",
+  "options": [
+   "Radiation",
+   "Convection",
+   "Friction",
+   "Dissolving"
+  ],
+  "ans": 1,
+  "why": "Radiation can travel through empty space. Convection needs a liquid or gas to carry the heat."
+ },
+ {
+  "n": 15,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Phys",
+  "body": "A piece of wood floats in water because it is…",
+  "options": [
+   "heavier than water",
+   "ALWAYS lighter than any liquid",
+   "hollow inside, like a bottle",
+   "less dense than water"
+  ],
+  "ans": 4,
+  "why": "Wood floats because it is less dense than water. That tells you nothing about every liquid: floating or sinking always comes from comparing densities."
+ },
+ {
+  "n": 16,
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "strand": "Phys",
+  "body": "The pins of an electric plug are made of brass because brass…",
+  "options": [
+   "is very soft and easy to bend",
+   "conducts electricity well",
+   "NEVER gets warm, however much current flows",
+   "is the cheapest metal there is"
+  ],
+  "ans": 2,
+  "why": "Brass is a good conductor, so current passes through easily. Any wire warms a little."
+ },
+ {
+  "n": 17,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Chem",
+  "body": "Which of these is a chemical change?",
+  "options": [
+   "Ice melting",
+   "Sugar dissolving",
+   "An iron gate rusting",
+   "Wood being sawn into pieces"
+  ],
+  "ans": 3,
+  "why": "Rusting makes a new substance, so it is a chemical change. The other three change shape or state only."
+ },
+ {
+  "n": 18,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Phys",
+  "body": "Why are small gaps left between steel railway rails?",
+  "options": [
+   "Steel expands when it gets hot, and the gaps stop the rails from bending",
+   "The gaps let rain water drain away from the track",
+   "Steel NEVER changes size, so the gaps are only there for show and for drainage",
+   "The gaps make the train run more quietly"
+  ],
+  "ans": 1,
+  "why": "Hot steel expands. With no gaps the rails would push against each other and bend."
+ },
+ {
+  "n": 19,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "E&S",
+  "body": "A comet swings close past the Sun once, then heads out of the solar system for ever. Why didn't the Sun keep it?",
+  "options": [
+   "The Sun's gravity has NO effect on comets at all, so it just flew straight past",
+   "The Sun's gravity bent its path, but the comet was moving too fast to be held",
+   "The comet ran out of fuel and drifted away",
+   "The comet is still going round the Sun today"
+  ],
+  "ans": 2,
+  "why": "Gravity pulls on the comet and bends its path. A fast comet has enough speed to escape."
+ },
+ {
+  "n": 20,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "A spider plant grows little plantlets on its stems, and it also makes seeds. Which young plants will be identical to the parent?",
+  "options": [
+   "The plantlets, which come from one parent",
+   "The seeds",
+   "Both the plantlets and the seeds",
+   "Neither, because young plants ALWAYS differ"
+  ],
+  "ans": 1,
+  "why": "A plantlet grows from one parent only, so it is an identical copy. Seeds come from two parents and can differ."
+ },
+ {
+  "n": 21,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "Two cells hold the same amount of material. One is a round ball and one is long and thin. Which takes in food faster for its size, and why?",
+  "options": [
+   "The ball, because it is the roundest shape there is",
+   "The long thin one: more surface for its size",
+   "Both the same, because they hold the same amount",
+   "The ball, because it is the bigger of the two"
+  ],
+  "ans": 2,
+  "why": "Food enters through the outside of a cell. The long thin cell has more outside for each bit of inside, so it takes in food faster for its size."
+ },
+ {
+  "n": 22,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "Apple slices left in thick sugar syrup go soft and shrink. Why?",
+  "options": [
+   "Sugar soaks into the cells and squashes them flat",
+   "The syrup is much too cold for the slices to stay firm",
+   "Water moves out of the apple cells into the syrup",
+   "The apple slowly turns into more syrup"
+  ],
+  "ans": 3,
+  "why": "Water leaves the cells for the stronger sugar solution outside, so the cells lose water and shrink."
+ },
+ {
+  "n": 23,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "A doctor says the liver is built from different kinds of tissue that team up to do one big job. At which level does the liver sit?",
+  "options": [
+   "Organ",
+   "Tissue",
+   "Cell",
+   "Organ system"
+  ],
+  "ans": 1,
+  "why": "Different tissues working together make an organ. Several organs working together make an organ system."
+ },
+ {
+  "n": 24,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "Which part of your body removes extra water from your blood, so your cells don't swell?",
+  "options": [
+   "The lungs",
+   "The heart",
+   "The stomach",
+   "The kidneys"
+  ],
+  "ans": 4,
+  "why": "The kidneys clean the blood and take out extra water, which leaves as urine."
+ },
+ {
+  "n": 25,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "A student looks at a slide and sees the shape in the picture. What is it most likely to be?",
+  "options": [
+   "A cell nucleus",
+   "A burst cell",
+   "A drop of oil",
+   "An air bubble"
+  ],
+  "ans": 4,
+  "why": "A perfectly round shape with a thick black edge and a bright, empty middle is an air bubble trapped under the cover slip. A nucleus is small and inside a cell, so it would not look like this.",
+  "fig": "<svg viewBox=\"0 0 300 220\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A round shape seen through a microscope, with a thick dark edge and a bright empty middle\"><rect width=\"300\" height=\"220\" rx=\"10\" fill=\"#e9eef0\"/><circle cx=\"150\" cy=\"110\" r=\"72\" fill=\"#ffffff\" stroke=\"#111\" stroke-width=\"13\"/><path d=\"M108 82 Q124 62 148 58\" fill=\"none\" stroke=\"#dfe6ea\" stroke-width=\"6\" stroke-linecap=\"round\"/></svg>"
+ },
+ {
+  "n": 26,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Method",
+  "body": "Which of these is an inference?",
+  "options": [
+   "“The cells in the picture are green”",
+   "“These cells must be from a leaf”",
+   "“There are 12 cells in the picture”",
+   "“The cells are shaped like boxes”"
+  ],
+  "ans": 2,
+  "why": "An inference is a conclusion drawn from what you see. The other three can be seen directly."
+ },
+ {
+  "n": 27,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "One bacterium splits in two every 20 minutes, and every new one does the same. How many bacteria are there after 1 hour?",
+  "options": [
+   "3",
+   "8",
+   "6",
+   "4"
+  ],
+  "ans": 2,
+  "why": "1 hour is 3 splits of 20 minutes: 1 → 2 → 4 → 8.",
+  "predict": true,
+  "sense": true
+ },
+ {
+  "n": 28,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "Why are the two new cells exactly the same as each other after a cell divides?",
+  "options": [
+   "Each one gets a copy of every chromosome",
+   "They share one single nucleus between them",
+   "They grow from the same food",
+   "Cells ALWAYS look alike anyway"
+  ],
+  "ans": 1,
+  "why": "The chromosomes were copied before the split, so each new cell receives the full set."
+ },
+ {
+  "n": 29,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Bio",
+  "body": "The picture shows 40 cells from a growing onion root. The cells with a dark X inside are dividing. What does the picture show?",
+  "options": [
+   "36 of the 40 cells are already dead",
+   "Only 4 of these cells are able to divide, ever",
+   "Most of a cell's life is not spent dividing",
+   "Cells are ALWAYS dividing"
+  ],
+  "ans": 3,
+  "why": "Only 4 of 40 cells are caught dividing, so each cell spends most of its life not dividing.",
+  "fig": "<svg viewBox=\"0 0 400 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A photo of root cells in 5 rows of 8\"><rect width=\"400\" height=\"260\" rx=\"10\" fill=\"#f4f1e6\"/><g class=\"cell\"><rect x=\"14\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"35\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"61\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"108\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><path d=\"M118 22 L140 44 M140 22 L118 44\" stroke=\"#5b1a8a\" stroke-width=\"5\" stroke-linecap=\"round\" class=\"xmark\"/></g><g class=\"cell\"><rect x=\"155\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"176\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"202\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"223\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"249\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"296\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"317\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"343\" y=\"12\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"364\" cy=\"33\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"14\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"35\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"61\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"108\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"129\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"155\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"176\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"202\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"223\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"249\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"296\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><path d=\"M306 70 L328 92 M328 70 L306 92\" stroke=\"#5b1a8a\" stroke-width=\"5\" stroke-linecap=\"round\" class=\"xmark\"/></g><g class=\"cell\"><rect x=\"343\" y=\"60\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"364\" cy=\"81\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"14\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"35\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"61\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"108\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"129\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"155\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"176\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"202\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"223\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"249\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"296\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"317\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"343\" y=\"108\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"364\" cy=\"129\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"14\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"35\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"61\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><path d=\"M71 166 L93 188 M93 166 L71 188\" stroke=\"#5b1a8a\" stroke-width=\"5\" stroke-linecap=\"round\" class=\"xmark\"/></g><g class=\"cell\"><rect x=\"108\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"129\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"155\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"176\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"202\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"223\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"249\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"270\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"296\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"317\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"343\" y=\"156\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"364\" cy=\"177\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"14\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"35\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"61\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"108\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"129\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"155\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"176\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"202\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"223\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"249\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><path d=\"M259 214 L281 236 M281 214 L259 236\" stroke=\"#5b1a8a\" stroke-width=\"5\" stroke-linecap=\"round\" class=\"xmark\"/></g><g class=\"cell\"><rect x=\"296\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"317\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g><g class=\"cell\"><rect x=\"343\" y=\"204\" width=\"42\" height=\"42\" rx=\"4\" fill=\"#fff8d8\" stroke=\"#8d7a2c\" stroke-width=\"2\"/><circle cx=\"364\" cy=\"225\" r=\"9\" fill=\"#d9a7e8\" stroke=\"#8a4aa0\" stroke-width=\"1.5\" class=\"nuc\"/></g></svg>"
+ },
+ {
+  "n": 30,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Method",
+  "body": "A sunflower is 30 cm tall in week 1, 35 cm in week 2 and 40 cm in week 3. If it keeps growing the same way, how tall will it be in week 6?",
+  "options": [
+   "45 cm",
+   "50 cm",
+   "60 cm",
+   "55 cm"
+  ],
+  "ans": 4,
+  "why": "It grows 5 cm each week. From week 3 to week 6 is three more weeks: 40 + 3 × 5 = 55 cm.",
+  "predict": true,
+  "sense": true
+ },
+ {
+  "n": 31,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "E&S",
+  "body": "Drops of water form on the inside of the lid of a pot of hot soup. Why?",
+  "options": [
+   "The lid leaks",
+   "Water vapour turns back to liquid on the cool lid",
+   "Steam is already made of tiny drops that fall off",
+   "The lid sweats because of the heat"
+  ],
+  "ans": 2,
+  "why": "Hot soup gives off water vapour. When it touches the cooler lid it turns back into liquid water."
+ },
+ {
+  "n": 32,
+  "section": "B",
+  "tier": "Intermediate",
+  "star": 1,
+  "strand": "Chem",
+  "body": "Someone's clothes catch fire. “Stop, drop and roll” puts it out mainly by…",
+  "options": [
+   "cooling it with the ground",
+   "removing the fuel",
+   "blowing the flames out, because rolling ALWAYS does",
+   "cutting off the oxygen"
+  ],
+  "ans": 4,
+  "why": "Fire needs oxygen. Rolling smothers the flames so air cannot reach them."
+ },
+ {
+  "n": 33,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Chem",
+  "body": "A jar holds sand, salt and iron filings mixed together. Jo's plan is: “1. Add water and stir. 2. Evaporate the water. 3. Use a magnet.” What is the best order of steps to get all three back separately?",
+  "options": [
+   "Jo's plan is fine as it is, because the magnet can pick the iron out at the end",
+   "Add water and stir, use a magnet, then evaporate; the sand stays mixed in with the salt",
+   "Magnet first, then add water, filter out the sand, evaporate the water",
+   "Salt can NEVER be got back once it has dissolved in water"
+  ],
+  "ans": 3,
+  "why": "Do the dry job first: the magnet takes out the iron. Then dissolve the salt, filter out the sand, and evaporate the water to get the salt. Jo's plan boils the water off with the sand still in it, so the salt comes out mixed with sand."
+ },
+ {
+  "n": 34,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Phys",
+  "body": "A hair is photographed through a ×10 eyepiece and a ×4 objective. In the photo it is 4 mm wide. How wide is the real hair?",
+  "options": [
+   "160 mm",
+   "0.4 mm",
+   "0.1 mm",
+   "1 mm"
+  ],
+  "ans": 3,
+  "why": "Total magnification is 10 × 4 = 40. The photo is 40 times bigger than the real hair, so the real hair is smaller: 4 ÷ 40 = 0.1 mm.",
+  "predict": true,
+  "sense": true
+ },
+ {
+  "n": 35,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Bio",
+  "body": "A gut lining holds 6,000 cells, and each cell divides once every 3 days. A patch of skin holds 2,500 cells, and each cell divides once a day. Over one day, which patch gives more new cells?",
+  "options": [
+   "The gut, because its 6,000 cells ALWAYS mean more new cells than the skin patch",
+   "The gut: 6,000 × 3 gives about 18,000 a day",
+   "Neither; both patches give equal amounts",
+   "The skin patch: about 2,500, against the gut's 2,000"
+  ],
+  "ans": 4,
+  "why": "Each gut cell does only one third of a division per day: 6,000 ÷ 3 = 2,000 new cells. The skin patch makes 2,500. Faster cells win here, but you have to work it out each time.",
+  "predict": true,
+  "sense": true
+ },
+ {
+  "n": 36,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Chem",
+  "body": "Three liquids are tested with litmus paper:<table class=\"tbl\"><tr><th>Liquid</th><th>Blue paper</th><th>Red paper</th></tr><tr><td>P</td><td>turns red</td><td>stays red</td></tr><tr><td>Q</td><td>stays blue</td><td>turns blue</td></tr><tr><td>R</td><td>stays blue</td><td>stays red</td></tr></table>The red that P makes is a darker red than the red made by another acid. Which conclusion is right?",
+  "options": [
+   "P is an acid, Q a base and R neutral, and colour cannot show strength",
+   "P is a base and Q is an acid, because P turns blue paper red",
+   "A darker red ALWAYS means a stronger acid, so P is the strongest",
+   "R is both an acid and a base, because it changes neither of the two papers"
+  ],
+  "ans": 1,
+  "why": "Red paper turning red or blue paper turning red shows an acid; blue from red paper shows a base; no change means neutral. Litmus only sorts liquids into three groups, so the depth of colour says nothing about strength."
+ },
+ {
+  "n": 37,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Phys",
+  "body": "Bulbs A and B and one switch are wired to a battery. When the switch is opened, bulb A goes out but bulb B stays on. How are they wired?",
+  "options": [
+   "Separate branches (parallel), with the switch only on A's branch",
+   "All in one single loop (series), so opening the switch stops both",
+   "The switch is on B's branch, not A's",
+   "A switch ALWAYS turns off everything"
+  ],
+  "ans": 1,
+  "why": "B stays lit, so B has its own path to the battery that does not go through the switch. A has the switch in its path.",
+  "predict": true
+ },
+ {
+  "n": 38,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "E&S",
+  "body": "The Moon has far more craters than Earth, though both have been hit by space rocks for billions of years. Why?",
+  "options": [
+   "The Moon is much closer to the asteroid belt, so far more of them hit it",
+   "No atmosphere to burn up rocks, and no wind or rain to wear craters away",
+   "Earth's craters are hidden behind the Moon",
+   "Space rocks NEVER reach Earth"
+  ],
+  "ans": 2,
+  "why": "Two facts combine. Earth's air burns up many rocks and Earth's weather wears away old craters. The Moon has neither, so every crater stays."
+ },
+ {
+  "n": 39,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Bio",
+  "body": "A fish that lives in the salty sea is put into fresh water. Its body cells begin to swell. Why does this happen, and why is it dangerous for an animal cell?",
+  "options": [
+   "Salt leaves the fish, and its cells shrink and wrinkle up",
+   "Fresh water is far too cold for the cells, and so they swell up to keep themselves warm",
+   "Water moves in, because fresh water has more free water; with no wall, cells can burst",
+   "Fish cells NEVER take in water, whatever water they are in"
+  ],
+  "ans": 3,
+  "why": "Water moves from where there is more free water to where there is less, so it moves into the cells. A plant cell has a strong wall to hold it back, but an animal cell has none, so it can burst."
+ },
+ {
+  "n": 40,
+  "section": "C",
+  "tier": "Applied",
+  "star": 2,
+  "strand": "Bio",
+  "body": "Yeast count: 0 h → 1 cell, 2 h → 2 cells, 4 h → 4 cells, 6 h → 8 cells. If it keeps going like this, when will there be 64 cells?",
+  "options": [
+   "12 hours",
+   "10 hours",
+   "14 hours",
+   "32 hours"
+  ],
+  "ans": 1,
+  "why": "The count doubles every 2 hours. 1 → 2 → 4 → 8 → 16 → 32 → 64 is 6 doublings, and 6 × 2 h = 12 hours.",
+  "predict": true,
+  "sense": true
+ }
+];
+/* ---------- END MILESTONE CONFIG ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Basic Recall (warm-up, 1.25 marks each)",
+  B: "SECTION B — Applying What You Know (&#9733; Intermediate, 2.5 marks each)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied, 5 marks each)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const nowMs = () => Date.now();
+const chosen = {};            // current choice per question (1-based option)
+const firstChoice = {};       // very first click per question
+const firstAt = {};           // ISO time of that first click
+const secsPrev = {};          // seconds since his previous answer click (or since opening), at the first click
+const predictions = {};       // { qn: text he typed }
+const openedAt = new Date(nowMs());
+let lastClick = nowMs();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false, reviewing = false;
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    let opts = '';
+    q.options.forEach((opt, idx) => {
+      opts += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    if (q.sense) opts += `<div class="sense">Does that number make sense?</div>`;
+    let optBlock;
+    if (q.predict){
+      optBlock = `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words or a number, then press Show options.</label>
+        <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+        <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div>
+        <div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+    } else optBlock = opts;
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${MARKS[q.section]} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>
+      ${optBlock}
+      <div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function predTyped(qn){
+  const v = document.getElementById('pin-'+qn).value.trim();
+  document.getElementById('pshow-'+qn).disabled = v.length < 2;
+}
+function predShow(qn){
+  const inp = document.getElementById('pin-'+qn);
+  const v = inp.value.trim();
+  if (v.length < 2 || qn in predictions) return;
+  predictions[qn] = v;                         // saved, never scored, cannot be edited after this
+  inp.readOnly = true;
+  document.getElementById('pshow-'+qn).style.display = 'none';
+  document.getElementById('pbody-'+qn).classList.remove('hid');
+}
+
+function choose(qn, idx){
+  if (submitted || reviewing) return;
+  const t = nowMs();
+  if (!(qn in firstChoice)){
+    firstChoice[qn] = idx;
+    firstAt[qn] = new Date(t).toISOString();
+    secsPrev[qn] = Math.round((t - lastClick)/100)/10;
+  }
+  lastClick = t;
+  chosen[qn] = idx;
+  const q = Q.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  document.getElementById('progress-label').textContent = `${n} / ${TOTAL_Q} answered`;
+  document.getElementById('progress-fill').style.width = (n/TOTAL_Q*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov(), pvDone = pv.helped && pv.usedNotes;
+  if (n === TOTAL_Q && pvDone){
+    btn.disabled = false;
+    btn.textContent = 'Submit Milestone Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < TOTAL_Q ? `Answer all ${TOTAL_Q} to submit (${TOTAL_Q-n} left)` : 'Answer the two questions above to submit';
+  }
+}
+
+function askConfirmSubmit(){
+  if (Object.keys(chosen).length < TOTAL_Q || !(prov().helped && prov().usedNotes)) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+/* ---------- fast-answer review ----------
+   eligible: A/B answers < REVIEW_SECS_AB, C answers < REVIEW_SECS_C after the previous answer.
+   shown: at most REVIEW_MAX, Section C first, then the fastest (smallest secsSincePrev). */
+let preReview = {}, reviewEligible = [], reviewList = [], reviewPos = 0, reviewLog = {};
+function pickReview(){
+  const elig = Q.filter(q => (q.n in secsPrev) && secsPrev[q.n] < (q.section === 'C' ? REVIEW_SECS_C : REVIEW_SECS_AB));
+  const ranked = elig.slice().sort((a,b) => ((a.section==='C'?0:1) - (b.section==='C'?0:1)) || (secsPrev[a.n]-secsPrev[b.n]) || (a.n-b.n));
+  return { eligible: elig.map(q => q.n), shown: ranked.slice(0, REVIEW_MAX).map(q => q.n).sort((a,b)=>a-b) };
+}
+function startReview(){
+  closeConfirm();
+  preReview = Object.assign({}, chosen);
+  const r = pickReview();
+  reviewEligible = r.eligible; reviewList = r.shown;
+  reviewPos = 0; reviewLog = {};
+  if (!reviewList.length){ doSubmit(); return; }
+  reviewing = true;
+  document.getElementById('review-overlay').classList.add('show');
+  showReviewItem();
+}
+function showReviewItem(){
+  const qn = reviewList[reviewPos];
+  const q = Q.find(x => x.n === qn);
+  document.getElementById('rv-count').textContent = `Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h = `${q.fig ? `<div class="fig">${q.fig}</div>` : ''}<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>`;
+  q.options.forEach((opt, i) => {
+    h += `<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${opt}</button>`;
+  });
+  document.getElementById('rv-body').innerHTML = h;
+  document.getElementById('rv-actions').innerHTML =
+    `<button class="btn keep" id="rv-keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" id="rv-change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){ reviewLog[reviewList[reviewPos]] = {kept:true}; rvNext(); }
+function rvChange(){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.disabled = false);
+  document.getElementById('rv-actions').innerHTML = `<button class="btn keep" id="rv-use" onclick="rvUse()">Use this answer</button>`;
+}
+function rvPick(i){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('rv-opt-'+i).classList.add('selected');
+  chosen[reviewList[reviewPos]] = i;
+}
+function rvUse(){
+  const qn = reviewList[reviewPos];
+  reviewLog[qn] = {kept:false, changed: chosen[qn] !== preReview[qn]};
+  rvNext();
+}
+function rvNext(){
+  reviewPos++;
+  if (reviewPos >= reviewList.length){
+    reviewing = false;
+    document.getElementById('review-overlay').classList.remove('show');
+    doSubmit();
+  } else showReviewItem();
+}
+
+let lastResults = null;
+const r2 = x => Math.round(x*100)/100;
+
+function doSubmit(){
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.pin').forEach(b => b.readOnly = true);
+
+  let marksEarned = 0, firstPassMarks = 0, preReviewMarks = 0, numCorrect = 0, firstPassCorrect = 0, preReviewCorrect = 0;
+  const sectionTally = { A:{c:0,t:0,marks:0,marksTotal:0}, B:{c:0,t:0,marks:0,marksTotal:0}, C:{c:0,t:0,marks:0,marksTotal:0} };
+  const tierTally = { Basic:{c:0,t:0,marks:0,marksTotal:0}, Intermediate:{c:0,t:0,marks:0,marksTotal:0}, Applied:{c:0,t:0,marks:0,marksTotal:0} };
+  const strandTally = {}; STRANDS.forEach(s => strandTally[s] = {c:0,t:0,marks:0,marksTotal:0});
+  const swing = { wrongToRight:0, rightToWrong:0, wrongToWrong:0 };
+  const selfSwing = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // changes made before the review
+  const allSwing  = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // every change since the first click
+  const changes = [];
+  const answers = Q.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    const qMarks = MARKS[q.section];
+    sectionTally[q.section].t++; sectionTally[q.section].marksTotal += qMarks;
+    tierTally[q.tier].t++; tierTally[q.tier].marksTotal += qMarks;
+    strandTally[q.strand].t++; strandTally[q.strand].marksTotal += qMarks;
+    if (isCorrect){
+      numCorrect++; marksEarned += qMarks;
+      sectionTally[q.section].c++; sectionTally[q.section].marks += qMarks;
+      tierTally[q.tier].c++; tierTally[q.tier].marks += qMarks;
+      strandTally[q.strand].c++; strandTally[q.strand].marks += qMarks;
+    }
+    if (firstChoice[q.n] === q.ans){ firstPassCorrect++; firstPassMarks += qMarks; }
+    if (preReview[q.n] === q.ans){ preReviewCorrect++; preReviewMarks += qMarks; }
+
+    const fc = firstChoice[q.n], pr = preReview[q.n];
+    if (pr !== fc){ selfSwing.changed++; if (fc === q.ans) selfSwing.rightToWrong++; else if (pr === q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++; }
+    if (given !== fc){ allSwing.changed++; if (fc === q.ans) allSwing.rightToWrong++; else if (given === q.ans) allSwing.wrongToRight++; else allSwing.wrongToWrong++; }
+    let dir = null;
+    const rv = reviewLog[q.n];
+    if (rv && rv.changed){
+      const was = preReview[q.n] === q.ans;
+      dir = was ? 'right->wrong' : (isCorrect ? 'wrong->right' : 'wrong->wrong');
+      if (dir === 'wrong->right') swing.wrongToRight++; else if (dir === 'right->wrong') swing.rightToWrong++; else swing.wrongToWrong++;
+      changes.push({ q:q.n, from:preReview[q.n], to:given, direction:dir });
+    }
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, strand: q.strand, chosen: given, correct: q.ans, isCorrect, marks: qMarks,
+             firstChoice: fc, firstCorrect: fc === q.ans,
+             preReviewChoice: pr, finalChoice: given,
+             secsSincePrev: secsPrev[q.n], firstClickAt: firstAt[q.n],
+             prediction: (q.n in predictions) ? predictions[q.n] : null,
+             reviewEligible: reviewEligible.indexOf(q.n) >= 0,
+             reviewed: q.n in reviewLog, changedBeforeReview: pr !== fc, changedOnReview: rv ? !!rv.changed : false, reviewDirection: dir };
+  });
+
+  marksEarned = r2(marksEarned); firstPassMarks = r2(firstPassMarks); preReviewMarks = r2(preReviewMarks);
+  const pct = Math.round(marksEarned/TOTAL_MARKS*100);
+  const pass = marksEarned >= PASS_MARKS;
+  const minutes = Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `${marksEarned} / ${TOTAL_MARKS} marks  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `\u{1F3C6} Great job, Prem! That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS} marks). You got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_MARKS}/${TOTAL_MARKS} marks — you got ${numCorrect}/${TOTAL_Q} questions right. Look through the highlighted answers below, then talk it through with Luikishi.`;
+  const delta = Math.round((marksEarned - BASELINE_MARKS) * 100) / 100;
+  document.getElementById('score-baseline').textContent =
+    `Compared to your Milestone Test 4 result (${BASELINE_MARKS}/100): ${delta >= 0 ? '+' : ''}${delta} marks.`;
+  const nChanged = changes.length;
+  document.getElementById('pace-lines').innerHTML =
+    `<div><b>First clicks:</b> ${firstPassMarks}/${TOTAL_MARKS} marks &rarr; <b>final:</b> ${marksEarned}/${TOTAL_MARKS} marks. Your checking changed ${allSwing.changed} answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>` +
+    `<div><b>Time:</b> ${minutes} min (last test, Unit 53: ${LAST_TEST_MINUTES} min)</div>` +
+    (reviewList.length
+      ? `<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${nChanged}: ${swing.wrongToRight} wrong→right, ${swing.rightToWrong} right→wrong.</div>`
+      : `<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t} correct (${r2(sectionTally[s].marks)}/${sectionTally[s].marksTotal} marks)</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('') +
+    STRANDS.map(s => `<div class="sec-chip">${s}: ${strandTally[s].c}/${strandTally[s].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+  document.getElementById('btn-hub').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    milestone: MILESTONE_NUM,
+    title: MILESTONE_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date(nowMs()).toISOString(),
+    minutesSpent: minutes,
+    lastTestMinutes: LAST_TEST_MINUTES,
+    provenance: prov(),
+    numCorrect, outOfQuestions: TOTAL_Q,
+    marksEarned, outOfMarks: TOTAL_MARKS, pct, passMarks: PASS_MARKS, passed: pass,
+    baselineMarks: BASELINE_MARKS, deltaVsBaseline: delta,
+    firstPassMarks, firstPassCorrect, preReviewMarks, preReviewCorrect,
+    reviewSecs: { AB: REVIEW_SECS_AB, C: REVIEW_SECS_C, max: REVIEW_MAX },
+    selfChanged: { changed: selfSwing.changed, wrongToRight: selfSwing.wrongToRight, rightToWrong: selfSwing.rightToWrong, wrongToWrong: selfSwing.wrongToWrong },
+    checkingSwing: { changed: allSwing.changed, wrongToRight: allSwing.wrongToRight, rightToWrong: allSwing.rightToWrong, wrongToWrong: allSwing.wrongToWrong },
+    predictions: Object.assign({}, predictions),
+    reviewEligible: reviewEligible.slice(),
+    reviewedQs: reviewList.slice(),
+    changedOnReview: changes,
+    reviewSwing: { eligible: reviewEligible.length, reviewed: reviewList.length, changed: nChanged, wrongToRight: swing.wrongToRight, rightToWrong: swing.rightToWrong, wrongToWrong: swing.wrongToWrong },
+    sections: ['A','B','C'].map(s => ({ name:s, correct:sectionTally[s].c, outOf:sectionTally[s].t, marks:r2(sectionTally[s].marks), marksOutOf:sectionTally[s].marksTotal })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, correct:tierTally[t].c, outOf:tierTally[t].t, marks:r2(tierTally[t].marks), marksOutOf:tierTally[t].marksTotal })),
+    strands: STRANDS.map(s => ({ name:s, correct:strandTally[s].c, outOf:strandTally[s].t, marks:r2(strandTally[s].marks), marksOutOf:strandTally[s].marksTotal })),
+    answers
+  };
+}
+
+async function saveResults(){
+  const filename = `SCI_M${String(MILESTONE_NUM).padStart(2,'0')}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>
