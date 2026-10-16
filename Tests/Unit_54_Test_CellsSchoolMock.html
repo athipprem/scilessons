@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_54_Test_CellsSchoolMock.html — Unit 54 school-format mock (Chapter 2 Cells).
+     Built from BUILD_PLAN_SCI_U54_CellsSchoolTestPrep.md (16 Oct 2026).
+     21 items, 50 marks, pass 40: Part A 15 MCQ x 2 = 30; Part B 6 structured = 20
+     (label 3 + label 2 + table 4 + select 2 + written 4 + written 5).
+     Pace protocol v2 + review cap 6 on MCQ items only. Written items are never auto-reviewed.
+     Written marks are provisional keyword marks; the typed text is saved for hand re-marking.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 54 Mock — Cells (school format)</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#1fa387; --steel-d:#14305c; --a-fill:#e6f7f2; --a-text:#1fa387;
+    --blue:#1565c0; --b-fill:#cdeee5; --b-text:#0f4a3d;
+    --purple:#37474f; --c-fill:#e8ecef; --c-text:#37474f;
+    --amber:#1fa387; --amber-l:#e6f7f2;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#14305c}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--amber),#e91e63);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#d4f1e8);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:#e6f7f2;border:1.5px solid var(--amber);color:#14305c;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#f0faf7;border:1.5px dashed var(--steel);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--steel-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#e3efec;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--steel-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--steel-d)}
+
+  .part-hd{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center;background:var(--a-fill);color:var(--a-text)}
+  .part-hd.S{background:var(--b-fill);color:var(--b-text)}
+  .q.S{border-left-color:var(--b-text)}
+  .sub{display:block}
+  .lblrow{display:flex;align-items:center;gap:10px;margin:6px 0}
+  .lblrow .num{background:#fff;border:2px solid var(--steel-d);color:var(--steel-d);border-radius:50%;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .lblrow select{flex:1;max-width:300px;padding:8px;border:1.5px solid var(--line);border-radius:8px;font-size:.95rem;font-family:inherit}
+  .lblrow.ok select{background:var(--ok-l);border-color:var(--ok)}.lblrow.bad select{background:var(--bad-l);border-color:var(--bad)}
+  .lblrow .fix{font-size:.82rem;color:var(--ok);font-weight:700}
+  table.tb{border-collapse:collapse;margin:6px 0;font-size:.93rem}table.tb th,table.tb td{border:1.5px solid var(--line);padding:6px 12px;text-align:center}table.tb td:first-child,table.tb th:first-child{text-align:left;font-weight:700}
+  table.tb tr.ok td:first-child{background:var(--ok-l)}table.tb tr.bad td:first-child{background:var(--bad-l)}
+  .ck{display:block;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .ck.ok{background:var(--ok-l);border-color:var(--ok);font-weight:700}.ck.bad{background:var(--bad-l);border-color:var(--bad)}
+  .wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}
+  .wp textarea,.wp input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wp textarea{min-height:80px}.wp input[type=text]{max-width:240px}
+  .wp textarea[readonly],.wp input[readonly]{background:#e3efec;color:var(--grey)}
+  .model{display:none;background:var(--ok-l);border-radius:9px;padding:10px 13px;margin-top:8px;font-size:.9rem}.model.show{display:block}
+  .idea{display:block;margin:4px 0;font-size:.88rem}.idea .got{font-weight:800}
+  .ptag{font-size:.78rem;color:var(--grey);margin-top:4px}
+  .marksline{font-size:.8rem;font-weight:700;color:var(--grey);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <div><b id="hdr-title">Unit 54 Mock Test — Chapter 2 Cells</b><span class="sub">School-test practice &bull; like the real test</span></div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+  <div class="readfirst">READ FIRST — about 40 minutes, one sitting, like the real test. Part A is multiple choice. Part B has labelling, a table and written answers: always write a <b>because</b>. Watch for ALWAYS, NEVER, ONLY and EVERY. Use the hand-in routine before you submit.</div>
+  <div class="pacebar">Use S.T.O.P. Go back to the start before you hand in.</div>
+  <div id="progress-bar"><span id="progress-label">0 / 21 answered</span><div id="progress-track"><div id="progress-fill"></div></div></div>
+  <div id="score-banner"><div id="score-big"></div><div id="score-msg"></div><div id="score-base"></div><div id="pace-lines"></div><div id="section-scores"></div></div>
+  <div id="quiz"></div>
+  <div id="submit-bar"><div style="width:100%;text-align:center">
+    <div class="prov" id="prov">
+      <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+      <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+    </div>
+    <button class="btn submit" id="btn-submit" disabled>Answer all 21 to submit</button>
+    <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+    <div id="save-status"></div>
+    <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">&#127968; Back to Hub</a>
+  </div></div>
+</div>
+<div id="confirm-overlay"><div class="confirm-box"><h3>Submit your mock?</h3><p>Some multiple-choice answers may come back for one more look. Have you used the hand-in routine?</p>
+  <div class="confirm-actions"><button class="btn cancel" onclick="closeConfirm()">Go back</button><button class="btn submit" onclick="startReview()">Yes, submit</button></div></div></div>
+<div id="review-overlay"><div class="rv-box"><h3>Quick check: you answered this one fast. Read it once more.</h3><div class="rv-count" id="rv-count"></div><div id="rv-body"></div><div class="rv-actions" id="rv-actions"></div></div></div>
+<script>
+const UNIT_NUM = 54;
+const UNIT_TITLE = "Chapter 2 Cells: school-format mock";
+const TOTAL_ITEMS = 21, TOTAL_MARKS = 50, PASS_MARKS = 40, MCQ_MARKS = 2;
+const LAST_TEST_MINUTES = 13.4;                  // Milestone 5, for the results line
+const REVIEW_SECS_AB = 15, REVIEW_SECS_C = 20, REVIEW_MAX = 6;
+const Q = [
+ {
+  "n": 1,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "body": "The basic unit of all living things is the&hellip;",
+  "options": [
+   "cell",
+   "tissue",
+   "organ",
+   "nucleus"
+  ],
+  "ans": 1,
+  "why": "The cell is the basic unit of all living things. Tissues, organs and bodies are all built from cells."
+ },
+ {
+  "n": 2,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "body": "Which living thing is unicellular?",
+  "options": [
+   "A mushroom",
+   "A frog",
+   "An amoeba",
+   "An oak tree"
+  ],
+  "ans": 3,
+  "why": "Unicellular means made of one cell. An amoeba is one cell. A mushroom, a frog and an oak tree are all made of many cells."
+ },
+ {
+  "n": 3,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "body": "Which part is in charge of all the cell&rsquo;s activities?",
+  "options": [
+   "The cytoplasm",
+   "The cell membrane",
+   "The vacuole",
+   "The nucleus"
+  ],
+  "ans": 4,
+  "why": "The nucleus controls the cell. It holds the chromosomes and works like the control centre."
+ },
+ {
+  "n": 4,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "body": "Which part is a stiff outer layer made of cellulose?",
+  "options": [
+   "The cell membrane",
+   "The cell wall",
+   "The chloroplast",
+   "The nucleus, found in EVERY plant part"
+  ],
+  "ans": 2,
+  "why": "The cell wall is made of cellulose. It is stiff, so it gives the plant cell its shape and support. The membrane is thin and bendy."
+ },
+ {
+  "n": 5,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "star": 0,
+  "body": "A microscope has a &times;15 eyepiece and a &times;10 objective. What is the total magnification?",
+  "options": [
+   "&times;150",
+   "&times;25",
+   "&times;5",
+   "&times;1.5"
+  ],
+  "ans": 1,
+  "why": "Total magnification = eyepiece &times; objective = 15 &times; 10 = 150. You multiply the two lenses. Adding gives 25, which is the wrong move."
+ },
+ {
+  "n": 6,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "Your eye is made of several different tissues working together. What level of organisation is it?",
+  "options": [
+   "A tissue",
+   "A single cell",
+   "An organ",
+   "An organ system"
+  ],
+  "ans": 3,
+  "why": "Different tissues working together make an organ. Several organs working together make an organ system."
+ },
+ {
+  "n": 7,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "Many muscle cells of the same kind working together form&hellip;",
+  "options": [
+   "an organism",
+   "muscle tissue",
+   "one large cell",
+   "a muscle organ system"
+  ],
+  "ans": 2,
+  "why": "A tissue is a group of cells of the same kind doing the same job. Muscle tissue is the tissue made of muscle cells."
+ },
+ {
+  "n": 8,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "A cell is very long and thin, with branches at each end. What is its most likely job?",
+  "options": [
+   "Storing spare food inside the cell for later",
+   "Making food, like ALL long and thin cells",
+   "Carrying oxygen around the body in the blood",
+   "Carrying messages around the body"
+  ],
+  "ans": 4,
+  "why": "A nerve cell is long and thin with branches. Its shape suits its job: it carries messages. Carrying oxygen is the job of a red blood cell, which is round."
+ },
+ {
+  "n": 9,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "A root hair cell has a long thin part that pokes into the soil. How does this help?",
+  "options": [
+   "It holds the plant upright in strong wind",
+   "It keeps the soil around the root from drying out",
+   "It gives more surface to take in water faster",
+   "It makes sugar using light for the plant"
+  ],
+  "ans": 3,
+  "why": "The long thin part gives the cell more surface to take in water. More surface means water can enter faster."
+ },
+ {
+  "n": 10,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "Why do you start at low power when looking at a slide?",
+  "options": [
+   "High power NEVER shows anything clearly, so you must always begin small",
+   "The slide could break if you began on any higher power setting",
+   "Low power makes the cells look bigger than high power does",
+   "It is easier to find the specimen, because you can see more of it"
+  ],
+  "ans": 4,
+  "why": "On low power you see more of the slide, so the specimen is easier to find. Then you can switch to high power to look closely."
+ },
+ {
+  "n": 11,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "Under a microscope, one yeast cell has a small bump on its side. Later the bump is a separate small cell. How did the yeast make its new cell?",
+  "options": [
+   "Yeast ALWAYS needs a partner cell to make a new one",
+   "The bump grew bigger and then pinched off as a new cell",
+   "The cell was cut exactly in half down the middle",
+   "A spore from the air landed on it and grew there"
+  ],
+  "ans": 2,
+  "why": "In budding a small bump grows out of the parent cell, then the bud pinches off and becomes a new cell."
+ },
+ {
+  "n": 12,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "star": 2,
+  "body": "Which statements are correct?<br>I. A plant cell full of water is turgid.<br>II. A vacuole full of cell sap helps keep a plant firm.<br>III. Animal cells have a large vacuole.",
+  "options": [
+   "I only",
+   "II and III only",
+   "I and II only",
+   "I, II and III"
+  ],
+  "ans": 3,
+  "why": "I and II are true: a vacuole full of cell sap makes the plant cell turgid, which keeps the plant firm. III is false: a large vacuole is a plant-cell part."
+ },
+ {
+  "n": 13,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "star": 2,
+  "body": "A cell has a cell wall and a large vacuole but no chloroplasts. Where is it most likely from?",
+  "options": [
+   "The root of a plant, where there is no light",
+   "A leaf on a tree, in full sunlight",
+   "The skin of an animal, such as a frog",
+   "A bacterium living in a pond"
+  ],
+  "ans": 1,
+  "why": "A wall and a large vacuole say plant. No chloroplasts says the cell does not make food, so it is not a leaf cell. A root has no light, so it has no chloroplasts.",
+  "predict": true
+ },
+ {
+  "n": 14,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "star": 2,
+  "body": "Dried beans soaked in water overnight swell up. Why?",
+  "options": [
+   "Water moves into the bean cells by osmosis",
+   "The beans grow lots of new cells overnight",
+   "Beans ALWAYS swell up to a huge size when wet",
+   "The water makes the beans much lighter inside"
+  ],
+  "ans": 1,
+  "why": "Water moves into the cells by osmosis, from where there is more water to where there is less. The cells swell, so the bean swells.",
+  "predict": true
+ },
+ {
+  "n": 15,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "star": 2,
+  "body": "Which statements about how a cell makes new cells are correct?<br>I. One cell makes two identical cells.<br>II. Cells only make new cells in children.<br>III. Before it makes two cells, a cell copies its chromosomes.",
+  "options": [
+   "I only",
+   "I and III only",
+   "II and III only",
+   "I, II and III"
+  ],
+  "ans": 2,
+  "why": "I and III are true: the chromosomes are copied first, then one cell makes two identical cells. II is false: cells divide all through life, for growth and repair."
+ },
+ {
+  "n": 16,
+  "type": "label",
+  "section": "S",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "This is a plant leaf cell. Choose the right name for each numbered arrow.",
+  "fig": "<svg viewBox=\"-30 -10 430 270\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A plant leaf cell\" class=\"\"><rect width=\"360\" height=\"250\" rx=\"12\" fill=\"#f7fbf4\"/><rect x=\"20\" y=\"20\" width=\"320\" height=\"210\" rx=\"26\" fill=\"#bfdcae\" stroke=\"#2e6b2e\" stroke-width=\"9\"/><rect x=\"33\" y=\"33\" width=\"294\" height=\"184\" rx=\"16\" fill=\"#f1f8e4\"/><ellipse cx=\"215\" cy=\"125\" rx=\"85\" ry=\"58\" fill=\"#bfe3f5\" stroke=\"#4a90b8\" stroke-width=\"2.5\"/><circle cx=\"95\" cy=\"98\" r=\"30\" fill=\"#b39ddb\" stroke=\"#5e35b1\" stroke-width=\"2.5\"/><circle cx=\"100\" cy=\"94\" r=\"8\" fill=\"#7e57c2\"/><ellipse cx=\"60\" cy=\"176\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><ellipse cx=\"122\" cy=\"198\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><ellipse cx=\"252\" cy=\"205\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><ellipse cx=\"305\" cy=\"62\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><ellipse cx=\"160\" cy=\"50\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><rect x=\"33\" y=\"33\" width=\"294\" height=\"184\" rx=\"16\" fill=\"none\" stroke=\"#7a6a2e\" stroke-width=\"2.4\" style=\"pointer-events:stroke\"/><line x1=\"-12\" y1=\"200\" x2=\"50\" y2=\"177\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"50\" cy=\"177\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"-12\" cy=\"200\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"-12\" y=\"205\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">1</text><line x1=\"-12\" y1=\"98\" x2=\"70\" y2=\"98\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"70\" cy=\"98\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"-12\" cy=\"98\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"-12\" y=\"103\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">2</text><line x1=\"-12\" y1=\"40\" x2=\"26\" y2=\"56\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"26\" cy=\"56\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"-12\" cy=\"40\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"-12\" y=\"45\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">3</text><line x1=\"372\" y1=\"125\" x2=\"280\" y2=\"125\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"280\" cy=\"125\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"372\" cy=\"125\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"372\" y=\"130\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">4</text><line x1=\"372\" y1=\"215\" x2=\"327\" y2=\"190\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"327\" cy=\"190\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"372\" cy=\"215\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"372\" y=\"220\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">5</text><line x1=\"372\" y1=\"45\" x2=\"270\" y2=\"48\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"270\" cy=\"48\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"372\" cy=\"45\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"372\" y=\"50\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">6</text></svg>",
+  "labels": [
+   "cell wall",
+   "cell membrane",
+   "cytoplasm",
+   "nucleus",
+   "vacuole",
+   "chloroplast"
+  ],
+  "key": [
+   "chloroplast",
+   "nucleus",
+   "cell wall",
+   "vacuole",
+   "cell membrane",
+   "cytoplasm"
+  ],
+  "each": 0.5,
+  "maxMarks": 3,
+  "why": "1 chloroplast, 2 nucleus, 3 cell wall, 4 vacuole, 5 cell membrane, 6 cytoplasm. The wall is the thick outer layer; the membrane is the thin line just inside it."
+ },
+ {
+  "n": 17,
+  "type": "label",
+  "section": "S",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "This is a microscope. Choose the right name for each numbered arrow.",
+  "fig": "<svg viewBox=\"0 0 300 340\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A microscope\" class=\"\"><rect width=\"300\" height=\"340\" rx=\"12\" fill=\"#f4f7f9\"/><rect x=\"55\" y=\"302\" width=\"190\" height=\"26\" rx=\"8\" fill=\"#455a64\"/><path d=\"M200,302 C262,292 266,168 222,98\" stroke=\"#607d8b\" stroke-width=\"24\" fill=\"none\" stroke-linecap=\"round\"/><path d=\"M154,102 L216,102\" stroke=\"#607d8b\" stroke-width=\"16\" stroke-linecap=\"round\"/><rect x=\"120\" y=\"46\" width=\"34\" height=\"108\" rx=\"4\" fill=\"#78909c\"/><rect x=\"127\" y=\"12\" width=\"20\" height=\"38\" rx=\"3\" fill=\"#263238\"/><rect x=\"124\" y=\"12\" width=\"26\" height=\"8\" rx=\"2\" fill=\"#37474f\"/><rect x=\"114\" y=\"150\" width=\"46\" height=\"14\" rx=\"4\" fill=\"#546e7a\"/><rect x=\"118\" y=\"164\" width=\"9\" height=\"30\" rx=\"2\" fill=\"#37474f\"/><rect x=\"130\" y=\"164\" width=\"9\" height=\"52\" rx=\"2\" fill=\"#263238\"/><rect x=\"142\" y=\"164\" width=\"9\" height=\"38\" rx=\"2\" fill=\"#37474f\"/><rect x=\"68\" y=\"238\" width=\"140\" height=\"12\" rx=\"3\" fill=\"#90a4ae\"/><rect x=\"102\" y=\"229\" width=\"72\" height=\"9\" rx=\"2\" fill=\"#e0f7fa\" stroke=\"#00838f\" stroke-width=\"1.5\"/><circle cx=\"138\" cy=\"284\" r=\"14\" fill=\"#ffd54f\" stroke=\"#f9a825\" stroke-width=\"2.5\"/><g stroke=\"#f9a825\" stroke-width=\"2.5\" stroke-linecap=\"round\"><line x1=\"138\" y1=\"262\" x2=\"138\" y2=\"254\"/><line x1=\"118\" y1=\"268\" x2=\"112\" y2=\"262\"/><line x1=\"158\" y1=\"268\" x2=\"164\" y2=\"262\"/></g><circle cx=\"240\" cy=\"190\" r=\"17\" fill=\"#ff8a65\" stroke=\"#bf360c\" stroke-width=\"2.5\"/><circle cx=\"240\" cy=\"190\" r=\"5\" fill=\"#bf360c\"/><line x1=\"68\" y1=\"244\" x2=\"68\" y2=\"244\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"68\" cy=\"244\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"24\" cy=\"244\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"24\" y=\"249\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">1</text><line x1=\"128\" y1=\"28\" x2=\"128\" y2=\"28\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"128\" cy=\"28\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"70\" cy=\"28\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"70\" y=\"33\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">2</text><line x1=\"124\" y1=\"282\" x2=\"124\" y2=\"282\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"124\" cy=\"282\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"36\" cy=\"272\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"36\" y=\"277\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">3</text><line x1=\"119\" y1=\"185\" x2=\"119\" y2=\"185\" stroke=\"#14305c\" stroke-width=\"2.2\"/><circle cx=\"119\" cy=\"185\" r=\"3.5\" fill=\"#14305c\"/><circle cx=\"52\" cy=\"190\" r=\"12\" fill=\"#fff\" stroke=\"#14305c\" stroke-width=\"2\"/><text x=\"52\" y=\"195\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">4</text></svg>",
+  "labels": [
+   "eyepiece",
+   "objective lens",
+   "stage",
+   "light source",
+   "focusing knob"
+  ],
+  "key": [
+   "stage",
+   "eyepiece",
+   "light source",
+   "objective lens"
+  ],
+  "each": 0.5,
+  "maxMarks": 2,
+  "why": "1 stage, 2 eyepiece, 3 light source, 4 objective lens. The focusing knob is on the side and has no arrow here."
+ },
+ {
+  "n": 18,
+  "type": "table",
+  "section": "S",
+  "tier": "Intermediate",
+  "star": 1,
+  "body": "Which cells have each part? Tick one box for every row.",
+  "rows": [
+   "nucleus",
+   "cell membrane",
+   "cytoplasm",
+   "large vacuole"
+  ],
+  "cols": [
+   "Plant cells only",
+   "Animal cells only",
+   "Both"
+  ],
+  "key": [
+   2,
+   2,
+   2,
+   0
+  ],
+  "each": 1,
+  "maxMarks": 4,
+  "why": "Nucleus, cell membrane and cytoplasm are in both kinds of cell. A large vacuole is in plant cells only."
+ },
+ {
+  "n": 19,
+  "type": "select",
+  "section": "S",
+  "tier": "Applied",
+  "star": 2,
+  "body": "Lee drew an animal cell and labelled it. Two of Lee&rsquo;s labels are mistakes. Tick the two labels that do not belong in an animal cell.",
+  "fig": "<svg viewBox=\"-120 0 600 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"An animal cell\" class=\"\"><rect width=\"360\" height=\"250\" rx=\"12\" fill=\"#fbf6f2\"/><path d=\"M72,122 C58,66 128,26 190,36 C262,22 322,72 306,126 C332,178 270,226 200,216 C140,236 70,216 82,160 C80,146 76,136 72,122 Z\" fill=\"#ffe3d1\" stroke=\"#c2703a\" stroke-width=\"4\"/><circle cx=\"188\" cy=\"128\" r=\"36\" fill=\"#b39ddb\" stroke=\"#5e35b1\" stroke-width=\"2.5\"/><circle cx=\"194\" cy=\"122\" r=\"9\" fill=\"#7e57c2\"/><path d=\"M72,122 C58,66 128,26 190,36 C262,22 322,72 306,126 C332,178 270,226 200,216 C140,236 70,216 82,160 C80,146 76,136 72,122 Z\" fill=\"none\" stroke=\"#6d8f4e\" stroke-width=\"9\" transform=\"translate(180 125) scale(1.06) translate(-180 -125)\"/><ellipse cx=\"110\" cy=\"150\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><ellipse cx=\"250\" cy=\"176\" rx=\"15\" ry=\"8\" fill=\"#3a9d3a\" stroke=\"#1f6b1f\" stroke-width=\"2\"/><line x1=\"-20\" y1=\"86\" x2=\"64\" y2=\"118\" stroke=\"#14305c\" stroke-width=\"2\"/><circle cx=\"64\" cy=\"118\" r=\"3.2\" fill=\"#14305c\"/><text x=\"-116\" y=\"90\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">cell wall</text><line x1=\"-20\" y1=\"166\" x2=\"82\" y2=\"158\" stroke=\"#14305c\" stroke-width=\"2\"/><circle cx=\"82\" cy=\"158\" r=\"3.2\" fill=\"#14305c\"/><text x=\"-116\" y=\"170\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">cell membrane</text><line x1=\"350\" y1=\"56\" x2=\"212\" y2=\"112\" stroke=\"#14305c\" stroke-width=\"2\"/><circle cx=\"212\" cy=\"112\" r=\"3.2\" fill=\"#14305c\"/><text x=\"356\" y=\"60\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">nucleus</text><line x1=\"350\" y1=\"126\" x2=\"250\" y2=\"134\" stroke=\"#14305c\" stroke-width=\"2\"/><circle cx=\"250\" cy=\"134\" r=\"3.2\" fill=\"#14305c\"/><text x=\"356\" y=\"130\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">cytoplasm</text><line x1=\"350\" y1=\"196\" x2=\"256\" y2=\"178\" stroke=\"#14305c\" stroke-width=\"2\"/><circle cx=\"256\" cy=\"178\" r=\"3.2\" fill=\"#14305c\"/><text x=\"356\" y=\"200\" font-size=\"14\" font-weight=\"800\" fill=\"#14305c\">chloroplast</text></svg>",
+  "options": [
+   "cell wall",
+   "nucleus",
+   "cell membrane",
+   "cytoplasm",
+   "chloroplast"
+  ],
+  "keySel": [
+   0,
+   4
+  ],
+  "maxMarks": 2,
+  "why": "Animal cells have no cell wall and no chloroplasts, so those two labels are the mistakes. Nucleus, cell membrane and cytoplasm belong in an animal cell."
+ },
+ {
+  "n": 20,
+  "type": "written",
+  "section": "S",
+  "tier": "Applied",
+  "star": 2,
+  "body": "A footballer breaks a bone in his leg. A few weeks later the bone has mended.",
+  "parts": [
+   {
+    "prompt": "(a) Which process makes the new bone cells?",
+    "kind": "text"
+   },
+   {
+    "prompt": "(b) Explain how the new cells mend the break.",
+    "kind": "area"
+   }
+  ],
+  "rubric": [
+   {
+    "part": 0,
+    "label": "the process is cell division",
+    "pat": "divi(de|sion)|mitosis",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "cells next to the break divide / split / multiply",
+    "pat": "divid|split|multipl|more cells|make more",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "the new cells fill the gap / replace the damaged ones",
+    "pat": "fill|replac|gap|join|close|fix|rebuild|take the place|bridge",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "the new cells are the same kind as the old ones",
+    "pat": "same|identical|alike|exact|match|just like",
+    "marks": 1
+   }
+  ],
+  "maxMarks": 4,
+  "model": "(a) Cell division. (b) The cells next to the break divide, so there are more cells. The new cells fill the gap and replace the damaged ones. They are the same kind of cell as the old ones, so the bone is repaired.",
+  "why": "This is the &ldquo;repair&rdquo; job of cell division. Three ideas earn the marks in (b): cells divide, the new cells fill the gap, and they are the same kind as the old ones."
+ },
+ {
+  "n": 21,
+  "type": "written",
+  "section": "S",
+  "tier": "Applied",
+  "star": 2,
+  "body": "One cell becomes two cells every hour, and each new cell does the same.",
+  "parts": [
+   {
+    "prompt": "(a) How many cells are there after 3 hours?",
+    "kind": "text"
+   },
+   {
+    "prompt": "(b) Explain how you worked it out.",
+    "kind": "area"
+   },
+   {
+    "prompt": "(c) How many cells are there after 5 hours?",
+    "kind": "text"
+   }
+  ],
+  "rubric": [
+   {
+    "part": 0,
+    "label": "(a) 8 cells",
+    "pat": "\\b8\\b|eight",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "(b) the number doubles each round",
+    "pat": "doubl|× ?2|x ?2|twice|two times|times (by )?2|2 times",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "(b) you counted the rounds (3 hours = 3 rounds)",
+    "pat": "\\b3\\b|three|round",
+    "marks": 1
+   },
+   {
+    "part": 2,
+    "label": "(c) 32 cells",
+    "pat": "\\b32\\b|thirty.?two",
+    "marks": 2
+   }
+  ],
+  "maxMarks": 5,
+  "model": "(a) 8. (b) The number of cells doubles every hour. 3 hours is 3 rounds, so 1 &rarr; 2 &rarr; 4 &rarr; 8. (c) 5 hours is 5 rounds: 1 &rarr; 2 &rarr; 4 &rarr; 8 &rarr; 16 &rarr; 32, so 32 cells.",
+  "why": "Count the rounds first, then double. 3 rounds gives 8. 5 rounds gives 32."
+ }
+];
+
+/* ---------- END CONFIG ---------- */
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const nowMs=()=>Date.now(), r2=x=>Math.round(x*100)/100;
+const openedAt=new Date(nowMs());
+let lastClick=nowMs(), submitted=false, reviewing=false;
+const chosen={}, firstChoice={}, firstAt={}, secsPrev={}, predictions={}, touched={}, touchSecs={};
+const lblAns={}, tblAns={}, selAns={}, txtAns={};
+const PART_LABEL={A:'PART A — Multiple choice (2 marks each)', S:'PART B — Structured questions (school style)'};
+function prov(){const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null};return{helped:g('helped'),usedNotes:g('notes')}}
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+const isApplied=q=>q.tier==='Applied';
+
+function mcqHtml(q){
+  let opts=''; q.options.forEach((o,i)=>{opts+=`<button class="opt" id="opt-${q.n}-${i+1}" onclick="choose(${q.n},${i+1})">${i+1}. ${o}</button>`});
+  if(q.predict) return `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words, then press Show options.</label>
+    <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+    <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div><div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+  return opts;
+}
+function labelHtml(q){
+  let h=''; q.key.forEach((k,i)=>{
+    h+=`<div class="lblrow" id="lr-${q.n}-${i}"><span class="num">${i+1}</span><select id="ls-${q.n}-${i}" onchange="lblChange(${q.n})"><option value="">choose a name</option>`+q.labels.map(l=>`<option value="${l}">${l}</option>`).join('')+`</select><span class="fix"></span></div>`;
+  }); return h;
+}
+function tableHtml(q){
+  let h=`<table class="tb"><tr><th></th>`+q.cols.map(c=>`<th>${c}</th>`).join('')+`</tr>`;
+  q.rows.forEach((r,i)=>{h+=`<tr id="tr-${q.n}-${i}"><td>${r}</td>`+q.cols.map((c,j)=>`<td><input type="radio" name="t-${q.n}-${i}" value="${j}" onchange="tblChange(${q.n})"></td>`).join('')+`</tr>`});
+  return h+'</table>';
+}
+function selectHtml(q){return q.options.map((o,i)=>`<label class="ck" id="ck-${q.n}-${i}"><input type="checkbox" value="${i}" onchange="selChange(${q.n})"> ${o}</label>`).join('')}
+function writtenHtml(q){
+  let h=''; q.parts.forEach((p,i)=>{
+    h+=`<div class="wp"><label for="wi-${q.n}-${i}">${p.prompt}</label>`+(p.kind==='area'?`<textarea id="wi-${q.n}-${i}" oninput="txtChange(${q.n})"></textarea>`:`<input type="text" id="wi-${q.n}-${i}" maxlength="40" autocomplete="off" oninput="txtChange(${q.n})">`)+`</div>`;
+  });
+  return h+`<div class="model" id="model-${q.n}"><b>Model answer:</b> ${q.model}<div id="ideas-${q.n}"></div></div>`;
+}
+function render(){
+  const quiz=document.getElementById('quiz'); let html='', last=null;
+  Q.forEach(q=>{
+    if(q.section!==last){html+=`<div class="part-hd ${q.section}">${PART_LABEL[q.section]}</div>`; last=q.section}
+    const stars=q.star===2?'&#9733;&#9733; ':(q.star===1?'&#9733; ':'');
+    const mk=q.type==='mcq'?MCQ_MARKS:q.maxMarks;
+    let inner='';
+    if(q.type==='mcq') inner=mcqHtml(q); else if(q.type==='label') inner=labelHtml(q); else if(q.type==='table') inner=tableHtml(q);
+    else if(q.type==='select') inner=selectHtml(q); else inner=writtenHtml(q);
+    html+=`<div class="q ${q.section}" id="q-${q.n}"><span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig?`<div class="fig">${q.fig}</div>`:''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${mk} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; full marks</span><span class="result-tag bad" id="tag-bad-${q.n}">&#10007; marks lost</span></p>
+      ${inner}<div class="ptag" id="ptag-${q.n}"></div>
+      <div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML=html;
+}
+function touch(n){const t=nowMs(); if(!(n in touched)){touched[n]=new Date(t).toISOString(); touchSecs[n]=Math.round((t-lastClick)/100)/10;} lastClick=t;}
+function predTyped(n){document.getElementById('pshow-'+n).disabled=document.getElementById('pin-'+n).value.trim().length<2}
+function predShow(n){const i=document.getElementById('pin-'+n), v=i.value.trim(); if(v.length<2||n in predictions) return; predictions[n]=v; i.readOnly=true; document.getElementById('pshow-'+n).style.display='none'; document.getElementById('pbody-'+n).classList.remove('hid')}
+function choose(n,idx){
+  if(submitted||reviewing) return; const t=nowMs();
+  if(!(n in firstChoice)){firstChoice[n]=idx; firstAt[n]=new Date(t).toISOString(); secsPrev[n]=Math.round((t-lastClick)/100)/10; touched[n]=firstAt[n]; touchSecs[n]=secsPrev[n]}
+  lastClick=t; chosen[n]=idx; const q=Q.find(x=>x.n===n);
+  q.options.forEach((_,i)=>document.getElementById(`opt-${n}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${n}-${idx}`).classList.add('selected'); updateProgress();
+}
+function lblChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); lblAns[n]=q.key.map((_,i)=>document.getElementById(`ls-${n}-${i}`).value); updateProgress()}
+function tblChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); tblAns[n]=q.rows.map((_,i)=>{const e=document.querySelector(`input[name="t-${n}-${i}"]:checked`);return e?+e.value:null}); updateProgress()}
+function selChange(n){if(submitted)return; touch(n); selAns[n]=Array.from(document.querySelectorAll(`#q-${n} input[type=checkbox]:checked`)).map(e=>+e.value); updateProgress()}
+function txtChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); txtAns[n]=q.parts.map((_,i)=>document.getElementById(`wi-${n}-${i}`).value); updateProgress()}
+function answered(q){
+  const n=q.n;
+  if(q.type==='mcq') return n in chosen;
+  if(q.type==='label') return !!lblAns[n] && lblAns[n].every(v=>v!=='');
+  if(q.type==='table') return !!tblAns[n] && tblAns[n].every(v=>v!==null);
+  if(q.type==='select') return !!selAns[n] && selAns[n].length>0;
+  return !!txtAns[n] && txtAns[n].every(v=>v.trim().length>0);
+}
+function nAnswered(){return Q.filter(answered).length}
+function updateProgress(){
+  const n=nAnswered(); document.getElementById('progress-label').textContent=`${n} / ${TOTAL_ITEMS} answered`;
+  document.getElementById('progress-fill').style.width=(n/TOTAL_ITEMS*100)+'%';
+  const btn=document.getElementById('btn-submit'), pv=prov(), ok=pv.helped&&pv.usedNotes;
+  if(n===TOTAL_ITEMS&&ok){btn.disabled=false; btn.textContent='Submit Mock Test'; btn.onclick=askConfirmSubmit}
+  else{btn.disabled=true; btn.textContent=n<TOTAL_ITEMS?`Answer all ${TOTAL_ITEMS} to submit (${TOTAL_ITEMS-n} left)`:'Answer the two questions above to submit'}
+}
+function askConfirmSubmit(){if(nAnswered()<TOTAL_ITEMS||!(prov().helped&&prov().usedNotes))return; document.getElementById('confirm-overlay').classList.add('show')}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('show')}
+
+/* ---------- fast-answer review (MCQ only) ---------- */
+let preReview={}, reviewEligible=[], reviewList=[], reviewPos=0, reviewLog={};
+function pickReview(){
+  const mq=Q.filter(q=>q.type==='mcq' && (q.n in secsPrev));
+  const elig=mq.filter(q=>secsPrev[q.n] < (isApplied(q)?REVIEW_SECS_C:REVIEW_SECS_AB));
+  const ranked=elig.slice().sort((a,b)=>((isApplied(a)?0:1)-(isApplied(b)?0:1))||(secsPrev[a.n]-secsPrev[b.n])||(a.n-b.n));
+  return {eligible:elig.map(q=>q.n), shown:ranked.slice(0,REVIEW_MAX).map(q=>q.n).sort((a,b)=>a-b)};
+}
+function startReview(){
+  closeConfirm(); preReview=Object.assign({},chosen); const r=pickReview(); reviewEligible=r.eligible; reviewList=r.shown; reviewPos=0; reviewLog={};
+  if(!reviewList.length){doSubmit();return} reviewing=true; document.getElementById('review-overlay').classList.add('show'); showReviewItem();
+}
+function showReviewItem(){
+  const qn=reviewList[reviewPos], q=Q.find(x=>x.n===qn);
+  document.getElementById('rv-count').textContent=`Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h=`<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>`;
+  q.options.forEach((o,i)=>{h+=`<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${o}</button>`});
+  document.getElementById('rv-body').innerHTML=h;
+  document.getElementById('rv-actions').innerHTML=`<button class="btn keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){reviewLog[reviewList[reviewPos]]={kept:true}; rvNext()}
+function rvChange(){document.querySelectorAll('#rv-body .opt').forEach(b=>b.disabled=false); document.getElementById('rv-actions').innerHTML=`<button class="btn keep" onclick="rvUse()">Use this answer</button>`}
+function rvPick(i){document.querySelectorAll('#rv-body .opt').forEach(b=>b.classList.remove('selected')); document.getElementById('rv-opt-'+i).classList.add('selected'); chosen[reviewList[reviewPos]]=i}
+function rvUse(){const qn=reviewList[reviewPos]; reviewLog[qn]={kept:false,changed:chosen[qn]!==preReview[qn]}; rvNext()}
+function rvNext(){reviewPos++; if(reviewPos>=reviewList.length){reviewing=false; document.getElementById('review-overlay').classList.remove('show'); doSubmit()} else showReviewItem()}
+
+/* ---------- marking ---------- */
+function markLabel(q){const a=lblAns[q.n]||[]; const per=q.key.map((k,i)=>a[i]===k); return {per, marks:per.filter(Boolean).length*q.each}}
+function markTable(q){const a=tblAns[q.n]||[]; const per=q.key.map((k,i)=>a[i]===k); return {per, marks:per.filter(Boolean).length*q.each}}
+function markSelect(q){const a=selAns[q.n]||[]; let m=0; a.forEach(i=>{m+=q.keySel.indexOf(i)>=0?1:-1}); return {marks:Math.max(0,m), right:a.filter(i=>q.keySel.indexOf(i)>=0).length, wrong:a.filter(i=>q.keySel.indexOf(i)<0).length}}
+function markWritten(q){
+  const a=txtAns[q.n]||[]; const ideas=q.rubric.map(r=>({label:r.label, got:new RegExp(r.pat,'i').test(a[r.part]||''), marks:r.marks}));
+  return {ideas, marks:ideas.reduce((s,x)=>s+(x.got?x.marks:0),0)};
+}
+function itemMarks(q){
+  if(q.type==='mcq') return chosen[q.n]===q.ans?MCQ_MARKS:0;
+  if(q.type==='label') return markLabel(q).marks; if(q.type==='table') return markTable(q).marks;
+  if(q.type==='select') return markSelect(q).marks; return markWritten(q).marks;
+}
+let lastResults=null;
+function doSubmit(){
+  submitted=true;
+  document.querySelectorAll('.opt,select,input,textarea').forEach(b=>{b.disabled=true; if(b.tagName==='TEXTAREA'||b.type==='text') b.readOnly=true});
+  let marks=0, partA=0, partB=0, mcqCorrect=0, firstPassMarks=0, preReviewMarks=0, provisionalWritten=0;
+  const tier={Basic:{m:0,t:0},Intermediate:{m:0,t:0},Applied:{m:0,t:0}};
+  const selfSwing={changed:0,wrongToRight:0,rightToWrong:0,wrongToWrong:0}, allSwing={changed:0,wrongToRight:0,rightToWrong:0,wrongToWrong:0}, swing={wrongToRight:0,rightToWrong:0,wrongToWrong:0}, changes=[];
+  const items=Q.map(q=>{
+    const n=q.n, m=itemMarks(q), mx=q.type==='mcq'?MCQ_MARKS:q.maxMarks; marks+=m; tier[q.tier].m+=m; tier[q.tier].t+=mx;
+    if(q.type==='mcq') partA+=m; else partB+=m;
+    const rec={q:n, type:q.type, section:q.section, tier:q.tier, marks:r2(m), maxMarks:mx, secsSincePrev:touchSecs[n], firstTouchAt:touched[n]};
+    if(q.type==='mcq'){
+      const ok=chosen[n]===q.ans, fc=firstChoice[n], pr=preReview[n];
+      if(ok) mcqCorrect++; if(fc===q.ans) firstPassMarks+=MCQ_MARKS; if(pr===q.ans) preReviewMarks+=MCQ_MARKS;
+      if(pr!==fc){selfSwing.changed++; if(fc===q.ans) selfSwing.rightToWrong++; else if(pr===q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++}
+      if(chosen[n]!==fc){allSwing.changed++; if(fc===q.ans) allSwing.rightToWrong++; else if(ok) allSwing.wrongToRight++; else allSwing.wrongToWrong++}
+      let dir=null; const rv=reviewLog[n];
+      if(rv&&rv.changed){const was=pr===q.ans; dir=was?'right->wrong':(ok?'wrong->right':'wrong->wrong'); if(dir==='wrong->right')swing.wrongToRight++; else if(dir==='right->wrong')swing.rightToWrong++; else swing.wrongToWrong++; changes.push({q:n,from:pr,to:chosen[n],direction:dir})}
+      document.getElementById(`opt-${n}-${chosen[n]}`).classList.add(ok?'correct':'wrong'); if(!ok) document.getElementById(`opt-${n}-${q.ans}`).classList.add('correct');
+      Object.assign(rec,{chosen:chosen[n],correct:q.ans,isCorrect:ok,firstChoice:fc,firstCorrect:fc===q.ans,preReviewChoice:pr,finalChoice:chosen[n],firstClickAt:firstAt[n],
+        prediction:(n in predictions)?predictions[n]:null,reviewEligible:reviewEligible.indexOf(n)>=0,reviewed:n in reviewLog,changedBeforeReview:pr!==fc,changedOnReview:rv?!!rv.changed:false,reviewDirection:dir});
+    } else if(q.type==='label'){
+      const r=markLabel(q); r.per.forEach((p,i)=>{const row=document.getElementById(`lr-${n}-${i}`); row.classList.add(p?'ok':'bad'); if(!p) row.querySelector('.fix').textContent='→ '+q.key[i]});
+      Object.assign(rec,{answers:lblAns[n],key:q.key,perLabel:r.per});
+    } else if(q.type==='table'){
+      const r=markTable(q); r.per.forEach((p,i)=>document.getElementById(`tr-${n}-${i}`).classList.add(p?'ok':'bad'));
+      Object.assign(rec,{answers:tblAns[n],key:q.key,perRow:r.per,cols:q.cols});
+    } else if(q.type==='select'){
+      const r=markSelect(q); (selAns[n]||[]).forEach(i=>document.getElementById(`ck-${n}-${i}`).classList.add(q.keySel.indexOf(i)>=0?'ok':'bad')); q.keySel.forEach(i=>document.getElementById(`ck-${n}-${i}`).classList.add('ok'));
+      Object.assign(rec,{ticked:selAns[n],keySel:q.keySel,right:r.right,wrong:r.wrong});
+    } else {
+      const r=markWritten(q); provisionalWritten+=r.marks;
+      document.getElementById('model-'+n).classList.add('show');
+      document.getElementById('ideas-'+n).innerHTML='<div style="margin-top:6px"><b>Marking ideas</b> (computer guess; tick the ones YOU had):</div>'+r.ideas.map((x,i)=>`<label class="idea"><input type="checkbox" class="selfmark" data-q="${n}" data-i="${i}" onchange="selfMarkChanged()"> ${x.label} <span class="got">${x.got?'(auto: found, '+x.marks+')':'(auto: not found)'}</span></label>`).join('');
+      Object.assign(rec,{typed:txtAns[n],provisionalMarks:r.marks,ideas:r.ideas.map(x=>({label:x.label,autoFound:x.got,marks:x.marks})),selfMarked:null});
+    }
+    document.getElementById('ptag-'+n).textContent= q.type==='mcq'?'':`Marks: ${r2(m)} / ${mx}`+(q.type==='written'?' (provisional — Luikishi will re-mark your writing)':'');
+    document.getElementById('why-'+n).classList.add('show');
+    document.getElementById(m>=mx?`tag-ok-${n}`:`tag-bad-${n}`).classList.add('show');
+    return rec;
+  });
+  marks=r2(marks); partA=r2(partA); partB=r2(partB); firstPassMarks=r2(firstPassMarks+partB); preReviewMarks=r2(preReviewMarks+partB);
+  const pass=marks>=PASS_MARKS, pct=Math.round(marks/TOTAL_MARKS*100), minutes=Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner=document.getElementById('score-banner'); banner.classList.add('show',pass?'pass':'fail');
+  document.getElementById('score-big').textContent=`${marks} / ${TOTAL_MARKS} marks (${pct}%)`;
+  document.getElementById('score-msg').textContent=pass?`\u{1F3C6} That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS}). Your writing marks are a computer guess for now: Luikishi will re-mark them.`:`Bar is ${PASS_MARKS}/${TOTAL_MARKS}. Look through the highlighted answers below, then talk it through with Luikishi. Your writing marks are a computer guess for now.`;
+  document.getElementById('score-base').textContent=`Part A (multiple choice): ${partA}/30 · Part B (structured): ${partB}/20`;
+  document.getElementById('pace-lines').innerHTML=
+    `<div><b>First clicks:</b> ${firstPassMarks}/${TOTAL_MARKS} marks &rarr; <b>final:</b> ${marks}/${TOTAL_MARKS}. Your checking changed ${allSwing.changed} multiple-choice answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>`+
+    `<div><b>Time:</b> ${minutes} min (Milestone 5: ${LAST_TEST_MINUTES} min)</div>`+
+    (reviewList.length?`<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${changes.length}.</div>`:`<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML=['Basic','Intermediate','Applied'].map(t=>`<div class="sec-chip">${t}: ${r2(tier[t].m)}/${tier[t].t} marks</div>`).join('');
+  banner.scrollIntoView({behavior:'smooth'});
+  document.getElementById('btn-submit').style.display='none'; document.getElementById('btn-save').style.display='inline-block'; document.getElementById('btn-hub').style.display='inline-block';
+  lastResults={student:'Prem',unit:UNIT_NUM,title:UNIT_TITLE,kind:'school-format mock',dateTaken:new Date().toISOString().slice(0,10),openedAt:openedAt.toISOString(),submittedAt:new Date(nowMs()).toISOString(),minutesSpent:minutes,lastTestMinutes:LAST_TEST_MINUTES,
+    provenance:prov(),marksEarned:marks,outOfMarks:TOTAL_MARKS,pct,passMarks:PASS_MARKS,passed:pass,
+    partA:{marks:partA,outOf:30,correct:mcqCorrect,outOfItems:15}, partB:{marks:partB,outOf:20},
+    provisionalWrittenMarks:r2(provisionalWritten), firstPassMarks, preReviewMarks,
+    reviewSecs:{AB:REVIEW_SECS_AB,C:REVIEW_SECS_C,max:REVIEW_MAX},
+    selfChanged:selfSwing, checkingSwing:allSwing, predictions:Object.assign({},predictions),
+    reviewEligible:reviewEligible.slice(), reviewedQs:reviewList.slice(), changedOnReview:changes,
+    reviewSwing:{eligible:reviewEligible.length,reviewed:reviewList.length,changed:changes.length,wrongToRight:swing.wrongToRight,rightToWrong:swing.rightToWrong,wrongToWrong:swing.wrongToWrong},
+    tiers:['Basic','Intermediate','Applied'].map(t=>({name:t,marks:r2(tier[t].m),marksOutOf:tier[t].t})),
+    items};
+}
+function selfMarkChanged(){
+  if(!lastResults) return;
+  document.querySelectorAll('.selfmark').forEach(c=>{const it=lastResults.items.find(x=>x.q===+c.dataset.q); if(!it.selfMarked) it.selfMarked={}; it.selfMarked[c.dataset.i]=c.checked});
+}
+async function saveResults(){
+  const filename=`SCI_U${String(UNIT_NUM).padStart(3,'0')}_Results_${lastResults.dateTaken}.json`, json=JSON.stringify(lastResults,null,2), st=document.getElementById('save-status');
+  if(window.showSaveFilePicker){
+    try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'Test results JSON',accept:{'application/json':['.json']}}]}); const w=await h.createWritable(); await w.write(json); await w.close(); st.textContent=`Saved as ${filename}. (First time, pick the Lessons\\Tests\\Results folder.)`; return}
+    catch(e){if(e.name==='AbortError'){st.textContent='Save cancelled — click again when ready.';return}}
+  }
+  const b=new Blob([json],{type:'application/json'}), a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=filename; document.body.appendChild(a); a.click(); a.remove();
+  st.textContent=`Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+render();
+</script>
+</body>
+</html>

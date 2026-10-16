@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '15 Oct 2026',
+  updated:        '16 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,7 +13,7 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-  currentUnit: { n:'M5', topic:'Milestone Test 5 &mdash; Units 41&ndash;53 (40 questions, ASMOPSS-weighted, pass 80/100)', status:'&#9989; Built and gated (15 Oct 2026, 0 FAIL), from `BUILD_PLAN_SCI_M5_Milestone5.md`. Warm-up page plus a 40-question test (100 marks, pass 80, M4 baseline 91.25); no lessons. Ready for Prem.' },
+    currentUnit: { n:54, topic:'Chapter 2 Cells &mdash; school-test prep (inserted; school test Tue 20 Oct 2026)', status:'&#9989; Built and gated (16 Oct 2026, 0 FAIL), from `BUILD_PLAN_SCI_U54_CellsSchoolTestPrep.md` v1.1. Warm-up, one lesson (Cells on One Map), a 21-item school-format mock (50 marks, pass 40) and a printable Last-Look Card. Plan: lesson Sat 17 Oct, mock Sun 18 Oct, card Mon 19 Oct.' },
 
   lastUnit: {
     n:53, score:17, outOf:20, pct:85, passBar:16, delta:+20, prevScore:65, passed:true, minutesSpent:6.5, minutesNote:'first click 16, final 17', firstPassScore:16,
@@ -97,6 +97,7 @@ var PREM_DATA = {
     { unit:51, topic:'Biology: Inside the Animal Cell &mdash; Two Solutions to One Problem, and Reading Real Cells (school-aligned, beyond-class)', score:15, outOf:20, pct:75, passBar:16, date:'2026-10-13' },
     { unit:52, topic:'Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle &amp; From Microscope to Genes (school-aligned, beyond-class)', score:13, outOf:20, pct:65, passBar:16, date:'2026-10-14' },
     { unit:53, topic:'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-15' },
+    { unit:'M5', topic:'Milestone Test 5 - Units 41-53', score:33, outOf:40, marks:80, marksOutOf:100, pct:80, passBar:32, firstPassMarks:71.25, minutes:13.4, date:'2026-10-16' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
