@@ -2,6 +2,8 @@
 (function(){
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+window.GDONE=window.GDONE||{};
+var GDONE=window.GDONE;
 function pass(id){var sc=document.getElementById(id); if(sc){sc.setAttribute('data-game-pass','1'); if(window.sciRefresh) window.sciRefresh();}}
 
 /* ---------- Mode 1: plant / animal ---------- */
@@ -59,7 +61,8 @@ var MJOB={
  knob:'The focusing knob moves the lenses up and down to make the picture sharp.'
 };
 var mseen={}, mcombos={}, ep=10, ob=4;
-function m3check(){ if(Object.keys(mseen).length>=4 && Object.keys(mcombos).length>=3) pass('sM3'); $('#xc3').textContent=Object.keys(mseen).length+' of 5 parts found · '+Math.min(3,Object.keys(mcombos).length)+' of 3 magnifications tried';}
+var m3part1=false;
+function m3check(){ if(Object.keys(mseen).length>=4 && Object.keys(mcombos).length>=3){ m3part1=true; if(GDONE.gcReal) pass('sM3'); } $('#xc3').textContent=Object.keys(mseen).length+' of 5 parts found · '+Math.min(3,Object.keys(mcombos).length)+' of 3 magnifications tried';}
 function mtap(p){ $('#xi3').innerHTML='<b>'+p+'</b>: '+MJOB[p]; mseen[p]=1; m3check(); }
 $$('#xp3 svg .part').forEach(function(p){p.addEventListener('click',function(){mtap(p.getAttribute('data-part'))})});
 $$('#xp3 .chip').forEach(function(c){c.onclick=function(){mtap(c.getAttribute('data-part'))}});
@@ -127,14 +130,14 @@ function dv(){
 function chk6(){}
 if($('#xp6')){ $('#dbtn').onclick=function(){dstep=(dstep>=3)?0:dstep+1; dv()}; dv(); }
 
-var rounds=0;
+var rounds=0, dblAnim=false;
 function dbl(){
   var n=Math.pow(2,rounds);
   $$('#xp7 .gsvg').forEach(function(s,i){s.classList.toggle('hid',i!==rounds)});
   $$('#xp7 .rrow').forEach(function(r,i){r.classList.toggle('on',i===rounds); r.classList.toggle('done',i<=rounds)});
   $('#xc7').innerHTML='After '+rounds+(rounds===1?' round':' rounds')+': <b>'+n+'</b> '+(n===1?'cell':'cells')+(rounds>0?' (the number of cells doubles each round)':'');
   $('#d2btn').textContent= rounds<4 ? 'Divide again ▶' : 'Start again';
-  if(rounds===4) pass('sM6b');
+  if(rounds===4){ dblAnim=true; if(GDONE.gcDouble) pass('sM6b'); }
 }
 if($('#xp7')){ $('#d2btn').onclick=function(){rounds=(rounds>=4)?0:rounds+1; dbl()}; dbl(); }
 /* sM6a passes once the 4 steps have been seen */
@@ -142,24 +145,47 @@ document.addEventListener('click',function(e){
   if(e.target && e.target.id==='dbtn' && dstep===3) pass('sM6a');
 });
 
-/* ---------- calc check item: typed step first, then the answer box ---------- */
-(function(){
-  var st=$('#cstep'); if(!st) return;
-  var sb=$('#cstepb'), fb=$('#cstepfb'), ans=$('#cans'), ai=$('#cansin'), ab=$('#cansb'), afb=$('#cansfb'), sz=$('#csize');
-  st.oninput=function(){sb.disabled=st.value.trim().length<3};
-  sb.onclick=function(){
-    var v=st.value.replace(/\s+/g,'');
-    var ok=/^25(\u00f7|\/|:|dividedby)50$/i.test(v) || /^25(\u00f7|\/|:)(10\*5|10x5|10\u00d75)$/i.test(v);
-    if(ok){ fb.className='fb show ok'; fb.textContent='\u2714 Good step: picture size \u00f7 total magnification, and 10 \u00d7 5 = 50.'; st.readOnly=true; sb.disabled=true; ans.classList.remove('hid'); }
-    else { fb.className='fb show no'; fb.textContent='\u2718 Not quite. Write picture size \u00f7 total magnification, using numbers. You need to work out the total magnification first.'; }
+/* ---------- guided calc walkthrough (U54 v1.2): Watch me -> Your turn -> On your own ----------
+   Beginner design (Lui, 18 Oct 2026): the explanation stays on the SAME screen as the practice; every step is
+   checked on its own; a wrong answer first shows a hint, a second wrong answer highlights the matching Watch-me step. */
+function gcInit(box){
+  var id=box.id, watch=$('.gwatch',box), turn=$('.gturn',box), own=$('.gown',box);
+  var ws=$$('.ws',watch), wbtn=$('.gwbtn',watch), shown=0;
+  wbtn.onclick=function(){
+    if(shown<ws.length){ ws[shown].classList.remove('hid'); shown++; }
+    if(shown<ws.length){ wbtn.innerHTML='Show step '+(shown+1)+' &#9654;'; }
+    else { wbtn.style.display='none'; turn.classList.remove('hid'); var f=$('input',turn); if(f) f.focus(); }
   };
-  ai.oninput=function(){ab.disabled=ai.value.trim().length<1};
-  ab.onclick=function(){
-    var v=parseFloat(ai.value.replace(',','.'));
-    if(Math.abs(v-0.5)<1e-9){ afb.className='fb show ok'; afb.textContent='\u2714 0.5 mm. The real leg is half a millimetre long.'; ai.readOnly=true; ab.disabled=true; sz.classList.remove('hid'); pass('sM3b'); }
-    else { afb.className='fb show no'; afb.textContent='\u2718 Not quite. Check your step: what is 25 \u00f7 50?'; }
-  };
-})();
+  function wire(stepsBox, onAll){
+    var steps=$$('.gs',stepsBox);
+    steps.forEach(function(st,i){
+      var tries=0, fb=$('.gfb',st);
+      function good(msg){ st.classList.add('ok'); fb.className='gfb ok'; fb.innerHTML='&#10004; '+msg;
+        $$('button',st).forEach(function(b){b.disabled=true}); var inp=$('input',st); if(inp) inp.readOnly=true;
+        $$('.ws',watch).forEach(function(w){w.classList.remove('flash')});
+        if(steps[i+1]){ steps[i+1].classList.remove('hid'); var f=$('input',steps[i+1]); if(f) f.focus(); } else onAll(); }
+      function bad(){ tries++; fb.className='gfb no';
+        var h=st.getAttribute('data-hint'), h2=st.getAttribute('data-hint2'), w=+st.getAttribute('data-ws');
+        if(tries===1){ fb.innerHTML='&#10008; Not yet. Hint: '+h; }
+        else if(h2){ fb.innerHTML='&#10008; Not yet. '+h2; }
+        else { fb.innerHTML='&#10008; Not yet. Look at the yellow Watch-me step '+w+' and do the same with your numbers. '+h;
+          $$('.ws',watch).forEach(function(x,k){x.classList.toggle('flash',k===w-1)}); }
+      }
+      if(st.getAttribute('data-kind')==='num'){
+        var inp=$('input',st), b=$('.gchk',st), ans=parseFloat(st.getAttribute('data-ans'));
+        function go(){ var v=parseFloat((inp.value||'').replace(/,/g,'').replace(/[^0-9.\-]/g,'')); if(isNaN(v)) return;
+          if(Math.abs(v-ans)<1e-9) good('Yes, '+st.getAttribute('data-ans')+'.'); else bad(); }
+        b.onclick=go; inp.onkeydown=function(e){ if(e.key==='Enter') go(); };
+      } else {
+        $$('.gopt',st).forEach(function(o){ o.onclick=function(){ if(o.getAttribute('data-ok')) good('Yes. '+o.textContent+'.'); else bad(); }; });
+      }
+    });
+  }
+  wire(turn, function(){ own.classList.remove('hid'); var f=$('input',own); if(f) f.focus(); });
+  wire(own, function(){ GDONE[id]=true; var d=document.createElement('div'); d.className='job'; d.innerHTML='&#127881; <b>You did it on your own.</b> Same steps every time: say what the numbers mean, write the step, size check.'; own.appendChild(d);
+    if(id==='gcReal' && m3part1) pass('sM3'); if(id==='gcDouble' && dblAnim) pass('sM6b'); });
+}
+$$('.gcalc').forEach(gcInit);
 
 /* ---------- written practice: type, show the model answer, self-mark, done ---------- */
 $$('.wr').forEach(function(w){

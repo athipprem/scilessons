@@ -154,6 +154,22 @@
   .gobox{border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}
   .calc{background:#fafcfb;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}.wp input[type=text]{width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}.wp input[readonly]{background:#e3efec;color:var(--grey)}
   @media(max-width:520px){.cards{grid-template-columns:repeat(2,1fr)}}
+
+  /* guided calc walkthrough (U54 v1.2) */
+  .gcalc{background:#fafcfb;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:#2e7d32;background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gs .gopt{margin:4px 6px 4px 0}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:#2e7d32}.gfb.no{color:#b0426b}
+  .gbar{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  .hid{display:none !important}
 </style>
 </head>
 <body data-next-href="Tests/Unit_54_Test_CellsSchoolMock.html" data-last-label="Go to Mock Test &rarr;">
@@ -192,8 +208,8 @@
   </section>
 
   <section class="screen" id="sM3" data-lock="game">
-    <h2>Stop 3: The Microscope</h2>
-    <div class="rulebar">Tap the parts. Then try three different magnifications.</div>
+    <h2>Stop 3: The Microscope and Real Size</h2>
+    <div class="rulebar">Part 1: tap the parts and try three magnifications. Part 2: learn real size, step by step.</div>
     <div class="xp" id="xp3">
       <svg viewBox="0 0 300 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A microscope" class=""><rect width="300" height="340" rx="12" fill="#f4f7f9"/><rect x="55" y="302" width="190" height="26" rx="8" fill="#455a64"/><path d="M200,302 C262,292 266,168 222,98" stroke="#607d8b" stroke-width="24" fill="none" stroke-linecap="round"/><path d="M154,102 L216,102" stroke="#607d8b" stroke-width="16" stroke-linecap="round"/><rect x="120" y="46" width="34" height="108" rx="4" fill="#78909c"/><rect x="127" y="12" width="20" height="38" rx="3" fill="#263238" class="part" data-part="eyepiece"/><rect x="124" y="12" width="26" height="8" rx="2" fill="#37474f" class="part" data-part="eyepiece"/><rect x="114" y="150" width="46" height="14" rx="4" fill="#546e7a"/><rect x="118" y="164" width="9" height="30" rx="2" fill="#37474f" class="part" data-part="objective"/><rect x="130" y="164" width="9" height="52" rx="2" fill="#263238" class="part" data-part="objective"/><rect x="142" y="164" width="9" height="38" rx="2" fill="#37474f" class="part" data-part="objective"/><rect x="68" y="238" width="140" height="12" rx="3" fill="#90a4ae" class="part" data-part="stage"/><rect x="102" y="229" width="72" height="9" rx="2" fill="#e0f7fa" stroke="#00838f" stroke-width="1.5"/><circle cx="138" cy="284" r="14" fill="#ffd54f" stroke="#f9a825" stroke-width="2.5" class="part" data-part="light"/><g stroke="#f9a825" stroke-width="2.5" stroke-linecap="round"><line x1="138" y1="262" x2="138" y2="254"/><line x1="118" y1="268" x2="112" y2="262"/><line x1="158" y1="268" x2="164" y2="262"/></g><circle cx="240" cy="190" r="17" fill="#ff8a65" stroke="#bf360c" stroke-width="2.5" class="part" data-part="knob"/><circle cx="240" cy="190" r="5" fill="#bf360c"/></svg>
       <div class="chips"><button class="chip" data-part="eyepiece">eyepiece</button><button class="chip" data-part="objective">objective lens</button><button class="chip" data-part="stage">stage</button><button class="chip" data-part="light">light source</button><button class="chip" data-part="knob">focusing knob</button></div>
@@ -202,22 +218,42 @@
       <div class="mtot" id="mtot"></div><div class="info" id="mlow"></div><div class="cnt" id="xc3"></div>
     </div>
     <div class="job">Total magnification = eyepiece &times; objective. Always start on <b>low power</b>: it shows more of the slide, so the specimen is easy to find.</div>
-    <div class="rulebar">Real size = picture size &divide; total magnification.</div>
-  </section>
 
-  <section class="screen" id="sM3b" data-lock="game">
-    <h2>Stop 3b: Real Size (Calc Check)</h2>
-    <div class="job"><b>Calc check:</b> <b>1.</b> Say what the number means. <b>2.</b> Write the step, never just the answer. <b>3.</b> Size check.</div>
-    <div class="calc" id="calc1">
-      <p><b>A ladybird&rsquo;s leg is photographed with a &times;10 eyepiece and a &times;5 objective. In the photo the leg is 25 mm long. How long is the real leg?</b></p>
-      <div class="info">1. What does the number mean? The photo is magnified, so the real leg is <b>smaller</b> than 25 mm.</div>
-      <div class="wp"><label for="cstep">2. Write the step (picture size and total magnification), then press Check step.</label>
-        <input type="text" id="cstep" maxlength="30" autocomplete="off" placeholder="type your step"><button class="btn chk" id="cstepb" disabled>Check step</button></div>
-      <div class="fb" id="cstepfb"></div>
-      <div class="wp hid" id="cans"><label for="cansin">Now the answer, in mm:</label><input type="text" id="cansin" maxlength="10" autocomplete="off"><button class="btn chk" id="cansb" disabled>Check answer</button><div class="fb" id="cansfb"></div></div>
-      <div class="info hid" id="csize">3. Size check: the real leg must be smaller than the photo, and 0.5 mm is far smaller than 25 mm. It passes.</div>
+    <div class="gcalc" id="gcReal">
+      <h3>Part 2: Real Size &mdash; what does it mean?</h3>
+      <div class="job">A microscope makes things look <b>bigger</b>. &ldquo;&times;20&rdquo; means the picture is <b>20 times bigger</b> than the real thing. To get back to the <b>real size</b>, we undo the bigger: we <b>divide</b>.</div>
+      <svg viewBox="0 0 320 92" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A tiny real leg and a much longer picture of it"><rect width="320" height="92" rx="10" fill="#f4f7f9"/><text x="12" y="24" font-size="13" font-weight="700" fill="#37474f">Real leg</text><rect x="100" y="14" width="10" height="12" rx="3" fill="#7e57c2"/><text x="12" y="62" font-size="13" font-weight="700" fill="#37474f">Picture &#215;20</text><rect x="100" y="52" width="200" height="12" rx="3" fill="#b39ddb"/><text x="100" y="86" font-size="12" fill="#37474f">The picture is 20 times longer, so real = picture &#247; 20</text></svg>
+      <div class="job"><b>Calc check</b> every time: <b>1.</b> Say what the number means. <b>2.</b> Write the step. <b>3.</b> Size check.</div>
+
+      <div class="gpart gwatch">
+        <h3>&#128064; Watch me</h3>
+        <div class="gq">An ant&rsquo;s leg is photographed with a &times;10 eyepiece and a &times;2 objective. In the photo the leg is 40 mm long. How long is the real leg?</div>
+        <div class="ws hid"><span class="n">1</span><b>Find the total magnification.</b> Eyepiece &times; objective = 10 &times; 2 = <b>20</b>. The photo is 20 times bigger than the real leg.</div>
+        <div class="ws hid"><span class="n">2</span><b>Bigger or smaller?</b> The real leg is <b>smaller</b> than the photo. Smaller means <b>divide</b>.</div>
+        <div class="ws hid"><span class="n">3</span><b>Write the sum.</b> Photo size &divide; total magnification = <b>40 &divide; 20</b>.</div>
+        <div class="ws hid"><span class="n">4</span><b>Work it out.</b> 40 &divide; 20 = <b>2</b>. The real leg is <b>2 mm</b> long.</div>
+        <div class="ws hid"><span class="n">5</span><b>Size check.</b> Is 2 mm smaller than 40 mm? Yes. Check back: 2 &times; 20 = 40, the same as the photo. The answer is right.</div>
+        <div class="gbar"><button class="btn chk gwbtn">Show step 1 &#9654;</button></div>
+      </div>
+
+      <div class="gpart gturn hid">
+        <h3>&#9997;&#65039; Your turn &mdash; the same 5 steps, new numbers</h3>
+        <div class="gq">A ladybird&rsquo;s leg is photographed with a &times;10 eyepiece and a &times;5 objective. In the photo the leg is 50 mm long. How long is the real leg?</div>
+        <div class="gs" data-kind="num" data-ans="50" data-ws="1" data-hint="Multiply the eyepiece number by the objective number: 10 &times; 5."><span class="n">1</span><b>Total magnification</b> = 10 &times; 5 = <input type="text" maxlength="6" autocomplete="off"><button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="2" data-hint="The photo was made bigger. So is the real leg bigger or smaller than the photo?"><span class="n">2</span><b>Is the real leg bigger or smaller than 50 mm?</b><br><button class="btn gopt" data-ok="1">Smaller, so divide</button><button class="btn gopt">Bigger, so multiply</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="3" data-hint="Photo size &divide; total magnification. The photo is 50 mm and the total is 50."><span class="n">3</span><b>Which sum is right?</b><br><button class="btn gopt">50 &times; 50</button><button class="btn gopt" data-ok="1">50 &divide; 50</button><button class="btn gopt">50 &divide; 10</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="1" data-ws="4" data-hint="50 &divide; 50: how many 50s fit into 50?"><span class="n">4</span><b>Work it out.</b> 50 &divide; 50 = <input type="text" maxlength="6" autocomplete="off"> mm <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="5" data-hint="Multiply your answer by the total magnification (50). Do you get the photo size back?"><span class="n">5</span><b>Size check.</b> Check back: 1 &times; 50 = ?<br><button class="btn gopt" data-ok="1">50, the same as the photo</button><button class="btn gopt">1</button><button class="btn gopt">500</button><div class="gfb"></div></div>
+      </div>
+
+      <div class="gpart gown hid">
+        <h3>&#11088; On your own</h3>
+        <div class="gq">A grain of sand is photographed with a &times;10 eyepiece and a &times;4 objective. In the photo it is 120 mm wide. How wide is the real grain of sand?</div>
+        <div class="gs" data-kind="num" data-ans="3" data-ws="0" data-hint="Use the same 5 steps. First the total magnification: 10 &times; 4. Then photo size &divide; total." data-hint2="10 &times; 4 = 40, so the sum is 120 &divide; 40. How many 40s make 120?"><span class="n">&#9733;</span>Real width = <input type="text" maxlength="6" autocomplete="off"> mm <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+      </div>
     </div>
   </section>
+
 
   <section class="screen" id="sM4" data-lock="game">
     <h2>Stop 4: The Zoom Ladder</h2>
@@ -242,12 +278,41 @@
 
   <section class="screen" id="sM6b" data-lock="game">
     <h2>Stop 6b: Count the Rounds First</h2>
-    <div class="rulebar">Press Divide again until you reach 4 rounds.</div>
+    <div class="rulebar">Part 1: press Divide again until you reach 4 rounds. Part 2: learn the sum, step by step.</div>
     <div class="xp" id="xp7"><div class="gsvg"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="12" fill="#f4f9f7"/><circle cx="100.0" cy="100.0" r="86.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="100.0" cy="100.0" r="30.1" fill="#7e57c2"/></svg></div><div class="gsvg hid"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="12" fill="#f4f9f7"/><circle cx="55.0" cy="100.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="55.0" cy="100.0" r="14.3" fill="#7e57c2"/><circle cx="145.0" cy="100.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="145.0" cy="100.0" r="14.3" fill="#7e57c2"/></svg></div><div class="gsvg hid"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="12" fill="#f4f9f7"/><circle cx="55.0" cy="55.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="55.0" cy="55.0" r="14.3" fill="#7e57c2"/><circle cx="145.0" cy="55.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="145.0" cy="55.0" r="14.3" fill="#7e57c2"/><circle cx="55.0" cy="145.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="55.0" cy="145.0" r="14.3" fill="#7e57c2"/><circle cx="145.0" cy="145.0" r="41.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="145.0" cy="145.0" r="14.3" fill="#7e57c2"/></svg></div><div class="gsvg hid"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="12" fill="#f4f9f7"/><circle cx="40.0" cy="40.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="40.0" cy="40.0" r="9.1" fill="#7e57c2"/><circle cx="100.0" cy="40.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="100.0" cy="40.0" r="9.1" fill="#7e57c2"/><circle cx="160.0" cy="40.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="160.0" cy="40.0" r="9.1" fill="#7e57c2"/><circle cx="40.0" cy="100.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="40.0" cy="100.0" r="9.1" fill="#7e57c2"/><circle cx="100.0" cy="100.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="100.0" cy="100.0" r="9.1" fill="#7e57c2"/><circle cx="160.0" cy="100.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="160.0" cy="100.0" r="9.1" fill="#7e57c2"/><circle cx="40.0" cy="160.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="40.0" cy="160.0" r="9.1" fill="#7e57c2"/><circle cx="100.0" cy="160.0" r="26.0" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="100.0" cy="160.0" r="9.1" fill="#7e57c2"/></svg></div><div class="gsvg hid"><svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><rect width="200" height="200" rx="12" fill="#f4f9f7"/><circle cx="32.5" cy="32.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="32.5" cy="32.5" r="6.5" fill="#7e57c2"/><circle cx="77.5" cy="32.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="77.5" cy="32.5" r="6.5" fill="#7e57c2"/><circle cx="122.5" cy="32.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="122.5" cy="32.5" r="6.5" fill="#7e57c2"/><circle cx="167.5" cy="32.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="167.5" cy="32.5" r="6.5" fill="#7e57c2"/><circle cx="32.5" cy="77.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="32.5" cy="77.5" r="6.5" fill="#7e57c2"/><circle cx="77.5" cy="77.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="77.5" cy="77.5" r="6.5" fill="#7e57c2"/><circle cx="122.5" cy="77.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="122.5" cy="77.5" r="6.5" fill="#7e57c2"/><circle cx="167.5" cy="77.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="167.5" cy="77.5" r="6.5" fill="#7e57c2"/><circle cx="32.5" cy="122.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="32.5" cy="122.5" r="6.5" fill="#7e57c2"/><circle cx="77.5" cy="122.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="77.5" cy="122.5" r="6.5" fill="#7e57c2"/><circle cx="122.5" cy="122.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="122.5" cy="122.5" r="6.5" fill="#7e57c2"/><circle cx="167.5" cy="122.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="167.5" cy="122.5" r="6.5" fill="#7e57c2"/><circle cx="32.5" cy="167.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="32.5" cy="167.5" r="6.5" fill="#7e57c2"/><circle cx="77.5" cy="167.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="77.5" cy="167.5" r="6.5" fill="#7e57c2"/><circle cx="122.5" cy="167.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="122.5" cy="167.5" r="6.5" fill="#7e57c2"/><circle cx="167.5" cy="167.5" r="18.5" fill="#c8f0e4" stroke="#1fa387" stroke-width="3"/><circle cx="167.5" cy="167.5" r="6.5" fill="#7e57c2"/></svg></div><div class="counter" id="xc7"></div><table class="rtab"><tr class="rrow"><td>Round 0</td><td>1 cell</td></tr><tr class="rrow"><td>Round 1</td><td>2 cells</td></tr><tr class="rrow"><td>Round 2</td><td>4 cells</td></tr><tr class="rrow"><td>Round 3</td><td>8 cells</td></tr><tr class="rrow"><td>Round 4</td><td>16 cells</td></tr></table><div style="text-align:center"><button class="actbtn" id="d2btn">Divide again</button></div></div>
-    <div class="job">Worked example: a cell divides every 30 minutes. How many cells after 2 hours? 2 hours is 120 minutes. 120 &divide; 30 = <b>4 rounds</b>. 1 &rarr; 2 &rarr; 4 &rarr; 8 &rarr; 16. The answer is 16 cells.</div>
-    <div class="rulebar">Rounds = time &divide; gap. Count the rounds first, then double.</div>
-    <div class="job"><b>Calc check, step 3: size check.</b> Does the number make sense? Each round doubles, so the numbers must climb 1, 2, 4, 8, 16.</div>
+    <div class="job">Every round, <b>each</b> cell splits into two, so the number of cells <b>doubles</b>: 1, 2, 4, 8, 16, 32, 64&hellip;</div>
+
+    <div class="gcalc" id="gcDouble">
+      <h3>Part 2: How many cells after some time?</h3>
+      <div class="job"><b>The rule:</b> Rounds = time &divide; gap. <b>Count the rounds first</b>, then double once for each round. <b>Calc check:</b> say what the numbers mean, write each step, size check.</div>
+
+      <div class="gpart gwatch">
+        <h3>&#128064; Watch me</h3>
+        <div class="gq">A cell divides every 30 minutes. How many cells are there after 2 hours?</div>
+        <div class="ws hid"><span class="n">1</span><b>Use the same units.</b> The gap is in minutes, so change hours to minutes: 2 hours = 60 + 60 = <b>120 minutes</b>.</div>
+        <div class="ws hid"><span class="n">2</span><b>Count the rounds.</b> Rounds = time &divide; gap = 120 &divide; 30 = <b>4 rounds</b>.</div>
+        <div class="ws hid"><span class="n">3</span><b>Double once per round.</b> Start at 1: 1 &rarr; 2 &rarr; 4 &rarr; 8 &rarr; 16. Four arrows for four rounds. Answer: <b>16 cells</b>.</div>
+        <div class="ws hid"><span class="n">4</span><b>Size check.</b> Count the arrows: 4, the same as the number of rounds. Each number is double the one before. It passes.</div>
+        <div class="gbar"><button class="btn chk gwbtn">Show step 1 &#9654;</button></div>
+      </div>
+
+      <div class="gpart gturn hid">
+        <h3>&#9997;&#65039; Your turn &mdash; the same steps, new numbers</h3>
+        <div class="gq">A cell divides every 20 minutes. How many cells are there after 2 hours?</div>
+        <div class="gs" data-kind="num" data-ans="120" data-ws="1" data-hint="1 hour = 60 minutes, so 2 hours = 60 + 60."><span class="n">1</span><b>2 hours in minutes</b> = <input type="text" maxlength="6" autocomplete="off"> minutes <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="6" data-ws="2" data-hint="Rounds = time &divide; gap = 120 &divide; 20. How many 20s fit into 120?"><span class="n">2</span><b>Number of rounds</b> = 120 &divide; 20 = <input type="text" maxlength="6" autocomplete="off"> <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="64" data-ws="3" data-hint="Start at 1 and double 6 times: 1, 2, 4, 8, 16, 32, then one more double."><span class="n">3</span><b>Cells after 6 rounds</b> = <input type="text" maxlength="6" autocomplete="off"> <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="4" data-hint="Count your arrows from 1 up to 64. Each arrow is one round."><span class="n">4</span><b>Size check.</b> How many times did you double?<br><button class="btn gopt">5</button><button class="btn gopt" data-ok="1">6, the same as the rounds</button><button class="btn gopt">2</button><div class="gfb"></div></div>
+      </div>
+
+      <div class="gpart gown hid">
+        <h3>&#11088; On your own</h3>
+        <div class="gq">A cell divides every 15 minutes. How many cells are there after 1 hour?</div>
+        <div class="gs" data-kind="num" data-ans="16" data-ws="0" data-hint="The same steps: change to minutes, count the rounds, then double." data-hint2="1 hour = 60 minutes. 60 &divide; 15 = 4 rounds. Now double 4 times, starting at 1."><span class="n">&#9733;</span>Cells after 1 hour = <input type="text" maxlength="6" autocomplete="off"> <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+      </div>
+    </div>
   </section>
+
 
   <section class="screen" id="sTwelve" data-route="B" data-label="Cells in 12 lines">
     <h2>Cells in 12 Lines</h2>
