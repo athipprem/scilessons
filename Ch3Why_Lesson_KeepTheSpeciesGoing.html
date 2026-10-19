@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 55 · Lesson 1 — Keep the Species Going</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#2f8f4e;--pl-d:#14502b;--pl-l:#e8f5ec;--am:#d99a0b;--am-l:#fff4d6;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#c8e6c9;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#f1f9f3;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#e1efe5;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#2f8f4e}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+
+  .xp{background:#fafcfa;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  .xp .cellview svg,.xp .lsvg svg,.xp .dsvg svg,.xp .gsvg svg{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+  .xp .lsvg,.xp .dsvg,.xp .gsvg{text-align:center}
+  .xp>svg{max-width:300px;margin:0 auto;display:block}
+  .xp svg .part{cursor:pointer}.xp svg .part:hover{filter:brightness(.93)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;color:var(--pl-d)}
+  .chip.on{background:var(--pl-l);border-color:var(--pl)}.chip.grey{opacity:.45;border-style:dashed}
+  .info{background:var(--pl-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:.95rem;min-height:3em}
+  .cnt{font-weight:800;text-align:center;color:var(--pl-d);font-size:.85rem}
+  .cmp{width:100%}.cmp td.no{color:#c62828;font-weight:800}.cmp td:nth-child(n+2){text-align:center;font-weight:800}
+  .ebtn,.obtn{background:#fff;color:var(--pl-d);border:1.5px solid var(--pl);border-radius:10px;padding:7px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .ebtn.on,.obtn.on{background:var(--pl);color:#fff}
+  .mtot{background:var(--pl-l);border-radius:10px;padding:8px 12px;text-align:center;font-size:1.05rem;margin:8px 0;color:var(--pl-d)}
+  .ladder{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .rung{border:1.5px solid var(--line);border-radius:8px;padding:4px 9px;font-size:.78rem;font-weight:800;background:#fff;color:#6b7280}
+  .rung.done{background:#e8f5e9;color:#2e7d32}.rung.on{background:var(--pl);color:#fff;border-color:var(--pl)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:5px;cursor:pointer;font-family:inherit;text-align:center}
+  .card svg{width:100%;height:auto}.card b{display:block;font-size:.8rem;color:var(--pl-d)}
+  .card.on{outline:3px solid var(--pl)}.card.seen{background:#f1f9f3}
+  .rtab{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0}.rtab td{border:1px solid var(--line);padding:4px 10px}
+  .rrow td:first-child{font-weight:800}.rrow.on td{background:var(--pl-l);font-weight:800}.rrow.done td{color:var(--pl-d)}
+  .wr textarea{width:100%;min-height:78px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wr textarea[readonly]{background:#e4f0e8;color:var(--grey)}
+  .wmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .lines{margin:8px 0 8px 22px;padding:0}.lines li{margin:5px 0}
+  .gobox{border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}
+  .calc{background:#fafcfa;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}.wp input[type=text]{width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}.wp input[readonly]{background:#e1efe5;color:var(--grey)}
+  @media(max-width:520px){.cards{grid-template-columns:repeat(2,1fr)}}
+
+  /* guided calc walkthrough */
+  .gcalc{background:#fafcfa;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:#2e7d32;background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gs .gopt,.gs .xo{margin:4px 6px 4px 0}
+  .gopt,.xo{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .gopt:disabled,.xo:disabled{opacity:.5;cursor:default}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:#2e7d32}.gfb.no{color:#b0426b}
+  .gbar{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  /* unit 55 pictures */
+  .stage svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cnt2{font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .sline{min-height:1.5em}
+  .rbar{background:var(--am-l);border:1.5px solid var(--am);border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700;text-align:center;color:#5a3d00}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .wlb{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .wlb.on{background:var(--pl);color:#fff}
+  .sorti{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sbinw{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+  .sbin{width:100%;background:var(--pl);color:#fff;border:none;border-radius:9px;padding:8px;font-weight:800;cursor:pointer;font-family:inherit}
+  .sbinw:nth-child(2) .sbin{background:var(--am);color:#3b2a00}
+  .placed{background:var(--ok-l);border-radius:8px;padding:6px 9px;margin-top:6px;font-size:.88rem}
+  .scs{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .sc{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:.93rem;font-family:inherit}
+  .sc.sel{outline:3px solid var(--pl);background:var(--pl-l)}.sc.used{opacity:.3;cursor:default}
+  .xl{background:#fff;border-left:5px solid var(--am);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .xl b{color:#7a5200}
+  #xta{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  #xta[readonly]{background:#e4f0e8;color:var(--grey)}
+  .xchk label{display:block;margin:4px 0;font-weight:700}
+  .xmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  input[type=range]{width:100%;accent-color:#2f8f4e}
+  .ctl{margin:8px 0;font-weight:700;color:var(--pl-d)}
+  .dots10{display:block;margin:8px auto}
+</style>
+</head>
+<body data-next-href="Ch3Why_Lesson_AnimalsAndTheirEggs.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#127807; Lesson 1 &middot; Keep the Species Going</b><span class="pill">Unit 55 &middot; Biology</span></div>
+
+  <section class="screen active" id="sPond" data-route="A" data-label="the Survival Pond" data-lock="game">
+    <h2>The Survival Pond</h2>
+    <div class="why">Every living thing dies one day. <b>Reproduction</b> makes <b>a new living thing</b>, its <b>offspring</b>, so its <b>species</b> carries on. A species is one kind of living thing.</div>
+    <div class="rulebar">A pond fish lays 1,000 eggs. Each dot is 10 eggs. Press Next danger four times.</div>
+    <div class="box stage" id="pond"><div id="pondsvg"></div><div class="cnt2" id="pondcount"></div><div class="sline" id="pondmsg"></div>
+      <button class="actbtn" id="pondbtn">Next danger</button>
+      <div class="hid" id="pondend"><div class="counter">10 of 1,000 grew up. <b>Most never grow up.</b></div><div class="cap show">many young, little care</div><div class="rbar">2 parents need about 2 grown-up young to take their place. 10 offspring is plenty, so the species is not extinct and this keeps the species going.</div></div></div>
+  </section>
+
+  <section class="screen" id="sEle" data-route="A" data-lock="game">
+    <h2>Few Young, Lots of Care</h2>
+    <div class="why">Now an elephant mother. She has only 4 calves in her whole life. Press both dangers.</div>
+    <div class="box stage" id="ele"><div id="elesvg"></div><div class="cnt2" id="elecount"></div><div class="sline" id="elemsg"></div>
+      <button class="actbtn" id="elelion">Lion comes</button><button class="actbtn alt" id="eledry">Dry season</button>
+      <div class="hid" id="eleend"><div class="cap show">few young, lots of care</div><div class="rbar">2 parents need 2 grown-up young. 3 offspring is enough, so the species is not extinct and this keeps the species going.</div></div></div>
+    <div class="job">Two plans, one goal: <b>many young, little care</b> or <b>few young, lots of care</b>. Both end with enough offspring grown up to replace the parents. The care a parent gives is called <b>parental care</b>.</div>
+  </section>
+
+  <section class="screen" id="sCard" data-route="B" data-label="the Survival card">
+    <h2>The Survival Card</h2>
+    <div class="rulebar">Same pond, now as steps you can do on paper.</div>
+    <ol class="stepol">
+      <li><b>Count the eggs.</b></li>
+      <li><b>Find the share that grows up.</b> &ldquo;1 in N&rdquo; means <b>fewer</b>, so <b>divide</b>: <b>survivors = eggs &divide; N</b>.</li>
+      <li><b>Compare with the parents.</b> At least 2 grown-up offspring: this keeps the species going. Fewer than 2: the numbers shrink, and the species may become extinct.</li>
+    </ol>
+    <div class="tree"><div class="q">Count the eggs. Divide by N.</div><div class="arr">&darr;</div><div class="row"><div class="a">2 or more grow up: keeps the species going</div><div class="a">Fewer than 2: the numbers shrink</div></div></div>
+    <div class="job">Pond fish: survivors = 1,000 eggs &divide; 100 = 10.</div>
+  </section>
+
+  <section class="screen" id="sCalc" data-lock="game">
+    <div class="gcalc" id="gcSurvive">
+      <h3>How many young grow up? Step by step</h3>
+      <div class="job">&ldquo;1 in 100 grow up&rdquo; means out of every 100 eggs, just 1 becomes an adult.</div>
+      <svg viewBox="0 0 310 62" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="100 dots with only 1 lit" class="dots10"><circle cx="8" cy="10" r="4.4" fill="#2f8f4e"/><circle cx="20" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="32" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="44" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="56" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="68" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="80" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="92" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="104" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="116" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="128" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="140" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="152" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="164" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="176" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="188" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="200" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="212" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="224" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="236" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="248" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="260" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="272" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="284" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="296" cy="10" r="4.4" fill="#cfd8dc"/><circle cx="8" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="20" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="32" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="44" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="56" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="68" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="80" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="92" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="104" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="116" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="128" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="140" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="152" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="164" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="176" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="188" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="200" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="212" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="224" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="236" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="248" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="260" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="272" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="284" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="296" cy="22" r="4.4" fill="#cfd8dc"/><circle cx="8" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="20" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="32" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="44" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="56" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="68" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="80" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="92" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="104" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="116" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="128" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="140" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="152" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="164" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="176" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="188" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="200" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="212" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="224" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="236" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="248" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="260" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="272" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="284" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="296" cy="34" r="4.4" fill="#cfd8dc"/><circle cx="8" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="20" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="32" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="44" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="56" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="68" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="80" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="92" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="104" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="116" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="128" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="140" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="152" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="164" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="176" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="188" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="200" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="212" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="224" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="236" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="248" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="260" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="272" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="284" cy="46" r="4.4" fill="#cfd8dc"/><circle cx="296" cy="46" r="4.4" fill="#cfd8dc"/></svg>
+      <div class="gpart gwatch">
+        <h3>&#128064; Watch me</h3>
+        <div class="gq">A pond fish lays 1,000 eggs. 1 in 100 grow up. How many survivors?</div>
+        <div class="ws hid"><span class="n">1</span><b>More or fewer than 1,000?</b> Fewer: most never grow up.</div>
+        <div class="ws hid"><span class="n">2</span><b>Fewer means divide</b> by 100.</div>
+        <div class="ws hid"><span class="n">3</span><b>Write it:</b> survivors = eggs &divide; 100, so 1,000 &divide; 100 = <b>10</b>.</div>
+        <div class="ws hid"><span class="n">4</span><b>Size check:</b> 10 &times; 100 = 1,000. That is back to the eggs.</div>
+        <div class="ws hid"><span class="n">5</span><b>Compare:</b> 10 is more than 2, so this keeps the species going.</div>
+        <div class="gbar"><button class="btn chk gwbtn">Show step 1 &#9654;</button></div>
+      </div>
+      <div class="gpart gturn hid">
+        <h3>&#9997;&#65039; Your turn: same 5 steps, new numbers</h3>
+        <div class="gq">A pond fish lays 800 eggs. 1 in 40 grow up. How many survivors?</div>
+        <div class="gs" data-kind="choice" data-ws="1" data-hint="Most eggs never grow up."><span class="n">1</span><b>More or fewer than 800 survive?</b><br><button class="gopt" data-ok="1">Fewer</button><button class="gopt">More</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="2" data-hint="Fewer means divide."><span class="n">2</span><b>Multiply or divide by 40?</b><br><button class="gopt">Multiply</button><button class="gopt" data-ok="1">Divide</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="20" data-ws="3" data-hint="How many 40s make 800? 40 &times; 10 = 400&hellip;"><span class="n">3</span><b>800 &divide; 40 =</b> <input type="text" maxlength="6" autocomplete="off"><button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="800" data-ws="4" data-hint="Multiply back. You should land on the eggs."><span class="n">4</span><b>Size check: 20 &times; 40 =</b> <input type="text" maxlength="6" autocomplete="off"><button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="5" data-hint="Is 20 at least 2?"><span class="n">5</span><b>Does the species keep going?</b><br><button class="gopt" data-ok="1">Yes, 20 is at least 2</button><button class="gopt">No</button><div class="gfb"></div></div>
+      </div>
+      <div class="gpart gown hid">
+        <h3>&#11088; On your own</h3>
+        <div class="gq">A pond fish lays 3,000 eggs. 1 in 500 grow up. How many survivors?</div>
+        <div class="gs" data-kind="num" data-ans="6" data-ws="0" data-hint="Fewer means divide." data-hint2="How many 500s fit in 3,000? Count up: 500, 1,000&hellip;"><span class="n">&#9733;</span>Survivors = <input type="text" maxlength="6" autocomplete="off"> <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="sTrouble" data-route="A" data-lock="game">
+    <h2>When Too Few Grow Up</h2>
+    <div class="why">The pond fish again. A new predator arrives. If too few grow up, the species can become extinct. Slide it up, then press Run 5 generations.</div>
+    <div class="box stage" id="trouble"><div class="ctl">New predator: none &rarr; huge<input type="range" id="trslide" min="0" max="3" step="1" value="0"></div><div class="cnt2" id="trn"></div><div id="trsvg"></div><div class="cap show" id="trcap"></div>
+      <button class="actbtn" id="trrun">Run 5 generations</button><button class="actbtn alt" id="trreset">Reset</button>
+      <div class="hid" id="trdone"><div class="rbar"><b>Extinct</b> means no members of a species are left anywhere.</div></div></div>
+    <div class="cap show">more die than are born</div>
+    <div class="job">Extinct is forever: no offspring, no species.</div>
+  </section>
+
+  <section class="screen" id="sPractice" data-lock="mcq">
+    <h2>Practice</h2>
+    <div class="mcq" data-why="Reproduction makes a new living thing. Healing only mends the same animal."><p>A rabbit has babies. A different rabbit&rsquo;s scratched ear heals. Which one is reproduction?</p><button class="opt">The scratched ear healing</button><button class="opt" data-ok>The rabbit having babies</button><button class="opt">Both of them</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq" data-why="Offspring replace the parents. Reproduction keeps the species going, so the species is not extinct."><p>Every animal in a herd dies one day. Why does the herd not just vanish?</p><button class="opt">The old animals never really die</button><button class="opt" data-ok>Reproduction makes offspring, and that keeps the species going</button><button class="opt">Each animal lives forever if it eats well</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq" data-why="Only 5 of 500 grew up. Most never grow up."><p>A pond has 500 eggs. A month later only 5 young fish are left. What does that show?</p><button class="opt">Most eggs grow up</button><button class="opt" data-ok>Most never grow up</button><button class="opt">All of them grew up</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq pred" data-why="Fewer means divide: survivors = eggs &divide; 50, so 200 &divide; 50 = 4."><p>200 eggs. 1 in 50 grow up. How many survivors?</p><div class="pbox"><label>What do you think? Write a few words or a number, then press Show options.</label><input class="pin" type="text" maxlength="60" autocomplete="off"><button class="btn pshow" disabled>Show options</button></div><div class="pbody hid"><button class="opt" data-ok>200 &divide; 50 = 4</button><button class="opt">200 &minus; 50 = 150</button><button class="opt">200 + 50 = 250</button><button class="btn chk">Check</button><div class="fb"></div></div></div>
+    <div class="mcq" data-why="More die than are born, so the numbers shrink, and the offspring may all be gone: extinct."><p>In a pond, 2 young grow up for every 5 adults that die. What happens over time?</p><button class="opt">The numbers grow</button><button class="opt" data-ok>The numbers shrink towards extinct, because more die than are born</button><button class="opt">The numbers stay the same</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before Lesson 2: Self-Check</h2>
+    <div class="rulebar">One try each. Then you are ready, or you go back to the right place.</div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>1. A fish lays 400 eggs. 1 in 20 grow up. How many survivors?</p><button class="opt">8,000</button><button class="opt" data-ok>20</button><button class="opt">380</button><button class="opt">420</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-fail="route" data-why=""><p>2. A mother has few young, but the whole herd guards them. Which plan is this?</p><button class="opt">many young, little care</button><button class="opt" data-ok>few young, lots of care</button><button class="opt">no plan at all</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div id="simtext" class="hid"><span data-k="d0">Press Next danger.</span><span data-k="d1">Eaten by bigger fish</span><span data-k="d2">Swept away by the current</span><span data-k="d3">Babies eaten by birds</span><span data-k="d4">Not enough food</span><span data-k="d0e">Press each danger.</span><span data-k="lion">A lion comes: the mother and herd circle the calves, so nobody is lost.</span><span data-k="dry">A dry season: one calf is lost.</span><span data-k="tr-ok">Enough young grow up: this keeps the species going.</span><span data-k="tr-bad">Fewer than 2 grow up per pair: more die than are born.</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch3Why_Sim.js"></script>
+</body>
+</html>

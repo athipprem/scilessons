@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '16 Oct 2026',
+  updated:        '19 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:54, topic:'Chapter 2 Cells &mdash; school-test prep (inserted; school test Tue 20 Oct 2026)', status:'&#9989; Built and gated (16 Oct 2026, 0 FAIL), from `BUILD_PLAN_SCI_U54_CellsSchoolTestPrep.md` v1.1. Warm-up, one lesson (Cells on One Map), a 21-item school-format mock (50 marks, pass 40) and a printable Last-Look Card. Plan: lesson Sat 17 Oct, mock Sun 18 Oct, card Mon 19 Oct.' },
+    currentUnit: { n:55, topic:'Chapter 3 &sect;A &mdash; Why Do Living Things Reproduce? Keeping the Species Going, and Animals and Their Eggs', status:'&#9989; Built (19 Oct 2026), from `BUILD_PLAN_SCI_U55_WhyReproduce.md` v1.0. Warm-up, two lessons and a 20-question test plus one written item (Q21, 4 marks, scored separately). Chapter 3 starts at school this week.' },
 
   lastUnit: {
-    n:53, score:17, outOf:20, pct:85, passBar:16, delta:+20, prevScore:65, passed:true, minutesSpent:6.5, minutesNote:'first click 16, final 17', firstPassScore:16,
-    patternLabel: 'Unit 53 result - Biology: The Life of a Cell (17/20, 85% PASS, 6.5 minutes; first clicks 16, final 17)',
-    patternInsight: '<strong>17/20 (85%)</strong> - PASS, +4 marks on Unit 52. Section A = <strong>2/2</strong>. Section B = <strong>6/6</strong>. Section C = <strong>9/12</strong>. Tier breakdown: Basic 2/2, Intermediate 6/6, Applied 9/12. Taken 15 Oct 2026, self-reported no help and no notes. <strong>Time: 6.5 minutes</strong> (U52: 8.6). First clicks 16, own changes 17 (Q13 wrong to right), review 17; the review changed nothing.',
-    analysisLabel: 'Three misses: Q9, Q15, Q17 - every Unit 52 miss was right this time except speed vs amount',
-    analysisInsight: '<strong>Held:</strong> the nucleus, yeast, the loop, growing tips, budding, speed vs distance, doubling fraction, dissolved salt. <strong>Missed:</strong> Q9 (typed Patch Q, chose P at about 900 = 300 x 3; keyed about 100 against 80), Q15 (the lid keeps sunlight out; keyed evaporate, condense, drip back), Q17 (chose 28 mm, the Day 4 value; keyed 32 mm).',
-    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Section A 2/2, Section B 6/6, Section C 9/12. 6.5 minutes. First clicks 16 / 20, final 17 / 20. Provenance: self-reported no help/no notes. Full record: `Memory Backup\\TEST_RECORD_SCI_U053.md`.',
+    n:54, score:46, outOf:50, pct:92, passBar:40, delta:null, prevScore:null, passed:true, minutesSpent:6.5, minutesUnit:53, minutesNote:'U54 was a retake, so not a pace point', firstPassScore:null,
+    patternLabel: 'Unit 54 result - Biology: Chapter 2 Cells school-format mock (46/50, 92% PASS, first sitting)',
+    patternInsight: '<strong>46/50 (92%)</strong> - PASS on the first sitting (Lui, 18 Oct 2026). The first sitting was lost to the old Save / Back-to-Hub layout, so Prem sat the paper a second time; the saved file (43/50 auto, 44 by hand, 4.7 min) is that retake. Item-level notes are indicative only, and the time is not a pace point.',
+    analysisLabel: 'Retake notes: reproduction vs repair (S5 "Budding"), two-word written answers, one right-to-wrong change (Q10)',
+    analysisInsight: '<strong>Held:</strong> diagram, label and table formats 11/11. <strong>Watch:</strong> S5 bone repair answered "Budding" (reproduction vs repair not secure); written answers are two words with no "because"; Q10 right to wrong onto the NEVER distractor. Unit 55 answers these: Q3 (repair vs reproduction), the Explain-it builder and Q21, and a S.T.O.P. line about changing answers.',
+    qSummary: '<strong>46 / 50 (92%) - PASS (first sitting, Lui).</strong> Saved item record is the retake: 43/50 auto, 44/50 by hand, 4.7 minutes. Full record: `Memory Backup\\TEST_RECORD_SCI_U054.md`.',
     qBreakdown: []
   },
 
@@ -98,11 +98,24 @@ var PREM_DATA = {
     { unit:52, topic:'Biology: What Gets Copied &mdash; Chromosomes, the Cell Cycle &amp; From Microscope to Genes (school-aligned, beyond-class)', score:13, outOf:20, pct:65, passBar:16, date:'2026-10-14' },
     { unit:53, topic:'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-15' },
     { unit:'M5', topic:'Milestone Test 5 - Units 41-53', score:33, outOf:40, marks:80, marksOutOf:100, pct:80, passBar:32, firstPassMarks:71.25, minutes:13.4, date:'2026-10-16' },
+    { unit:54, topic:'Biology: Chapter 2 Cells &mdash; school-format mock (inserted, school-test prep)', score:46, outOf:50, pct:92, passBar:40, date:'2026-10-18', note:'first sitting (Lui); the saved file is a 2nd sitting, 43/50' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 54, badge: 'linear-gradient(135deg,#1e3a5f,#14806a)',
+      title: 'Biology: Chapter 2 Cells &mdash; school-format mock (inserted, school-test prep)',
+      tags: [
+        { t:'&#9989; 46/50 (92%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First sitting (Lui)', c:'tgreen' },
+        { t:'Retake saved: 43/50, not a pace point', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Inserted school-test prep: warm-up, one lesson (Cells on One Map), a 21-item school-format mock (50 marks, pass 40) and a Last-Look Card. <strong>46/50 (92%) PASS on the first sitting</strong> (Lui, 18 Oct 2026); that sitting was lost to the old Save layout, so Prem sat it again (saved file 43/50 auto, 44 by hand, 4.7 min, indicative only). Retake notes: S5 bone repair answered "Budding"; written answers too short; Q10 right to wrong. Record: `Memory Backup\\TEST_RECORD_SCI_U054.md`.',
+      status: 'done'
+    },
     {
       n: 53, badge: 'linear-gradient(135deg,#c2570c,#3d4f63)',
       title: 'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)',

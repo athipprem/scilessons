@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_55_Test_WhyReproduce.html  —  Science Unit 55 (Ch.3 section A: Why do living things reproduce?)
+     Built 19 Oct 2026 from BUILD_PLAN_SCI_U55_WhyReproduce.md v1.0 and the master template (save-button layout).
+     Part 1 = 20 MCQ {A:2,B:6,C:12}, pass 16. Part 2 = Q21 written, /4, scored separately (provisional keyword marks).
+     Pace protocol v2: S.T.O.P. line, predict-first on Q9/Q13/Q14/Q16, fast-answer review (MCQ only, cap 6, C first).
+     SAVE-BUTTON RULE: the x close (#btn-close) top-left; Save alone at the end; no Back-to-Hub button.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 55 Test — Why Living Things Reproduce</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#2f8f4e; --gold-d:#14502b; --steel:#2f8f4e; --steel-d:#14502b; --yolk:#d99a0b; --yolk-l:#fff4d6;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .x-close{width:34px;height:34px;border-radius:50%;background:#ffffff33;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;text-decoration:none;flex:0 0 auto}
+  .x-close:hover{background:#ffffff59}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:var(--yolk-l);border:1.5px solid var(--yolk);color:#5a3d00;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#f1f9f3;border:1.5px dashed var(--gold);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--gold-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--gold-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--gold-d)}
+
+  .tbl{border-collapse:collapse;margin:8px 0;font-weight:400;font-size:.9rem}.tbl th,.tbl td{border:1.5px solid var(--line);padding:4px 12px;text-align:left}.tbl th{background:#f4f0e2}
+  .band.W{background:var(--yolk-l);color:#5a3d00;border:1.5px solid var(--yolk)}
+  .q.W{border-left-color:var(--yolk)}
+  .wbox textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit;font-size:.95rem}
+  .wbox textarea[readonly]{background:#eef4ef;color:var(--grey)}
+  .wres{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.88rem;background:#eef7ee;border-left:5px solid var(--green)}
+  .wres.show{display:block}
+  .wres ul{margin:6px 0 6px 18px;padding:0}
+  .tbl td.num{text-align:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <a class="x-close" id="btn-close" href="../index.html" title="Close and go back to the hub" aria-label="Close and go back to the hub" onclick="return leaveGuard()">&#10005;</a>
+    <div style="flex:1">
+      <b id="hdr-title">Unit 55 Test — Biology: Why Living Things Reproduce</b>
+      <span class="sub" id="hdr-sub">Species &bull; Survival &bull; Eggs and care &bull; one written answer</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+  <div class="pacebar">Section C takes about 1–2 minutes a question. Use S.T.O.P. Change an answer only if you can point to the word.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="part2-line"></div>
+    <div id="pace-lines"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Some answers may come back for one more look before your results. Make sure you're happy with all 20, and with your written answer!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="startReview()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-overlay">
+  <div class="rv-box">
+    <h3>Quick check: you answered this one fast. Read it once more.</h3>
+    <div class="rv-count" id="rv-count"></div>
+    <div id="rv-body"></div>
+    <div class="rv-actions" id="rv-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 55;
+const UNIT_TITLE = "Biology: Why Living Things Reproduce (Ch.3 section A)";
+const PASS_BAR   = 16;                        // Part 1: out of 20 (80%). Part 2 (Q21, /4) never counts toward it
+const NQ         = 20;                        // MCQ items (Part 1)
+const LAST_TEST_MINUTES = 6.5;                // Unit 53 (U54 was a retake, so it is not used)
+const REVIEW_SECS_AB = 15;                    // Section A/B answers faster than this are eligible for one more look
+const REVIEW_SECS_C  = 20;                    // Section C answers faster than this are eligible
+const REVIEW_MAX     = 6;                     // at most this many are shown (Section C first, then the fastest)
+const WRITTEN_MIN_CHARS = 3;                  // Q21 must have something typed before Submit opens
+
+const Q = [
+ {
+  "n": 1,
+  "section": "A",
+  "tier": "Basic",
+  "body": "A mayfly lives as an adult for only about one day. In that day it mates and lays its eggs, then it dies. Why does laying eggs matter so much for mayflies?",
+  "options": [
+   "Laying eggs helps the adult mayfly live for longer",
+   "Laying eggs makes the adult mayfly grow bigger",
+   "Laying eggs gives the adult mayfly enough food for its one day",
+   "When the adults die, there are young to take their place"
+  ],
+  "ans": 4,
+  "star": 0,
+  "why": "Adult mayflies die after about a day, but their eggs hatch into young that take over. That is how reproduction keeps the species going."
+ },
+ {
+  "n": 2,
+  "section": "A",
+  "tier": "Basic",
+  "body": "A kind of animal that has no members left alive anywhere in the world is called…",
+  "options": [
+   "extinct",
+   "a species",
+   "offspring",
+   "hatched"
+  ],
+  "ans": 1,
+  "star": 0,
+  "why": "A kind of living thing with no members left anywhere is extinct. A species is the kind itself, offspring are the young, and hatched means the egg has opened."
+ },
+ {
+  "n": 3,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "Which of these is NOT reproduction?",
+  "options": [
+   "A lizard grows back the tail it lost",
+   "A yeast cell grows a bud that becomes a new yeast cell",
+   "A mother pig gives birth to six piglets",
+   "A bean plant makes seeds that grow into new bean plants"
+  ],
+  "ans": 1,
+  "star": 1,
+  "why": "Reproduction makes a new living thing. A lizard growing back a lost tail is repair: it mends the same animal. Budding, piglets and seeds all make new living things."
+ },
+ {
+  "n": 4,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "An orangutan mother has one baby about every seven years and carries it with her for years. How can orangutans keep going with so few babies?",
+  "options": [
+   "Orangutans never die, so they need few babies",
+   "Her care makes each baby very likely to grow up",
+   "Each baby is fully grown in a few weeks",
+   "The baby finds all its own food from its first day"
+  ],
+  "ans": 2,
+  "star": 1,
+  "why": "Orangutan mothers look after each baby for years, so each one is very likely to grow up. Few young, lots of care can still keep the species going."
+ },
+ {
+  "n": 5,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "Egg X and egg Y come from two different kinds of bird. Both are cut in half (see the picture). What does the bigger egg most likely give the chick growing inside it?",
+  "options": [
+   "More stored food (yolk) to grow on before it hatches",
+   "A thinner shell, so it can hatch easily",
+   "Room for two chicks to grow side by side instead of one",
+   "A shell that no animal can break"
+  ],
+  "ans": 1,
+  "fig": "<svg viewBox=\"0 0 300 120\" xmlns=\"http://www.w3.org/2000/svg\"><ellipse cx=\"80\" cy=\"60\" rx=\"60\" ry=\"45\" fill=\"#fff\"/><circle cx=\"80\" cy=\"60\" r=\"30\" fill=\"#f4c430\"/><text x=\"70\" y=\"115\">X</text><ellipse cx=\"220\" cy=\"60\" rx=\"22\" ry=\"17\" fill=\"#fff\"/><circle cx=\"220\" cy=\"60\" r=\"8\" fill=\"#f4c430\"/><text x=\"215\" y=\"115\">Y</text></svg>",
+  "star": 1,
+  "why": "The bigger egg has the bigger yolk circle: bigger egg, more yolk. The chick has more stored food to grow on before it hatches."
+ },
+ {
+  "n": 6,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "A snake lays its eggs in a hole on land. Fish lay their eggs in water. Why do the snake's eggs need a tough, leathery skin when fish eggs don't?",
+  "options": [
+   "Snake eggs need to be heavy so they don't roll out of the hole",
+   "The skin keeps the eggs cool when the hot sun shines on them",
+   "On land the eggs could dry out; the skin keeps water in",
+   "Fish eggs are too small to need any covering"
+  ],
+  "ans": 3,
+  "star": 1,
+  "why": "On land an egg could dry out. A tough skin stops the egg drying out. Fish eggs sit in water, so they do not need it."
+ },
+ {
+  "n": 7,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "Which of these is an example of parental care?",
+  "options": [
+   "A cod lets millions of its eggs drift away on the sea currents",
+   "A housefly lays its eggs on rubbish and flies off",
+   "A lizard lays its eggs in warm sand and never comes back to them",
+   "A penguin father keeps the egg on his feet, under a fold of skin"
+  ],
+  "ans": 4,
+  "star": 1,
+  "why": "Parental care means the parents look after their eggs or young. The penguin father keeps the egg warm. A cod, a housefly and a lizard all leave their eggs."
+ },
+ {
+  "n": 8,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "A baby giraffe is about 1.8 m tall at birth and grows to about 5 m. What mostly happens inside its body as it grows taller?",
+  "options": [
+   "Each of its cells grows to the size of a pea",
+   "Its cells join together into one big cell",
+   "Food turns straight into new bone without any cells",
+   "Its cells divide again and again to make more cells"
+  ],
+  "ans": 4,
+  "star": 1,
+  "why": "Growing taller means making more cells. Cells divide again and again (Chapter 2); they do not grow huge or join up into one cell."
+ },
+ {
+  "n": 9,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Fish P lays 5,000 eggs a year and leaves them. About 1 in 1,000 of them grows up. Bird Q lays 6 eggs a year and feeds its chicks. About 1 in 2 of them grows up. Which kind gets more young to grow up each year? (Does that size make sense?)",
+  "options": [
+   "Q: 6 × 2 = 12 young grow up, more than P",
+   "P: about 5 young grow up, against Q's 3",
+   "P: 5,000 × 1,000 = 5,000,000 young grow up",
+   "Q: cared-for young ALWAYS outnumber the rest"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 2,
+  "why": "Divide, not multiply: &ldquo;1 in 1,000&rdquo; means fewer than the eggs laid. P: 5,000 &divide; 1,000 = 5. Q: 6 &divide; 2 = 3. So P gets 5 young to grow up, more than Q&rsquo;s 3. Size check: 12 and 5,000,000 are bigger than the eggs laid, so they cannot be right."
+ },
+ {
+  "n": 10,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Many birds line their nests with soft feathers or fur before they lay. How does the lining help the eggs?",
+  "options": [
+   "Feathers give out their own heat, like a heater",
+   "Feathers are good conductors, so heat rushes into the eggs",
+   "Soft things ALWAYS make eggs hatch faster",
+   "Feathers trap air, a poor conductor of heat, so the eggs stay warm longer"
+  ],
+  "ans": 4,
+  "star": 2,
+  "why": "Feathers and fur trap air. Trapped air is a poor conductor of heat, so heat leaves the eggs slowly and they stay warm (Unit 32)."
+ },
+ {
+  "n": 11,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Lin drops a piece of eggshell into a glass of vinegar. Bubbles fizz off it, and after two days the shell has gone. Which is correct?",
+  "options": [
+   "Chemical change: the bubbles are a new gas, so new substances formed",
+   "A physical change: the shell melted, just like ice",
+   "Anything that disappears in a liquid is ALWAYS only a physical change",
+   "No change at all: the shell is still there, just invisible"
+  ],
+  "ans": 1,
+  "star": 2,
+  "why": "Bubbles of a new gas show a new substance formed, so this is a chemical change (Unit 41). Disappearing in a liquid is not enough: melting ice is physical because nothing new forms."
+ },
+ {
+  "n": 12,
+  "section": "C",
+  "tier": "Applied",
+  "body": "The table shows five kinds of animal (A to E): how many young each has in a year, and how many weeks the parents care for them. Which statement does the table support best?",
+  "options": [
+   "Animals that care for their young longer tend to have fewer young",
+   "Animals with more young give them more weeks of care",
+   "Animal E's young ALWAYS survive, every single time",
+   "The number of young has nothing to do with care"
+  ],
+  "ans": 1,
+  "rows": [
+   "Animal A: 2,000 young a year, 0 weeks of care",
+   "Animal B: 300 young a year, 1 week of care",
+   "Animal C: 20 young a year, 6 weeks of care",
+   "Animal D: 4 young a year, 30 weeks of care",
+   "Animal E: 1 young a year, 100 weeks of care"
+  ],
+  "star": 2,
+  "why": "Down the table the number of young falls (2,000 to 1) while the weeks of care rise (0 to 100). So animals that care for their young longer tend to have fewer young. The table does not show that E&rsquo;s young always survive."
+ },
+ {
+  "n": 13,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Many sea fish eggs carry a tiny drop of oil inside. The eggs drift near the surface, where the water is warmer and tiny food is plentiful. How does the oil drop help?",
+  "options": [
+   "Oil is heavy, so it keeps the egg on the sea floor",
+   "The oil is the only food the baby fish will eat until it grows up",
+   "Oil ALWAYS sinks to the bottom of water",
+   "Oil is less dense than water, so it helps the egg float up"
+  ],
+  "ans": 4,
+  "predict": true,
+  "star": 2,
+  "why": "Oil is less dense than water, so a drop of oil lifts the egg up to the warm surface where the food is (Units 15 and 24)."
+ },
+ {
+  "n": 14,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Tiny baby spiders spread out by letting out a long silk thread and drifting on the wind. Why does a long thread help a baby spider travel far?",
+  "options": [
+   "The thread switches off gravity for as long as the spider is flying",
+   "Long threads ALWAYS make things lighter than air",
+   "More air resistance: it falls slowly, so the wind carries it far",
+   "The thread pulls the spider upward like a magnet"
+  ],
+  "ans": 3,
+  "predict": true,
+  "star": 2,
+  "why": "A long thread gives more air resistance, so the baby spider falls slowly and the wind carries it far (Unit 21)."
+ },
+ {
+  "n": 15,
+  "section": "C",
+  "tier": "Applied",
+  "body": "A river fish lays 10,000 eggs, and only a few grow up. Sam says, \"All the other eggs are wasted.\" What is the best reply?",
+  "options": [
+   "Uneaten eggs ALWAYS hatch later in the year, so not a single one is lost",
+   "They dissolve and turn back into clean water",
+   "They are food for other animals, passing energy along the food chain",
+   "They grow into water plants instead of fish"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "Eggs that are eaten are food. Energy passes from the egg to the animal that eats it, along the food chain (Unit 17). Nothing is wasted."
+ },
+ {
+  "n": 16,
+  "section": "C",
+  "tier": "Applied",
+  "body": "In countries with cold winters, many small birds lay their eggs in spring, so the chicks hatch in late spring. Why is that good timing?",
+  "options": [
+   "Birds can ONLY lay eggs when the Earth is closest to the Sun",
+   "Longer, warmer days bring plenty of insects and seeds to feed the chicks",
+   "There are no predators at all in spring",
+   "Eggs need snow on the nest to hatch"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 2,
+  "why": "Spring brings longer, warmer days, so there are plenty of insects and seeds for the chicks. Seasons come from Earth&rsquo;s tilt, not its distance from the Sun (Unit 28)."
+ },
+ {
+  "n": 17,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Ben says: \"A bird's eggshell is hard, so NOTHING can pass in or out of it.\" What is wrong with Ben's idea?",
+  "options": [
+   "Nothing is wrong: a shell is completely sealed",
+   "Eggshells ALWAYS let water pour in and out freely",
+   "The shell has tiny holes that let air in, so the chick can breathe",
+   "The chick breathes air stored in the egg white, so it never needs the shell"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "The shell has tiny holes that let air in, so the chick can breathe. &ldquo;Nothing&rdquo; is the trap word: it is too strong."
+ },
+ {
+  "n": 18,
+  "section": "C",
+  "tier": "Applied",
+  "body": "A class egg incubator has its heater and its lamp wired in parallel. The lamp's bulb breaks. What happens to the heater, and why does it matter for the eggs?",
+  "options": [
+   "It stops, because one broken part breaks the whole circuit",
+   "EVERY part in a circuit ALWAYS stops when one part breaks",
+   "It keeps working because it has its own path, so the eggs stay warm",
+   "It gets twice as hot, because now it also gets the lamp's share of power"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "In a parallel circuit each part has its own path, so the heater keeps working when the lamp breaks and the eggs stay warm (Unit 42)."
+ },
+ {
+  "n": 19,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Scientists find a young animal in a cave. Which clue PROVES that its mother cared for it after it was born?",
+  "options": [
+   "It hatched from an egg with a hard shell",
+   "It is a young bat, and mammal mothers feed their young on milk",
+   "It has a backbone, like a fish or a lizard",
+   "It lives in a cold, dark cave, where babies can't survive alone"
+  ],
+  "ans": 2,
+  "star": 2,
+  "why": "Only the milk clue proves care: mammal mothers feed their young on milk, and a bat is a mammal. A hard-shelled egg, a backbone or a cold cave prove nothing about care (Unit 31)."
+ },
+ {
+  "n": 20,
+  "section": "C",
+  "tier": "Applied",
+  "body": "In a fish hatchery, eggs kept in still, warm water often grow fluffy white mould and die. Eggs in cool, moving water mostly stay healthy. What is the best explanation?",
+  "options": [
+   "Mould ALWAYS comes from inside the eggs themselves, never the water",
+   "Mould is a microorganism that grows fast in still, warm water",
+   "Moving water gives the eggs extra food to grow",
+   "Cool water makes the eggs too hard for anything to grow"
+  ],
+  "ans": 2,
+  "star": 2,
+  "why": "Mould is a microorganism. It grows fast in still, warm water, so eggs kept there get covered and die (Unit 4)."
+ },
+ {
+  "n": 21,
+  "section": "W",
+  "tier": "Applied",
+  "type": "written",
+  "marks": 4,
+  "body": "Explain it (4 marks). The kakapo is a heavy parrot that cannot fly. It nests on the ground and lays only 1 to 4 eggs, and only every 2 to 4 years. When rats and stoats reached its islands, the kakapo nearly vanished. Explain why. Use 'because' or 'so' to link your ideas.",
+  "model": "Because the kakapo lays only a few eggs, and only every few years, it makes very few young. Rats and stoats can easily reach eggs and chicks in nests on the ground, and the parrot cannot fly away. So more kakapo died than were born, and their numbers kept falling towards none.",
+  "rubric": [
+   "Very few young (few eggs / not every year)",
+   "Predators reach eggs or chicks on the ground (it can't fly / nest on the ground)",
+   "More died than were born, so numbers fell",
+   "Ideas linked into a chain with because / so (at least two links)"
+  ],
+  "star": 2,
+  "why": ""
+ }
+];
+
+/* Q21 keyword marker (provisional only; the coach re-marks by hand). One mark per idea. */
+const RUBRIC_RX = {
+  few:  /\b(few|only|1 to 4|one|two|rarely|not (many|often|every year))\b.*\b(eggs?|young|chicks?|babies)\b|\b(eggs?|young)\b.*\b(few|rarely)\b/i,
+  predA:/\b(rats?|stoats?|predators?|eat\w*|caught|kill\w*)\b/i,
+  predB:/\b(ground|can'?t fly|cannot fly|unable to fly|nest)\b/i,
+  more: /more (\w+ )?(die|died|dying|killed|eaten)|(died|die|dying) (faster|more)|than (were |are |get )?born|not enough (young|chicks|babies)|numbers? (fell|fall|drop)/i,
+  link: /\b(because|so|therefore|which means)\b/gi
+};
+function markWritten(text){
+  const t = String(text||'');
+  const ideas = [
+    RUBRIC_RX.few.test(t),
+    RUBRIC_RX.predA.test(t) && RUBRIC_RX.predB.test(t),
+    RUBRIC_RX.more.test(t),
+    ((t.match(RUBRIC_RX.link)||[]).length) >= 2
+  ];
+  return { ideas, marks: ideas.filter(Boolean).length };
+}
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)",
+  W: "PART 2 — Explain It (4 marks, scored on its own: it does not count towards the 16/20)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const nowMs = () => Date.now();
+const MCQ = Q.filter(q => q.type !== 'written');
+const WQ  = Q.find(q => q.type === 'written');
+const chosen = {};            // current choice per question (1-based option)
+const firstChoice = {};       // very first click per question
+const firstAt = {};           // ISO time of that first click
+const secsPrev = {};          // seconds since his previous answer click (or since opening), at the first click
+const predictions = {};       // { qn: text he typed }
+const openedAt = new Date(nowMs());
+let lastClick = nowMs();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+function writtenText(){ const e = document.getElementById('w-'+WQ.n); return e ? e.value : ''; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false, reviewing = false;
+
+function tableHTML(rows){
+  let h = '<table class="tbl"><tr><th>Animal</th><th>Young a year</th><th>Weeks of care</th></tr>';
+  rows.forEach(r => { const m = r.match(/^Animal (\w): ([\d,]+) young a year, (\d+) weeks? of care$/); h += m ? `<tr><td>${m[1]}</td><td class="num">${m[2]}</td><td class="num">${m[3]}</td></tr>` : `<tr><td colspan="3">${r}</td></tr>`; });
+  return h + '</table>';
+}
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    if (q.type === 'written'){
+      html += `<div class="q W" id="q-${q.n}">
+        <span class="tierlbl Applied">Applied</span>
+        <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">&#9733;&#9733;</span> ${q.body}</p>
+        <div class="wbox"><textarea id="w-${q.n}" maxlength="900" placeholder="Type your answer here" oninput="updateProgress()"></textarea></div>
+        <div class="wres" id="wres-${q.n}"></div></div>`;
+      return;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    let opts = '';
+    q.options.forEach((opt, idx) => {
+      opts += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    let optBlock;
+    if (q.predict){
+      optBlock = `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words or a number, then press Show options.</label>
+        <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+        <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div>
+        <div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+    } else optBlock = opts;
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>
+      ${q.rows ? tableHTML(q.rows) : ''}
+      ${optBlock}
+      <div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function predTyped(qn){
+  const v = document.getElementById('pin-'+qn).value.trim();
+  document.getElementById('pshow-'+qn).disabled = v.length < 2;
+}
+function predShow(qn){
+  const inp = document.getElementById('pin-'+qn);
+  const v = inp.value.trim();
+  if (v.length < 2 || qn in predictions) return;
+  predictions[qn] = v;                         // saved, never scored, cannot be edited after this
+  inp.readOnly = true;
+  document.getElementById('pshow-'+qn).style.display = 'none';
+  document.getElementById('pbody-'+qn).classList.remove('hid');
+}
+
+function choose(qn, idx){
+  if (submitted || reviewing) return;
+  const t = nowMs();
+  if (!(qn in firstChoice)){
+    firstChoice[qn] = idx;
+    firstAt[qn] = new Date(t).toISOString();
+    secsPrev[qn] = Math.round((t - lastClick)/100)/10;
+  }
+  lastClick = t;
+  chosen[qn] = idx;
+  const q = MCQ.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function readyToSubmit(){
+  const pv = prov();
+  return Object.keys(chosen).length === NQ && writtenText().trim().length >= WRITTEN_MIN_CHARS && pv.helped && pv.usedNotes;
+}
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  const wDone = writtenText().trim().length >= WRITTEN_MIN_CHARS;
+  document.getElementById('progress-label').textContent = `${n} / ${NQ} answered · Part 2 ${wDone ? 'written' : 'not yet'}`;
+  document.getElementById('progress-fill').style.width = (n/NQ*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov();
+  if (readyToSubmit()){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < NQ ? `Answer all ${NQ} to submit (${NQ-n} left)` : (!wDone ? 'Write your Part 2 answer to submit' : 'Answer the two questions above to submit');
+  }
+}
+
+function askConfirmSubmit(){
+  if (!readyToSubmit()) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+/* ---------- fast-answer review (MCQ only; Q21 is outside it) ----------
+   eligible: A/B answers < REVIEW_SECS_AB, C answers < REVIEW_SECS_C after the previous answer.
+   shown: at most REVIEW_MAX, Section C first, then the fastest (smallest secsSincePrev). */
+let preReview = {}, reviewEligible = [], reviewList = [], reviewPos = 0, reviewLog = {};
+function pickReview(){
+  const elig = MCQ.filter(q => (q.n in secsPrev) && secsPrev[q.n] < (q.section === 'C' ? REVIEW_SECS_C : REVIEW_SECS_AB));
+  const ranked = elig.slice().sort((a,b) => ((a.section==='C'?0:1) - (b.section==='C'?0:1)) || (secsPrev[a.n]-secsPrev[b.n]) || (a.n-b.n));
+  return { eligible: elig.map(q => q.n), shown: ranked.slice(0, REVIEW_MAX).map(q => q.n).sort((a,b)=>a-b) };
+}
+function startReview(){
+  closeConfirm();
+  preReview = Object.assign({}, chosen);
+  const r = pickReview();
+  reviewEligible = r.eligible; reviewList = r.shown;
+  reviewPos = 0; reviewLog = {};
+  if (!reviewList.length){ doSubmit(); return; }
+  reviewing = true;
+  document.getElementById('review-overlay').classList.add('show');
+  showReviewItem();
+}
+function showReviewItem(){
+  const qn = reviewList[reviewPos];
+  const q = MCQ.find(x => x.n === qn);
+  document.getElementById('rv-count').textContent = `Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h = `${q.fig ? `<div class="fig">${q.fig}</div>` : ''}<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>${q.rows ? tableHTML(q.rows) : ''}`;
+  q.options.forEach((opt, i) => {
+    h += `<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${opt}</button>`;
+  });
+  document.getElementById('rv-body').innerHTML = h;
+  document.getElementById('rv-actions').innerHTML =
+    `<button class="btn keep" id="rv-keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" id="rv-change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){ reviewLog[reviewList[reviewPos]] = {kept:true}; rvNext(); }
+function rvChange(){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.disabled = false);
+  document.getElementById('rv-actions').innerHTML = `<button class="btn keep" id="rv-use" onclick="rvUse()">Use this answer</button>`;
+}
+function rvPick(i){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('rv-opt-'+i).classList.add('selected');
+  chosen[reviewList[reviewPos]] = i;
+}
+function rvUse(){
+  const qn = reviewList[reviewPos];
+  reviewLog[qn] = {kept:false, changed: chosen[qn] !== preReview[qn]};
+  rvNext();
+}
+function rvNext(){
+  reviewPos++;
+  if (reviewPos >= reviewList.length){
+    reviewing = false;
+    document.getElementById('review-overlay').classList.remove('show');
+    doSubmit();
+  } else showReviewItem();
+}
+
+let lastResults = null;
+let resultsSaved = false;
+function leaveGuard(){ return !(lastResults && !resultsSaved) || confirm('You have not saved your results yet. Leave without saving?'); }
+
+function doSubmit(){
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.pin').forEach(b => b.readOnly = true);
+
+  let score = 0, firstPassScore = 0, preReviewScore = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const swing = { wrongToRight:0, rightToWrong:0, wrongToWrong:0 };
+  const selfSwing = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // changes made before the review
+  const allSwing  = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // every change since the first click
+  const changes = [];
+  const answers = MCQ.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    if (firstChoice[q.n] === q.ans) firstPassScore++;
+    if (preReview[q.n] === q.ans) preReviewScore++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    const fc = firstChoice[q.n], pr = preReview[q.n];
+    if (pr !== fc){ selfSwing.changed++; if (fc === q.ans) selfSwing.rightToWrong++; else if (pr === q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++; }
+    if (given !== fc){ allSwing.changed++; if (fc === q.ans) allSwing.rightToWrong++; else if (given === q.ans) allSwing.wrongToRight++; else allSwing.wrongToWrong++; }
+    let dir = null;
+    const rv = reviewLog[q.n];
+    if (rv && rv.changed){
+      const was = preReview[q.n] === q.ans;
+      dir = was ? 'right->wrong' : (isCorrect ? 'wrong->right' : 'wrong->wrong');
+      if (dir === 'wrong->right') swing.wrongToRight++; else if (dir === 'right->wrong') swing.rightToWrong++; else swing.wrongToWrong++;
+      changes.push({ q:q.n, from:preReview[q.n], to:given, direction:dir });
+    }
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect,
+             firstChoice: fc, firstCorrect: fc === q.ans,
+             preReviewChoice: pr, finalChoice: given,
+             secsSincePrev: secsPrev[q.n], firstClickAt: firstAt[q.n],
+             prediction: (q.n in predictions) ? predictions[q.n] : null,
+             reviewEligible: reviewEligible.indexOf(q.n) >= 0,
+             reviewed: q.n in reviewLog, changedBeforeReview: pr !== fc, changedOnReview: rv ? !!rv.changed : false, reviewDirection: dir };
+  });
+
+  /* Part 2: Q21, provisional keyword marks */
+  const wText = writtenText().trim();
+  const wm = markWritten(wText);
+  const wTa = document.getElementById('w-'+WQ.n); wTa.readOnly = true;
+  const IDEA_LABELS = WQ.rubric;
+  const wres = document.getElementById('wres-'+WQ.n);
+  wres.innerHTML = `<b>Model answer:</b> ${WQ.model}<br><b>The 4 ideas (1 mark each):</b><ul>` +
+    IDEA_LABELS.map((l,i) => `<li>${wm.ideas[i] ? '&#10003;' : '&#9744;'} ${l}</li>`).join('') +
+    `</ul><i>Provisional: ${wm.marks}/4. This is a keyword check only, so your coach marks your writing by hand.</i>`;
+  wres.classList.add('show');
+
+  const pct = Math.round(score/NQ*100);
+  const pass = score >= PASS_BAR;
+  const minutes = Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `Part 1: ${score} / ${NQ}  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/${NQ}). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/${NQ} — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('part2-line').innerHTML = `<b>Part 2 (written, scored on its own):</b> provisional ${wm.marks} / 4. Your coach checks it by hand.`;
+  const nChanged = changes.length;
+  document.getElementById('pace-lines').innerHTML =
+    `<div><b>First clicks:</b> ${firstPassScore}/${NQ} &rarr; <b>final:</b> ${score}/${NQ}. Your checking changed ${allSwing.changed} answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>` +
+    `<div><b>Time:</b> ${minutes} min (last 20-question unit test, Unit 53: ${LAST_TEST_MINUTES} min)</div>` +
+    (reviewList.length
+      ? `<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${nChanged}: ${swing.wrongToRight} wrong→right, ${swing.rightToWrong} right→wrong.</div>`
+      : `<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date(nowMs()).toISOString(),
+    minutesSpent: minutes,
+    lastTestMinutes: LAST_TEST_MINUTES,
+    provenance: prov(),
+    score, outOf: NQ, pct, passBar: PASS_BAR, passed: pass,
+    part1Score: score, part2Score: wm.marks, part2Provisional: true,
+    firstPassScore, preReviewScore,
+    reviewSecs: { AB: REVIEW_SECS_AB, C: REVIEW_SECS_C, max: REVIEW_MAX },
+    selfChanged: { changed: selfSwing.changed, wrongToRight: selfSwing.wrongToRight, rightToWrong: selfSwing.rightToWrong, wrongToWrong: selfSwing.wrongToWrong },
+    checkingSwing: { changed: allSwing.changed, wrongToRight: allSwing.wrongToRight, rightToWrong: allSwing.rightToWrong, wrongToWrong: allSwing.wrongToWrong },
+    predictions: Object.assign({}, predictions),
+    reviewEligible: reviewEligible.slice(),
+    reviewedQs: reviewList.slice(),
+    changedOnReview: changes,
+    reviewSwing: { eligible: reviewEligible.length, reviewed: reviewList.length, changed: nChanged, wrongToRight: swing.wrongToRight, rightToWrong: swing.rightToWrong, wrongToWrong: swing.wrongToWrong },
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    written: { n: WQ.n, text: wText, autoIdeas: wm.ideas, autoScore: wm.marks, outOf: WQ.marks },
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      resultsSaved = true;
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  resultsSaved = true;
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

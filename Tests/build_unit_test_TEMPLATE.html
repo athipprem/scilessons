@@ -68,9 +68,15 @@
        - Results file naming: U{unit#, 2-digit}_Results_{YYYY-MM-DD}.json
        - Save location: Lessons\Tests\Results\ (pick this folder the first
          time the save dialog opens; supporting browsers remember it after).
-       - "Back to Hub" link (#btn-hub, href="../index.html") appears next to
-         Save Results once submitted — do not remove (set 2 Jul 2026 by Lui).
-         Path is one level up because tests live in Lessons\Tests\.
+       - SAVE-BUTTON RULE (Lui, 18 Oct 2026 — supersedes the 2 Jul 2026 "Back to Hub
+         next to Save" rule): ANY page that has a Save button for Prem's results
+         carries ONLY that Save button, alone, at the end of the page. NO "Back to
+         Hub" button or link anywhere near it (he may click the wrong one and lose
+         the results). The only way back to the hub is the small "x" close button
+         at the TOP-LEFT of the page (#btn-close, href="../index.html" — one level
+         up because tests live in Lessons\Tests\). If results are submitted but
+         not yet saved, the x asks "leave without saving?" first (leaveGuard).
+         The gate checks this when the plan's gate JSON sets "save_button_alone": true.
      ============================================================ -->
 <head>
 <meta charset="UTF-8">
@@ -133,7 +139,8 @@
   .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
   .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
   .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
-  .btn.hub{background:#546e7a;color:#fff;text-decoration:none;display:inline-block;margin-top:10px;margin-left:8px}
+  .x-close{width:34px;height:34px;border-radius:50%;background:#ffffff33;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;text-decoration:none;flex:0 0 auto}
+  .x-close:hover{background:#ffffff59}
 
   #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
   #score-banner.show{display:block}
@@ -160,7 +167,8 @@
 <div class="wrap">
 
   <div class="hdr">
-    <div>
+    <a class="x-close" id="btn-close" href="../index.html" title="Close and go back to the hub" aria-label="Close and go back to the hub" onclick="return leaveGuard()">&#10005;</a>
+    <div style="flex:1">
       <b id="hdr-title">Unit 1 Test — Biology: Plants</b>
       <span class="sub" id="hdr-sub">Plant parts • Water transport • Thinking like a scientist</span>
     </div>
@@ -187,7 +195,6 @@
       <button class="btn submit" id="btn-submit" disabled onclick="askConfirmSubmit()">Answer all 20 to submit</button>
       <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">💾 Save Results for Luikishi</button>
       <div id="save-status"></div>
-      <a class="btn hub" id="btn-hub" href="../index.html" style="display:none">🏠 Back to Hub</a>
     </div>
   </div>
 
@@ -333,6 +340,8 @@ function askConfirmSubmit(){
 function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
 
 let lastResults = null;
+let resultsSaved = false;
+function leaveGuard(){ return !(lastResults && !resultsSaved) || confirm('You have not saved your results yet. Leave without saving?'); }
 
 function doSubmit(){
   closeConfirm();
@@ -371,7 +380,6 @@ function doSubmit(){
 
   document.getElementById('btn-submit').style.display = 'none';
   document.getElementById('btn-save').style.display = 'inline-block';
-  document.getElementById('btn-hub').style.display = 'inline-block';
 
   lastResults = {
     student: "Prem",
@@ -400,6 +408,7 @@ async function saveResults(){
       const writable = await handle.createWritable();
       await writable.write(json);
       await writable.close();
+      resultsSaved = true;
       statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
       return;
     } catch(e){
@@ -412,6 +421,7 @@ async function saveResults(){
   a.href = URL.createObjectURL(blob);
   a.download = filename;
   document.body.appendChild(a); a.click(); a.remove();
+  resultsSaved = true;
   statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
 }
 

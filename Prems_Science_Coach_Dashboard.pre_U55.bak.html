@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prem's Science Coach Dashboard</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:#FFFBEF; color:#2b2205; font-size:13px; line-height:1.5; height:100vh; overflow:hidden; }
+#pw-overlay { position:fixed; inset:0; background:rgba(10,30,18,0.93); display:flex; align-items:center; justify-content:center; z-index:9999; backdrop-filter:blur(4px); }
+#pw-overlay.hidden { display:none; }
+.pw-box { background:#fff; border-radius:18px; padding:36px 32px 30px; width:320px; text-align:center; box-shadow:0 12px 40px rgba(0,0,0,0.35); }
+.pw-box h2 { font-size:1.3rem; color:#8a6a00; margin-bottom:6px; }
+.pw-box p { font-size:0.85rem; color:#8a7a4a; margin-bottom:20px; }
+.pw-input { width:100%; padding:11px 14px; border:2px solid #f0dfa8; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; }
+.pw-input:focus { border-color:#DAA520; }
+.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#FFC107,#FFA500); color:#5a3d00; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; }
+.pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
+#app { display:flex; height:100vh; overflow:hidden; }
+#sidebar { width:66px; background:#4a3800; display:flex; flex-direction:column; align-items:center; padding:14px 0; gap:4px; flex-shrink:0; }
+.sb-logo { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:12px; }
+.sb-btn { width:48px; height:48px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.5); transition:all .15s; text-decoration:none; }
+.sb-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
+.sb-btn.active { background:rgba(255,255,255,0.18); color:#fff; }
+.sb-icon { font-size:18px; line-height:1; } .sb-lbl { font-size:7.5px; font-weight:600; letter-spacing:.3px; text-transform:uppercase; opacity:.85; }
+.sb-divider { width:30px; height:1px; background:rgba(255,255,255,0.14); margin:6px 0; }
+.sb-spacer { flex:1; }
+#main { flex:1; display:flex; flex-direction:column; overflow:hidden; }
+#topbar { background:#fff; border-bottom:1px solid #f0dfa8; padding:0 20px; height:52px; display:flex; align-items:center; justify-content:space-between; flex-shrink:0; }
+#topbar-title { font-size:15px; font-weight:800; color:#4a3800; } #topbar-sub { font-size:11px; color:#8a7a4a; margin-left:10px; }
+.topbar-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.tb-badge { border-radius:20px; padding:3px 10px; font-size:11px; font-weight:700; white-space:nowrap; }
+.tb-gold { background:linear-gradient(135deg,#FFD700,#FFA500); color:#5a3d00; border:1px solid #e0a800; }
+.tb-green { background:#FFF3CD; border:1px solid #FFD700; color:#8a6a00; }
+.tb-purple { background:#f3e8ff; border:1px solid #ce93d8; color:#6a1b9a; }
+#hero { display:grid; grid-template-columns:repeat(6,1fr); gap:12px; padding:14px 20px; background:#fff; border-bottom:1px solid #f0dfa8; flex-shrink:0; }
+.hero-box { background:#f5faf6; border-radius:10px; padding:10px 14px; border:1px solid #f0dfa8; }
+.hero-val { font-size:22px; font-weight:800; color:#2b2205; line-height:1.1; }
+.hero-lbl { font-size:10px; color:#8a7a4a; margin-top:2px; font-weight:700; text-transform:uppercase; letter-spacing:.4px; }
+.hero-sub { font-size:10px; font-weight:600; margin-top:1px; color:#a89568; }
+#content { flex:1; overflow-y:auto; padding:20px; }
+.panel { display:none; } .panel.active { display:block; }
+.card { background:#fff; border-radius:12px; padding:18px 20px; border:1px solid #f0dfa8; margin-bottom:16px; }
+.card-hd { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:#8a7a4a; margin-bottom:14px; display:flex; align-items:center; gap:6px; }
+.dot { width:6px; height:6px; border-radius:50%; display:inline-block; background:#DAA520; }
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.insight { border-radius:10px; padding:11px 14px; margin-top:12px; }
+.insight.orange { background:#fff8e1; border:1px solid #fbd38d; } .insight.green { background:#f0fff4; border:1px solid #c6f6d5; }
+.insight-lbl { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.6px; margin-bottom:4px; color:#c05621; }
+.insight p { font-size:11px; color:#4a5568; line-height:1.6; }
+.gap-item { margin-bottom:12px; } .gap-item:last-child { margin-bottom:0; }
+.gap-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:4px; }
+.gap-label { font-size:12px; font-weight:700; color:#2b2205; }
+.gap-score { font-size:11px; color:#8a7a4a; margin:3px 0 5px; }
+.gap-bar { height:7px; background:#e7efe9; border-radius:4px; overflow:hidden; }
+.gap-fill { height:100%; border-radius:4px; }
+.g2 { background:#f6993f; } .g3 { background:#43a047; } .gs { background:#43e97b; }
+.gpill { font-size:9.5px; font-weight:700; padding:2px 7px; border-radius:8px; text-transform:uppercase; white-space:nowrap; }
+.p1 { background:#ffe9e0; color:#c0392b; } .p2 { background:#fffaf0; color:#c05621; } .p3 { background:#e6f4ea; color:#2e7d32; }
+.tm { display:flex; justify-content:space-between; padding:6px 0; border-bottom:1px solid #f0f4f8; font-size:12px; } .tm:last-child { border-bottom:none; } .tm span:last-child { color:#8a6a00; font-weight:700; }
+.skill-row { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.skill-name { font-size:11px; color:#3a4f42; width:120px; flex-shrink:0; }
+.skill-track { flex:1; height:9px; background:#e7efe9; border-radius:5px; overflow:hidden; position:relative; }
+.skill-fill { height:100%; border-radius:5px; }
+.skill-fill.lvl-red { background:#e53e3e; }
+.skill-fill.lvl-yellow { background:#f6993f; }
+.skill-fill.lvl-green { background:#43e97b; }
+.skill-val { font-size:11px; font-weight:700; color:#3a4f42; width:24px; text-align:right; flex-shrink:0; }
+.skill-delta { font-size:10px; font-weight:800; width:32px; text-align:right; flex-shrink:0; }
+.skill-delta.lvl-red { color:#c0392b; }
+.skill-delta.lvl-yellow { color:#c05621; }
+.skill-delta.lvl-green { color:#2e7d32; }
+.skill-foot { display:flex; justify-content:space-between; flex-wrap:wrap; gap:6px; margin-top:12px; padding:10px 12px; background:#f5faf6; border-radius:8px; font-size:11px; color:#4a5568; border:1px solid #f0dfa8; }
+.chart-wrap { display:flex; align-items:center; justify-content:center; }
+.radar-legend { display:flex; gap:14px; justify-content:center; margin-top:8px; flex-wrap:wrap; }
+.radar-legend-item { display:flex; align-items:center; gap:6px; font-size:11px; color:#4a5568; }
+.comp-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.comp-box { background:#f5faf6; border:1px solid #f0dfa8; border-radius:10px; padding:14px 12px; text-align:center; }
+.comp-box .medal { font-size:24px; margin-bottom:4px; }
+.comp-name { font-size:9px; color:#8a7a4a; font-weight:700; text-transform:uppercase; letter-spacing:.5px; }
+.comp-result { font-size:13px; font-weight:700; color:#2b2205; margin:3px 0 2px; }
+.comp-sub { font-size:10px; color:#8a6a00; font-weight:600; }
+.session-item { display:grid; grid-template-columns:54px 1fr; gap:10px; align-items:start; padding:10px 0; border-bottom:1px solid #f0f4f8; }
+.session-item:last-child { border-bottom:none; }
+.ut-badge { border-radius:8px; padding:6px 4px; text-align:center; font-size:12px; font-weight:800; line-height:1.2; color:#fff; }
+.session-body strong { display:block; font-size:12px; color:#2b2205; margin-bottom:3px; }
+.tags { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:3px; }
+.tag { font-size:10px; padding:2px 7px; border-radius:10px; font-weight:600; }
+.tgreen { background:#f0fff4; color:#276749; } .tpurple { background:#faf5ff; color:#6b46c1; } .torange { background:#fff5e6; color:#c05621; } .tblue { background:#ebf4ff; color:#2b6cb0; }
+.snote { font-size:10px; color:#8a7a4a; }
+.log-hd { display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:6px; }
+.log-count { font-size:10px; font-weight:700; color:#8a7a4a; text-transform:uppercase; letter-spacing:.5px; }
+.log-filters { display:flex; gap:6px; flex-wrap:wrap; margin:10px 0 4px; }
+.log-filter-btn { border:none; border-radius:20px; padding:6px 14px; font-size:11px; font-weight:700; cursor:pointer; background:#eceff1; color:#546e7a; }
+.log-filter-btn:hover { background:#e2e8f0; }
+.log-filter-btn.active { background:#1565c0; color:#fff; }
+.q-table { width:100%; border-collapse:collapse; font-size:11px; }
+.q-table th { text-align:left; padding:4px 6px; color:#8a7a4a; font-weight:700; border-bottom:1px solid #edf2f7; font-size:10px; text-transform:uppercase; }
+.q-table td { padding:5px 6px; border-bottom:1px solid #f7fafc; vertical-align:top; }
+.q-fail { color:#c53030; font-weight:700; }
+.lw { background:#f0fff4; color:#276749; font-size:10px; padding:1px 5px; border-radius:6px; font-weight:600; white-space:nowrap; }
+.lh { background:#faf5ff; color:#6b46c1; font-size:10px; padding:1px 5px; border-radius:6px; font-weight:600; white-space:nowrap; }
+.note-empty { color:#a89568; font-size:12px; text-align:center; padding:16px; }
+@media(max-width:820px){ #hero{grid-template-columns:1fr 1fr;} .grid-2{grid-template-columns:1fr;} .comp-row{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div id="pw-overlay">
+  <div class="pw-box">
+    <div style="font-size:2.2rem;margin-bottom:10px">&#128202;</div>
+    <h2>Science Coach Dashboard</h2>
+    <p>Enter the password to continue</p>
+    <input class="pw-input" id="pw-input" type="password" placeholder="Password" inputmode="numeric"
+           onkeydown="if(event.key==='Enter') checkDashPw()">
+    <button class="pw-btn" onclick="checkDashPw()">Unlock &#8594;</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+</div>
+<div id="app">
+  <nav id="sidebar">
+    <div class="sb-logo">&#127793;</div>
+    <button class="sb-btn active" onclick="showPanel('overview',this)" title="Science Overview"><span class="sb-icon">&#128202;</span><span class="sb-lbl">Science</span></button>
+    <button class="sb-btn" onclick="showPanel('skills',this)" title="Skills Radar"><span class="sb-icon">&#127993;</span><span class="sb-lbl">Skills</span></button>
+    <button class="sb-btn" onclick="showPanel('results',this)" title="Unit Results"><span class="sb-icon">&#128221;</span><span class="sb-lbl">Results</span></button>
+    <div class="sb-divider"></div>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openIndex()" title="Back to Science Index" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-size:14px">&#8592;</span><span class="sb-lbl">Index</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openMath()" title="Math Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">M</span><span class="sb-lbl">Math</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openEnglish()" title="English Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon" style="font-weight:700">E</span><span class="sb-lbl">English</span></a>
+    <a class="sb-btn" href="https://athipprem.github.io/scigame/" target="_blank" rel="noopener" title="Science Quest" style="text-decoration:none;cursor:pointer"><span class="sb-icon"><img src="quest_icon.svg" alt="Science Quest" style="width:18px;height:18px;display:block"></span><span class="sb-lbl">Quest</span></a>
+    <a class="sb-btn" href="javascript:void(0)" onclick="openCoding()" title="Coding Lessons" style="text-decoration:none;cursor:pointer"><span class="sb-icon"><img src="https://athipprem.github.io/codinglessons/assets/rover-ship.svg" alt="Coding" style="width:18px;height:18px;display:block"></span><span class="sb-lbl">Coding</span></a>
+    <div class="sb-spacer"></div>
+  </nav>
+  <div id="main">
+    <div id="topbar">
+      <div style="display:flex;align-items:baseline">
+        <span id="topbar-title">Science &mdash; Overview</span>
+        <span id="topbar-sub">&nbsp;&mdash;&nbsp;Grade 4 &nbsp;|&nbsp; ASMOPSS 2026 &nbsp;|&nbsp; Coach: Luikishi</span>
+      </div>
+      <div class="topbar-right">
+        <span class="tb-badge tb-gold">&#129351; Target: GOLD</span>
+        <span class="tb-badge tb-purple">&#128221; 2025 G4 &middot; 72.5/100</span>
+        <span class="tb-badge tb-green">&#127941; 2025 G3 &middot; Hon. Mention</span>
+      </div>
+    </div>
+    <div id="hero">
+      <div class="hero-box"><div class="hero-val" style="color:#ef6c00" id="h-skill">&mdash;</div><div class="hero-lbl">Skills achievement</div><div class="hero-sub">vs gold &#129351; target</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-base">72.5%</div><div class="hero-lbl">Baseline (2025 G4)</div><div class="hero-sub">72.5/100 &middot; 28/40 Q</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-done">&mdash;</div><div class="hero-lbl">Unit + Milestone tests done</div><div class="hero-sub">Baseline: 72.5/100 (28/40)</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-mins">&mdash;</div><div class="hero-lbl">Minutes on last test</div><div class="hero-sub" id="h-mins-sub">&nbsp;</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-fc">&mdash;</div><div class="hero-lbl">First click &rarr; final</div><div class="hero-sub" id="h-fc-sub">&nbsp;</div></div>
+      <div class="hero-box"><div class="hero-val" id="h-weeks">&mdash;</div><div class="hero-lbl">Weeks to ASMOPSS</div><div class="hero-sub" id="h-days">9 Aug 2026</div></div>
+    </div>
+    <div id="content">
+      <!-- OVERVIEW -->
+      <div class="panel active" id="panel-overview">
+        <div class="grid-2">
+          <div>
+            <div class="card">
+              <div class="card-hd"><span class="dot"></span>Unit Score History</div>
+              <div class="note-empty" id="score-empty">No unit tests completed yet &mdash; U1 is the first. Baseline 72.5/100 on the 2025 G4 paper.</div>
+              <div id="score-chart-wrap" style="display:none">
+                <svg id="scoreChartSvg" viewBox="0 0 560 210" style="width:100%;height:auto;display:block"></svg>
+                <div style="display:flex;gap:14px;justify-content:center;margin-top:2px;flex-wrap:wrap;font-size:11px;color:#4a5568">
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#1565c0"/></svg>Unit</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#FFC107"/></svg>Perfect &#11088;</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="10" height="10"><circle cx="5" cy="5" r="5" fill="#c62828"/></svg>Below pass</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#c05621" stroke-width="2" stroke-dasharray="4,3"/></svg>Pass line (80%)</span>
+                </div>
+              </div>
+              <div class="insight orange"><div class="insight-lbl" id="ov-plabel"></div><p id="ov-pins"></p></div>
+            </div>
+            <div class="card">
+              <div class="card-hd log-hd">
+                <span style="display:flex;align-items:center;gap:6px"><span class="dot"></span>Unit Log</span>
+                <span class="log-count" id="log-count"></span>
+              </div>
+              <div class="log-filters" id="log-filters">
+                <button class="log-filter-btn active" data-f="recent5" onclick="setLogFilter('recent5',this)">Recent 5</button>
+                <button class="log-filter-btn" data-f="all" onclick="setLogFilter('all',this)">All</button>
+                <button class="log-filter-btn" data-f="pending" onclick="setLogFilter('pending',this)">Pending</button>
+                <button class="log-filter-btn" data-f="done" onclick="setLogFilter('done',this)">Done</button>
+                <button class="log-filter-btn" data-f="milestones" onclick="setLogFilter('milestones',this)">Milestones</button>
+              </div>
+              <div id="session-log"></div>
+            </div>
+          </div>
+          <div>
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#fc4e4e"></span>Priority Gaps</div>
+              <div id="priority-gaps"></div>
+            </div>
+            <div class="card">
+              <div class="card-hd"><span class="dot" style="background:#f6993f"></span>Road to ASMOPSS Gold</div>
+              <div style="margin-bottom:14px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                  <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4a5568">&#129351; Skills achievement</span>
+                  <span id="road-pct" style="font-size:12px;font-weight:700;color:#b7791f"></span>
+                </div>
+                <div style="background:#e7efe9;border-radius:8px;height:10px;overflow:hidden"><div id="road-bar" style="height:100%;background:linear-gradient(90deg,#ffd700,#f6993f);border-radius:8px"></div></div>
+                <div style="font-size:10px;color:#8a7a4a;margin-top:3px;text-align:right">vs gold target (85 avg)</div>
+              </div>
+              <div style="margin-bottom:14px">
+                <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px">
+                  <span style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#4a5568">&#9202; Prep time elapsed</span>
+                  <span style="font-size:12px;font-weight:700;color:#8a6a00" id="time-pct"></span>
+                </div>
+                <div style="background:#e7efe9;border-radius:8px;height:10px;overflow:hidden"><div style="height:100%;background:linear-gradient(90deg,#DAA520,#B8860B);border-radius:8px" id="time-bar"></div></div>
+                <div style="font-size:10px;color:#8a7a4a;margin-top:3px;text-align:right" id="time-lbl"></div>
+              </div>
+              <div class="tm"><span>&#129353; ASMOPSS 2026 result</span><span>BRONZE medal</span></div>
+              <div class="tm"><span>&#128197; Sat / announced</span><span>9 Aug / 16 Sep 2026</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SKILLS -->
+      <div class="panel" id="panel-skills">
+        <div class="grid-2" style="margin-bottom:16px">
+          <div class="card">
+            <div class="card-hd"><span class="dot"></span>Skills Radar</div>
+            <div class="chart-wrap"><svg id="radarSvg" viewBox="0 0 320 280" width="320" height="280"></svg></div>
+            <div class="radar-legend">
+              <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#a89568" stroke-width="2" stroke-dasharray="2,2"/></svg>Before Unit 1</div>
+              <div class="radar-legend-item"><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="#DAA520"/></svg><span id="radar-now-lbl">Now</span></div>
+              <div class="radar-legend-item"><svg width="18" height="10"><line x1="0" y1="5" x2="18" y2="5" stroke="#B85C00" stroke-width="2" stroke-dasharray="4,3"/></svg>Target (Gold)</div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-hd"><span class="dot" style="background:#DAA520"></span>Skill vs Target Breakdown</div>
+            <div id="skill-meta" style="margin-bottom:10px;font-size:10px;color:#8a7a4a"></div>
+            <div id="skill-bars"></div>
+            <div class="radar-legend" style="justify-content:flex-start;margin-top:2px">
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#e53e3e;display:inline-block"></span>Critical</div>
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#f6993f;display:inline-block"></span>OK</div>
+              <div class="radar-legend-item"><span style="width:10px;height:10px;border-radius:3px;background:#43e97b;display:inline-block"></span>Great / 85%+</div>
+            </div>
+            <div id="skill-summary" style="margin-top:10px;font-size:11px;color:#4a5568"></div>
+            <div id="skill-foot" class="skill-foot"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-hd"><span class="dot" style="background:#ffd700"></span>Competition Standing</div>
+          <div class="comp-row">
+            <div class="comp-box"><div class="medal">&#128221;</div><div class="comp-name">ASMOPSS 2025 &middot; G4 paper</div><div class="comp-result">72.5 / 100</div><div class="comp-sub">28/40 questions (baseline)</div></div>
+            <div class="comp-box"><div class="medal">&#127941;</div><div class="comp-name">ASMOPSS 2025 &middot; G3</div><div class="comp-result">Honorable Mention</div><div class="comp-sub">55.5/100 &middot; 88.66th pct</div></div>
+            <div class="comp-box"><div class="medal">&#129353;</div><div class="comp-name">ASMOPSS 2026 &middot; G4</div><div class="comp-result">BRONZE medal</div><div class="comp-sub">60/100 &middot; 87.85th pct &middot; nat'l rank 404/3,722</div></div>
+          </div>
+        </div>
+      </div>
+      <!-- RESULTS -->
+      <div class="panel" id="panel-results">
+        <div class="card">
+          <div class="card-hd"><span class="dot"></span>Latest Assessment &mdash; <span id="res-sum" style="margin-left:4px;text-transform:none;letter-spacing:0;font-weight:600;color:#2b2205"></span></div>
+          <table class="q-table"><thead><tr><th>Q</th><th>Topic</th><th>Level</th><th>Result</th></tr></thead><tbody id="q-body"></tbody></table>
+        </div>
+        <div class="insight orange"><div class="insight-lbl" id="res-alabel"></div><p id="res-ains"></p></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="prem_data.js"></script>
+<script>
+  var PW_HASH = 2088511772;
+  function djb2(str){ var h=5381; for(var i=0;i<str.length;i++){ h=(((h<<5)+h)+str.charCodeAt(i))>>>0; } return h; }
+  var hubToken = new URLSearchParams(window.location.search).get('hub');
+  var tokenValid = hubToken && (Date.now() - parseInt(hubToken, 10)) < 15000;
+  if (sessionStorage.getItem('unlocked')==='yes' || tokenValid){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); } else { document.getElementById('pw-input').focus(); }
+  function checkDashPw(){ var e=document.getElementById('pw-input').value;
+    if (djb2(e)===PW_HASH){ sessionStorage.setItem('unlocked','yes'); document.getElementById('pw-overlay').classList.add('hidden'); }
+    else { document.getElementById('pw-error').textContent='Wrong password. Try again!'; document.getElementById('pw-input').value=''; document.getElementById('pw-input').focus(); } }
+  function openIndex(){
+    var url = 'index.html';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openMath(){
+    var url = 'https://athipprem.github.io/mathlessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openEnglish(){
+    var url = 'https://athipprem.github.io/englessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+  function openCoding(){
+    var url = 'https://athipprem.github.io/codinglessons/';
+    if (sessionStorage.getItem('unlocked')==='yes'){ url += '?hub=' + Date.now(); }
+    window.location.href = url;
+  }
+
+  var D = PREM_DATA;
+  var panelTitles = { overview:'Science — Overview', skills:'Skills & Radar', results:'Unit Results' };
+  function showPanel(name, btn){
+    var ps=document.querySelectorAll('.panel'); for(var i=0;i<ps.length;i++) ps[i].classList.remove('active');
+    var bs=document.querySelectorAll('.sb-btn'); for(var j=0;j<bs.length;j++) bs[j].classList.remove('active');
+    document.getElementById('panel-'+name).classList.add('active'); if(btn) btn.classList.add('active');
+    document.getElementById('topbar-title').textContent = panelTitles[name]||name;
+    if(name==='skills') buildRadar();
+  }
+
+  // hero + countdown
+  var ms = new Date(D.asmopssDate)-new Date();
+  var weeks = Math.ceil(ms/(7*864e5)), days = Math.ceil(ms/864e5);
+  document.getElementById('h-weeks').textContent = weeks;
+  document.getElementById('h-days').textContent = days+' days left';
+  var unitTestCount = D.scores.filter(function(s){ return typeof s.unit === 'number'; }).length;
+  var milestoneCount = D.scores.filter(function(s){ return typeof s.unit === 'string' && s.unit.charAt(0) === 'M'; }).length;
+  document.getElementById('h-done').textContent = unitTestCount+'+'+milestoneCount;
+  if (D.lastUnit.minutesSpent){ document.getElementById('h-mins').textContent = D.lastUnit.minutesSpent; document.getElementById('h-mins-sub').textContent = 'Unit '+D.lastUnit.n+(D.lastUnit.minutesNote?' \u00b7 '+D.lastUnit.minutesNote:''); }
+  if (D.lastUnit.firstPassScore!=null){ document.getElementById('h-fc').textContent = D.lastUnit.firstPassScore+' \u2192 '+D.lastUnit.score; document.getElementById('h-fc-sub').textContent = 'Unit '+D.lastUnit.n+' \u00b7 checking earned '+(D.lastUnit.score-D.lastUnit.firstPassScore); }
+  var sc=0, st=0; for(var k=0;k<D.skills.length;k++){ sc+=D.skills[k].c; st+=D.skills[k].t; }
+  var ach = Math.round(sc/st*100);
+  document.getElementById('h-skill').textContent = ach+'%';
+  document.getElementById('road-pct').textContent = ach+'%';
+  document.getElementById('road-bar').style.width = ach+'%';
+  document.getElementById('skill-meta').textContent = 'Current score / target score — '+ach+'% overall';
+  // prep time (start -> exam)
+  var start=new Date(D.coachStartDate), exam=new Date(D.asmopssDate), now=new Date();
+  var tp=Math.min(100,Math.max(0,((now-start)/(exam-start))*100));
+  document.getElementById('time-pct').textContent=tp.toFixed(0)+'%';
+  document.getElementById('time-bar').style.width=tp.toFixed(1)+'%';
+  document.getElementById('time-lbl').textContent=days+' days left · '+weeks+' weeks remaining';
+
+  // overview pattern insight
+  document.getElementById('ov-plabel').innerHTML = D.lastUnit.patternLabel;
+  document.getElementById('ov-pins').innerHTML = D.lastUnit.patternInsight;
+
+  // unit score history (real scores once unit tests are done) - line chart
+  if (D.scores.length > 0){
+    document.getElementById('score-empty').style.display = 'none';
+    document.getElementById('score-chart-wrap').style.display = 'block';
+    buildScoreChart();
+  }
+
+  function buildScoreChart(){
+    var svg = document.getElementById('scoreChartSvg');
+    var scores = D.scores, n = scores.length;
+    // more points need more vertical room for rotated x-axis labels, and a wider
+    // viewBox so each point has enough horizontal room even before labels are thinned
+    var W = Math.max(560, n*15), H=250, padL=32, padR=14, padT=20, padB=64;
+    svg.setAttribute('viewBox', '0 0 '+W+' '+H);
+    var innerW = W-padL-padR, innerH = H-padT-padB;
+    function xAt(i){ return n<=1 ? padL+innerW/2 : padL + innerW*i/(n-1); }
+    function yAt(pct){ return padT + innerH*(1-Math.max(0,Math.min(100,pct))/100); }
+    function svgEl(tag){ return document.createElementNS('http://www.w3.org/2000/svg', tag); }
+    // thin out x-axis labels once there are too many points to read side-by-side;
+    // milestones/mock tests (string unit ids) always keep their label, since
+    // they're the key reference points in the story
+    var labelStep = n>44 ? 3 : (n>28 ? 2 : 1);
+    function showLabel(i, s){ return (typeof s.unit === 'string') || (i % labelStep === 0) || (i === n-1); }
+
+    // gridlines: 0%, 50%, 80% (pass, dashed), 100%
+    [0,50,80,100].forEach(function(v){
+      var y = yAt(v);
+      var ln = svgEl('line');
+      ln.setAttribute('x1',padL); ln.setAttribute('x2',W-padR); ln.setAttribute('y1',y); ln.setAttribute('y2',y);
+      ln.setAttribute('stroke', v===80 ? '#c05621' : '#f0dfa8');
+      ln.setAttribute('stroke-width', v===80 ? '1.5' : '1');
+      if (v===80) ln.setAttribute('stroke-dasharray','5,4');
+      svg.appendChild(ln);
+      var lbl = svgEl('text');
+      lbl.setAttribute('x', padL-6); lbl.setAttribute('y', y+3); lbl.setAttribute('text-anchor','end');
+      lbl.setAttribute('font-size','9'); lbl.setAttribute('fill', v===80 ? '#c05621' : '#a89568');
+      lbl.textContent = v+'%';
+      svg.appendChild(lbl);
+    });
+
+    // connecting line across all units
+    if (n > 1){
+      var pts = scores.map(function(s,i){ return xAt(i)+','+yAt(s.pct); }).join(' ');
+      var poly = svgEl('polyline');
+      poly.setAttribute('points', pts); poly.setAttribute('fill','none');
+      poly.setAttribute('stroke','#8a6a00'); poly.setAttribute('stroke-width','2');
+      svg.appendChild(poly);
+    }
+
+    // points, value labels, x-axis unit labels
+    scores.forEach(function(s,i){
+      var x = xAt(i), y = yAt(s.pct);
+      var passed = s.score >= (s.passBar||12);
+      var perfect = s.pct >= 100;
+      var color = perfect ? '#FFC107' : (passed ? '#1565c0' : '#c62828');
+
+      var c = svgEl('circle');
+      c.setAttribute('cx',x); c.setAttribute('cy',y); c.setAttribute('r','5');
+      c.setAttribute('fill',color); c.setAttribute('stroke','#fff'); c.setAttribute('stroke-width','1.5');
+      svg.appendChild(c);
+
+      if (perfect){
+        var star = svgEl('text');
+        star.setAttribute('x',x); star.setAttribute('y',y-12); star.setAttribute('text-anchor','middle');
+        star.setAttribute('font-size','11'); star.textContent='⭐';
+        svg.appendChild(star);
+      }
+      if (showLabel(i, s)){
+        var isMilestone = typeof s.unit === 'string';
+        var ly = H-padB+10;
+        var xlab = svgEl('text');
+        xlab.setAttribute('x',x); xlab.setAttribute('y', ly); xlab.setAttribute('text-anchor','end');
+        xlab.setAttribute('font-size', isMilestone ? '9.5' : '9');
+        xlab.setAttribute('fill', isMilestone ? '#8a6a00' : '#8a7a4a');
+        if (isMilestone) xlab.setAttribute('font-weight','700');
+        xlab.setAttribute('transform', 'rotate(-60 '+x+' '+ly+')');
+        xlab.textContent = (typeof s.unit==='number' ? 'U'+s.unit : s.unit);
+        svg.appendChild(xlab);
+      }
+    });
+  }
+
+  // unit log (filterable: Recent 5 / All / Pending / Done / Milestones)
+  var logFilter = 'recent5';
+  function isMilestone(it){ return typeof it.n === 'string' && it.n.charAt(0) === 'M'; }
+  function filteredLog(){
+    if (logFilter === 'recent5') return D.unitLog.slice(0, 5);
+    if (logFilter === 'pending') return D.unitLog.filter(function(it){ return it.status === 'pending'; });
+    if (logFilter === 'done')    return D.unitLog.filter(function(it){ return it.status === 'done'; });
+    if (logFilter === 'milestones') return D.unitLog.filter(isMilestone);
+    return D.unitLog; // all
+  }
+  var EMPTY_MSG = {
+    pending: 'Nothing pending right now &mdash; every built unit has been taken.',
+    milestones: 'No milestone tests yet &mdash; the first one (M1) comes after Unit 10.'
+  };
+  function renderLog(){
+    var lg = document.getElementById('session-log');
+    var list = filteredLog();
+    document.getElementById('log-count').textContent = 'Showing ' + list.length + ' of ' + D.unitLog.length;
+    if (list.length === 0){
+      lg.innerHTML = '<div class="note-empty">' + (EMPTY_MSG[logFilter] || 'Nothing to show yet.') + '</div>';
+      return;
+    }
+    var html = '';
+    for(var u=0;u<list.length;u++){ var it=list[u]; var tags='';
+      if(it.tags){ for(var t=0;t<it.tags.length;t++){ var tg=it.tags[t]; tags+='<span class="tag '+(tg.c||'tgreen')+'"'+(tg.s?(' style="'+tg.s+'"'):'')+'>'+tg.t+'</span>'; } }
+      var nm=(typeof it.n==='number')?('U'+it.n):it.n;
+      html+='<div class="session-item"><div class="ut-badge" style="background:'+it.badge+'">'+nm+'</div>'+
+        '<div class="session-body"><strong>'+it.title+'</strong><div class="tags">'+tags+'</div><div class="snote">'+it.note+'</div></div></div>'; }
+    lg.innerHTML = html;
+  }
+  function setLogFilter(f, btn){
+    logFilter = f;
+    var btns = document.querySelectorAll('#log-filters .log-filter-btn');
+    for(var i=0;i<btns.length;i++){ btns[i].classList.remove('active'); }
+    if (btn) btn.classList.add('active');
+    renderLog();
+  }
+  renderLog();
+
+  // priority gaps
+  var g=document.getElementById('priority-gaps');
+  for(var p=0;p<D.priorityGaps.length;p++){ var q=D.priorityGaps[p];
+    g.innerHTML+='<div class="gap-item"><div class="gap-header"><span class="gap-label">'+q.label+'</span>'+
+      '<span class="gpill '+q.pill+'">'+q.pillText+'</span></div>'+
+      '<div class="gap-score">'+q.score+'</div>'+
+      '<div class="gap-bar"><div class="gap-fill '+q.fillClass+'" style="width:'+q.fillPct+'%"></div></div></div>'; }
+
+  // skill bars + summary
+  var sb=document.getElementById('skill-bars');
+  var skillSumC=0, skillSumT=0, html='';
+  for(var s=0;s<D.skills.length;s++){ var x=D.skills[s];
+    skillSumC+=x.c; skillSumT+=x.t;
+    var lvl = x.c>=85 ? 'green' : (x.c>=65 ? 'yellow' : 'red');
+    var gap = x.t - x.c;
+    var deltaHtml = gap<=0 ? '&#10003;' : ('+'+gap);
+    html+='<div class="skill-row"><div class="skill-name">'+x.name+'</div>'+
+      '<div class="skill-track"><div class="skill-fill lvl-'+lvl+'" style="width:'+x.c+'%"></div></div>'+
+      '<div class="skill-val">'+x.c+'</div>'+
+      '<div class="skill-delta lvl-'+lvl+'">'+deltaHtml+'</div></div>'; }
+  sb.innerHTML = html;
+  var skillAch = Math.round(skillSumC/skillSumT*100);
+  document.getElementById('skill-summary').innerHTML = '<strong>Read:</strong> Physics, Biology, Chemistry, Scientific Investigation and Applied Reasoning are all at or above target &mdash; Earth &amp; Space (50%) is now the sole red zone and the single biggest lever left for gold. Bars are seeded from the 2025 G3 + G4 papers and update after each unit test.';
+  document.getElementById('skill-foot').innerHTML = '<span>Current sum <strong>'+skillSumC+'</strong></span><span>Target sum <strong>'+skillSumT+'</strong></span><span><strong>'+skillAch+'%</strong> toward Gold target</span>';
+
+  // results
+  document.getElementById('res-sum').innerHTML = D.lastUnit.qSummary;
+  document.getElementById('res-alabel').innerHTML = D.lastUnit.analysisLabel;
+  document.getElementById('res-ains').innerHTML = D.lastUnit.analysisInsight;
+  var qb=document.getElementById('q-body');
+  if (D.lastUnit.qBreakdown.length === 0){
+    qb.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#8a6a00;font-weight:700;padding:16px 0">&#127881; Perfect score &mdash; no wrong answers to review!</td></tr>';
+  } else {
+    for(var b=0;b<D.lastUnit.qBreakdown.length;b++){ var r=D.lastUnit.qBreakdown[b];
+      var lvl = r.lvl==='h' ? '<span class="lh">Hard</span>' : '<span class="lw">Basic</span>';
+      qb.innerHTML+='<tr><td><strong>'+r.q+'</strong></td><td>'+r.topic+'</td><td>'+lvl+'</td><td class="'+(r.pass?'':'q-fail')+'">'+r.note+'</td></tr>'; }
+  }
+
+  // radar (6 axes)
+  var radarBuilt=false;
+  function buildRadar(){
+    if(radarBuilt) return; radarBuilt=true;
+    var lblEl=document.getElementById('radar-now-lbl'); if(lblEl){ var radarUnitLabel=(typeof D.currentUnit.n === 'string' && D.currentUnit.n.charAt(0)==='M') ? 'Milestone '+D.currentUnit.n.slice(1) : 'U'+D.currentUnit.n; lblEl.textContent='Now ('+radarUnitLabel+')'; }
+    var svg=document.getElementById('radarSvg'); var cx=160, cy=140, r=96;
+    var labels=['Biology','Chemistry\n/ Matter','Physics','Earth &\nSpace','Scientific\nInvestigation','Applied\nReasoning'];
+    var cur=D.radarCurrent, tgt=D.radarTarget, base=D.radarBaseline, n=labels.length;
+    function pt(v,i){ var a=(Math.PI*2*i/n)-Math.PI/2; var rr=r*v/100; return {x:cx+rr*Math.cos(a), y:cy+rr*Math.sin(a)}; }
+    for(var lv=1; lv<=5; lv++){ var gp=[]; for(var ii=0;ii<n;ii++){ var p=pt(lv*20,ii); gp.push(p.x+','+p.y); }
+      var el=document.createElementNS('http://www.w3.org/2000/svg','polygon'); el.setAttribute('points',gp.join(' '));
+      el.setAttribute('fill','none'); el.setAttribute('stroke','#f0dfa8'); el.setAttribute('stroke-width','1'); svg.appendChild(el); }
+    for(var ii=0;ii<n;ii++){ var ap=pt(100,ii); var ln=document.createElementNS('http://www.w3.org/2000/svg','line');
+      ln.setAttribute('x1',cx); ln.setAttribute('y1',cy); ln.setAttribute('x2',ap.x); ln.setAttribute('y2',ap.y);
+      ln.setAttribute('stroke','#f0dfa8'); ln.setAttribute('stroke-width','1'); svg.appendChild(ln); }
+    function poly(data,fill,op,stroke,sw,dash){ var pts=data.map(function(v,i){var p=pt(v,i);return p.x+','+p.y;}).join(' ');
+      var el=document.createElementNS('http://www.w3.org/2000/svg','polygon'); el.setAttribute('points',pts);
+      el.setAttribute('fill',fill); el.setAttribute('fill-opacity',op); el.setAttribute('stroke',stroke); el.setAttribute('stroke-width',sw);
+      if(dash) el.setAttribute('stroke-dasharray',dash); svg.appendChild(el); }
+    if(base) poly(base,'none','0','#a89568','1.5','2,2');
+    poly(cur,'#FFC107','0.3','#DAA520','1.5',null);
+    poly(tgt,'none','0','#B85C00','2','4,3');
+    if(base) base.forEach(function(v,i){ var p=pt(v,i); var d=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      d.setAttribute('cx',p.x); d.setAttribute('cy',p.y); d.setAttribute('r','2.5'); d.setAttribute('fill','#a89568'); svg.appendChild(d); });
+    cur.forEach(function(v,i){ var p=pt(v,i); var d=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      d.setAttribute('cx',p.x); d.setAttribute('cy',p.y); d.setAttribute('r','3'); d.setAttribute('fill','#DAA520'); svg.appendChild(d); });
+    labels.forEach(function(label,i){ var a=(Math.PI*2*i/n)-Math.PI/2; var lr=r+24; var lx=cx+lr*Math.cos(a), ly=cy+lr*Math.sin(a);
+      var anchor=Math.abs(lx-cx)<8?'middle':(lx<cx?'end':'start'); var parts=label.split('\n');
+      var tg=document.createElementNS('http://www.w3.org/2000/svg','text'); tg.setAttribute('x',lx); tg.setAttribute('y',ly);
+      tg.setAttribute('text-anchor',anchor); tg.setAttribute('font-size','9'); tg.setAttribute('fill','#4a5568');
+      parts.forEach(function(part,pi){ var ts=document.createElementNS('http://www.w3.org/2000/svg','tspan'); ts.setAttribute('x',lx);
+        ts.setAttribute('dy', pi===0 ? (parts.length>1?'-0.5em':'0.35em') : '1.1em'); ts.textContent=part; tg.appendChild(ts); }); svg.appendChild(tg); }); }
+</script>
+</body>
+</html>
