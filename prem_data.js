@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '19 Oct 2026',
+  updated:        '23 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:55, topic:'Chapter 3 &sect;A &mdash; Why Do Living Things Reproduce? Keeping the Species Going, and Animals and Their Eggs', status:'&#9989; Built (19 Oct 2026), from `BUILD_PLAN_SCI_U55_WhyReproduce.md` v1.0. Warm-up, two lessons and a 20-question test plus one written item (Q21, 4 marks, scored separately). Chapter 3 starts at school this week.' },
+    currentUnit: { n:56, topic:'Chapter 3 &sect;B &mdash; Why Two Parents? Variation, Plantlets vs Seeds, and the Land Problem', status:'&#128295; Being built (23 Oct 2026), from `BUILD_PLAN_SCI_U56_WhyTwoParents.md` v1.0. Warm-up, two lessons and a 20-question test plus one written item (Q21, 4 marks, scored separately).' },
 
   lastUnit: {
-    n:54, score:46, outOf:50, pct:92, passBar:40, delta:null, prevScore:null, passed:true, minutesSpent:6.5, minutesUnit:53, minutesNote:'U54 was a retake, so not a pace point', firstPassScore:null,
-    patternLabel: 'Unit 54 result - Biology: Chapter 2 Cells school-format mock (46/50, 92% PASS, first sitting)',
-    patternInsight: '<strong>46/50 (92%)</strong> - PASS on the first sitting (Lui, 18 Oct 2026). The first sitting was lost to the old Save / Back-to-Hub layout, so Prem sat the paper a second time; the saved file (43/50 auto, 44 by hand, 4.7 min) is that retake. Item-level notes are indicative only, and the time is not a pace point.',
-    analysisLabel: 'Retake notes: reproduction vs repair (S5 "Budding"), two-word written answers, one right-to-wrong change (Q10)',
-    analysisInsight: '<strong>Held:</strong> diagram, label and table formats 11/11. <strong>Watch:</strong> S5 bone repair answered "Budding" (reproduction vs repair not secure); written answers are two words with no "because"; Q10 right to wrong onto the NEVER distractor. Unit 55 answers these: Q3 (repair vs reproduction), the Explain-it builder and Q21, and a S.T.O.P. line about changing answers.',
-    qSummary: '<strong>46 / 50 (92%) - PASS (first sitting, Lui).</strong> Saved item record is the retake: 43/50 auto, 44/50 by hand, 4.7 minutes. Full record: `Memory Backup\\TEST_RECORD_SCI_U054.md`.',
+    n:55, score:15, outOf:20, pct:75, passBar:16, delta:null, prevScore:null, passed:false, minutesSpent:8.4, minutesUnit:55, minutesNote:'longest since U52', firstPassScore:11,
+    patternLabel: 'Unit 55 result - Biology: Chapter 3 &sect;A Why do living things reproduce? (15/20, 75%, FAIL by one mark)',
+    patternInsight: '<strong>15/20 (75%)</strong> - FAIL by one mark. Section A 2/2, Section B 5/6, Section C 8/12. Sat alone, no notes, 8.4 minutes. First clicks 11, 15 after his own changes (5 wrong to right, 1 right to wrong), 15 after the review (which changed nothing). The unit&#39;s own Chapter 3 items were 12 of 13 right.',
+    analysisLabel: 'Misses: Q6 (land eggs drying out), Q11 (chemical change), Q13 (oil and density), Q15 (an ALWAYS option), Q19 (first click right, then changed)',
+    analysisInsight: '<strong>Held:</strong> the per-N calculation (Q9, with the prediction &quot;Fish P&quot;), repair vs reproduction (Q3), and the unit&#39;s teaching in general. <strong>Watch:</strong> four mixed-in questions from earlier units went wrong; Q19 was changed from right to wrong. Part 2 (Q21, 4 marks) is marked by hand: 1/4 for now.',
+    qSummary: '<strong>15 / 20 (75%) - FAIL by one mark.</strong> Part 2 written answer 1/4 (provisional, hand-mark by Lui). Full record: `Memory Backup\\TEST_RECORD_SCI_U055.md`.',
     qBreakdown: []
   },
 
@@ -99,11 +99,24 @@ var PREM_DATA = {
     { unit:53, topic:'Biology: The Life of a Cell &mdash; the Loop, Budding, Growing Points &amp; Fast vs Many (consolidation, inserted)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-15' },
     { unit:'M5', topic:'Milestone Test 5 - Units 41-53', score:33, outOf:40, marks:80, marksOutOf:100, pct:80, passBar:32, firstPassMarks:71.25, minutes:13.4, date:'2026-10-16' },
     { unit:54, topic:'Biology: Chapter 2 Cells &mdash; school-format mock (inserted, school-test prep)', score:46, outOf:50, pct:92, passBar:40, date:'2026-10-18', note:'first sitting (Lui); the saved file is a 2nd sitting, 43/50' },
+    { unit:55, topic:'Biology: Chapter 3 &sect;A &mdash; Why Do Living Things Reproduce? (school-aligned, beyond-class)', score:15, outOf:20, pct:75, passBar:16, date:'2026-10-23', firstPassScore:11, minutesSpent:8.4, part2:'1/4' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 55, badge: 'linear-gradient(135deg,#1f6b3a,#c98a0b)',
+      title: 'Biology: Chapter 3 &sect;A &mdash; Why Do Living Things Reproduce? (school-aligned, beyond-class)',
+      tags: [
+        { t:'&#10060; 15/20 (75%) FAIL by one mark', s:'background:#fdecea;color:#c62828;font-weight:700' },
+        { t:'First click 11 &rarr; final 15', c:'tgreen' },
+        { t:'8.4 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U55_WhyReproduce.md` (gate 0 FAIL(s)): warm-up, two lessons, a shared simulator, a 20-question test plus a written Part 2 (Q21, 4 marks). <strong>Taken 23 Oct 2026: 15/20 (75%), FAIL by one mark</strong> &mdash; Section A 2/2, Section B 5/6, Section C 8/12. First clicks 11, 15 after his own changes (5 wrong to right, 1 right to wrong at Q19), 15 after the review (which changed nothing). Missed: Q6, Q11, Q13, Q15, Q19. Part 2 auto-mark 1/4, pending hand-mark. Record: `Memory Backup\\TEST_RECORD_SCI_U055.md`.',
+      status: 'done'
+    },
     {
       n: 54, badge: 'linear-gradient(135deg,#1e3a5f,#14806a)',
       title: 'Biology: Chapter 2 Cells &mdash; school-format mock (inserted, school-test prep)',
