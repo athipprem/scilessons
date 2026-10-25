@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 57 · Lesson 1 · Recipe Cards</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#8a3f9e;--pl-d:#4a1f5c;--pl-l:#f4e8f8;--am:#3f9a4b;--am-l:#e7f5e9;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#e6cdee;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#f6eef9;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eadcf0;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#8a3f9e}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+
+  .xp{background:#faf6fc;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  .xp .cellview svg,.xp .lsvg svg,.xp .dsvg svg,.xp .gsvg svg{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+  .xp .lsvg,.xp .dsvg,.xp .gsvg{text-align:center}
+  .xp>svg{max-width:300px;margin:0 auto;display:block}
+  .xp svg .part{cursor:pointer}.xp svg .part:hover{filter:brightness(.93)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;color:var(--pl-d)}
+  .chip.on{background:var(--pl-l);border-color:var(--pl)}.chip.grey{opacity:.45;border-style:dashed}
+  .info{background:var(--pl-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:.95rem;min-height:3em}
+  .cnt{font-weight:800;text-align:center;color:var(--pl-d);font-size:.85rem}
+  .cmp{width:100%}.cmp td.no{color:#c62828;font-weight:800}.cmp td:nth-child(n+2){text-align:center;font-weight:800}
+  .ebtn,.obtn{background:#fff;color:var(--pl-d);border:1.5px solid var(--pl);border-radius:10px;padding:7px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .ebtn.on,.obtn.on{background:var(--pl);color:#fff}
+  .mtot{background:var(--pl-l);border-radius:10px;padding:8px 12px;text-align:center;font-size:1.05rem;margin:8px 0;color:var(--pl-d)}
+  .ladder{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .rung{border:1.5px solid var(--line);border-radius:8px;padding:4px 9px;font-size:.78rem;font-weight:800;background:#fff;color:#6b7280}
+  .rung.done{background:#e8f5e9;color:#2e7d32}.rung.on{background:var(--pl);color:#fff;border-color:var(--pl)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:5px;cursor:pointer;font-family:inherit;text-align:center}
+  .card svg{width:100%;height:auto}.card b{display:block;font-size:.8rem;color:var(--pl-d)}
+  .card.on{outline:3px solid var(--pl)}.card.seen{background:#f6eef9}
+  .rtab{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0}.rtab td{border:1px solid var(--line);padding:4px 10px}
+  .rrow td:first-child{font-weight:800}.rrow.on td{background:var(--pl-l);font-weight:800}.rrow.done td{color:var(--pl-d)}
+  .wr textarea{width:100%;min-height:78px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wr textarea[readonly]{background:#e4f0e8;color:var(--grey)}
+  .wmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .lines{margin:8px 0 8px 22px;padding:0}.lines li{margin:5px 0}
+  .gobox{border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}
+  .calc{background:#faf6fc;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}.wp input[type=text]{width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}.wp input[readonly]{background:#eadcf0;color:var(--grey)}
+  @media(max-width:520px){.cards{grid-template-columns:repeat(2,1fr)}}
+
+  /* guided calc walkthrough */
+  .gcalc{background:#faf6fc;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n,.tbx .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:#2e7d32;background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gs .gopt,.gs .xo{margin:4px 6px 4px 0}
+  .gopt,.xo{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .gopt:disabled,.xo:disabled{opacity:.5;cursor:default}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:#2e7d32}.gfb.no{color:#b0426b}
+  .gbar{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  /* unit 55 pictures */
+  .stage svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cnt2{font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .sline{min-height:1.5em}
+  .rbar{background:var(--am-l);border:1.5px solid var(--am);border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700;text-align:center;color:#1d5a26}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .wlb{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .wlb.on{background:var(--pl);color:#fff}
+  .sorti{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sbinw{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+  .sbin{width:100%;background:var(--pl);color:#fff;border:none;border-radius:9px;padding:8px;font-weight:800;cursor:pointer;font-family:inherit}
+  .sbinw:nth-child(2) .sbin{background:var(--am);color:#fff}
+  .placed{background:var(--ok-l);border-radius:8px;padding:6px 9px;margin-top:6px;font-size:.88rem}
+  .scs{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .sc{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:.93rem;font-family:inherit}
+  .sc.sel{outline:3px solid var(--pl);background:var(--pl-l)}.sc.used{opacity:.3;cursor:default}
+  .xl{background:#fff;border-left:5px solid var(--am);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .xl b{color:#1d5a26}
+  #xta{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  #xta[readonly]{background:#e4f0e8;color:var(--grey)}
+  .xchk label{display:block;margin:4px 0;font-weight:700}
+  .xmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  input[type=range]{width:100%;accent-color:#8a3f9e}
+  .ctl{margin:8px 0;font-weight:700;color:var(--pl-d)}
+  .dots10{display:block;margin:8px auto}
+
+  .xl.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .tbx{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .tbx.ok{border-color:var(--ok);background:#f1f8f1}
+  .tbx input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;margin:6px 0}
+  .tbx input[readonly]{background:#e4efe6;color:var(--grey)}
+  .tmodel{background:var(--am-l);border-left:5px solid var(--am);border-radius:8px;padding:7px 11px;margin:6px 0;font-size:.92rem}
+  .btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .pcard{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;min-width:72px;border:1.5px solid var(--line);background:#fff;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800;color:var(--pl-d)}
+  .pcard svg{width:46px;height:64px}
+  .pcard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.pcard.used{opacity:.3;cursor:default}
+  .pcards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslot{min-width:74px;min-height:92px;border:2px dashed var(--sv);border-radius:10px;padding:4px;text-align:center;cursor:pointer;background:#fff;font-weight:800;font-size:.85rem;color:var(--pl-d);display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+  .pslot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-l)}
+  .pslot svg{width:40px;height:56px}
+  .stagelines{margin:6px 0 6px 20px;padding:0;font-size:.92rem}
+
+  /* unit 57 */
+  .whobox{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}
+  .wc{border:1.5px solid var(--line);background:#fff;border-radius:10px;padding:9px 10px;cursor:pointer;text-align:left;font:inherit;font-weight:700;color:var(--ink)}
+  .wc.on{background:var(--pl-l);border-color:var(--pl)}
+  .welse{display:block;font-weight:400;font-size:.88rem;margin-top:4px;color:#4a5568}
+  .welse.proof{color:#1b5e20;font-weight:800}
+  .wc.proofc.on{background:var(--ok-l);border-color:var(--ok)}
+  .bb{display:inline-flex;flex-direction:column;align-items:center;font-size:.8rem;font-weight:700;color:var(--pl-d)}
+  #babies,#twsvg{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center;margin:8px 0}
+  #dealsvg svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .arrow{font-size:1.6rem;font-weight:900;color:var(--pl-d)}
+  .peaeq{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;font-weight:800}
+  .pcrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center;margin:6px 0}
+  .pc{border:2px solid var(--line);background:#fff;border-radius:10px;padding:8px 12px;cursor:pointer;font:inherit;font-weight:800;color:var(--pl-d)}
+  .pc.on{outline:3px solid var(--pl);background:var(--pl-l)}
+  #peat{margin:8px auto;border-collapse:collapse;font-size:.9rem}#peat td{border:1px solid var(--line);padding:4px 10px}#peat td.tk{width:2em;text-align:center;color:var(--ok);font-weight:900}
+  .gridw{display:grid;grid-template-columns:auto 1fr 1fr;gap:6px;max-width:380px;margin:8px auto;align-items:center}
+  .gh{font-weight:800;font-size:.82rem;text-align:center;color:var(--pl-d)}
+  .gbox{min-height:88px;border:2px dashed var(--sv);border-radius:10px;background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;font:inherit;font-weight:700;color:var(--pl-d);padding:4px}
+  .gbox.pu{background:#efe0f5;border-style:solid;border-color:var(--pl)}.gbox.wh{background:#fff;border-style:solid;border-color:#90a4ae}
+  .gbox .gq1{font-size:.78rem;color:#546e7a;font-weight:700}
+  .ftw svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .carrier{cursor:pointer}.carrier:focus{outline:none}.carrier:focus circle,.carrier:hover circle{stroke:var(--pl);stroke-width:4}
+  .grp{display:inline-flex;align-items:center;gap:4px}
+  .survey{table-layout:fixed;width:100%;border-collapse:collapse;font-size:.88rem;margin:8px 0}.survey td,.survey th{border:1px solid var(--line);padding:4px 5px;text-align:left}
+  .survey select{font-size:.7rem;padding:4px 1px;width:100%;font:inherit;padding:5px;border:1.5px solid var(--line);border-radius:7px;background:#fff}
+  .survey td.m{font-weight:800;text-align:center}.survey td.m1{background:var(--ok-l)}
+  .three{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .three .box{flex:1;min-width:110px;margin:4px 0;padding:6px}
+  .pick .pbtxt{font-weight:400}
+</style>
+</head>
+<body data-next-href="Ch3Heredity_Lesson_StrongAndHidden.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#127183; Lesson 1 &middot; Recipe Cards</b><span class="pill">Unit 57 &middot; Biology</span></div>
+
+  <section class="screen active" id="s0" data-lock="mcq">
+    <h2>Heredity: Why You Look Like Your Family</h2>
+    <div class="why">Why learn this? It explains why you have Dad&rsquo;s ears or Mum&rsquo;s smile, and why you are still not a copy of either.</div>
+    <div class="job"><b>Heredity</b> is the <b>passing of traits from parents to young</b>. A <b>trait</b> is a feature, such as eye colour.</div>
+    <div class="box"><svg viewBox="0 0 360 136" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A cat family of three with different coat patches" style="max-width:360px;width:100%;height:auto"><ellipse cx="60" cy="86" rx="30" ry="22" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M36,62 L40,34 L56,56 Z" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M64,56 L80,34 L84,62 Z" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><circle cx="60" cy="62" r="24" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M54,40 A24,24 0 0 1 80,52 L64,62 L48,48 Z" fill="#ffffff"/><circle cx="51" cy="60" r="3" fill="#263238"/><circle cx="69" cy="60" r="3" fill="#263238"/><path d="M56,70 q4,4 8,0" fill="none" stroke="#263238" stroke-width="2"/><rect x="40" y="102" width="12" height="9" rx="4" fill="#f3a35c" stroke="#4a3b2a" stroke-width="1.5"/><rect x="68" y="102" width="12" height="9" rx="4" fill="#f3a35c" stroke="#4a3b2a" stroke-width="1.5"/><text x="60" y="128" font-size="13" font-weight="800" fill="#4a1f5c" text-anchor="middle">Mum cat</text><ellipse cx="180" cy="86" rx="30" ry="22" fill="#b0bec5" stroke="#4a3b2a" stroke-width="2"/><path d="M156,62 L160,34 L176,56 Z" fill="#b0bec5" stroke="#4a3b2a" stroke-width="2"/><path d="M184,56 L200,34 L204,62 Z" fill="#b0bec5" stroke="#4a3b2a" stroke-width="2"/><circle cx="180" cy="62" r="24" fill="#b0bec5" stroke="#4a3b2a" stroke-width="2"/><path d="M174,40 A24,24 0 0 1 200,52 L184,62 L168,48 Z" fill="#78909c"/><circle cx="171" cy="60" r="3" fill="#263238"/><circle cx="189" cy="60" r="3" fill="#263238"/><path d="M176,70 q4,4 8,0" fill="none" stroke="#263238" stroke-width="2"/><rect x="160" y="102" width="12" height="9" rx="4" fill="#ffffff" stroke="#4a3b2a" stroke-width="1.5"/><rect x="188" y="102" width="12" height="9" rx="4" fill="#ffffff" stroke="#4a3b2a" stroke-width="1.5"/><text x="180" y="128" font-size="13" font-weight="800" fill="#4a1f5c" text-anchor="middle">Dad cat</text><ellipse cx="300" cy="86" rx="30" ry="22" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M276,62 L280,34 L296,56 Z" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M304,56 L320,34 L324,62 Z" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><circle cx="300" cy="62" r="24" fill="#f3a35c" stroke="#4a3b2a" stroke-width="2"/><path d="M294,40 A24,24 0 0 1 320,52 L304,62 L288,48 Z" fill="#ffffff"/><circle cx="291" cy="60" r="3" fill="#263238"/><circle cx="309" cy="60" r="3" fill="#263238"/><path d="M296,70 q4,4 8,0" fill="none" stroke="#263238" stroke-width="2"/><rect x="280" y="102" width="12" height="9" rx="4" fill="#ffffff" stroke="#4a3b2a" stroke-width="1.5"/><rect x="308" y="102" width="12" height="9" rx="4" fill="#ffffff" stroke="#4a3b2a" stroke-width="1.5"/><text x="300" y="128" font-size="13" font-weight="800" fill="#4a1f5c" text-anchor="middle">Young cat</text></svg></div>
+    <p>Young are <b>like their parents, but not exactly the same</b>. Eye colour, hair colour, hair type, ear shape and height (partly) are <b>inherited</b> traits you can see. Inherited traits are <b>passed on in the genes</b>. Traits you pick up in life are <b>acquired</b>.</p>
+<div class="mcq" data-why="Heredity is the passing of traits from parents to young."><p>What is heredity?</p><button class="opt">Learning to talk from your family</button><button class="opt" data-ok>The passing of traits from parents to young</button><button class="opt">Growing taller each year</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="Young are like their parents, but not exactly the same."><p>The young cat has its mum&rsquo;s orange patches but its dad&rsquo;s white paws. What does this show?</p><button class="opt">Young are exact copies of Mum</button><button class="opt" data-ok>Young are like their parents, but not exactly the same</button><button class="opt">The young cat learned its patches</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="Eye colour. You are born with it. Swimming and haircuts are not."><p>Which is an inherited trait?</p><button class="opt">Knowing how to swim</button><button class="opt" data-ok>Eye colour</button><button class="opt">A short haircut</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sDeal" data-route="A" data-label="the Card Deal" data-lock="game">
+    <h2>Deal a Zibbit Baby</h2>
+    <div class="rulebar">A Zibbit has two cards for each feature. Press the button.</div>
+    <div class="box" id="deal"><div id="dealsvg"></div><div class="cap show" id="dealcap"></div><div id="babies"></div><div class="cnt" id="dealn"></div>
+      <div class="btnrow"><button class="actbtn" id="dealbtn">Deal a baby</button><button class="actbtn alt" id="dealrst">Start again</button></div></div>
+    <div class="job hid" id="dealend">The cards are genes. Inherited traits are <b>passed on in the genes</b>, on chromosomes inside each cell.</div>
+  </section>
+
+  <section class="screen" id="sSteps" data-route="B" data-label="the Card Rules" data-lock="mcq">
+    <h2>The Card Rules</h2>
+    <div class="job">Think of a recipe card. Each feature has <b>two cards</b>, and you get <b>one from each parent</b>. In Lesson 2, some cards are <b>dominant (strong)</b> and some <b>recessive (hidden)</b>.</div>
+    <div class="box"><svg viewBox="0 0 360 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mum has two cards and gives one, Dad has two cards and gives one, the baby gets one from each" style="max-width:360px;width:100%;height:auto"><text x="62" y="16" font-size="13" font-weight="800" fill="#4a1f5c" text-anchor="middle">Mum: 2 cards</text><rect x="34" y="24" width="24" height="18" rx="4" fill="#f08a4b" stroke="#455a64" stroke-width="1.6"/><rect x="66" y="24" width="24" height="18" rx="4" fill="#2a9d8f" stroke="#455a64" stroke-width="1.6"/><text x="298" y="16" font-size="13" font-weight="800" fill="#4a1f5c" text-anchor="middle">Dad: 2 cards</text><rect x="270" y="24" width="24" height="18" rx="4" fill="#2a9d8f" stroke="#455a64" stroke-width="1.6"/><rect x="302" y="24" width="24" height="18" rx="4" fill="#f08a4b" stroke="#455a64" stroke-width="1.6"/><path d="M46,48 L140,98" stroke="#8a3f9e" stroke-width="3" fill="none"/><path d="M314,48 L220,98" stroke="#8a3f9e" stroke-width="3" fill="none"/><text x="70" y="82" font-size="12" font-weight="700" fill="#455a64">gives 1</text><text x="262" y="82" font-size="12" font-weight="700" fill="#455a64" text-anchor="end">gives 1</text><rect x="120" y="96" width="120" height="46" rx="10" fill="#faf6fc" stroke="#8a3f9e" stroke-width="2.4"/><rect x="138" y="110" width="24" height="18" rx="4" fill="#f08a4b" stroke="#455a64" stroke-width="1.6"/><rect x="198" y="110" width="24" height="18" rx="4" fill="#f08a4b" stroke="#455a64" stroke-width="1.6"/><text x="180" y="122" font-size="16" font-weight="800" fill="#455a64" text-anchor="middle">+</text><text x="180" y="138" font-size="11" font-weight="800" fill="#4a1f5c" text-anchor="middle">Baby</text></svg></div>
+    <ol class="stepol">
+      <li>Each feature is a pair of cards (genes).</li>
+      <li>Mum gives 1 card and Dad gives 1 card: <b>half from mum, half from dad</b>.</li>
+      <li>Different picks make different babies: <b>a different mix for each child</b>.</li>
+    </ol>
+<div class="mcq" data-why="One. Mum gives 1 card and Dad gives 1 card."><p>How many cards for one feature does a baby get from Mum?</p><button class="opt" data-ok>One</button><button class="opt">Both of hers</button><button class="opt">None</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sTwin" data-lock="game">
+    <h2>Twins</h2>
+    <div class="rulebar">Press both buttons.</div>
+    <div class="box" id="twin"><div id="twsvg"></div><div class="cap show" id="twcap">Which kind of twins look alike?</div>
+      <div class="btnrow"><button class="actbtn" id="twsplit">Split the egg</button><button class="actbtn alt" id="twtwo">Two eggs</button></div></div>
+    <div class="job hid" id="twend">Identical twins start as <b>one egg, split in two</b>, so they have the same cards and the same inherited traits.</div>
+  </section>
+
+  <section class="screen" id="sSort" data-lock="game">
+    <h2>Inherited or Acquired?</h2>
+    <div class="rulebar">The test: could it get into the egg or sperm? Tap a card, then its bin.</div>
+    <div id="sort"><div class="scs"><button class="sc" data-bin="inh">Natural hair colour</button><button class="sc" data-bin="acq">A suntan</button><button class="sc" data-bin="inh">Ear shape</button><button class="sc" data-bin="acq">Dyed hair</button><button class="sc" data-bin="acq">Speaking Thai</button><button class="sc" data-bin="inh">Eye colour</button><button class="sc" data-bin="acq">A broken arm that healed crooked</button><button class="sc" data-bin="acq">A short haircut</button></div>
+      <div class="sorti"><div class="sbinw"><button class="sbin" data-bin="inh">Inherited</button><div class="bl"></div></div><div class="sbinw"><button class="sbin" data-bin="acq">Acquired</button><div class="bl"></div></div></div><div class="pfb" id="sortfb"></div></div>
+    <div class="job hid" id="sortend"><b>Acquired</b> traits are things you learn or pick up. They <b>can&#39;t get into the egg or sperm</b>. Inherited traits are already in the genes.</div>
+  </section>
+
+  <section class="screen" id="sPlants" data-lock="mcq">
+    <h2>Genes Are Not the Whole Story</h2>
+    <div class="box"><svg viewBox="0 0 360 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two cuttings from one plant: the watered one is tall and green, the thirsty one is small and droopy" style="max-width:360px;width:100%;height:auto"><rect x="116" y="146" width="128" height="1" fill="none"/><rect x="60" y="148" width="60" height="30" rx="5" fill="#a1887f" stroke="#5d4037" stroke-width="2"/><rect x="240" y="148" width="60" height="30" rx="5" fill="#a1887f" stroke="#5d4037" stroke-width="2"/><path d="M90,150 L90,70" stroke="#2f8f4e" stroke-width="6" fill="none"/><ellipse cx="70" cy="100" rx="20" ry="9" fill="#43a047" stroke="#2e7d32" stroke-width="1.5" transform="rotate(25 70 100)"/><ellipse cx="110" cy="84" rx="20" ry="9" fill="#43a047" stroke="#2e7d32" stroke-width="1.5" transform="rotate(-25 110 84)"/><ellipse cx="110" cy="118" rx="20" ry="9" fill="#43a047" stroke="#2e7d32" stroke-width="1.5" transform="rotate(-25 110 118)"/><ellipse cx="90" cy="62" rx="16" ry="12" fill="#66bb6a" stroke="#2e7d32" stroke-width="1.5"/><path d="M270,150 Q270,120 294,112" stroke="#8d7b3a" stroke-width="5" fill="none"/><ellipse cx="300" cy="120" rx="16" ry="7" fill="#c8b560" stroke="#8d7b3a" stroke-width="1.5" transform="rotate(50 300 120)"/><ellipse cx="258" cy="130" rx="14" ry="6" fill="#b49a4a" stroke="#8d7b3a" stroke-width="1.5" transform="rotate(-40 258 130)"/><path d="M30,40 q8,12 0,18 q-8,-6 0,-18 Z" fill="#42a5f5" stroke="#1565c0" stroke-width="1.5"/><path d="M48,30 q8,12 0,18 q-8,-6 0,-18 Z" fill="#42a5f5" stroke="#1565c0" stroke-width="1.5"/><text x="90" y="16" font-size="13" font-weight="800" fill="#2e7d32" text-anchor="middle">watered</text><text x="270" y="16" font-size="13" font-weight="800" fill="#8d6e0a" text-anchor="middle">left thirsty</text><text x="180" y="108" font-size="22" font-weight="800" fill="#455a64" text-anchor="middle">=</text><text x="180" y="128" font-size="11" font-weight="700" fill="#455a64" text-anchor="middle">same genes</text></svg></div>
+    <div class="job">Two cuttings from one plant. One is watered and one is left thirsty. They grow differently. <b>Genes and surroundings both matter</b>: inherited traits come from the genes, acquired ones from life.</div>
+<div class="mcq" data-why="Genes and surroundings both matter. Same genes, less water."><p>Two cuttings have the same genes, but one is much smaller. Why?</p><button class="opt">Its genes changed overnight</button><button class="opt" data-ok>Genes and surroundings both matter: it was left thirsty</button><button class="opt">It had better genes</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sSurvey" data-lock="game">
+    <h2>What Did My Parents Pass to Me?</h2>
+    <div class="rulebar">Pick your own traits, then Mum&rsquo;s and Dad&rsquo;s. Ask them, or look at a photo.</div>
+    <div id="survey"></div>
+    <ul id="svres" class="lines"></ul>
+    <div class="cap" id="svcap"></div>
+  </section>
+
+  <section class="screen" id="sPractice" data-lock="mcq">
+    <h2>Practice</h2>
+<div class="mcq" data-why="Passed on in the genes. Babies do not copy ear shapes."><p>A baby Zibbit has its dad&rsquo;s pointy ears. How did the ear shape get to the baby?</p><button class="opt">Babies copy their parents by watching them</button><button class="opt" data-ok>It was passed on in the genes</button><button class="opt">The baby chose pointy ears</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="Half from mum, half from dad. One card from each."><p>Where do a baby Zibbit&rsquo;s cards come from?</p><button class="opt">The stronger parent gives all the cards</button><button class="opt" data-ok>Half from mum, half from dad</button><button class="opt">All from an older cousin</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="A different mix for each child. Each baby gets its own pick of cards."><p>Four Zibbit babies have the same mum and dad but look different. Why?</p><button class="opt">The oldest child gets the best cards</button><button class="opt">Mum gives them different food</button><button class="opt" data-ok>There is a different mix for each child</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="No. Practice is acquired, so it can&#39;t get into the egg or sperm."><p>A Zibbit practises jumping every day and becomes a champion. Will its babies be born champions?</p><button class="opt">Yes: if you practise long enough, your babies get it</button><button class="opt" data-ok>No: acquired skills can&#39;t get into the egg or sperm</button><button class="opt">Yes, but only the eldest baby</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="One egg, split in two. Two separate eggs give two different mixes."><p>Two baby Zibbits have exactly the same cards. How did that happen?</p><button class="opt">Twins are two eggs that look alike</button><button class="opt" data-ok>They came from one egg, split in two</button><button class="opt">Mum dealt the same cards twice</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="sSelf" data-lock="self">
+    <h2>Before Lesson 2: Self-Check</h2>
+    <div class="rulebar">One try each. Then you are ready, or you go back to the right place.</div>
+<div class="mcq selfq" data-fail="route" data-why=""><p>1. A Zibbit baby gets cards from its parents. Which is right?</p><button class="opt">All from the stronger parent</button><button class="opt" data-ok>Half from mum, half from dad</button><button class="opt">None: the baby makes its own</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq selfq" data-fail="route" data-why=""><p>2. Which can get into the egg or sperm?</p><button class="opt">A suntan</button><button class="opt">A skill learned at school</button><button class="opt" data-ok>Eye colour</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div id="simtext" class="hid"><span data-k="deal0">Mum and Dad each hold two cards for each feature.</span><span data-k="deal1">One card from Mum, one card from Dad: half from mum, half from dad. Deal again.</span><span data-k="deal4">Four babies from the same parents, four mixes: a different mix for each child.</span><span data-k="tw-one">One egg, split in two: both babies get the same cards, so they look alike.</span><span data-k="tw-two">Two eggs, two separate deals: two different mixes, so they are not alike.</span><span data-k="sort-no">Not that bin. Could it get into the egg or sperm?</span><span data-k="sv-end">Some match Mum, some match Dad, some match neither: like their parents, but not exactly the same. That is heredity: the passing of traits from parents to young.</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch3Heredity_Sim.js"></script>
+</body>
+</html>
