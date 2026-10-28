@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_58_Test_Ch3WrapUp.html  —  Science Unit 58 (Ch.3 Wrap-up: Reproduction in Animals, the whole chapter)
+     Built 28 Oct 2026 from BUILD_PLAN_SCI_U58_Ch3WrapUp.md (v1.1 content) and the U57 template.
+     Part 1 = 20 MCQ {A:2,B:6,C:12}, pass 16. Part 2 = Q21 written, /4, scored separately (provisional keyword marks).
+     Pace protocol v2.1: S.T.O.P. line, predict-first on Q9/Q10/Q12/Q16, fast-answer review (MCQ only, cap 6, C first, items he already changed himself are skipped).
+     SAVE-BUTTON RULE: the x close (#btn-close) top-left; Save alone at the end; no Back-to-Hub button.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 58 Test — Chapter 3 Wrap-up</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+
+<style>
+  :root{
+    --green:#2e7d32; --green-d:#1b5e20; --a-fill:#c8e6c9; --a-text:#1b5e20;
+    --blue:#1565c0; --b-fill:#bbdefb; --b-text:#0d47a1;
+    --purple:#6a1b9a; --c-fill:#e1bee7; --c-text:#4a148c;
+    --amber:#ef6c00; --amber-l:#fff3e8;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+    --gold:#0e8a8a; --gold-d:#0a4d55; --steel:#0e8a8a; --steel-d:#0a4d55; --yolk:#e8604c; --yolk-l:#ffe9e4;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f8f4;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#e2ece4;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold-d),var(--gold));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--gold-d);white-space:nowrap}
+
+  .readfirst{background:#f3e8ff;border:1.5px solid #9b59b6;color:#5c0f8b;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+  .milestone-note{background:#fff3e0;border:1.5px solid var(--gold);color:#6a4a00;border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--green)}
+  .q.B{border-left-color:var(--blue)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--gold-d)}
+  .q p.body .marks{color:var(--grey);font-size:.78rem;font-weight:700}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--blue)}
+  .opt.selected{border-color:var(--green);background:#f1f8f2;font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#7a4a00}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.submit:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--blue),#1e88e5);color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd8d2;color:#8a9a90;cursor:not-allowed}
+  .x-close{width:34px;height:34px;border-radius:50%;background:#ffffff33;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;text-decoration:none;flex:0 0 auto}
+  .x-close:hover{background:#ffffff59}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid var(--green)}
+  #score-banner.fail{background:linear-gradient(135deg,#fff3e8,#ffe0c2);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--gold-d)}
+  #score-banner.fail #score-big{color:#a34700}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #score-baseline{font-size:.85rem;margin-top:8px;color:var(--grey);font-style:italic}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(10,30,18,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--gold-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:var(--yolk-l);border:1.5px solid var(--yolk);color:#7a2a1c;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#eef8f7;border:1.5px dashed var(--gold);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--gold-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eef1f6;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--gold-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--gold-d),var(--gold));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--gold-d)}
+
+  .tbl{border-collapse:collapse;margin:8px 0;font-weight:400;font-size:.9rem}.tbl th,.tbl td{border:1.5px solid var(--line);padding:4px 12px;text-align:left}.tbl th{background:#f4f0e2}
+  .band.W{background:var(--yolk-l);color:#7a2a1c;border:1.5px solid var(--yolk)}
+  .q.W{border-left-color:var(--yolk)}
+  .wbox textarea{width:100%;min-height:120px;border:1.5px solid var(--line);border-radius:8px;padding:9px 11px;font:inherit;font-size:.95rem}
+  .wbox textarea[readonly]{background:#eef4ef;color:var(--grey)}
+  .wtick{margin:8px 0;font-weight:700;font-size:.92rem}.wtick input{margin-right:6px;transform:scale(1.2)}
+  .wres{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.88rem;background:#eef7ee;border-left:5px solid var(--green)}
+  .wres.show{display:block}
+  .wres ul{margin:6px 0 6px 18px;padding:0}
+  .tbl td.num{text-align:right}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hdr">
+    <a class="x-close" id="btn-close" href="../index.html" title="Close and go back to the hub" aria-label="Close and go back to the hub" onclick="return leaveGuard()">&#10005;</a>
+    <div style="flex:1">
+      <b id="hdr-title">Unit 58 Test — Biology: Chapter 3 Wrap-up</b>
+      <span class="sub" id="hdr-sub">Why reproduce &bull; Fertilisation &bull; Heredity &bull; Reading and judging evidence &bull; one written answer</span>
+    </div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+
+  <div class="readfirst">READ FIRST — watch for words like ALWAYS, NEVER, ONLY, and EVERY in the answer choices. And don't rush the easy-looking ones — check them once more before locking in!</div>
+  <div class="pacebar">This test covers all of Chapter 3. Section C takes about 1–2 minutes a question. Use S.T.O.P. Change an answer only if you can point to the word.</div>
+
+  <div id="progress-bar">
+    <span id="progress-label">0 / 20 answered</span>
+    <div id="progress-track"><div id="progress-fill"></div></div>
+  </div>
+
+  <div id="score-banner">
+    <div id="score-big"></div>
+    <div id="score-msg"></div>
+    <div id="part2-line"></div>
+    <div id="pace-lines"></div>
+    <div id="section-scores"></div>
+  </div>
+
+  <div id="quiz"></div>
+
+  <div id="submit-bar">
+    <div style="width:100%;text-align:center">
+      <div class="prov" id="prov">
+        <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+        <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+      </div>
+      <button class="btn submit" id="btn-submit" disabled>Answer all 20 to submit</button>
+      <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+      <div id="save-status"></div>
+    </div>
+  </div>
+
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <h3>Submit your test?</h3>
+    <p>Some answers may come back for one more look before your results. Make sure you're happy with all 20, and with your written answer!</p>
+    <div class="confirm-actions">
+      <button class="btn cancel" onclick="closeConfirm()">Go back</button>
+      <button class="btn submit" onclick="startReview()">Yes, submit</button>
+    </div>
+  </div>
+</div>
+
+<div id="review-overlay">
+  <div class="rv-box">
+    <h3>Quick check: you answered this one fast. Read it once more.</h3>
+    <div class="rv-count" id="rv-count"></div>
+    <div id="rv-body"></div>
+    <div class="rv-actions" id="rv-actions"></div>
+  </div>
+</div>
+
+<script>
+/* ---------- EDIT PER UNIT ---------- */
+const UNIT_NUM   = 58;
+const UNIT_TITLE = "Biology: Chapter 3 Wrap-up: Reproduction in Animals, the Whole Chapter (Book + ASMOPSS)";
+const PASS_BAR   = 16;                        // Part 1: out of 20 (80%). Part 2 (Q21, /4) never counts toward it
+const NQ         = 20;                        // MCQ items (Part 1)
+const LAST_TEST_MINUTES = 6.6;                // Unit 57
+const REVIEW_SECS_AB = 15;                    // Section A/B answers faster than this are eligible for one more look
+const REVIEW_SECS_C  = 20;                    // Section C answers faster than this are eligible
+const REVIEW_MAX     = 6;                     // at most this many are shown (Section C first, then the fastest)
+const WRITTEN_MIN_CHARS = 3;                  // Q21 must have something typed before Submit opens
+
+const Q = [
+ {
+  "n": 1,
+  "section": "A",
+  "tier": "Basic",
+  "body": "According to your book, what is the main reason living things reproduce?",
+  "options": [
+   "To help the parent animals grow bigger and stronger as they age",
+   "To help the parents live longer",
+   "To find more food for the family",
+   "To make sure their kind (species) continues to exist"
+  ],
+  "ans": 4,
+  "star": 0,
+  "why": "Living things reproduce to ensure the continuity of their kind. Parents do not live longer or get stronger by having young."
+ },
+ {
+  "n": 2,
+  "section": "A",
+  "tier": "Basic",
+  "body": "In human beings, which organs release the eggs?",
+  "options": [
+   "The testes",
+   "The ovaries",
+   "The kidneys",
+   "The lungs"
+  ],
+  "ans": 2,
+  "star": 0,
+  "why": "Ovaries release eggs; testes make sperm. The testes belong to the male."
+ },
+ {
+  "n": 3,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "What does it mean when a kind of animal is extinct?",
+  "options": [
+   "It has moved to live in another country",
+   "No members of that kind are left alive anywhere",
+   "Only the young are left, and no adults",
+   "It is sleeping through the long, cold winter months"
+  ],
+  "ans": 2,
+  "star": 1,
+  "why": "Extinct means none of that kind are left alive anywhere. It is not sleeping, moving or hiding."
+ },
+ {
+  "n": 4,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "What happens at the moment of fertilisation?",
+  "options": [
+   "Two eggs join together to make one bigger egg with two nuclei",
+   "The egg splits into two halves by itself",
+   "The nucleus of a sperm joins with the nucleus of an egg",
+   "The sperm grows into a baby on its own"
+  ],
+  "ans": 3,
+  "star": 1,
+  "why": "At fertilisation the two nuclei join: the sperm nucleus and the egg nucleus. Two eggs do not join, and the sperm cannot grow alone."
+ },
+ {
+  "n": 5,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "The timeline shows a baby growing before it is born, in weeks. At which point have the major organs already FORMED, not just started forming?",
+  "fig": "<svg viewBox=\"0 0 420 90\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A timeline in weeks with marks at 0, 2, 8, 12 and 38. A small curled shape above each mark gets bigger and bigger.\"><line x1=\"14\" y1=\"51\" x2=\"404\" y2=\"51\" stroke=\"#263238\" stroke-width=\"2.4\"/><ellipse cx=\"22.0\" cy=\"35.4\" rx=\"2.5\" ry=\"3.0\" fill=\"#f7c9a0\" stroke=\"#8a4b1a\" stroke-width=\"2\"/><path d=\"M23.1,34.0 a1.5,1.5 0 1 0 0.3,2.7\" fill=\"none\" stroke=\"#8a4b1a\" stroke-width=\"1.6\"/><ellipse cx=\"41.0\" cy=\"35.1\" rx=\"3.8\" ry=\"4.5\" fill=\"#f7c9a0\" stroke=\"#8a4b1a\" stroke-width=\"2\"/><path d=\"M42.6,33.1 a2.2,2.2 0 1 0 0.5,4.0\" fill=\"none\" stroke=\"#8a4b1a\" stroke-width=\"1.6\"/><ellipse cx=\"98.0\" cy=\"34.6\" rx=\"6.0\" ry=\"7.0\" fill=\"#f7c9a0\" stroke=\"#8a4b1a\" stroke-width=\"2\"/><path d=\"M100.5,31.5 a3.5,3.5 0 1 0 0.7,6.3\" fill=\"none\" stroke=\"#8a4b1a\" stroke-width=\"1.6\"/><ellipse cx=\"136.0\" cy=\"34.0\" rx=\"8.5\" ry=\"10.0\" fill=\"#f7c9a0\" stroke=\"#8a4b1a\" stroke-width=\"2\"/><path d=\"M139.5,29.5 a5.0,5.0 0 1 0 1.0,9.0\" fill=\"none\" stroke=\"#8a4b1a\" stroke-width=\"1.6\"/><ellipse cx=\"383.0\" cy=\"32.6\" rx=\"14.4\" ry=\"17.0\" fill=\"#f7c9a0\" stroke=\"#8a4b1a\" stroke-width=\"2\"/><path d=\"M388.9,25.0 a8.5,8.5 0 1 0 1.7,15.3\" fill=\"none\" stroke=\"#8a4b1a\" stroke-width=\"1.6\"/><line x1=\"22.0\" y1=\"46\" x2=\"22.0\" y2=\"56\" stroke=\"#263238\" stroke-width=\"2.4\"/><text x=\"19.0\" y=\"72\" font-size=\"12\" font-weight=\"800\" fill=\"#263238\" text-anchor=\"middle\">0</text><line x1=\"41.0\" y1=\"46\" x2=\"41.0\" y2=\"56\" stroke=\"#263238\" stroke-width=\"2.4\"/><text x=\"44.0\" y=\"72\" font-size=\"12\" font-weight=\"800\" fill=\"#263238\" text-anchor=\"middle\">2</text><line x1=\"98.0\" y1=\"46\" x2=\"98.0\" y2=\"56\" stroke=\"#263238\" stroke-width=\"2.4\"/><text x=\"98.0\" y=\"72\" font-size=\"12\" font-weight=\"800\" fill=\"#263238\" text-anchor=\"middle\">8</text><line x1=\"136.0\" y1=\"46\" x2=\"136.0\" y2=\"56\" stroke=\"#263238\" stroke-width=\"2.4\"/><text x=\"136.0\" y=\"72\" font-size=\"12\" font-weight=\"800\" fill=\"#263238\" text-anchor=\"middle\">12</text><line x1=\"383.0\" y1=\"46\" x2=\"383.0\" y2=\"56\" stroke=\"#263238\" stroke-width=\"2.4\"/><text x=\"383.0\" y=\"72\" font-size=\"12\" font-weight=\"800\" fill=\"#263238\" text-anchor=\"middle\">38</text><text x=\"404\" y=\"84\" font-size=\"11\" font-weight=\"700\" fill=\"#455a64\" text-anchor=\"end\">weeks</text></svg>",
+  "options": [
+   "At the 12th week",
+   "At the 8th week",
+   "At the 2nd week",
+   "On the very first day"
+  ],
+  "ans": 1,
+  "star": 1,
+  "why": "Read the ticks in weeks. By week 12 the organs are formed. Week 8 is when they are still forming."
+ },
+ {
+  "n": 6,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "In which of these animals does fertilisation happen INSIDE the female's body?",
+  "options": [
+   "A tuna",
+   "A coral",
+   "A salmon",
+   "A bird"
+  ],
+  "ans": 4,
+  "star": 1,
+  "why": "A bird is fertilised inside the female's body. Fish and corals shed eggs into the water, where fertilisation happens outside."
+ },
+ {
+  "n": 7,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "Which of these is a trait passed on from parents to their offspring?",
+  "options": [
+   "A sun-tan from a beach holiday",
+   "Being able to ride a horse",
+   "Attached or detached earlobes",
+   "A new haircut"
+  ],
+  "ans": 3,
+  "star": 1,
+  "why": "Earlobes are passed on through genes. A sun-tan, a skill and a haircut are all picked up during life."
+ },
+ {
+  "n": 8,
+  "section": "B",
+  "tier": "Intermediate",
+  "body": "A pea plant got a round-seed card from one parent and a wrinkled-seed card from the other. Its seeds are round. Which card is the strong (dominant) one?",
+  "options": [
+   "The wrinkled-seed card",
+   "Neither: the seeds should be half round, half wrinkled",
+   "The round-seed card",
+   "Both cards are exactly as strong as each other"
+  ],
+  "ans": 3,
+  "star": 1,
+  "why": "The seeds show round, so the round card is the dominant (strong) one. The strong card hides the other."
+ },
+ {
+  "n": 9,
+  "section": "C",
+  "tier": "Applied",
+  "body": "In one kind of fish, about 3 out of every 100,000 eggs grow into adults. A group of these fish lays 200,000 eggs. About how many will grow into adults? (Does that size make sense?)",
+  "options": [
+   "About 3",
+   "About 600,000",
+   "About 199,997",
+   "About 6"
+  ],
+  "ans": 4,
+  "predict": true,
+  "star": 2,
+  "why": "3 out of 100,000, and 200,000 is two groups of 100,000. So 2 × 3 = 6. Size check: far fewer adults than eggs."
+ },
+ {
+  "n": 10,
+  "section": "C",
+  "tier": "Applied",
+  "body": "A kind of tree frog lives in only one small forest. Another kind of frog lives in forests in many countries. Why is the first kind in much more danger of becoming extinct?",
+  "options": [
+   "Small forests ALWAYS have more food than big ones",
+   "All its members live in one place, so losing that forest could wipe them all out",
+   "Frogs that live in many countries never get any diseases",
+   "The first kind is too small to lay any eggs"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 2,
+  "why": "Only one forest means all of them are in one place. One disaster there could wipe out the whole kind. Many countries spreads the risk."
+ },
+ {
+  "n": 11,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Mia has her father's dark hair and her mother's eye colour. Which best explains this?",
+  "options": [
+   "She copied her parents' looks by watching them while she was growing up",
+   "She got all her genes from whichever parent is older",
+   "She got one set of genes from her father and one set from her mother",
+   "Hair and eye colour come from the food she ate"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "A child gets one set of genes from the father and one set from the mother. That is why she can look like each in a different way."
+ },
+ {
+  "n": 12,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Two black goats have a kid with a white coat. Neither parent is white, but one of the grandmothers was. What explains this?",
+  "options": [
+   "White coat is a hidden trait: both black parents carried a hidden white gene, and the kid got one from each",
+   "The kid caught its white coat from its grandmother",
+   "A hidden trait can NEVER come back once it has skipped a generation",
+   "The kid's coat faded in the hot sun after it was born"
+  ],
+  "ans": 1,
+  "predict": true,
+  "star": 2,
+  "why": "Black parents can each carry a hidden white gene. The kid got one from each, so white showed. A hidden trait can skip a generation and come back."
+ },
+ {
+  "n": 13,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Why do fish that use external fertilisation lay their eggs in water and not on land?",
+  "options": [
+   "Fish eggs are far too heavy for the parent fish to carry all the way onto land",
+   "Eggs laid in water ALWAYS hatch within an hour",
+   "The sperm need water to swim to the eggs, and on land the eggs would dry out",
+   "Land is too cold for any kind of egg to grow"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "Sperm need water to swim to the eggs. On land the eggs would dry out. Weight and temperature are not the reason."
+ },
+ {
+  "n": 14,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Which ONE clue PROVES that an animal's eggs were fertilised inside the mother's body?",
+  "options": [
+   "Her baby grew inside her womb before it was born",
+   "She lays eggs",
+   "She lives on land",
+   "She is a very large animal that lives for many years"
+  ],
+  "ans": 1,
+  "star": 2,
+  "why": "PROVES means only this clue works. Only live birth from the womb shows fertilisation inside. Laying eggs fits both inside and outside."
+ },
+ {
+  "n": 15,
+  "section": "C",
+  "tier": "Applied",
+  "body": "In class, Lin puts a drop of iodine solution on a thin layer of leek skin before looking at it under a microscope. Why?",
+  "options": [
+   "It kills the leek cells so that they stop moving about under the lens",
+   "It stains the cell parts, so the nucleus and cell wall show up clearly",
+   "Iodine ALWAYS turns every kind of cell bright blue",
+   "It makes the leek cells grow much bigger"
+  ],
+  "ans": 2,
+  "star": 2,
+  "why": "Iodine is a stain. It colours the nucleus and cell wall so they show clearly. It does not kill cells or make them grow."
+ },
+ {
+  "n": 16,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Ben put the same size ice cube on three plates in the same room. It melted in 7 minutes on the metal plate, 15 minutes on the plastic plate and 18 minutes on the wooden plate. Which conclusion do his results support?",
+  "options": [
+   "Wood is the best conductor of heat out of all three plates",
+   "Metal let heat flow into the ice fastest of the three",
+   "Plastic ALWAYS melts ice faster than metal does",
+   "The plates made no difference to the melting time"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 2,
+  "why": "The ice melted fastest on metal, so heat flowed into it fastest there. The data cannot say 'ALWAYS' for plastic."
+ },
+ {
+  "n": 17,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Mo wants to find out which of two magnets is stronger by counting how many paperclips each can hold in a chain. What makes his test fair?",
+  "options": [
+   "Use big paperclips for one magnet and small ones for the other",
+   "Test one magnet in the morning and the other at night",
+   "A magnet ALWAYS holds more if it is the bigger one, so no test is needed",
+   "Use the same size paperclips and hang them the same way for both magnets"
+  ],
+  "ans": 4,
+  "star": 2,
+  "why": "A fair test changes one thing only. Same size paperclips, hung the same way, for both magnets."
+ },
+ {
+  "n": 18,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Ana's jar holds a mixture of salt and sand. Which steps get both of them back separately?",
+  "options": [
+   "Add water and stir, filter out the sand, then evaporate the water to leave the salt",
+   "Pour it through filter paper: that ALWAYS separates salt from sand",
+   "Add some water, then put the jar in the freezer so all the salt sinks to the very bottom",
+   "Shake it hard so the salt and sand fall into layers"
+  ],
+  "ans": 1,
+  "star": 2,
+  "why": "Salt dissolves in water and sand does not. Filter out the sand, then evaporate the water to get the salt back. Filter paper alone leaves them mixed."
+ },
+ {
+  "n": 19,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Which of these shows variation?",
+  "options": [
+   "Ten sunflowers in one bed, all measured on the same day, are all different heights",
+   "One sunflower, measured once every week for two whole months, grows taller and taller",
+   "A sunflower head turning to face the Sun during the day",
+   "A sunflower seed slowly changing into a young plant"
+  ],
+  "ans": 1,
+  "star": 2,
+  "why": "Variation is a line-up: many of one kind, one day, all different. A sunflower growing over weeks is change over time."
+ },
+ {
+  "n": 20,
+  "section": "C",
+  "tier": "Applied",
+  "body": "Scientists want to find out if a kind of wild bird is becoming endangered. Which plan gives the best evidence?",
+  "options": [
+   "Count the birds once, on one sunny morning",
+   "Ask one person if they have seen fewer birds lately",
+   "Count them in a different place every year so more places get checked",
+   "Count the birds in the same places at the same time each year for several years and compare"
+  ],
+  "ans": 4,
+  "star": 2,
+  "why": "Same places, same time, several years: a fair comparison. One count or one opinion cannot show a change."
+ },
+ {
+  "n": 21,
+  "section": "W",
+  "tier": "Applied",
+  "type": "written",
+  "marks": 4,
+  "body": "Explain it (4 marks). Most human mothers have just one baby at a time, and only a few babies in their whole life. Explain why human beings still do not die out. Start your answer with the question's own words: \"Human beings do not die out because…\"",
+  "star": 2,
+  "why": "",
+  "model": "Human beings do not die out because parents look after their babies for many years, feeding and protecting them. So almost every baby grows up into an adult. When they grow up they can have children of their own, so they take the place of their parents.",
+  "rubric": [
+   "Parents look after / feed / protect the baby for a long time",
+   "So most babies survive and grow up",
+   "When grown up they have children of their own (replace the parents)",
+   "Starts from the question's words and gives the reason with because/so"
+  ]
+ }
+];
+
+/* Q21 keyword marker (provisional only; the coach re-marks by hand). One mark per idea. Planner-tested (sci_U58_q21_marker.js). */
+const Q21_START = "Human beings do not die out because";
+function startedFromQuestion(t){
+  const w = Q21_START.toLowerCase().replace(/[^a-z ]/g,'').split(' ');
+  const a = t.toLowerCase().replace(/[^a-z ]/g,' ').split(/\s+/).join(' ');
+  for (let i=0;i+4<=w.length;i++){ if (a.includes(w.slice(i,i+4).join(' '))) return true; }
+  return false;
+}
+const MARK_R = [
+  t => /look(s|ed)? after|care|feed|protect|keep (them|it|the baby) safe|raise/i.test(t),
+  t => /(surviv|grow(s|n)? up|live(s)? to|stay(s)? alive|most (babies|of them|children)|don'?t die)/i.test(t),
+  t => /(children|babies|kids|young|offspring) of their own|have (their own )?(children|babies|kids)|reproduce|take (the|their) (parents'? )?place|replace/i.test(t),
+  t => startedFromQuestion(t) && /\bbecause\b/i.test(t) && (t.match(/\b(because|so|therefore)\b/gi)||[]).length >= 2
+];
+function markWritten(text){
+  const t = String(text||'');
+  const ideas = MARK_R.map(f => !!f(t));
+  return { ideas, marks: ideas.filter(Boolean).length };
+}
+/* ---------- END EDIT PER UNIT ---------- */
+
+const SECTION_LABEL = {
+  A: "SECTION A — Warm-Up (Basic)",
+  B: "SECTION B — Applying the Skills (&#9733; Intermediate)",
+  C: "SECTION C — Think Like a Scientist (&#9733;&#9733; Applied)",
+  W: "PART 2 — Explain It (4 marks, scored on its own: it does not count towards the 16/20)"
+};
+
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+
+const nowMs = () => Date.now();
+const MCQ = Q.filter(q => q.type !== 'written');
+const WQ  = Q.find(q => q.type === 'written');
+const chosen = {};            // current choice per question (1-based option)
+const firstChoice = {};       // very first click per question
+const firstAt = {};           // ISO time of that first click
+const secsPrev = {};          // seconds since his previous answer click (or since opening), at the first click
+const predictions = {};       // { qn: text he typed }
+const openedAt = new Date(nowMs());
+let lastClick = nowMs();
+function prov(){ const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null}; return {helped:g('helped'), usedNotes:g('notes')}; }
+function writtenText(){ const e = document.getElementById('w-'+WQ.n); return e ? e.value : ''; }
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+let submitted = false, reviewing = false;
+
+function tableHTML(rows){
+  let h = '<table class="tbl"><tr><th>Animal</th><th>Young a year</th><th>Weeks of care</th></tr>';
+  rows.forEach(r => { const m = r.match(/^Animal (\w): ([\d,]+) young a year, (\d+) weeks? of care$/); h += m ? `<tr><td>${m[1]}</td><td class="num">${m[2]}</td><td class="num">${m[3]}</td></tr>` : `<tr><td colspan="3">${r}</td></tr>`; });
+  return h + '</table>';
+}
+
+function render(){
+  const quiz = document.getElementById('quiz');
+  let html = '';
+  let lastSection = null;
+  Q.forEach(q => {
+    if (q.section !== lastSection){
+      html += `<div class="band ${q.section}">${SECTION_LABEL[q.section]}</div>`;
+      lastSection = q.section;
+    }
+    if (q.type === 'written'){
+      html += `<div class="q W" id="q-${q.n}">
+        <span class="tierlbl Applied">Applied</span>
+        <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">&#9733;&#9733;</span> ${q.body}</p>
+        <div class="wbox"><textarea id="w-${q.n}" maxlength="900" placeholder="Type your answer here" oninput="updateProgress()"></textarea></div>
+        <div class="wtick"><label><input type="checkbox" id="whytick-${q.n}"> My answer says WHY, not just a fact near it</label></div>
+        <div class="wres" id="wres-${q.n}"></div></div>`;
+      return;
+    }
+    const stars = q.star === 2 ? '&#9733;&#9733; ' : (q.star === 1 ? '&#9733; ' : '');
+    let opts = '';
+    q.options.forEach((opt, idx) => {
+      opts += `<button class="opt" id="opt-${q.n}-${idx+1}" onclick="choose(${q.n}, ${idx+1})">${idx+1}. ${opt}</button>`;
+    });
+    let optBlock;
+    if (q.predict){
+      optBlock = `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words or a number, then press Show options.</label>
+        <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+        <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div>
+        <div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+    } else optBlock = opts;
+    html += `<div class="q ${q.section}" id="q-${q.n}">
+      <span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig ? `<div class="fig">${q.fig}</div>` : ''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="star">${stars}</span>${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; correct</span>
+        <span class="result-tag bad" id="tag-bad-${q.n}">&#10007; try again next time</span>
+      </p>
+      ${q.rows ? tableHTML(q.rows) : ''}
+      ${optBlock}
+      <div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why}</div></div>`;
+  });
+  quiz.innerHTML = html;
+}
+
+function predTyped(qn){
+  const v = document.getElementById('pin-'+qn).value.trim();
+  document.getElementById('pshow-'+qn).disabled = v.length < 2;
+}
+function predShow(qn){
+  const inp = document.getElementById('pin-'+qn);
+  const v = inp.value.trim();
+  if (v.length < 2 || qn in predictions) return;
+  predictions[qn] = v;                         // saved, never scored, cannot be edited after this
+  inp.readOnly = true;
+  document.getElementById('pshow-'+qn).style.display = 'none';
+  document.getElementById('pbody-'+qn).classList.remove('hid');
+}
+
+function choose(qn, idx){
+  if (submitted || reviewing) return;
+  const t = nowMs();
+  if (!(qn in firstChoice)){
+    firstChoice[qn] = idx;
+    firstAt[qn] = new Date(t).toISOString();
+    secsPrev[qn] = Math.round((t - lastClick)/100)/10;
+  }
+  lastClick = t;
+  chosen[qn] = idx;
+  const q = MCQ.find(x => x.n === qn);
+  q.options.forEach((_, i) => document.getElementById(`opt-${qn}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${qn}-${idx}`).classList.add('selected');
+  updateProgress();
+}
+
+function readyToSubmit(){
+  const pv = prov();
+  return Object.keys(chosen).length === NQ && writtenText().trim().length >= WRITTEN_MIN_CHARS && pv.helped && pv.usedNotes;
+}
+function updateProgress(){
+  const n = Object.keys(chosen).length;
+  const wDone = writtenText().trim().length >= WRITTEN_MIN_CHARS;
+  document.getElementById('progress-label').textContent = `${n} / ${NQ} answered · Part 2 ${wDone ? 'written' : 'not yet'}`;
+  document.getElementById('progress-fill').style.width = (n/NQ*100) + '%';
+  const btn = document.getElementById('btn-submit');
+  const pv = prov();
+  if (readyToSubmit()){
+    btn.disabled = false;
+    btn.textContent = 'Submit Test';
+    btn.onclick = askConfirmSubmit;
+  } else {
+    btn.disabled = true;
+    btn.textContent = n < NQ ? `Answer all ${NQ} to submit (${NQ-n} left)` : (!wDone ? 'Write your Part 2 answer to submit' : 'Answer the two questions above to submit');
+  }
+}
+
+function askConfirmSubmit(){
+  if (!readyToSubmit()) return;
+  document.getElementById('confirm-overlay').classList.add('show');
+}
+function closeConfirm(){ document.getElementById('confirm-overlay').classList.remove('show'); }
+
+/* ---------- fast-answer review (MCQ only; Q21 is outside it) ----------
+   eligible: A/B answers < REVIEW_SECS_AB, C answers < REVIEW_SECS_C after the previous answer, and not changed by him before Submit (v2.1).
+   shown: at most REVIEW_MAX, Section C first, then the fastest (smallest secsSincePrev). */
+let preReview = {}, reviewEligible = [], reviewList = [], reviewSkippedSelf = [], reviewPos = 0, reviewLog = {};
+function pickReview(){
+  const fast = MCQ.filter(q => (q.n in secsPrev) && secsPrev[q.n] < (q.section === 'C' ? REVIEW_SECS_C : REVIEW_SECS_AB));
+  const skipped = fast.filter(q => chosen[q.n] !== firstChoice[q.n]);     // v2.1: he already changed these himself, so they are not shown again
+  const elig = fast.filter(q => chosen[q.n] === firstChoice[q.n]);
+  const ranked = elig.slice().sort((a,b) => ((a.section==='C'?0:1) - (b.section==='C'?0:1)) || (secsPrev[a.n]-secsPrev[b.n]) || (a.n-b.n));
+  return { eligible: elig.map(q => q.n), skippedSelfChanged: skipped.map(q => q.n), shown: ranked.slice(0, REVIEW_MAX).map(q => q.n).sort((a,b)=>a-b) };
+}
+function startReview(){
+  closeConfirm();
+  preReview = Object.assign({}, chosen);
+  const r = pickReview();
+  reviewEligible = r.eligible; reviewList = r.shown; reviewSkippedSelf = r.skippedSelfChanged;
+  reviewPos = 0; reviewLog = {};
+  if (!reviewList.length){ doSubmit(); return; }
+  reviewing = true;
+  document.getElementById('review-overlay').classList.add('show');
+  showReviewItem();
+}
+function showReviewItem(){
+  const qn = reviewList[reviewPos];
+  const q = MCQ.find(x => x.n === qn);
+  document.getElementById('rv-count').textContent = `Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h = `${q.fig ? `<div class="fig">${q.fig}</div>` : ''}<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>${q.rows ? tableHTML(q.rows) : ''}`;
+  q.options.forEach((opt, i) => {
+    h += `<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${opt}</button>`;
+  });
+  document.getElementById('rv-body').innerHTML = h;
+  document.getElementById('rv-actions').innerHTML =
+    `<button class="btn keep" id="rv-keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" id="rv-change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){ reviewLog[reviewList[reviewPos]] = {kept:true}; rvNext(); }
+function rvChange(){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.disabled = false);
+  document.getElementById('rv-actions').innerHTML = `<button class="btn keep" id="rv-use" onclick="rvUse()">Use this answer</button>`;
+}
+function rvPick(i){
+  document.querySelectorAll('#rv-body .opt').forEach(b => b.classList.remove('selected'));
+  document.getElementById('rv-opt-'+i).classList.add('selected');
+  chosen[reviewList[reviewPos]] = i;
+}
+function rvUse(){
+  const qn = reviewList[reviewPos];
+  reviewLog[qn] = {kept:false, changed: chosen[qn] !== preReview[qn]};
+  rvNext();
+}
+function rvNext(){
+  reviewPos++;
+  if (reviewPos >= reviewList.length){
+    reviewing = false;
+    document.getElementById('review-overlay').classList.remove('show');
+    doSubmit();
+  } else showReviewItem();
+}
+
+let lastResults = null;
+let resultsSaved = false;
+function leaveGuard(){ return !(lastResults && !resultsSaved) || confirm('You have not saved your results yet. Leave without saving?'); }
+
+function doSubmit(){
+  submitted = true;
+  document.querySelectorAll('.opt').forEach(b => b.disabled = true);
+  document.querySelectorAll('.pin').forEach(b => b.readOnly = true);
+
+  let score = 0, firstPassScore = 0, preReviewScore = 0;
+  const sectionTally = { A:{c:0,t:0}, B:{c:0,t:0}, C:{c:0,t:0} };
+  const tierTally = { Basic:{c:0,t:0}, Intermediate:{c:0,t:0}, Applied:{c:0,t:0} };
+  const swing = { wrongToRight:0, rightToWrong:0, wrongToWrong:0 };
+  const selfSwing = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // changes made before the review
+  const allSwing  = { changed:0, wrongToRight:0, rightToWrong:0, wrongToWrong:0 };   // every change since the first click
+  const changes = [];
+  const answers = MCQ.map(q => {
+    const given = chosen[q.n];
+    const isCorrect = given === q.ans;
+    if (isCorrect) score++;
+    if (firstChoice[q.n] === q.ans) firstPassScore++;
+    if (preReview[q.n] === q.ans) preReviewScore++;
+    sectionTally[q.section].t++;
+    tierTally[q.tier].t++;
+    if (isCorrect) { sectionTally[q.section].c++; tierTally[q.tier].c++; }
+
+    const fc = firstChoice[q.n], pr = preReview[q.n];
+    if (pr !== fc){ selfSwing.changed++; if (fc === q.ans) selfSwing.rightToWrong++; else if (pr === q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++; }
+    if (given !== fc){ allSwing.changed++; if (fc === q.ans) allSwing.rightToWrong++; else if (given === q.ans) allSwing.wrongToRight++; else allSwing.wrongToWrong++; }
+    let dir = null;
+    const rv = reviewLog[q.n];
+    if (rv && rv.changed){
+      const was = preReview[q.n] === q.ans;
+      dir = was ? 'right->wrong' : (isCorrect ? 'wrong->right' : 'wrong->wrong');
+      if (dir === 'wrong->right') swing.wrongToRight++; else if (dir === 'right->wrong') swing.rightToWrong++; else swing.wrongToWrong++;
+      changes.push({ q:q.n, from:preReview[q.n], to:given, direction:dir });
+    }
+    document.getElementById(`opt-${q.n}-${given}`).classList.add(isCorrect ? 'correct' : 'wrong');
+    if (!isCorrect) document.getElementById(`opt-${q.n}-${q.ans}`).classList.add('correct');
+    document.getElementById(`why-${q.n}`).classList.add('show');
+    document.getElementById(isCorrect ? `tag-ok-${q.n}` : `tag-bad-${q.n}`).classList.add('show');
+
+    return { q: q.n, section: q.section, tier: q.tier, chosen: given, correct: q.ans, isCorrect,
+             firstChoice: fc, firstCorrect: fc === q.ans,
+             preReviewChoice: pr, finalChoice: given,
+             secsSincePrev: secsPrev[q.n], firstClickAt: firstAt[q.n],
+             prediction: (q.n in predictions) ? predictions[q.n] : null,
+             reviewEligible: reviewEligible.indexOf(q.n) >= 0,
+             reviewed: q.n in reviewLog, changedBeforeReview: pr !== fc, changedOnReview: rv ? !!rv.changed : false, reviewDirection: dir };
+  });
+
+  /* Part 2: Q21, provisional keyword marks */
+  const wText = writtenText().trim();
+  const wm = markWritten(wText);
+  const wTa = document.getElementById('w-'+WQ.n); wTa.readOnly = true;
+  const whyTickEl = document.getElementById('whytick-'+WQ.n); const answeredWhyTick = !!whyTickEl.checked; whyTickEl.disabled = true;
+  const typedStarter = startedFromQuestion(wText);
+  const IDEA_LABELS = WQ.rubric;
+  const wres = document.getElementById('wres-'+WQ.n);
+  wres.innerHTML = `<b>Model answer:</b> ${WQ.model}<br><b>The 4 ideas (1 mark each):</b><ul>` +
+    IDEA_LABELS.map((l,i) => `<li>${wm.ideas[i] ? '&#10003;' : '&#9744;'} ${l}</li>`).join('') +
+    `</ul><i>Provisional: ${wm.marks}/4. This is a keyword check only, so your coach marks your writing by hand.</i>`;
+  wres.classList.add('show');
+
+  const pct = Math.round(score/NQ*100);
+  const pass = score >= PASS_BAR;
+  const minutes = Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner = document.getElementById('score-banner');
+  banner.classList.add('show', pass ? 'pass' : 'fail');
+  document.getElementById('score-big').textContent = `Part 1: ${score} / ${NQ}  (${pct}%)`;
+  document.getElementById('score-msg').textContent = pass
+    ? `🎉 Great job, Prem! That's a PASS (bar is ${PASS_BAR}/${NQ}). Look through the highlighted answers below to see why.`
+    : `Good effort! Bar is ${PASS_BAR}/${NQ} — look through the highlighted answers below, then talk it through with Luikishi.`;
+  document.getElementById('part2-line').innerHTML = `<b>Part 2 (written, scored on its own):</b> provisional ${wm.marks} / 4. Your coach checks it by hand.`;
+  const nChanged = changes.length;
+  document.getElementById('pace-lines').innerHTML =
+    `<div><b>First clicks:</b> ${firstPassScore}/${NQ} &rarr; <b>final:</b> ${score}/${NQ}. Your checking changed ${allSwing.changed} answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>` +
+    `<div><b>Time:</b> ${minutes} min (Your last test took ${LAST_TEST_MINUTES} minutes, U57)</div>` +
+    (reviewList.length
+      ? `<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${nChanged}: ${swing.wrongToRight} wrong→right, ${swing.rightToWrong} right→wrong.</div>`
+      : `<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML =
+    ['A','B','C'].map(s => `<div class="sec-chip">Section ${s}: ${sectionTally[s].c}/${sectionTally[s].t}</div>`).join('') +
+    ['Basic','Intermediate','Applied'].map(t => `<div class="sec-chip">${t}: ${tierTally[t].c}/${tierTally[t].t}</div>`).join('');
+
+  banner.scrollIntoView({behavior:'smooth'});
+
+  document.getElementById('btn-submit').style.display = 'none';
+  document.getElementById('btn-save').style.display = 'inline-block';
+
+  lastResults = {
+    student: "Prem",
+    unit: UNIT_NUM,
+    unitTitle: UNIT_TITLE,
+    dateTaken: new Date().toISOString().slice(0,10),
+    openedAt: openedAt.toISOString(),
+    submittedAt: new Date(nowMs()).toISOString(),
+    minutesSpent: minutes,
+    lastTestMinutes: LAST_TEST_MINUTES,
+    provenance: prov(),
+    score, outOf: NQ, pct, passBar: PASS_BAR, passed: pass,
+    part1Score: score, part2Score: wm.marks, part2Provisional: true,
+    firstPassScore, preReviewScore,
+    reviewSecs: { AB: REVIEW_SECS_AB, C: REVIEW_SECS_C, max: REVIEW_MAX },
+    selfChanged: { changed: selfSwing.changed, wrongToRight: selfSwing.wrongToRight, rightToWrong: selfSwing.rightToWrong, wrongToWrong: selfSwing.wrongToWrong },
+    checkingSwing: { changed: allSwing.changed, wrongToRight: allSwing.wrongToRight, rightToWrong: allSwing.rightToWrong, wrongToWrong: allSwing.wrongToWrong },
+    predictions: Object.assign({}, predictions),
+    reviewEligible: reviewEligible.slice(),
+    reviewedQs: reviewList.slice(),
+    reviewSkippedSelfChanged: reviewSkippedSelf.slice(),
+    changedOnReview: changes,
+    reviewSwing: { eligible: reviewEligible.length, skippedSelfChanged: reviewSkippedSelf.length, reviewed: reviewList.length, changed: nChanged, wrongToRight: swing.wrongToRight, rightToWrong: swing.rightToWrong, wrongToWrong: swing.wrongToWrong },
+    sections: ['A','B','C'].map(s => ({ name:s, score:sectionTally[s].c, outOf:sectionTally[s].t })),
+    tiers: ['Basic','Intermediate','Applied'].map(t => ({ name:t, score:tierTally[t].c, outOf:tierTally[t].t })),
+    written: { n: WQ.n, text: wText, autoIdeas: wm.ideas, autoScore: wm.marks, outOf: WQ.marks, answeredWhyTick, typedStarter },
+    answeredWhyTick,
+    answers
+  };
+}
+
+async function saveResults(){
+  const pad = n => String(n).padStart(3,'0');
+  const filename = `SCI_U${pad(UNIT_NUM)}_Results_${lastResults.dateTaken}.json`;
+  const json = JSON.stringify(lastResults, null, 2);
+  const statusEl = document.getElementById('save-status');
+
+  if (window.showSaveFilePicker){
+    try {
+      const handle = await window.showSaveFilePicker({
+        suggestedName: filename,
+        types: [{ description:'Test results JSON', accept:{'application/json':['.json']} }]
+      });
+      const writable = await handle.createWritable();
+      await writable.write(json);
+      await writable.close();
+      resultsSaved = true;
+      statusEl.textContent = `Saved as ${filename}. (First time, remember to pick the Lessons\\Tests\\Results folder — your browser will suggest it again next time.)`;
+      return;
+    } catch(e){
+      if (e.name === 'AbortError'){ statusEl.textContent = 'Save cancelled — click the button again when ready.'; return; }
+    }
+  }
+  const blob = new Blob([json], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  resultsSaved = true;
+  statusEl.textContent = `Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+
+render();
+</script>
+</body>
+</html>

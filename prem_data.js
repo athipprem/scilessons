@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '25 Oct 2026',
+  updated:        '28 Oct 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:57, topic:'Chapter 3 &sect;C &mdash; Heredity: Recipe Cards, Strong and Hidden Traits (the last section of Chapter 3)', status:'&#128295; Built (25 Oct 2026), from `BUILD_PLAN_SCI_U57_Heredity.md` v1.1, ready to sit. Warm-up, two lessons and a 20-question test plus one written item (Q21, 4 marks, scored separately). Gate: 0 FAIL(s).' },
+    currentUnit: { n:58, topic:'Chapter 3 Wrap-up &mdash; Reproduction in Animals, the Whole Chapter (Book + ASMOPSS)', status:'&#127381; Built and ready (28 Oct 2026), from `BUILD_PLAN_SCI_U58_Ch3WrapUp.md` v1.2. Warm-up (with the on-screen PROVE card sort), two lessons and a 20-question test plus one written item (Q21, 4 marks, scored separately). School Ch.3 test is Thu 5 Nov 2026.' },
 
   lastUnit: {
-    n:56, score:17, outOf:20, pct:85, passBar:16, delta:2, prevScore:15, passed:true, minutesSpent:7.0, minutesUnit:56, minutesNote:'U55 was 8.4', firstPassScore:17,
-    patternLabel: 'Unit 56 result - Biology: Chapter 3 &sect;B Why two parents? (17/20, 85%, PASS)',
-    patternInsight: '<strong>17/20 (85%)</strong> - PASS (bar 16). Section A 1/2, Section B 5/6, Section C 11/12. Sat alone, no notes, 7.0 minutes. First clicks 17, final 17: he changed no answer, before or during the review (6 shown, 0 changed). <strong>Calc check: CLOSED</strong> - the per-N item (Q9, prediction &quot;12&quot;) was right for the second clean time running.',
-    analysisLabel: 'Misses: Q1 (what variation means), Q3 (plantlets vs seeds), Q19 (which ONE clue proves a bird)',
-    analysisInsight: '<strong>Held:</strong> the per-N calculation, all six review-screen items, and 10 of 11 older-unit items. <strong>Watch:</strong> Q3 is the 5th plantlets/seeds miss; Q19 is the 2nd &quot;which clue proves it&quot; miss in a row (U55 Q19, U56 Q19). Part 2 (Q21, 4 marks): 0/4 by auto-mark and by hand.',
-    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Part 2 written answer 0/4 (auto and hand). Full record: `Memory Backup\\TEST_RECORD_SCI_U056.md`.',
+    n:57, score:17, outOf:20, pct:85, passBar:16, delta:0, prevScore:17, passed:true, minutesSpent:6.6, minutesUnit:57, minutesNote:'U56 was 7.0', firstPassScore:15,
+    patternLabel: 'Unit 57 result - Biology: Chapter 3 &sect;C Heredity (17/20, 85%, PASS)',
+    patternInsight: '<strong>17/20 (85%)</strong> - PASS (bar 16). Section A 2/2, Section B 4/6, Section C 11/12. Sat alone, no notes, 6.6 minutes. First clicks 15, 17 after his own changes (3 wrong to right, 1 right to wrong at Q18), 17 after the review (6 shown, 0 changed). The family-tree item (Q10) and the grid count (Q9, prediction &quot;10&quot;) were both right.',
+    analysisLabel: 'Misses: Q6 (dominant card), Q8 (variation example), Q18 (which ONE clue proves a mammal)',
+    analysisInsight: '<strong>Held:</strong> hidden carriers on an unseen tree, the 2x2 grid count, all six Physics/Chemistry items, no absolute-word option chosen. <strong>Watch:</strong> Q18 is the 3rd &quot;which clue proves it&quot; miss in a row (first click right, changed to wrong); Q8 is the 2nd variation miss. Part 2 (Q21, 4 marks): 0/4 auto, 1/4 by hand.',
+    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Part 2 written answer 1/4 (hand-mark; auto 0/4). Full record: `Memory Backup\\TEST_RECORD_SCI_U057.md`.',
     qBreakdown: []
   },
 
@@ -101,11 +101,24 @@ var PREM_DATA = {
     { unit:54, topic:'Biology: Chapter 2 Cells &mdash; school-format mock (inserted, school-test prep)', score:46, outOf:50, pct:92, passBar:40, date:'2026-10-18', note:'first sitting (Lui); the saved file is a 2nd sitting, 43/50' },
     { unit:55, topic:'Biology: Chapter 3 &sect;A &mdash; Why Do Living Things Reproduce? (school-aligned, beyond-class)', score:15, outOf:20, pct:75, passBar:16, date:'2026-10-23', firstPassScore:11, minutesSpent:8.4, part2:'1/4' },
     { unit:56, topic:'Biology: Chapter 3 &sect;B &mdash; Why Two Parents? Variation, Plantlets vs Seeds, and the Land Problem (school-aligned, beyond-class)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-24', firstPassScore:17, minutesSpent:7.0, part2:'0/4' },
+    { unit:57, topic:'Biology: Chapter 3 &sect;C &mdash; Heredity: Recipe Cards, Strong and Hidden Traits (school-aligned, beyond-class)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-25', firstPassScore:15, minutesSpent:6.6, part2:'1/4' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 57, badge: 'linear-gradient(135deg,#8a3f9e,#3f9a4b)',
+      title: 'Biology: Chapter 3 &sect;C &mdash; Heredity: Recipe Cards, Strong and Hidden Traits (school-aligned, beyond-class)',
+      tags: [
+        { t:'&#9989; 17/20 (85%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 15 &rarr; final 17', c:'tgreen' },
+        { t:'6.6 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U57_Heredity.md` v1.1 (gate 0 FAIL(s)): warm-up, two lessons, a shared simulator, a 20-question test plus a written Part 2 (Q21, 4 marks). <strong>Taken 25 Oct 2026: 17/20 (85%), PASS</strong> &mdash; Section A 2/2, Section B 4/6, Section C 11/12. First clicks 15, 17 after his own changes (3 wrong to right, 1 right to wrong at Q18), 17 after the review (which changed nothing). Missed: Q6, Q8, Q18. Part 2 auto 0/4, hand 1/4. Record: `Memory Backup\\TEST_RECORD_SCI_U057.md`.',
+      status: 'done'
+    },
     {
       n: 56, badge: 'linear-gradient(135deg,#0a4d55,#e8604c)',
       title: 'Biology: Chapter 3 &sect;B &mdash; Why Two Parents? Variation, Plantlets vs Seeds, and the Land Problem (school-aligned, beyond-class)',
