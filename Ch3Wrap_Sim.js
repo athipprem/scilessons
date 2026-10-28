@@ -38,7 +38,7 @@ if(ps){
   var RND=[
     {c:'lays eggs',a:{eagle:'bird',ostrich:'bird',crocodile:'reptile',butterfly:'insect',platypus:'mammal'},v:0},
     {c:'can fly',a:{eagle:'bird',butterfly:'insect'},v:0},
-    {c:'gives birth to live young',a:{dolphin:'mammal',cow:'mammal',shark:'fish'},v:0},
+    {c:'gives birth to live young',a:{dolphin:'mammal',cow:'mammal',guppy:'fish'},v:0},
     {c:'feeds young on milk',a:{dolphin:'mammal',cow:'mammal',platypus:'mammal'},v:1},
     {c:'has feathers',a:{eagle:'bird',ostrich:'bird'},v:1}
   ];

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 59 · Lesson 1 · Animal Groups</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#2e7d32;--pl-d:#1b4d2c;--pl-l:#e3f1e5;--am:#e8903c;--am-l:#fff1e0;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#2e7d32;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#cfe9d3;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#edf7ee;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#d9eddb;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#2e7d32}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+
+  .xp{background:#f6fbf6;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  .xp .cellview svg,.xp .lsvg svg,.xp .dsvg svg,.xp .gsvg svg{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+  .xp .lsvg,.xp .dsvg,.xp .gsvg{text-align:center}
+  .xp>svg{max-width:300px;margin:0 auto;display:block}
+  .xp svg .part{cursor:pointer}.xp svg .part:hover{filter:brightness(.93)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;color:var(--pl-d)}
+  .chip.on{background:var(--pl-l);border-color:var(--pl)}.chip.grey{opacity:.45;border-style:dashed}
+  .info{background:var(--pl-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:.95rem;min-height:3em}
+  .cnt{font-weight:800;text-align:center;color:var(--pl-d);font-size:.85rem}
+  .cmp{width:100%}.cmp td.no{color:#c62828;font-weight:800}.cmp td:nth-child(n+2){text-align:center;font-weight:800}
+  .ebtn,.obtn{background:#fff;color:var(--pl-d);border:1.5px solid var(--pl);border-radius:10px;padding:7px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .ebtn.on,.obtn.on{background:var(--pl);color:#fff}
+  .mtot{background:var(--pl-l);border-radius:10px;padding:8px 12px;text-align:center;font-size:1.05rem;margin:8px 0;color:var(--pl-d)}
+  .ladder{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .rung{border:1.5px solid var(--line);border-radius:8px;padding:4px 9px;font-size:.78rem;font-weight:800;background:#fff;color:#6b7280}
+  .rung.done{background:#e8f5e9;color:#2e7d32}.rung.on{background:var(--pl);color:#fff;border-color:var(--pl)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:5px;cursor:pointer;font-family:inherit;text-align:center}
+  .card svg{width:100%;height:auto}.card b{display:block;font-size:.8rem;color:var(--pl-d)}
+  .card.on{outline:3px solid var(--pl)}.card.seen{background:#edf7ee}
+  .rtab{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0}.rtab td{border:1px solid var(--line);padding:4px 10px}
+  .rrow td:first-child{font-weight:800}.rrow.on td{background:var(--pl-l);font-weight:800}.rrow.done td{color:var(--pl-d)}
+  .wr textarea{width:100%;min-height:78px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wr textarea[readonly]{background:#e4f0e8;color:var(--grey)}
+  .wmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .lines{margin:8px 0 8px 22px;padding:0}.lines li{margin:5px 0}
+  .gobox{border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}
+  .calc{background:#f6fbf6;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}.wp input[type=text]{width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}.wp input[readonly]{background:#d9eddb;color:var(--grey)}
+  @media(max-width:520px){.cards{grid-template-columns:repeat(2,1fr)}}
+
+  /* guided calc walkthrough */
+  .gcalc{background:#f6fbf6;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n,.tbx .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:#2e7d32;background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gs .gopt,.gs .xo{margin:4px 6px 4px 0}
+  .gopt,.xo{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .gopt:disabled,.xo:disabled{opacity:.5;cursor:default}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:#2e7d32}.gfb.no{color:#b0426b}
+  .gbar{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  /* unit 55 pictures */
+  .stage svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cnt2{font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .sline{min-height:1.5em}
+  .rbar{background:var(--am-l);border:1.5px solid var(--am);border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700;text-align:center;color:#1b4d2c}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .wlb{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .wlb.on{background:var(--pl);color:#fff}
+  .sorti{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sbinw{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+  .sbin{width:100%;background:var(--pl);color:#fff;border:none;border-radius:9px;padding:8px;font-weight:800;cursor:pointer;font-family:inherit}
+  .sbinw:nth-child(2) .sbin{background:var(--am);color:#3b2a00}
+  .placed{background:var(--ok-l);border-radius:8px;padding:6px 9px;margin-top:6px;font-size:.88rem}
+  .scs{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .sc{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:.93rem;font-family:inherit}
+  .sc.sel{outline:3px solid var(--pl);background:var(--pl-l)}.sc.used{opacity:.3;cursor:default}
+  .xl{background:#fff;border-left:5px solid var(--am);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .xl b{color:#1b4d2c}
+  #xta{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  #xta[readonly]{background:#e4f0e8;color:var(--grey)}
+  .xchk label{display:block;margin:4px 0;font-weight:700}
+  .xmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  input[type=range]{width:100%;accent-color:#2e7d32}
+  .ctl{margin:8px 0;font-weight:700;color:var(--pl-d)}
+  .dots10{display:block;margin:8px auto}
+
+  .xl.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .tbx{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .tbx.ok{border-color:var(--ok);background:#f1f8f1}
+  .tbx input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;margin:6px 0}
+  .tbx input[readonly]{background:#e1efe5;color:var(--grey)}
+  .tmodel{background:var(--am-l);border-left:5px solid var(--am);border-radius:8px;padding:7px 11px;margin:6px 0;font-size:.92rem}
+  .btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .pcard{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;min-width:72px;border:1.5px solid var(--line);background:#fff;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800;color:var(--pl-d)}
+  .pcard svg{width:46px;height:64px}
+  .pcard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.pcard.used{opacity:.3;cursor:default}
+  .pcards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslot{min-width:74px;min-height:92px;border:2px dashed var(--sv);border-radius:10px;padding:4px;text-align:center;cursor:pointer;background:#fff;font-weight:800;font-size:.85rem;color:var(--pl-d);display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+  .pslot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-l)}
+  .pslot svg{width:40px;height:56px}
+  .stagelines{margin:6px 0 6px 20px;padding:0;font-size:.92rem}
+
+  /* unit 58 */
+  .twopic{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .twopic .box{margin:0;padding:6px}
+  .twopic svg,.pic svg{width:100%;height:auto;display:block}
+  .pic{margin:8px auto;max-width:420px}
+  .pcap{font-weight:800;font-size:.85rem;text-align:center;color:var(--pl-d);margin-top:2px}
+  .causes{display:grid;grid-template-columns:1fr;gap:8px;margin:8px 0}
+  .cause{border:2px solid var(--am);background:var(--am-l);border-radius:12px;padding:8px 12px}
+  .cause b{color:#7a3d00}
+  .hens{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0;min-height:70px}
+  .hen{width:54px;transition:opacity .4s}.hen.gone{opacity:0}
+  #fertsvg svg,#iodsvg svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cmrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:7px 0;font-weight:700}
+  .blank{min-width:120px;min-height:38px;border:2.5px dashed var(--am);background:#fff;border-radius:9px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer;padding:4px 10px}
+  .blank.full{border-style:solid;border-color:var(--ok);background:var(--ok-l);cursor:default}
+  .bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .bk{border:2px solid var(--pl);background:#fff;border-radius:999px;padding:7px 12px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer}
+  .bk.sel{background:var(--pl-l);outline:3px solid var(--pl)}.bk.used{opacity:.3;cursor:default}
+  table.dt{border-collapse:collapse;width:100%;margin:8px 0;font-size:.92rem}.dt th,.dt td{border:1px solid var(--line);padding:6px 8px;text-align:left}.dt th{background:var(--pl-l)}
+  .tr3{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+  .tr3 .box{margin:0;padding:6px;text-align:center}
+  .tr3 svg{width:100%;height:auto;max-width:150px}
+  .gate11{font-weight:800}
+  a.actbtn{text-decoration:none;display:inline-block}
+  .pcards{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+  .pcd{border:2px solid var(--pl);background:#fff;border-radius:10px;padding:8px 12px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer}
+  .pcd small{display:block;font-size:.72rem;color:#b25e00}
+  .pcd.glow{outline:4px solid var(--am);animation:pg 1s ease-in-out 3}
+  @keyframes pg{50%{background:var(--am-l)}}
+  .ppile{min-height:64px;border:3px dashed var(--am);background:var(--am-l);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-start}
+  .ppile:empty::before{content:"The pile is empty. Tap a card to put it here.";color:#7a3d00;font-weight:700}
+  .pvr{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+
+
+  /* unit 59 */
+  .gtab{border-collapse:collapse;width:100%;margin:8px 0;font-size:.85rem}
+  .gtab th,.gtab td{border:1px solid var(--line);padding:5px 5px;text-align:center;vertical-align:middle}
+  .gtab th{background:var(--pl-l);color:var(--pl-d);font-size:.8rem}
+  .gtab td.gn{font-weight:800;text-align:left;color:var(--pl-d)}
+  .gtab td.gc{font-size:.78rem}
+  .gcell{width:100%;min-height:42px;border:2px dashed var(--am);background:#fff;border-radius:8px;font:inherit;font-size:.78rem;font-weight:800;color:var(--pl-d);cursor:pointer;padding:3px}
+  .gcell.full{border-style:solid;border-color:var(--ok);background:var(--ok-l);cursor:default}
+  .twopic.onecol{grid-template-columns:1fr!important}
+  .asxtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+  .asxtabs button,.tcard>button{border:2px solid var(--pl);background:#fff;color:var(--pl-d);border-radius:999px;padding:7px 14px;font:inherit;font-weight:800;cursor:pointer}
+  .asxtabs button.on{background:var(--pl);color:#fff}
+  .isl{background:#fafcf9;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .isl svg{width:100%;height:auto;display:block}
+  .isls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .tcard{border:2px solid var(--pl);border-radius:12px;margin:8px 0;background:#fff;padding:8px}
+  .tcard>button{display:block;width:100%;border-radius:10px;text-align:left}
+  .tback{margin-top:8px}
+  .care .bar{height:16px;border-radius:8px;background:var(--pl);margin:3px 0}
+  .care .bar.o{background:var(--am)}
+  .care .lbl{font-weight:800;color:var(--pl-d);font-size:.9rem}
+  .cmpbox{background:#fff7e8;border:2px solid var(--am);border-radius:10px;padding:8px 12px;margin:6px 0;font-weight:700}
+  .chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chain .ch{border:2px solid var(--pl);background:var(--pl-l);border-radius:10px;padding:6px 10px;font-weight:800;color:var(--pl-d);text-align:center}
+  .chain .ar{font-weight:900;color:var(--pl-d)}
+  .joinbox{min-height:58px;border:3px dashed var(--am);background:var(--am-l);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-start}
+  .joinbox:empty::before{content:"The join box is empty. Tap two cells to put them here.";color:#7a3d00;font-weight:700}
+</style>
+</head>
+<body data-next-href="Survival_Lesson_OneParentOrTwo.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#129435; Lesson 1 &middot; Animal Groups</b><span class="pill">Unit 59</span></div>
+
+  <section class="screen active" id="s1" data-lock="game">
+    <h2>Eggs or Live Young?</h2>
+    <div class="job"><b>Why it matters:</b> how an animal starts its life tells you how it must be kept safe. Zoo keepers and scientists use this every day.</div>
+    <div class="twopic"><div class="box"><div class="pic"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A horse with its foal standing on grass"><rect x="0" y="112" width="220" height="28" fill="#cfe9d3"/><path d="M30,60 Q34,38 70,38 L104,40 Q118,42 120,58 Q118,80 100,84 L50,84 Q30,82 30,60 Z" fill="#b5835a" stroke="#4a3b2a" stroke-width="2.5"/><path d="M104,42 Q116,22 126,10 L142,16 Q146,22 138,34 L130,40 L118,62 Z" fill="#b5835a" stroke="#4a3b2a" stroke-width="2.5"/><path d="M126,10 L142,16 L150,24 Q152,32 142,34 L134,30 Z" fill="#c4956c" stroke="#4a3b2a" stroke-width="2.5"/><circle cx="138" cy="19" r="2.2" fill="#263238"/><path d="M118,12 L124,6 L128,14" fill="#b5835a" stroke="#4a3b2a" stroke-width="2"/><path d="M106,24 Q112,30 110,44 M112,18 Q118,26 116,40" fill="none" stroke="#4a3b2a" stroke-width="3.5" stroke-linecap="round"/><path d="M32,52 Q14,60 18,96" fill="none" stroke="#4a3b2a" stroke-width="5" stroke-linecap="round"/><path d="M44,84 L42,112 M62,84 L62,112 M92,84 L92,112 M108,80 L112,112" stroke="#4a3b2a" stroke-width="6" stroke-linecap="round"/><path d="M158,84 Q160,72 178,72 L196,73 Q208,76 207,88 Q204,98 194,98 L166,98 Q157,96 158,84 Z" fill="#d1a67c" stroke="#4a3b2a" stroke-width="2.2"/><path d="M196,74 Q204,64 208,58 L216,62 Q217,68 212,72 L206,80 Z" fill="#d1a67c" stroke="#4a3b2a" stroke-width="2.2"/><circle cx="212" cy="62" r="1.6" fill="#263238"/><path d="M162,98 L162,112 M172,98 L172,112 M192,98 L192,112 M200,96 L202,112" stroke="#4a3b2a" stroke-width="4" stroke-linecap="round"/><path d="M158,80 Q150,82 152,92" fill="none" stroke="#4a3b2a" stroke-width="3" stroke-linecap="round"/></svg></div><div class="pcap">A horse and its young</div></div><div class="box"><div class="pic"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A glass frog on a leaf, with its eggs on the leaf next to it"><path d="M20,112 Q110,60 214,100 Q150,134 20,112 Z" fill="#6fb36f" stroke="#2f6b34" stroke-width="2.5"/><path d="M30,112 Q120,98 206,100" fill="none" stroke="#2f6b34" stroke-width="2"/><circle cx="44" cy="92" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="58" cy="92" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="72" cy="92" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="86" cy="92" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="51" cy="79" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="65" cy="79" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="79" cy="79" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="93" cy="79" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="58" cy="66" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="72" cy="66" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="86" cy="66" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><circle cx="100" cy="66" r="6.5" fill="#f4fbf2" stroke="#8fbf8f" stroke-width="1.6"/><ellipse cx="156" cy="82" rx="26" ry="18" fill="#a8d86e" stroke="#4d7a1f" stroke-width="2.5"/><circle cx="146" cy="62" r="8" fill="#a8d86e" stroke="#4d7a1f" stroke-width="2.5"/><circle cx="168" cy="62" r="8" fill="#a8d86e" stroke="#4d7a1f" stroke-width="2.5"/><circle cx="146" cy="61" r="2.6" fill="#263238"/><circle cx="168" cy="61" r="2.6" fill="#263238"/><path d="M138,94 q-14,8 -6,16 M176,94 q14,8 6,16" fill="none" stroke="#4d7a1f" stroke-width="4" stroke-linecap="round"/><path d="M148,76 q8,6 16,0" fill="none" stroke="#4d7a1f" stroke-width="2"/></svg></div><div class="pcap">A glass frog next to its eggs on a leaf</div></div></div>
+    <div class="rulebar">Tap a card, then tap its bin.</div>
+    <div id="sort" data-fb="#sortfb" data-end="#sortend"><div class="scs"><button class="sc" data-bin="egg">hen</button><button class="sc" data-bin="live">cow</button><button class="sc" data-bin="egg">frog</button><button class="sc" data-bin="live">cat</button><button class="sc" data-bin="egg">crocodile</button><button class="sc" data-bin="live" data-hint="A guppy is a fish that gives birth to live young. Keep that in mind: it comes back later.">guppy</button><button class="sc" data-bin="egg">goldfish</button><button class="sc" data-bin="live">human</button></div>
+      <div class="sorti"><div class="sbinw"><button class="sbin" data-bin="egg">Lays eggs</button><div class="bl"></div></div><div class="sbinw"><button class="sbin" data-bin="live">Gives birth to live young</button><div class="bl"></div></div></div><div class="pfb" id="sortfb"></div></div>
+    <div class="job hid" id="sortend">Eggs or live young: that is one way animals differ. Next: five whole groups.</div>
+  </section>
+
+  <section class="screen" id="s2" data-lock="game">
+    <h2>The Five Groups</h2>
+    <div class="rulebar">Tap a card, then tap an empty box. Cards can be used again.</div>
+    <div id="gt">
+      <table class="gtab" id="gtab"><tr><th>Group</th><th>Eggs</th><th>Fertilisation</th><th>Care</th></tr><tr><td class="gn">Fish</td><td><button class="gcell" data-a="jelly eggs in water">&hellip;</button></td><td><button class="gcell" data-a="outside the body">&hellip;</button></td><td class="gc">little or no care</td></tr><tr><td class="gn">Amphibian</td><td><button class="gcell" data-a="jelly eggs in water">&hellip;</button></td><td><button class="gcell" data-a="outside the body">&hellip;</button></td><td class="gc">little or no care</td></tr><tr><td class="gn">Reptile</td><td><button class="gcell" data-a="leathery eggs on land">&hellip;</button></td><td><button class="gcell" data-a="inside the body">&hellip;</button></td><td class="gc">little care (some guard the nest)</td></tr><tr><td class="gn">Bird</td><td><button class="gcell" data-a="hard-shelled eggs">&hellip;</button></td><td><button class="gcell" data-a="inside the body">&hellip;</button></td><td class="gc">a lot of care</td></tr><tr><td class="gn">Mammal</td><td><button class="gcell" data-a="young grow inside the mother">&hellip;</button></td><td><button class="gcell" data-a="inside the body">&hellip;</button></td><td class="gc">the most care, and milk</td></tr></table>
+      <div class="bank"><button class="bk" data-v="jelly eggs in water">jelly eggs in water</button><button class="bk" data-v="leathery eggs on land">leathery eggs on land</button><button class="bk" data-v="hard-shelled eggs">hard-shelled eggs</button><button class="bk" data-v="young grow inside the mother">young grow inside the mother</button><button class="bk" data-v="outside the body">outside the body</button><button class="bk" data-v="inside the body">inside the body</button></div>
+      <div class="pfb" id="gtfb"></div>
+    </div>
+    <div class="job hid" id="gtend">Each group has its own egg for its own place. Mammals: feeding young on milk proves it is a mammal.</div>
+  </section>
+
+  <section class="screen" id="s3" data-lock="mcq">
+    <h2>Why the Egg Suits the Place</h2>
+    <div class="pic"><svg viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A loop of three pictures going clockwise: an egg, then a chick, then an adult hen, and back to an egg"><circle cx="58" cy="56" r="24" fill="#fff3e0" stroke="#d98a1c" stroke-width="3"/><ellipse cx="58" cy="56" rx="11" ry="14" fill="#fff" stroke="#d98a1c" stroke-width="2"/><text x="58" y="20" font-size="15" font-weight="800" fill="#1b4d2c" text-anchor="middle">egg</text><circle cx="242" cy="56" r="24" fill="#fff6bf" stroke="#8a5a00" stroke-width="3"/><circle cx="242" cy="58" r="11" fill="#ffe27a" stroke="#8a5a00" stroke-width="2"/><path d="M252,58 l8,3 l-8,3 Z" fill="#e8903c"/><circle cx="244" cy="55" r="1.8" fill="#263238"/><text x="242" y="20" font-size="15" font-weight="800" fill="#1b4d2c" text-anchor="middle">chick</text><circle cx="150" cy="158" r="24" fill="#f6ddb5" stroke="#8a5a00" stroke-width="3"/><ellipse cx="148" cy="160" rx="14" ry="10" fill="#f6ddb5" stroke="#8a5a00" stroke-width="2"/><circle cx="162" cy="148" r="7" fill="#f6ddb5" stroke="#8a5a00" stroke-width="2"/><path d="M169,148 l6,2 l-6,2 Z" fill="#e8903c"/><text x="150" y="202" font-size="15" font-weight="800" fill="#1b4d2c" text-anchor="middle">adult</text><path d="M88,56 L206,56" fill="none" stroke="#1b4d2c" stroke-width="3"/><path d="M-7,-6 L2,0 L-7,6" fill="none" stroke="#1b4d2c" stroke-width="3" transform="translate(206 56) rotate(0)"/><path d="M236,86 Q216,124 178,138" fill="none" stroke="#1b4d2c" stroke-width="3"/><path d="M-7,-6 L2,0 L-7,6" fill="none" stroke="#1b4d2c" stroke-width="3" transform="translate(178 138) rotate(148)"/><path d="M122,138 Q84,124 64,86" fill="none" stroke="#1b4d2c" stroke-width="3"/><path d="M-7,-6 L2,0 L-7,6" fill="none" stroke="#1b4d2c" stroke-width="3" transform="translate(64 86) rotate(240)"/></svg></div><div class="pcap">Egg, chick, adult, and round again</div>
+    <div class="job">Fish and amphibians: <b>jelly eggs in water</b> are safe in a pond, but on land they would dry out.</div>
+    <div class="job">Reptiles: <b>leathery eggs on land</b> keep the water in. Birds: <b>hard-shelled eggs</b> keep the water in and stay strong.</div>
+<div class="mcq" data-hint="Not that one. The chick inside needs air to breathe." data-why="The shell keeps water in and protects the chick. Tiny holes let air pass through."><p>Why do birds&rsquo; eggs have a hard shell?</p><button class="opt">So that nothing can get in or out</button><button class="opt" data-ok>It keeps the water in and protects the chick, while air still passes through tiny holes</button><button class="opt">So that the egg can float on a pond</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-why="Jelly eggs in water need water around them. On dry land they dry out."><p>A frog&rsquo;s jelly eggs are laid on dry sand. What happens?</p><button class="opt">They grow a hard shell</button><button class="opt" data-ok>They dry out</button><button class="opt">They turn into leathery eggs</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s4" data-lock="pick">
+    <h2>Inside or Outside?</h2>
+    <div class="job">Two cells must meet: <b>a sperm nucleus joins an egg nucleus</b>. This is fertilisation.</div>
+    <div class="chain"><div class="ch">sperm</div><div class="ar">+</div><div class="ch">egg (ovum)</div><div class="ar">&rarr;</div><div class="ch">fertilised egg</div><div class="ar">&rarr;</div><div class="ch">new organism</div></div>
+    <div class="job"><b>External</b> fertilisation is outside the female&rsquo;s body. <b>Internal</b> fertilisation is inside it.</div>
+    <div class="twopic onecol"><div class="box"><div class="pic"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A female fish and a male fish in water, with eggs and sperm floating in the water between them"><rect x="4" y="6" width="212" height="128" rx="10" fill="#d6eefc" stroke="#4a90c2" stroke-width="2.5"/><g transform="translate(58 60)"><ellipse cx="0" cy="0" rx="24" ry="12" fill="#e9a6a0" stroke="#33472f" stroke-width="2"/><path d="M22,0 l14,-10 v20 Z" fill="#e9a6a0" stroke="#33472f" stroke-width="2"/><circle cx="-13" cy="-2" r="2" fill="#263238"/></g><g transform="translate(168 74) scale(-1 1)"><ellipse cx="0" cy="0" rx="24" ry="12" fill="#9ab0e0" stroke="#33472f" stroke-width="2"/><path d="M22,0 l14,-10 v20 Z" fill="#9ab0e0" stroke="#33472f" stroke-width="2"/><circle cx="-13" cy="-2" r="2" fill="#263238"/></g><circle cx="90" cy="92" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="99" cy="86" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="108" cy="92" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="117" cy="86" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="126" cy="92" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="135" cy="86" r="3.4" fill="#f3a35c" stroke="#b5651d"/><circle cx="128" cy="84" r="1.8" fill="#1565c0"/><circle cx="134" cy="89" r="1.8" fill="#1565c0"/><circle cx="140" cy="94" r="1.8" fill="#1565c0"/><circle cx="146" cy="84" r="1.8" fill="#1565c0"/><circle cx="152" cy="89" r="1.8" fill="#1565c0"/><text x="110" y="124" font-size="11" font-weight="800" fill="#1b4d2c" text-anchor="middle">eggs and sperm meet in the water</text><text x="110" y="22" font-size="12" font-weight="800" fill="#2a6a8a" text-anchor="middle">OUTSIDE the female</text></svg></div><div class="pcap">External</div></div><div class="box"><div class="pic"><svg viewBox="0 0 220 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A hen with a dotted egg shape drawn inside her body"><rect x="4" y="6" width="212" height="128" rx="10" fill="#fff5e1" stroke="#d98a1c" stroke-width="2.5"/><ellipse cx="100" cy="76" rx="52" ry="28" fill="#f6ddb5" stroke="#8a5a00" stroke-width="2.5"/><circle cx="154" cy="58" r="16" fill="#f6ddb5" stroke="#8a5a00" stroke-width="2.5"/><path d="M168,58 l12,4 l-12,4 Z" fill="#e8903c" stroke="#8a5a00" stroke-width="1.6"/><circle cx="158" cy="54" r="2.4" fill="#263238"/><path d="M148,44 q4,-12 9,0 q4,-8 6,2" fill="#d94a3a" stroke="#8a2a1a" stroke-width="1.6"/><ellipse cx="96" cy="80" rx="12" ry="14" fill="#fff" stroke="#d98a1c" stroke-width="2.4" stroke-dasharray="4 3"/><text x="110" y="124" font-size="11" font-weight="800" fill="#1b4d2c" text-anchor="middle">egg fertilised inside the body</text><text x="110" y="22" font-size="12" font-weight="800" fill="#a35a12" text-anchor="middle">INSIDE the female</text></svg></div><div class="pcap">Internal</div></div></div>
+    <div class="job">Fish: outside. Birds and human beings: inside. Mating is how the sperm reach the egg inside.</div>
+<div class="pick" data-why="Amphibians use jelly eggs in water, so fertilisation is outside." data-hint="Think about where the jelly eggs are laid."><p>Amphibian: where does fertilisation happen?</p><button class="pb">inside</button><button class="pb" data-ok>outside</button><div class="pfb"></div></div>
+<div class="pick" data-why="Reptiles fertilise inside, before the leathery egg is laid on land." data-hint="The egg must be fertilised before its leathery shell forms."><p>Reptile: where does fertilisation happen?</p><button class="pb" data-ok>inside</button><button class="pb">outside</button><div class="pfb"></div></div>
+<div class="pick" data-why="Mammals fertilise inside the mother." data-hint="The baby grows inside the mother."><p>Mammal: where does fertilisation happen?</p><button class="pb" data-ok>inside</button><button class="pb">outside</button><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="s5" data-lock="game mcq">
+    <h2>The Odd Ones Out</h2>
+    <div class="job">Two animals break the usual pattern. Sort the clues: who has each one?</div>
+    <div id="sort2" data-fb="#sort2fb" data-end="#sort2end"><div class="scs"><button class="sc" data-bin="pl">lays eggs</button><button class="sc" data-bin="gu">has gills</button><button class="sc" data-bin="pl">has hair</button><button class="sc" data-bin="gu">gives birth to live young</button><button class="sc" data-bin="pl">makes milk for its young</button><button class="sc" data-bin="gu">has fins</button></div>
+      <div class="sorti"><div class="sbinw"><button class="sbin" data-bin="pl">Platypus</button><div class="bl"></div></div><div class="sbinw"><button class="sbin" data-bin="gu">Guppy</button><div class="bl"></div></div></div><div class="pfb" id="sort2fb"></div></div>
+    <div class="job hid" id="sort2end">A platypus lays eggs, but <b>feeding young on milk proves it is a mammal</b>. A guppy gives birth, but it has gills and fins, so it is a fish.</div>
+<div class="mcq" data-hint="Many groups lay eggs. Which clue belongs only to mammals?" data-why="Feeding young on milk proves it is a mammal. Many groups lay eggs, so eggs prove nothing alone."><p>A platypus lays eggs. Does that make it a bird?</p><button class="opt">Yes: laying eggs proves it is a bird</button><button class="opt">No: it is a reptile, because reptiles lay eggs</button><button class="opt" data-ok>No: feeding young on milk proves it is a mammal</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-hint="Which clue belongs only to fish?" data-why="Gills and fins show it is a fish. Live young alone do not make a mammal."><p>A guppy gives birth to live young. Why is it still a fish?</p><button class="opt" data-ok>It has gills and fins</button><button class="opt">It lives in water, and every animal in water is a fish</button><button class="opt">Live young prove it is a mammal</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s6" data-lock="game mcq">
+    <h2>Fewer Young, More Care</h2>
+    <div class="rulebar">Slide through all five animals.</div>
+    <div class="box care" id="care">
+      <input type="range" id="careR" min="0" max="4" value="0" step="1" aria-label="Choose an animal from cod to elephant" style="width:100%">
+      <div class="lbl" id="careN">cod</div>
+      <ul id="careD" class="hid"><li data-n="cod" data-y="100" data-c="0" data-ty="millions of eggs" data-tc="no care"></li><li data-n="frog" data-y="80" data-c="0" data-ty="thousands of eggs" data-tc="no care"></li><li data-n="crocodile" data-y="45" data-c="30" data-ty="about 50 eggs" data-tc="guards the nest"></li><li data-n="eagle" data-y="18" data-c="58" data-ty="2 eggs" data-tc="care for weeks"></li><li data-n="elephant" data-y="6" data-c="100" data-ty="1 calf" data-tc="care for years"></li></ul>
+      <div class="lbl">Young</div><div class="bar o" id="careY" style="width:100%"></div><div id="careYT"></div>
+      <div class="lbl">Care</div><div class="bar" id="careC" style="width:3%"></div><div id="careCT"></div>
+    </div>
+    <div class="job hid" id="careEnd">The more young, the less care. The fewer young, the more care: <b>fewer young, more care</b>. Both are survival plans.</div>
+<div class="mcq" data-hint="It is not about love. Think about how many young survive." data-why="It is a survival plan, not a feeling. Thousands of eggs mean a few survive even without care."><p>Frogs care less than elephants. Do frogs love their young less?</p><button class="opt" data-ok>No: fewer young, more care is one survival plan, and many eggs is another</button><button class="opt">Yes: animals that care less love their young less</button><button class="opt">Yes: thousands of eggs is a sign of caring</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s7" data-lock="mcq">
+    <h2>Check Yourself</h2>
+<div class="mcq" data-hint="Think about where the turtle lays them." data-why="Reptiles lay leathery eggs on land. Eggs differ from group to group."><p>A turtle buries its eggs in warm sand. Which fact fits?</p><button class="opt" data-ok>Its leathery eggs on land keep the water in</button><button class="opt">It lays jelly eggs in water, like a frog</button><button class="opt">All eggs have hard shells</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-hint="Birds use internal fertilisation." data-why="Birds fertilise inside the female. Then the hard shell forms around the egg."><p>An ostrich lays huge hard-shelled eggs. Where was each egg fertilised?</p><button class="opt" data-ok>Inside the mother, before the shell formed</button><button class="opt">Outside, in the nest</button><button class="opt">In a pond</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-hint="What do jelly eggs need around them?" data-why="Jelly eggs in water cannot cope with dry rock. They need water around them."><p>A newt&rsquo;s eggs sit on a sunny rock. Why would they be in trouble?</p><button class="opt" data-ok>Jelly eggs in water need water, and they would dry out</button><button class="opt">Hard-shelled eggs crack in the sun</button><button class="opt">Newts only lay eggs at night</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq" data-hint="Compare how many young there are with how much care they get." data-why="Fewer young, more care. Many eggs, little care. Both are plans to keep the kind going."><p>A hawk has 3 chicks and feeds them for weeks. A carp scatters thousands of eggs and swims away. What is the pattern?</p><button class="opt">The hawk loves its young and the carp does not</button><button class="opt" data-ok>Fewer young, more care: a few well-cared-for chicks survive</button><button class="opt">Carp need no eggs</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s8" data-lock="pick">
+    <h2>Science Toolbox</h2>
+    <div class="rulebar">Open each card. Read the rule. Tap the answer.</div>
+<div class="tcard"><button>1 &middot; Heat</button><div class="tback hid"><div class="job"><b>A good insulator slows heat down.</b> A flask keeps soup hot.</div><div class="pick" data-why="X lost the least heat." data-hint="Which one slowed the heat down?"><p>Soup in flask X cools from 80 to 60 &deg;C in an hour. In flask Y it cools to 40 &deg;C. Better insulator?</p><button class="pb" data-ok>Flask X: a good insulator slows heat down</button><button class="pb">Flask Y: it cooled the most</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>2 &middot; Magnets</button><div class="tback hid"><div class="job"><b>The further away, the weaker the pull.</b> A fridge magnet holds one card but slips through five.</div><div class="pick" data-why="More cards means more distance." data-hint="Think about distance."><p>Why does it drop five cards?</p><button class="pb" data-ok>Five cards put it further away: the further away, the weaker the pull</button><button class="pb">Cards make magnets weaker for ever</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>3 &middot; Falling</button><div class="tback hid"><div class="job">A closed parachute falls faster: <b>less air resistance</b>. Air pushes up against anything falling.</div><div class="pick" data-why="Narrower means less air resistance." data-hint="Which one meets less air?"><p>Which falls faster?</p><button class="pb" data-ok>A closed parachute: less air resistance</button><button class="pb">An open parachute: it is heavier</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>4 &middot; Fire</button><div class="tback hid"><div class="job"><b>Fire needs oxygen.</b> Soil on a campfire stops oxygen reaching it.</div><div class="pick" data-why="Fire needs oxygen, and soil blocks it." data-hint="What does a fire need?"><p>Why does soil put out a campfire?</p><button class="pb" data-ok>It blocks the oxygen: fire needs oxygen</button><button class="pb">It makes the fire cold</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>5 &middot; Circuits</button><div class="tback hid"><div class="job"><b>Conductors let electricity through.</b> A copper wire lights a bulb; a rubber band does not.</div><div class="pick" data-why="Copper is a conductor." data-hint="Which one lets electricity through?"><p>Which closes the gap?</p><button class="pb" data-ok>Copper wire: conductors let electricity through</button><button class="pb">Rubber band: it stretches across</button><div class="pfb"></div></div>
+</div></div>
+    <div class="job">Rules: a good insulator slows heat down; the further away, the weaker the pull; less air resistance, faster fall; fire needs oxygen; conductors let electricity through.</div>
+  </section>
+
+  <div id="simtext" class="hid"><span data-k="sort-no">Not that bin. Think about how this animal is born.</span><span data-k="sort-pick">Tap a card first.</span><span data-k="sort2-no">Not that animal. Think about which one has this clue.</span><span data-k="gt-pick">Tap a card first.</span><span data-k="gt-no">Not that one for this box. Read the group name and try again.</span><span data-k="gt-ok">Yes.</span><span data-k="care-y">young at a time</span><span data-k="care-c">care</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Survival_Sim.js"></script>
+</body>
+</html>
