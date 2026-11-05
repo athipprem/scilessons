@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 60 · Lesson 2 · Life Cycles and Toolbox</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#e8573d;--pl-d:#14305c;--pl-l:#fdeeea;--am:#e8903c;--am-l:#fff1e0;--sv:#546e7a;--sv-l:#eceff1;--blue:#1565c0;--blue-l:#e3f2fd;--ink:#2d3748;--grey:#718096;--line:#dfe3e8;--ok:#e8573d;--ok-l:#e8f5e9;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f5f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fafbfc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p,.cluebox p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb,.cl{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover,.cl:hover{border-color:var(--pl)}
+  .opt.sel,.cl.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.8}
+  .pbrow{display:flex;gap:8px;flex-wrap:wrap}.pbrow .pb{width:auto;flex:1;text-align:center}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit}
+  .chk{background:#546e7a;color:#fff;margin-top:6px}
+  .chk:disabled{opacity:.4;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#eceff1;color:#546e7a}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:var(--sv);color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.4;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--pl);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .actbtn.alt{background:var(--sv)}
+  .slider{width:90%;margin:10px auto;display:block}
+  .twocol{display:flex;gap:12px;flex-wrap:wrap}.twocol>div{flex:1;min-width:240px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.35}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  table.cmp{border-collapse:collapse;width:100%;font-size:.9rem}table.cmp td,table.cmp th{border:1px solid var(--line);padding:5px 8px;text-align:left}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .grey{opacity:.15}
+
+  .why{border-left-color:var(--sv)}
+  .box>svg{max-width:340px;max-height:280px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:none}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw:hover{background:var(--pl-l)}.tw.good{background:#f9d9d0;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .twist .tq{font-weight:700;font-size:1.02rem;margin:.1rem 0 .6rem;line-height:1.9}
+  .pbox{background:#fff4f1;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#f7dcd4;color:var(--grey)}
+  .pshow{margin-top:8px;background:var(--pl);color:#fff}
+  .pshow:disabled{background:#cfd2d8;color:#8a8e9a}
+  .stopcard{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1.5px solid var(--line);border-left:6px solid var(--sv);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .stopcard .ltr{font-size:1.8rem;font-weight:900;color:var(--sv);min-width:34px;text-align:center;line-height:1.1}
+  .stopcard b.t{color:var(--pl-d)}
+  .stopcard .real{font-size:.88rem;color:#4a5568;margin-top:3px}
+  .cellrow{display:flex;gap:14px;align-items:center;flex-wrap:wrap}.cellrow svg{flex:0 0 170px;max-width:100%}.cellrow .box{flex:1;min-width:220px;margin:6px 0}
+  .stepol{margin:8px 0 8px 18px;padding:0}.stepol li{margin:6px 0}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}.stepbar span{width:26px;height:26px;border-radius:50%;background:#e5e9f0;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.8rem}.stepbar span.on{background:var(--pl);color:#fff}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .counter{background:var(--pl-l);border-radius:8px;padding:6px 10px;font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .pick.oi .pbrow{}
+  svg .pb{cursor:pointer}svg .pb:hover{filter:brightness(.92)}svg .pb.good{stroke:var(--ok);stroke-width:4}svg .pb.bad{opacity:.35}
+
+  .chk{background:#546e7a}
+  .simstage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  .simtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:6px}
+  .simtabs .mode{background:#eceff1;color:#37474f}.simtabs .mode.on{background:var(--pl);color:#fff}
+  .simctl{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .actbtn:disabled{opacity:.45;cursor:default}
+  .spinF{animation:spin .8s linear infinite}.spinS{animation:spin 6s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .ordq{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .ordq p{font-weight:bold;margin:.1rem 0 .6rem}
+  .ocards{display:flex;flex-direction:column;gap:6px;margin:6px 0}
+  .ocard{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 12px;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .ocard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.ocard.used{opacity:.3;cursor:default}
+  .oslots{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .oslot{display:block;min-height:40px;border:2px dashed var(--sv);border-radius:9px;padding:8px 12px;cursor:pointer;background:#fff;font-size:.95rem}
+  .oslot b{color:var(--pl-d);margin-right:6px}.oslot.ok{background:var(--ok-l);border-style:solid;border-color:var(--ok)}
+  .race{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .patch{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .patch h3{margin:.1rem 0 .2rem;font-size:1rem;color:var(--pl-d)}
+  .patch svg{width:100%;height:auto}
+  .patch .big{font-size:1.5rem;font-weight:900;color:var(--pl)}
+  .rcctl{margin:8px 0;font-size:.9rem;font-weight:700;color:var(--pl-d)}
+  .rcctl input{width:100%;accent-color:#e8573d}
+  .simcnt:empty{display:none}
+  svg .pb.good>*{stroke:var(--ok);stroke-width:4}
+  .oi .pbrow{flex-wrap:nowrap}
+  @media(max-width:520px){.race{grid-template-columns:1fr}}
+
+  .xp{background:#fffaf8;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  .xp .cellview svg,.xp .lsvg svg,.xp .dsvg svg,.xp .gsvg svg{width:100%;max-width:360px;height:auto;display:block;margin:0 auto}
+  .xp .lsvg,.xp .dsvg,.xp .gsvg{text-align:center}
+  .xp>svg{max-width:300px;margin:0 auto;display:block}
+  .xp svg .part{cursor:pointer}.xp svg .part:hover{filter:brightness(.93)}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;color:var(--pl-d)}
+  .chip.on{background:var(--pl-l);border-color:var(--pl)}.chip.grey{opacity:.45;border-style:dashed}
+  .info{background:var(--pl-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:.95rem;min-height:3em}
+  .cnt{font-weight:800;text-align:center;color:var(--pl-d);font-size:.85rem}
+  .cmp{width:100%}.cmp td.no{color:#c62828;font-weight:800}.cmp td:nth-child(n+2){text-align:center;font-weight:800}
+  .ebtn,.obtn{background:#fff;color:var(--pl-d);border:1.5px solid var(--pl);border-radius:10px;padding:7px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .ebtn.on,.obtn.on{background:var(--pl);color:#fff}
+  .mtot{background:var(--pl-l);border-radius:10px;padding:8px 12px;text-align:center;font-size:1.05rem;margin:8px 0;color:var(--pl-d)}
+  .ladder{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .rung{border:1.5px solid var(--line);border-radius:8px;padding:4px 9px;font-size:.78rem;font-weight:800;background:#fff;color:#6b7280}
+  .rung.done{background:#e8f5e9;color:#e8573d}.rung.on{background:var(--pl);color:#fff;border-color:var(--pl)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .card{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:5px;cursor:pointer;font-family:inherit;text-align:center}
+  .card svg{width:100%;height:auto}.card b{display:block;font-size:.8rem;color:var(--pl-d)}
+  .card.on{outline:3px solid var(--pl)}.card.seen{background:#fff4f1}
+  .rtab{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0}.rtab td{border:1px solid var(--line);padding:4px 10px}
+  .rrow td:first-child{font-weight:800}.rrow.on td{background:var(--pl-l);font-weight:800}.rrow.done td{color:var(--pl-d)}
+  .wr textarea{width:100%;min-height:78px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wr textarea[readonly]{background:#e4f0e8;color:var(--grey)}
+  .wmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .lines{margin:8px 0 8px 22px;padding:0}.lines li{margin:5px 0}
+  .gobox{border:1.5px solid var(--line);border-radius:12px;padding:10px;margin:8px 0;background:#fff}
+  .calc{background:#fffaf8;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}.wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}.wp input[type=text]{width:100%;max-width:260px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}.wp input[readonly]{background:#f7dcd4;color:var(--grey)}
+  @media(max-width:520px){.cards{grid-template-columns:repeat(2,1fr)}}
+
+  /* guided calc walkthrough */
+  .gcalc{background:#fffaf8;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n,.tbx .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:#e8573d;background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gs .gopt,.gs .xo{margin:4px 6px 4px 0}
+  .gopt,.xo{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit}
+  .gopt:disabled,.xo:disabled{opacity:.5;cursor:default}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:#e8573d}.gfb.no{color:#b0426b}
+  .gbar{display:flex;align-items:center;gap:10px;margin:6px 0;flex-wrap:wrap}
+  /* unit 55 pictures */
+  .stage svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cnt2{font-weight:800;text-align:center;color:var(--pl-d);margin:6px 0}
+  .sline{min-height:1.5em}
+  .rbar{background:var(--am-l);border:1.5px solid var(--am);border-radius:10px;padding:8px 12px;margin:8px 0;font-weight:700;text-align:center;color:#14305c}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .wlb{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:800;cursor:pointer;font-family:inherit;margin:3px}
+  .wlb.on{background:var(--pl);color:#fff}
+  .sorti{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .sbinw{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+  .sbin{width:100%;background:var(--pl);color:#fff;border:none;border-radius:9px;padding:8px;font-weight:800;cursor:pointer;font-family:inherit}
+  .sbinw:nth-child(2) .sbin{background:var(--am);color:#3b2a00}
+  .placed{background:var(--ok-l);border-radius:8px;padding:6px 9px;margin-top:6px;font-size:.88rem}
+  .scs{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .sc{text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:8px 12px;cursor:pointer;font-size:.93rem;font-family:inherit}
+  .sc.sel{outline:3px solid var(--pl);background:var(--pl-l)}.sc.used{opacity:.3;cursor:default}
+  .xl{background:#fff;border-left:5px solid var(--am);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .xl b{color:#14305c}
+  #xta{width:100%;min-height:80px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  #xta[readonly]{background:#e4f0e8;color:var(--grey)}
+  .xchk label{display:block;margin:4px 0;font-weight:700}
+  .xmodel{background:#e8f5e9;border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  input[type=range]{width:100%;accent-color:#e8573d}
+  .ctl{margin:8px 0;font-weight:700;color:var(--pl-d)}
+  .dots10{display:block;margin:8px auto}
+
+  .xl.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .tbx{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .tbx.ok{border-color:var(--ok);background:#f1f8f1}
+  .tbx input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit;margin:6px 0}
+  .tbx input[readonly]{background:#e1efe5;color:var(--grey)}
+  .tmodel{background:var(--am-l);border-left:5px solid var(--am);border-radius:8px;padding:7px 11px;margin:6px 0;font-size:.92rem}
+  .btnrow{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+  .pcard{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px;min-width:72px;border:1.5px solid var(--line);background:#fff;border-radius:10px;cursor:pointer;font-family:inherit;font-weight:800;color:var(--pl-d)}
+  .pcard svg{width:46px;height:64px}
+  .pcard.sel{outline:3px solid var(--pl);background:var(--pl-l)}.pcard.used{opacity:.3;cursor:default}
+  .pcards{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslots{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0}
+  .pslot{min-width:74px;min-height:92px;border:2px dashed var(--sv);border-radius:10px;padding:4px;text-align:center;cursor:pointer;background:#fff;font-weight:800;font-size:.85rem;color:var(--pl-d);display:flex;flex-direction:column;align-items:center;justify-content:flex-start}
+  .pslot.ok{border-style:solid;border-color:var(--ok);background:var(--ok-l)}
+  .pslot svg{width:40px;height:56px}
+  .stagelines{margin:6px 0 6px 20px;padding:0;font-size:.92rem}
+
+  /* unit 58 */
+  .twopic{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .twopic .box{margin:0;padding:6px}
+  .twopic svg,.pic svg{width:100%;height:auto;display:block}
+  .pic{margin:8px auto;max-width:420px}
+  .pcap{font-weight:800;font-size:.85rem;text-align:center;color:var(--pl-d);margin-top:2px}
+  .causes{display:grid;grid-template-columns:1fr;gap:8px;margin:8px 0}
+  .cause{border:2px solid var(--am);background:var(--am-l);border-radius:12px;padding:8px 12px}
+  .cause b{color:#7a3d00}
+  .hens{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:8px 0;min-height:70px}
+  .hen{width:54px;transition:opacity .4s}.hen.gone{opacity:0}
+  #fertsvg svg,#iodsvg svg{width:100%;max-width:420px;height:auto;display:block;margin:0 auto}
+  .cmrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:7px 0;font-weight:700}
+  .blank{min-width:120px;min-height:38px;border:2.5px dashed var(--am);background:#fff;border-radius:9px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer;padding:4px 10px}
+  .blank.full{border-style:solid;border-color:var(--ok);background:var(--ok-l);cursor:default}
+  .bank{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+  .bk{border:2px solid var(--pl);background:#fff;border-radius:999px;padding:7px 12px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer}
+  .bk.sel{background:var(--pl-l);outline:3px solid var(--pl)}.bk.used{opacity:.3;cursor:default}
+  table.dt{border-collapse:collapse;width:100%;margin:8px 0;font-size:.92rem}.dt th,.dt td{border:1px solid var(--line);padding:6px 8px;text-align:left}.dt th{background:var(--pl-l)}
+  .tr3{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:8px 0}
+  .tr3 .box{margin:0;padding:6px;text-align:center}
+  .tr3 svg{width:100%;height:auto;max-width:150px}
+  .gate11{font-weight:800}
+  a.actbtn{text-decoration:none;display:inline-block}
+  .pcards{display:flex;flex-wrap:wrap;gap:7px;margin:8px 0}
+  .pcd{border:2px solid var(--pl);background:#fff;border-radius:10px;padding:8px 12px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer}
+  .pcd small{display:block;font-size:.72rem;color:#b25e00}
+  .pcd.glow{outline:4px solid var(--am);animation:pg 1s ease-in-out 3}
+  @keyframes pg{50%{background:var(--am-l)}}
+  .ppile{min-height:64px;border:3px dashed var(--am);background:var(--am-l);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-start}
+  .ppile:empty::before{content:"The pile is empty. Tap a card to put it here.";color:#7a3d00;font-weight:700}
+  .pvr{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+
+
+  /* unit 59 */
+  .gtab{border-collapse:collapse;width:100%;margin:8px 0;font-size:.85rem}
+  .gtab th,.gtab td{border:1px solid var(--line);padding:5px 5px;text-align:center;vertical-align:middle}
+  .gtab th{background:var(--pl-l);color:var(--pl-d);font-size:.8rem}
+  .gtab td.gn{font-weight:800;text-align:left;color:var(--pl-d)}
+  .gtab td.gc{font-size:.78rem}
+  .gcell{width:100%;min-height:42px;border:2px dashed var(--am);background:#fff;border-radius:8px;font:inherit;font-size:.78rem;font-weight:800;color:var(--pl-d);cursor:pointer;padding:3px}
+  .gcell.full{border-style:solid;border-color:var(--ok);background:var(--ok-l);cursor:default}
+  .twopic.onecol{grid-template-columns:1fr!important}
+  .asxtabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+  .asxtabs button,.tcard>button{border:2px solid var(--pl);background:#fff;color:var(--pl-d);border-radius:999px;padding:7px 14px;font:inherit;font-weight:800;cursor:pointer}
+  .asxtabs button.on{background:var(--pl);color:#fff}
+  .isl{background:#fffaf8;border:1.5px solid var(--line);border-radius:12px;padding:8px;text-align:center}
+  .isl svg{width:100%;height:auto;display:block}
+  .isls{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .tcard{border:2px solid var(--pl);border-radius:12px;margin:8px 0;background:#fff;padding:8px}
+  .tcard>button{display:block;width:100%;border-radius:10px;text-align:left}
+  .tback{margin-top:8px}
+  .care .bar{height:16px;border-radius:8px;background:var(--pl);margin:3px 0}
+  .care .bar.o{background:var(--am)}
+  .care .lbl{font-weight:800;color:var(--pl-d);font-size:.9rem}
+  .cmpbox{background:#fff7e8;border:2px solid var(--am);border-radius:10px;padding:8px 12px;margin:6px 0;font-weight:700}
+  .chain{display:flex;align-items:center;justify-content:center;gap:6px;flex-wrap:wrap;margin:8px 0}
+  .chain .ch{border:2px solid var(--pl);background:var(--pl-l);border-radius:10px;padding:6px 10px;font-weight:800;color:var(--pl-d);text-align:center}
+  .chain .ar{font-weight:900;color:var(--pl-d)}
+  .joinbox{min-height:58px;border:3px dashed var(--am);background:var(--am-l);border-radius:12px;padding:8px;display:flex;flex-wrap:wrap;gap:7px;align-items:flex-start}
+  .joinbox:empty::before{content:"The join box is empty. Tap two cells to put them here.";color:#7a3d00;font-weight:700}
+
+  /* unit 60 */
+  .hens{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0}
+  .hen{border:2px solid var(--line);background:#fff;border-radius:10px;padding:3px;cursor:pointer;font:inherit}
+  .hen.sel{border-color:#e8573d;background:#fff4f1}
+  .hen svg{width:100%;height:auto;display:block}
+  .hn{font-size:.68rem;font-weight:800;color:#14305c;text-align:center}
+  .hbar{display:flex;align-items:center;gap:6px;margin:3px 0;font-size:.82rem;font-weight:800;color:#14305c}
+  .hbar .hl{width:44px}.hbar .hb{display:block;height:14px;background:#e8573d;border-radius:7px}.hbar .hv{min-width:26px}
+  .pigs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+  .pigc{border:2px solid var(--line);border-radius:10px;padding:4px;background:#fff;text-align:center}
+  .pigc svg{width:100%;height:auto;display:block}.pn{font-size:.78rem;font-weight:800;color:#14305c}
+  .gcards{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin:6px 0}
+  .gcard{border:2px solid #14305c;background:#eef3fb;border-radius:8px;padding:5px 9px;font-weight:800;font-size:.82rem;color:#14305c}
+  .lcrow{border:2px solid var(--line);border-radius:12px;padding:8px;margin:8px 0;background:#fff}
+  .lcrow.done{border-color:var(--ok);background:var(--ok-l)}
+  .lcrow h3{margin:0 0 6px;font-size:.95rem;color:#14305c}
+  .lcslots{min-height:38px;display:flex;gap:6px;flex-wrap:wrap;align-items:center;border:2px dashed #e8573d;border-radius:10px;padding:5px;margin-bottom:6px}
+  .lcs{background:#14305c;color:#fff;border-radius:8px;padding:4px 10px;font-weight:800}
+  .lct{border:2px solid #14305c;background:#fff;color:#14305c;border-radius:8px;padding:6px 12px;font:inherit;font-weight:800;cursor:pointer;margin:2px}
+  .lct.used{opacity:.35;cursor:default}
+</style>
+</head>
+<body data-next-href="Tests/Unit_60_Test_Ch3SchoolMock.html" data-last-label="Go to Mock Test &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#129419; Lesson 2 &middot; Life Cycles and Toolbox</b><span class="pill">Unit 60</span></div>
+
+  <section class="screen active" id="s1" data-lock="pick">
+    <h2>The Butterfly Life Cycle</h2>
+    <div class="job"><b>Why it matters:</b> many young animals look nothing like their parents. A life cycle tells you what comes next.</div>
+<div class="box"><div class="pic"><svg viewBox="0 0 372 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Four pictures, left to right, joined by arrows: a butterfly egg on a leaf, a larva (caterpillar), a pupa hanging, and the adult butterfly."><rect x="6" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><path d="M14 90 q35.0 -22 70 0 q-35.0 18 -70 0 Z" fill="#7cb86f" stroke="#2f6b34" stroke-width="2"/><ellipse cx="48" cy="70" rx="8.1" ry="10.8" fill="#fff8e6" stroke="#c28a12" stroke-width="2.4"/><text x="48" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">egg</text><path d="M92 66 H94" stroke="#14305c" stroke-width="3"/><path d="M94 66 l-8 -6 M94 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="98" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(112 76) scale(0.62)"><circle cx="0" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="13" cy="0" r="9" fill="#b5d98a" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="26" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="39" cy="0" r="9" fill="#b5d98a" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="52" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="62" cy="-2" r="10" fill="#8bc34a" stroke="#2d6a2d" stroke-width="2.4"/><circle cx="66" cy="-5" r="2" fill="#263238"/><path d="M66 -12 q4 -8 8 -6" fill="none" stroke="#2d6a2d" stroke-width="2"/></g><path d="M110 98 q31.0 -22 62 0 q-31.0 18 -62 0 Z" fill="#7cb86f" stroke="#2f6b34" stroke-width="2"/><text x="140" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">larva</text><path d="M184 66 H186" stroke="#14305c" stroke-width="3"/><path d="M186 66 l-8 -6 M186 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="190" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(232 52) scale(1.1)"><path d="M0 -26 V-14" stroke="#6b4e2a" stroke-width="3"/><path d="M0 -14 Q-12 0 -6 22 Q0 32 6 22 Q12 0 0 -14 Z" fill="#c9a66b" stroke="#6b4e2a" stroke-width="2.4"/><path d="M-6 0 H6 M-7 8 H7 M-5 16 H5" stroke="#6b4e2a" stroke-width="1.6"/></g><text x="232" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">pupa</text><path d="M276 66 H278" stroke="#14305c" stroke-width="3"/><path d="M278 66 l-8 -6 M278 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="282" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(324 66) scale(1.05)"><path d="M0 0 Q-30 -34 -34 -6 Q-30 20 0 6 Z" fill="#f4a24a" stroke="#8a4b00" stroke-width="2.4"/><path d="M0 0 Q30 -34 34 -6 Q30 20 0 6 Z" fill="#f4a24a" stroke="#8a4b00" stroke-width="2.4"/><path d="M0 6 Q-22 12 -18 28 Q-8 30 0 10 Z" fill="#f9c47e" stroke="#8a4b00" stroke-width="2"/><path d="M0 6 Q22 12 18 28 Q8 30 0 10 Z" fill="#f9c47e" stroke="#8a4b00" stroke-width="2"/><ellipse cx="0" cy="6" rx="3.4" ry="16" fill="#4e342e"/><path d="M0 -10 q-6 -10 -12 -10 M0 -10 q6 -10 12 -10" fill="none" stroke="#4e342e" stroke-width="1.8"/></g><text x="324" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">adult</text></svg></div><div class="pcap">The butterfly life cycle, from the book</div></div>
+    <div class="job">Four stages: <b>egg, larva, pupa, adult</b>. The larva (a caterpillar) looks very different from the adult butterfly. It grows, then changes inside the pupa.</div>
+<div class="pick" data-why="Egg, larva, pupa, adult." data-hint="Follow the arrows in the picture."><p>Which stage comes after the larva?</p><button class="pb" data-ok>Pupa</button><button class="pb">Egg</button><div class="pfb"></div></div>
+<div class="pick" data-why="A caterpillar looks nothing like a butterfly." data-hint="Compare the two pictures."><p>Does a larva look like its parent?</p><button class="pb" data-ok>No, it looks very different</button><button class="pb">Yes, just smaller</button><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="s2" data-lock="game mcq">
+    <h2>Complete or Incomplete?</h2>
+    <div class="job"><b>Complete:</b> egg, larva, pupa, adult. <b>Incomplete:</b> egg, nymph, adult. A <b>nymph</b> looks like a small adult, but with no wings yet.</div>
+<div class="box"><div class="pic"><svg viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A small young grasshopper with no wings next to a bigger adult grasshopper with wings. They look alike."><rect x="4" y="4" width="292" height="92" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(76 36) scale(1.0)"><ellipse cx="0" cy="0" rx="20" ry="7" fill="#9ccc65" stroke="#33691e" stroke-width="2.2"/><circle cx="-23" cy="-3" r="7" fill="#9ccc65" stroke="#33691e" stroke-width="2.2"/><circle cx="-25" cy="-5" r="1.8" fill="#263238"/><path d="M6 4 l12 -16 l10 20 M6 4 l10 10 l-4 12" fill="none" stroke="#33691e" stroke-width="2.4" stroke-linecap="round"/></g><text x="76" y="90" font-size="11.5" font-weight="800" fill="#14305c" text-anchor="middle">nymph: no wings yet</text><g transform="translate(222 36) scale(1.3)"><ellipse cx="0" cy="0" rx="20" ry="7" fill="#9ccc65" stroke="#33691e" stroke-width="2.2"/><circle cx="-23" cy="-3" r="7" fill="#9ccc65" stroke="#33691e" stroke-width="2.2"/><circle cx="-25" cy="-5" r="1.8" fill="#263238"/><path d="M6 4 l12 -16 l10 20 M6 4 l10 10 l-4 12" fill="none" stroke="#33691e" stroke-width="2.4" stroke-linecap="round"/><path d="M-8 -6 Q10 -22 28 -8 Q10 -2 -8 -4 Z" fill="#dcedc8" stroke="#33691e" stroke-width="1.8"/></g><text x="222" y="90" font-size="11.5" font-weight="800" fill="#14305c" text-anchor="middle">adult: wings</text></svg></div><div class="pcap">A grasshopper nymph and an adult</div></div>
+    <div class="rulebar">Tap the stages in order, for the mosquito and for the grasshopper.</div>
+    <div id="lcb">
+      <div class="lcrow" data-name="mosquito" data-order="egg|larva|pupa|adult"><h3>Mosquito: it has a pupa</h3><div class="lcslots"></div>
+        <button class="lct" data-s="pupa">pupa</button><button class="lct" data-s="egg">egg</button><button class="lct" data-s="adult">adult</button><button class="lct" data-s="larva">larva</button></div>
+      <div class="lcrow" data-name="grasshopper" data-order="egg|nymph|adult"><h3>Grasshopper: it has a nymph</h3><div class="lcslots"></div>
+        <button class="lct" data-s="adult">adult</button><button class="lct" data-s="nymph">nymph</button><button class="lct" data-s="egg">egg</button></div>
+      <div class="pfb" id="lcFb"></div></div>
+    <div class="job hid" id="lcEnd">The mosquito has a pupa, so it is complete. The grasshopper has a nymph and no pupa, so it is incomplete. A nymph grows into an adult by getting bigger and growing wings.</div>
+<div class="mcq" data-hint="The nymph looks like a small adult." data-why="A nymph is in the incomplete cycle: egg, nymph, adult."><p>Which life cycle has a nymph?</p><button class="opt">Egg, larva, pupa, adult</button><button class="opt" data-ok>Egg, nymph, adult</button><button class="opt">Egg, adult</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s3" data-lock="pick">
+    <h2>Read an Unseen Life Cycle</h2>
+    <div class="job">A new animal! Read its life cycle from the pictures, with the same rules.</div>
+<div class="box"><div class="pic"><svg viewBox="0 0 372 150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A beetle life cycle: egg, then larva (a grub), then pupa, then the adult beetle."><rect x="6" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><ellipse cx="48" cy="66" rx="8.1" ry="10.8" fill="#fff" stroke="#8a6d2a" stroke-width="2.4"/><text x="48" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">egg</text><path d="M92 66 H94" stroke="#14305c" stroke-width="3"/><path d="M94 66 l-8 -6 M94 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="98" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(140 68) scale(1.2)"><path d="M-26 8 Q-26 -12 -8 -12 Q10 -12 14 2 Q20 12 8 16 Q-12 20 -26 8 Z" fill="#f2e2b8" stroke="#8a6d2a" stroke-width="2.4"/><circle cx="12" cy="-2" r="5" fill="#8a6d2a"/><path d="M-14 -10 v-4 M-4 -12 v-4" stroke="#8a6d2a" stroke-width="2"/></g><text x="140" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">larva</text><path d="M184 66 H186" stroke="#14305c" stroke-width="3"/><path d="M186 66 l-8 -6 M186 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="190" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(232 54) scale(1.1)"><path d="M0 -26 V-14" stroke="#6b4e2a" stroke-width="3"/><path d="M0 -14 Q-12 0 -6 22 Q0 32 6 22 Q12 0 0 -14 Z" fill="#c9a66b" stroke="#6b4e2a" stroke-width="2.4"/><path d="M-6 0 H6 M-7 8 H7 M-5 16 H5" stroke="#6b4e2a" stroke-width="1.6"/></g><text x="232" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">pupa</text><path d="M276 66 H278" stroke="#14305c" stroke-width="3"/><path d="M278 66 l-8 -6 M278 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><rect x="282" y="14" width="84" height="104" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><g transform="translate(324 68) scale(1.2)"><ellipse cx="0" cy="0" rx="13" ry="16" fill="#5d4037" stroke="#263238" stroke-width="2.2"/><path d="M0 -16 V16" stroke="#263238" stroke-width="1.6"/><circle cx="0" cy="-19" r="6" fill="#263238"/><path d="M-13 -5 l-8 -4 M-13 3 l-9 0 M-13 10 l-8 5 M13 -5 l8 -4 M13 3 l9 0 M13 10 l8 5" stroke="#263238" stroke-width="1.8"/></g><text x="324" y="138" font-size="14" font-weight="800" fill="#14305c" text-anchor="middle">adult</text></svg></div><div class="pcap">A beetle</div></div><div class="pick" data-why="Egg, larva, pupa, adult: 4." data-hint="Count the pictures."><p>How many stages does the beetle have?</p><button class="pb" data-ok>4 stages</button><button class="pb">3 stages</button><div class="pfb"></div></div>
+<div class="pick" data-why="The third picture is the pupa." data-hint="Look for the third picture."><p>Does the beetle have a pupa?</p><button class="pb" data-ok>Yes</button><button class="pb">No</button><div class="pfb"></div></div>
+<div class="pick" data-why="It has a larva and a pupa, so it is complete." data-hint="Incomplete cycles have a nymph and no pupa."><p>Is the beetle cycle complete or incomplete?</p><button class="pb" data-ok>Complete</button><button class="pb">Incomplete</button><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="s4" data-lock="mcq">
+    <h2>Young and Adults Eat Differently</h2>
+<div class="box"><div class="pic"><svg viewBox="0 0 340 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A caterpillar eating a leaf, an arrow, then a butterfly sipping nectar from a flower."><rect x="4" y="4" width="332" height="122" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><path d="M24 76 q40.0 -22 80 0 q-40.0 18 -80 0 Z" fill="#7cb86f" stroke="#2f6b34" stroke-width="2"/><g transform="translate(40 56) scale(0.7)"><circle cx="0" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="13" cy="0" r="9" fill="#b5d98a" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="26" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="39" cy="0" r="9" fill="#b5d98a" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="52" cy="0" r="9" fill="#9ccc65" stroke="#2d6a2d" stroke-width="2.2"/><circle cx="62" cy="-2" r="10" fill="#8bc34a" stroke="#2d6a2d" stroke-width="2.4"/><circle cx="66" cy="-5" r="2" fill="#263238"/><path d="M66 -12 q4 -8 8 -6" fill="none" stroke="#2d6a2d" stroke-width="2"/></g><text x="76" y="104" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">larva eats leaves</text><path d="M138 66 H168" stroke="#14305c" stroke-width="3"/><path d="M168 66 l-8 -6 M168 66 l-8 6" stroke="#14305c" stroke-width="3" fill="none"/><g transform="translate(232 62) scale(1.2)"><path d="M0 0 Q-30 -34 -34 -6 Q-30 20 0 6 Z" fill="#f4a24a" stroke="#8a4b00" stroke-width="2.4"/><path d="M0 0 Q30 -34 34 -6 Q30 20 0 6 Z" fill="#f4a24a" stroke="#8a4b00" stroke-width="2.4"/><path d="M0 6 Q-22 12 -18 28 Q-8 30 0 10 Z" fill="#f9c47e" stroke="#8a4b00" stroke-width="2"/><path d="M0 6 Q22 12 18 28 Q8 30 0 10 Z" fill="#f9c47e" stroke="#8a4b00" stroke-width="2"/><ellipse cx="0" cy="6" rx="3.4" ry="16" fill="#4e342e"/><path d="M0 -10 q-6 -10 -12 -10 M0 -10 q6 -10 12 -10" fill="none" stroke="#4e342e" stroke-width="1.8"/></g><circle cx="288" cy="46" r="10" fill="#ffd54f" stroke="#e65100" stroke-width="2.4"/><path d="M288 56 V90" stroke="#2f7d32" stroke-width="3"/><text x="236" y="112" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">adult sips nectar</text></svg></div><div class="pcap">A caterpillar eats leaves. The butterfly sips nectar.</div></div>
+    <div class="job">The larva eats leaves. The adult sips nectar from flowers. They need different food, so <b>young and adults do not compete for the same food</b>.</div>
+<div class="mcq" data-hint="Think about who eats what." data-why="They do not compete, so more of them find food and survive."><p>Why is it good for a kind that the young and the adults eat different food?</p><button class="opt" data-ok>Young and adults do not compete for the same food</button><button class="opt">The adults can eat the young</button><button class="opt">The young never need to eat</button><button class="btn chk">Check</button><div class="fb"></div></div>
+  </section>
+
+  <section class="screen" id="s5" data-lock="pick">
+    <h2>Science Toolbox</h2>
+    <div class="rulebar">Open each card. Read the rule. Tap the answer.</div>
+<div class="tcard"><button>1 &middot; Heat</button><div class="tback hid"><svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two pans on a hot cooker. One has a metal handle and one has a wooden handle."><rect x="4" y="4" width="292" height="102" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><ellipse cx="60" cy="56" rx="38" ry="14" fill="#b0bec5" stroke="#37474f" stroke-width="2.4"/><rect x="96" y="50" width="48" height="10" rx="4" fill="#90a4ae" stroke="#37474f" stroke-width="2.4"/><text x="104" y="84" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">metal handle</text><ellipse cx="184" cy="56" rx="34" ry="14" fill="#b0bec5" stroke="#37474f" stroke-width="2.4"/><rect x="216" y="50" width="62" height="10" rx="4" fill="#c8a165" stroke="#6b4a1f" stroke-width="2.4"/><text x="244" y="84" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">wooden handle</text><path d="M48 36 q-6 -10 0 -16 M62 36 q-6 -10 0 -16 M178 36 q-6 -10 0 -16 M192 36 q-6 -10 0 -16" fill="none" stroke="#e8573d" stroke-width="2.4" stroke-linecap="round"/></svg><div class="job"><b>Metals are good conductors of heat.</b> Heat runs along metal fast. Wood is a poor conductor.</div><div class="pick" data-why="The metal handle, because metals are good conductors of heat." data-hint="Which material lets heat run along it?"><p>Which pan handle gets hot first?</p><button class="pb" data-ok>The metal handle: metals are good conductors of heat</button><button class="pb">The wooden handle</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>2 &middot; Dissolving</button><div class="tback hid"><svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Two cups of tea, each with a sugar lump. One cup is warm and one is iced."><rect x="4" y="4" width="292" height="102" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><path d="M40 34 H110 L102 80 H48 Z" fill="#f4c27a" stroke="#6b4a1f" stroke-width="2.4"/><rect x="62" y="56" width="14" height="14" rx="2" fill="#fff" stroke="#6b4a1f" stroke-width="1.8"/><text x="75" y="98" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">warm tea</text><path d="M190 34 H260 L252 80 H198 Z" fill="#d9a65a" stroke="#6b4a1f" stroke-width="2.4"/><rect x="212" y="56" width="14" height="14" rx="2" fill="#fff" stroke="#6b4a1f" stroke-width="1.8"/><text x="225" y="98" font-size="12" font-weight="800" fill="#14305c" text-anchor="middle">iced tea</text><path d="M62 24 q-5 -8 0 -14 M80 24 q-5 -8 0 -14" fill="none" stroke="#e8573d" stroke-width="2.4" stroke-linecap="round"/></svg><div class="job">A sugar lump <b>dissolves faster in warm water</b>. Warm water works faster. It does not hold more sugar.</div><div class="pick" data-why="Warm tea. Sugar dissolves faster in warm water." data-hint="Which one is warmer?"><p>In which tea does the sugar lump dissolve faster?</p><button class="pb" data-ok>Warm tea: sugar dissolves faster in warm water</button><button class="pb">Iced tea</button><div class="pfb"></div></div>
+</div></div>
+<div class="tcard"><button>3 &middot; Shadows</button><div class="tback hid"><svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A light on the left, a hand in the middle and a wall on the right, with the hand's shadow on the wall."><rect x="4" y="4" width="292" height="112" rx="12" fill="#fffaf8" stroke="#c9d6e8" stroke-width="2"/><rect x="262" y="10" width="26" height="100" fill="#eceff1" stroke="#90a4ae" stroke-width="2"/><circle cx="24" cy="60" r="12" fill="#ffd54f" stroke="#e65100" stroke-width="2.4"/><rect x="100" y="46" width="14" height="30" rx="5" fill="#f7c9a9" stroke="#a5674a" stroke-width="2.4"/><path d="M262 40 H278 V80 H262 Z" fill="#455a64" opacity=".75"/><text x="24" y="92" font-size="11" font-weight="800" fill="#14305c" text-anchor="middle">light</text><text x="107" y="92" font-size="11" font-weight="800" fill="#14305c" text-anchor="middle">hand</text><text x="275" y="106" font-size="11" font-weight="800" fill="#14305c" text-anchor="middle">wall</text></svg><div class="job">Move the light nearer to your hand and the shadow grows. <b>The closer the light, the bigger the shadow.</b></div><div class="pick" data-why="Bigger. The closer the light, the bigger the shadow." data-hint="Which way do shadows change when the light moves in?"><p>The desk light moves closer to a hand. What happens to the shadow on the wall?</p><button class="pb" data-ok>It gets bigger: the closer the light, the bigger the shadow</button><button class="pb">It gets smaller</button><div class="pfb"></div></div>
+</div></div>
+  </section>
+
+  <section class="screen" id="s6" data-lock="self">
+    <h2>Chapter 3 in One List</h2>
+    <div class="job"><b>Book facts.</b> Living things reproduce for the continuity of their kind. Overhunting can make a kind extinct. Ovaries release eggs; testes make sperm (one testis, two testes). The womb is where a baby grows, for about nine months. At the 12th week, the major organs are formed. The sperm's nucleus fuses with the egg's nucleus. Fertilisation happens inside or outside the female's body. Heredity is the passing on of characteristics from parents to offspring. Each of us has one set from the father and one set from the mother. A trait can skip a generation. Gregor Mendel studied pea plants.</div>
+    <div class="job"><b>Extras.</b> Amphibians lay jelly eggs in water. Selective breeding: choose the parents with the trait you want. Surroundings can change you, but only genes are passed on. Each child gets a different mix of genes. Complete: egg, larva, pupa, adult. Incomplete: egg, nymph, adult. Young and adults do not compete for the same food. Metals are good conductors of heat. Sugar dissolves faster in warm water. The closer the light, the bigger the shadow.</div>
+<div class="mcq selfq" data-fail="route" data-why=""><p>Which life cycle has a pupa?</p><button class="opt">Incomplete: egg, nymph, adult</button><button class="opt" data-ok>Complete: egg, larva, pupa, adult</button><button class="opt">Neither</button><button class="btn chk">Check</button><div class="fb"></div></div>
+<div class="mcq selfq" data-fail="route" data-why=""><p>Which statement is true?</p><button class="opt" data-ok>Surroundings can change you, but only genes are passed on</button><button class="opt">A dyed colour is passed on in the genes</button><button class="opt">Learning is passed on in the genes</button><button class="btn chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <section class="screen" id="s7" data-lock="game">
+    <h2>Your Mock Routine</h2>
+    <div class="job">Like the real test. About 45 minutes. One sitting.</div>
+    <div class="job"><b>S.T.O.P.:</b> Spot the twist &middot; Think first &middot; Open all four options, then Prove it. <b>Hand-in:</b> go back to the start, then cover the options and say your answer first.</div>
+    <div class="gcalc" id="gcMack">
+      <div class="job">Out of every 100,000 fertilised mackerel eggs, only about <b>3</b> grow into adult fish. How many adults could grow from <b>300,000</b> eggs?</div>
+      <div class="gpart gwatch">
+        <h3>&#128064; Watch me</h3>
+        <div class="ws hid"><span class="n">1</span>The rule is for 100,000 eggs. How many groups of 100,000 are in 300,000? 300,000 &divide; 100,000 = <b>3 groups</b>.</div>
+        <div class="ws hid"><span class="n">2</span>Each group gives about 3 adults: 3 &times; 3 = <b>9</b>.</div>
+        <div class="ws hid"><span class="n">3</span>Size check: 9 adults from 300,000 eggs is very few, which fits.</div>
+        <div class="gbar"><button class="btn chk gwbtn">Show step 1 &#9654;</button></div>
+      </div>
+      <div class="gpart gturn hid">
+        <h3>&#9997;&#65039; Your turn</h3>
+        <div class="gs" data-kind="num" data-ans="3" data-ws="1" data-hint="How many 100,000s fit into 300,000?"><span class="n">1</span><b>Groups of 100,000 in 300,000:</b> <input type="text" maxlength="6" autocomplete="off"><button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="num" data-ans="9" data-ws="2" data-hint="3 groups, 3 adults in each."><span class="n">2</span><b>3 &times; 3 =</b> <input type="text" maxlength="6" autocomplete="off"><button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+        <div class="gs hid" data-kind="choice" data-ws="3" data-hint="Compare 9 with 300,000."><span class="n">3</span><b>Size check: are 9 adults a lot or a few?</b><br><button class="gopt" data-ok="1">A few: it fits</button><button class="gopt">A lot</button><div class="gfb"></div></div>
+      </div>
+      <div class="gpart gown hid">
+        <h3>&#11088; On your own</h3>
+        <div class="gq">Out of every 100,000 eggs, 3 adults. How many adults from 400,000 eggs?</div>
+        <div class="gs" data-kind="num" data-ans="12" data-ws="0" data-hint="4 groups of 100,000, 3 adults in each." data-hint2="4 &times; 3."><span class="n">&#9733;</span>Adults = <input type="text" maxlength="6" autocomplete="off"> <button class="btn chk gchk">Check</button><div class="gfb"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <div id="simtext" class="hid"><span data-k="lc-ok">Yes. What comes next?</span><span data-k="lc-no">Not that one yet. What comes next?</span><span data-k="lc-done-mosquito">Mosquito done. Now the grasshopper.</span><span data-k="lc-done-grasshopper">Grasshopper done.</span></div>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="Ch3Mock_Sim.js"></script>
+</body>
+</html>

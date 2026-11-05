@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- ============================================================
+     Unit_60_Test_Ch3SchoolMock.html  -  Science Unit 60 (Ch.3 ASMOPSS extension II + school-format mock)
+     Built 5 Nov 2026 from BUILD_PLAN_SCI_U60_Ch3Mock.md (v1.0), the U54 mock engine and the U59 pace v2.1 engine.
+     28 items. Part A 15 MCQ x2 = 30; Part B 7 structured = 20; /50, pass 40. Part C 6 ASMOPSS MCQ x2 = /12, scored separately (never in the /50).
+     Pace v2.1: predict-first on Q13, Q14, Q24, Q26, Q28; fast-answer review (MCQ only, cap 6, Section C first, self-changed skipped).
+     Results record answerOrder and firstPassScore. Q21 is provisional keyword marking (two one-word blanks).
+     SAVE-BUTTON RULE: the x close (#btn-close) top-left; Save alone at the end; no Back-to-Hub button.
+     ============================================================ -->
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 60 Mock — Chapter 3 (school format)</title>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<style>
+  :root{
+    --steel:#e8573d; --steel-d:#14305c; --a-fill:#fdeeea; --a-text:#c4432b;
+    --blue:#1565c0; --b-fill:#dde8f7; --b-text:#14305c;
+    --purple:#37474f; --c-fill:#e8ecef; --c-text:#37474f;
+    --amber:#e8573d; --amber-l:#fdeeea;
+    --ink:#2d3748; --grey:#718096; --line:#e2e8f0;
+    --ok:#2e7d32; --ok-l:#e8f5e9; --bad:#c62828; --bad-l:#fdecea;
+  }
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f4f6f7;color:var(--ink);line-height:1.5;padding-bottom:40px}
+  .wrap{max-width:820px;margin:0 auto;padding:16px}
+
+  .hdr{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;padding:14px 20px;border-radius:14px;margin-bottom:8px;flex-wrap:wrap;gap:8px}
+  .hdr b{font-size:1.15rem;display:block}
+  .hdr .sub{font-size:.8rem;opacity:.9}
+  .hdr .meta{font-size:.82rem;background:#ffffff26;padding:6px 12px;border-radius:10px;text-align:right}
+
+  #progress-bar{position:sticky;top:0;z-index:20;background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:10px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 2px 8px #0001}
+  #progress-track{flex:1;height:8px;background:#dde3e6;border-radius:6px;overflow:hidden}
+  #progress-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--steel-d),var(--steel));transition:width .25s}
+  #progress-label{font-size:.82rem;font-weight:700;color:var(--steel-d);white-space:nowrap}
+
+  .readfirst{background:var(--a-fill);border:1.5px solid var(--steel);color:var(--steel-d);border-radius:10px;padding:10px 16px;font-size:.85rem;margin-bottom:16px;text-align:center}
+
+  .band{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center}
+  .band.A{background:var(--a-fill);color:var(--a-text)}
+  .band.B{background:var(--b-fill);color:var(--b-text)}
+  .band.C{background:var(--c-fill);color:var(--c-text)}
+
+  .q{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:16px;margin:12px 0;border-left:6px solid var(--line)}
+  .q.A{border-left-color:var(--a-text)}
+  .q.B{border-left-color:var(--b-text)}
+  .q.C{border-left-color:var(--purple)}
+  .q p.body{font-weight:700;margin:0 0 4px;font-size:.98rem}
+  .q p.body .qnum{color:var(--steel-d)}
+  .q p.body .star{color:var(--amber);font-size:.85rem}
+  .tierlbl{display:inline-block;font-size:.68rem;font-weight:700;padding:1px 8px;border-radius:20px;margin-bottom:8px}
+  .tierlbl.Basic{background:var(--a-fill);color:var(--a-text)}
+  .tierlbl.Intermediate{background:var(--b-fill);color:var(--b-text)}
+  .tierlbl.Applied{background:var(--c-fill);color:var(--c-text)}
+  .opt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:10px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .opt:hover{border-color:var(--steel)}
+  .opt.selected{border-color:var(--steel-d);background:var(--a-fill);font-weight:700}
+  .opt.correct{background:var(--ok-l);border-color:var(--ok);font-weight:700}
+  .opt.wrong{background:var(--bad-l);border-color:var(--bad);font-weight:700}
+  .opt:disabled{cursor:default}
+  .why{display:none;margin-top:10px;padding:10px 13px;border-radius:9px;font-size:.87rem;background:var(--amber-l);border-left:5px solid var(--amber);color:#14305c}
+  .why.show{display:block}
+  .result-tag{display:none;font-size:.78rem;font-weight:800;padding:2px 10px;border-radius:20px;margin-left:8px;vertical-align:middle}
+  .result-tag.show{display:inline-block}
+  .result-tag.ok{background:var(--ok-l);color:var(--ok)}
+  .result-tag.bad{background:var(--bad-l);color:var(--bad)}
+
+  #submit-bar{position:sticky;bottom:0;background:#fff;border-top:1.5px solid var(--line);padding:14px 16px;margin-top:20px;border-radius:12px 12px 0 0;box-shadow:0 -2px 10px #0001;display:flex;justify-content:center}
+  .btn{border:none;border-radius:10px;padding:13px 28px;font-size:1rem;font-weight:800;cursor:pointer}
+  .btn.submit{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.submit:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .btn.save{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff;margin-top:10px}
+  .btn.save:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .x-close{width:34px;height:34px;border-radius:50%;background:#ffffff33;color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;font-weight:800;text-decoration:none;flex:0 0 auto}
+  .x-close:hover{background:#ffffff59}
+  #fix-list{margin-top:12px;text-align:left;font-size:.88rem}
+  #fix-list h4{margin:0 0 6px;color:var(--steel-d)}
+  #fix-list .fx{background:#fff;border:1.5px solid var(--line);border-left:5px solid var(--steel);border-radius:8px;padding:7px 10px;margin:5px 0}
+  #fix-list .fx b{color:var(--steel-d)}
+
+  #score-banner{display:none;text-align:center;border-radius:16px;padding:22px;margin-bottom:16px}
+  #score-banner.show{display:block}
+  #score-banner.pass{background:linear-gradient(135deg,var(--a-fill),#d4f1e8);border:2px solid var(--steel)}
+  #score-banner.fail{background:linear-gradient(135deg,#fce4ec,#f8bbd0);border:2px solid var(--amber)}
+  #score-big{font-size:2.4rem;font-weight:900;color:var(--steel-d)}
+  #score-banner.fail #score-big{color:#880e4f}
+  #score-msg{font-size:.95rem;margin-top:4px;color:var(--ink)}
+  #section-scores{display:flex;justify-content:center;gap:14px;margin-top:12px;flex-wrap:wrap}
+  .sec-chip{background:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;border:1.5px solid var(--line)}
+
+  #save-status{font-size:.82rem;text-align:center;margin-top:8px;color:var(--grey)}
+  #confirm-overlay{display:none;position:fixed;inset:0;background:rgba(20,20,45,.55);align-items:center;justify-content:center;z-index:99}
+  #confirm-overlay.show{display:flex}
+  .confirm-box{background:#fff;border-radius:16px;padding:26px 24px;max-width:340px;text-align:center;box-shadow:0 12px 40px #0004}
+  .confirm-box h3{color:var(--steel-d);margin:0 0 8px}
+  .confirm-box p{font-size:.88rem;color:var(--grey);margin-bottom:18px}
+  .confirm-actions{display:flex;gap:10px;justify-content:center}
+  .confirm-actions .btn{padding:10px 18px;font-size:.88rem}
+  .btn.cancel{background:#eceff1;color:#546e7a}
+  .fig{text-align:center;margin:4px 0 10px}.fig svg{width:100%;max-width:340px;height:auto;border:1.5px solid var(--line);border-radius:10px}
+  .prov{width:100%;max-width:520px;margin:0 auto 10px;text-align:left;font-size:.88rem;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px}
+  .prov .row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:4px 0}
+  .prov label{margin-left:10px;cursor:pointer;white-space:nowrap}
+
+  .fig svg.wide{max-width:680px}
+  .pacebar{background:#fdeeea;border:1.5px solid var(--amber);color:#14305c;border-radius:10px;padding:9px 16px;font-size:.88rem;margin:-6px 0 14px;text-align:center;font-weight:700}
+  .pbox{background:#fff6f3;border:1.5px dashed var(--steel);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--steel-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#eceff4;color:var(--grey)}
+  .btn.pshow{margin-top:8px;padding:9px 18px;font-size:.92rem;background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.pshow:disabled{background:#cfd2d8;color:#8a8e9a;cursor:not-allowed}
+  .hid{display:none!important}
+  .sense{font-size:.82rem;color:var(--grey);margin:6px 2px 0;font-style:italic}
+  #review-overlay{display:none;position:fixed;inset:0;background:rgba(15,25,60,.6);align-items:flex-start;justify-content:center;z-index:98;overflow-y:auto;padding:24px 12px}
+  #review-overlay.show{display:flex}
+  .rv-box{background:#fff;border-radius:16px;padding:20px 20px 24px;max-width:680px;width:100%;box-shadow:0 12px 40px #0005}
+  .rv-box h3{color:var(--steel-d);margin:0 0 4px}
+  .rv-count{font-size:.8rem;color:var(--grey);margin-bottom:10px}
+  .rv-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .rv-actions .btn{padding:10px 20px;font-size:.95rem}
+  .btn.keep{background:linear-gradient(135deg,var(--steel-d),var(--steel));color:#fff}
+  .btn.change{background:#eceff1;color:#37474f}
+  #pace-lines{margin-top:10px;font-size:.92rem;line-height:1.6}
+  #pace-lines b{color:var(--steel-d)}
+
+  .part-hd{border-radius:10px;padding:9px 16px;font-weight:800;font-size:.95rem;margin:18px 0 10px;text-align:center;background:var(--a-fill);color:var(--a-text)}
+  .part-hd.S{background:var(--b-fill);color:var(--b-text)}
+  .part-hd.C{background:#e8ecef;color:#37474f}
+  .q.S{border-left-color:var(--b-text)}
+  .q .book{font-size:.74rem;color:var(--grey);margin-top:4px}
+  .sub{display:block}
+  .lblrow{display:flex;align-items:center;gap:10px;margin:6px 0}
+  .lblrow .num{background:#fff;border:2px solid var(--steel-d);color:var(--steel-d);border-radius:50%;min-width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800}
+  .lblrow select{flex:1;max-width:300px;padding:8px;border:1.5px solid var(--line);border-radius:8px;font-size:.95rem;font-family:inherit}
+  .lblrow.ok select{background:var(--ok-l);border-color:var(--ok)}.lblrow.bad select{background:var(--bad-l);border-color:var(--bad)}
+  .lblrow .fix{font-size:.82rem;color:var(--ok);font-weight:700}
+  table.tb{border-collapse:collapse;margin:6px 0;font-size:.93rem}table.tb th,table.tb td{border:1.5px solid var(--line);padding:6px 12px;text-align:center}table.tb td:first-child,table.tb th:first-child{text-align:left;font-weight:700}
+  table.tb tr.ok td:first-child{background:var(--ok-l)}table.tb tr.bad td:first-child{background:var(--bad-l)}
+  .ck{display:block;border:1.5px solid var(--line);background:#fff;border-radius:9px;padding:9px 13px;margin:6px 0;cursor:pointer;font-size:.93rem}
+  .ck.ok{background:var(--ok-l);border-color:var(--ok);font-weight:700}.ck.bad{background:var(--bad-l);border-color:var(--bad)}
+  .wp{margin:8px 0}.wp label{display:block;font-weight:700;font-size:.93rem;margin-bottom:4px}
+  .wp textarea,.wp input[type=text]{width:100%;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wp textarea{min-height:80px}.wp input[type=text]{max-width:240px}
+  .wp textarea[readonly],.wp input[readonly]{background:#eceff4;color:var(--grey)}
+  .model{display:none;background:var(--ok-l);border-radius:9px;padding:10px 13px;margin-top:8px;font-size:.9rem}.model.show{display:block}
+  .idea{display:block;margin:4px 0;font-size:.88rem}.idea .got{font-weight:800}
+  .ptag{font-size:.78rem;color:var(--grey);margin-top:4px}
+  .marksline{font-size:.8rem;font-weight:700;color:var(--grey);margin-left:6px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hdr">
+    <a class="x-close" id="btn-close" href="../index.html" title="Close and go back to the hub" aria-label="Close and go back to the hub" onclick="return leaveGuard()">&#10005;</a>
+    <div style="flex:1"><b id="hdr-title">Unit 60 Mock Test</b><span class="sub">Biology: Chapter 3 &bull; like the real test</span></div>
+    <div class="meta">Name: Prem<br>Date: <span id="hdr-date"></span></div>
+  </div>
+  <div class="readfirst">READ FIRST — Like the real test on Tuesday. About 45 minutes, one sitting. Parts A and B are your book. Part C is ASMOPSS extra. Watch for ALWAYS, NEVER, ONLY and EVERY. Use the hand-in routine at the end.</div>
+  <div class="pacebar">Use S.T.O.P. Change an answer only if you can point to the word. Go back to the start before you hand in.</div>
+  <div id="progress-bar"><span id="progress-label">0 / 28 answered</span><div id="progress-track"><div id="progress-fill"></div></div></div>
+  <div id="score-banner"><div id="score-big"></div><div id="score-msg"></div><div id="score-base"></div><div id="partc-line" style="font-weight:700;margin-top:6px"></div><div id="pace-lines"></div><div id="fix-list"></div><div id="section-scores"></div></div>
+  <div id="quiz"></div>
+  <div id="submit-bar"><div style="width:100%;text-align:center">
+    <div class="prov" id="prov">
+      <div class="row"><span>Did anyone help you with this test?</span><span><label><input type="radio" name="helped" value="yes"> Yes</label><label><input type="radio" name="helped" value="no"> No</label></span></div>
+      <div class="row"><span>Did you look at notes or the lessons?</span><span><label><input type="radio" name="notes" value="yes"> Yes</label><label><input type="radio" name="notes" value="no"> No</label></span></div>
+    </div>
+    <button class="btn submit" id="btn-submit" disabled>Answer all 28 to submit</button>
+    <button class="btn save" id="btn-save" style="display:none" onclick="saveResults()">&#128190; Save Results for Luikishi</button>
+    <div id="save-status"></div>
+  </div></div>
+</div>
+<div id="confirm-overlay"><div class="confirm-box"><h3>Submit your mock?</h3><p>Some multiple-choice answers may come back for one more look. Have you used the hand-in routine?</p>
+  <div class="confirm-actions"><button class="btn cancel" onclick="closeConfirm()">Go back</button><button class="btn submit" onclick="startReview()">Yes, submit</button></div></div></div>
+<div id="review-overlay"><div class="rv-box"><h3>Quick check: you answered this one fast. Read it once more.</h3><div class="rv-count" id="rv-count"></div><div id="rv-body"></div><div class="rv-actions" id="rv-actions"></div></div></div>
+<script>
+const UNIT_NUM = 60;
+const UNIT_TITLE = "Biology: Chapter 3 ASMOPSS extension II and school-format mock";
+const TOTAL_ITEMS = 28, TOTAL_MARKS = 50, PASS_MARKS = 40, MCQ_MARKS = 2, PARTC_MARKS = 12;
+const LAST_TEST_MINUTES = 6.6;                   // Unit 59, for the results line
+const REVIEW_SECS_AB = 15, REVIEW_SECS_C = 20, REVIEW_MAX = 6;
+const Q = [
+ {
+  "n": 1,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "body": "What is reproduction?",
+  "options": [
+   "Living things producing young of their own kind",
+   "Living things growing bigger and taller as they get older",
+   "Living things taking in food and water",
+   "Living things breathing in oxygen"
+  ],
+  "ans": 1,
+  "star": 0,
+  "why": "Reproduction means making young of the same kind. It is how living things keep their kind going.",
+  "book": "book p.38-40"
+ },
+ {
+  "n": 2,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "body": "The male reproductive cell is called the…",
+  "options": [
+   "egg cell",
+   "nucleus",
+   "sperm",
+   "yolk"
+  ],
+  "ans": 3,
+  "star": 0,
+  "why": "The male reproductive cell is the sperm. The egg cell is the female cell.",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 3,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "body": "In a human mother, where does a baby grow before it is born?",
+  "options": [
+   "In the stomach",
+   "In the heart",
+   "In the womb",
+   "In the kidney"
+  ],
+  "ans": 3,
+  "star": 0,
+  "why": "A baby grows in its mother's womb until it is born.",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 4,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "body": "About how long does a human baby grow inside its mother before it is born?",
+  "options": [
+   "About nine weeks",
+   "About nine days",
+   "About two whole years",
+   "About nine months"
+  ],
+  "ans": 4,
+  "star": 0,
+  "why": "A human baby grows in the womb for about nine months.",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 5,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Basic",
+  "body": "Which of these animals has become extinct?",
+  "options": [
+   "The Asian elephant",
+   "The dodo",
+   "The king cobra",
+   "The brown bear"
+  ],
+  "ans": 2,
+  "star": 0,
+  "why": "The dodo has been extinct for a long time. The other three animals are still alive today.",
+  "book": "book p.38-40"
+ },
+ {
+  "n": 6,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "What does the word heredity mean?",
+  "options": [
+   "The passing on of characteristics from parents to offspring",
+   "Learning new skills by watching your parents",
+   "Growing up from a baby into an adult",
+   "Children ALWAYS looking exactly like their father in every way"
+  ],
+  "ans": 1,
+  "star": 0,
+  "why": "Heredity is the passing on of characteristics from parents to offspring. Learning is not heredity.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 7,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "Which of these is a trait passed on from parents to their children?",
+  "options": [
+   "Being good at swimming",
+   "The colour of your eyes",
+   "A sunburn from a day at the beach",
+   "Knowing how to cook rice"
+  ],
+  "ans": 2,
+  "star": 0,
+  "why": "Eye colour is passed on in the genes. Swimming skills and sunburn are picked up during life.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 8,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "In which animal does fertilisation happen outside the female's body?",
+  "options": [
+   "A frog",
+   "A dog",
+   "A hen",
+   "A human being"
+  ],
+  "ans": 1,
+  "star": 0,
+  "why": "A frog's eggs are fertilised outside the female's body, in water. A dog, a hen and a human are fertilised inside.",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 9,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "Each of us has two sets of genes. Where do they come from?",
+  "options": [
+   "Both sets come from the mother",
+   "One set from the father and one set from the mother",
+   "ALL of them come from the grandparents",
+   "From the food we eat and the water we drink as we grow"
+  ],
+  "ans": 2,
+  "star": 0,
+  "why": "Each of us has two sets of genes: one set from the father and one set from the mother.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 10,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "Which statements about how a baby begins are correct?\nI. A sperm fuses with an egg.\nII. Two eggs fuse together.\nIII. The fertilised egg divides many times as the baby grows.",
+  "options": [
+   "I only",
+   "II and III only",
+   "I, II and III",
+   "I and III only"
+  ],
+  "ans": 4,
+  "star": 0,
+  "why": "A sperm fuses with an egg (I), and the fertilised egg divides many times (III). Two eggs never fuse (II).",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 11,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Intermediate",
+  "body": "Some young animals do not look like their parents at first. Which is an example?",
+  "options": [
+   "A puppy, which grows up and looks just like a grown-up dog",
+   "A calf, which grows into a cow",
+   "A caterpillar, which later changes into a butterfly",
+   "A chick, which grows into a hen"
+  ],
+  "ans": 3,
+  "star": 0,
+  "why": "A caterpillar looks very different from the butterfly it becomes. The other young look like small grown-ups.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 12,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "body": "Why do animals that do not look after their young usually produce many more eggs than animals that do?",
+  "options": [
+   "Because they like to have very big families",
+   "So that at least a few of the young survive to become adults",
+   "Because EVERY egg they lay ALWAYS grows into an adult in the end",
+   "So that the parents can grow bigger and stronger"
+  ],
+  "ans": 2,
+  "star": 0,
+  "why": "Animals that do not look after their young lay many eggs so that a few survive to become adults.",
+  "book": "book p.38-40"
+ },
+ {
+  "n": 13,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "body": "Out of every 100,000 fertilised mackerel eggs, only about 3 grow into adult fish. About how many adults could grow from 500,000 fertilised eggs?",
+  "options": [
+   "3",
+   "15",
+   "5",
+   "150"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 0,
+  "why": "500,000 is 5 groups of 100,000. Each group gives about 3 adults, so 5 x 3 = 15.",
+  "book": "book p.38-40"
+ },
+ {
+  "n": 14,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "body": "Grandma can roll her tongue. Her son cannot. His daughter can. What does this show?",
+  "options": [
+   "A trait can skip a generation and appear again",
+   "The daughter learnt how to do it by copying her grandma",
+   "Traits NEVER skip a generation",
+   "Tongue rolling changes as you grow older"
+  ],
+  "ans": 1,
+  "predict": true,
+  "star": 0,
+  "why": "A trait can skip a generation and appear again. A child can have a gene that the parent did not show.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 15,
+  "type": "mcq",
+  "section": "A",
+  "tier": "Applied",
+  "body": "Which of these can cause a kind of animal to become extinct?\nI. Overhunting\nII. Destroying the places where they live\nIII. A disease\nIV. Breeding them in zoos",
+  "options": [
+   "I, II and III only",
+   "I and II only",
+   "III and IV only",
+   "I, II, III and IV"
+  ],
+  "ans": 1,
+  "star": 0,
+  "why": "Overhunting, destroying where they live and disease can all make a kind extinct. Breeding in zoos is not a cause.",
+  "book": "book p.38-40"
+ },
+ {
+  "n": 16,
+  "type": "label",
+  "section": "S",
+  "tier": "Basic",
+  "body": "These are the human female (left) and male (right) reproductive systems. Choose the right name for each numbered arrow.",
+  "fig": "<svg viewBox=\"0 0 420 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Two simple drawings side by side. The left drawing is the female reproductive system and the right drawing is the male reproductive system. Three arrows are numbered 1, 2 and 3.\"><rect x=\"4\" y=\"4\" width=\"204\" height=\"242\" rx=\"10\" fill=\"#fffaf8\" stroke=\"#f0cfc6\" stroke-width=\"1.5\"/><rect x=\"212\" y=\"4\" width=\"204\" height=\"242\" rx=\"10\" fill=\"#f6faff\" stroke=\"#c9dcf0\" stroke-width=\"1.5\"/><path d=\"M62 44 Q50 60 52 100 Q54 150 70 186 L140 186 Q156 150 158 100 Q160 60 148 44 Z\" fill=\"#fde7df\" stroke=\"#c98a79\" stroke-width=\"2\"/><path d=\"M105 86 Q86 90 86 112 Q86 140 105 156 Q124 140 124 112 Q124 90 105 86 Z\" fill=\"#f7a99a\" stroke=\"#b5503d\" stroke-width=\"2.2\"/><path d=\"M90 98 Q70 88 68 104\" fill=\"none\" stroke=\"#b5503d\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M120 98 Q140 88 142 104\" fill=\"none\" stroke=\"#b5503d\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"66\" cy=\"112\" rx=\"9\" ry=\"12\" fill=\"#ffd9a0\" stroke=\"#b9772a\" stroke-width=\"2\"/><ellipse cx=\"144\" cy=\"112\" rx=\"9\" ry=\"12\" fill=\"#ffd9a0\" stroke=\"#b9772a\" stroke-width=\"2\"/><line x1=\"186\" y1=\"80\" x2=\"150\" y2=\"108\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"150\" cy=\"108\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"190\" cy=\"70\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"190\" y=\"74.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">1</text><line x1=\"186\" y1=\"150\" x2=\"118\" y2=\"136\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"118\" cy=\"136\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"190\" cy=\"160\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"190\" y=\"164.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">2</text><text x=\"106\" y=\"214\" font-size=\"13\" font-weight=\"800\" fill=\"#7a3b2e\" text-anchor=\"middle\">Female</text><text x=\"106\" y=\"231\" font-size=\"13\" font-weight=\"800\" fill=\"#7a3b2e\" text-anchor=\"middle\">reproductive system</text><path d=\"M270 44 Q258 60 260 100 Q262 150 278 186 L348 186 Q364 150 366 100 Q368 60 356 44 Z\" fill=\"#e2effb\" stroke=\"#7fa3c7\" stroke-width=\"2\"/><path d=\"M290 112 Q300 84 314 84 Q328 84 338 112\" fill=\"none\" stroke=\"#3f6f9e\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M314 84 L314 150\" fill=\"none\" stroke=\"#3f6f9e\" stroke-width=\"3\" stroke-linecap=\"round\"/><ellipse cx=\"292\" cy=\"130\" rx=\"11\" ry=\"15\" fill=\"#c9d8ff\" stroke=\"#3f55a8\" stroke-width=\"2.2\"/><ellipse cx=\"336\" cy=\"130\" rx=\"11\" ry=\"15\" fill=\"#c9d8ff\" stroke=\"#3f55a8\" stroke-width=\"2.2\"/><line x1=\"236\" y1=\"130\" x2=\"281\" y2=\"130\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"281\" cy=\"130\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"232\" cy=\"110\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"232\" y=\"114.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">3</text><text x=\"314\" y=\"214\" font-size=\"13\" font-weight=\"800\" fill=\"#2d4f73\" text-anchor=\"middle\">Male</text><text x=\"314\" y=\"231\" font-size=\"13\" font-weight=\"800\" fill=\"#2d4f73\" text-anchor=\"middle\">reproductive system</text></svg>",
+  "labels": [
+   "ovary",
+   "womb",
+   "testis",
+   "stomach",
+   "lung"
+  ],
+  "key": [
+   "ovary",
+   "womb",
+   "testis"
+  ],
+  "each": 1,
+  "maxMarks": 3,
+  "star": 1,
+  "why": "The ovaries make eggs, the womb is where a baby grows, and the testes make sperm.",
+  "book": "book p.41"
+ },
+ {
+  "n": 17,
+  "type": "label",
+  "section": "S",
+  "tier": "Basic",
+  "body": "The chain shows how a baby begins. Choose the right name for each numbered box.",
+  "fig": "<svg viewBox=\"0 0 440 240\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A chain of four numbered boxes. Boxes 1 and 2 join with arrows into box 3. An arrow leads from box 3 to box 4. Box 1 shows a tiny cell with a tail. Box 2 shows a large round cell. Box 4 shows a baby.\"><rect x=\"12\" y=\"10\" width=\"120\" height=\"100\" rx=\"10\" fill=\"#fff\" stroke=\"#9fb2c4\" stroke-width=\"2\"/><ellipse cx=\"62\" cy=\"58\" rx=\"8\" ry=\"6\" fill=\"#9ad0f5\" stroke=\"#2f77ad\" stroke-width=\"2\"/><path d=\"M70 58 Q88 44 100 60 Q110 72 122 58\" fill=\"none\" stroke=\"#2f77ad\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><circle cx=\"26\" cy=\"24\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"26\" y=\"28.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">1</text><rect x=\"12\" y=\"126\" width=\"120\" height=\"104\" rx=\"10\" fill=\"#fff\" stroke=\"#9fb2c4\" stroke-width=\"2\"/><circle cx=\"72\" cy=\"174\" r=\"34\" fill=\"#ffe7a8\" stroke=\"#c28a12\" stroke-width=\"2.4\"/><circle cx=\"72\" cy=\"174\" r=\"9\" fill=\"#f2b84b\" stroke=\"#c28a12\" stroke-width=\"1.6\"/><circle cx=\"26\" cy=\"140\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"26\" y=\"144.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">2</text><path d=\"M134 62 L172 108\" stroke=\"#546e7a\" stroke-width=\"2.4\" fill=\"none\"/><path d=\"M134 178 L172 132\" stroke=\"#546e7a\" stroke-width=\"2.4\" fill=\"none\"/><polygon points=\"176,96 162,98 170,110\" fill=\"#546e7a\"/><polygon points=\"176,144 162,142 170,130\" fill=\"#546e7a\"/><rect x=\"176\" y=\"70\" width=\"120\" height=\"100\" rx=\"10\" fill=\"#fff\" stroke=\"#9fb2c4\" stroke-width=\"2\"/><circle cx=\"236\" cy=\"120\" r=\"34\" fill=\"#ffe7a8\" stroke=\"#c28a12\" stroke-width=\"2.4\"/><circle cx=\"228\" cy=\"118\" r=\"7\" fill=\"#f2b84b\" stroke=\"#c28a12\" stroke-width=\"1.6\"/><circle cx=\"244\" cy=\"124\" r=\"7\" fill=\"#9ad0f5\" stroke=\"#2f77ad\" stroke-width=\"1.6\"/><circle cx=\"190\" cy=\"84\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"190\" y=\"88.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">3</text><line x1=\"298\" y1=\"120\" x2=\"326\" y2=\"120\" stroke=\"#546e7a\" stroke-width=\"2.4\"/><polygon points=\"334,120 322,113 322,127\" fill=\"#546e7a\"/><rect x=\"336\" y=\"50\" width=\"96\" height=\"140\" rx=\"10\" fill=\"#fff\" stroke=\"#9fb2c4\" stroke-width=\"2\"/><circle cx=\"384\" cy=\"92\" r=\"22\" fill=\"#ffd9bd\" stroke=\"#b3693f\" stroke-width=\"2.2\"/><circle cx=\"376\" cy=\"90\" r=\"2.4\" fill=\"#37474f\"/><circle cx=\"392\" cy=\"90\" r=\"2.4\" fill=\"#37474f\"/><path d=\"M378 100 Q384 106 390 100\" fill=\"none\" stroke=\"#b3693f\" stroke-width=\"2\"/><path d=\"M362 120 Q384 112 406 120 L404 160 Q384 168 364 160 Z\" fill=\"#cfe9ff\" stroke=\"#3f7fb3\" stroke-width=\"2.2\"/><path d=\"M366 126 L350 146 M402 126 L418 146\" stroke=\"#b3693f\" stroke-width=\"5\" stroke-linecap=\"round\"/><circle cx=\"350\" cy=\"64\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"350\" y=\"68.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">4</text></svg>",
+  "labels": [
+   "sperm",
+   "egg",
+   "fertilised egg",
+   "baby",
+   "ovary"
+  ],
+  "key": [
+   "sperm",
+   "egg",
+   "fertilised egg",
+   "baby"
+  ],
+  "each": 0.5,
+  "maxMarks": 2,
+  "star": 1,
+  "why": "A sperm and an egg fuse to make a fertilised egg. It grows into a baby.",
+  "book": "book p.44"
+ },
+ {
+  "n": 18,
+  "type": "table",
+  "section": "S",
+  "tier": "Intermediate",
+  "body": "Where does fertilisation happen in each animal? Tick one box for every row.",
+  "key": [
+   0,
+   0,
+   1,
+   0
+  ],
+  "each": 1,
+  "rows": [
+   "human being",
+   "pigeon",
+   "catfish",
+   "rabbit"
+  ],
+  "cols": [
+   "Inside the female's body",
+   "Outside the female's body"
+  ],
+  "maxMarks": 4,
+  "star": 1,
+  "why": "Humans, pigeons and rabbits are fertilised inside the female's body. A catfish is fertilised outside, in water.",
+  "book": "book p.41-45"
+ },
+ {
+  "n": 19,
+  "type": "table",
+  "section": "S",
+  "tier": "Intermediate",
+  "body": "Is each one passed on from parents, or learnt or picked up during life? Tick one box for every row.",
+  "key": [
+   0,
+   0,
+   1,
+   1
+  ],
+  "each": 1,
+  "rows": [
+   "hair colour",
+   "skin colour",
+   "playing the piano",
+   "writing neatly"
+  ],
+  "cols": [
+   "Passed on from parents",
+   "Learnt or picked up"
+  ],
+  "maxMarks": 4,
+  "star": 1,
+  "why": "Hair colour and skin colour are passed on in the genes. Skills such as piano and neat writing are learnt.",
+  "book": "book p.46-48"
+ },
+ {
+  "n": 20,
+  "type": "select",
+  "section": "S",
+  "tier": "Applied",
+  "body": "Mai made a concept map of Chapter 3, like the one at the end of your book. Two of her boxes are wrong. Tick the two wrong boxes.",
+  "fig": "<svg class=\"wide\" viewBox=\"0 0 440 380\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A concept map with a box at the top called Reproduction, linked to five boxes of statements, drawn like the bird's-eye view at the end of the book.\"><line x1=\"220\" y1=\"40\" x2=\"112\" y2=\"70\" stroke=\"#7d93ab\" stroke-width=\"2.4\"/><line x1=\"220\" y1=\"40\" x2=\"328\" y2=\"70\" stroke=\"#7d93ab\" stroke-width=\"2.4\"/><line x1=\"112\" y1=\"140\" x2=\"112\" y2=\"184\" stroke=\"#7d93ab\" stroke-width=\"2.4\"/><line x1=\"328\" y1=\"140\" x2=\"328\" y2=\"184\" stroke=\"#7d93ab\" stroke-width=\"2.4\"/><line x1=\"112\" y1=\"254\" x2=\"112\" y2=\"298\" stroke=\"#7d93ab\" stroke-width=\"2.4\"/><rect x=\"160\" y=\"6\" width=\"120\" height=\"34\" rx=\"9\" fill=\"#fde0d8\" stroke=\"#e8573d\" stroke-width=\"2.4\"/><text x=\"220\" y=\"29\" font-size=\"15\" font-weight=\"800\" fill=\"#8a2f1f\" text-anchor=\"middle\">Reproduction</text><rect x=\"8\" y=\"70\" width=\"208\" height=\"70\" rx=\"9\" fill=\"#fff\" stroke=\"#5c7fa6\" stroke-width=\"2.2\"/><text x=\"112.0\" y=\"93.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">Reproduction is a</text><text x=\"112.0\" y=\"109.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">characteristic of all</text><text x=\"112.0\" y=\"125.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">living things</text><rect x=\"224\" y=\"70\" width=\"208\" height=\"70\" rx=\"9\" fill=\"#fff\" stroke=\"#5c7fa6\" stroke-width=\"2.2\"/><text x=\"328.0\" y=\"93.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">Most animals reproduce</text><text x=\"328.0\" y=\"109.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">by sexual</text><text x=\"328.0\" y=\"125.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">reproduction</text><rect x=\"8\" y=\"184\" width=\"208\" height=\"70\" rx=\"9\" fill=\"#fff\" stroke=\"#5c7fa6\" stroke-width=\"2.2\"/><text x=\"112.0\" y=\"215.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">Every animal gives birth</text><text x=\"112.0\" y=\"231.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">to live young</text><rect x=\"224\" y=\"184\" width=\"208\" height=\"70\" rx=\"9\" fill=\"#fff\" stroke=\"#5c7fa6\" stroke-width=\"2.2\"/><text x=\"328.0\" y=\"215.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">In humans, eggs come</text><text x=\"328.0\" y=\"231.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">from the ovaries</text><rect x=\"8\" y=\"298\" width=\"208\" height=\"70\" rx=\"9\" fill=\"#fff\" stroke=\"#5c7fa6\" stroke-width=\"2.2\"/><text x=\"112.0\" y=\"321.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">Living things reproduce</text><text x=\"112.0\" y=\"337.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">so that their kind</text><text x=\"112.0\" y=\"353.6\" font-size=\"13.5\" fill=\"#263238\" text-anchor=\"middle\">dies out</text></svg>",
+  "options": [
+   "Reproduction is a characteristic of all living things",
+   "In humans, eggs come from the ovaries",
+   "Every animal gives birth to live young",
+   "Living things reproduce so that their kind dies out",
+   "Most animals reproduce by sexual reproduction"
+  ],
+  "keySel": [
+   2,
+   3
+  ],
+  "maxMarks": 2,
+  "star": 1,
+  "why": "Not every animal gives birth to live young: some lay eggs. And living things reproduce so that their kind continues, not dies out.",
+  "book": "book p.50"
+ },
+ {
+  "n": 21,
+  "type": "written",
+  "section": "S",
+  "tier": "Intermediate",
+  "body": "Fill in each blank with one word from your book.",
+  "parts": [
+   {
+    "prompt": "(a) Living things reproduce to ensure the ________ of their kind.",
+    "kind": "text"
+   },
+   {
+    "prompt": "(b) Gregor ________ found out how traits are passed on by studying pea plants.",
+    "kind": "text"
+   }
+  ],
+  "rubric": [
+   {
+    "part": 0,
+    "label": "continuity",
+    "pat": "continu",
+    "marks": 1
+   },
+   {
+    "part": 1,
+    "label": "Mendel",
+    "pat": "mend[ae]l",
+    "marks": 1
+   }
+  ],
+  "model": "(a) continuity (b) Mendel",
+  "maxMarks": 2,
+  "star": 1,
+  "why": "Living things reproduce to ensure the continuity of their kind. Gregor Mendel studied pea plants to find out how traits are passed on.",
+  "book": "book p.38 and p.48"
+ },
+ {
+  "n": 22,
+  "type": "label",
+  "section": "S",
+  "tier": "Intermediate",
+  "body": "The timeline shows a baby growing before it is born. Choose what is happening at each numbered week.",
+  "fig": "<svg viewBox=\"0 0 440 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Three drawings of a baby growing before birth, left to right, getting bigger. Under them are the headings At 8th week, At 12th week and At 38th week, with arrows numbered 1, 2 and 3.\"><rect x=\"4\" y=\"4\" width=\"432\" height=\"222\" rx=\"10\" fill=\"#fff8f4\" stroke=\"#f0cfc6\" stroke-width=\"1.5\"/><g transform=\"translate(70 100) scale(0.8)\"><ellipse cx=\"6\" cy=\"22\" rx=\"22\" ry=\"14\" transform=\"rotate(30 6 22)\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-8\" cy=\"-6\" r=\"15\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-13\" cy=\"-8\" r=\"1.8\" fill=\"#37474f\"/><path d=\"M10 14 q10 -6 14 2 M-14 24 q-8 8 -2 14 M18 36 q8 6 14 0\" fill=\"none\" stroke=\"#b5503d\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><g transform=\"translate(214 96) scale(1.25)\"><ellipse cx=\"6\" cy=\"22\" rx=\"22\" ry=\"14\" transform=\"rotate(30 6 22)\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-8\" cy=\"-6\" r=\"15\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-13\" cy=\"-8\" r=\"1.8\" fill=\"#37474f\"/><path d=\"M10 14 q10 -6 14 2 M-14 24 q-8 8 -2 14 M18 36 q8 6 14 0\" fill=\"none\" stroke=\"#b5503d\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><g transform=\"translate(352 90) scale(1.85)\"><ellipse cx=\"6\" cy=\"22\" rx=\"22\" ry=\"14\" transform=\"rotate(30 6 22)\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-8\" cy=\"-6\" r=\"15\" fill=\"#f7b79d\" stroke=\"#b5503d\" stroke-width=\"2.6\"/><circle cx=\"-13\" cy=\"-8\" r=\"1.8\" fill=\"#37474f\"/><path d=\"M10 14 q10 -6 14 2 M-14 24 q-8 8 -2 14 M18 36 q8 6 14 0\" fill=\"none\" stroke=\"#b5503d\" stroke-width=\"4\" stroke-linecap=\"round\"/></g><text x=\"72\" y=\"214\" font-size=\"13\" font-weight=\"800\" fill=\"#7a3b2e\" text-anchor=\"middle\">At 8th week</text><text x=\"216\" y=\"214\" font-size=\"13\" font-weight=\"800\" fill=\"#7a3b2e\" text-anchor=\"middle\">At 12th week</text><text x=\"356\" y=\"214\" font-size=\"13\" font-weight=\"800\" fill=\"#7a3b2e\" text-anchor=\"middle\">At 38th week</text><line x1=\"36\" y1=\"38\" x2=\"60\" y2=\"76\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"60\" cy=\"76\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"28\" cy=\"28\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"28\" y=\"32.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">1</text><line x1=\"176\" y1=\"30\" x2=\"198\" y2=\"60\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"198\" cy=\"60\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"168\" cy=\"20\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"168\" y=\"24.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">2</text><line x1=\"300\" y1=\"26\" x2=\"326\" y2=\"52\" stroke=\"#e8573d\" stroke-width=\"1.8\"/><circle cx=\"326\" cy=\"52\" r=\"2.8\" fill=\"#e8573d\"/><circle cx=\"292\" cy=\"16\" r=\"11\" fill=\"#fff\" stroke=\"#e8573d\" stroke-width=\"2.2\"/><text x=\"292\" y=\"20.6\" font-size=\"13\" font-weight=\"900\" fill=\"#e8573d\" text-anchor=\"middle\">3</text><path d=\"M24 190 L416 190\" stroke=\"#d9b8ac\" stroke-width=\"2\" stroke-dasharray=\"5 4\"/><polygon points=\"420,190 410,185 410,195\" fill=\"#d9b8ac\"/></svg>",
+  "labels": [
+   "the major organs are forming",
+   "the major organs are formed",
+   "almost ready to be born",
+   "fertilisation happens"
+  ],
+  "key": [
+   "the major organs are forming",
+   "the major organs are formed",
+   "almost ready to be born"
+  ],
+  "each": 1,
+  "maxMarks": 3,
+  "star": 1,
+  "why": "At the 8th week the major organs are forming. At the 12th week they are formed. At the 38th week the baby is almost ready to be born.",
+  "book": "book p.45"
+ },
+ {
+  "n": 23,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "Every year, a farmer lets only the cows that give the most milk have calves. After many years, what is most likely?",
+  "options": [
+   "The cows give less milk every year",
+   "EVERY calf ALWAYS gives exactly the same amount of milk",
+   "Most of the cows in her herd give more milk than before",
+   "The cows stop having calves altogether"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "Choosing the best parents each time is selective breeding. After many years, most of the herd gives more milk.",
+  "book": "ASMOPSS extra: Lesson 1, selective breeding"
+ },
+ {
+  "n": 24,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "Identical twin brothers have exactly the same genes. One works outdoors on a sunny farm every day, and his skin becomes darker. Why are the twins now different?",
+  "options": [
+   "His genes changed into new ones",
+   "Twins ALWAYS stay the same in every way",
+   "He inherited the darker skin from a grandmother on his mother's side of the family",
+   "The sunlight around him changed his skin; it did not come from his genes"
+  ],
+  "ans": 4,
+  "predict": true,
+  "star": 2,
+  "why": "Identical twins share the same genes. Sunlight is a surrounding, and surroundings can change you, but only genes are passed on.",
+  "book": "ASMOPSS extra: Lesson 1, inherited or surroundings"
+ },
+ {
+  "n": 25,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "A ladybird's life cycle is egg → larva → pupa → adult. A dragonfly's is egg → nymph → adult. Which is correct?",
+  "options": [
+   "Both of them have a pupa stage",
+   "ALL insects have a pupa stage",
+   "Only the ladybird has a pupa stage",
+   "Only the dragonfly has a pupa stage"
+  ],
+  "ans": 3,
+  "star": 2,
+  "why": "The ladybird goes egg, larva, pupa, adult (complete). The dragonfly goes egg, nymph, adult (incomplete), so it has no pupa.",
+  "book": "ASMOPSS extra: Lesson 2, complete or incomplete"
+ },
+ {
+  "n": 26,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "Rods of copper, glass and wood are the same size. Each has a blob of butter on its top end, and the bottom ends stand in hot water. Which blob melts first, and why?",
+  "options": [
+   "Wood's, because wood soaks up the hot water fastest of the three",
+   "Copper's, because metals are good conductors of heat",
+   "Glass's, because heat can be seen through glass",
+   "They ALL melt at exactly the same moment"
+  ],
+  "ans": 2,
+  "predict": true,
+  "star": 2,
+  "why": "Copper is a metal, and metals are good conductors of heat. So the heat reaches the butter on the copper rod first.",
+  "book": "ASMOPSS extra: Lesson 2, toolbox card 1"
+ },
+ {
+  "n": 27,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "A packet of drink powder dissolves in 20 seconds in warm water but takes 2 minutes in cold water. What does this show?",
+  "options": [
+   "Cold water dissolves more of the powder than the warm water does",
+   "The powder NEVER dissolves in cold water",
+   "The warm water had more powder in it",
+   "The powder dissolves faster in warm water than in cold water"
+  ],
+  "ans": 4,
+  "star": 2,
+  "why": "Warm water dissolves the powder faster. Warm water does not hold more powder; it just works faster.",
+  "book": "ASMOPSS extra: Lesson 2, toolbox card 2"
+ },
+ {
+  "n": 28,
+  "type": "mcq",
+  "section": "C",
+  "tier": "Applied",
+  "body": "A toy robot stands between a lamp and a wall, making a shadow. Lin moves the lamp closer to the robot. What happens to the shadow?",
+  "options": [
+   "It gets smaller",
+   "Shadows ALWAYS stay the same size",
+   "It disappears completely",
+   "It gets bigger"
+  ],
+  "ans": 4,
+  "predict": true,
+  "star": 2,
+  "why": "The closer the light, the bigger the shadow.",
+  "book": "ASMOPSS extra: Lesson 2, toolbox card 3"
+ }
+];
+
+/* ---------- END CONFIG ---------- */
+document.getElementById('hdr-date').textContent = new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+const nowMs=()=>Date.now(), r2=x=>Math.round(x*100)/100;
+const openedAt=new Date(nowMs());
+let lastClick=nowMs(), submitted=false, reviewing=false;
+const firstOrder=[];
+const chosen={}, firstChoice={}, firstAt={}, secsPrev={}, predictions={}, touched={}, touchSecs={};
+const lblAns={}, tblAns={}, selAns={}, txtAns={};
+const PART_LABEL={A:'PART A — Multiple choice (2 marks each)', S:'PART B — Structured questions (school style)', C:'PART C — Think Like a Scientist (ASMOPSS extra, 2 marks each, scored on its own)'};
+function prov(){const g=n=>{const e=document.querySelector('input[name="'+n+'"]:checked');return e?e.value:null};return{helped:g('helped'),usedNotes:g('notes')}}
+document.querySelectorAll('#prov input').forEach(e=>e.addEventListener('change',()=>updateProgress()));
+const isApplied=q=>q.section==='C'||q.tier==='Applied';
+
+function mcqHtml(q){
+  let opts=''; q.options.forEach((o,i)=>{opts+=`<button class="opt" id="opt-${q.n}-${i+1}" onclick="choose(${q.n},${i+1})">${i+1}. ${o}</button>`});
+  if(q.predict) return `<div class="pbox" id="pbox-${q.n}"><label for="pin-${q.n}">What do you think? Write a few words, then press Show options.</label>
+    <input class="pin" id="pin-${q.n}" type="text" maxlength="80" autocomplete="off" oninput="predTyped(${q.n})">
+    <button class="btn pshow" id="pshow-${q.n}" disabled onclick="predShow(${q.n})">Show options</button></div><div class="pbody hid" id="pbody-${q.n}">${opts}</div>`;
+  return opts;
+}
+function labelHtml(q){
+  let h=''; q.key.forEach((k,i)=>{
+    h+=`<div class="lblrow" id="lr-${q.n}-${i}"><span class="num">${i+1}</span><select id="ls-${q.n}-${i}" onchange="lblChange(${q.n})"><option value="">choose a name</option>`+q.labels.map(l=>`<option value="${l}">${l}</option>`).join('')+`</select><span class="fix"></span></div>`;
+  }); return h;
+}
+function tableHtml(q){
+  let h=`<table class="tb"><tr><th></th>`+q.cols.map(c=>`<th>${c}</th>`).join('')+`</tr>`;
+  q.rows.forEach((r,i)=>{h+=`<tr id="tr-${q.n}-${i}"><td>${r}</td>`+q.cols.map((c,j)=>`<td><input type="radio" name="t-${q.n}-${i}" value="${j}" onchange="tblChange(${q.n})"></td>`).join('')+`</tr>`});
+  return h+'</table>';
+}
+function selectHtml(q){return q.options.map((o,i)=>`<label class="ck" id="ck-${q.n}-${i}"><input type="checkbox" value="${i}" onchange="selChange(${q.n})"> ${o}</label>`).join('')}
+function writtenHtml(q){
+  let h=''; q.parts.forEach((p,i)=>{
+    h+=`<div class="wp"><label for="wi-${q.n}-${i}">${p.prompt}</label>`+(p.kind==='area'?`<textarea id="wi-${q.n}-${i}" oninput="txtChange(${q.n})"></textarea>`:`<input type="text" id="wi-${q.n}-${i}" maxlength="40" autocomplete="off" oninput="txtChange(${q.n})">`)+`</div>`;
+  });
+  return h+`<div class="model" id="model-${q.n}"><b>Model answer:</b> ${q.model}<div id="ideas-${q.n}"></div></div>`;
+}
+function render(){
+  const quiz=document.getElementById('quiz'); let html='', last=null;
+  Q.forEach(q=>{
+    if(q.section!==last){html+=`<div class="part-hd ${q.section}">${PART_LABEL[q.section]}</div>`; last=q.section}
+    const stars=q.star===2?'&#9733;&#9733; ':(q.star===1?'&#9733; ':'');
+    const mk=q.type==='mcq'?MCQ_MARKS:q.maxMarks;
+    let inner='';
+    if(q.type==='mcq') inner=mcqHtml(q); else if(q.type==='label') inner=labelHtml(q); else if(q.type==='table') inner=tableHtml(q);
+    else if(q.type==='select') inner=selectHtml(q); else inner=writtenHtml(q);
+    html+=`<div class="q ${q.section}" id="q-${q.n}"><span class="tierlbl ${q.tier}">${q.tier}</span>
+      ${q.fig?`<div class="fig">${q.fig}</div>`:''}
+      <p class="body"><span class="qnum">Q${q.n}.</span> <span class="marks">[${mk} marks]</span> ${stars}${q.body}
+        <span class="result-tag ok" id="tag-ok-${q.n}">&#10003; full marks</span><span class="result-tag bad" id="tag-bad-${q.n}">&#10007; marks lost</span></p>
+      ${inner}<div class="ptag" id="ptag-${q.n}"></div>
+      <div class="why" id="why-${q.n}">&#128161; <b>Why:</b> ${q.why} <span class="book">(${q.book})</span></div></div>`;
+  });
+  quiz.innerHTML=html;
+}
+function touch(n){const t=nowMs(); if(!(n in touched)){firstOrder.push(n); touched[n]=new Date(t).toISOString(); touchSecs[n]=Math.round((t-lastClick)/100)/10;} lastClick=t;}
+function predTyped(n){document.getElementById('pshow-'+n).disabled=document.getElementById('pin-'+n).value.trim().length<2}
+function predShow(n){const i=document.getElementById('pin-'+n), v=i.value.trim(); if(v.length<2||n in predictions) return; predictions[n]=v; i.readOnly=true; document.getElementById('pshow-'+n).style.display='none'; document.getElementById('pbody-'+n).classList.remove('hid')}
+function choose(n,idx){
+  if(submitted||reviewing) return; const t=nowMs();
+  if(!(n in firstChoice)){firstChoice[n]=idx; if(firstOrder.indexOf(n)<0) firstOrder.push(n); firstAt[n]=new Date(t).toISOString(); secsPrev[n]=Math.round((t-lastClick)/100)/10; touched[n]=firstAt[n]; touchSecs[n]=secsPrev[n]}
+  lastClick=t; chosen[n]=idx; const q=Q.find(x=>x.n===n);
+  q.options.forEach((_,i)=>document.getElementById(`opt-${n}-${i+1}`).classList.remove('selected'));
+  document.getElementById(`opt-${n}-${idx}`).classList.add('selected'); updateProgress();
+}
+function lblChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); lblAns[n]=q.key.map((_,i)=>document.getElementById(`ls-${n}-${i}`).value); updateProgress()}
+function tblChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); tblAns[n]=q.rows.map((_,i)=>{const e=document.querySelector(`input[name="t-${n}-${i}"]:checked`);return e?+e.value:null}); updateProgress()}
+function selChange(n){if(submitted)return; touch(n); selAns[n]=Array.from(document.querySelectorAll(`#q-${n} input[type=checkbox]:checked`)).map(e=>+e.value); updateProgress()}
+function txtChange(n){if(submitted)return; touch(n); const q=Q.find(x=>x.n===n); txtAns[n]=q.parts.map((_,i)=>document.getElementById(`wi-${n}-${i}`).value); updateProgress()}
+function answered(q){
+  const n=q.n;
+  if(q.type==='mcq') return n in chosen;
+  if(q.type==='label') return !!lblAns[n] && lblAns[n].every(v=>v!=='');
+  if(q.type==='table') return !!tblAns[n] && tblAns[n].every(v=>v!==null);
+  if(q.type==='select') return !!selAns[n] && selAns[n].length>0;
+  return !!txtAns[n] && txtAns[n].every(v=>v.trim().length>0);
+}
+function nAnswered(){return Q.filter(answered).length}
+function updateProgress(){
+  const n=nAnswered(); document.getElementById('progress-label').textContent=`${n} / ${TOTAL_ITEMS} answered`;
+  document.getElementById('progress-fill').style.width=(n/TOTAL_ITEMS*100)+'%';
+  const btn=document.getElementById('btn-submit'), pv=prov(), ok=pv.helped&&pv.usedNotes;
+  if(n===TOTAL_ITEMS&&ok){btn.disabled=false; btn.textContent='Submit Mock Test'; btn.onclick=askConfirmSubmit}
+  else{btn.disabled=true; btn.textContent=n<TOTAL_ITEMS?`Answer all ${TOTAL_ITEMS} to submit (${TOTAL_ITEMS-n} left)`:'Answer the two questions above to submit'}
+}
+function askConfirmSubmit(){if(nAnswered()<TOTAL_ITEMS||!(prov().helped&&prov().usedNotes))return; document.getElementById('confirm-overlay').classList.add('show')}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('show')}
+
+/* ---------- fast-answer review (MCQ only) ---------- */
+let reviewSkippedSelf=[], preReview={}, reviewEligible=[], reviewList=[], reviewPos=0, reviewLog={};
+function pickReview(){
+  const mq=Q.filter(q=>q.type==='mcq' && (q.n in secsPrev));
+  const fast=mq.filter(q=>secsPrev[q.n] < (isApplied(q)?REVIEW_SECS_C:REVIEW_SECS_AB));
+  reviewSkippedSelf=fast.filter(q=>chosen[q.n]!==firstChoice[q.n]).map(q=>q.n);
+  const elig=fast.filter(q=>chosen[q.n]===firstChoice[q.n]);
+  const ranked=elig.slice().sort((a,b)=>((isApplied(a)?0:1)-(isApplied(b)?0:1))||(secsPrev[a.n]-secsPrev[b.n])||(a.n-b.n));
+  return {eligible:elig.map(q=>q.n), shown:ranked.slice(0,REVIEW_MAX).map(q=>q.n).sort((a,b)=>a-b)};
+}
+function startReview(){
+  closeConfirm(); preReview=Object.assign({},chosen); const r=pickReview(); reviewEligible=r.eligible; reviewList=r.shown; reviewPos=0; reviewLog={};
+  if(!reviewList.length){doSubmit();return} reviewing=true; document.getElementById('review-overlay').classList.add('show'); showReviewItem();
+}
+function showReviewItem(){
+  const qn=reviewList[reviewPos], q=Q.find(x=>x.n===qn);
+  document.getElementById('rv-count').textContent=`Question ${reviewPos+1} of ${reviewList.length} to look at again`;
+  let h=`<p class="body" style="font-weight:700"><span class="qnum">Q${q.n}.</span> ${q.body}</p>`;
+  q.options.forEach((o,i)=>{h+=`<button class="opt${chosen[qn]===i+1?' selected':''}" id="rv-opt-${i+1}" disabled onclick="rvPick(${i+1})">${i+1}. ${o}</button>`});
+  document.getElementById('rv-body').innerHTML=h;
+  document.getElementById('rv-actions').innerHTML=`<button class="btn keep" onclick="rvKeep()">Keep my answer</button><button class="btn change" onclick="rvChange()">Change it</button>`;
+  document.getElementById('review-overlay').scrollTo(0,0);
+}
+function rvKeep(){reviewLog[reviewList[reviewPos]]={kept:true}; rvNext()}
+function rvChange(){document.querySelectorAll('#rv-body .opt').forEach(b=>b.disabled=false); document.getElementById('rv-actions').innerHTML=`<button class="btn keep" onclick="rvUse()">Use this answer</button>`}
+function rvPick(i){document.querySelectorAll('#rv-body .opt').forEach(b=>b.classList.remove('selected')); document.getElementById('rv-opt-'+i).classList.add('selected'); chosen[reviewList[reviewPos]]=i}
+function rvUse(){const qn=reviewList[reviewPos]; reviewLog[qn]={kept:false,changed:chosen[qn]!==preReview[qn]}; rvNext()}
+function rvNext(){reviewPos++; if(reviewPos>=reviewList.length){reviewing=false; document.getElementById('review-overlay').classList.remove('show'); doSubmit()} else showReviewItem()}
+
+/* ---------- marking ---------- */
+function markLabel(q){const a=lblAns[q.n]||[]; const per=q.key.map((k,i)=>a[i]===k); return {per, marks:per.filter(Boolean).length*q.each}}
+function markTable(q){const a=tblAns[q.n]||[]; const per=q.key.map((k,i)=>a[i]===k); return {per, marks:per.filter(Boolean).length*q.each}}
+function markSelect(q){const a=selAns[q.n]||[]; let m=0; a.forEach(i=>{m+=q.keySel.indexOf(i)>=0?1:-1}); return {marks:Math.max(0,m), right:a.filter(i=>q.keySel.indexOf(i)>=0).length, wrong:a.filter(i=>q.keySel.indexOf(i)<0).length}}
+function markWritten(q){
+  const a=txtAns[q.n]||[]; const ideas=q.rubric.map(r=>({label:r.label, got:new RegExp(r.pat,'i').test(a[r.part]||''), marks:r.marks}));
+  return {ideas, marks:ideas.reduce((s,x)=>s+(x.got?x.marks:0),0)};
+}
+function itemMarks(q){
+  if(q.type==='mcq') return chosen[q.n]===q.ans?MCQ_MARKS:0;
+  if(q.type==='label') return markLabel(q).marks; if(q.type==='table') return markTable(q).marks;
+  if(q.type==='select') return markSelect(q).marks; return markWritten(q).marks;
+}
+let lastResults=null, resultsSaved=false;
+function leaveGuard(){return !(lastResults&&!resultsSaved)||confirm('You have not saved your results yet. Leave without saving?')}
+function doSubmit(){
+  submitted=true;
+  document.querySelectorAll('.opt,select,input,textarea').forEach(b=>{b.disabled=true; if(b.tagName==='TEXTAREA'||b.type==='text') b.readOnly=true});
+  let fpA=0, fpMcqCorrect=0, marks=0, partA=0, partB=0, partC=0, mcqCorrect=0, firstPassMarks=0, preReviewMarks=0, provisionalWritten=0;
+  const tier={Basic:{m:0,t:0},Intermediate:{m:0,t:0},Applied:{m:0,t:0}};
+  const selfSwing={changed:0,wrongToRight:0,rightToWrong:0,wrongToWrong:0}, allSwing={changed:0,wrongToRight:0,rightToWrong:0,wrongToWrong:0}, swing={wrongToRight:0,rightToWrong:0,wrongToWrong:0}, changes=[];
+  const items=Q.map(q=>{
+    const n=q.n, m=itemMarks(q), mx=q.type==='mcq'?MCQ_MARKS:q.maxMarks; if(q.section!=='C') marks+=m; tier[q.tier].m+=m; tier[q.tier].t+=mx;
+    if(q.section==='A') partA+=m; else if(q.section==='S') partB+=m; else partC+=m;
+    const rec={q:n, type:q.type, section:q.section, tier:q.tier, marks:r2(m), maxMarks:mx, secsSincePrev:touchSecs[n], firstTouchAt:touched[n]};
+    if(q.type==='mcq'){
+      const ok=chosen[n]===q.ans, fc=firstChoice[n], pr=preReview[n];
+      if(ok) mcqCorrect++; if(fc===q.ans) firstPassMarks+=MCQ_MARKS; if(fc===q.ans&&q.section==='A') fpA+=MCQ_MARKS; if(pr===q.ans) preReviewMarks+=MCQ_MARKS; if(fc===q.ans) fpMcqCorrect++;
+      if(pr!==fc){selfSwing.changed++; if(fc===q.ans) selfSwing.rightToWrong++; else if(pr===q.ans) selfSwing.wrongToRight++; else selfSwing.wrongToWrong++}
+      if(chosen[n]!==fc){allSwing.changed++; if(fc===q.ans) allSwing.rightToWrong++; else if(ok) allSwing.wrongToRight++; else allSwing.wrongToWrong++}
+      let dir=null; const rv=reviewLog[n];
+      if(rv&&rv.changed){const was=pr===q.ans; dir=was?'right->wrong':(ok?'wrong->right':'wrong->wrong'); if(dir==='wrong->right')swing.wrongToRight++; else if(dir==='right->wrong')swing.rightToWrong++; else swing.wrongToWrong++; changes.push({q:n,from:pr,to:chosen[n],direction:dir})}
+      document.getElementById(`opt-${n}-${chosen[n]}`).classList.add(ok?'correct':'wrong'); if(!ok) document.getElementById(`opt-${n}-${q.ans}`).classList.add('correct');
+      Object.assign(rec,{chosen:chosen[n],correct:q.ans,isCorrect:ok,firstChoice:fc,firstCorrect:fc===q.ans,preReviewChoice:pr,finalChoice:chosen[n],firstClickAt:firstAt[n],
+        prediction:(n in predictions)?predictions[n]:null,reviewEligible:reviewEligible.indexOf(n)>=0,reviewed:n in reviewLog,changedBeforeReview:pr!==fc,changedOnReview:rv?!!rv.changed:false,reviewDirection:dir});
+    } else if(q.type==='label'){
+      const r=markLabel(q); r.per.forEach((p,i)=>{const row=document.getElementById(`lr-${n}-${i}`); row.classList.add(p?'ok':'bad'); if(!p) row.querySelector('.fix').textContent='→ '+q.key[i]});
+      Object.assign(rec,{answers:lblAns[n],key:q.key,perLabel:r.per});
+    } else if(q.type==='table'){
+      const r=markTable(q); r.per.forEach((p,i)=>document.getElementById(`tr-${n}-${i}`).classList.add(p?'ok':'bad'));
+      Object.assign(rec,{answers:tblAns[n],key:q.key,perRow:r.per,cols:q.cols});
+    } else if(q.type==='select'){
+      const r=markSelect(q); (selAns[n]||[]).forEach(i=>document.getElementById(`ck-${n}-${i}`).classList.add(q.keySel.indexOf(i)>=0?'ok':'bad')); q.keySel.forEach(i=>document.getElementById(`ck-${n}-${i}`).classList.add('ok'));
+      Object.assign(rec,{ticked:selAns[n],keySel:q.keySel,right:r.right,wrong:r.wrong});
+    } else {
+      const r=markWritten(q); provisionalWritten+=r.marks;
+      document.getElementById('model-'+n).classList.add('show');
+      document.getElementById('ideas-'+n).innerHTML='<div style="margin-top:6px"><b>Marking ideas</b> (computer guess; tick the ones YOU had):</div>'+r.ideas.map((x,i)=>`<label class="idea"><input type="checkbox" class="selfmark" data-q="${n}" data-i="${i}" onchange="selfMarkChanged()"> ${x.label} <span class="got">${x.got?'(auto: found, '+x.marks+')':'(auto: not found)'}</span></label>`).join('');
+      Object.assign(rec,{typed:txtAns[n],provisionalMarks:r.marks,ideas:r.ideas.map(x=>({label:x.label,autoFound:x.got,marks:x.marks})),selfMarked:null});
+    }
+    document.getElementById('ptag-'+n).textContent= q.type==='mcq'?'':`Marks: ${r2(m)} / ${mx}`+(q.type==='written'?' (provisional — Luikishi will re-mark your writing)':'');
+    document.getElementById('why-'+n).classList.add('show');
+    document.getElementById(m>=mx?`tag-ok-${n}`:`tag-bad-${n}`).classList.add('show');
+    return rec;
+  });
+  marks=r2(marks); partA=r2(partA); partB=r2(partB); partC=r2(partC); const firstPassScore=fpMcqCorrect; firstPassMarks=r2(firstPassMarks); preReviewMarks=r2(preReviewMarks);
+  const pass=marks>=PASS_MARKS, pct=Math.round(marks/TOTAL_MARKS*100), minutes=Math.round((nowMs()-openedAt.getTime())/6000)/10;
+  const banner=document.getElementById('score-banner'); banner.classList.add('show',pass?'pass':'fail');
+  document.getElementById('score-big').textContent=`${marks} / ${TOTAL_MARKS} marks (${pct}%)`;
+  document.getElementById('score-msg').textContent=pass?`\u{1F3C6} That's a PASS (bar is ${PASS_MARKS}/${TOTAL_MARKS}). Your writing marks are a computer guess for now: Luikishi will re-mark them.`:`Bar is ${PASS_MARKS}/${TOTAL_MARKS}. Look through the highlighted answers below, then talk it through with Luikishi. Your writing marks are a computer guess for now.`;
+  document.getElementById('score-base').textContent=`Part A (multiple choice): ${partA}/30 · Part B (structured): ${partB}/20`;
+  document.getElementById('partc-line').textContent=`Part C (ASMOPSS extra, scored on its own): ${partC}/${PARTC_MARKS}. It does not count in the ${TOTAL_MARKS}.`;
+  document.getElementById('pace-lines').innerHTML=
+    `<div><b>First clicks:</b> ${r2(fpA+partB)}/${TOTAL_MARKS} marks (Parts A and B) &rarr; <b>final:</b> ${marks}/${TOTAL_MARKS}. Your checking changed ${allSwing.changed} multiple-choice answer${allSwing.changed===1?'':'s'}: ${allSwing.wrongToRight} wrong&rarr;right, ${allSwing.rightToWrong} right&rarr;wrong.</div>`+
+    `<div><b>Time:</b> ${minutes} min (Your last test took ${LAST_TEST_MINUTES} minutes, U59)</div>`+
+    (reviewList.length?`<div><b>Your quick check</b> looked again at ${reviewList.length} answer${reviewList.length===1?'':'s'} and changed ${changes.length}.</div>`:`<div><b>Your quick check:</b> no answers needed a second look.</div>`);
+  document.getElementById('section-scores').innerHTML=['Basic','Intermediate','Applied'].map(t=>`<div class="sec-chip">${t}: ${r2(tier[t].m)}/${tier[t].t} marks</div>`).join('');
+  const misses=items.filter(it=>it.marks<it.maxMarks).map(it=>{const q=Q.find(x=>x.n===it.q); return `<div class="fx"><b>Q${q.n}</b> (${q.book}): ${q.why}</div>`});
+  document.getElementById('fix-list').innerHTML=misses.length?`<h4>Your fix list (${misses.length} to look at again)</h4>`+misses.join(''):'<h4>Nothing to fix. Every item got full marks.</h4>';
+  banner.scrollIntoView({behavior:'smooth'});
+  document.getElementById('btn-submit').style.display='none'; document.getElementById('btn-save').style.display='inline-block'; document.getElementById('prov').style.display='none';
+  lastResults={student:'Prem',unit:UNIT_NUM,title:UNIT_TITLE,kind:'school-format mock',answerOrderNote:'item numbers in the order first touched',dateTaken:new Date().toISOString().slice(0,10),openedAt:openedAt.toISOString(),submittedAt:new Date(nowMs()).toISOString(),minutesSpent:minutes,lastTestMinutes:LAST_TEST_MINUTES,
+    provenance:prov(),marksEarned:marks,outOfMarks:TOTAL_MARKS,pct,passMarks:PASS_MARKS,passed:pass,answerOrder:firstOrder.slice(),firstPassScore:r2(fpA+partB),firstPassMcqCorrect:fpMcqCorrect,
+    partAB:{marks,outOf:TOTAL_MARKS,partA,partB}, partC:{marks:partC,outOf:PARTC_MARKS,correct:Q.filter(q=>q.section==='C'&&chosen[q.n]===q.ans).length,outOfItems:6},
+    fixList:items.filter(it=>it.marks<it.maxMarks).map(it=>{const q=Q.find(x=>x.n===it.q);return {q:q.n,book:q.book,why:q.why}}),
+    partA:{marks:partA,outOf:30,correct:mcqCorrect,outOfItems:15}, partB:{marks:partB,outOf:20},
+    provisionalWrittenMarks:r2(provisionalWritten), firstPassMarks, preReviewMarks,
+    reviewSecs:{AB:REVIEW_SECS_AB,C:REVIEW_SECS_C,max:REVIEW_MAX},
+    selfChanged:selfSwing, checkingSwing:allSwing, predictions:Object.assign({},predictions),
+    reviewEligible:reviewEligible.slice(), reviewedQs:reviewList.slice(), reviewSkippedSelfChanged:reviewSkippedSelf.slice(), changedOnReview:changes,
+    reviewSwing:{eligible:reviewEligible.length,reviewed:reviewList.length,changed:changes.length,wrongToRight:swing.wrongToRight,rightToWrong:swing.rightToWrong,wrongToWrong:swing.wrongToWrong},
+    tiers:['Basic','Intermediate','Applied'].map(t=>({name:t,marks:r2(tier[t].m),marksOutOf:tier[t].t})),
+    items};
+}
+function selfMarkChanged(){
+  if(!lastResults) return;
+  document.querySelectorAll('.selfmark').forEach(c=>{const it=lastResults.items.find(x=>x.q===+c.dataset.q); if(!it.selfMarked) it.selfMarked={}; it.selfMarked[c.dataset.i]=c.checked});
+}
+async function saveResults(){
+  const filename=`SCI_U${String(UNIT_NUM).padStart(3,'0')}_Results_${lastResults.dateTaken}.json`, json=JSON.stringify(lastResults,null,2), st=document.getElementById('save-status');
+  if(window.showSaveFilePicker){
+    try{const h=await window.showSaveFilePicker({suggestedName:filename,types:[{description:'Test results JSON',accept:{'application/json':['.json']}}]}); const w=await h.createWritable(); await w.write(json); await w.close(); resultsSaved=true; st.textContent=`Saved as ${filename}. (First time, pick the Lessons\\Tests\\Results folder.)`; return}
+    catch(e){if(e.name==='AbortError'){st.textContent='Save cancelled — click again when ready.';return}}
+  }
+  const b=new Blob([json],{type:'application/json'}), a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download=filename; document.body.appendChild(a); a.click(); a.remove(); resultsSaved=true;
+  st.textContent=`Downloaded ${filename} — please move it into Lessons\\Tests\\Results.`;
+}
+render();
+</script>
+</body>
+</html>

@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '28 Oct 2026',
+  updated:        '5 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:59, topic:'Chapter 3 Extension I &mdash; Strategies for Survival (animal groups, one parent or two, saving a kind; ASMOPSS)', status:'&#127381; Built and ready (28 Oct 2026), from `BUILD_PLAN_SCI_U59_Survival.md` v1.0. Warm-up, two lessons and a 20-question test. No written part (paused until after M6). Prem sits it Sat 31 Oct / Sun 1 Nov; school Ch.3 test is Thu 5 Nov 2026.' },
+    currentUnit: { n:60, topic:'Chapter 3 Extension II &mdash; Heredity at Work, Life Cycles &amp; the Ch.3 School-Format Mock (ASMOPSS)', status:'&#127381; Built and ready (5 Nov 2026), from `BUILD_PLAN_SCI_U60_Ch3Mock.md` v1.0. Warm-up, two lessons, a 28-item mock (Part A 15 MCQ + Part B 7 structured = /50, pass 40; Part C 6 ASMOPSS items /12, scored separately) and an on-screen Last-Look card. Fri 6 Nov warm-up + L1; Sat 7 L2; Sun 8 the mock; Mon 9 the card; school Ch.3 test Tue 10 Nov 2026.' },
 
   lastUnit: {
-    n:58, score:17, outOf:20, pct:85, passBar:16, delta:0, prevScore:17, passed:true, minutesSpent:7.8, minutesUnit:58, minutesNote:'U57 was 6.6', firstPassScore:17,
-    patternLabel: 'Unit 58 result - Biology: Chapter 3 Wrap-up (17/20, 85%, PASS)',
-    patternInsight: '<strong>17/20 (85%)</strong> - PASS (bar 16). Section A 2/2, Section B 5/6, Section C 10/12; the six book-Applied items (Q9-14) were 6/6, the six extension items (Q15-20) 4/6. Sat alone, no notes, 7.8 minutes. First clicks 17, own changes 0, review changed 0 (6 shown). He answered Q20 first, down to Q1. Q12 (deciding), Q14 (PROVE re-test) and Q15 (iodine) were right.',
-    analysisLabel: 'Misses: Q4, Q16, Q19',
-    analysisInsight: '<strong>Facts only:</strong> three misses, none changed on review. Part 2 (Q21, 4 marks): auto 1/4, hand 1/4. Written answers are now paused in Science until after M6. Full per-question record: `Memory Backup\\TEST_RECORD_SCI_U058.md`.',
-    qSummary: '<strong>17 / 20 (85%) - PASS.</strong> Part 2 written answer 1/4. Full record: `Memory Backup\\TEST_RECORD_SCI_U058.md`.',
+    n:59, score:19, outOf:20, pct:95, passBar:16, delta:2, prevScore:17, passed:true, minutesSpent:6.6, minutesUnit:59, minutesNote:'U58 was 7.8', firstPassScore:19,
+    patternLabel: 'Unit 59 result - Biology: Chapter 3 Extension I, Strategies for Survival (19/20, 95%, PASS)',
+    patternInsight: '<strong>19/20 (95%)</strong> - PASS (bar 16). Section A 2/2, Section B 5/6, Section C 12/12 (Biology-extension 6/6, Physics/Chemistry 6/6). Sat alone, no notes, 6.6 minutes. First clicks 19, own changes 1 (Q3, wrong to wrong), review changed 0 (6 shown). The deciding item Q10 (differences between members of the same kind) was right. Predict-first Q9, Q12, Q15, Q17 all right.',
+    analysisLabel: 'Miss: Q3',
+    analysisInsight: '<strong>Facts only:</strong> one miss, Q3 (which eggs amphibians lay); changed once, wrong to wrong. Full per-question record: `Memory Backup\\TEST_RECORD_SCI_U059.md`.',
+    qSummary: '<strong>19 / 20 (95%) - PASS.</strong> No written part. Full record: `Memory Backup\\TEST_RECORD_SCI_U059.md`.',
     qBreakdown: []
   },
 
@@ -103,11 +103,24 @@ var PREM_DATA = {
     { unit:56, topic:'Biology: Chapter 3 &sect;B &mdash; Why Two Parents? Variation, Plantlets vs Seeds, and the Land Problem (school-aligned, beyond-class)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-24', firstPassScore:17, minutesSpent:7.0, part2:'0/4' },
     { unit:57, topic:'Biology: Chapter 3 &sect;C &mdash; Heredity: Recipe Cards, Strong and Hidden Traits (school-aligned, beyond-class)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-25', firstPassScore:15, minutesSpent:6.6, part2:'1/4' },
     { unit:58, topic:'Biology: Chapter 3 Wrap-up &mdash; Reproduction in Animals, the Whole Chapter (Book + ASMOPSS)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-28', firstPassScore:17, minutesSpent:7.8, part2:'1/4' },
+    { unit:59, topic:'Biology: Chapter 3 Extension I &mdash; Strategies for Survival (animal groups, one parent or two, saving a kind; ASMOPSS)', score:19, outOf:20, pct:95, passBar:16, date:'2026-11-05', firstPassScore:19, minutesSpent:6.6 },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 59, badge: 'linear-gradient(135deg,#1b4d2c,#e8903c)',
+      title: 'Biology: Chapter 3 Extension I &mdash; Strategies for Survival (animal groups, one parent or two, saving a kind; ASMOPSS)',
+      tags: [
+        { t:'&#9989; 19/20 (95%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 19 &rarr; final 19', c:'tgreen' },
+        { t:'6.6 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U59_Survival.md` v1.0 (gate 0 FAIL(s)): warm-up, two lessons and a 20-question test, no written part. <strong>Taken 5 Nov 2026: 19/20 (95%), PASS</strong> &mdash; Section A 2/2, Section B 5/6, Section C 12/12. First clicks 19, final 19; the review (6 shown) changed nothing. Missed: Q3. Record: `Memory Backup\\TEST_RECORD_SCI_U059.md`.',
+      status: 'done'
+    },
     {
       n: 58, badge: 'linear-gradient(135deg,#0a4d55,#e8903c)',
       title: 'Biology: Chapter 3 Wrap-up &mdash; Reproduction in Animals, the Whole Chapter (Book + ASMOPSS)',
