@@ -12,7 +12,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 #app { display:flex; height:100vh; overflow:hidden; }
 #sidebar { width:66px; background:#4a3800; display:flex; flex-direction:column; align-items:center; padding:14px 0; gap:4px; flex-shrink:0; }
 .sb-logo { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.15); display:flex; align-items:center; justify-content:center; font-size:20px; margin-bottom:12px; }
-.sb-btn { width:48px; height:48px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.5); }
+.sb-btn { width:48px; height:48px; border-radius:10px; border:none; background:transparent; cursor:pointer; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:rgba(255,255,255,0.9); }
 .sb-btn:hover { background:rgba(255,255,255,0.1); color:#fff; }
 .sb-btn.active { background:rgba(255,255,255,0.18); color:#fff; }
 .sb-icon { font-size:18px; } .sb-lbl { font-size:8px; font-weight:600; letter-spacing:.3px; text-transform:uppercase; }
@@ -46,9 +46,9 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 .badge { font-size:10px; font-weight:700; padding:2px 8px; border-radius:12px; }
 .badge-new { background:#FFF3CD; color:#8a6a00; } .badge-asm { background:#fff3e0; color:#E65100; }
 .badge-soon { background:#f3f3f3; color:#999; }
-.btn-start { margin-top:6px; color:#5a3d00; text-decoration:none; font-size:11px; font-weight:700; padding:8px 16px; border-radius:8px; text-align:center; width:fit-content; background:linear-gradient(135deg,#FFC107,#FFA500); }
+.btn-start { margin-top:6px; color:#fff; text-decoration:none; font-size:11px; font-weight:700; padding:8px 16px; border-radius:8px; text-align:center; width:fit-content; background:linear-gradient(135deg,#7a4a00,#8a5a00); }
 .btn-start.blue, .btn-start.purple { color:#fff; }
-.btn-start.blue { background:linear-gradient(135deg,#1565c0,#1e88e5); }
+.btn-start.blue { background:linear-gradient(135deg,#0d3c7a,#1557a8); }
 .btn-start.purple { background:linear-gradient(135deg,#6a1b9a,#8e24aa); }
 .sec-div { font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:.8px; color:#a89568; padding:6px 0 10px; }
 .empty { color:#a89568; font-size:12px; padding:20px; text-align:center; border:1px dashed #cfdcd4; border-radius:12px; }
@@ -59,7 +59,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
 .pw-box p { font-size:0.85rem; color:#8a7a4a; margin-bottom:20px; }
 .pw-input { width:100%; padding:11px 14px; border:2px solid #f0dfa8; border-radius:10px; font-size:1rem; outline:none; margin-bottom:10px; }
 .pw-input:focus { border-color:#DAA520; }
-.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#FFC107,#FFA500); color:#5a3d00; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; }
+.pw-btn { width:100%; padding:11px; background:linear-gradient(135deg,#7a4a00,#8a5a00); color:#fff; border:none; border-radius:10px; font-size:1rem; font-weight:700; cursor:pointer; }
 .pw-error { font-size:0.8rem; color:#e53e3e; margin-top:8px; min-height:16px; }
 </style>
 </head>
@@ -114,35 +114,35 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Which Egg? Book Check</div>
             <div class="lc-desc">Sort which animals lay which eggs, then two quick true-or-false rounds on the book. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch3Mock_WarmUp_U60.html">Start Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch3Mock_WarmUp_U60.html">Start Warm-Up</a>
           </div>
           <div class="lesson-card" style="border-top-color:#14305c">
             <div class="lc-unit" style="color:#14305c">Biology &middot; Unit 60 &middot; Lesson 1 (Fri 6 Nov)</div>
             <div class="lc-title">Heredity at Work</div>
             <div class="lc-desc">Book section C on one screen, then inherited or from surroundings, breeding a hen farm, and mixing piglet genes.</div>
             <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
-            <a class="btn-start" style="background:#14305c" href="Ch3Mock_Lesson_HeredityAtWork.html">Start Lesson 1</a>
+            <a class="btn-start" style="background:#14305c;color:#fff" href="Ch3Mock_Lesson_HeredityAtWork.html">Start Lesson 1</a>
           </div>
           <div class="lesson-card" style="border-top-color:#e8573d">
             <div class="lc-unit" style="color:#c2410c">Biology &middot; Unit 60 &middot; Lesson 2 (Sat 7 Nov)</div>
             <div class="lc-title">Life Cycles and the Toolbox</div>
             <div class="lc-desc">Complete and incomplete life cycles (the nymph), food for young and adults, a three-card Science toolbox, the whole of Chapter 3 in one list, and your mock routine.</div>
             <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
-            <a class="btn-start" style="background:#e8573d" href="Ch3Mock_Lesson_LifeCyclesAndToolbox.html">Start Lesson 2</a>
+            <a class="btn-start" style="background:#a73e2b;color:#fff" href="Ch3Mock_Lesson_LifeCyclesAndToolbox.html">Start Lesson 2</a>
           </div>
           <div class="lesson-card" style="border-top-color:#14305c">
             <div class="lc-unit" style="color:#14305c">Unit 60 &middot; Mock Test (Sun 8 Nov)</div>
             <div class="lc-title">Unit 60 Mock &mdash; Chapter 3</div>
             <div class="lc-desc">School-format mock: 15 multiple-choice and 7 structured questions (50 marks, pass 40), then 6 ASMOPSS questions scored on their own. About 45 minutes in one sitting. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
-            <a class="btn-start" style="background:#14305c" href="Tests/Unit_60_Test_Ch3SchoolMock.html">Start Mock</a>
+            <a class="btn-start" style="background:#14305c;color:#fff" href="Tests/Unit_60_Test_Ch3SchoolMock.html">Start Mock</a>
           </div>
           <div class="lesson-card" style="border-top-color:#e8573d">
             <div class="lc-unit" style="color:#c2410c">Unit 60 &middot; Last-Look Card (Mon 9 Nov)</div>
             <div class="lc-title">Chapter 3 Last-Look Card</div>
             <div class="lc-desc">One page to read on screen the day before the school test: the two book pictures, the weeks, inherited or learnt, and S.T.O.P. No questions.</div>
             <div class="lc-badges"><span class="badge" style="background:#fdeee0;color:#7a3a05">&#128221; Ready</span></div>
-            <a class="btn-start" style="background:#e8573d" href="Ch3Mock_LastLookCard_U60.html">Open Card</a>
+            <a class="btn-start" style="background:#a73e2b;color:#fff" href="Ch3Mock_LastLookCard_U60.html">Open Card</a>
           </div>
         </div>
 
@@ -158,28 +158,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Same Kind, Not the Same</div>
             <div class="lc-desc">Join a sperm and an egg, spot differences between members of the same kind, and see what iodine does to a cell. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 19/20</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Survival_WarmUp_U59.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Survival_WarmUp_U59.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#2e7d32">
             <div class="lc-unit" style="color:#1b4d2c">Biology &middot; Unit 59 &middot; Lesson 1</div>
             <div class="lc-title">Animal Groups</div>
             <div class="lc-desc">Five animal groups: their eggs, where fertilisation happens, and how much care the young get. Sort the odd ones out, then open the Science toolbox.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 19/20</span></div>
-            <a class="btn-start" style="background:#2e7d32" href="Survival_Lesson_AnimalGroups.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#286d2b;color:#fff" href="Survival_Lesson_AnimalGroups.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#e8903c">
             <div class="lc-unit" style="color:#a85a10">Biology &middot; Unit 59 &middot; Lesson 2</div>
             <div class="lc-title">One Parent or Two?</div>
             <div class="lc-desc">Budding, regrowing and aphids against two-parent young; how differences save a kind; extinct and endangered; how people help.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 19/20</span></div>
-            <a class="btn-start" style="background:#e8903c" href="Survival_Lesson_OneParentOrTwo.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#865322;color:#fff" href="Survival_Lesson_OneParentOrTwo.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#1b4d2c">
             <div class="lc-unit" style="color:#1b4d2c">Unit 59 &middot; Test</div>
             <div class="lc-title">Unit 59 Test &mdash; Strategies for Survival</div>
             <div class="lc-desc">20 multiple-choice questions (pass 16). No written part. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 19/20</span></div>
-            <a class="btn-start" style="background:#1b4d2c" href="Tests/Unit_59_Test_Survival.html">Review Test</a>
+            <a class="btn-start" style="background:#1b4d2c;color:#fff" href="Tests/Unit_59_Test_Survival.html">Review Test</a>
           </div>
         </div>
 
@@ -190,28 +190,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Line-up or Timeline?</div>
             <div class="lc-desc">Your checking took 15 to 17 on Unit 57. Sort variation from growth, see what iodine does to a cell, redo the strong card, and a card sort with Dad. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 17/20</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch3Wrap_WarmUp_U58.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch3Wrap_WarmUp_U58.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#0e8a8a">
             <div class="lc-unit" style="color:#0a4d55">Biology &middot; Unit 58 &middot; Lesson 1</div>
             <div class="lc-title">The Book Map</div>
             <div class="lc-desc">The whole of Chapter 3, one screen per book section: why animals reproduce, extinction, sperm and egg, growing before birth, inside or outside, heredity. End by filling the book's own concept map.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 17/20</span></div>
-            <a class="btn-start" style="background:#0e8a8a" href="Ch3Wrap_Lesson_BookMap.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#0a6b6b;color:#fff" href="Ch3Wrap_Lesson_BookMap.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#e8903c">
             <div class="lc-unit" style="color:#a85a10">Biology &middot; Unit 58 &middot; Lesson 2</div>
             <div class="lc-title">Beyond the Book</div>
             <div class="lc-desc">Read a data table, judge a fair investigation, spot an ASMOPSS trap, and write a full-marks answer with the starter.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 17/20</span></div>
-            <a class="btn-start" style="background:#e8903c" href="Ch3Wrap_Lesson_BeyondTheBook.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#865322;color:#fff" href="Ch3Wrap_Lesson_BeyondTheBook.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#0a4d55">
             <div class="lc-unit" style="color:#0a4d55">Unit 58 &middot; Test</div>
             <div class="lc-title">Unit 58 Test &mdash; Chapter 3 Wrap-up</div>
             <div class="lc-desc">20 multiple-choice questions (pass 16) plus one written answer worth 4 marks, scored on its own. Covers all of Chapter 3. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done: 17/20</span></div>
-            <a class="btn-start" style="background:#0a4d55" href="Tests/Unit_58_Test_Ch3WrapUp.html">Review Test</a>
+            <a class="btn-start" style="background:#0a4d55;color:#fff" href="Tests/Unit_58_Test_Ch3WrapUp.html">Review Test</a>
           </div>
         </div>
 
@@ -222,28 +222,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Who Else Has It?</div>
             <div class="lc-desc">A short card on S.T.O.P., then a quick check that a feature is only proof if nothing else has it. Then a redo of variation and growth, and one question about seeds. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch3Heredity_WarmUp_U57.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch3Heredity_WarmUp_U57.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#8a3f9e">
             <div class="lc-unit" style="color:#4a1f5c">Biology &middot; Unit 57 &middot; Lesson 1</div>
             <div class="lc-title">Recipe Cards</div>
             <div class="lc-desc">Deal the Zibbit cards to a baby, split a twin egg, sort inherited from acquired, and try your own survey from Activity Book 3.4.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#8a3f9e" href="Ch3Heredity_Lesson_RecipeCards.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#8a3f9e;color:#fff" href="Ch3Heredity_Lesson_RecipeCards.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#3f9a4b">
             <div class="lc-unit" style="color:#1d5a26">Biology &middot; Unit 57 &middot; Lesson 2</div>
             <div class="lc-title">Strong and Hidden</div>
             <div class="lc-desc">Cross purple and white pea cards, fill the 2&times;2 grid, follow a hidden trait down a family tree, and write a full-marks answer.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#3f9a4b" href="Ch3Heredity_Lesson_StrongAndHidden.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#2d6e35;color:#fff" href="Ch3Heredity_Lesson_StrongAndHidden.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#4a1f5c">
             <div class="lc-unit" style="color:#4a1f5c">Unit 57 &middot; Test</div>
             <div class="lc-title">Unit 57 Test &mdash; Heredity</div>
             <div class="lc-desc">20 multiple-choice questions (pass 16) plus one written answer worth 4 marks, scored on its own. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done &middot; 17/20 (85%) PASS &middot; 6.6 min (first click 15 &rarr; final 17)</span></div>
-            <a class="btn-start" style="background:#4a1f5c" href="Tests/Unit_57_Test_Heredity.html">Review Test</a>
+            <a class="btn-start" style="background:#4a1f5c;color:#fff" href="Tests/Unit_57_Test_Heredity.html">Review Test</a>
           </div>
         </div>
 
@@ -256,28 +256,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Your Checking Works</div>
             <div class="lc-desc">Your checking added 4 marks on Unit 55. A short card on S.T.O.P., then a quick redo of chemical or physical, floats or sinks, and a &ldquo;prove it&rdquo; question. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch3Two_WarmUp_U56.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch3Two_WarmUp_U56.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#0e8a8a">
             <div class="lc-unit" style="color:#0a4d55">Biology &middot; Unit 56 &middot; Lesson 1</div>
             <div class="lc-title">Why Two Parents?</div>
             <div class="lc-desc">Two gardens of beetles meet a cold autumn and a new disease. Find out why being different helps a family survive, sort plantlets from seeds, and work out how many young survive, step by step.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#0e8a8a" href="Ch3Two_Lesson_WhyTwoParents.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#0a6b6b;color:#fff" href="Ch3Two_Lesson_WhyTwoParents.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#e8604c">
             <div class="lc-unit" style="color:#b23a28">Biology &middot; Unit 56 &middot; Lesson 2</div>
             <div class="lc-title">The Land Problem</div>
             <div class="lc-desc">Drain a pond and watch what happens to the sperm and eggs. Then follow an embryo growing inside its mother, put the human life stages in order, and type a full-marks answer.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#e8604c" href="Ch3Two_Lesson_TheLandProblem.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#a24335;color:#fff" href="Ch3Two_Lesson_TheLandProblem.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#0a4d55">
             <div class="lc-unit" style="color:#0a4d55">Unit 56 &middot; Test</div>
             <div class="lc-title">Unit 56 Test &mdash; Why Two Parents?</div>
             <div class="lc-desc">20 multiple-choice questions (pass 16) plus one written answer worth 4 marks, scored on its own. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done &middot; 17/20 (85%) PASS &middot; 7.0 min (first click 17 &rarr; final 17)</span></div>
-            <a class="btn-start" style="background:#0a4d55" href="Tests/Unit_56_Test_TwoParents.html">Review Test</a>
+            <a class="btn-start" style="background:#0a4d55;color:#fff" href="Tests/Unit_56_Test_TwoParents.html">Review Test</a>
           </div>
         </div>
 
@@ -290,28 +290,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: 46 out of 50</div>
             <div class="lc-desc">Well done on the Chapter 2 mock. A short card on S.T.O.P. and the Calc check, then a quick redo of a healing question, litmus, and stop-drop-and-roll. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch3Why_WarmUp_U55.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch3Why_WarmUp_U55.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#1f6b3a">
             <div class="lc-unit" style="color:#1f6b3a">Biology &middot; Unit 55 &middot; Lesson 1</div>
             <div class="lc-title">Keep the Species Going</div>
             <div class="lc-desc">Every animal dies, so how does a kind of animal carry on? Press the dangers in the Survival Pond, then learn to work out how many young grow up, step by step.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1f6b3a" href="Ch3Why_Lesson_KeepTheSpeciesGoing.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#1f6b3a;color:#fff" href="Ch3Why_Lesson_KeepTheSpeciesGoing.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#c98a0b">
             <div class="lc-unit" style="color:#9a6700">Biology &middot; Unit 55 &middot; Lesson 2</div>
             <div class="lc-title">Animals and Their Eggs</div>
             <div class="lc-desc">Many small eggs or a few big ones? Build eggs with a food budget, look inside a shell, sort who cares for their young, and learn how to write a full-marks answer.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#c98a0b" href="Ch3Why_Lesson_AnimalsAndTheirEggs.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#805807;color:#fff" href="Ch3Why_Lesson_AnimalsAndTheirEggs.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#14532d">
             <div class="lc-unit" style="color:#14532d">Unit 55 &middot; Test</div>
             <div class="lc-title">Unit 55 Test &mdash; Why Living Things Reproduce</div>
             <div class="lc-desc">20 multiple-choice questions (pass 16) plus one written answer worth 4 marks, scored on its own. Use S.T.O.P. and press Save at the very end.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#10060; Done &middot; 15/20 (75%) FAIL by one mark &middot; 8.4 min (first click 11 &rarr; final 15)</span></div>
-            <a class="btn-start" style="background:#14532d" href="Tests/Unit_55_Test_WhyReproduce.html">Review Test</a>
+            <a class="btn-start" style="background:#14532d;color:#fff" href="Tests/Unit_55_Test_WhyReproduce.html">Review Test</a>
           </div>
         </div>
 
@@ -323,28 +323,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Your Checking Works</div>
             <div class="lc-desc">Your checking earned almost 9 marks on Milestone 5. A short card on the S.T.O.P. steps, the Calc check for sums, and the hand-in routine for Tuesday. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch2Review_WarmUp_U54.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch2Review_WarmUp_U54.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#1e3a5f">
             <div class="lc-unit" style="color:#1e3a5f">Biology &middot; Unit 54 &middot; Lesson (Sat 17 Oct)</div>
             <div class="lc-title">Cells on One Map</div>
             <div class="lc-desc">Six stops: plant and animal cells, the comparison table, the microscope, the zoom ladder, special cells and cell division. Tap, build and check your way through, then pass a self-check before the mock.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1e3a5f" href="Ch2Review_Lesson_CellsOnOneMap.html">Review Lesson</a>
+            <a class="btn-start" style="background:#1e3a5f;color:#fff" href="Ch2Review_Lesson_CellsOnOneMap.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#14806a">
             <div class="lc-unit" style="color:#14806a">Unit 54 &middot; Mock Test (Sun 18 Oct)</div>
             <div class="lc-title">Unit 54 Mock &mdash; Chapter 2 Cells</div>
             <div class="lc-desc">School-format practice: 15 multiple choice, then labelling, a table, a tick-two question and two written answers. 50 marks, pass 40. Use the hand-in routine. Written answers are marked together afterwards.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done &middot; 46/50 (92%) PASS &middot; first sitting</span></div>
-            <a class="btn-start" style="background:#14806a" href="Tests/Unit_54_Test_CellsSchoolMock.html">Review Mock</a>
+            <a class="btn-start" style="background:#106b59;color:#fff" href="Tests/Unit_54_Test_CellsSchoolMock.html">Review Mock</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#7a3a05">
             <div class="lc-unit" style="color:#7a3a05">Unit 54 &middot; Last-Look Card (Mon 19 Oct)</div>
             <div class="lc-title">Last-Look Card (print)</div>
             <div class="lc-desc">One A4 page with everything on Chapter 2: both cells, the microscope, the levels, special cells and division. Print it and read it on Monday. Do not write on it.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#7a3a05" href="Ch2Review_LastLookCard_U54.html">Open Card</a>
+            <a class="btn-start" style="background:#7a3a05;color:#fff" href="Ch2Review_LastLookCard_U54.html">Open Card</a>
           </div>
         </div>
 
@@ -357,14 +357,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Divide or Multiply?</div>
             <div class="lc-desc">Your reading got sharper: first clicks 9 out of 20, then 16. Then a short box on telling divide from multiply by asking what the number means, with one practice question. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Tests/Milestone_05_WarmUp.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Tests/Milestone_05_WarmUp.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#8a1c1c">
             <div class="lc-unit" style="color:#8a1c1c">Milestone 5 &middot; Test</div>
             <div class="lc-title">Milestone Test 5 &mdash; Units 41&ndash;53</div>
             <div class="lc-desc">40 questions, worth 100 marks: Section A 16 &times; 1.25, Section B 16 &times; 2.5, Section C 8 &times; 5. Pass bar 80/100; Milestone 4 scored 91.25. About 45&ndash;60 minutes. Six think-first questions and a quick re-look at fast answers.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done &middot; 80/100 PASS (exactly on the bar) &middot; 13.4 min (first click 71.25 &rarr; final 80)</span></div>
-            <a class="btn-start" style="background:#8a1c1c" href="Tests/Milestone_05_Test.html">Review Test</a>
+            <a class="btn-start" style="background:#8a1c1c;color:#fff" href="Tests/Milestone_05_Test.html">Review Test</a>
           </div>
         </div>
 
@@ -375,28 +375,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: Your Checking Works</div>
             <div class="lc-desc">A short look at how checking answers earned marks in Unit 52, the S.T.O.P. steps again, and a Chemistry refresher on dissolving from Unit 40. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch2Life_WarmUp_U53.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch2Life_WarmUp_U53.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#c2570c">
             <div class="lc-unit" style="color:#c2570c">Biology &middot; Unit 53 &middot; Lesson 1</div>
             <div class="lc-title">The Cell&#39;s Loop</div>
             <div class="lc-desc">Run the Cell Life Simulator: a body ring, a photo of cells, a budding yeast and plant growing tips. See that a cell spends most of its life not dividing, copies its chromosomes inside the nucleus, then splits.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#c2570c" href="Ch2Life_Lesson_TheCellsLoop.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#9f4709;color:#fff" href="Ch2Life_Lesson_TheCellsLoop.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#3d4f63">
             <div class="lc-unit" style="color:#3d4f63">Biology &middot; Unit 53 &middot; Lesson 2</div>
             <div class="lc-title">Fast or Many?</div>
             <div class="lc-desc">Race two patches of cells. Change the number of cells and the loop days, and find out why fast is not the same as many. Then pass a six-chip check.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#3d4f63" href="Ch2Life_Lesson_FastOrMany.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#3d4f63;color:#fff" href="Ch2Life_Lesson_FastOrMany.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#7a3a05">
             <div class="lc-unit" style="color:#7a3a05">Unit 53 &middot; Test</div>
             <div class="lc-title">Unit 53 Test &mdash; The Life of a Cell</div>
             <div class="lc-desc">20 questions, 3 sections, every question tier-tagged: 2 Basic, 6 Intermediate, 12 Applied. Pass bar 16/20. Review on all sections.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b6e2e">&#9989; Done &middot; 17/20 (85%) PASS &middot; 6.5 min (first click 16 &rarr; final 17)</span></div>
-            <a class="btn-start" style="background:#7a3a05" href="Tests/Unit_53_Test_LifeOfACell.html">Review Test</a>
+            <a class="btn-start" style="background:#7a3a05;color:#fff" href="Tests/Unit_53_Test_LifeOfACell.html">Review Test</a>
           </div>
         </div>
 
@@ -408,28 +408,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up: S.T.O.P. and a Chemistry Refresher</div>
             <div class="lc-desc">Four steps for reading a question carefully (Spot the twist, Think first, Open all four, Prove it), tried on real questions from Unit 51, plus a quick Chemistry refresher from Unit 37. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch2Division_WarmUp_U52.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch2Division_WarmUp_U52.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#1f4e9c">
             <div class="lc-unit" style="color:#1f4e9c">Biology &middot; Unit 52 &middot; Lesson 1</div>
             <div class="lc-title">What Gets Copied</div>
             <div class="lc-desc">Read the shape of a new cell, then watch a nucleus copy its 4 chromosomes before it splits into two identical cells. Run the cell cycle as a loop, see where division is fastest, and try a short self-check with two ways to learn it.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1f4e9c" href="Ch2Division_Lesson_ChromosomesAndTheCellCycle.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#1f4e9c;color:#fff" href="Ch2Division_Lesson_ChromosomesAndTheCellCycle.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#b0426b">
             <div class="lc-unit" style="color:#b0426b">Biology &middot; Unit 52 &middot; Lesson 2</div>
             <div class="lc-title">Budding and From Microscope to Genes</div>
             <div class="lc-desc">Watch a yeast cell bud, then press Bud! to see 1, 2, 4, 8, 16 cells. Learn the doubling steps with a worked example, zoom from a person down to a gene, sort observation from inference, and pass a four-word check.</div>
             <div class="lc-badges"><span class="badge" style="background:#e8effb;color:#0f2a5e">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#b0426b" href="Ch2Division_Lesson_BuddingAndFromMicroscopeToGenes.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#b0426b;color:#fff" href="Ch2Division_Lesson_BuddingAndFromMicroscopeToGenes.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#0f2a5e">
             <div class="lc-unit" style="color:#0f2a5e">Unit 52 &middot; Test</div>
             <div class="lc-title">Unit 52 Test &mdash; What Gets Copied</div>
             <div class="lc-desc">20 questions, 3 sections, every question tier-tagged: 2 Basic, 6 Intermediate, 12 Applied. Pass bar 16/20. Four think-first questions, two picture items, and a quick re-look at fast answers before you submit.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#10060; Done &middot; 13/20 (65%) FAIL &middot; 8.6 min (first click 9 &rarr; final 13)</span></div>
-            <a class="btn-start" style="background:#0f2a5e" href="Tests/Unit_52_Test_CellDivision.html">Review Test</a>
+            <a class="btn-start" style="background:#0f2a5e;color:#fff" href="Tests/Unit_52_Test_CellDivision.html">Review Test</a>
           </div>
         </div>
 
@@ -441,28 +441,28 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Warm-Up</div>
             <div class="lc-desc">Two quick Heat refreshers from Unit 32 (nothing to do with cells), to keep an older skill sharp. Not scored.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#5f6b78" href="Ch2Animal_WarmUp_U51.html">Review Warm-Up</a>
+            <a class="btn-start" style="background:#5f6b78;color:#fff" href="Ch2Animal_WarmUp_U51.html">Review Warm-Up</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#7b2d6b">
             <div class="lc-unit" style="color:#7b2d6b">Biology &middot; Unit 51 &middot; Lesson 1</div>
             <div class="lc-title">Two Solutions to One Problem</div>
             <div class="lc-desc">A leaf cell and a cheek cell face the same water danger. Drag the water slider and watch both cells, then see how an animal&rsquo;s body regulates the water instead of building a wall. Shape tells the job: ciliated, fat, bone and white blood cells. Two ways to learn it (a picture route and a steps route), then a self-check.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#7b2d6b" href="Ch2Animal_Lesson_TwoSolutionsAndSpecialisation.html">Review Lesson 1</a>
+            <a class="btn-start" style="background:#7b2d6b;color:#fff" href="Ch2Animal_Lesson_TwoSolutionsAndSpecialisation.html">Review Lesson 1</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#c9a227">
             <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 51 &middot; Lesson 2</div>
             <div class="lc-title">Slides, Stains and Reading Real Cells</div>
             <div class="lc-desc">Make a cheek-cell slide step by step (try the coverslip both ways), pick the right stain, sort cells from air bubbles, tell observation from inference, and pick two good clues for plant or animal. A six-word check must be passed before the test.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#8a6a00" href="Ch2Animal_Lesson_SlidesStainsAndReadingRealCells.html">Review Lesson 2</a>
+            <a class="btn-start" style="background:#795d00;color:#fff" href="Ch2Animal_Lesson_SlidesStainsAndReadingRealCells.html">Review Lesson 2</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#6a1b9a">
             <div class="lc-unit" style="color:#6a1b9a">Unit 51 &middot; Test</div>
             <div class="lc-title">Unit 51 Test &mdash; Inside the Animal Cell</div>
             <div class="lc-desc">20 questions, 3 sections, every question tier-tagged &mdash; 2 Basic/6 Intermediate/12 Applied. Pass bar 16/20. Two picture items, one unseen cell to reason about, and spaced items from Units 2, 8, 13, 32, 40, 42 and 47.</div>
             <div class="lc-badges"><span class="badge" style="background:#f6e9f3;color:#4a1744">&#10060; Done &middot; 15/20 (75%) FAIL by one mark &middot; 4.7 min</span></div>
-            <a class="btn-start purple" style="background:#6a1b9a" href="Tests/Unit_51_Test_AnimalCell.html">Review Test</a>
+            <a class="btn-start purple" style="background:#6a1b9a;color:#fff" href="Tests/Unit_51_Test_AnimalCell.html">Review Test</a>
           </div>
         </div>
 
@@ -474,14 +474,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">The Water Journey</div>
             <div class="lc-desc">A consolidation unit, inserted after Unit 49's real 12/20 FAIL. Built around one interactive plant shown at five zoom stops (organism &rarr; organ system &rarr; organ &rarr; tissue &rarr; cell), each stop showing exactly where the next one zooms from, with a Water/Dry-Day control that plumps or wilts the plant at every stop. Teaches the organisation ladder as a picture he manipulates &mdash; the first attempt at teaching it visually, after two text-based attempts (U48, U49) both failed.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#00695c" href="Ch2Water_WarmUp_U50.html">Review Lesson</a>
+            <a class="btn-start" style="background:#00695c;color:#fff" href="Ch2Water_WarmUp_U50.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#c9a227">
             <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 50 &middot; Lesson 2</div>
             <div class="lc-title">Inside the Cell</div>
             <div class="lc-desc">Opens at the plant's cell-level zoom stop. Label-the-diagram practice (wall, membrane, vacuole, cytoplasm, nucleus), cell sap shown as the vacuole fills, the wall-vs-membrane hinge as a picture, and turgid/flaccid on a slider he drags. A scored six-term retrieval check must be passed before the test. Trap-Recognition Drill #13.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#c9a227" href="Ch2Water_Lesson_InsideTheCell.html">Review Lesson</a>
+            <a class="btn-start" style="background:#745d16;color:#fff" href="Ch2Water_Lesson_InsideTheCell.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 50 &middot; Test</div>
@@ -499,14 +499,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">What the Parts Are Made Of</div>
             <div class="lc-desc">Sixth unit of the 7-unit school-aligned block, built directly from Unit 48's real result. Opens with a spiral-maintenance warm-up from Chemistry U40 (Mixtures &amp; Solutions) and a Quick Fix targeting Unit 48's real ladder-placement gap via a two-box "What IS it? / What system does it belong to?" sort on the root water-uptake pathway, then teaches what the cell wall, membrane, chloroplast and vacuole are actually made of and do &mdash; closing on the hinge question: the wall lets everything through, so what's doing the choosing?</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1b5e20" href="Ch2Plant_Lesson_WhatThePartsAreMadeOf.html">Review Lesson</a>
+            <a class="btn-start" style="background:#1b5e20;color:#fff" href="Ch2Plant_Lesson_WhatThePartsAreMadeOf.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#8a6a00">
             <div class="lc-unit" style="color:#8a6a00">Biology &middot; Unit 49 &middot; Lesson 2</div>
             <div class="lc-title">Partially Permeable Membranes &amp; Osmosis</div>
             <div class="lc-desc">Sourced from the Activity Book (2.4), never taught before. Covers what "partially permeable" means, osmosis (water moves from more to less until it evens out), turgor and wilting as the mechanism under Unit 14's bare fact, everyday evidence (celery, salted cucumber), and Trap-Recognition Drill #12 &mdash; "osmosis only happens in plants."</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#8a6a00" href="Ch2Plant_Lesson_PartiallyPermeableAndOsmosis.html">Review Lesson</a>
+            <a class="btn-start" style="background:#795d00;color:#fff" href="Ch2Plant_Lesson_PartiallyPermeableAndOsmosis.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 49 &middot; Test</div>
@@ -524,14 +524,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">The Organisation Ladder &amp; Why Cells Are Small</div>
             <div class="lc-desc">Fifth unit of the 7-unit school-aligned block, and the FIRST built under the new format: both lessons go beyond the course book. Opens with a spiral-maintenance warm-up from Physics U13 (Light, stale since 10 Jul) and a Quick Fix confirming rep for Unit 46's real seeds-vs-spores gap, then teaches the organisation ladder (cell &rarr; tissue &rarr; organ &rarr; organ system &rarr; organism, with a Unit 11 callback) and WHY cells are small via an interactive surface-area-to-volume cube demo.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#059669" href="Ch2Cells_Lesson_OrganisationAndCellSize.html">Review Lesson</a>
+            <a class="btn-start" style="background:#036e4d;color:#fff" href="Ch2Cells_Lesson_OrganisationAndCellSize.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#d97706">
             <div class="lc-unit" style="color:#d97706">Biology &middot; Unit 48 &middot; Lesson 2</div>
             <div class="lc-title">The Microscope: History, How It Works &amp; Magnification</div>
             <div class="lc-desc">Sourced from the Activity Book's microscope section. Covers the 1665 Hooke/Leeuwenhoek history, how a microscope actually works, magnification arithmetic (eyepiece &times; objective, interactive calculator with a shrinking field-of-view), the resolution-vs-field-of-view trade-off, a why-stain preview, and Trap-Recognition Drill #11 &mdash; "highest magnification is always best."</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#d97706" href="Ch2Cells_Lesson_TheMicroscope.html">Review Lesson</a>
+            <a class="btn-start" style="background:#935004;color:#fff" href="Ch2Cells_Lesson_TheMicroscope.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 48 &middot; Test</div>
@@ -549,14 +549,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Eclipses &amp; Earth's Shield</div>
             <div class="lc-desc">A follow-up to Unit 43, closing course-book Chapter 1 gaps and going beyond it. Opens with a Chemistry U9 spiral-maintenance warm-up, briefly recaps Unit 43's Sun/Earth facts, then teaches genuinely new content: solar &amp; lunar eclipses (why they're rare) and Earth's magnetic-field/atmosphere shield against the solar wind, plus the aurora as a bonus fact.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#3949ab" href="SolarSystemExt_Lesson_EclipsesAndEarthsShield.html">Review Lesson</a>
+            <a class="btn-start" style="background:#3949ab;color:#fff" href="SolarSystemExt_Lesson_EclipsesAndEarthsShield.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#e65100">
             <div class="lc-unit" style="color:#e65100">Earth &amp; Space &middot; Unit 47 &middot; Lesson 2</div>
             <div class="lc-title">Dwarf Planets, Comets &amp; Real Missions</div>
             <div class="lc-desc">Opens with a Physics U21 (gravity) warm-up, recaps Unit 43's 8-planet fact, then teaches genuinely new content: the dwarf-planet definition, asteroid/comet/meteor-meteoroid-meteorite classification, and satellite-vs-probe-vs-rover with real examples (ISS/Hubble/GPS, Voyager, Perseverance/Zhurong).</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#e65100" href="SolarSystemExt_Lesson_DwarfPlanetsCometsAndRealMissions.html">Review Lesson</a>
+            <a class="btn-start" style="background:#aa3b00;color:#fff" href="SolarSystemExt_Lesson_DwarfPlanetsCometsAndRealMissions.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 47 &middot; Test</div>
@@ -574,7 +574,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Seeds Recap &amp; Reproduction from Spores</div>
             <div class="lc-desc">Fourth unit of the 7-unit school-aligned block, matching Chapter 4 of Prem's Y5 i-Science course book. Opens with a spiral-maintenance warm-up from Biology U17 (ecosystems/food chains, stale since mid-July), briefly recaps Unit 25's pollination &amp; seed facts, then teaches genuinely new content: reproduction from spores (ferns, mosses).</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#2e7d32;color:#fff" href="PlantReproSchool_Lesson_SexualRecapAndSpores.html">Review Lesson</a>
+            <a class="btn-start" style="background:#286d2b;color:#fff" href="PlantReproSchool_Lesson_SexualRecapAndSpores.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ad1457">
             <div class="lc-unit" style="color:#ad1457">Biology &middot; Unit 46 &middot; Lesson 2</div>
@@ -599,14 +599,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Animal Reproduction: Male, Female &amp; Fertilisation</div>
             <div class="lc-desc">Third unit of the 7-unit school-aligned block, matching Chapter 3 of Prem's Y5 i-Science course book. Opens with a fresh-scene confirming rep for Unit 44's real-taken miss pattern, then a spiral-maintenance warm-up from Physics U21 (gravity/free fall/air resistance, stale since June), briefly recaps Unit 31's five vertebrate groups, then teaches genuinely new content: sexual reproduction and internal vs external fertilisation.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#3949ab" href="AnimalReproSchool_Lesson_MaleFemaleAndFertilisation.html">Review Lesson</a>
+            <a class="btn-start" style="background:#3949ab;color:#fff" href="AnimalReproSchool_Lesson_MaleFemaleAndFertilisation.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ffa000">
             <div class="lc-unit" style="color:#e65100">Biology &middot; Unit 45 &middot; Lesson 2</div>
             <div class="lc-title">Life Cycles: With and Without Metamorphosis</div>
             <div class="lc-desc">The three life-cycle types &mdash; no metamorphosis (young already look like small adults), incomplete metamorphosis (egg &rarr; nymph &rarr; adult), and complete metamorphosis (egg &rarr; larva &rarr; pupa &rarr; adult). Includes Trap-Recognition Drill #9 &mdash; the "ALL animals go through metamorphosis" absolute-claim trap.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#ffa000" href="AnimalReproSchool_Lesson_LifeCyclesAndMetamorphosis.html">Review Lesson</a>
+            <a class="btn-start" style="background:#895600;color:#fff" href="AnimalReproSchool_Lesson_LifeCyclesAndMetamorphosis.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 45 &middot; Test</div>
@@ -624,14 +624,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Cells Recap &amp; Why Cells Divide</div>
             <div class="lc-desc">Second unit of the 7-unit school-aligned block, matching Chapter 2 of Prem's Y5 i-Science course book. Opens with a spiral-maintenance warm-up from Physics U16 (Sound, stale since mid-July), briefly recaps Unit 14's cell-structure facts (plant vs animal cell parts, unicellular vs multicellular), then teaches genuinely new content: cell division and its two purposes, growth and repair.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#00695c" href="Cells2School_Lesson_CellsRecapAndWhyDivide.html">Review Lesson</a>
+            <a class="btn-start" style="background:#00695c;color:#fff" href="Cells2School_Lesson_CellsRecapAndWhyDivide.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ff7043">
             <div class="lc-unit" style="color:#bf360c">Biology &middot; Unit 44 &middot; Lesson 2</div>
             <div class="lc-title">How Cells Divide: Growth vs Repair</div>
             <div class="lc-desc">The three-stage mechanism (grows &rarr; copies its parts &rarr; splits in two), why healing takes days rather than happening instantly, and growth-over-a-lifetime reasoning (division slows for growth but never stops for repair). Includes Trap-Recognition Drill #8 &mdash; the "adult cells never divide again" absolute-claim trap.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#ff7043" href="Cells2School_Lesson_HowCellsDivideGrowthVsRepair.html">Review Lesson</a>
+            <a class="btn-start" style="background:#9e4529;color:#fff" href="Cells2School_Lesson_HowCellsDivideGrowthVsRepair.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 44 &middot; Test</div>
@@ -649,14 +649,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">The Sun &amp; Earth</div>
             <div class="lc-desc">First unit of a NEW 7-unit school-aligned block, matching Chapter 1 of Prem's Y5 i-Science course book &mdash; the U41&ndash;U50 ASMOPSS-track rotation is postponed after only 2 units. Opens with a spiral-maintenance warm-up from Chemistry U9/U12 (material origins) and a brief Unit 7 rotation/revolution recap, then teaches the Sun (a star, hot gases, energy source) and Earth (three layers, life-supporting conditions) as genuinely new content.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1a237e" href="SolarSystemSchool_Lesson_TheSunAndEarth.html">Review Lesson</a>
+            <a class="btn-start" style="background:#1a237e;color:#fff" href="SolarSystemSchool_Lesson_TheSunAndEarth.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ffb300">
             <div class="lc-unit" style="color:#8a6a00">Earth &amp; Space &middot; Unit 43 &middot; Lesson 2</div>
             <div class="lc-title">Moon, Solar System &amp; Man-Made Satellites</div>
             <div class="lc-desc">A brief Unit 7 Moon-phases recap, then new surface-feature content, the 8-planet order and two planet families (rocky vs gas giant), and man-made satellites &mdash; never taught before in this program. Includes Trap-Recognition Drill #7.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#ffb300;color:#1a237e" href="SolarSystemSchool_Lesson_MoonSolarSystemAndSatellites.html">Review Lesson</a>
+            <a class="btn-start" style="background:#7f5900;color:#fff" href="SolarSystemSchool_Lesson_MoonSolarSystemAndSatellites.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 43 &middot; Test</div>
@@ -674,14 +674,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Series Circuits</div>
             <div class="lc-desc">Second unit of the U41&ndash;U50 block. Opens with 2 quick confirming checks from Unit 41 (fresh-scene acid/base identity questions), plus an Earth &amp; Space (U27/U28) spiral-maintenance warm-up. Then: what makes a series circuit, and the one big rule &mdash; one gap breaks ALL the bulbs &mdash; via the old Christmas-lights problem.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#1565c0" href="CircuitsDeepDive_Lesson_SeriesCircuits.html">Review Lesson</a>
+            <a class="btn-start" style="background:#1565c0;color:#fff" href="CircuitsDeepDive_Lesson_SeriesCircuits.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ef6c00">
             <div class="lc-unit" style="color:#ef6c00">Physics &middot; Unit 42 &middot; Lesson 2</div>
             <div class="lc-title">Parallel Circuits &amp; Series vs Parallel</div>
             <div class="lc-desc">What makes a parallel circuit, Trap-Recognition Drill #6 ("more bulbs doesn't always mean parallel"), and a worked comparison &mdash; old Christmas lights (series, all go dark) vs a real house (parallel, one room's failure doesn't affect the others).</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#ef6c00" href="CircuitsDeepDive_Lesson_ParallelCircuits.html">Review Lesson</a>
+            <a class="btn-start" style="background:#9d4700;color:#fff" href="CircuitsDeepDive_Lesson_ParallelCircuits.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 42 &middot; Test</div>
@@ -699,14 +699,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Acids &amp; Bases</div>
             <div class="lc-desc">First unit of a fresh 10-unit block (U41&ndash;U50), opened after Milestone 4 closed U31&ndash;U40. Opens with a redesigned "Find the Flaw" click-based device targeting the sieve/filter/evaporate critique gap (now confirmed across 2 real tests), plus a Biology U31 spiral-maintenance warm-up. Then: what makes an acid or a base, litmus paper testing, and a decision tree covering acid/base/neutral.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#c2185b" href="AcidsBasesChem_Lesson_AcidsAndBases.html">Review Lesson</a>
+            <a class="btn-start" style="background:#c2185b;color:#fff" href="AcidsBasesChem_Lesson_AcidsAndBases.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#00838f">
             <div class="lc-unit" style="color:#00838f">Chemistry &middot; Unit 41 &middot; Lesson 2</div>
             <div class="lc-title">Chemical vs Physical Change</div>
             <div class="lc-desc">The four real signs of a chemical change (colour, bubbles, temperature, smell), Trap-Recognition Drill #5 (boiling water isn't a chemical change!), and a worked vinegar + baking soda example that bridges both lessons into one live reaction.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#00838f" href="AcidsBasesChem_Lesson_ChemicalVsPhysicalChange.html">Review Lesson</a>
+            <a class="btn-start" style="background:#006b75;color:#fff" href="AcidsBasesChem_Lesson_ChemicalVsPhysicalChange.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 41 &middot; Test</div>
@@ -735,14 +735,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-title">Mixtures &amp; Solutions</div>
             <div class="lc-desc">Opens with 2 quick confirming checks from Unit 39 (a fresh 3-object air-resistance ranking, plus trap-recognition generalized to friction). Then: what makes a mixture, what makes a solution, and the vocabulary &mdash; solute, solvent, soluble, insoluble &mdash; that ties them together. Brand-new content, building on Unit 2's dissolving fact.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#00695c" href="MixturesSolutions_Lesson_MixturesAndSolutions.html">Review Lesson</a>
+            <a class="btn-start" style="background:#00695c;color:#fff" href="MixturesSolutions_Lesson_MixturesAndSolutions.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8;border-top-color:#ef6c00">
             <div class="lc-unit" style="color:#ef6c00">Chemistry &middot; Unit 40 &middot; Lesson 2</div>
             <div class="lc-title">Separating Mixtures: Sieving, Filtering &amp; Evaporation</div>
             <div class="lc-desc">Three separating methods and when each one applies, Trap-Recognition Drill #4, and a multi-step worked challenge (sand + salt + water) that mirrors the exact "chain several facts together" format that has repeatedly been this program's fragile point.</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#ef6c00" href="MixturesSolutions_Lesson_SeparatingMixtures.html">Review Lesson</a>
+            <a class="btn-start" style="background:#9d4700;color:#fff" href="MixturesSolutions_Lesson_SeparatingMixtures.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="border-top-color:#6a1b9a;opacity:.8">
             <div class="lc-unit" style="color:#6a1b9a">Unit 40 &middot; Test</div>
@@ -809,7 +809,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; backg
             <div class="lc-unit" style="color:#d84315">Chemistry &middot; Unit 37 &middot; Lesson 1</div>
             <div class="lc-title">What Burning Needs: The Fire Triangle</div>
             <div class="lc-badges"><span class="badge" style="background:#e6f4ea;color:#1b5e20">&#9989; Done</span></div>
-            <a class="btn-start" style="background:#d84315" href="Combustion_Lesson_FireTriangleAndOxygen.html">Review Lesson</a>
+            <a class="btn-start" style="background:#ac3510;color:#fff" href="Combustion_Lesson_FireTriangleAndOxygen.html">Review Lesson</a>
           </div>
           <div class="lesson-card" style="opacity:.8">
             <div class="lc-unit" style="color:#1565c0">Chemistry &middot; Unit 37 &middot; Lesson 2</div>
