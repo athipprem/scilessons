@@ -1,0 +1,732 @@
+{
+  "student": "Prem",
+  "unit": 61,
+  "title": "Biology: Chapter 3: School Test Practice B (the night before)",
+  "kind": "school-format mock B",
+  "answerOrderNote": "item numbers in the order first touched",
+  "dateTaken": "2026-11-09",
+  "openedAt": "2026-11-09T11:41:39.465Z",
+  "submittedAt": "2026-11-09T11:46:54.899Z",
+  "minutesSpent": 5.3,
+  "lastTestMinutes": 6.6,
+  "provenance": {
+    "helped": "no",
+    "usedNotes": "no"
+  },
+  "marksEarned": 45,
+  "outOfMarks": 50,
+  "pct": 90,
+  "passMarks": 40,
+  "passed": true,
+  "answerOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "firstPassScore": 39,
+  "firstPassMcqCorrect": 12,
+  "partAB": {
+    "marks": 45,
+    "outOf": 50,
+    "partA": 30,
+    "partB": 15
+  },
+  "fixList": [
+    {
+      "q": 20,
+      "book": "book p.44 and p.46",
+      "why": "A fertilised egg is made when ONE sperm joins ONE egg. Heredity is passing on characteristics in the genes, not learning skills."
+    },
+    {
+      "q": 21,
+      "book": "book p.38, p.46-48",
+      "why": "(a) continuity (b) traits (c) pea (d) offspring."
+    }
+  ],
+  "partA": {
+    "marks": 30,
+    "outOf": 30,
+    "correct": 15,
+    "outOfItems": 15
+  },
+  "partB": {
+    "marks": 15,
+    "outOf": 20
+  },
+  "provisionalWrittenMarks": 1,
+  "firstPassMarks": 24,
+  "preReviewMarks": 30,
+  "reviewSecs": {
+    "AB": 15,
+    "C": 20,
+    "max": 6
+  },
+  "predictShown": true,
+  "stmtTaps": {
+    "stmt": [
+      {
+        "item": "a",
+        "taps": [
+          0,
+          1,
+          1
+        ],
+        "firstPick": "II and III only",
+        "tries": 3
+      },
+      {
+        "item": "b",
+        "taps": [
+          1,
+          0,
+          1
+        ],
+        "firstPick": "II and III only",
+        "tries": 3
+      },
+      {
+        "item": "c",
+        "taps": [
+          1,
+          0,
+          1
+        ],
+        "firstPick": "I and III only",
+        "tries": 3
+      }
+    ],
+    "pred": {
+      "predicted": "20",
+      "picked": "20",
+      "match": true
+    },
+    "spell": []
+  },
+  "trapPicked": [],
+  "selfChanged": {
+    "changed": 3,
+    "wrongToRight": 3,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "checkingSwing": {
+    "changed": 3,
+    "wrongToRight": 3,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "predictions": {
+    "13": "12"
+  },
+  "reviewEligible": [
+    1,
+    2,
+    4,
+    5,
+    6,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13
+  ],
+  "reviewedQs": [
+    4,
+    5,
+    7,
+    9,
+    12,
+    13
+  ],
+  "reviewSkippedSelfChanged": [
+    3,
+    8,
+    15
+  ],
+  "changedOnReview": [],
+  "reviewSwing": {
+    "eligible": 11,
+    "reviewed": 6,
+    "changed": 0,
+    "wrongToRight": 0,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "tiers": [
+    {
+      "name": "Basic",
+      "marks": 16,
+      "marksOutOf": 16
+    },
+    {
+      "name": "Intermediate",
+      "marks": 21,
+      "marksOutOf": 24
+    },
+    {
+      "name": "Applied",
+      "marks": 8,
+      "marksOutOf": 10
+    }
+  ],
+  "items": [
+    {
+      "q": 1,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 12.6,
+      "firstTouchAt": "2026-11-09T11:41:52.087Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-09T11:41:52.087Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 2,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5.7,
+      "firstTouchAt": "2026-11-09T11:41:57.763Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-09T11:41:57.763Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 3,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 8.1,
+      "firstTouchAt": "2026-11-09T11:42:05.831Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": false,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-09T11:42:05.831Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 4,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 3.9,
+      "firstTouchAt": "2026-11-09T11:42:13.576Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-09T11:42:13.576Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 5,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5,
+      "firstTouchAt": "2026-11-09T11:42:18.541Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-09T11:42:18.541Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 6,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5.8,
+      "firstTouchAt": "2026-11-09T11:42:24.390Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-09T11:42:24.390Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 7,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 4.7,
+      "firstTouchAt": "2026-11-09T11:42:29.106Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-09T11:42:29.106Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 8,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 10.2,
+      "firstTouchAt": "2026-11-09T11:42:39.304Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": false,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-09T11:42:39.304Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 9,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 4.5,
+      "firstTouchAt": "2026-11-09T11:42:44.720Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-09T11:42:44.720Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 10,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 11.5,
+      "firstTouchAt": "2026-11-09T11:42:56.227Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-09T11:42:56.227Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 11,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 14.4,
+      "firstTouchAt": "2026-11-09T11:43:10.676Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-09T11:43:10.676Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 12,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5.6,
+      "firstTouchAt": "2026-11-09T11:43:19.939Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-09T11:43:19.939Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 13,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 9.4,
+      "firstTouchAt": "2026-11-09T11:43:29.302Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-09T11:43:29.302Z",
+      "prediction": "12",
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 14,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 20.4,
+      "firstTouchAt": "2026-11-09T11:43:49.715Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-09T11:43:49.715Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 15,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 12,
+      "firstTouchAt": "2026-11-09T11:44:01.760Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": false,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-09T11:44:01.760Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 16,
+      "type": "table",
+      "section": "S",
+      "tier": "Basic",
+      "marks": 3,
+      "maxMarks": 3,
+      "secsSincePrev": 11.5,
+      "firstTouchAt": "2026-11-09T11:44:13.758Z",
+      "answers": [
+        0,
+        1,
+        2
+      ],
+      "key": [
+        0,
+        1,
+        2
+      ],
+      "perRow": [
+        true,
+        true,
+        true
+      ],
+      "cols": [
+        "ovary",
+        "testis",
+        "womb"
+      ]
+    },
+    {
+      "q": 17,
+      "type": "label",
+      "section": "S",
+      "tier": "Basic",
+      "marks": 3,
+      "maxMarks": 3,
+      "secsSincePrev": 5.4,
+      "firstTouchAt": "2026-11-09T11:44:25.210Z",
+      "answers": [
+        "egg",
+        "chick",
+        "adult hen"
+      ],
+      "key": [
+        "egg",
+        "chick",
+        "adult hen"
+      ],
+      "perLabel": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "q": 18,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 4,
+      "maxMarks": 4,
+      "secsSincePrev": 6.5,
+      "firstTouchAt": "2026-11-09T11:44:36.376Z",
+      "answers": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "key": [
+        0,
+        1,
+        0,
+        1
+      ],
+      "perRow": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "cols": [
+        "Inside the female's body",
+        "Outside the female's body"
+      ]
+    },
+    {
+      "q": 19,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 4,
+      "maxMarks": 4,
+      "secsSincePrev": 6.3,
+      "firstTouchAt": "2026-11-09T11:44:52.228Z",
+      "answers": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "key": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "perRow": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "cols": [
+        "Passed on from parents",
+        "Learnt or picked up"
+      ]
+    },
+    {
+      "q": 20,
+      "type": "select",
+      "section": "S",
+      "tier": "Applied",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 13.9,
+      "firstTouchAt": "2026-11-09T11:45:09.344Z",
+      "ticked": [
+        1,
+        2
+      ],
+      "keySel": [
+        3,
+        4
+      ],
+      "right": 0,
+      "wrong": 2
+    },
+    {
+      "q": 21,
+      "type": "written",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 1,
+      "maxMarks": 4,
+      "secsSincePrev": 12,
+      "firstTouchAt": "2026-11-09T11:45:24.143Z",
+      "typed": [
+        "More animals ",
+        "Inherited",
+        "Pea",
+        "Fertilized egg"
+      ],
+      "provisionalMarks": 1,
+      "ideas": [
+        {
+          "label": "continuity",
+          "autoFound": false,
+          "marks": 1
+        },
+        {
+          "label": "traits",
+          "autoFound": false,
+          "marks": 1
+        },
+        {
+          "label": "pea",
+          "autoFound": true,
+          "marks": 1
+        },
+        {
+          "label": "offspring",
+          "autoFound": false,
+          "marks": 1
+        }
+      ],
+      "selfMarked": null
+    }
+  ]
+}

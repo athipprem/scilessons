@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '9 Nov 2026',
+  updated:        '10 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:61, topic:'Chapter 3 School-Test Prep II &mdash; Mock B, the night before (school Ch.3 test Tue 10 Nov 2026)', status:'&#127381; Built and ready (9 Nov 2026), from `BUILD_PLAN_SCI_U61_Ch3MockB.md` v1.0. A short warm-up (check every statement, warning words, predict first, three spellings) and Mock B: 21 items, Part A 15 MCQ + Part B 6 structured = /50, pass 40, no Part C. Sit it tonight, Mon 9 Nov; school Ch.3 test Tue 10 Nov 2026.' },
+    currentUnit: { n:'M6', topic:'Milestone Test 6 &mdash; Units 54&ndash;61 (Ch.2 retention, Ch.3 in full, the Physics and Chemistry toolbox)', status:'&#127381; Built and ready (10 Nov 2026), from `BUILD_PLAN_SCI_M6_Milestone6.md` v1.0. A short warm-up and a 40-question milestone (A 16 x 1.25, B 16 x 2.5, C 8 x 5 = 100, pass 80; baseline M5 = 80). No lessons, no written part. Sit it Wed 11 - Sat 14 Nov 2026, after the school Ch.3 test.' },
 
   lastUnit: {
-    n:60, score:47, outOf:50, pct:94, passBar:40, delta:null, prevScore:19, passed:true, minutesSpent:6.6, minutesUnit:60, minutesNote:'U59 was 6.6', firstPassScore:43,
-    patternLabel: 'Unit 60 result - Biology: Chapter 3 school-format mock (47/50, 94%, PASS)',
-    patternInsight: '<strong>47/50 (94%)</strong> - PASS (bar 40), Part A + B. Part C (ASMOPSS extra, scored separately) 8/12. Sat alone, 6.6 minutes. First-pass 43 on A + B.',
-    analysisLabel: 'Misses: Q10, Q23, Q26, Q21(a)',
-    analysisInsight: '<strong>Facts only:</strong> Q10 (chose &quot;I only&quot; instead of &quot;I and III only&quot;), Q23, Q26 (changed a correct copper prediction to wrong), Q21(a). Full record: `Memory Backup\\TEST_RECORD_SCI_U060.md`.',
-    qSummary: '<strong>47 / 50 (94%) - PASS</strong>; Part C 8/12. Full record: `Memory Backup\\TEST_RECORD_SCI_U060.md`.',
+    n:61, score:45, outOf:50, pct:90, passBar:40, delta:null, prevScore:47, passed:true, minutesSpent:5.3, minutesUnit:61, minutesNote:'U60 was 6.6', firstPassScore:39,
+    patternLabel: 'Unit 61 result - Biology: Chapter 3 school-test prep II, Mock B (45/50, 90%, PASS)',
+    patternInsight: '<strong>45/50 (90%)</strong> - PASS (bar 40). Part A 30/30, Part B 15/20. Sat alone, no notes, 5.3 minutes. First clicks 39, final 45; three own changes (Q3, Q8, Q15), all wrong to right. Statement items Q10, Q11, Q14 all right first click; predict-first Q13 typed 12, picked 12.',
+    analysisLabel: 'Misses: Q20, Q21',
+    analysisInsight: '<strong>Facts only:</strong> Q20 0/2 (ticked two true facts), Q21 1/4 provisional (only "pea" matched). Full record: `Memory Backup\\TEST_RECORD_SCI_U061.md`.',
+    qSummary: '<strong>45 / 50 (90%) - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U061.md`.',
     qBreakdown: []
   },
 
@@ -105,11 +105,24 @@ var PREM_DATA = {
     { unit:58, topic:'Biology: Chapter 3 Wrap-up &mdash; Reproduction in Animals, the Whole Chapter (Book + ASMOPSS)', score:17, outOf:20, pct:85, passBar:16, date:'2026-10-28', firstPassScore:17, minutesSpent:7.8, part2:'1/4' },
     { unit:59, topic:'Biology: Chapter 3 Extension I &mdash; Strategies for Survival (animal groups, one parent or two, saving a kind; ASMOPSS)', score:19, outOf:20, pct:95, passBar:16, date:'2026-11-05', firstPassScore:19, minutesSpent:6.6 },
     { unit:60, topic:'Biology: Chapter 3 school-format mock (Part A + B /50; Part C ASMOPSS 8/12 separate)', score:47, outOf:50, pct:94, passBar:40, date:'2026-11-08', firstPassScore:43, minutesSpent:6.6, partC:'8/12' },
+    { unit:61, topic:'Biology: Chapter 3 school-test prep II, Mock B, the night before (Part A + B /50)', score:45, outOf:50, pct:90, passBar:40, date:'2026-11-09', firstPassScore:39, minutesSpent:5.3 },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 61, badge: 'linear-gradient(135deg,#14305c,#1b5e3a)',
+      title: 'Biology: Chapter 3 school-test prep II &mdash; Mock B, the night before',
+      tags: [
+        { t:'&#9989; 45/50 (90%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 39 &rarr; final 45', c:'tgreen' },
+        { t:'5.3 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U61_Ch3MockB.md` v1.0 (gate 0 FAIL(s)): a short warm-up and a 21-item mock, no Part C. <strong>Taken Mon 9 Nov 2026: 45/50 (90%), PASS</strong> &mdash; Part A 30/30, Part B 15/20. Statement items Q10, Q11, Q14 all right on the first click. Missed: Q20, Q21 (provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U061.md`.',
+      status: 'done'
+    },
     {
       n: 60, badge: 'linear-gradient(135deg,#14305c,#e8573d)',
       title: 'Biology: Chapter 3 Extension II &mdash; Heredity at Work, Life Cycles and the school-format mock',
