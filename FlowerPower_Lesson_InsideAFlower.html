@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit 62 · Lesson 1 · Inside a Flower</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<style>
+  :root{--pl:#4a1d5e;--pl-d:#3a1450;--pl-l:#f3e8f7;--gr:#1f6b3f;--gr-l:#e6f4ea;--am:#b0426b;--am-l:#fbe9f0;--sv:#5b4a66;--sv-l:#f1edf4;--ink:#2d3748;--grey:#6b7280;--line:#ddd5e3;--ok:#1f6b3f;--ok-l:#e6f4ea;--bad:#c62828;--bad-l:#fdecea}
+  *{box-sizing:border-box}
+  body{font-family:'Segoe UI',Arial,sans-serif;margin:0;background:#f5f3f7;color:var(--ink);line-height:1.5}
+  .wrap{max-width:860px;margin:0 auto;padding:16px}
+  .topbar{display:flex;justify-content:space-between;align-items:center;background:var(--pl-d);color:#fff;padding:12px 18px;border-radius:14px;margin-bottom:14px;gap:8px;flex-wrap:wrap}
+  .topbar b{font-size:1.1rem}
+  .pill{background:#ffffff33;padding:3px 10px;border-radius:20px;font-size:.8rem}
+  .screen{display:none;background:#fff;border-radius:16px;box-shadow:0 3px 14px #0001;padding:22px}
+  .screen.active{display:block}
+  h2{color:var(--pl-d);margin:.1rem 0 .6rem}
+  h3{color:var(--pl-d);margin:.6rem 0 .3rem}
+  .rulebar{background:var(--pl-l);border:1.5px solid var(--pl);color:var(--pl-d);border-radius:10px;padding:8px 14px;font-weight:bold;margin:10px 0;text-align:center}
+  .why{background:var(--sv-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:10px 0;font-size:.95rem}
+  .job{background:var(--pl-l);border-radius:10px;padding:10px 14px;margin:8px 0;border-left:5px solid var(--pl)}
+  .trap{background:#fce4ec;border:2px solid #ad1457;border-radius:12px;padding:14px;margin:14px 0}
+  .box{background:#fbfafc;border:1.5px solid var(--line);border-radius:14px;padding:12px;text-align:center;margin:10px 0}
+  .box svg{max-width:100%;height:auto}
+  .mcq,.pick,.cluebox{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .mcq p,.pick p{font-weight:bold;margin:.1rem 0 .6rem}
+  .opt,.pb{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .opt:hover,.pb:hover{border-color:var(--pl)}
+  .opt.sel{outline:3px solid var(--pl);background:var(--pl-l)}
+  .opt.good,.pb.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}
+  .opt.bad,.pb.bad{background:var(--bad-l);border-color:var(--bad)}
+  .opt:disabled,.pb:disabled{cursor:default;opacity:.85}
+  .fb,.pfb{display:none;margin-top:8px;padding:9px 12px;border-radius:9px;font-size:.9rem}
+  .fb.show,.pfb.show{display:block}
+  .fb.ok,.pfb.ok{background:var(--ok-l);color:#1b5e20}
+  .fb.no,.pfb.no{background:#fdf1d8;color:#6a4a00}
+  .btn{border:none;border-radius:10px;padding:10px 18px;font-size:.95rem;font-weight:bold;cursor:pointer;font-family:inherit;background:var(--pl-d);color:#fff}
+  .btn.green,.chk{background:var(--gr);color:#fff}
+  .chk{border:none;border-radius:10px;padding:9px 16px;font-weight:bold;cursor:pointer;font-family:inherit;margin-top:6px}
+  .chk:disabled{opacity:.5;cursor:default}
+  .nav{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+  .btn.prev{background:#3b2f45;color:#fff}
+  .btn.next{background:var(--pl-d);color:#fff}
+  .btn.hub{background:#2e4a3a;color:#fff;text-decoration:none;display:inline-block}
+  .btn:disabled{opacity:.5;cursor:default}
+  .dots{text-align:center;margin-top:8px;color:var(--grey);font-size:.8rem}
+  .cap{display:none;font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .cap.show{display:block}
+  .seqbtn,.actbtn{background:var(--gr);color:#fff;border:none;border-radius:10px;padding:9px 16px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px}
+  .selfres{display:none;margin-top:10px;padding:12px;border-radius:10px;text-align:center}
+  .selfres.show{display:block}.okbox{background:var(--ok-l)}.nobox{background:#fdf1d8}
+  .gobtn{background:var(--pl-d);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-weight:700;cursor:pointer}
+  .tchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .tchip{border:1.5px solid var(--line);background:#fff;color:var(--pl-d);border-radius:20px;padding:6px 14px;cursor:pointer;font-weight:700;font-family:inherit}
+  .tchip.sel{background:var(--pl-l);border-color:var(--pl)}.tchip.used{opacity:.45}
+  .trow{display:flex;gap:10px;align-items:center;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0;cursor:pointer;background:#fff}
+  .trow .slot{min-width:130px;font-weight:800;color:var(--pl-d);text-align:center;border-bottom:2px dashed var(--sv)}
+  .trow.rgood{background:var(--ok-l);border-color:var(--ok)}.trow.rbad{background:var(--bad-l);border-color:var(--bad)}
+  .tres{margin-top:8px;font-size:.95rem}
+  svg text{font-family:'Segoe UI',Arial,sans-serif}
+  .box>svg{max-width:360px;width:100%;display:block;margin:0 auto}
+  .box>svg.wide{max-width:560px}
+  .hid{display:none!important}
+  .gated{display:none}
+  .tw{display:inline-block;cursor:pointer;padding:0 3px;border-radius:5px;margin:1px;border-bottom:2px dotted var(--pl)}
+  .tw.good{background:#d7ecdc;font-weight:800;border-bottom-color:var(--ok)}.tw.bad{background:#fdecea;text-decoration:line-through;border-bottom-color:var(--bad)}
+  .twist{background:var(--pl-l);border:1.5px solid var(--pl);border-radius:12px;padding:14px;margin:12px 0}
+  .pbox{background:#f6eef9;border:1.5px dashed var(--pl);border-radius:10px;padding:10px 12px;margin:6px 0 4px}
+  .pbox label{display:block;font-size:.88rem;font-weight:700;color:var(--pl-d);margin-bottom:6px}
+  .pbox .pin{width:100%;padding:9px 11px;border:1.5px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+  .pbox .pin[readonly]{background:#e6dcee;color:var(--grey)}
+  .pshow{margin-top:8px}
+  .sline{font-weight:700;text-align:center;margin:8px 0;color:var(--pl-d)}
+  .stmt{background:var(--sv-l);border:1.5px dashed var(--sv);border-radius:12px;padding:14px;margin:12px 0}
+  .stmt .stq{font-weight:bold;margin:.1rem 0 .6rem}
+  .srow{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;margin:6px 0}
+  .srow .st{display:block;margin-bottom:6px}
+  .tfrow{display:flex;gap:8px}
+  .tf{border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:7px 18px;font-weight:700;cursor:pointer;font-family:inherit}
+  .tf.on{background:var(--pl-l);border-color:var(--pl);outline:2px solid var(--pl)}
+  .snote{font-size:.88rem;font-weight:700;color:var(--pl-d);margin:8px 0}
+  .so{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:9px 12px;margin:6px 0;cursor:pointer;font-size:.95rem;font-family:inherit}
+  .so:disabled{opacity:.6;cursor:default}
+  .so.mine{outline:3px solid var(--pl)}.so.good{background:var(--ok-l);border-color:var(--ok);font-weight:bold}.so.bad{background:var(--bad-l);border-color:var(--bad)}
+  .xp{background:#fbf8fc;border:1.5px solid var(--line);border-radius:14px;padding:12px;margin:10px 0}
+  .xp svg{width:100%;max-width:340px;height:auto;display:block;margin:0 auto}
+  .xp svg [data-k]{cursor:pointer}
+  .xp svg [data-k].on{filter:drop-shadow(0 0 4px #e8a600);stroke:#e8a600;stroke-width:3}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0}
+  .chip{border:1.5px solid var(--line);background:#fff;border-radius:20px;padding:5px 12px;font-weight:700;font-size:.85rem;cursor:pointer;font-family:inherit;color:var(--pl-d)}
+  .chip.on,.chip.seenc{background:var(--pl-l);border-color:var(--pl)}
+  .info{background:var(--pl-l);border-left:5px solid var(--pl);border-radius:8px;padding:9px 13px;margin:8px 0;font-size:.95rem;min-height:3em}
+  .cnt{font-weight:800;text-align:center;color:var(--pl-d);font-size:.85rem}
+  .insets{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .inset{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:6px;text-align:center;font-size:.8rem;font-weight:700;color:var(--pl-d)}
+  .inset svg{width:150px;height:auto;display:block;margin:0 auto}
+  .twopic{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+  .twopic.onecol{grid-template-columns:1fr}
+  .threepic{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+  .twopic .box,.threepic .box{margin:0;padding:6px}
+  .twopic svg,.threepic svg{width:100%;height:auto;display:block}
+  .pcap{font-weight:800;font-size:.82rem;text-align:center;color:var(--pl-d);margin-top:2px}
+  .grp{border:2px solid var(--gr);border-radius:12px;padding:8px;margin:8px 0;background:#f6fbf7}
+  .grp>b{display:block;color:var(--gr);margin-bottom:4px}
+  .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+  .strip .box{margin:0;padding:4px}
+  .strip svg{width:100%;height:auto;display:block}
+  .tbl{border-collapse:collapse;width:100%;margin:8px 0;font-size:.9rem}
+  .tbl th,.tbl td{border:1.5px solid var(--line);padding:6px 8px;text-align:center}
+  .tbl th{background:var(--pl-l);color:var(--pl-d)}
+  .tbl td.rl{font-weight:800;text-align:left;color:var(--pl-d);background:#fbf3ea}
+  .fcell{width:100%;min-height:40px;border:2px dashed var(--am);background:#fff;border-radius:8px;font:inherit;font-weight:800;color:var(--pl-d);cursor:pointer;padding:3px}
+  .fcell.full{border-style:solid;border-color:var(--ok);background:var(--ok-l);cursor:default}
+  .fcell.wrongc,.ocd.wrongc,.sc2.wrongc{background:var(--bad-l);border-color:var(--bad)}
+  .fchips{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .fchip{border:2px solid var(--pl);background:#fff;color:var(--pl-d);border-radius:999px;padding:7px 14px;font:inherit;font-weight:800;cursor:pointer}
+  .fchip.sel{background:var(--pl-l);outline:3px solid var(--pl)}
+  .fnote,.onote,.snote2{font-size:.9rem;font-weight:700;color:var(--pl-d);min-height:1.4em;margin:4px 0}
+  .ocds{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+  .ocd{border:2px solid var(--pl);background:#fff;color:var(--pl-d);border-radius:10px;padding:8px 12px;font:inherit;font-weight:800;cursor:pointer}
+  .ocd.used{opacity:.3;cursor:default}
+  .olist{margin:6px 0}.oitem{background:var(--ok-l);border-radius:8px;padding:6px 10px;margin:4px 0;font-weight:700}
+  .sc2s{display:flex;flex-direction:column;gap:6px;margin:8px 0}
+  .sc2{text-align:left;border:1.5px solid var(--line);background:#fff;color:var(--ink);border-radius:9px;padding:8px 12px;cursor:pointer;font-size:.93rem;font-family:inherit}
+  .sc2.sel{outline:3px solid var(--pl);background:var(--pl-l)}.sc2.used{opacity:.3;cursor:default}
+  .bins{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .binw{background:#fff;border:1.5px solid var(--line);border-radius:12px;padding:8px}
+  .sbin2{width:100%;background:var(--gr);color:#fff;border:none;border-radius:9px;padding:9px;font-weight:800;cursor:pointer;font-family:inherit}
+  .binw:nth-child(2) .sbin2{background:var(--am);color:#fff}
+  .placed{background:var(--ok-l);border-radius:8px;padding:6px 9px;margin-top:6px;font-size:.88rem}
+  .tree{display:flex;flex-direction:column;align-items:center;gap:4px;margin:8px 0;font-size:.92rem}
+  .tree .q{background:var(--pl-d);color:#fff;border-radius:10px;padding:7px 14px;font-weight:800;text-align:center}
+  .tree .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .tree .a{background:#fff;border:2px solid var(--pl);border-radius:10px;padding:6px 12px;text-align:center;font-weight:700;min-width:130px}
+  .tree .arr{color:var(--pl-d);font-weight:900}
+  .lines{margin:8px 0 8px 22px;padding:0}.lines li{margin:5px 0}
+  .cmpt{border-collapse:collapse;width:100%;font-size:.9rem;margin:8px 0}.cmpt td,.cmpt th{border:1px solid var(--line);padding:5px 8px;text-align:left}.cmpt th{background:var(--pl-l)}
+  .tcard{border:2px solid var(--pl);border-radius:12px;margin:8px 0;background:#fff;padding:8px}
+  .tfront{display:block;width:100%;border:2px solid var(--pl);background:#fff;color:var(--pl-d);border-radius:10px;text-align:left;padding:9px 12px;font:inherit;font-weight:800;cursor:pointer}
+  .tcard.seenc .tfront{background:var(--pl-l)}
+  .tback{margin-top:8px}
+  .wr textarea{width:100%;min-height:78px;border:1.5px solid var(--line);border-radius:8px;padding:8px 10px;font:inherit}
+  .wr textarea[readonly]{background:#ece4f0;color:var(--grey)}
+  .wmodel{background:var(--ok-l);border-radius:9px;padding:9px 12px;margin:8px 0;font-size:.92rem}
+  .wtick label{display:block;margin:4px 0;font-weight:700}
+  .wfb{font-weight:700;color:var(--gr);margin-top:6px}
+  .gcalc{background:#fbf8fc;border:1.5px solid var(--line);border-radius:14px;padding:14px;margin:12px 0}
+  .gcalc h3{margin:6px 0 8px;font-size:1.05rem}
+  .gpart{border-top:2px dashed var(--line);margin-top:12px;padding-top:10px}
+  .gq{font-weight:700;background:#fff;border:1.5px solid var(--pl);border-radius:10px;padding:9px 12px;margin:6px 0}
+  .ws{background:#fff;border-left:5px solid var(--pl);border-radius:8px;padding:8px 12px;margin:6px 0}
+  .ws.flash{outline:3px solid #f9a825;background:#fff8e1}
+  .ws .n,.gs .n{display:inline-block;min-width:1.6em;height:1.6em;line-height:1.6em;text-align:center;border-radius:50%;background:var(--pl-d);color:#fff;font-weight:800;margin-right:6px}
+  .gs{background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;margin:8px 0}
+  .gs.ok{border-color:var(--ok);background:#f1f8f1}
+  .gs input[type=text]{width:110px;border:1.5px solid var(--line);border-radius:8px;padding:7px 9px;font:inherit;margin:0 6px}
+  .gopt{background:#fff;border:1.5px solid var(--pl);color:var(--pl-d);border-radius:9px;padding:7px 12px;font-weight:700;cursor:pointer;font-family:inherit;margin:4px 6px 4px 0}
+  .gopt:disabled{opacity:.55;cursor:default}
+  .gfb{margin-top:6px;font-weight:700;font-size:.93rem}.gfb.ok{color:var(--ok)}.gfb.no{color:#b0426b}
+  .gwbtn,.gchk{background:var(--pl-d);color:#fff;border:none;border-radius:9px;padding:8px 14px;font-weight:700;cursor:pointer;font-family:inherit}
+  .realbar{margin:8px 0}.realbar .r1{height:12px;background:var(--gr);border-radius:6px;width:6%}.realbar .r2{height:12px;background:var(--am);border-radius:6px;width:100%;margin-top:6px}
+  .realbar span{font-size:.82rem;font-weight:700;color:var(--pl-d)}
+  .stepbar{display:flex;gap:8px;justify-content:center;margin:8px 0}
+  .sg{opacity:0;transition:opacity .4s}
+  [data-state="0"] .s0,[data-state="1"] .s1,[data-state="2"] .s2,[data-state="3"] .s3,[data-state="4"] .s4{opacity:1}
+  .stage svg{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+  @media(max-width:520px){.strip{grid-template-columns:repeat(2,1fr)}.threepic{grid-template-columns:1fr}.bins{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-next-href="FlowerPower_Lesson_BeyondTheBook.html" data-last-label="Start Lesson 2 &rarr;">
+<div class="wrap">
+  <div class="topbar"><b>&#127802; Lesson 1 &middot; Inside a Flower</b><span class="pill">Unit 62</span></div>
+
+  <section class="screen active" id="s1" data-lock="game">
+    <h2>Where Do Seeds Come From?</h2>
+    <div class="job">Every bean, pumpkin and apple began as a flower. A farmer gets fruit only if the flowers do their job, so we start inside the flower.</div>
+    <p>Young plants grow from seeds. Seeds are made by the reproductive parts of a flower. In some plants the male and female parts are on a single flower: <b>hibiscus and morning glory</b>. In others, the male and female parts are on separate flowers: <b>maize and cucumber</b>.</p>
+    <div class="grp"><b>Male and female parts on ONE flower</b><div class="twopic"><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Hibiscus flower"><ellipse cx="60" cy="60" rx="20" ry="30" transform="rotate(0 60 60) translate(0 -22)" fill="#f08a3c" stroke="#c4601a" stroke-width="2"/><ellipse cx="60" cy="60" rx="20" ry="30" transform="rotate(72 60 60) translate(0 -22)" fill="#f08a3c" stroke="#c4601a" stroke-width="2"/><ellipse cx="60" cy="60" rx="20" ry="30" transform="rotate(144 60 60) translate(0 -22)" fill="#f08a3c" stroke="#c4601a" stroke-width="2"/><ellipse cx="60" cy="60" rx="20" ry="30" transform="rotate(216 60 60) translate(0 -22)" fill="#f08a3c" stroke="#c4601a" stroke-width="2"/><ellipse cx="60" cy="60" rx="20" ry="30" transform="rotate(288 60 60) translate(0 -22)" fill="#f08a3c" stroke="#c4601a" stroke-width="2"/><path d="M60 60 L84 28" stroke="#8a6d2f" stroke-width="4"/><circle cx="84" cy="26" r="6" fill="#e0527a"/><circle cx="76" cy="38" r="3" fill="#f9d96a"/><circle cx="68" cy="46" r="3" fill="#f9d96a"/><circle cx="84" cy="36" r="3" fill="#f9d96a"/></svg><div class="pcap">Hibiscus</div></div><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Morning glory flower"><path d="M60 20 C20 20 14 62 36 84 C46 94 74 94 84 84 C106 62 100 20 60 20 Z" fill="#8f86d8" stroke="#5c52b0" stroke-width="2"/><ellipse cx="60" cy="50" rx="22" ry="16" fill="#cfc9f5" stroke="#5c52b0" stroke-width="1.5"/><path d="M60 50 L60 80" stroke="#f9d96a" stroke-width="4"/><circle cx="60" cy="50" r="5" fill="#e0527a"/></svg><div class="pcap">Morning glory</div></div></div></div>
+    <div class="grp"><b>Male and female parts on SEPARATE flowers</b><div class="box"><svg viewBox="0 0 220 240" role="img" aria-label="Maize plant"><path d="M100 230 L100 40" stroke="#2c7a45" stroke-width="8"/><path d="M100 200 C60 180 40 190 20 220 C60 215 80 210 100 200 Z" fill="#3f9a5a"/><path d="M100 150 C140 130 170 140 190 170 C150 168 125 162 100 150 Z" fill="#3f9a5a"/><path d="M100 120 C70 100 50 105 36 130 C66 128 84 128 100 120 Z" fill="#3f9a5a"/><path d="M100 44 L76 12" stroke="#d9b648" stroke-width="3" stroke-linecap="round"/><path d="M100 44 L88 6" stroke="#d9b648" stroke-width="3" stroke-linecap="round"/><path d="M100 44 L100 4" stroke="#d9b648" stroke-width="3" stroke-linecap="round"/><path d="M100 44 L112 6" stroke="#d9b648" stroke-width="3" stroke-linecap="round"/><path d="M100 44 L124 12" stroke="#d9b648" stroke-width="3" stroke-linecap="round"/><ellipse cx="128" cy="132" rx="9" ry="22" fill="#f1d25c" stroke="#b58a1b" stroke-width="2"/><path d="M128 112 C140 100 150 96 156 92 M128 112 C138 106 146 108 152 106" stroke="#d65a8a" stroke-width="2.5" fill="none"/><text x="136" y="24" font-size="13" font-weight="700" fill="#3a1450">Male flowers</text><text x="156" y="94" font-size="12" font-weight="700" fill="#3a1450">Female</text><text x="156" y="108" font-size="12" font-weight="700" fill="#3a1450">flowers</text><path d="M134 20 L118 14" stroke="#6b5a78" stroke-width="1.2"/></svg><div class="pcap">Maize plant</div></div></div>
+    <div class="rulebar">Sort the plants into the right box.</div>
+    <div class="sortw gw" data-hint="Not that box. Think about the clue on the card."><div class="sc2s"><button class="sc2" data-b="0">hibiscus</button><button class="sc2" data-b="1">maize</button><button class="sc2" data-b="0">morning glory</button><button class="sc2" data-b="1">cucumber</button></div><div class="bins"><div class="binw"><button class="sbin2" data-b="0">One flower</button><div class="binlist" data-b="0"></div></div><div class="binw"><button class="sbin2" data-b="1">Separate flowers</button><div class="binlist" data-b="1"></div></div></div><div class="snote2"></div><div class="sdone hid sline">hibiscus and morning glory: both parts on one flower. maize and cucumber: separate flowers.</div></div>
+  </section>
+
+  <section class="screen" id="s2" data-lock="game" data-route="A" data-label="the flower dissection">
+    <h2>Inside a Flower: Look Closely</h2>
+    <div class="rulebar">Route 1: take the flower apart.</div>
+    <div class="box"><svg viewBox="0 0 470 244" class="wide" role="img" aria-label="The female part, a cross-section, and the male part of a flower"><ellipse cx="85" cy="110" rx="70" ry="100" fill="#fff" stroke="#6b5a78" stroke-width="2"/><path d="M80 190 L80 150 L90 150 L90 190 Z" fill="#3f9a5a"/><ellipse cx="85" cy="130" rx="20" ry="24" fill="#bfe3c6" stroke="#2c7a45" stroke-width="2"/><ellipse cx="78" cy="126" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="78" cy="126" r="3.2" fill="#c0392b"/><ellipse cx="92" cy="126" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="92" cy="126" r="3.2" fill="#c0392b"/><ellipse cx="78" cy="140" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="78" cy="140" r="3.2" fill="#c0392b"/><ellipse cx="92" cy="140" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="92" cy="140" r="3.2" fill="#c0392b"/><path d="M81 108 L81 62 L89 62 L89 108 Z" fill="#a8d8b0" stroke="#2c7a45" stroke-width="2"/><ellipse cx="85" cy="56" rx="12" ry="9" fill="#e0527a" stroke="#a3294f" stroke-width="2"/><text x="132" y="28" font-size="15" font-weight="700" fill="#3a1450" text-anchor="end">Stigma</text><path d="M112 33 L96 52" stroke="#6b5a78" stroke-width="1.5"/><text x="144" y="112" font-size="15" font-weight="700" fill="#3a1450" text-anchor="end">Ovary</text><path d="M108 108 L100 124" stroke="#6b5a78" stroke-width="1.5"/><text x="144" y="160" font-size="15" font-weight="700" fill="#3a1450" text-anchor="end">Ovule</text><path d="M112 156 L98 142" stroke="#6b5a78" stroke-width="1.5"/><g transform="translate(168 30) scale(.62)"><path d="M122 238 C70 215 40 150 62 96 C92 124 118 170 140 222 Z" fill="#e58bb0" stroke="#c4607f" stroke-width="2"/><path d="M178 238 C230 215 260 150 238 96 C208 124 182 170 160 222 Z" fill="#e58bb0" stroke="#c4607f" stroke-width="2"/><path d="M144 300 L144 240 L156 240 L156 300 Z" fill="#3f9a5a" stroke="#2c7a45" stroke-width="2"/><path d="M118 244 C118 232 132 226 150 226 C168 226 182 232 182 244 Z" fill="#3f9a5a" stroke="#2c7a45" stroke-width="2"/><path d="M134 230 C124 190 108 160 100 132" stroke="#8a6d2f" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M166 230 C176 190 192 160 200 132" stroke="#8a6d2f" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="124" rx="9" ry="15" transform="rotate(-18 100 124)" fill="#f2c230" stroke="#b58a1b" stroke-width="2"/><ellipse cx="200" cy="124" rx="9" ry="15" transform="rotate(18 200 124)" fill="#f2c230" stroke="#b58a1b" stroke-width="2"/><circle cx="88" cy="106" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><circle cx="96" cy="98" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><circle cx="106" cy="102" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><circle cx="210" cy="106" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><circle cx="202" cy="98" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><circle cx="194" cy="102" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8"/><ellipse cx="150" cy="200" rx="26" ry="30" fill="#bfe3c6" stroke="#2c7a45" stroke-width="2"/><ellipse cx="140" cy="196" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="140" cy="196" r="3.2" fill="#c0392b"/><ellipse cx="160" cy="196" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="160" cy="196" r="3.2" fill="#c0392b"/><ellipse cx="150" cy="214" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="150" cy="214" r="3.2" fill="#c0392b"/><ellipse cx="150" cy="184" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="150" cy="184" r="3.2" fill="#c0392b"/><path d="M146 172 L146 112 L154 112 L154 172 Z" fill="#a8d8b0" stroke="#2c7a45" stroke-width="2"/><ellipse cx="150" cy="106" rx="14" ry="10" fill="#e0527a" stroke="#a3294f" stroke-width="2"/></g><text x="300" y="42" font-size="15" font-weight="700" fill="#3a1450" text-anchor="end">Petal</text><path d="M236 52 L214 70" stroke="#6b5a78" stroke-width="1.5"/><text x="190" y="234" font-size="15" font-weight="700" fill="#3a1450" text-anchor="middle">Female part and male part</text><ellipse cx="400" cy="110" rx="62" ry="100" fill="#fff" stroke="#6b5a78" stroke-width="2"/><path d="M396 190 C396 160 398 140 402 110" stroke="#8a6d2f" stroke-width="5" fill="none"/><ellipse cx="403" cy="86" rx="12" ry="26" transform="rotate(8 403 86)" fill="#f2c230" stroke="#b58a1b" stroke-width="2"/><text x="456" y="60" font-size="15" font-weight="700" fill="#3a1450" text-anchor="end">Anther</text><path d="M424 64 L412 78" stroke="#6b5a78" stroke-width="1.5"/></svg><div class="pcap">The female part, a cross-section, and the male part</div></div>
+    <p>Tap each part, in the picture or on a button. Open the ovule and the anther to look inside.</p>
+    <div class="xp dissect gw"><svg viewBox="0 0 300 300" role="img" aria-label="Cross-section of a flower"><path d="M122 238 C70 215 40 150 62 96 C92 124 118 170 140 222 Z" fill="#e58bb0" stroke="#c4607f" stroke-width="2"/><path d="M178 238 C230 215 260 150 238 96 C208 124 182 170 160 222 Z" fill="#e58bb0" stroke="#c4607f" stroke-width="2"/><path d="M144 300 L144 240 L156 240 L156 300 Z" fill="#3f9a5a" stroke="#2c7a45" stroke-width="2"/><path d="M118 244 C118 232 132 226 150 226 C168 226 182 232 182 244 Z" fill="#3f9a5a" stroke="#2c7a45" stroke-width="2"/><path d="M134 230 C124 190 108 160 100 132" stroke="#8a6d2f" stroke-width="4" fill="none" stroke-linecap="round"/><path d="M166 230 C176 190 192 160 200 132" stroke="#8a6d2f" stroke-width="4" fill="none" stroke-linecap="round"/><ellipse cx="100" cy="124" rx="9" ry="15" transform="rotate(-18 100 124)" fill="#f2c230" stroke="#b58a1b" stroke-width="2" data-k="anther"/><ellipse cx="200" cy="124" rx="9" ry="15" transform="rotate(18 200 124)" fill="#f2c230" stroke="#b58a1b" stroke-width="2" data-k="anther"/><circle cx="88" cy="106" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><circle cx="96" cy="98" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><circle cx="106" cy="102" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><circle cx="210" cy="106" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><circle cx="202" cy="98" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><circle cx="194" cy="102" r="2.6" fill="#f7e27a" stroke="#b58a1b" stroke-width=".8" data-k="pollen"/><ellipse cx="150" cy="200" rx="26" ry="30" fill="#bfe3c6" stroke="#2c7a45" stroke-width="2" data-k="ovary"/><ellipse cx="140" cy="196" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="140" cy="196" r="3.2" fill="#c0392b"/><ellipse cx="160" cy="196" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="160" cy="196" r="3.2" fill="#c0392b"/><ellipse cx="150" cy="214" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="150" cy="214" r="3.2" fill="#c0392b"/><ellipse cx="150" cy="184" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" data-k="ovule"/><circle cx="150" cy="184" r="3.2" fill="#c0392b"/><path d="M146 172 L146 112 L154 112 L154 172 Z" fill="#a8d8b0" stroke="#2c7a45" stroke-width="2"/><ellipse cx="150" cy="106" rx="14" ry="10" fill="#e0527a" stroke="#a3294f" stroke-width="2" data-k="stigma"/></svg>
+      <div class="chips"><button class="chip" data-k="stigma">stigma</button><button class="chip" data-k="ovary">ovary</button><button class="chip" data-k="ovule">ovule</button><button class="chip" data-k="egg">egg</button><button class="chip" data-k="anther">anther</button><button class="chip" data-k="pollen">pollen</button></div>
+      <div class="info">Tap a part to begin.</div><div class="cnt">0 of 6 parts found</div>
+      <div class="insets"><div class="inset hid" data-for="ovule"><svg viewBox="0 0 150 120" role="img" aria-label="Inside an ovule"><ellipse cx="75" cy="60" rx="46" ry="52" fill="#f6e3a1" stroke="#b58a1b" stroke-width="3"/><circle cx="75" cy="62" r="16" fill="#c0392b" data-k="egg"/><circle cx="75" cy="62" r="6" fill="#7a1c12" data-k="egg"/></svg>Inside an ovule</div><div class="inset hid" data-for="anther"><svg viewBox="0 0 150 120" role="img" aria-label="Inside an anther"><rect x="30" y="20" width="40" height="80" rx="20" fill="#f9d96a" stroke="#b58a1b" stroke-width="3"/><rect x="80" y="20" width="40" height="80" rx="20" fill="#f9d96a" stroke="#b58a1b" stroke-width="3"/><circle cx="50" cy="46" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="60" cy="54" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="52" cy="62" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="100" cy="46" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="90" cy="54" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="98" cy="62" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="50" cy="82" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="60" cy="90" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="100" cy="82" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/><circle cx="90" cy="90" r="3.5" fill="#f7e27a" stroke="#b58a1b" stroke-width="1" data-k="pollen"/></svg>Inside an anther</div></div>
+    </div>
+  </section>
+
+  <section class="screen" id="s3" data-lock="game" data-route="B" data-label="the flower list">
+    <h2>The Same Flower, as a List</h2>
+    <div class="rulebar">Route 2: the same flower, as a list.</div>
+    <div class="twocol">
+    <div class="job"><b>Female part</b><ul class="lines"><li>The <b>stigma</b> is at the top.</li><li>The ovary has one or more ovules.</li><li>Each ovule contains an egg. The egg is the female reproductive cell.</li></ul></div>
+    <div class="job"><b>Male part</b><ul class="lines"><li>A thin stalk, with an <b>anther</b> at the tip.</li><li>The anther contains pollen sacs.</li><li>The sacs hold <b>pollen</b>, the male reproductive cells.</li></ul></div></div>
+    <div class="why">Careful: the anther is NOT part of the female part.</div>
+    <div class="sortw gw" data-hint="Not that box. Think about the clue on the card."><div class="sc2s"><button class="sc2" data-b="0">stigma</button><button class="sc2" data-b="1">anther</button><button class="sc2" data-b="0">ovule</button><button class="sc2" data-b="1">pollen</button><button class="sc2" data-b="0">ovary</button><button class="sc2" data-b="1">pollen sacs</button></div><div class="bins"><div class="binw"><button class="sbin2" data-b="0">Female part</button><div class="binlist" data-b="0"></div></div><div class="binw"><button class="sbin2" data-b="1">Male part</button><div class="binlist" data-b="1"></div></div></div><div class="snote2"></div><div class="sdone hid sline">The ovary has one or more ovules, each ovule contains an egg, and the anther contains pollen sacs.</div></div>
+  </section>
+
+  <section class="screen" id="s4" data-lock="pick">
+    <h2>Pollination</h2>
+    <p>A flower cannot walk to find a mate. Pollen is small, light and powdery, so something must carry it. Wind or animals such as insects carry pollen to the stigma. The <b>transfer of pollen from the anther to the stigma</b> is called <b>pollination</b>.</p>
+    <div class="twopic onecol">
+      <div class="box"><div class="pcap">Pollination by insects</div>
+      <div class="box stage"><div id="stI" data-state="0"><svg viewBox="0 0 400 190" role="img" aria-label="Pollination by insects"><g transform="translate(90 110) scale(1.0)"><path d="M0 70 L0 10" stroke="#2c7a45" stroke-width="6"/><path d="M-6 10 C-30 -4 -34 -30 -26 -44 C-14 -30 -6 -14 0 4 Z" fill="#f08a3c" stroke="#c4607f" stroke-width="2"/><path d="M6 10 C30 -4 34 -30 26 -44 C14 -30 6 -14 0 4 Z" fill="#f08a3c" stroke="#c4607f" stroke-width="2"/><path d="M-4 8 L-14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="-15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M4 8 L14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M0 8 L0 -26" stroke="#2c7a45" stroke-width="4"/><ellipse cx="0" cy="-30" rx="6" ry="4" fill="#e0527a" stroke="#a3294f" stroke-width="1.5"/></g><g transform="translate(310 110) scale(1.0)"><path d="M0 70 L0 10" stroke="#2c7a45" stroke-width="6"/><path d="M-6 10 C-30 -4 -34 -30 -26 -44 C-14 -30 -6 -14 0 4 Z" fill="#f08a3c" stroke="#c4607f" stroke-width="2"/><path d="M6 10 C30 -4 34 -30 26 -44 C14 -30 6 -14 0 4 Z" fill="#f08a3c" stroke="#c4607f" stroke-width="2"/><path d="M-4 8 L-14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="-15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M4 8 L14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M0 8 L0 -26" stroke="#2c7a45" stroke-width="4"/><ellipse cx="0" cy="-30" rx="6" ry="4" fill="#e0527a" stroke="#a3294f" stroke-width="1.5"/></g><g class="sg s0 s1"><circle cx="76" cy="86" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="80" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="104" cy="86" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="100" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s1" transform="translate(90 58)"><ellipse cx="-10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="-8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><rect x="-2" y="-10" width="4" height="22" rx="2" fill="#2d2040"/></g><g class="sg s2" transform="translate(200 40)"><ellipse cx="-10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="-8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><rect x="-2" y="-10" width="4" height="22" rx="2" fill="#2d2040"/></g><g class="sg s2"><circle cx="196" cy="52" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="204" cy="52" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s3" transform="translate(310 58)"><ellipse cx="-10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="10" cy="-6" rx="11" ry="8" fill="#7d5bd0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="-8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><ellipse cx="8" cy="6" rx="8" ry="6" fill="#9b7fe0" stroke="#4a2f9a" stroke-width="1.5"/><rect x="-2" y="-10" width="4" height="22" rx="2" fill="#2d2040"/></g><g class="sg s3"><circle cx="310" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="306" cy="82" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="314" cy="82" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><path d="M120 60 C150 30 170 30 190 38" stroke="#8a7a99" stroke-width="2" fill="none" stroke-dasharray="5 5" class="sg s2"/></svg></div><div class="cap show" data-s="0">Pollen sits on the anthers of a hibiscus.</div><div class="cap" data-s="1">A butterfly lands to drink. Pollen rubs onto its body.</div><div class="cap" data-s="2">It flies to another hibiscus, carrying pollen.</div><div class="cap" data-s="3">Pollen lands on the stigma. This is pollination: the transfer of pollen from the anther to the stigma.</div><button class="seqbtn" data-target="#stI" data-max="3">Next step &#9654;</button></div></div>
+      <div class="box"><div class="pcap">Pollination by wind</div>
+      <div class="box stage"><div id="stW" data-state="0"><svg viewBox="0 0 400 190" role="img" aria-label="Pollination by wind"><g transform="translate(90 110) scale(1.0)"><path d="M0 70 L0 10" stroke="#2c7a45" stroke-width="6"/><path d="M-6 10 C-30 -4 -34 -30 -26 -44 C-14 -30 -6 -14 0 4 Z" fill="#8aa0d8" stroke="#c4607f" stroke-width="2"/><path d="M6 10 C30 -4 34 -30 26 -44 C14 -30 6 -14 0 4 Z" fill="#8aa0d8" stroke="#c4607f" stroke-width="2"/><path d="M-4 8 L-14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="-15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M4 8 L14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M0 8 L0 -26" stroke="#2c7a45" stroke-width="4"/><ellipse cx="0" cy="-30" rx="6" ry="4" fill="#e0527a" stroke="#a3294f" stroke-width="1.5"/></g><g transform="translate(310 110) scale(1.0)"><path d="M0 70 L0 10" stroke="#2c7a45" stroke-width="6"/><path d="M-6 10 C-30 -4 -34 -30 -26 -44 C-14 -30 -6 -14 0 4 Z" fill="#8aa0d8" stroke="#c4607f" stroke-width="2"/><path d="M6 10 C30 -4 34 -30 26 -44 C14 -30 6 -14 0 4 Z" fill="#8aa0d8" stroke="#c4607f" stroke-width="2"/><path d="M-4 8 L-14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="-15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M4 8 L14 -16" stroke="#8a6d2f" stroke-width="3"/><ellipse cx="15" cy="-22" rx="4" ry="8" fill="#f2c230" stroke="#b58a1b"/><path d="M0 8 L0 -26" stroke="#2c7a45" stroke-width="4"/><ellipse cx="0" cy="-30" rx="6" ry="4" fill="#e0527a" stroke="#a3294f" stroke-width="1.5"/></g><g class="sg s0"><circle cx="76" cy="86" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="80" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="104" cy="86" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="100" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s1 s2"><path d="M120 40 C160 26 200 54 240 40" stroke="#7a9ab8" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M120 64 C160 50 200 78 240 64" stroke="#7a9ab8" stroke-width="2.5" fill="none" stroke-linecap="round"/></g><g class="sg s1"><circle cx="130" cy="48" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="158" cy="40" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="186" cy="52" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="214" cy="44" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s2"><circle cx="220" cy="56" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="250" cy="48" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="274" cy="62" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="292" cy="70" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s3"><circle cx="310" cy="80" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="306" cy="82" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/><circle cx="314" cy="82" r="2.4" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g></svg></div><div class="cap show" data-s="0">Pollen is light and powdery.</div><div class="cap" data-s="1">The wind blows it off the anthers.</div><div class="cap" data-s="2">It drifts through the air.</div><div class="cap" data-s="3">Some lands on a stigma. Pollination again.</div><button class="seqbtn" data-target="#stW" data-max="3">Next step &#9654;</button></div></div>
+    </div>
+    <div class="job">A butterfly passes through complete: egg, larva, pupa, adult. As an adult it drinks nectar and carries pollen.</div>
+    <div class="job">When pollen goes to a different flower, that is cross-pollination. Lesson 2 explains cross-pollination.</div><div class="job">Book box: cedar trees release great amounts of very light pollen into the air every year. Wind carries it, and it makes many people sneeze.</div>
+    <div class="pick" data-why="Yes. Colour and scent attract insects. Insects carry pollen to another stigma." data-hint="Think about what a butterfly is looking for."><p>Thinking Cap: why do many insect flowers have bright colours and a sweet scent?</p><button class="pb" data-ok>To attract insects, which carry the pollen</button><button class="pb">To keep the rain off the pollen</button><button class="pb">To make the wind blow harder</button><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="s5" data-lock="pick">
+    <h2>Fertilisation, Fruit and Seeds</h2>
+    <p>After pollination, the pollen grain enters an ovule. The nucleus of the pollen grain fuses with the nucleus of the egg. The result is a fertilised egg. This is <b>fertilisation</b>.</p>
+    <div class="why">Old mistake from Chapter 3: two eggs never join. Here the male cell is the pollen grain, and the female cell is the egg. Like every cell, each has a nucleus, and the cell membrane controls what goes in and out.</div>
+    <div class="box stage"><div id="stF" data-state="0"><svg viewBox="0 0 380 260" role="img" aria-label="From pollen to fruit and seeds"><path d="M190 250 L190 160" stroke="#2c7a45" stroke-width="8"/><g class="sg s0 s1 s2"><ellipse cx="190" cy="150" rx="46" ry="52" fill="#bfe3c6" stroke="#2c7a45" stroke-width="3"/><ellipse cx="172" cy="140" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="172" cy="140" r="3.2" fill="#c0392b"/><ellipse cx="208" cy="140" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="208" cy="140" r="3.2" fill="#c0392b"/><ellipse cx="190" cy="166" rx="7" ry="9" fill="#f6e3a1" stroke="#b58a1b" stroke-width="1.5" /><circle cx="190" cy="166" r="3.2" fill="#c0392b"/></g><g class="sg s3"><ellipse cx="190" cy="140" rx="68" ry="78" fill="#a5d36b" stroke="#4a8a2a" stroke-width="3"/><ellipse cx="162" cy="128" rx="9" ry="12" fill="#6b4a1f" stroke="#3a2610" stroke-width="2"/><ellipse cx="218" cy="128" rx="9" ry="12" fill="#6b4a1f" stroke="#3a2610" stroke-width="2"/><ellipse cx="190" cy="162" rx="9" ry="12" fill="#6b4a1f" stroke="#3a2610" stroke-width="2"/><ellipse cx="190" cy="112" rx="9" ry="12" fill="#6b4a1f" stroke="#3a2610" stroke-width="2"/></g><path d="M184 100 L184 36 L196 36 L196 100 Z" fill="#a8d8b0" stroke="#2c7a45" stroke-width="2" class="sg s0 s1 s2"/><ellipse cx="190" cy="30" rx="18" ry="11" fill="#e0527a" stroke="#a3294f" stroke-width="2" class="sg s0 s1 s2"/><g class="sg s0"><circle cx="190" cy="8" r="5" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><g class="sg s1"><circle cx="190" cy="24" r="5" fill="#f1cf3a" stroke="#b58a1b" stroke-width=".8"/></g><path d="M190 24 L190 90 L186 130" stroke="#d6a400" stroke-width="3" fill="none" stroke-dasharray="4 5" class="sg s1"/><circle cx="182" cy="134" r="5" fill="#d6a400" class="sg s2"/><circle cx="178" cy="140" r="4" fill="#7a1c12" class="sg s2"/><path d="M170 120 L174 128 M196 120 L190 128 M164 134 L172 136" stroke="#e8a600" stroke-width="2.5" class="sg s2"/></svg></div><div class="cap show" data-s="0">A pollen grain has landed on the stigma.</div><div class="cap" data-s="1">The pollen grain enters the ovule.</div><div class="cap" data-s="2">The nucleus of the pollen grain fuses with the nucleus of the egg: fertilisation.</div><div class="cap" data-s="3">The ovary develops into a fruit, and the ovules develop into seeds.</div><button class="seqbtn" data-target="#stF" data-max="3">Next step &#9654;</button></div>
+    <p>After fertilisation, the ovary develops into a fruit, and the ovules develop into seeds. Each seed carries a fertilised egg that can grow into a new plant. The fruit protects the seeds until they are released when the fruit is ripe.</p>
+    <div class="strip"><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Guava flower"><ellipse cx="60" cy="60" rx="14" ry="26" transform="rotate(0 60 60) translate(0 -20)" fill="#fff" stroke="#9bb59f" stroke-width="2"/><ellipse cx="60" cy="60" rx="14" ry="26" transform="rotate(72 60 60) translate(0 -20)" fill="#fff" stroke="#9bb59f" stroke-width="2"/><ellipse cx="60" cy="60" rx="14" ry="26" transform="rotate(144 60 60) translate(0 -20)" fill="#fff" stroke="#9bb59f" stroke-width="2"/><ellipse cx="60" cy="60" rx="14" ry="26" transform="rotate(216 60 60) translate(0 -20)" fill="#fff" stroke="#9bb59f" stroke-width="2"/><ellipse cx="60" cy="60" rx="14" ry="26" transform="rotate(288 60 60) translate(0 -20)" fill="#fff" stroke="#9bb59f" stroke-width="2"/><path d="M60 60 L82.0 60.0" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L79.0920219529083 70.9313630325622" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L71.13684565912112 78.97289299935345" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L60.237514575281885 81.99871784505926" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L49.27539374864409 79.20892554916536" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L41.14844742588316 71.34103018007221" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L38.005128470315576 60.47500146597411" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L40.676409838104775 49.48340058502246" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L48.45610720423838 41.271985179417364" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L59.28756700928606 38.01153849779975" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L70.30736676860829 40.56399757415663" stroke="#d8c45a" stroke-width="2"/><path d="M60 60 L78.60229413825458 48.25459013938384" stroke="#d8c45a" stroke-width="2"/><circle cx="60" cy="60" r="6" fill="#9bd08c"/></svg><div class="pcap">Guava flower</div></div><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Guava flower dies"><path d="M60 112 L60 70" stroke="#2c7a45" stroke-width="5"/><ellipse cx="60" cy="64" rx="12" ry="12" fill="#c9d8b4" stroke="#6b8a4a" stroke-width="2"/><path d="M44 74 C30 80 26 92 30 100 C40 92 48 86 50 76 Z" fill="#d8c9a0" stroke="#9b8452" stroke-width="1.5"/><path d="M76 74 C90 80 94 92 90 100 C80 92 72 86 70 76 Z" fill="#d8c9a0" stroke="#9b8452" stroke-width="1.5"/></svg><div class="pcap">Guava flower dies</div></div><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Guava fruit developing"><path d="M60 108 L60 64" stroke="#2c7a45" stroke-width="5"/><ellipse cx="60" cy="56" rx="18" ry="20" fill="#8cc98f" stroke="#2c7a45" stroke-width="2"/><path d="M52 38 L60 32 L68 38" stroke="#6b8a4a" stroke-width="2" fill="none"/></svg><div class="pcap">Guava fruit developing</div></div><div class="box"><svg viewBox="0 0 120 120" role="img" aria-label="Guava fruit developed"><path d="M60 108 L60 80" stroke="#2c7a45" stroke-width="5"/><ellipse cx="60" cy="52" rx="34" ry="34" fill="#a5d36b" stroke="#4a8a2a" stroke-width="2.5"/><path d="M50 22 L60 16 L70 22" stroke="#6b8a4a" stroke-width="2" fill="none"/></svg><div class="pcap">Guava fruit developed</div></div></div>
+    <div class="tree"><div class="q">Did pollen land on the stigma?</div><div class="arr">&darr; yes</div><div class="q">Did the pollen grain&#39;s nucleus fuse with the egg&#39;s nucleus?</div><div class="row"><div class="a">Yes: fertilisation. Fruit and seeds form.</div><div class="a">No: no seeds yet.</div></div></div>
+    <div class="why">Pollination is not fertilisation. Pollination is the pollen landing on the stigma. Fertilisation comes after it, and only then can seeds form.</div>
+    <div class="pick" data-why="Yes. The ovary becomes the fruit, and the ovules become the seeds." data-hint="The ovary is the big round base. The ovules are the small parts inside it."><p>Which pair is right?</p><button class="pb">The ovules become the fruit, and the ovary becomes the seeds</button><button class="pb" data-ok>The ovary becomes the fruit, and the ovules become the seeds</button><button class="pb">The anther becomes the fruit, and the stigma becomes the seeds</button><div class="pfb"></div></div>
+  </section>
+
+  <section class="screen" id="s6" data-lock="game">
+    <h2>Plants and Animals Compared</h2>
+    <p>In animals, males make sperm and females make eggs. In flowering plants, the male parts make pollen and the female parts make eggs. Pollen has a similar job to sperm. In both, a new living thing forms when the male and female cells fuse.</p>
+    <div class="rulebar">Fill the table. Pick a word, then tap a box.</div>
+    <div class="fillt gw"><div class="fchips"><button class="fchip" data-v="egg">egg</button><button class="fchip" data-v="sperm">sperm</button><button class="fchip" data-v="pollen">pollen</button><button class="fchip" data-v="fuse">the cells fuse</button></div>
+    <table class="tbl"><tr><th></th><th>Animals</th><th>Flowering plants</th></tr>
+    <tr><td class="rl">Female reproductive cell</td><td><button class="fcell" data-a="egg">&nbsp;</button></td><td><button class="fcell" data-a="egg">&nbsp;</button></td></tr>
+    <tr><td class="rl">Male reproductive cell</td><td><button class="fcell" data-a="sperm">&nbsp;</button></td><td><button class="fcell" data-a="pollen">&nbsp;</button></td></tr>
+    <tr><td class="rl">How the new organism forms</td><td><button class="fcell" data-a="fuse">&nbsp;</button></td><td><button class="fcell" data-a="fuse">&nbsp;</button></td></tr></table>
+    <div class="fnote"></div><div class="fdone hid sline">Pollen has a similar job to sperm: pollen is the male cell, and sperm is the male cell.</div></div>
+  </section>
+
+  <section class="screen" id="s7" data-lock="game">
+    <h2>The Four Processes, In Order</h2>
+    <p>A flowering plant cannot move to mate, yet it still makes seeds. It uses four processes. You have met the first two. The last two come next lesson set.</p>
+    <div class="rulebar">Tap them in order, first to last.</div>
+    <div class="ordw gw" data-hint="Which one happens first, when pollen lands?"><div class="ocds"><button class="ocd" data-i="3">germination</button><button class="ocd" data-i="2">seed dispersal</button><button class="ocd" data-i="1">fertilisation</button><button class="ocd" data-i="0">pollination</button></div><div class="olist"></div><div class="onote"></div><div class="odone hid sline">pollination, fertilisation, seed dispersal and germination</div></div>
+  </section>
+
+  <section class="screen" id="s8" data-lock="self game">
+    <h2>Book Check</h2>
+    <div class="rulebar">Check every statement. Say NOT in your head. Remember to copy the question's words when you write an answer.</div><div class="job">Next lesson also has a toolbox: distillation, steam that condenses, and faster vibrations make a higher pitch. The four processes in order: pollination, fertilisation, seed dispersal and germination.</div>
+    <div class="stmt gw" data-id="b"><p class="stq">Which statements are correct?</p><div class="srow" data-t="1"><span class="st">I. The anther is part of the male part.</span><div class="tfrow"><button class="tf" data-v="1">True</button><button class="tf" data-v="0">False</button></div></div><div class="srow" data-t="0"><span class="st">II. Pollen is a female cell.</span><div class="tfrow"><button class="tf" data-v="1">True</button><button class="tf" data-v="0">False</button></div></div><div class="srow" data-t="1"><span class="st">III. Pollination moves pollen to a stigma.</span><div class="tfrow"><button class="tf" data-v="1">True</button><button class="tf" data-v="0">False</button></div></div><div class="snote"></div><button class="so" data-r="I only" disabled>I only</button><button class="so" data-r="II and III only" disabled>II and III only</button><button class="so" data-ok data-r="I and III only" disabled>I and III only</button><button class="so" data-r="I, II and III" disabled>I, II and III</button><div class="pfb"></div></div>
+    <div class="mcq selfq" data-why="Yes. The anther is the male part." data-hint="The female part has a stigma, an ovary and ovules." data-fail="route"><p>Which one is <b>NOT</b> part of the female part of a flower?</p><button class="opt">stigma</button><button class="opt">ovary</button><button class="opt">ovule</button><button class="opt" data-ok>anther</button><button class="chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-why="Yes. The ovary becomes the fruit." data-hint="No anthers means this is a female flower. Which female part is the swelling?" data-fail="route"><p>A pumpkin plant has a flower with a small round swelling under its petals and no anthers. Which part is the swelling, and what will it become?</p><button class="opt" data-ok>The ovary: it will become the fruit</button><button class="opt">The anther: it will become pollen</button><button class="opt">The ovule: it will become the fruit</button><button class="opt">The petal: it will become the seed</button><button class="chk">Check</button><div class="fb"></div></div>
+    <div class="mcq selfq" data-why="Yes. Insects and wind carry pollen." data-hint="Pollen needs something that moves." data-fail="route"><p>Which one carries pollen between flowers?</p><button class="opt" data-ok>A butterfly</button><button class="opt">The stem</button><button class="opt">The root</button><button class="chk">Check</button><div class="fb"></div></div>
+    <div class="selfres"></div>
+  </section>
+
+  <div class="nav">
+    <button class="btn prev" id="prev">&larr; Back</button>
+    <a class="btn hub" href="index.html">&#127968; Hub</a>
+    <button class="btn next" id="next">Next &rarr;</button>
+  </div>
+  <div class="dots" id="dots"></div>
+</div>
+<script src="sci_lesson_engine.js"></script>
+<script src="FlowerPower_Sim.js"></script>
+</body>
+</html>

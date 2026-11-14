@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '10 Nov 2026',
+  updated:        '14 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:'M6', topic:'Milestone Test 6 &mdash; Units 54&ndash;61 (Ch.2 retention, Ch.3 in full, the Physics and Chemistry toolbox)', status:'&#127381; Built and ready (10 Nov 2026), from `BUILD_PLAN_SCI_M6_Milestone6.md` v1.0. A short warm-up and a 40-question milestone (A 16 x 1.25, B 16 x 2.5, C 8 x 5 = 100, pass 80; baseline M5 = 80). No lessons, no written part. Sit it Wed 11 - Sat 14 Nov 2026, after the school Ch.3 test.' },
+    currentUnit: { n:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', status:'&#127381; Built and ready (14 Nov 2026), from `BUILD_PLAN_SCI_U62_InsideAFlower.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Written answers restart with this unit.' },
 
   lastUnit: {
-    n:61, score:45, outOf:50, pct:90, passBar:40, delta:null, prevScore:47, passed:true, minutesSpent:5.3, minutesUnit:61, minutesNote:'U60 was 6.6', firstPassScore:39,
-    patternLabel: 'Unit 61 result - Biology: Chapter 3 school-test prep II, Mock B (45/50, 90%, PASS)',
-    patternInsight: '<strong>45/50 (90%)</strong> - PASS (bar 40). Part A 30/30, Part B 15/20. Sat alone, no notes, 5.3 minutes. First clicks 39, final 45; three own changes (Q3, Q8, Q15), all wrong to right. Statement items Q10, Q11, Q14 all right first click; predict-first Q13 typed 12, picked 12.',
-    analysisLabel: 'Misses: Q20, Q21',
-    analysisInsight: '<strong>Facts only:</strong> Q20 0/2 (ticked two true facts), Q21 1/4 provisional (only "pea" matched). Full record: `Memory Backup\\TEST_RECORD_SCI_U061.md`.',
-    qSummary: '<strong>45 / 50 (90%) - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U061.md`.',
+    n:'M6', score:36, outOf:40, pct:90, passBar:32, delta:10, prevScore:80, passed:true, minutesSpent:9.3, minutesUnit:'M6', minutesNote:'M5 was 13.4', firstPassScore:32,
+    patternLabel: 'Milestone 6 result - Units 54-61 (90/100, PASS)',
+    patternInsight: '<strong>90/100 (36/40)</strong> - PASS (bar 80), +10 on M5 (80). Section A 14/16, B 15/16, C 7/8. Physics 11/11 and Earth &amp; Space 3/3 perfect. Sat alone, no notes, 9.3 minutes (M5 13.4). First clicks 82.5, final 90; four own changes (Q7, Q12, Q20, Q25), all wrong to right. Statement item Q35 right on the first click.',
+    analysisLabel: 'Misses: Q4, Q10, Q27, Q36',
+    analysisInsight: '<strong>Facts only:</strong> Q4 chose the nucleus for the cell membrane; Q10 chose nymph for pupa; Q27 chose a paper filter for salt water; Q36 real size (&times;250) typed 125 and chose 12.5 mm, correct 0.08 mm. Full record: `Memory Backup\\TEST_RECORD_SCI_M06.md`.',
+    qSummary: '<strong>90 / 100 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_M06.md`.',
     qBreakdown: []
   },
 
@@ -106,11 +106,24 @@ var PREM_DATA = {
     { unit:59, topic:'Biology: Chapter 3 Extension I &mdash; Strategies for Survival (animal groups, one parent or two, saving a kind; ASMOPSS)', score:19, outOf:20, pct:95, passBar:16, date:'2026-11-05', firstPassScore:19, minutesSpent:6.6 },
     { unit:60, topic:'Biology: Chapter 3 school-format mock (Part A + B /50; Part C ASMOPSS 8/12 separate)', score:47, outOf:50, pct:94, passBar:40, date:'2026-11-08', firstPassScore:43, minutesSpent:6.6, partC:'8/12' },
     { unit:61, topic:'Biology: Chapter 3 school-test prep II, Mock B, the night before (Part A + B /50)', score:45, outOf:50, pct:90, passBar:40, date:'2026-11-09', firstPassScore:39, minutesSpent:5.3 },
+    { unit:'M6', topic:'Milestone Test 6 - Units 54-61', score:36, outOf:40, marks:90, marksOutOf:100, pct:90, passBar:32, firstPassMarks:82.5, minutes:9.3, date:'2026-11-13' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 'M6', badge: 'linear-gradient(135deg,#DAA520,#8a1c1c)',
+      title: 'Milestone Test 6 &mdash; Units 54&ndash;61',
+      tags: [
+        { t:'&#9989; 90/100 PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 82.5 &rarr; final 90', c:'tgreen' },
+        { t:'9.3 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_M6_Milestone6.md` v1.0. <strong>Taken Fri 13 Nov 2026: 90/100 (36/40), PASS</strong>, +10 on M5. Physics 11/11, Earth &amp; Space 3/3. Missed Q4, Q10, Q27, Q36. Record: `Memory Backup\\TEST_RECORD_SCI_M06.md`.',
+      status: 'done'
+    },
     {
       n: 61, badge: 'linear-gradient(135deg,#14305c,#1b5e3a)',
       title: 'Biology: Chapter 3 school-test prep II &mdash; Mock B, the night before',
