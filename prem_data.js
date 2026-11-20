@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '14 Nov 2026',
+  updated:        '20 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', status:'&#127381; Built and ready (14 Nov 2026), from `BUILD_PLAN_SCI_U62_InsideAFlower.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Written answers restart with this unit.' },
+    currentUnit: { n:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', status:'&#127381; Built and ready (20 Nov 2026), from `BUILD_PLAN_SCI_U63_SeedJourney.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Deciding item: Q18 (starch in a bag in iodine).' },
 
   lastUnit: {
-    n:'M6', score:36, outOf:40, pct:90, passBar:32, delta:10, prevScore:80, passed:true, minutesSpent:9.3, minutesUnit:'M6', minutesNote:'M5 was 13.4', firstPassScore:32,
-    patternLabel: 'Milestone 6 result - Units 54-61 (90/100, PASS)',
-    patternInsight: '<strong>90/100 (36/40)</strong> - PASS (bar 80), +10 on M5 (80). Section A 14/16, B 15/16, C 7/8. Physics 11/11 and Earth &amp; Space 3/3 perfect. Sat alone, no notes, 9.3 minutes (M5 13.4). First clicks 82.5, final 90; four own changes (Q7, Q12, Q20, Q25), all wrong to right. Statement item Q35 right on the first click.',
-    analysisLabel: 'Misses: Q4, Q10, Q27, Q36',
-    analysisInsight: '<strong>Facts only:</strong> Q4 chose the nucleus for the cell membrane; Q10 chose nymph for pupa; Q27 chose a paper filter for salt water; Q36 real size (&times;250) typed 125 and chose 12.5 mm, correct 0.08 mm. Full record: `Memory Backup\\TEST_RECORD_SCI_M06.md`.',
-    qSummary: '<strong>90 / 100 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_M06.md`.',
+    n:62, score:17, outOf:20, pct:85, passBar:16, delta:-2, prevScore:19, passed:true, minutesSpent:7.7, minutesUnit:'U62', minutesNote:'M6 was 9.3', firstPassScore:12,
+    patternLabel: 'Unit 62 result - Inside a Flower (17/20, PASS)',
+    patternInsight: '<strong>17/20 (85%)</strong> - PASS (bar 16). Section A 1/2, B 5/6, C 11/12. Sat alone, no notes, 7.7 minutes (M6 9.3). First clicks 12, final 17: five own changes, all wrong to right (Q4, Q6, Q11, Q15, Q17). Deciding item Q14 (pollination vs fertilisation) right on the first click. Statement item Q11 first click &ldquo;I only&rdquo;, changed himself to the right answer.',
+    analysisLabel: 'Misses: Q1, Q3, Q16',
+    analysisInsight: '<strong>Facts only:</strong> Q1 (egg cells) chose the petals, first click the pollen sacs, correct the ovules in the ovary; Q3 chose morning glory, correct maize; Q16 chose &ldquo;keeps the pollen dry and safe&rdquo;. Q21 written: 1/2 provisional (hand mark pending). Full record: `Memory Backup\\TEST_RECORD_SCI_U062.md`.',
+    qSummary: '<strong>17 / 20 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U062.md`.',
     qBreakdown: []
   },
 
@@ -107,11 +107,24 @@ var PREM_DATA = {
     { unit:60, topic:'Biology: Chapter 3 school-format mock (Part A + B /50; Part C ASMOPSS 8/12 separate)', score:47, outOf:50, pct:94, passBar:40, date:'2026-11-08', firstPassScore:43, minutesSpent:6.6, partC:'8/12' },
     { unit:61, topic:'Biology: Chapter 3 school-test prep II, Mock B, the night before (Part A + B /50)', score:45, outOf:50, pct:90, passBar:40, date:'2026-11-09', firstPassScore:39, minutesSpent:5.3 },
     { unit:'M6', topic:'Milestone Test 6 - Units 54-61', score:36, outOf:40, marks:90, marksOutOf:100, pct:90, passBar:32, firstPassMarks:82.5, minutes:9.3, date:'2026-11-13' },
+    { unit:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', score:17, outOf:20, pct:85, passBar:16, date:'2026-11-15', firstPassScore:12, minutesSpent:7.7, part2:'1/2' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 62, badge: 'linear-gradient(135deg,#6b2a6b,#1f6b3f)',
+      title: 'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (pollination and fertilisation)',
+      tags: [
+        { t:'&#9989; 17/20 (85%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 12 &rarr; final 17', c:'tgreen' },
+        { t:'7.7 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U62_InsideAFlower.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Sun 15 Nov 2026: 17/20 (85%), PASS</strong>. Deciding Q14 right on the first click. Missed Q1, Q3, Q16. Q21 written 1/2 (provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U062.md`.',
+      status: 'done'
+    },
     {
       n: 'M6', badge: 'linear-gradient(135deg,#DAA520,#8a1c1c)',
       title: 'Milestone Test 6 &mdash; Units 54&ndash;61',
