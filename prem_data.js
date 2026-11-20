@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', status:'&#127381; Built and ready (20 Nov 2026), from `BUILD_PLAN_SCI_U63_SeedJourney.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Deciding item: Q18 (starch in a bag in iodine).' },
+    currentUnit: { n:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', status:'&#127381; Built and ready (20 Nov 2026), from `BUILD_PLAN_SCI_U64_PlantTricks.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Deciding item: Q12 (which young plants are most like the parent).' },
 
   lastUnit: {
-    n:62, score:17, outOf:20, pct:85, passBar:16, delta:-2, prevScore:19, passed:true, minutesSpent:7.7, minutesUnit:'U62', minutesNote:'M6 was 9.3', firstPassScore:12,
-    patternLabel: 'Unit 62 result - Inside a Flower (17/20, PASS)',
-    patternInsight: '<strong>17/20 (85%)</strong> - PASS (bar 16). Section A 1/2, B 5/6, C 11/12. Sat alone, no notes, 7.7 minutes (M6 9.3). First clicks 12, final 17: five own changes, all wrong to right (Q4, Q6, Q11, Q15, Q17). Deciding item Q14 (pollination vs fertilisation) right on the first click. Statement item Q11 first click &ldquo;I only&rdquo;, changed himself to the right answer.',
-    analysisLabel: 'Misses: Q1, Q3, Q16',
-    analysisInsight: '<strong>Facts only:</strong> Q1 (egg cells) chose the petals, first click the pollen sacs, correct the ovules in the ovary; Q3 chose morning glory, correct maize; Q16 chose &ldquo;keeps the pollen dry and safe&rdquo;. Q21 written: 1/2 provisional (hand mark pending). Full record: `Memory Backup\\TEST_RECORD_SCI_U062.md`.',
-    qSummary: '<strong>17 / 20 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U062.md`.',
+    n:63, score:18, outOf:20, pct:90, passBar:16, delta:1, prevScore:17, passed:true, minutesSpent:5.7, minutesUnit:'U63', minutesNote:'U62 was 7.7', firstPassScore:11,
+    patternLabel: 'Unit 63 result - The Seed\'s Journey (18/20, PASS)',
+    patternInsight: '<strong>18/20 (90%)</strong> - PASS (bar 16). Section A 2/2, B 5/6, C 11/12. Sat alone, no notes, 5.7 minutes (U62 7.7). First clicks 11, final 18: seven own changes, all wrong to right (Q3, Q5, Q8, Q11, Q12, Q14, Q17). Deciding item Q18 (starch bag in iodine) right on the first click. Statement item Q11 first click &ldquo;I only&rdquo;, changed himself to the right answer.',
+    analysisLabel: 'Misses: Q7, Q15',
+    analysisInsight: '<strong>Facts only:</strong> Q7 (what comes straight after seed dispersal) chose pollination, correct germination, never changed; Q15 (three seeds in order of distance) chose Z, X, Y, correct Y, Z, X, never changed. Q21 written: 0/2 provisional (hand mark pending). Full record: `Memory Backup\\TEST_RECORD_SCI_U063.md`.',
+    qSummary: '<strong>18 / 20 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U063.md`.',
     qBreakdown: []
   },
 
@@ -108,11 +108,24 @@ var PREM_DATA = {
     { unit:61, topic:'Biology: Chapter 3 school-test prep II, Mock B, the night before (Part A + B /50)', score:45, outOf:50, pct:90, passBar:40, date:'2026-11-09', firstPassScore:39, minutesSpent:5.3 },
     { unit:'M6', topic:'Milestone Test 6 - Units 54-61', score:36, outOf:40, marks:90, marksOutOf:100, pct:90, passBar:32, firstPassMarks:82.5, minutes:9.3, date:'2026-11-13' },
     { unit:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', score:17, outOf:20, pct:85, passBar:16, date:'2026-11-15', firstPassScore:12, minutesSpent:7.7, part2:'1/2' },
+    { unit:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', score:18, outOf:20, pct:90, passBar:16, date:'2026-11-20', firstPassScore:11, minutesSpent:5.7, part2:'0/2' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 63, badge: 'linear-gradient(135deg,#1f5c3a,#c8641a)',
+      title: 'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (dispersal and germination)',
+      tags: [
+        { t:'&#9989; 18/20 (90%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 11 &rarr; final 18', c:'tgreen' },
+        { t:'5.7 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U63_SeedJourney.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Fri 20 Nov 2026: 18/20 (90%), PASS</strong>. Deciding Q18 right on the first click. Missed Q7, Q15. Q21 written 0/2 (provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U063.md`.',
+      status: 'done'
+    },
     {
       n: 62, badge: 'linear-gradient(135deg,#6b2a6b,#1f6b3f)',
       title: 'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (pollination and fertilisation)',
