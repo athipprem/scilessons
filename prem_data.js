@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:65, topic:'Biology: Chapter 4 &mdash; Ready for the School Test (Reproduction in Plants), school-format mock', status:'&#127381; Built and ready (23 Nov 2026), from `BUILD_PLAN_SCI_U65_Ch4Mock.md` v1.0 (gate 0 FAIL(s)): a warm-up, one lesson, a 28-item Chapter 4 school-format mock (Part A 15 multiple choice + Part B 7 structured items = /50, pass 40; Part C 6 ASMOPSS items /12, scored separately) and an on-screen Last-Look card. Deciding item: Q13.' },
+    currentUnit: { n:66, topic:'Biology: Chapter 4 &mdash; School-Test Practice B (Fix-It lesson, then Mock B)', status:'&#127381; Built and ready (23 Nov 2026), from `BUILD_PLAN_SCI_U66_Ch4MockB.md` v1.0 (gate 0 FAIL(s)): a warm-up and a Fix-It lesson (Wed 25 Nov) with three new-cause devices, then Mock B (Thu 26 Nov): 22 items, Part A 15 multiple choice + Part B 7 structured = /50, pass 40, no extra part. Deciding item: Q5.' },
 
   lastUnit: {
-    n:64, score:14, outOf:20, pct:70, passBar:16, delta:-4, prevScore:18, passed:false, minutesSpent:6.9, minutesUnit:'U64', minutesNote:'U63 was 5.7', firstPassScore:11,
-    patternLabel: 'Unit 64 result - Plants\' Other Tricks (14/20, below the bar)',
-    patternInsight: '<strong>14/20 (70%)</strong> - below the pass bar (16). Section A 2/2, B 3/6, C 9/12. Sat alone, no notes, 6.9 minutes (U63 5.7). First clicks 11, final 14: five own changes wrong to right (Q2, Q7, Q11, Q12, Q18), two right to wrong (Q8, Q14). Deciding item Q12 (plantlets vs seed plants) right.',
-    analysisLabel: 'Misses: Q5, Q6, Q8, Q10, Q14, Q20',
-    analysisInsight: '<strong>Facts only:</strong> Q5 chose fallen seeds for young banana plants; Q6 spores; Q8 and Q14 changed from right to wrong; Q10 chose &ldquo;II and III only&rdquo; (key &ldquo;II only&rdquo;); Q20 chose the ALWAYS option after 63 s. Q21 written 1/2 by the marker (hand mark 2/2). Full record: `Memory Backup\\TEST_RECORD_SCI_U064.md`.',
-    qSummary: '<strong>14 / 20 - below the bar.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U064.md`.',
+    n:65, score:34, outOf:50, pct:68, passBar:40, delta:null, prevScore:null, passed:false, minutesSpent:10.6, minutesUnit:'U65', minutesNote:'U64 was 6.9', firstPassScore:34, partC:'12/12',
+    patternLabel: 'Unit 65 result - Chapter 4 school-format mock (34/50, below the bar)',
+    patternInsight: '<strong>34/50 (68%)</strong> - below the pass bar (40). Part A 20/30, Part B 14/20, Part C 12/12 (scored separately). Sat alone, no notes, Mon 23 Nov, 10.6 minutes (U64 6.9). First clicks 16/21 MCQ. Deciding item Q13 (spore, not a plant part) right.',
+    analysisLabel: 'Misses: Q5, Q6, Q9, Q10, Q14',
+    analysisInsight: '<strong>Facts only:</strong> Q5 put seed dispersal before fertilisation; Q6 chose &ldquo;fewer plants, so each makes seeds sooner&rdquo;; Q9 chose &ldquo;II and III only&rdquo;; Q10 chose seeds that fell off the old plant (key: suckers); Q14 typed 3, key 4. Q17 1/2 (anther and stigma jobs swapped), Q18 2/4 (dishes C and D reversed), Q21 1/2 and Q22 0/2 by the marker (written, provisional). Full record: `Memory Backup\\TEST_RECORD_SCI_U065.md`.',
+    qSummary: '<strong>34 / 50 - below the bar.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U065.md`.',
     qBreakdown: []
   },
 
@@ -110,11 +110,24 @@ var PREM_DATA = {
     { unit:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', score:17, outOf:20, pct:85, passBar:16, date:'2026-11-15', firstPassScore:12, minutesSpent:7.7, part2:'1/2' },
     { unit:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', score:18, outOf:20, pct:90, passBar:16, date:'2026-11-20', firstPassScore:11, minutesSpent:5.7, part2:'0/2' },
     { unit:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', score:14, outOf:20, pct:70, passBar:16, date:'2026-11-22', firstPassScore:11, minutesSpent:6.9, part2:'1/2' },
+    { unit:65, topic:'Biology: Chapter 4 school-format mock (Ready for the School Test)', score:34, outOf:50, pct:68, passBar:40, date:'2026-11-23', firstPassScore:34, minutesSpent:10.6, partC:'12/12', part2:'Q21 1/2, Q22 0/2 (marker, provisional; inside the 50)' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 65, badge: 'linear-gradient(135deg,#14305c,#1f6b3f)',
+      title: 'Biology: Chapter 4 &mdash; Ready for the School Test (school-format mock, Part A + B + extra Part C)',
+      tags: [
+        { t:'&#9888; 34/50 (68%) below the bar of 40', s:'background:#ffe0b2;color:#c05621;font-weight:700' },
+        { t:'Part C 12/12', c:'tgreen' },
+        { t:'10.6 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U65_Ch4Mock.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Mon 23 Nov 2026: 34/50 (68%), below the bar of 40</strong> (A 20/30, B 14/20, C 12/12 separate). First clicks 16/21 MCQ. Deciding Q13 right. Missed Q5, Q6, Q9, Q10, Q14; Q17 1/2, Q18 2/4, Q21 1/2, Q22 0/2 (written marks provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U065.md`.',
+      status: 'done'
+    },
     {
       n: 64, badge: 'linear-gradient(135deg,#0f6b66,#1f6b3f)',
       title: 'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (spores, suckers, underground stems, leaves)',
