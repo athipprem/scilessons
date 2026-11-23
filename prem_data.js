@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '20 Nov 2026',
+  updated:        '23 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', status:'&#127381; Built and ready (20 Nov 2026), from `BUILD_PLAN_SCI_U64_PlantTricks.md` v1.0 (gate 0 FAIL(s)): a warm-up, two lessons and a 20-question test (2 Basic, 6 Intermediate, 12 Applied, pass 16) plus one 2-mark written answer, scored separately. Deciding item: Q12 (which young plants are most like the parent).' },
+    currentUnit: { n:65, topic:'Biology: Chapter 4 &mdash; Ready for the School Test (Reproduction in Plants), school-format mock', status:'&#127381; Built and ready (23 Nov 2026), from `BUILD_PLAN_SCI_U65_Ch4Mock.md` v1.0 (gate 0 FAIL(s)): a warm-up, one lesson, a 28-item Chapter 4 school-format mock (Part A 15 multiple choice + Part B 7 structured items = /50, pass 40; Part C 6 ASMOPSS items /12, scored separately) and an on-screen Last-Look card. Deciding item: Q13.' },
 
   lastUnit: {
-    n:63, score:18, outOf:20, pct:90, passBar:16, delta:1, prevScore:17, passed:true, minutesSpent:5.7, minutesUnit:'U63', minutesNote:'U62 was 7.7', firstPassScore:11,
-    patternLabel: 'Unit 63 result - The Seed\'s Journey (18/20, PASS)',
-    patternInsight: '<strong>18/20 (90%)</strong> - PASS (bar 16). Section A 2/2, B 5/6, C 11/12. Sat alone, no notes, 5.7 minutes (U62 7.7). First clicks 11, final 18: seven own changes, all wrong to right (Q3, Q5, Q8, Q11, Q12, Q14, Q17). Deciding item Q18 (starch bag in iodine) right on the first click. Statement item Q11 first click &ldquo;I only&rdquo;, changed himself to the right answer.',
-    analysisLabel: 'Misses: Q7, Q15',
-    analysisInsight: '<strong>Facts only:</strong> Q7 (what comes straight after seed dispersal) chose pollination, correct germination, never changed; Q15 (three seeds in order of distance) chose Z, X, Y, correct Y, Z, X, never changed. Q21 written: 0/2 provisional (hand mark pending). Full record: `Memory Backup\\TEST_RECORD_SCI_U063.md`.',
-    qSummary: '<strong>18 / 20 - PASS.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U063.md`.',
+    n:64, score:14, outOf:20, pct:70, passBar:16, delta:-4, prevScore:18, passed:false, minutesSpent:6.9, minutesUnit:'U64', minutesNote:'U63 was 5.7', firstPassScore:11,
+    patternLabel: 'Unit 64 result - Plants\' Other Tricks (14/20, below the bar)',
+    patternInsight: '<strong>14/20 (70%)</strong> - below the pass bar (16). Section A 2/2, B 3/6, C 9/12. Sat alone, no notes, 6.9 minutes (U63 5.7). First clicks 11, final 14: five own changes wrong to right (Q2, Q7, Q11, Q12, Q18), two right to wrong (Q8, Q14). Deciding item Q12 (plantlets vs seed plants) right.',
+    analysisLabel: 'Misses: Q5, Q6, Q8, Q10, Q14, Q20',
+    analysisInsight: '<strong>Facts only:</strong> Q5 chose fallen seeds for young banana plants; Q6 spores; Q8 and Q14 changed from right to wrong; Q10 chose &ldquo;II and III only&rdquo; (key &ldquo;II only&rdquo;); Q20 chose the ALWAYS option after 63 s. Q21 written 1/2 by the marker (hand mark 2/2). Full record: `Memory Backup\\TEST_RECORD_SCI_U064.md`.',
+    qSummary: '<strong>14 / 20 - below the bar.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U064.md`.',
     qBreakdown: []
   },
 
@@ -109,11 +109,24 @@ var PREM_DATA = {
     { unit:'M6', topic:'Milestone Test 6 - Units 54-61', score:36, outOf:40, marks:90, marksOutOf:100, pct:90, passBar:32, firstPassMarks:82.5, minutes:9.3, date:'2026-11-13' },
     { unit:62, topic:'Biology: Chapter 4 &sect;A &mdash; Inside a Flower (Pollination and Fertilisation)', score:17, outOf:20, pct:85, passBar:16, date:'2026-11-15', firstPassScore:12, minutesSpent:7.7, part2:'1/2' },
     { unit:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', score:18, outOf:20, pct:90, passBar:16, date:'2026-11-20', firstPassScore:11, minutesSpent:5.7, part2:'0/2' },
+    { unit:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', score:14, outOf:20, pct:70, passBar:16, date:'2026-11-22', firstPassScore:11, minutesSpent:6.9, part2:'1/2' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 64, badge: 'linear-gradient(135deg,#0f6b66,#1f6b3f)',
+      title: 'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (spores, suckers, underground stems, leaves)',
+      tags: [
+        { t:'&#9888; 14/20 (70%) below the bar', s:'background:#ffe0b2;color:#c05621;font-weight:700' },
+        { t:'First click 11 &rarr; final 14', c:'tgreen' },
+        { t:'6.9 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U64_PlantTricks.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Sun 22 Nov 2026: 14/20 (70%), below the bar of 16</strong>. Deciding Q12 right. Missed Q5, Q6, Q8, Q10, Q14, Q20. Q21 written 1/2 by the marker. Record: `Memory Backup\\TEST_RECORD_SCI_U064.md`.',
+      status: 'done'
+    },
     {
       n: 63, badge: 'linear-gradient(135deg,#1f5c3a,#c8641a)',
       title: 'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (dispersal and germination)',
