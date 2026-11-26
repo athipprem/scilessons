@@ -1,0 +1,1131 @@
+{
+  "student": "Prem",
+  "unit": 66,
+  "paceVersion": "2.1",
+  "lockSeconds": 0,
+  "warmUp": {
+    "page": "warm-up",
+    "startedAt": "2026-11-25T13:13:38.071Z",
+    "qf1": {
+      "spots": [
+        "anther",
+        "stigma"
+      ],
+      "spotWrong": 0,
+      "sort": [
+        "Pollen is caught here",
+        "Pollen is made here",
+        "Its tips hold the pollen grains",
+        "Pollen grains land on its top"
+      ],
+      "sortWrong": 4
+    },
+    "qf2": {
+      "rows": [
+        {
+          "factor": "water",
+          "predictedGrows": true,
+          "actualGrows": false,
+          "predictionRight": false
+        },
+        {
+          "factor": "air",
+          "predictedGrows": false,
+          "actualGrows": false,
+          "predictionRight": true
+        },
+        {
+          "factor": "warmth",
+          "predictedGrows": true,
+          "actualGrows": false,
+          "predictionRight": false
+        },
+        {
+          "factor": "light",
+          "predictedGrows": false,
+          "actualGrows": true,
+          "predictionRight": false
+        }
+      ]
+    },
+    "qf3": {
+      "drops": 1,
+      "typed": [
+        "seed dispersal",
+        "seed dispersalu",
+        "seed dispersal",
+        "seed dispersal",
+        "seed dispersal",
+        "germination",
+        "germination",
+        "germination"
+      ],
+      "accepted": null
+    },
+    "qf4": {
+      "typed": [],
+      "ticks": null,
+      "modelShown": false,
+      "tries": 0
+    },
+    "cards": {
+      "opened": []
+    },
+    "screensSeen": [
+      "s1",
+      "s2",
+      "s3",
+      "s4"
+    ],
+    "savedAt": "2026-11-25T13:14:34.285Z"
+  },
+  "lessonLog": {
+    "page": "fix-it lesson",
+    "startedAt": "2026-11-25T13:14:44.179Z",
+    "d1": {
+      "concrete": {
+        "order": [
+          "pollen on stigma",
+          "blow tried early",
+          "pollen tube grown",
+          "nuclei fused, counter 1",
+          "seed blown away"
+        ],
+        "earlyBlowTries": 1
+      },
+      "ladder": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "d2": {
+      "concrete": {
+        "zoomSeen": [
+          1,
+          2,
+          3
+        ],
+        "checks": [
+          "petals",
+          "anther",
+          "stigma"
+        ]
+      },
+      "procedural": [
+        {
+          "q": "A plant has petals, an anther and a stigma. Flower or not?",
+          "wrongTaps": 1
+        },
+        {
+          "q": "A plant has no petals, no anther and no stigma. Flower or no",
+          "wrongTaps": 1
+        }
+      ]
+    },
+    "d3": {
+      "concrete": {
+        "steps": [
+          "cut: tiny black dots",
+          "planted the dots",
+          "nothing grew",
+          "dug down",
+          "lifted together"
+        ]
+      },
+      "procedural": [
+        {
+          "q": "A young plant grows beside an old one, joined at the base. S",
+          "wrongTaps": 0
+        },
+        {
+          "q": "A tiny plant grows alone from a seed in the soil. Sucker or ",
+          "wrongTaps": 1
+        }
+      ]
+    },
+    "routine": {
+      "counts": {
+        "tries": 1,
+        "counted": 5
+      },
+      "picks": [
+        {
+          "q": "Seeds need to ____ in warm, damp soil.",
+          "wrongTaps": 0
+        },
+        {
+          "q": "Which answer has both ideas?",
+          "wrongTaps": 0
+        }
+      ]
+    },
+    "deviceChecks": {
+      "d1": [
+        {
+          "item": "A seed is blowing across a field. Which step has already happened?",
+          "chosen": "Germination, because it has a root",
+          "firstCorrect": false,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:15:26.365Z"
+        },
+        {
+          "item": "A gardener spreads fertiliser on the soil. What is it?",
+          "chosen": "The start of fertilisation in the flower",
+          "firstCorrect": false,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:15:30.704Z"
+        },
+        {
+          "item": "A seed is blowing across a field. Which step has already happened?",
+          "chosen": "Fertilisation, because a seed exists",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:15:43.244Z"
+        },
+        {
+          "item": "A gardener spreads fertiliser on the soil. What is it?",
+          "chosen": "Fertiliser is plant food, not fertilisation",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:15:45.867Z"
+        }
+      ],
+      "d2": [
+        {
+          "item": "A moss plant has stalks with small tips. Is a tip a flower?",
+          "chosen": "No. Moss has no flowers",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:16:06.405Z"
+        },
+        {
+          "item": "What puffs out of an open moss capsule?",
+          "chosen": "Spores",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:16:18.821Z"
+        }
+      ],
+      "d3": [
+        {
+          "item": "Seeds from a banana we eat are planted. What happens?",
+          "chosen": "A seedling grows in a few weeks",
+          "firstCorrect": false,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:16:47.994Z"
+        },
+        {
+          "item": "A young plant is joined to the old plant at the base. What is it?",
+          "chosen": "A spore",
+          "firstCorrect": false,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:16:56.240Z"
+        },
+        {
+          "item": "Seeds from a banana we eat are planted. What happens?",
+          "chosen": "Nothing grows: the bananas we eat have no seeds that can grow",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:17:04.717Z"
+        },
+        {
+          "item": "A young plant is joined to the old plant at the base. What is it?",
+          "chosen": "A sucker",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-25T13:17:13.450Z"
+        }
+      ],
+      "d1SentTo": [
+        "the seed counter"
+      ],
+      "d1Result": "passed",
+      "d2Result": "passed",
+      "d3SentTo": [
+        "the banana picture"
+      ],
+      "d3Result": "passed"
+    },
+    "routeWalk": [
+      "s1",
+      "s2",
+      "s1",
+      "s2",
+      "s1",
+      "s2",
+      "s4",
+      "s5",
+      "s7",
+      "s8",
+      "s8",
+      "s7",
+      "s8"
+    ],
+    "screensSeen": [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8",
+      "s9",
+      "s10"
+    ],
+    "savedAt": "2026-11-25T13:17:32.828Z"
+  },
+  "deviceChecks": {
+    "d1": [
+      {
+        "item": "A seed is blowing across a field. Which step has already happened?",
+        "chosen": "Germination, because it has a root",
+        "firstCorrect": false,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:15:26.365Z"
+      },
+      {
+        "item": "A gardener spreads fertiliser on the soil. What is it?",
+        "chosen": "The start of fertilisation in the flower",
+        "firstCorrect": false,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:15:30.704Z"
+      },
+      {
+        "item": "A seed is blowing across a field. Which step has already happened?",
+        "chosen": "Fertilisation, because a seed exists",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:15:43.244Z"
+      },
+      {
+        "item": "A gardener spreads fertiliser on the soil. What is it?",
+        "chosen": "Fertiliser is plant food, not fertilisation",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:15:45.867Z"
+      }
+    ],
+    "d2": [
+      {
+        "item": "A moss plant has stalks with small tips. Is a tip a flower?",
+        "chosen": "No. Moss has no flowers",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:16:06.405Z"
+      },
+      {
+        "item": "What puffs out of an open moss capsule?",
+        "chosen": "Spores",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:16:18.821Z"
+      }
+    ],
+    "d3": [
+      {
+        "item": "Seeds from a banana we eat are planted. What happens?",
+        "chosen": "A seedling grows in a few weeks",
+        "firstCorrect": false,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:16:47.994Z"
+      },
+      {
+        "item": "A young plant is joined to the old plant at the base. What is it?",
+        "chosen": "A spore",
+        "firstCorrect": false,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:16:56.240Z"
+      },
+      {
+        "item": "Seeds from a banana we eat are planted. What happens?",
+        "chosen": "Nothing grows: the bananas we eat have no seeds that can grow",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:17:04.717Z"
+      },
+      {
+        "item": "A young plant is joined to the old plant at the base. What is it?",
+        "chosen": "A sucker",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-25T13:17:13.450Z"
+      }
+    ],
+    "d1SentTo": [
+      "the seed counter"
+    ],
+    "d1Result": "passed",
+    "d2Result": "passed",
+    "d3SentTo": [
+      "the banana picture"
+    ],
+    "d3Result": "passed"
+  },
+  "title": "Biology: Chapter 4: School Test Practice B",
+  "kind": "school-format mock",
+  "answerOrderNote": "item numbers in the order first touched",
+  "dateTaken": "2026-11-25",
+  "openedAt": "2026-11-25T13:56:24.961Z",
+  "submittedAt": "2026-11-25T13:59:58.133Z",
+  "minutesSpent": 3.6,
+  "lastTestMinutes": 10.6,
+  "provenance": {
+    "helped": "no",
+    "usedNotes": "no"
+  },
+  "marksEarned": 36.5,
+  "outOfMarks": 50,
+  "pct": 73,
+  "passMarks": 40,
+  "passed": false,
+  "answerOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22
+  ],
+  "firstPassScore": 34.5,
+  "firstPassMcqCorrect": 11,
+  "partAB": {
+    "marks": 36.5,
+    "outOf": 50,
+    "partA": 24,
+    "partB": 12.5
+  },
+  "fixList": [
+    {
+      "q": 3,
+      "book": "book pp.58-59",
+      "why": "Chiku is dispersed by animals that eat the fruit. Lalang and shorea use wind. Lotus uses water."
+    },
+    {
+      "q": 4,
+      "book": "book p.65",
+      "why": "A new plant can grow from the leaves of a bryophyllum plant."
+    },
+    {
+      "q": 11,
+      "book": "book p.54",
+      "why": "Wind-pollinated flowers make lots of light, dry pollen that the wind carries."
+    },
+    {
+      "q": 16,
+      "book": "book pp.53-55",
+      "why": "Stigma: catches the pollen. Ovary: becomes the fruit. Anther: makes the pollen. Ovule: becomes a seed."
+    },
+    {
+      "q": 17,
+      "book": "book pp.54-55, 62",
+      "why": "1st pollination, 2nd fertilisation, 3rd seed dispersal, 4th germination."
+    },
+    {
+      "q": 18,
+      "book": "book p.61",
+      "why": "Seeds need water, air and warmth, but not light. Tube 4 in the dark grows. Tube 2 has no air and tube 3 is too cold."
+    },
+    {
+      "q": 21,
+      "book": "book pp.54, 57",
+      "why": "(a) overcrowding is a naming word. (b) pollinate is a doing word, after help to."
+    }
+  ],
+  "partA": {
+    "marks": 24,
+    "outOf": 30,
+    "correct": 12,
+    "outOfItems": 15
+  },
+  "partB": {
+    "marks": 12.5,
+    "outOf": 20
+  },
+  "provisionalWrittenMarks": 2,
+  "firstPassMarks": 22,
+  "preReviewMarks": 24,
+  "reviewSecs": {
+    "AB": 15,
+    "C": 20,
+    "max": 6
+  },
+  "selfChanged": {
+    "changed": 1,
+    "wrongToRight": 1,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "checkingSwing": {
+    "changed": 1,
+    "wrongToRight": 1,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "predictions": {
+    "5": "Fertilisation",
+    "14": "3."
+  },
+  "reviewEligible": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "reviewedQs": [
+    7,
+    8,
+    10,
+    13,
+    14,
+    15
+  ],
+  "reviewSkippedSelfChanged": [
+    1
+  ],
+  "changedOnReview": [],
+  "reviewSwing": {
+    "eligible": 14,
+    "reviewed": 6,
+    "changed": 0,
+    "wrongToRight": 0,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "tiers": [
+    {
+      "name": "Basic",
+      "marks": 4,
+      "marksOutOf": 8
+    },
+    {
+      "name": "Intermediate",
+      "marks": 22.5,
+      "marksOutOf": 32
+    },
+    {
+      "name": "Applied",
+      "marks": 10,
+      "marksOutOf": 10
+    }
+  ],
+  "items": [
+    {
+      "q": 1,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 8.3,
+      "firstTouchAt": "2026-11-25T13:56:33.280Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": false,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-25T13:56:33.280Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 2,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 4.4,
+      "firstTouchAt": "2026-11-25T13:56:38.560Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:56:38.560Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 3,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 8.4,
+      "firstTouchAt": "2026-11-25T13:56:46.910Z",
+      "chosen": 1,
+      "correct": 2,
+      "isCorrect": false,
+      "firstChoice": 1,
+      "firstCorrect": false,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-25T13:56:46.910Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 4,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 6.8,
+      "firstTouchAt": "2026-11-25T13:56:53.742Z",
+      "chosen": 3,
+      "correct": 2,
+      "isCorrect": false,
+      "firstChoice": 3,
+      "firstCorrect": false,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:56:53.742Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 5,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 13.1,
+      "firstTouchAt": "2026-11-25T13:57:06.837Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-25T13:57:06.837Z",
+      "prediction": "Fertilisation",
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 6,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 6.7,
+      "firstTouchAt": "2026-11-25T13:57:13.568Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-25T13:57:13.568Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 7,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 4.3,
+      "firstTouchAt": "2026-11-25T13:57:17.885Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-25T13:57:17.885Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 8,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 3.7,
+      "firstTouchAt": "2026-11-25T13:57:21.604Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:57:21.604Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 9,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5.5,
+      "firstTouchAt": "2026-11-25T13:57:27.063Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-25T13:57:27.063Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 10,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 3.1,
+      "firstTouchAt": "2026-11-25T13:57:30.164Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:57:30.164Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 11,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 5.9,
+      "firstTouchAt": "2026-11-25T13:57:36.974Z",
+      "chosen": 3,
+      "correct": 1,
+      "isCorrect": false,
+      "firstChoice": 3,
+      "firstCorrect": false,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:57:36.974Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 12,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5.8,
+      "firstTouchAt": "2026-11-25T13:57:42.795Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-25T13:57:42.795Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 13,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 14.9,
+      "firstTouchAt": "2026-11-25T13:57:57.721Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-25T13:57:57.721Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 14,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 5,
+      "firstTouchAt": "2026-11-25T13:58:02.717Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-25T13:58:02.717Z",
+      "prediction": "3.",
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 15,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 10.2,
+      "firstTouchAt": "2026-11-25T13:58:12.948Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-25T13:58:12.948Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 16,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 4,
+      "secsSincePrev": 5.9,
+      "firstTouchAt": "2026-11-25T13:58:27.060Z",
+      "answers": [
+        0,
+        2,
+        1,
+        3
+      ],
+      "key": [
+        1,
+        2,
+        0,
+        3
+      ],
+      "perRow": [
+        false,
+        true,
+        false,
+        true
+      ],
+      "cols": [
+        "makes pollen grains",
+        "has a sticky top that catches pollen",
+        "turns into a fruit",
+        "turns into a seed"
+      ]
+    },
+    {
+      "q": 17,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 0.5,
+      "maxMarks": 2,
+      "secsSincePrev": 12.1,
+      "firstTouchAt": "2026-11-25T13:58:53.633Z",
+      "answers": [
+        1,
+        2,
+        3,
+        0
+      ],
+      "key": [
+        2,
+        0,
+        3,
+        1
+      ],
+      "perRow": [
+        false,
+        false,
+        true,
+        false
+      ],
+      "cols": [
+        "1st",
+        "2nd",
+        "3rd",
+        "4th"
+      ]
+    },
+    {
+      "q": 18,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 4,
+      "secsSincePrev": 5.3,
+      "firstTouchAt": "2026-11-25T13:59:04.930Z",
+      "answers": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "key": [
+        0,
+        1,
+        1,
+        0
+      ],
+      "perRow": [
+        true,
+        false,
+        true,
+        false
+      ],
+      "cols": [
+        "Grows into a seedling",
+        "Does not grow"
+      ]
+    },
+    {
+      "q": 19,
+      "type": "select",
+      "section": "S",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 2.8,
+      "firstTouchAt": "2026-11-25T13:59:10.881Z",
+      "ticked": [
+        0,
+        3
+      ],
+      "keySel": [
+        0,
+        3
+      ],
+      "right": 2,
+      "wrong": 0
+    },
+    {
+      "q": 20,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 4,
+      "maxMarks": 4,
+      "secsSincePrev": 5,
+      "firstTouchAt": "2026-11-25T13:59:16.494Z",
+      "answers": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "key": [
+        0,
+        1,
+        3,
+        2
+      ],
+      "perRow": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "cols": [
+        "From seeds",
+        "From spores",
+        "From suckers",
+        "From underground stems"
+      ]
+    },
+    {
+      "q": 21,
+      "type": "written",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 8.6,
+      "firstTouchAt": "2026-11-25T13:59:28.902Z",
+      "typed": [
+        "Crowding",
+        "Fertilise"
+      ],
+      "provisionalMarks": 0,
+      "ideas": [
+        {
+          "label": "overcrowding (the naming word)",
+          "autoFound": false,
+          "marks": 1
+        },
+        {
+          "label": "pollinate (the doing word)",
+          "autoFound": false,
+          "marks": 1
+        }
+      ],
+      "selfMarked": null
+    },
+    {
+      "q": 22,
+      "type": "written",
+      "section": "S",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 9.9,
+      "firstTouchAt": "2026-11-25T13:59:45.993Z",
+      "typed": [
+        "The hooks help because the plant seed will be able to hook onto an animal and then an animal will take it into a different place"
+      ],
+      "provisionalMarks": 2,
+      "ideas": [
+        {
+          "label": "the hooks cling to the fur of animals or the clothes of people",
+          "autoFound": true,
+          "marks": 1
+        },
+        {
+          "label": "the seeds are carried to another place and drop off",
+          "autoFound": true,
+          "marks": 1
+        }
+      ],
+      "selfMarked": null
+    }
+  ]
+}

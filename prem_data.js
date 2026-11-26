@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '23 Nov 2026',
+  updated:        '26 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:66, topic:'Biology: Chapter 4 &mdash; School-Test Practice B (Fix-It lesson, then Mock B)', status:'&#127381; Built and ready (23 Nov 2026), from `BUILD_PLAN_SCI_U66_Ch4MockB.md` v1.0 (gate 0 FAIL(s)): a warm-up and a Fix-It lesson (Wed 25 Nov) with three new-cause devices, then Mock B (Thu 26 Nov): 22 items, Part A 15 multiple choice + Part B 7 structured = /50, pass 40, no extra part. Deciding item: Q5.' },
+    currentUnit: { n:67, topic:'Biology: Chapter 4 &mdash; Memory Tricks for the Test (the last fix before the school test)', status:'&#127381; Built and ready (26 Nov 2026), from `BUILD_PLAN_SCI_U67_Ch4MemoryFix.md` v1.0 (gate 0 FAIL(s)): a warm-up and a Memory Tricks lesson (Fri 27 Nov), then a 20-question check (Sat 28 Nov), /40, pass 32. The check saves itself in the browser and offers to save a lost finish. Fix list Sun 29, Last-Look card Mon 30, school Ch.4 test Tue 1 Dec. Deciding item: Q16, the light row.' },
 
   lastUnit: {
-    n:65, score:34, outOf:50, pct:68, passBar:40, delta:null, prevScore:null, passed:false, minutesSpent:10.6, minutesUnit:'U65', minutesNote:'U64 was 6.9', firstPassScore:34, partC:'12/12',
-    patternLabel: 'Unit 65 result - Chapter 4 school-format mock (34/50, below the bar)',
-    patternInsight: '<strong>34/50 (68%)</strong> - below the pass bar (40). Part A 20/30, Part B 14/20, Part C 12/12 (scored separately). Sat alone, no notes, Mon 23 Nov, 10.6 minutes (U64 6.9). First clicks 16/21 MCQ. Deciding item Q13 (spore, not a plant part) right.',
-    analysisLabel: 'Misses: Q5, Q6, Q9, Q10, Q14',
-    analysisInsight: '<strong>Facts only:</strong> Q5 put seed dispersal before fertilisation; Q6 chose &ldquo;fewer plants, so each makes seeds sooner&rdquo;; Q9 chose &ldquo;II and III only&rdquo;; Q10 chose seeds that fell off the old plant (key: suckers); Q14 typed 3, key 4. Q17 1/2 (anther and stigma jobs swapped), Q18 2/4 (dishes C and D reversed), Q21 1/2 and Q22 0/2 by the marker (written, provisional). Full record: `Memory Backup\\TEST_RECORD_SCI_U065.md`.',
-    qSummary: '<strong>34 / 50 - below the bar.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U065.md`.',
+    n:66, score:36.5, outOf:50, pct:73, passBar:40, delta:null, prevScore:null, passed:false, minutesSpent:3.6, minutesUnit:'U66', minutesNote:'U65 was 10.6; a re-sit, the first finish was not saved', firstPassScore:34.5,
+    patternLabel: 'Unit 66 result - Chapter 4 Mock B (36.5/50, below the bar; a re-sit)',
+    patternInsight: '<strong>36.5/50 (73%)</strong> - below the pass bar (40). Part A 24/30, Part B 12.5/20. Sat Wed 25 Nov, 3.6 minutes. <strong>A re-sit:</strong> the first finish was not saved, so the score and the time are not a clean measurement. First clicks 11/15 MCQ. Deciding item Q5 right.',
+    analysisLabel: 'Misses: Q3, Q4, Q11',
+    analysisInsight: '<strong>Facts only:</strong> Q3 Lalang for Chiku; Q4 suckers for leaves (bryophyllum); Q11 nectar for light, dry pollen. Q16 2/4 (stigma and anther swapped), Q17 0.5/2 (order), Q18 2/4 (tubes 2 and 4 reversed), Q21 0/2 and Q22 2/2 by the marker (written, provisional). Full record: `Memory Backup\\TEST_RECORD_SCI_U066.md`.',
+    qSummary: '<strong>36.5 / 50 - below the bar (re-sit).</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U066.md`.',
     qBreakdown: []
   },
 
@@ -111,11 +111,24 @@ var PREM_DATA = {
     { unit:63, topic:'Biology: Chapter 4 &sect;A &mdash; The Seed\'s Journey (Dispersal and Germination)', score:18, outOf:20, pct:90, passBar:16, date:'2026-11-20', firstPassScore:11, minutesSpent:5.7, part2:'0/2' },
     { unit:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', score:14, outOf:20, pct:70, passBar:16, date:'2026-11-22', firstPassScore:11, minutesSpent:6.9, part2:'1/2' },
     { unit:65, topic:'Biology: Chapter 4 school-format mock (Ready for the School Test)', score:34, outOf:50, pct:68, passBar:40, date:'2026-11-23', firstPassScore:34, minutesSpent:10.6, partC:'12/12', part2:'Q21 1/2, Q22 0/2 (marker, provisional; inside the 50)' },
+    { unit:66, topic:'Biology: Chapter 4 school-format Mock B (re-sit: the first finish was not saved)', score:36.5, outOf:50, pct:73, passBar:40, date:'2026-11-25', firstPassScore:34.5, minutesSpent:3.6, part2:'Q21 0/2, Q22 2/2 (marker, provisional; inside the 50)' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 66, badge: 'linear-gradient(135deg,#14305c,#c9a227)',
+      title: 'Biology: Chapter 4 &mdash; School-Test Practice B (Fix-It, then Mock B)',
+      tags: [
+        { t:'&#9888; 36.5/50 (73%) below the bar of 40', s:'background:#ffe0b2;color:#c05621;font-weight:700' },
+        { t:'Re-sit: first finish not saved', c:'tblue' },
+        { t:'3.6 minutes', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U66_Ch4MockB.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Wed 25 Nov 2026: 36.5/50 (73%), below the bar of 40</strong> (A 24/30, B 12.5/20). <strong>A re-sit:</strong> Prem forgot to save his first finish, so the score and the time are not a clean measurement. First clicks 11/15 MCQ. Deciding Q5 right. Missed Q3, Q4, Q11; Q16 2/4, Q17 0.5/2, Q18 2/4, Q21 0/2, Q22 2/2 (written marks provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U066.md`.',
+      status: 'done'
+    },
     {
       n: 65, badge: 'linear-gradient(135deg,#14305c,#1f6b3f)',
       title: 'Biology: Chapter 4 &mdash; Ready for the School Test (school-format mock, Part A + B + extra Part C)',
