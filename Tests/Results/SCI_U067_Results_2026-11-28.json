@@ -1,0 +1,1073 @@
+{
+  "student": "Prem",
+  "unit": 67,
+  "paceVersion": "2.1",
+  "lockSeconds": 0,
+  "warmUp": {
+    "page": "warm-up",
+    "startedAt": "2026-11-28T13:24:14.799Z",
+    "saveNote": {
+      "acked": true,
+      "at": "2026-11-28T13:24:16.456Z"
+    },
+    "before": {
+      "t1": [
+        {
+          "item": "The anther:",
+          "chosen": "makes pollen",
+          "correct": true
+        },
+        {
+          "item": "The stigma:",
+          "chosen": "catches pollen",
+          "correct": true
+        }
+      ],
+      "t2": [
+        {
+          "item": "Does a seed need light to start?",
+          "chosen": "Yes",
+          "correct": false
+        },
+        {
+          "item": "Does a seed need air?",
+          "chosen": "No",
+          "correct": false
+        }
+      ],
+      "t3": [
+        {
+          "item": "Pick the right spelling:",
+          "chosen": "overcroding",
+          "correct": false
+        },
+        {
+          "item": "Type it: too many young plants in one place.",
+          "chosen": "Crowding",
+          "correct": false
+        }
+      ]
+    },
+    "counts": {
+      "tries": 1,
+      "counted": 5
+    },
+    "cards": {
+      "opened": [
+        "name the fact"
+      ]
+    },
+    "screensSeen": [
+      "s1",
+      "s2",
+      "s3"
+    ],
+    "savedAt": "2026-11-28T13:24:42.323Z"
+  },
+  "lessonLog": {
+    "page": "memory-tricks lesson",
+    "startedAt": "2026-11-28T13:24:44.731Z",
+    "t1": {
+      "concrete": {
+        "steps": [
+          "shook: pollen poured out of the anthers",
+          "tilted: pollen stuck on the stigma"
+        ]
+      },
+      "ladder": [
+        1,
+        2,
+        3
+      ]
+    },
+    "t2": {
+      "concrete": {
+        "steps": [
+          "opened the lunchbox: seed leaves",
+          "dark room: seed still grew",
+          "under water with oil: breathing stopped, nothing grew"
+        ]
+      },
+      "ladder": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "t3": {
+      "concrete": {
+        "wrongTaps": 0,
+        "typed": [
+          "overcrowding"
+        ],
+        "accepted": "overcrowding"
+      },
+      "ladder": [
+        1,
+        2,
+        3
+      ]
+    },
+    "after": {
+      "t1": [
+        {
+          "item": "Which part of the flower catches pollen?",
+          "chosen": "The stigma",
+          "correct": true
+        },
+        {
+          "item": "A flower loses its anthers. Which job stops?",
+          "chosen": "Making pollen",
+          "correct": true
+        }
+      ],
+      "t2": [
+        {
+          "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+          "chosen": "No, seeds need light first",
+          "correct": false
+        },
+        {
+          "item": "A seed sits under water with oil on top and nothing grows. Why?",
+          "chosen": "Air cannot reach it, and a seed must breathe",
+          "correct": true
+        }
+      ],
+      "t3": [
+        {
+          "item": "Too many seedlings in one tray is a problem. What is the problem called?",
+          "chosen": "overcrowding",
+          "correct": true
+        },
+        {
+          "item": "Flowers help to ____ new plants.",
+          "chosen": "reproduce",
+          "correct": true
+        }
+      ]
+    },
+    "deviceChecks": {
+      "t1": [
+        {
+          "item": "Which part of the flower catches pollen?",
+          "chosen": "The stigma",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:25:30.604Z"
+        },
+        {
+          "item": "A flower loses its anthers. Which job stops?",
+          "chosen": "Making pollen",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:25:36.938Z"
+        }
+      ],
+      "t2": [
+        {
+          "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+          "chosen": "No, seeds need light first",
+          "firstCorrect": false,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:26:13.837Z"
+        },
+        {
+          "item": "A seed sits under water with oil on top and nothing grows. Why?",
+          "chosen": "Air cannot reach it, and a seed must breathe",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:26:19.324Z"
+        },
+        {
+          "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+          "chosen": "Yes, a seed has a packed lunch",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:26:26.108Z"
+        },
+        {
+          "item": "A seed sits under water with oil on top and nothing grows. Why?",
+          "chosen": "Air cannot reach it, and a seed must breathe",
+          "firstCorrect": true,
+          "attempt": 2,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:26:27.734Z"
+        }
+      ],
+      "t3": [
+        {
+          "item": "Too many seedlings in one tray is a problem. What is the problem called?",
+          "chosen": "overcrowding",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:27:03.957Z"
+        },
+        {
+          "item": "Flowers help to ____ new plants.",
+          "chosen": "reproduce",
+          "firstCorrect": true,
+          "attempt": 1,
+          "routeBefore": "B",
+          "at": "2026-11-28T13:27:09.614Z"
+        }
+      ],
+      "t1Result": "passed",
+      "t2SentTo": [
+        "the lunchbox"
+      ],
+      "t2Result": "passed",
+      "t3Result": "passed"
+    },
+    "routine": {
+      "said": true
+    },
+    "routeWalk": [
+      "s1",
+      "s2",
+      "s4",
+      "s5",
+      "s4",
+      "s5",
+      "s7",
+      "s8"
+    ],
+    "screensSeen": [
+      "s1",
+      "s2",
+      "s3",
+      "s4",
+      "s5",
+      "s6",
+      "s7",
+      "s8",
+      "s9",
+      "s10"
+    ],
+    "savedAt": "2026-11-28T13:27:17.624Z"
+  },
+  "deviceChecks": {
+    "t1": [
+      {
+        "item": "Which part of the flower catches pollen?",
+        "chosen": "The stigma",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:25:30.604Z"
+      },
+      {
+        "item": "A flower loses its anthers. Which job stops?",
+        "chosen": "Making pollen",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:25:36.938Z"
+      }
+    ],
+    "t2": [
+      {
+        "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+        "chosen": "No, seeds need light first",
+        "firstCorrect": false,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:26:13.837Z"
+      },
+      {
+        "item": "A seed sits under water with oil on top and nothing grows. Why?",
+        "chosen": "Air cannot reach it, and a seed must breathe",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:26:19.324Z"
+      },
+      {
+        "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+        "chosen": "Yes, a seed has a packed lunch",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:26:26.108Z"
+      },
+      {
+        "item": "A seed sits under water with oil on top and nothing grows. Why?",
+        "chosen": "Air cannot reach it, and a seed must breathe",
+        "firstCorrect": true,
+        "attempt": 2,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:26:27.734Z"
+      }
+    ],
+    "t3": [
+      {
+        "item": "Too many seedlings in one tray is a problem. What is the problem called?",
+        "chosen": "overcrowding",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:27:03.957Z"
+      },
+      {
+        "item": "Flowers help to ____ new plants.",
+        "chosen": "reproduce",
+        "firstCorrect": true,
+        "attempt": 1,
+        "routeBefore": "B",
+        "at": "2026-11-28T13:27:09.614Z"
+      }
+    ],
+    "t1Result": "passed",
+    "t2SentTo": [
+      "the lunchbox"
+    ],
+    "t2Result": "passed",
+    "t3Result": "passed"
+  },
+  "trickChecks": {
+    "before": {
+      "t1": [
+        {
+          "item": "The anther:",
+          "chosen": "makes pollen",
+          "correct": true
+        },
+        {
+          "item": "The stigma:",
+          "chosen": "catches pollen",
+          "correct": true
+        }
+      ],
+      "t2": [
+        {
+          "item": "Does a seed need light to start?",
+          "chosen": "Yes",
+          "correct": false
+        },
+        {
+          "item": "Does a seed need air?",
+          "chosen": "No",
+          "correct": false
+        }
+      ],
+      "t3": [
+        {
+          "item": "Pick the right spelling:",
+          "chosen": "overcroding",
+          "correct": false
+        },
+        {
+          "item": "Type it: too many young plants in one place.",
+          "chosen": "Crowding",
+          "correct": false
+        }
+      ]
+    },
+    "after": {
+      "t1": [
+        {
+          "item": "Which part of the flower catches pollen?",
+          "chosen": "The stigma",
+          "correct": true
+        },
+        {
+          "item": "A flower loses its anthers. Which job stops?",
+          "chosen": "Making pollen",
+          "correct": true
+        }
+      ],
+      "t2": [
+        {
+          "item": "Seeds are put in soil in a room with no light. Will they start to grow?",
+          "chosen": "No, seeds need light first",
+          "correct": false
+        },
+        {
+          "item": "A seed sits under water with oil on top and nothing grows. Why?",
+          "chosen": "Air cannot reach it, and a seed must breathe",
+          "correct": true
+        }
+      ],
+      "t3": [
+        {
+          "item": "Too many seedlings in one tray is a problem. What is the problem called?",
+          "chosen": "overcrowding",
+          "correct": true
+        },
+        {
+          "item": "Flowers help to ____ new plants.",
+          "chosen": "reproduce",
+          "correct": true
+        }
+      ]
+    }
+  },
+  "title": "Biology: Chapter 4: Memory Tricks for the Test",
+  "kind": "memory-tricks check",
+  "answerOrderNote": "item numbers in the order first touched",
+  "dateTaken": "2026-11-28",
+  "openedAt": "2026-11-28T13:27:40.069Z",
+  "submittedAt": "2026-11-28T13:49:31.220Z",
+  "minutesSpent": 21.9,
+  "lastTestMinutes": 3.6,
+  "provenance": {
+    "helped": "no",
+    "usedNotes": "no"
+  },
+  "marksEarned": 32.5,
+  "outOfMarks": 40,
+  "pct": 81,
+  "passMarks": 32,
+  "passed": true,
+  "answerOrder": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "firstPassScore": 30.5,
+  "firstPassMcqCorrect": 12,
+  "partAB": {
+    "marks": 32.5,
+    "outOf": 40,
+    "partA": 26,
+    "partB": 6.5
+  },
+  "fixList": [
+    {
+      "q": 4,
+      "book": "book p.65",
+      "why": "Tiny new plants can grow from the edges of a bryophyllum leaf."
+    },
+    {
+      "q": 17,
+      "book": "book p.61",
+      "why": "To test air, change only the air. Dish A has air and Dish B has none. Everything else is the same."
+    },
+    {
+      "q": 18,
+      "book": "book pp.54-55, 62",
+      "why": "Pollination, fertilisation, seed dispersal, germination: 1st pollination, 2nd fertilisation, 3rd seed dispersal, 4th germination."
+    },
+    {
+      "q": 19,
+      "book": "book pp.54, 57",
+      "why": "(a) overcrowding is a naming word, after is called. (b) pollinate is a doing word, after to."
+    },
+    {
+      "q": 20,
+      "book": "book pp.58-60",
+      "why": "The husk traps air, so the coconut floats. The sea carries it to another beach."
+    }
+  ],
+  "partA": {
+    "marks": 26,
+    "outOf": 28,
+    "correct": 13,
+    "outOfItems": 14
+  },
+  "partB": {
+    "marks": 6.5,
+    "outOf": 12
+  },
+  "changes": [],
+  "provisionalWrittenMarks": 2,
+  "firstPassMarks": 24,
+  "preReviewMarks": 26,
+  "reviewSecs": {
+    "AB": 15,
+    "C": 20,
+    "max": 6
+  },
+  "selfChanged": {
+    "changed": 3,
+    "wrongToRight": 2,
+    "rightToWrong": 1,
+    "wrongToWrong": 0
+  },
+  "checkingSwing": {
+    "changed": 3,
+    "wrongToRight": 2,
+    "rightToWrong": 1,
+    "wrongToWrong": 0
+  },
+  "predictions": {},
+  "reviewEligible": [
+    2,
+    3,
+    7,
+    14
+  ],
+  "reviewedQs": [
+    2,
+    3,
+    7,
+    14
+  ],
+  "reviewSkippedSelfChanged": [
+    4,
+    10,
+    12
+  ],
+  "changedOnReview": [],
+  "reviewSwing": {
+    "eligible": 4,
+    "reviewed": 4,
+    "changed": 0,
+    "wrongToRight": 0,
+    "rightToWrong": 0,
+    "wrongToWrong": 0
+  },
+  "tiers": [
+    {
+      "name": "Basic",
+      "marks": 8,
+      "marksOutOf": 10
+    },
+    {
+      "name": "Intermediate",
+      "marks": 15.5,
+      "marksOutOf": 18
+    },
+    {
+      "name": "Applied",
+      "marks": 9,
+      "marksOutOf": 12
+    }
+  ],
+  "items": [
+    {
+      "q": 1,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 26.7,
+      "firstTouchAt": "2026-11-28T13:28:06.808Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-28T13:28:06.808Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 2,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 7.9,
+      "firstTouchAt": "2026-11-28T13:28:14.738Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-28T13:28:14.738Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 3,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 7.3,
+      "firstTouchAt": "2026-11-28T13:28:22.040Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-28T13:28:22.040Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 4,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Basic",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 14,
+      "firstTouchAt": "2026-11-28T13:28:36.034Z",
+      "chosen": 1,
+      "correct": 4,
+      "isCorrect": false,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-28T13:28:36.034Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 5,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 887.1,
+      "firstTouchAt": "2026-11-28T13:43:28.624Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-28T13:43:28.624Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 6,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 18.7,
+      "firstTouchAt": "2026-11-28T13:43:47.280Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-28T13:43:47.280Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 7,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 8.6,
+      "firstTouchAt": "2026-11-28T13:43:55.861Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-28T13:43:55.861Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 8,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 18.9,
+      "firstTouchAt": "2026-11-28T13:44:14.788Z",
+      "chosen": 1,
+      "correct": 1,
+      "isCorrect": true,
+      "firstChoice": 1,
+      "firstCorrect": true,
+      "preReviewChoice": 1,
+      "finalChoice": 1,
+      "firstClickAt": "2026-11-28T13:44:14.788Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 9,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 18.8,
+      "firstTouchAt": "2026-11-28T13:44:33.596Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": true,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-28T13:44:33.596Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 10,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 7.5,
+      "firstTouchAt": "2026-11-28T13:44:41.079Z",
+      "chosen": 3,
+      "correct": 3,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": false,
+      "preReviewChoice": 3,
+      "finalChoice": 3,
+      "firstClickAt": "2026-11-28T13:44:41.079Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 11,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 23.4,
+      "firstTouchAt": "2026-11-28T13:45:05.305Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 4,
+      "firstCorrect": true,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-28T13:45:05.305Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 12,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 10.2,
+      "firstTouchAt": "2026-11-28T13:45:15.503Z",
+      "chosen": 4,
+      "correct": 4,
+      "isCorrect": true,
+      "firstChoice": 3,
+      "firstCorrect": false,
+      "preReviewChoice": 4,
+      "finalChoice": 4,
+      "firstClickAt": "2026-11-28T13:45:15.503Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": true,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 13,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 20.1,
+      "firstTouchAt": "2026-11-28T13:45:36.061Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-28T13:45:36.061Z",
+      "prediction": null,
+      "reviewEligible": false,
+      "reviewed": false,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 14,
+      "type": "mcq",
+      "section": "A",
+      "tier": "Applied",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 13.2,
+      "firstTouchAt": "2026-11-28T13:45:49.271Z",
+      "chosen": 2,
+      "correct": 2,
+      "isCorrect": true,
+      "firstChoice": 2,
+      "firstCorrect": true,
+      "preReviewChoice": 2,
+      "finalChoice": 2,
+      "firstClickAt": "2026-11-28T13:45:49.271Z",
+      "prediction": null,
+      "reviewEligible": true,
+      "reviewed": true,
+      "changedBeforeReview": false,
+      "changedOnReview": false,
+      "reviewDirection": null
+    },
+    {
+      "q": 15,
+      "type": "label",
+      "section": "S",
+      "tier": "Basic",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 31.2,
+      "firstTouchAt": "2026-11-28T13:46:20.448Z",
+      "answers": [
+        "anther",
+        "stigma",
+        "ovary",
+        "ovule"
+      ],
+      "key": [
+        "anther",
+        "stigma",
+        "ovary",
+        "ovule"
+      ],
+      "perLabel": [
+        true,
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "q": 16,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 2,
+      "maxMarks": 2,
+      "secsSincePrev": 12.2,
+      "firstTouchAt": "2026-11-28T13:46:40.943Z",
+      "answers": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "key": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "perRow": [
+        true,
+        true,
+        true,
+        true
+      ],
+      "cols": [
+        "Needed",
+        "Not needed"
+      ]
+    },
+    {
+      "q": 17,
+      "type": "select",
+      "section": "S",
+      "tier": "Applied",
+      "marks": 0,
+      "maxMarks": 2,
+      "secsSincePrev": 51.7,
+      "firstTouchAt": "2026-11-28T13:47:39.954Z",
+      "ticked": [
+        1,
+        2
+      ],
+      "keySel": [
+        0,
+        1
+      ],
+      "right": 1,
+      "wrong": 1
+    },
+    {
+      "q": 18,
+      "type": "table",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 0.5,
+      "maxMarks": 2,
+      "secsSincePrev": 8.6,
+      "firstTouchAt": "2026-11-28T13:47:53.183Z",
+      "answers": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "key": [
+        1,
+        3,
+        0,
+        2
+      ],
+      "perRow": [
+        true,
+        false,
+        false,
+        false
+      ],
+      "cols": [
+        "1st",
+        "2nd",
+        "3rd",
+        "4th"
+      ]
+    },
+    {
+      "q": 19,
+      "type": "written",
+      "section": "S",
+      "tier": "Intermediate",
+      "marks": 1,
+      "maxMarks": 2,
+      "secsSincePrev": 12.3,
+      "firstTouchAt": "2026-11-28T13:48:23.134Z",
+      "typed": [
+        "Overcrowding",
+        "Reproduce"
+      ],
+      "provisionalMarks": 1,
+      "ideas": [
+        {
+          "label": "overcrowding (the naming word)",
+          "autoFound": true,
+          "marks": 1
+        },
+        {
+          "label": "pollinate (the doing word)",
+          "autoFound": false,
+          "marks": 1
+        }
+      ],
+      "selfMarked": {
+        "0": true,
+        "1": false
+      }
+    },
+    {
+      "q": 20,
+      "type": "written",
+      "section": "S",
+      "tier": "Applied",
+      "marks": 1,
+      "maxMarks": 2,
+      "secsSincePrev": 16.9,
+      "firstTouchAt": "2026-11-28T13:48:55.398Z",
+      "typed": [
+        "The coconut got there because the coconut fruit is “ floatable” and it will float in the sea and go to a far away ."
+      ],
+      "provisionalMarks": 1,
+      "ideas": [
+        {
+          "label": "its husk is light / traps air, so it floats",
+          "autoFound": true,
+          "marks": 1
+        },
+        {
+          "label": "the sea / water carried it to another place",
+          "autoFound": false,
+          "marks": 1
+        }
+      ],
+      "selfMarked": {
+        "0": false,
+        "1": false
+      }
+    }
+  ]
+}

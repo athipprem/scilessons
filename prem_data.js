@@ -5,7 +5,7 @@
 */
 var PREM_DATA = {
   // Meta
-  updated:        '26 Nov 2026',
+  updated:        '28 Nov 2026',
   coachStartDate: '2026-06-28',
   asmopssDate:    '2026-08-09',
   coach:          'Luikishi',
@@ -13,15 +13,15 @@ var PREM_DATA = {
   goal:           'GOLD medal - ASMOPSS 2027 Science (2026 OFFICIAL result: BRONZE medal, 60/100, T-score 62.43, 87.85th percentile, national rank 404/3,722 - announced 16 Sep 2026)',
   goalShort:      'Gold',
 
-    currentUnit: { n:67, topic:'Biology: Chapter 4 &mdash; Memory Tricks for the Test (the last fix before the school test)', status:'&#127381; Built and ready (26 Nov 2026), from `BUILD_PLAN_SCI_U67_Ch4MemoryFix.md` v1.0 (gate 0 FAIL(s)): a warm-up and a Memory Tricks lesson (Fri 27 Nov), then a 20-question check (Sat 28 Nov), /40, pass 32. The check saves itself in the browser and offers to save a lost finish. Fix list Sun 29, Last-Look card Mon 30, school Ch.4 test Tue 1 Dec. Deciding item: Q16, the light row.' },
+    currentUnit: { n:68, topic:'Biology: Chapter 4 &mdash; School-Test Practice C (the last paper before the school test)', status:'&#127381; Built and ready (28 Nov 2026), from `BUILD_PLAN_SCI_U68_Ch4MockC.md` v1.0 (gate 0 FAIL(s)): a 5-minute warm-up (the fair pair, the bryophyllum leaf, the order line, doing words, count twice), then Mock C, 22 questions in one sitting, /50, pass 40. Sit it Sun 29 or Mon 30 Nov. The page saves itself, then you press Save. Last-Look card Mon 30 evening, school Ch.4 test Tue 1 Dec. Deciding item: Q17, the order asked as a flowchart.' },
 
   lastUnit: {
-    n:66, score:36.5, outOf:50, pct:73, passBar:40, delta:null, prevScore:null, passed:false, minutesSpent:3.6, minutesUnit:'U66', minutesNote:'U65 was 10.6; a re-sit, the first finish was not saved', firstPassScore:34.5,
-    patternLabel: 'Unit 66 result - Chapter 4 Mock B (36.5/50, below the bar; a re-sit)',
-    patternInsight: '<strong>36.5/50 (73%)</strong> - below the pass bar (40). Part A 24/30, Part B 12.5/20. Sat Wed 25 Nov, 3.6 minutes. <strong>A re-sit:</strong> the first finish was not saved, so the score and the time are not a clean measurement. First clicks 11/15 MCQ. Deciding item Q5 right.',
-    analysisLabel: 'Misses: Q3, Q4, Q11',
-    analysisInsight: '<strong>Facts only:</strong> Q3 Lalang for Chiku; Q4 suckers for leaves (bryophyllum); Q11 nectar for light, dry pollen. Q16 2/4 (stigma and anther swapped), Q17 0.5/2 (order), Q18 2/4 (tubes 2 and 4 reversed), Q21 0/2 and Q22 2/2 by the marker (written, provisional). Full record: `Memory Backup\\TEST_RECORD_SCI_U066.md`.',
-    qSummary: '<strong>36.5 / 50 - below the bar (re-sit).</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U066.md`.',
+    n:67, score:32.5, outOf:40, pct:81, passBar:32, delta:null, prevScore:null, passed:true, minutesSpent:21.9, minutesUnit:'U67', minutesNote:'includes one 14.8-minute break between Q4 and Q5; about 7 minutes of answering; U66 was 3.6 (a re-sit)', firstPassScore:30.5,
+    patternLabel: 'Unit 67 result - Chapter 4 Memory Tricks check (32.5/40, above the bar)',
+    patternInsight: '<strong>32.5/40 (81%)</strong> - above the pass bar (32) by 0.5. Part A 26/28, Part B 6.5/12 (written marks provisional; hand marks 33.5/40). Sat Sat 28 Nov, alone, no notes (self-reported). First clicks 12/14 MCQ. Deciding item Q16 (the seed-needs table) 4/4.',
+    analysisLabel: 'Misses: Q4, Q17, Q18, Q19(b)',
+    analysisInsight: '<strong>Facts only:</strong> Q4 first click right, changed to "a sucker" for bryophyllum; Q17 ticked Dish B and Dish C (key A and B); Q18 0.5/2 (order table); Q19 (b) typed "Reproduce". Anther/stigma items, the overcrowding word and the seed-needs table were right. Full record: `Memory Backup\\TEST_RECORD_SCI_U067.md`.',
+    qSummary: '<strong>32.5 / 40 - above the bar.</strong> Full record: `Memory Backup\\TEST_RECORD_SCI_U067.md`.',
     qBreakdown: []
   },
 
@@ -112,11 +112,24 @@ var PREM_DATA = {
     { unit:64, topic:'Biology: Chapter 4 &sect;B&ndash;&sect;D &mdash; Plants\' Other Tricks (Spores, Suckers, Stems and Leaves)', score:14, outOf:20, pct:70, passBar:16, date:'2026-11-22', firstPassScore:11, minutesSpent:6.9, part2:'1/2' },
     { unit:65, topic:'Biology: Chapter 4 school-format mock (Ready for the School Test)', score:34, outOf:50, pct:68, passBar:40, date:'2026-11-23', firstPassScore:34, minutesSpent:10.6, partC:'12/12', part2:'Q21 1/2, Q22 0/2 (marker, provisional; inside the 50)' },
     { unit:66, topic:'Biology: Chapter 4 school-format Mock B (re-sit: the first finish was not saved)', score:36.5, outOf:50, pct:73, passBar:40, date:'2026-11-25', firstPassScore:34.5, minutesSpent:3.6, part2:'Q21 0/2, Q22 2/2 (marker, provisional; inside the 50)' },
+    { unit:67, topic:'Biology: Chapter 4 Memory Tricks check (the last fix before the school test)', score:32.5, outOf:40, pct:81, passBar:32, date:'2026-11-28', firstPassScore:30.5, minutesSpent:21.9, part2:'Q19 1/2, Q20 1/2 (marker, provisional; inside the 40; hand marks Q19 1/2, Q20 2/2 give 33.5/40)' },
   ],
   baseline: { label:'2025 G4 paper', score:28, outOf:40, marks:72.5, marksOutOf:100, pct:72.5,
               g3:{ label:'2025 G3 (official)', marks:55.5, marksOutOf:100, pct:55.5, percentile:88.66 } },
 
   unitLog: [
+    {
+      n: 67, badge: 'linear-gradient(135deg,#14305c,#d9573a)',
+      title: 'Biology: Chapter 4 &mdash; Memory Tricks for the Test (warm-up, lesson, then the check)',
+      tags: [
+        { t:'&#9989; 32.5/40 (81%) PASS', s:'background:#e6f4ea;color:#1b6e2e;font-weight:700' },
+        { t:'First click 12/14 MCQ', c:'tgreen' },
+        { t:'21.9 minutes (one 14.8-minute break)', c:'torange' },
+        { t:'Self-reported: no help, no notes', c:'tblue' }
+      ],
+      note: 'Built from `BUILD_PLAN_SCI_U67_Ch4MemoryFix.md` v1.0 (gate 0 FAIL(s)). <strong>Taken Sat 28 Nov 2026: 32.5/40 (81%), PASS</strong> (A 26/28, B 6.5/12; hand marks 33.5/40). Deciding Q16 4/4. Missed Q4 (first click right, then changed), Q17 0/2, Q18 0.5/2, Q19 1/2, Q20 1/2 (written marks provisional). Record: `Memory Backup\\TEST_RECORD_SCI_U067.md`.',
+      status: 'done'
+    },
     {
       n: 66, badge: 'linear-gradient(135deg,#14305c,#c9a227)',
       title: 'Biology: Chapter 4 &mdash; School-Test Practice B (Fix-It, then Mock B)',
